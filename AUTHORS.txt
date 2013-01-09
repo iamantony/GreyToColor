@@ -1,0 +1,3 @@
+GreyToColor is primarily authored by:
+
+* Antony Cherepanov <antony.cherepanov@gmail.com>
