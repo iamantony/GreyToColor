@@ -14,7 +14,6 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-		mainwindow.cpp \
 	idbhandler.cpp \
 	imghandler.cpp \
 	COLOR_SPACE/rgblab.cpp \
@@ -27,9 +26,12 @@ SOURCES += main.cpp\
 	SERVICE/imgtransform.cpp \
 	SERVICE/imgsearchparams.cpp \
 	SERVICE/fileoperations.cpp \
-	SERVICE/comparestuff.cpp
+	SERVICE/comparestuff.cpp \
+    mainwindow_old.cpp \
+    mainwindow.cpp \
+    statusbar.cpp
 
-HEADERS  += mainwindow.h \
+HEADERS  += \
 	defines.h \
 	idbhandler.h \
 	imghandler.h \
@@ -43,6 +45,11 @@ HEADERS  += mainwindow.h \
 	SERVICE/imgtransform.h \
 	SERVICE/imgsearchparams.h \
 	SERVICE/fileoperations.h \
-	SERVICE/comparestuff.h
+	SERVICE/comparestuff.h \
+    mainwindow_old.h \
+    mainwindow.h \
+    statusbar.h \
+    DEFINES/programstatus.h
 
-FORMS    += mainwindow.ui
+FORMS    += \
+    mainwindow.ui
