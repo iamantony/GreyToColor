@@ -43,3 +43,4 @@ MainWindow::~MainWindow()
 // 1) Open image... -> user picked image -> pop up dialog, in which user must choose type of image:
 // target (grey) or source (color).
 // 2) Resizing of labels on MainWindow
+// 3) Create architecture list
