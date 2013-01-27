@@ -16,45 +16,22 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef MAINWINDOWUI_H
+#define MAINWINDOWUI_H
 
-#include <QMainWindow>
-#include <QFileDialog>
-#include <QDir>
-#include <QDebug>
-#include "statusbar.h"
-#include "DEFINES/programstatus.h"
-#include "DEFINES/mainwindowui.h"
+#define DEFAULT_TARGET_IMG_PATH "./UI/target_image.png"
+#define DEFAULT_RESULT_IMG_PATH "./UI/result_image.png"
+#define DEFAULT_SOURCE_IMG_PATH "./UI/source_image.png"
 
-
-namespace Ui
+namespace Images
 {
-	class MainWindow;
+	enum Types
+	{
+		TARGET = 0,
+		RESULT,
+		SOURCE,
+		DEFAULT_LAST
+	};
 }
 
-class MainWindow : public QMainWindow
-{
-	Q_OBJECT
-
-	// == DATA ==
-private:
-	Ui::MainWindow *ui;
-	StatusBar *m_statusBar;
-
-	// == METHODS ==
-public:
-	explicit MainWindow(QWidget *parent = 0);
-	~MainWindow();
-
-private slots:
-	void on_openTargetImgPB_clicked();
-
-private:
-	void InitUI();
-	void InitStatusBar();
-	void InitImgsLabels();
-	void InitImg(Images::Types t_imgType);
-};
-
-#endif // MAINWINDOW_H
+#endif // MAINWINDOWUI_H

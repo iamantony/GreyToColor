@@ -30,8 +30,84 @@ void MainWindow::InitUI()
 {
 	ui->setupUi(this);
 
+	InitStatusBar();
+	InitImgsLabels();
+}
+
+void MainWindow::InitStatusBar()
+{
 	m_statusBar = new StatusBar();
 	this->setStatusBar(m_statusBar);
+}
+
+void MainWindow::InitImgsLabels()
+{
+//	InitImg(Images::TARGET);
+//	InitImg(Images::RESULT);
+//	InitImg(Images::SOURCE);
+}
+
+void MainWindow::InitImg(Images::Types t_imgType)
+{
+	QLabel *imgLabel;
+	QString pathToImg;
+	Qt::GlobalColor defaultColor;
+
+	switch (t_imgType)
+	{
+		case Images::TARGET:
+		{
+			imgLabel = ui->targetImgLbl;
+			pathToImg.append(DEFAULT_TARGET_IMG_PATH);
+			defaultColor = Qt::red;
+			break;
+		}
+
+		case Images::RESULT:
+		{
+			imgLabel = ui->resultImgLbl;
+			pathToImg.append(DEFAULT_RESULT_IMG_PATH);
+			defaultColor = Qt::green;
+			break;
+		}
+
+		case Images::SOURCE:
+		{
+			imgLabel = ui->sourceImgLbl;
+			pathToImg.append(DEFAULT_SOURCE_IMG_PATH);
+			defaultColor = Qt::blue;
+			break;
+		}
+
+		default:
+		{
+			qDebug() << "MainWindow::InitImg(): Error - undefined image type";
+			return;
+		}
+	}
+
+	int currentLabelWidth = imgLabel->width();
+	int currentLabelHeight = imgLabel->height();
+
+	QPixmap pixMap(currentLabelWidth, currentLabelHeight);
+	QImage imgToSet(pathToImg);
+	if ( true == imgToSet.isNull() )
+	{
+		qDebug() << "Can't load default image from" << pathToImg << endl <<
+					"Setting up default color";
+
+		pixMap.fill(defaultColor);
+	}
+	else
+	{
+		imgToSet = imgToSet.scaled(currentLabelWidth,
+									currentLabelHeight,
+									Qt::KeepAspectRatio);
+
+		pixMap = QPixmap::fromImage(imgToSet);
+	}
+
+	imgLabel->setPixmap(pixMap);
 }
 
 MainWindow::~MainWindow()
@@ -40,7 +116,21 @@ MainWindow::~MainWindow()
 }
 
 // TODO:
-// 1) Open image... -> user picked image -> pop up dialog, in which user must choose type of image:
-// target (grey) or source (color).
-// 2) Resizing of labels on MainWindow
 // 3) Create architecture list
+// 4) Should we use auto scaling function of QLabel, or we should scale images by ourself
+
+void MainWindow::on_openTargetImgPB_clicked()
+{
+	QString fName = QFileDialog::getOpenFileName(this,
+												 "Open target image...",
+												 QDir::currentPath(),
+												 "IMG files (*.png *.jpg *.bmp)");
+
+	if(true == fName.isEmpty())
+	{
+		return;
+	}
+
+	QImage img(fName);
+	ui->targetImgLbl->setPixmap(QPixmap::fromImage(img));
+}

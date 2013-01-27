@@ -49,7 +49,11 @@ HEADERS  += \
     mainwindow_old.h \
     mainwindow.h \
     statusbar.h \
-    DEFINES/programstatus.h
+    DEFINES/programstatus.h \
+    DEFINES/mainwindowui.h
 
 FORMS    += \
     mainwindow.ui
+
+RESOURCES += \
+    uiresources.qrc
