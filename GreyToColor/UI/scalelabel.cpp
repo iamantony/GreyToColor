@@ -23,6 +23,29 @@ ScaleLabel::ScaleLabel(QWidget *parent) :
 {
 }
 
+void ScaleLabel::SetImage(const QImage &t_image)
+{
+	if ( true == t_image.isNull() )
+	{
+		return;
+	}
+
+	m_originalImg = t_image;
+
+	SetImgOnLabel();
+}
+
+void ScaleLabel::SetImgOnLabel()
+{
+	if ( true == m_originalImg.isNull() )
+	{
+		return;
+	}
+
+	QImage imgToSet = m_originalImg.scaled(this->width(), this->height(), Qt::KeepAspectRatio);
+	this->setPixmap(QPixmap::fromImage(imgToSet));
+}
+
 void ScaleLabel::resizeEvent(QResizeEvent *)
 {
 	if ( true == this->pixmap()->isNull() )
@@ -30,16 +53,5 @@ void ScaleLabel::resizeEvent(QResizeEvent *)
 		return;
 	}
 
-	QPixmap imgPM = *(this->pixmap());
-
-
-	int widthPM = this->width();
-	int heightPM = this->height();
-
-	imgPM = imgPM.scaled(widthPM, heightPM, Qt::KeepAspectRatio);
-
-//	this->setPixmap(imgPM);
-
-	// TODO:
-	// how we can get original pixmap?
+	SetImgOnLabel();
 }

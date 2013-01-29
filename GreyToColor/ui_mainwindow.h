@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Tue 29. Jan 09:56:28 2013
+** Created: Tue 29. Jan 17:52:13 2013
 **      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -46,14 +46,14 @@ public:
     QSpacerItem *rightHS_3;
     QSpacerItem *targetResultImgsHS;
     QVBoxLayout *resultImgLayout;
-    QLabel *resultImgLbl;
+    ScaleLabel *resultImgLbl;
     QHBoxLayout *resultButtonsLayout;
     QSpacerItem *leftHS_2;
     QPushButton *saveResultPB;
     QSpacerItem *rightHS_2;
     QSpacerItem *resultSourceImgsHS;
     QVBoxLayout *sourceImgLayout;
-    QLabel *sourceImgLbl;
+    ScaleLabel *sourceImgLbl;
     QHBoxLayout *sourceButtonsLayout;
     QSpacerItem *leftHS;
     QPushButton *openSourceImgPB;
@@ -72,7 +72,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(800, 600);
+        MainWindow->resize(800, 507);
         MainWindow->setSizeIncrement(QSize(1, 1));
         MainWindow->setBaseSize(QSize(800, 600));
         actionOpenTargetImage = new QAction(MainWindow);
@@ -100,8 +100,7 @@ public:
         targetImgLbl->setMinimumSize(QSize(200, 200));
         targetImgLbl->setMaximumSize(QSize(660, 660));
         targetImgLbl->setFrameShape(QFrame::NoFrame);
-        targetImgLbl->setPixmap(QPixmap(QString::fromUtf8(":/defaultPics/UI/PICS/target_image.png")));
-        targetImgLbl->setScaledContents(true);
+        targetImgLbl->setScaledContents(false);
         targetImgLbl->setAlignment(Qt::AlignCenter);
         targetImgLbl->setWordWrap(true);
         targetImgLbl->setIndent(-1);
@@ -133,22 +132,20 @@ public:
 
         imgsLayout->addLayout(targetImgLayout);
 
-        targetResultImgsHS = new QSpacerItem(13, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
+        targetResultImgsHS = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
 
         imgsLayout->addItem(targetResultImgsHS);
 
         resultImgLayout = new QVBoxLayout();
         resultImgLayout->setObjectName(QString::fromUtf8("resultImgLayout"));
         resultImgLayout->setContentsMargins(0, -1, -1, -1);
-        resultImgLbl = new QLabel(centralwidget);
+        resultImgLbl = new ScaleLabel(centralwidget);
         resultImgLbl->setObjectName(QString::fromUtf8("resultImgLbl"));
         sizePolicy.setHeightForWidth(resultImgLbl->sizePolicy().hasHeightForWidth());
         resultImgLbl->setSizePolicy(sizePolicy);
         resultImgLbl->setMinimumSize(QSize(200, 200));
         resultImgLbl->setMaximumSize(QSize(660, 660));
         resultImgLbl->setFrameShape(QFrame::NoFrame);
-        resultImgLbl->setPixmap(QPixmap(QString::fromUtf8(":/defaultPics/UI/PICS/result_image.png")));
-        resultImgLbl->setScaledContents(true);
         resultImgLbl->setAlignment(Qt::AlignCenter);
         resultImgLbl->setWordWrap(true);
 
@@ -177,21 +174,19 @@ public:
 
         imgsLayout->addLayout(resultImgLayout);
 
-        resultSourceImgsHS = new QSpacerItem(18, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
+        resultSourceImgsHS = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
 
         imgsLayout->addItem(resultSourceImgsHS);
 
         sourceImgLayout = new QVBoxLayout();
         sourceImgLayout->setObjectName(QString::fromUtf8("sourceImgLayout"));
-        sourceImgLbl = new QLabel(centralwidget);
+        sourceImgLbl = new ScaleLabel(centralwidget);
         sourceImgLbl->setObjectName(QString::fromUtf8("sourceImgLbl"));
         sizePolicy.setHeightForWidth(sourceImgLbl->sizePolicy().hasHeightForWidth());
         sourceImgLbl->setSizePolicy(sizePolicy);
         sourceImgLbl->setMinimumSize(QSize(200, 200));
         sourceImgLbl->setMaximumSize(QSize(660, 660));
         sourceImgLbl->setFrameShape(QFrame::NoFrame);
-        sourceImgLbl->setPixmap(QPixmap(QString::fromUtf8(":/defaultPics/UI/PICS/source_image.png")));
-        sourceImgLbl->setScaledContents(true);
         sourceImgLbl->setAlignment(Qt::AlignCenter);
         sourceImgLbl->setWordWrap(true);
 
@@ -199,7 +194,7 @@ public:
 
         sourceButtonsLayout = new QHBoxLayout();
         sourceButtonsLayout->setObjectName(QString::fromUtf8("sourceButtonsLayout"));
-        leftHS = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
+        leftHS = new QSpacerItem(10, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
 
         sourceButtonsLayout->addItem(leftHS);
 
@@ -210,7 +205,7 @@ public:
 
         sourceButtonsLayout->addWidget(openSourceImgPB);
 
-        middleHS = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
+        middleHS = new QSpacerItem(10, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
 
         sourceButtonsLayout->addItem(middleHS);
 
@@ -218,10 +213,17 @@ public:
         findSourceImgPB->setObjectName(QString::fromUtf8("findSourceImgPB"));
         findSourceImgPB->setMinimumSize(QSize(60, 23));
         findSourceImgPB->setMaximumSize(QSize(80, 23));
+        findSourceImgPB->setCheckable(false);
+        findSourceImgPB->setChecked(false);
+        findSourceImgPB->setAutoRepeat(false);
+        findSourceImgPB->setAutoExclusive(false);
+        findSourceImgPB->setAutoDefault(false);
+        findSourceImgPB->setDefault(false);
+        findSourceImgPB->setFlat(false);
 
         sourceButtonsLayout->addWidget(findSourceImgPB);
 
-        rightHS = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
+        rightHS = new QSpacerItem(10, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
 
         sourceButtonsLayout->addItem(rightHS);
 

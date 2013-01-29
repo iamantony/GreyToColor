@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>600</height>
+    <height>507</height>
    </rect>
   </property>
   <property name="sizeIncrement">
@@ -60,11 +60,8 @@
           <property name="text">
            <string/>
           </property>
-          <property name="pixmap">
-           <pixmap resource="resources_ui.qrc">:/defaultPics/UI/PICS/target_image.png</pixmap>
-          </property>
           <property name="scaledContents">
-           <bool>true</bool>
+           <bool>false</bool>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -147,7 +144,7 @@
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>13</width>
+          <width>20</width>
           <height>20</height>
          </size>
         </property>
@@ -159,7 +156,7 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="QLabel" name="resultImgLbl">
+         <widget class="ScaleLabel" name="resultImgLbl">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -183,12 +180,6 @@
           </property>
           <property name="text">
            <string/>
-          </property>
-          <property name="pixmap">
-           <pixmap resource="resources_ui.qrc">:/defaultPics/UI/PICS/result_image.png</pixmap>
-          </property>
-          <property name="scaledContents">
-           <bool>true</bool>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
@@ -265,7 +256,7 @@
         </property>
         <property name="sizeHint" stdset="0">
          <size>
-          <width>18</width>
+          <width>20</width>
           <height>20</height>
          </size>
         </property>
@@ -274,7 +265,7 @@
       <item>
        <layout class="QVBoxLayout" name="sourceImgLayout">
         <item>
-         <widget class="QLabel" name="sourceImgLbl">
+         <widget class="ScaleLabel" name="sourceImgLbl">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
             <horstretch>0</horstretch>
@@ -299,12 +290,6 @@
           <property name="text">
            <string/>
           </property>
-          <property name="pixmap">
-           <pixmap resource="resources_ui.qrc">:/defaultPics/UI/PICS/source_image.png</pixmap>
-          </property>
-          <property name="scaledContents">
-           <bool>true</bool>
-          </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
           </property>
@@ -325,7 +310,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>10</width>
               <height>20</height>
              </size>
             </property>
@@ -360,7 +345,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>10</width>
               <height>20</height>
              </size>
             </property>
@@ -383,6 +368,27 @@
             <property name="text">
              <string>Find in DB</string>
             </property>
+            <property name="checkable">
+             <bool>false</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <property name="autoRepeat">
+             <bool>false</bool>
+            </property>
+            <property name="autoExclusive">
+             <bool>false</bool>
+            </property>
+            <property name="autoDefault">
+             <bool>false</bool>
+            </property>
+            <property name="default">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
            </widget>
           </item>
           <item>
@@ -395,7 +401,7 @@
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>40</width>
+              <width>10</width>
               <height>20</height>
              </size>
             </property>
@@ -529,9 +535,7 @@
    <header location="global">UI/scalelabel.h</header>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="resources_ui.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>actionClose</sender>

@@ -19,9 +19,9 @@
 #ifndef MAINWINDOWUI_H
 #define MAINWINDOWUI_H
 
-#define DEFAULT_TARGET_IMG_PATH "./UI/target_image.png"
-#define DEFAULT_RESULT_IMG_PATH "./UI/result_image.png"
-#define DEFAULT_SOURCE_IMG_PATH "./UI/source_image.png"
+#define DEFAULT_TARGET_IMG_PATH ":/defaultPics/UI/PICS/target_image.png"
+#define DEFAULT_RESULT_IMG_PATH ":/defaultPics/UI/PICS/result_image.png"
+#define DEFAULT_SOURCE_IMG_PATH ":/defaultPics/UI/PICS/source_image.png"
 
 namespace Images
 {

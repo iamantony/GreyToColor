@@ -20,15 +20,27 @@
 #define SCALELABEL_H
 
 #include <QLabel>
+#include <QImage>
 
 class ScaleLabel : public QLabel
 {
 	Q_OBJECT
+
+	// == DATA ==
+private:
+	QImage m_originalImg;
+	QPixmap m_originalPixmap;
+
+	// == METHODS ==
 public:
 	explicit ScaleLabel(QWidget *parent = 0);
+	void SetImage(const QImage &t_image);
 
 protected:
 	void resizeEvent(QResizeEvent *);
+
+private:
+	void SetImgOnLabel();
 
 };
 

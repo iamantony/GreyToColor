@@ -42,14 +42,14 @@ void MainWindow::InitStatusBar()
 
 void MainWindow::InitImgsLabels()
 {
-//	InitImg(Images::TARGET);
-//	InitImg(Images::RESULT);
-//	InitImg(Images::SOURCE);
+	InitImg(Images::TARGET);
+	InitImg(Images::RESULT);
+	InitImg(Images::SOURCE);
 }
 
 void MainWindow::InitImg(Images::Types t_imgType)
 {
-	QLabel *imgLabel;
+	ScaleLabel *imgLabel;
 	QString pathToImg;
 	Qt::GlobalColor defaultColor;
 
@@ -89,25 +89,22 @@ void MainWindow::InitImg(Images::Types t_imgType)
 	int currentLabelWidth = imgLabel->width();
 	int currentLabelHeight = imgLabel->height();
 
-	QPixmap pixMap(currentLabelWidth, currentLabelHeight);
 	QImage imgToSet(pathToImg);
 	if ( true == imgToSet.isNull() )
 	{
 		qDebug() << "Can't load default image from" << pathToImg << endl <<
 					"Setting up default color";
 
+		QPixmap pixMap(currentLabelWidth, currentLabelHeight);
 		pixMap.fill(defaultColor);
+		imgLabel->setPixmap(pixMap);
 	}
 	else
 	{
-		imgToSet = imgToSet.scaled(currentLabelWidth,
-									currentLabelHeight,
-									Qt::KeepAspectRatio);
-
-		pixMap = QPixmap::fromImage(imgToSet);
+		imgLabel->SetImage(imgToSet);
 	}
 
-	imgLabel->setPixmap(pixMap);
+
 }
 
 MainWindow::~MainWindow()
@@ -132,5 +129,5 @@ void MainWindow::on_openTargetImgPB_clicked()
 	}
 
 	QImage img(fName);
-	ui->targetImgLbl->setPixmap(QPixmap::fromImage(img));
+	ui->targetImgLbl->SetImage(img);
 }
