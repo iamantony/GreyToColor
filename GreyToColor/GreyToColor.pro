@@ -27,9 +27,10 @@ SOURCES += main.cpp\
 	SERVICE/imgsearchparams.cpp \
 	SERVICE/fileoperations.cpp \
 	SERVICE/comparestuff.cpp \
-    mainwindow_old.cpp \
-    mainwindow.cpp \
-    statusbar.cpp
+	mainwindow_old.cpp \
+	mainwindow.cpp \
+	UI/statusbar.cpp \
+    UI/scalelabel.cpp
 
 HEADERS  += \
 	defines.h \
@@ -46,14 +47,15 @@ HEADERS  += \
 	SERVICE/imgsearchparams.h \
 	SERVICE/fileoperations.h \
 	SERVICE/comparestuff.h \
-    mainwindow_old.h \
-    mainwindow.h \
-    statusbar.h \
-    DEFINES/programstatus.h \
-    DEFINES/mainwindowui.h
+	mainwindow_old.h \
+	mainwindow.h \
+	DEFINES/programstatus.h \
+	DEFINES/mainwindowui.h \
+	UI/statusbar.h \
+    UI/scalelabel.h
 
 FORMS    += \
-    mainwindow.ui
+	mainwindow.ui
 
 RESOURCES += \
-    uiresources.qrc
+    resources_ui.qrc

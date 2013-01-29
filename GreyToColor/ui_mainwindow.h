@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Sun 27. Jan 16:39:04 2013
-**      by: Qt User Interface Compiler version 4.8.1
+** Created: Tue 29. Jan 09:56:28 2013
+**      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -25,19 +25,21 @@
 #include <QtGui/QSpacerItem>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
+#include <UI/scalelabel.h>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_MainWindow
 {
 public:
-    QAction *actionOpenImage;
+    QAction *actionOpenTargetImage;
     QAction *actionClose;
+    QAction *actionOpenSourceImage;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *imgsLayout;
     QVBoxLayout *targetImgLayout;
-    QLabel *targetImgLbl;
+    ScaleLabel *targetImgLbl;
     QHBoxLayout *targetButtonsLayout;
     QSpacerItem *leftHS_3;
     QPushButton *openTargetImgPB;
@@ -73,10 +75,12 @@ public:
         MainWindow->resize(800, 600);
         MainWindow->setSizeIncrement(QSize(1, 1));
         MainWindow->setBaseSize(QSize(800, 600));
-        actionOpenImage = new QAction(MainWindow);
-        actionOpenImage->setObjectName(QString::fromUtf8("actionOpenImage"));
+        actionOpenTargetImage = new QAction(MainWindow);
+        actionOpenTargetImage->setObjectName(QString::fromUtf8("actionOpenTargetImage"));
         actionClose = new QAction(MainWindow);
         actionClose->setObjectName(QString::fromUtf8("actionClose"));
+        actionOpenSourceImage = new QAction(MainWindow);
+        actionOpenSourceImage->setObjectName(QString::fromUtf8("actionOpenSourceImage"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -86,7 +90,7 @@ public:
         imgsLayout->setSizeConstraint(QLayout::SetMaximumSize);
         targetImgLayout = new QVBoxLayout();
         targetImgLayout->setObjectName(QString::fromUtf8("targetImgLayout"));
-        targetImgLbl = new QLabel(centralwidget);
+        targetImgLbl = new ScaleLabel(centralwidget);
         targetImgLbl->setObjectName(QString::fromUtf8("targetImgLbl"));
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
         sizePolicy.setHorizontalStretch(0);
@@ -96,7 +100,7 @@ public:
         targetImgLbl->setMinimumSize(QSize(200, 200));
         targetImgLbl->setMaximumSize(QSize(660, 660));
         targetImgLbl->setFrameShape(QFrame::NoFrame);
-        targetImgLbl->setPixmap(QPixmap(QString::fromUtf8(":/defaultImgs/UI/target_image.png")));
+        targetImgLbl->setPixmap(QPixmap(QString::fromUtf8(":/defaultPics/UI/PICS/target_image.png")));
         targetImgLbl->setScaledContents(true);
         targetImgLbl->setAlignment(Qt::AlignCenter);
         targetImgLbl->setWordWrap(true);
@@ -143,7 +147,7 @@ public:
         resultImgLbl->setMinimumSize(QSize(200, 200));
         resultImgLbl->setMaximumSize(QSize(660, 660));
         resultImgLbl->setFrameShape(QFrame::NoFrame);
-        resultImgLbl->setPixmap(QPixmap(QString::fromUtf8(":/defaultImgs/UI/result_image.png")));
+        resultImgLbl->setPixmap(QPixmap(QString::fromUtf8(":/defaultPics/UI/PICS/result_image.png")));
         resultImgLbl->setScaledContents(true);
         resultImgLbl->setAlignment(Qt::AlignCenter);
         resultImgLbl->setWordWrap(true);
@@ -186,7 +190,7 @@ public:
         sourceImgLbl->setMinimumSize(QSize(200, 200));
         sourceImgLbl->setMaximumSize(QSize(660, 660));
         sourceImgLbl->setFrameShape(QFrame::NoFrame);
-        sourceImgLbl->setPixmap(QPixmap(QString::fromUtf8(":/defaultImgs/UI/source_image.png")));
+        sourceImgLbl->setPixmap(QPixmap(QString::fromUtf8(":/defaultPics/UI/PICS/source_image.png")));
         sourceImgLbl->setScaledContents(true);
         sourceImgLbl->setAlignment(Qt::AlignCenter);
         sourceImgLbl->setWordWrap(true);
@@ -270,13 +274,14 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 20));
+        menubar->setGeometry(QRect(0, 0, 800, 21));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         MainWindow->setMenuBar(menubar);
 
         menubar->addAction(menuFile->menuAction());
-        menuFile->addAction(actionOpenImage);
+        menuFile->addAction(actionOpenTargetImage);
+        menuFile->addAction(actionOpenSourceImage);
         menuFile->addSeparator();
         menuFile->addAction(actionClose);
 
@@ -289,8 +294,9 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "GreyToColor", 0, QApplication::UnicodeUTF8));
-        actionOpenImage->setText(QApplication::translate("MainWindow", "Open image...", 0, QApplication::UnicodeUTF8));
+        actionOpenTargetImage->setText(QApplication::translate("MainWindow", "Open target image...", 0, QApplication::UnicodeUTF8));
         actionClose->setText(QApplication::translate("MainWindow", "Close", 0, QApplication::UnicodeUTF8));
+        actionOpenSourceImage->setText(QApplication::translate("MainWindow", "Open source image...", 0, QApplication::UnicodeUTF8));
         targetImgLbl->setText(QString());
         openTargetImgPB->setText(QApplication::translate("MainWindow", "Open target image", 0, QApplication::UnicodeUTF8));
         resultImgLbl->setText(QString());

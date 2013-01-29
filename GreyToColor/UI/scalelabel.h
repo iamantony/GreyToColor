@@ -16,46 +16,20 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef SCALELABEL_H
+#define SCALELABEL_H
 
-#include <QMainWindow>
-#include <QFileDialog>
-#include <QDir>
-#include <QDebug>
-#include "UI/statusbar.h"
-#include "UI/scalelabel.h"
-#include "DEFINES/programstatus.h"
-#include "DEFINES/mainwindowui.h"
+#include <QLabel>
 
-
-namespace Ui
-{
-	class MainWindow;
-}
-
-class MainWindow : public QMainWindow
+class ScaleLabel : public QLabel
 {
 	Q_OBJECT
-
-	// == DATA ==
-private:
-	Ui::MainWindow *ui;
-	StatusBar *m_statusBar;
-
-	// == METHODS ==
 public:
-	explicit MainWindow(QWidget *parent = 0);
-	~MainWindow();
+	explicit ScaleLabel(QWidget *parent = 0);
 
-private slots:
-	void on_openTargetImgPB_clicked();
+protected:
+	void resizeEvent(QResizeEvent *);
 
-private:
-	void InitUI();
-	void InitStatusBar();
-	void InitImgsLabels();
-	void InitImg(Images::Types t_imgType);
 };
 
-#endif // MAINWINDOW_H
+#endif // SCALELABEL_H

@@ -16,46 +16,30 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#include "scalelabel.h"
 
-#include <QMainWindow>
-#include <QFileDialog>
-#include <QDir>
-#include <QDebug>
-#include "UI/statusbar.h"
-#include "UI/scalelabel.h"
-#include "DEFINES/programstatus.h"
-#include "DEFINES/mainwindowui.h"
-
-
-namespace Ui
+ScaleLabel::ScaleLabel(QWidget *parent) :
+	QLabel(parent)
 {
-	class MainWindow;
 }
 
-class MainWindow : public QMainWindow
+void ScaleLabel::resizeEvent(QResizeEvent *)
 {
-	Q_OBJECT
+	if ( true == this->pixmap()->isNull() )
+	{
+		return;
+	}
 
-	// == DATA ==
-private:
-	Ui::MainWindow *ui;
-	StatusBar *m_statusBar;
+	QPixmap imgPM = *(this->pixmap());
 
-	// == METHODS ==
-public:
-	explicit MainWindow(QWidget *parent = 0);
-	~MainWindow();
 
-private slots:
-	void on_openTargetImgPB_clicked();
+	int widthPM = this->width();
+	int heightPM = this->height();
 
-private:
-	void InitUI();
-	void InitStatusBar();
-	void InitImgsLabels();
-	void InitImg(Images::Types t_imgType);
-};
+	imgPM = imgPM.scaled(widthPM, heightPM, Qt::KeepAspectRatio);
 
-#endif // MAINWINDOW_H
+//	this->setPixmap(imgPM);
+
+	// TODO:
+	// how we can get original pixmap?
+}
