@@ -1,5 +1,11 @@
 #include "pixelentity.h"
 
+// TODO:
+// 1 - save color in QRgb
+// 2 - save greay color in QRgb
+// 3 - For transformation RGB -> grey use http://en.wikipedia.org/wiki/Grayscale
+// 4 - Don't use QRgb.grey()
+
 PixelEntity::PixelEntity()
 {
 	m_Red = ERROR;

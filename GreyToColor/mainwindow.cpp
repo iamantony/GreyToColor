@@ -114,7 +114,6 @@ MainWindow::~MainWindow()
 
 // TODO:
 // 3) Create architecture list
-// 4) Should we use auto scaling function of QLabel, or we should scale images by ourself
 
 void MainWindow::on_openTargetImgPB_clicked()
 {
