@@ -1,8 +1,3 @@
-#ifndef STATUSBAR_H
-#define STATUSBAR_H
-
-#include <QStatusBar>
-#include <QProgressBar>
 /* === This file is part of GreyToColor ===
  *
  *	Copyright 2012, Antony Cherepanov <antony.cherepanov@gmail.com>
@@ -21,6 +16,11 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef STATUSBAR_H
+#define STATUSBAR_H
+
+#include <QStatusBar>
+#include <QProgressBar>
 #include <QLabel>
 #include <QDebug>
 #include "DEFINES/programstatus.h"
