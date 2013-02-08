@@ -1,0 +1,2 @@
+Think about copy function for class Image
+http://www.devexp.ru/2010/03/o-kopirovanii-obektov-v-c/
