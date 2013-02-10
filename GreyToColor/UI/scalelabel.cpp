@@ -21,6 +21,55 @@
 ScaleLabel::ScaleLabel(QWidget *parent) :
 	QLabel(parent)
 {
+	m_defaultImgPath.clear();
+}
+
+ScaleLabel::~ScaleLabel()
+{
+	m_defaultImgPath.clear();
+}
+
+// Set path to default image
+// @input:
+// - t_pathToDefault - unnull path to existing image
+// @output:
+// - true - path to default image saved
+// - false - can't save path
+bool ScaleLabel::SetDefaultImgPath(const QString &t_pathToDefault)
+{
+	if ( true == t_pathToDefault.isEmpty() )
+	{
+		qDebug() << "SetDefaultImgPath(): Error - invalid arguments";
+		return false;
+	}
+
+	m_defaultImgPath.clear();
+
+	QImage testImg;
+	bool imgExist = testImg.load(t_pathToDefault);
+	if ( true == imgExist )
+	{
+		m_defaultImgPath.append(t_pathToDefault);
+	}
+
+	return true;
+}
+
+// Put to label default image
+// @input:
+// @output:
+void ScaleLabel::ShowDefaultImg()
+{
+	if ( true == m_defaultImgPath.isEmpty() )
+	{
+		QPixmap blankPixmap(this->width(), this->height());
+		blankPixmap.fill(Qt::white);
+		this->setPixmap(blankPixmap);
+	}
+	else
+	{
+		SetImage(m_defaultImgPath);
+	}
 }
 
 // Set image to label
@@ -33,7 +82,9 @@ bool ScaleLabel::SetImage(const QImage &t_image)
 {
 	if ( true == t_image.isNull() )
 	{
-		return;
+		qDebug() << "SetImage(): Error - invalid arguments";
+		ShowDefaultImg();
+		return false;
 	}
 
 	m_originalImg = t_image;
@@ -53,7 +104,8 @@ bool ScaleLabel::SetImage(const QString &t_pathToImg)
 {
 	if ( true == t_pathToImg.isNull() )
 	{
-		qDebug() << "SetImage(): Error - path to image is empty -" << t_pathToImg;
+		qDebug() << "SetImage(): Error - invalid arguments";
+		ShowDefaultImg();
 		return false;
 	}
 
@@ -61,6 +113,7 @@ bool ScaleLabel::SetImage(const QString &t_pathToImg)
 	if ( false == imgLoaded )
 	{
 		qDebug() << "SetImage(): Error - can't load image" << t_pathToImg;
+		ShowDefaultImg();
 		return false;
 	}
 
@@ -76,6 +129,7 @@ void ScaleLabel::SetImgOnLabel()
 {
 	if ( true == m_originalImg.isNull() )
 	{
+		ShowDefaultImg();
 		return;
 	}
 

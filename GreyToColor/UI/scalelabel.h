@@ -21,6 +21,7 @@
 
 #include <QLabel>
 #include <QImage>
+#include <QDebug>
 
 class ScaleLabel : public QLabel
 {
@@ -28,12 +29,18 @@ class ScaleLabel : public QLabel
 
 	// == DATA ==
 private:
+	QString m_defaultImgPath;
 	QImage m_originalImg;
-	QPixmap m_originalPixmap;
 
 	// == METHODS ==
 public:
 	explicit ScaleLabel(QWidget *parent = 0);
+	~ScaleLabel();
+
+	// Set path to default image
+	bool SetDefaultImgPath(const QString &t_pathToDefault);
+	// Put to label default image
+	void ShowDefaultImg();
 	// Set image to label
 	bool SetImage(const QImage &t_image);
 	bool SetImage(const QString &t_pathToImg);
