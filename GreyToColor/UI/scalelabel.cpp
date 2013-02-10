@@ -23,7 +23,13 @@ ScaleLabel::ScaleLabel(QWidget *parent) :
 {
 }
 
-void ScaleLabel::SetImage(const QImage &t_image)
+// Set image to label
+// @input:
+// - t_image - unnull loaded image
+// @output:
+// - true - image set
+// - false - can't set image
+bool ScaleLabel::SetImage(const QImage &t_image)
 {
 	if ( true == t_image.isNull() )
 	{
@@ -33,8 +39,39 @@ void ScaleLabel::SetImage(const QImage &t_image)
 	m_originalImg = t_image;
 
 	SetImgOnLabel();
+
+	return true;
 }
 
+// Set image to label
+// @input:
+// - t_pathToImg - unnull path to existing image
+// @output:
+// - true - image set
+// - false - can't set image
+bool ScaleLabel::SetImage(const QString &t_pathToImg)
+{
+	if ( true == t_pathToImg.isNull() )
+	{
+		qDebug() << "SetImage(): Error - path to image is empty -" << t_pathToImg;
+		return false;
+	}
+
+	bool imgLoaded = m_originalImg.load(t_pathToImg);
+	if ( false == imgLoaded )
+	{
+		qDebug() << "SetImage(): Error - can't load image" << t_pathToImg;
+		return false;
+	}
+
+	SetImgOnLabel();
+
+	return true;
+}
+
+// Get scaled image from previously loaded original image and set it as pixmap to label
+// @input:
+// @output:
 void ScaleLabel::SetImgOnLabel()
 {
 	if ( true == m_originalImg.isNull() )
@@ -46,6 +83,9 @@ void ScaleLabel::SetImgOnLabel()
 	this->setPixmap(QPixmap::fromImage(imgToSet));
 }
 
+// On resize rescale image
+// @input:
+// @output:
 void ScaleLabel::resizeEvent(QResizeEvent *)
 {
 	if ( true == this->pixmap()->isNull() )

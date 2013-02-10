@@ -26,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent) :
 	InitUI();
 }
 
+// Call all functions to initialise UI
+// @input:
+// @output:
 void MainWindow::InitUI()
 {
 	ui->setupUi(this);
@@ -34,12 +37,18 @@ void MainWindow::InitUI()
 	InitImgsLabels();
 }
 
+// Creating, applying settings to status bar
+// @input:
+// @output:
 void MainWindow::InitStatusBar()
 {
 	m_statusBar = new StatusBar();
 	this->setStatusBar(m_statusBar);
 }
 
+// Put default picture to all labels on MainWindow
+// @input:
+// @output:
 void MainWindow::InitImgsLabels()
 {
 	InitImg(Images::TARGET);
@@ -47,6 +56,10 @@ void MainWindow::InitImgsLabels()
 	InitImg(Images::SOURCE);
 }
 
+// Put default picture to one of three labels on MainWindow
+// @input:
+// - t_imgType - type of label
+// @output:
 void MainWindow::InitImg(Images::Types t_imgType)
 {
 	ScaleLabel *imgLabel;
@@ -103,17 +116,12 @@ void MainWindow::InitImg(Images::Types t_imgType)
 	{
 		imgLabel->SetImage(imgToSet);
 	}
-
-
 }
 
 MainWindow::~MainWindow()
 {
 	delete ui;
 }
-
-// TODO:
-// 3) Create architecture list
 
 void MainWindow::on_openTargetImgPB_clicked()
 {

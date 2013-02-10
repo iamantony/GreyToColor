@@ -34,7 +34,9 @@ private:
 	// == METHODS ==
 public:
 	explicit ScaleLabel(QWidget *parent = 0);
-	void SetImage(const QImage &t_image);
+	// Set image to label
+	bool SetImage(const QImage &t_image);
+	bool SetImage(const QString &t_pathToImg);
 
 protected:
 	void resizeEvent(QResizeEvent *);
