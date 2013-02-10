@@ -18,10 +18,10 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="153.0" width="202.0" x="-6118.451736787564" y="464.03062202643173"/>
+          <y:Geometry height="202.45092286374143" width="267.10567215889205" x="-5781.916351158004" y="-170.54960079283228"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="83.42822265625" x="59.285888671875" y="26.701171875">MainWindow<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="83.42822265625" x="91.83872475132102" y="26.701171875">MainWindow<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -29,11 +29,15 @@
             </y:ModelParameter>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="QMainWindow" use3DEffect="true">
-            <y:AttributeLabel>- QImage m_targetImg
-- QImage m_resultImg
-- QImage m_sourceImg</y:AttributeLabel>
+            <y:AttributeLabel/>
             <y:MethodLabel>+ void SetTargetImg( QImage )
-+ void SetSourceImg( QImage )</y:MethodLabel>
++ void SetSourceImg( QImage )
+
+- void ShowWarning( QString, QString )
+- void on_openTargetImgPB_clicked()
+- void on_actionOpenTargetImage_triggered()
+- void on_openSourceImgPB_clicked()
+- void on_actionOpenSourceImage_triggered()</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -93,7 +97,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="153.0" width="202.0" x="-5591.0" y="1046.6005025045195"/>
+          <y:Geometry height="153.0" width="202.0" x="-5062.391415719267" y="-122.56060234536506"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="32.9072265625" x="84.54638671875" y="3.0">Area<y:LabelModel>
@@ -345,7 +349,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="176.33564757709257" width="202.0" x="-6258.724864540868" y="701.6876969162995"/>
+          <y:Geometry height="217.68585022026446" width="202.0" x="-5861.363515078558" y="116.55839696077692"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="71.92626953125" x="65.036865234375" y="26.701171875">ScaleLabel<y:LabelModel>
@@ -356,9 +360,12 @@
             </y:ModelParameter>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="QLabel" use3DEffect="true">
-            <y:AttributeLabel>- QImage m_originalImg
-- QPixmap m_originalPixmap</y:AttributeLabel>
+            <y:AttributeLabel>- QString m_defaultImgPath
+- QImage m_originalImg</y:AttributeLabel>
             <y:MethodLabel>+ void SetImage( QImage )
++ void SetImage( QString )
++ bool SetDefaultImgPath( QString )
++ void ShowDefaultImg()
 
 # void resizeEvent( QResizeEvent )
 
@@ -371,7 +378,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="217.68585022026446" width="202.0" x="-5998.451736787564" y="701.6876969162995"/>
+          <y:Geometry height="217.68585022026446" width="202.0" x="-5629.363515078558" y="116.55839696077692"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="65.4072265625" x="68.29638671875" y="26.701171875">StatusBar<y:LabelModel>
@@ -436,7 +443,7 @@
           <y:Geometry height="78.07224669603511" width="303.5165782905592" x="-4545.015951660542" y="2270.9638766519824"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="59.60546875" x="121.9555547702796" y="3.0">RGBLAB<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="59.60546875" x="121.95555477027938" y="26.18190292636882">RGBLAB<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -569,11 +576,11 @@
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
             <y:AttributeLabel/>
-            <y:MethodLabel>+ QList&lt;QByteArray&gt; GetImgPassports( QImage )
+            <y:MethodLabel>+ QList&lt;QByteArray&gt; GetImgPassports( Image )
 + QList&lt;double&gt; ConvertByteArray2DoubleList( QByteArray )
 
-- QByteArray GetScaledLuminancePassport( QImage )
-- QList&lt;double&gt; CountPercentOfPixelsForEachLum( QImage, int )
+- QByteArray GetScaledLuminancePassport( Image )
+- QList&lt;double&gt; CountPercentOfPixelsForEachLum( Image, int )
 </y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
@@ -699,7 +706,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="183.3134661354582" width="281.1985355799752" x="-4760.0" y="-74.0"/>
+          <y:Geometry height="240.9591133594767" width="281.1985355799752" x="-4760.0" y="-324.7868230946883"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="75.5126953125" x="102.8429201337376" y="3.0">ImgHandler<y:LabelModel>
@@ -712,8 +719,17 @@
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
             <y:AttributeLabel>- Image m_original
 - TargetImage m_target
-- SourceImage m_source</y:AttributeLabel>
-            <y:MethodLabel/>
+- SourceImage m_source
+- QList&lt; Area &gt; m_areas</y:AttributeLabel>
+            <y:MethodLabel>+ bool SetOriginalImg( Image )
++ bool SetTargetImg( Image )
++ bool SetSourcelImg( Image )
++ Image GetOriginalImg()
++ Image GetTargetImg()
++ Image GetSourcelImg()
++ double GetImgSKO()
++ void StartColorizationWalshSimple()
++ void StartColorizationWalshNeighbor()</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -722,7 +738,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="125.0149779735682" width="236.6436752462314" x="-3336.643675246232" y="166.0"/>
+          <y:Geometry height="139.70896648165137" width="236.6436752462314" x="-3336.643675246232" y="166.0"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="59.630859375" x="88.5064079356157" y="3.0">Passport<y:LabelModel>
@@ -733,7 +749,8 @@
             </y:ModelParameter>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-            <y:AttributeLabel>- QList&lt;double&gt; m_passport</y:AttributeLabel>
+            <y:AttributeLabel>- QString m_imgPath
+- QList&lt;double&gt; m_imgPassport</y:AttributeLabel>
             <y:MethodLabel>+ bool SetPassport( QList&lt;double&gt; )
 + bool SetPassport( QByteArray )
 + QList&lt;double&gt; GetPassport()
@@ -744,10 +761,9 @@
     </node>
     <node id="n27">
       <data key="d4"/>
-      <data key="d5"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="231.3550660792951" width="354.6828601036268" x="-4220.0" y="-104.0"/>
+          <y:Geometry height="231.3550660792951" width="354.6828601036268" x="-3838.0799260969975" y="-104.0"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="84.919921875" x="134.8814691143134" y="3.0">ImgDatabase<y:LabelModel>
@@ -758,8 +774,34 @@
             </y:ModelParameter>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-            <y:AttributeLabel/>
+            <y:AttributeLabel>- QString m_name
+- QSqlDatabase m_idb</y:AttributeLabel>
             <y:MethodLabel/>
+          </y:UML>
+        </y:UMLClassNode>
+      </data>
+    </node>
+    <node id="n28">
+      <data key="d4"/>
+      <data key="d5"/>
+      <data key="d6">
+        <y:UMLClassNode>
+          <y:Geometry height="240.9591133594767" width="354.6828601036268" x="-4350.473015796767" y="-324.7868230946883"/>
+          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:BorderStyle color="#000000" type="line" width="1.0"/>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.7890625" x="139.9468988018134" y="3.0">IDBHandler<y:LabelModel>
+              <y:SmartNodeLabelModel distance="4.0"/>
+            </y:LabelModel>
+            <y:ModelParameter>
+              <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+            </y:ModelParameter>
+          </y:NodeLabel>
+          <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+            <y:AttributeLabel>- ImgDatabase m_idb</y:AttributeLabel>
+            <y:MethodLabel>+ bool AddImgToIDB( QString )
++ QString FindSimilarImg( Image, PASSPORT_TYPE )
+
+-QString ComparePassports( Passport, QList&lt;Passport&gt; )</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -848,8 +890,8 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-6017.451736787564" y="660.5306220264317"/>
-            <y:Point x="-6157.724864540868" y="660.5306220264317"/>
+            <y:Point x="-5648.363515078558" y="75.40132207090915"/>
+            <y:Point x="-5760.363515078558" y="75.40132207090915"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="white_diamond" target="none"/>
@@ -862,8 +904,8 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-6017.451736787564" y="660.5306220264317"/>
-            <y:Point x="-5897.451736787564" y="660.5306220264317"/>
+            <y:Point x="-5648.363515078558" y="75.40132207090915"/>
+            <y:Point x="-5528.363515078558" y="75.40132207090915"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="white_diamond" target="none"/>
@@ -1043,6 +1085,21 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="-128.12730717131853" ty="0.0"/>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="diamond" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e22" source="n25" target="n3">
+      <data key="d8"/>
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
+            <y:Point x="-4766.877892924894" y="-233.1300900269592"/>
+            <y:Point x="-4961.391415719267" y="-233.1300900269592"/>
+          </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
           <y:BendStyle smoothed="false"/>

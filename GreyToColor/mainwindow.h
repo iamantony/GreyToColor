@@ -21,6 +21,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include <QMessageBox>
 #include <QDir>
 #include <QDebug>
 #include "UI/statusbar.h"
@@ -50,12 +51,16 @@ public:
 
 private slots:
 	void on_openTargetImgPB_clicked();
+	void on_actionOpenTargetImage_triggered();
+	void on_openSourceImgPB_clicked();
+	void on_actionOpenSourceImage_triggered();
 
 private:
 	void InitUI();
 	void InitStatusBar();
 	void InitImgsLabels();
 	void InitImg(Images::Types t_imgType);
+	void ShowWarning(const QString &t_title, const QString &t_text);
 };
 
 #endif // MAINWINDOW_H

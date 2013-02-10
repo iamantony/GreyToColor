@@ -62,33 +62,26 @@ void MainWindow::InitImgsLabels()
 // @output:
 void MainWindow::InitImg(Images::Types t_imgType)
 {
-	ScaleLabel *imgLabel;
-	QString pathToImg;
-	Qt::GlobalColor defaultColor;
-
 	switch (t_imgType)
 	{
 		case Images::TARGET:
 		{
-			imgLabel = ui->targetImgLbl;
-			pathToImg.append(DEFAULT_TARGET_IMG_PATH);
-			defaultColor = Qt::red;
+			ui->targetImgLbl->SetDefaultImgPath(DEFAULT_TARGET_IMG_PATH);
+			ui->targetImgLbl->ShowDefaultImg();
 			break;
 		}
 
 		case Images::RESULT:
 		{
-			imgLabel = ui->resultImgLbl;
-			pathToImg.append(DEFAULT_RESULT_IMG_PATH);
-			defaultColor = Qt::green;
+			ui->resultImgLbl->SetDefaultImgPath(DEFAULT_RESULT_IMG_PATH);
+			ui->resultImgLbl->ShowDefaultImg();
 			break;
 		}
 
 		case Images::SOURCE:
 		{
-			imgLabel = ui->sourceImgLbl;
-			pathToImg.append(DEFAULT_SOURCE_IMG_PATH);
-			defaultColor = Qt::blue;
+			ui->sourceImgLbl->SetDefaultImgPath(DEFAULT_SOURCE_IMG_PATH);
+			ui->sourceImgLbl->ShowDefaultImg();
 			break;
 		}
 
@@ -98,24 +91,6 @@ void MainWindow::InitImg(Images::Types t_imgType)
 			return;
 		}
 	}
-
-	int currentLabelWidth = imgLabel->width();
-	int currentLabelHeight = imgLabel->height();
-
-	QImage imgToSet(pathToImg);
-	if ( true == imgToSet.isNull() )
-	{
-		qDebug() << "Can't load default image from" << pathToImg << endl <<
-					"Setting up default color";
-
-		QPixmap pixMap(currentLabelWidth, currentLabelHeight);
-		pixMap.fill(defaultColor);
-		imgLabel->setPixmap(pixMap);
-	}
-	else
-	{
-		imgLabel->SetImage(imgToSet);
-	}
 }
 
 MainWindow::~MainWindow()
@@ -123,6 +98,23 @@ MainWindow::~MainWindow()
 	delete ui;
 }
 
+// Show warning window with title and some text
+// @input:
+// - t_title - nonempty title of the window
+// - t_text - nonempty text for the message
+// @output:
+void MainWindow::ShowWarning(const QString &t_title, const QString &t_text)
+{
+	QMessageBox::warning(this,
+						 t_title,
+						 t_text,
+						 QMessageBox::Ok,
+						 QMessageBox::NoButton);
+}
+
+// Slot for button TargetImgPB to set target image
+// @input:
+// @output:
 void MainWindow::on_openTargetImgPB_clicked()
 {
 	QString fName = QFileDialog::getOpenFileName(this,
@@ -135,6 +127,47 @@ void MainWindow::on_openTargetImgPB_clicked()
 		return;
 	}
 
-	QImage img(fName);
-	ui->targetImgLbl->SetImage(img);
+	bool imgSet = ui->targetImgLbl->SetImage(fName);
+	if ( false == imgSet )
+	{
+		ShowWarning("Loading target image...", "Can't load image. Please, try another one.");
+	}
+}
+
+// Slot for action actionOpenTargetImage to set target image
+// @input:
+// @output:
+void MainWindow::on_actionOpenTargetImage_triggered()
+{
+	on_openTargetImgPB_clicked();
+}
+
+// Slot for button SourceImgPB to set source image
+// @input:
+// @output:
+void MainWindow::on_openSourceImgPB_clicked()
+{
+	QString fName = QFileDialog::getOpenFileName(this,
+												 "Open source image...",
+												 QDir::currentPath(),
+												 "IMG files (*.png *.jpg *.bmp)");
+
+	if(true == fName.isEmpty())
+	{
+		return;
+	}
+
+	bool imgSet = ui->sourceImgLbl->SetImage(fName);
+	if ( false == imgSet )
+	{
+		ShowWarning("Loading source image...", "Can't load image. Please, try another one.");
+	}
+}
+
+// Slot for action actionOpenSourceImage to set source image
+// @input:
+// @output:
+void MainWindow::on_actionOpenSourceImage_triggered()
+{
+	on_openSourceImgPB_clicked();
 }
