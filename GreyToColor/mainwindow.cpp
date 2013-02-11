@@ -132,6 +132,9 @@ void MainWindow::on_openTargetImgPB_clicked()
 	{
 		ShowWarning("Loading target image...", "Can't load image. Please, try another one.");
 	}
+
+	// TODO:
+	// save target image as ImgCandidate. Get from it greyscale image and send to ImgHandler
 }
 
 // Slot for action actionOpenTargetImage to set target image
@@ -170,4 +173,74 @@ void MainWindow::on_openSourceImgPB_clicked()
 void MainWindow::on_actionOpenSourceImage_triggered()
 {
 	on_openSourceImgPB_clicked();
+}
+
+// Slot for button findSourceImgPB to find similar image from IDB
+// @input:
+// @output:
+void MainWindow::on_findSourceImgPB_clicked()
+{
+	emit SignalFindSimilarInIDB();
+}
+
+// Slot for getting new Result image
+// @input:
+// - t_resultImg - unnull new result image
+// @output:
+void MainWindow::SlotResultImg(/*Image*/ QImage t_resultImg)
+{
+	if ( true == t_resultImg.isNull() )
+	{
+		qDebug() << "SlotResultImg(): Error - invalid arguments";
+		return;
+	}
+
+	ui->resultImgLbl->SetImage(t_resultImg);
+}
+
+// Slot for getting new Source image
+// @input:
+// - t_sourceImg - unnull new source image
+// @output:
+void MainWindow::SlotSourceImg(/*Image*/ QImage t_sourceImg)
+{
+	if ( true == t_sourceImg.isNull() )
+	{
+		qDebug() << "SlotSourceImg(): Error - invalid arguments";
+		return;
+	}
+
+	ui->sourceImgLbl->SetImage(t_sourceImg);
+}
+
+// Slot for button saveResultPB to save result image
+// @input:
+// @output:
+void MainWindow::on_saveResultPB_clicked()
+{
+	emit SignalSaveResultImg();
+}
+
+// Slot for saving result (colorized) image
+// @input:
+// - t_resultImg -unnull current result image to save
+// @output:
+void MainWindow::SlotSaveResult(/*Image*/ QImage t_resultImg)
+{
+	if ( true == t_resultImg.isNull() )
+	{
+		qDebug() << "SlotSaveResult(): Error - invalid arguments";
+		return;
+	}
+
+	QString imgName = QFileDialog::getSaveFileName(this,
+												   "Choose name...",
+												   QDir::currentPath(),
+												   "IMG files (*.png)");
+
+	qDebug() << imgName;
+
+	// TODO:
+	// save image with defined format
+	// add new formats
 }

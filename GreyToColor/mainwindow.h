@@ -49,18 +49,32 @@ public:
 	explicit MainWindow(QWidget *parent = 0);
 	~MainWindow();
 
-private slots:
-	void on_openTargetImgPB_clicked();
-	void on_actionOpenTargetImage_triggered();
-	void on_openSourceImgPB_clicked();
-	void on_actionOpenSourceImage_triggered();
-
 private:
 	void InitUI();
 	void InitStatusBar();
 	void InitImgsLabels();
 	void InitImg(Images::Types t_imgType);
 	void ShowWarning(const QString &t_title, const QString &t_text);
+
+signals:
+	void SignalFindSimilarInIDB();
+	void SignalSaveResultImg();
+
+public slots:
+	// Slot for getting new Result image
+	void SlotResultImg(/*Image*/ QImage t_resultImg);
+	// Slot for getting new Source image
+	void SlotSourceImg(/*Image*/ QImage t_sourceImg);
+	// Slot for saving result (colorized) image
+	void SlotSaveResult(/*Image*/ QImage t_resultImg);
+
+private slots:
+	void on_openTargetImgPB_clicked();
+	void on_actionOpenTargetImage_triggered();
+	void on_openSourceImgPB_clicked();
+	void on_actionOpenSourceImage_triggered();
+	void on_findSourceImgPB_clicked();
+	void on_saveResultPB_clicked();
 };
 
 #endif // MAINWINDOW_H
