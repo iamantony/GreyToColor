@@ -30,7 +30,8 @@ SOURCES += main.cpp\
 	mainwindow_old.cpp \
 	mainwindow.cpp \
 	UI/statusbar.cpp \
-    UI/scalelabel.cpp
+    UI/scalelabel.cpp \
+    IMAGES/image.cpp
 
 HEADERS  += \
 	defines.h \
@@ -52,7 +53,8 @@ HEADERS  += \
 	DEFINES/programstatus.h \
 	DEFINES/mainwindowui.h \
 	UI/statusbar.h \
-    UI/scalelabel.h
+    UI/scalelabel.h \
+    IMAGES/image.h
 
 FORMS    += \
 	mainwindow.ui
