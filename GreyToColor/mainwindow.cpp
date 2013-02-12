@@ -131,10 +131,13 @@ void MainWindow::on_openTargetImgPB_clicked()
 	if ( false == imgSet )
 	{
 		ShowWarning("Loading target image...", "Can't load image. Please, try another one.");
+		return;
 	}
 
+	emit SignalStrToOriginalImg(fName);
+
 	// TODO:
-	// save target image as ImgCandidate. Get from it greyscale image and send to ImgHandler
+	// Get from ImgHandler greyscale image
 }
 
 // Slot for action actionOpenTargetImage to set target image
@@ -187,7 +190,7 @@ void MainWindow::on_findSourceImgPB_clicked()
 // @input:
 // - t_resultImg - unnull new result image
 // @output:
-void MainWindow::SlotResultImg(/*Image*/ QImage t_resultImg)
+void MainWindow::SlotResultImg(QImage t_resultImg)
 {
 	if ( true == t_resultImg.isNull() )
 	{
@@ -202,7 +205,7 @@ void MainWindow::SlotResultImg(/*Image*/ QImage t_resultImg)
 // @input:
 // - t_sourceImg - unnull new source image
 // @output:
-void MainWindow::SlotSourceImg(/*Image*/ QImage t_sourceImg)
+void MainWindow::SlotSourceImg(QImage t_sourceImg)
 {
 	if ( true == t_sourceImg.isNull() )
 	{
@@ -225,7 +228,7 @@ void MainWindow::on_saveResultPB_clicked()
 // @input:
 // - t_resultImg -unnull current result image to save
 // @output:
-void MainWindow::SlotSaveResult(/*Image*/ QImage t_resultImg)
+void MainWindow::SlotSaveResult(QImage t_resultImg)
 {
 	if ( true == t_resultImg.isNull() )
 	{
@@ -243,4 +246,14 @@ void MainWindow::SlotSaveResult(/*Image*/ QImage t_resultImg)
 	// TODO:
 	// save image with defined format
 	// add new formats
+}
+
+// Slot for resetting current target image
+// @input:
+// @output:
+void MainWindow::on_resetPB_clicked()
+{
+	// TODO:
+	// Send signal to ImgHandler. It should reload target image, calc all it's params (LAB, SKO) and then send
+	// it to us
 }

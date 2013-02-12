@@ -26,6 +26,7 @@
 #include <QDebug>
 #include "UI/statusbar.h"
 #include "UI/scalelabel.h"
+#include "./IMAGES/image.h"
 #include "DEFINES/programstatus.h"
 #include "DEFINES/mainwindowui.h"
 
@@ -59,14 +60,15 @@ private:
 signals:
 	void SignalFindSimilarInIDB();
 	void SignalSaveResultImg();
+	void SignalStrToOriginalImg(const QString &t_str);
 
 public slots:
 	// Slot for getting new Result image
-	void SlotResultImg(/*Image*/ QImage t_resultImg);
+	void SlotResultImg(QImage t_resultImg);
 	// Slot for getting new Source image
-	void SlotSourceImg(/*Image*/ QImage t_sourceImg);
+	void SlotSourceImg(QImage t_sourceImg);
 	// Slot for saving result (colorized) image
-	void SlotSaveResult(/*Image*/ QImage t_resultImg);
+	void SlotSaveResult(QImage t_resultImg);
 
 private slots:
 	void on_openTargetImgPB_clicked();
@@ -75,6 +77,7 @@ private slots:
 	void on_actionOpenSourceImage_triggered();
 	void on_findSourceImgPB_clicked();
 	void on_saveResultPB_clicked();
+	void on_resetPB_clicked();
 };
 
 #endif // MAINWINDOW_H

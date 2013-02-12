@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Mon 11. Feb 09:23:23 2013
+** Created: Tue 12. Feb 11:33:18 2013
 **      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -50,6 +50,8 @@ public:
     QHBoxLayout *resultButtonsLayout;
     QSpacerItem *leftHS_2;
     QPushButton *saveResultPB;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *resetPB;
     QSpacerItem *rightHS_2;
     QSpacerItem *resultSourceImgsHS;
     QVBoxLayout *sourceImgLayout;
@@ -163,6 +165,15 @@ public:
         saveResultPB->setMaximumSize(QSize(100, 23));
 
         resultButtonsLayout->addWidget(saveResultPB);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        resultButtonsLayout->addItem(horizontalSpacer);
+
+        resetPB = new QPushButton(centralwidget);
+        resetPB->setObjectName(QString::fromUtf8("resetPB"));
+
+        resultButtonsLayout->addWidget(resetPB);
 
         rightHS_2 = new QSpacerItem(40, 20, QSizePolicy::Preferred, QSizePolicy::Minimum);
 
@@ -303,6 +314,7 @@ public:
         openTargetImgPB->setText(QApplication::translate("MainWindow", "Open target image", 0, QApplication::UnicodeUTF8));
         resultImgLbl->setText(QString());
         saveResultPB->setText(QApplication::translate("MainWindow", "Save result", 0, QApplication::UnicodeUTF8));
+        resetPB->setText(QApplication::translate("MainWindow", "Reset", 0, QApplication::UnicodeUTF8));
         sourceImgLbl->setText(QString());
         openSourceImgPB->setText(QApplication::translate("MainWindow", "Open source image", 0, QApplication::UnicodeUTF8));
         findSourceImgPB->setText(QApplication::translate("MainWindow", "Find in DB", 0, QApplication::UnicodeUTF8));

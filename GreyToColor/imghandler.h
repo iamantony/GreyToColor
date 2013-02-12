@@ -1,53 +1,52 @@
+/* === This file is part of GreyToColor ===
+ *
+ *	Copyright 2012, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *
+ *	GreyToColor is free software: you can redistribute it and/or modify
+ *	it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	GreyToColor is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #ifndef IMGHANDLER_H
 #define IMGHANDLER_H
 
 #include <QObject>
-#include <QMessageBox>
-#include <QImage>
-#include <QColor>
-#include "METHODS/imgcolorwalshsimple.h"
-#include "METHODS/imgcolorwalshneighbor.h"
-#include "SERVICE/comparestuff.h"
-#include "SERVICE/imgtransform.h"
-#include "defines.h"
+#include <QDebug>
+#include "./IMAGES/image.h"
 
 class ImgHandler : public QObject
 {
 	Q_OBJECT
 
-	/*------------------------------------------------------------------------------*/
-	/*-----------------------------Data-------------------------------------------*/
-	/*------------------------------------------------------------------------------*/
+	// == DATA ==
 private:
-	QImage m_imgMass[3];
+	Image m_original;
+//	TargetImage m_target;
+//	SourceImage m_source;
 
-	/*------------------------------------------------------------------------------*/
-	/*-----------------------------Methods-------------------------------------------*/
-	/*------------------------------------------------------------------------------*/
+	// == METHODS ==
 public:
 	explicit ImgHandler(QObject *parent = 0);
-	void setImg(QImage t_img, int t_type);
-	QImage getImg(int t_type);
-	void getGrayImg(QString t_imgPath);
-	void getColorImg(QString t_imgPath);
-
-	QImage startImgColorizationWSimple();
-	QImage startImgColorizationWNeighbor();
-	void imageComparison (QImage &t_targ, QImage &t_coloured);
-
-private:
-	void setImg2Label(QImage *t_img, int t_type);
-	void getLumImg(QImage *t_img);
 
 signals:
-	void signalImagesSKO (QString);
-	void signalEnableProcButtn(int);
-	void signalSetTargetImg(QImage);
-	void signalSetResultImg(QImage);
-	void signalSetOriginalImg(QImage);
+	void SignalGetResultImg(QImage t_img);
+	void SignalHasNewTarget();
+	void SignalSendTargetImg();
 
 public slots:
-
+	// This slot get signal to save result (colorized or not) image and send it copy signal to some (MainWindow) UI
+	void SlotSaveResultImg();
+	// This slot get path to new original image
+	void SlotGetOriginalImg(const QString &t_imgPath);
 };
 
 #endif // IMGHANDLER_H

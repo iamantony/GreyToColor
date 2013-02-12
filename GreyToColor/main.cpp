@@ -18,11 +18,31 @@
 
 #include <QtGui/QApplication>
 #include "mainwindow.h"
+#include "imghandler.h"
 
 int main(int argc, char *argv[])
 {
 	QApplication a(argc, argv);
+
+	ImgHandler imgHandler;
 	MainWindow w;
+
+	QObject::connect(&w,
+					 SIGNAL(SignalSaveResultImg()),
+					 &imgHandler,
+					 SLOT(SlotSaveResultImg()));
+
+	QObject::connect(&imgHandler,
+					 SIGNAL(SignalGetResultImg(QImage)),
+					 &w,
+					 SLOT(SlotSaveResult(QImage)));
+
+	QObject::connect(&w,
+					 SIGNAL(SignalStrToOriginalImg(QString)),
+					 &imgHandler,
+					 SLOT(SlotGetOriginalImg(QString)));
+
 	w.show();
+
 	return a.exec();
 }

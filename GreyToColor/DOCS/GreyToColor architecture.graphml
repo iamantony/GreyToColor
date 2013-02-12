@@ -18,7 +18,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="245.85997139953818" width="267.10567215889205" x="-5781.916351158004" y="-213.95864932862904"/>
+          <y:Geometry height="310.07370320570556" width="267.10567215889205" x="-5781.916351158004" y="-278.1723811347964"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="83.42822265625" x="91.83872475132102" y="26.701171875">MainWindow<y:LabelModel>
@@ -34,13 +34,18 @@
 + void SlotSourceImg( QImage )
 + void SlotSaveResult( QImage )
 
+- void InitUI()
+- void InitStatusBar()
+- void InitImgsLabels()
+- void InitImg( Images::Types t_imgType )
 - void ShowWarning( QString, QString )
 - void on_openTargetImgPB_clicked()
 - void on_actionOpenTargetImage_triggered()
 - void on_openSourceImgPB_clicked()
 - void on_actionOpenSourceImage_triggered()
 - void on_findSourceImgPB_clicked()
-- void on_saveResultPB_clicked();</y:MethodLabel>
+- void on_saveResultPB_clicked()
+- void on_resetPB_clicked()</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -465,7 +470,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="165.04780876494033" width="281.1985355799752" x="-3440.599267789988" y="958.2031284677272"/>
+          <y:Geometry height="243.75198464450477" width="281.1985355799752" x="-3440.599267789988" y="899.9305945264886"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="41.57177734375" x="119.8133791181126" y="3.0">Image<y:LabelModel>
@@ -478,7 +483,11 @@
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
             <y:AttributeLabel>- QString m_path</y:AttributeLabel>
             <y:MethodLabel>+ bool LoadImg( QString )
++ bool SetPath( QString )
 + QString GetImgPath()
++ QImage GetImg()
++ bool SaveImg()
++ bool SaveImg( QString )
 + bool IsNull()
 + int GetMaxRGBLum()
 + int GetMinRGBLum()
@@ -712,7 +721,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="240.9591133594767" width="281.1985355799752" x="-4760.0" y="-324.7868230946883"/>
+          <y:Geometry height="281.5928766474173" width="281.1985355799752" x="-4760.0" y="-324.7868230946883"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="75.5126953125" x="102.8429201337376" y="3.0">ImgHandler<y:LabelModel>
@@ -735,7 +744,10 @@
 + Image GetSourcelImg()
 + double GetImgSKO()
 + void StartColorizationWalshSimple()
-+ void StartColorizationWalshNeighbor()</y:MethodLabel>
++ void StartColorizationWalshNeighbor()
+
++ void SlotSaveResultImg()
++ void SlotGetOriginalImg( QString )</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -1050,7 +1062,7 @@
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="74.72778715503686">
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="110.36224330050996">
             <y:Point x="-3300.0000000000005" y="1470.0"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
@@ -1089,7 +1101,10 @@
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="-128.12730717131853" ty="0.0"/>
+          <y:Path sx="153.88501731429278" sy="-19.458706607929344" tx="-128.12730717131853" ty="0.0">
+            <y:Point x="-3505.069815828466" y="1021.2683262422679"/>
+            <y:Point x="-3505.069815828466" y="1021.806586848741"/>
+          </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
           <y:BendStyle smoothed="false"/>

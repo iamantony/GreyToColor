@@ -15,7 +15,6 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
 	idbhandler.cpp \
-	imghandler.cpp \
 	COLOR_SPACE/rgblab.cpp \
 	DATABASE/imgdatabase.cpp \
 	IMG_ENTITY/pixelentity.cpp \
@@ -31,12 +30,13 @@ SOURCES += main.cpp\
 	mainwindow.cpp \
 	UI/statusbar.cpp \
     UI/scalelabel.cpp \
-    IMAGES/image.cpp
+    IMAGES/image.cpp \
+    imghandler_old.cpp \
+    imghandler.cpp
 
 HEADERS  += \
 	defines.h \
 	idbhandler.h \
-	imghandler.h \
 	COLOR_SPACE/rgblab.h \
 	DATABASE/imgdatabase.h \
 	IMG_ENTITY/pixelentity.h \
@@ -54,7 +54,9 @@ HEADERS  += \
 	DEFINES/mainwindowui.h \
 	UI/statusbar.h \
     UI/scalelabel.h \
-    IMAGES/image.h
+    IMAGES/image.h \
+    imghandler_old.h \
+    imghandler.h
 
 FORMS    += \
 	mainwindow.ui

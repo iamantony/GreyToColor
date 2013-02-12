@@ -15,7 +15,7 @@
 #include <QLineEdit>
 #include <QDebug>
 #include "defines.h"
-#include "imghandler.h"
+//#include "imghandler.h"
 #include "idbhandler.h"
 
 namespace Ui

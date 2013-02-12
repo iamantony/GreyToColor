@@ -40,8 +40,16 @@ public:
 
 	// Loading image from path
 	bool LoadImg(const QString &t_path);
+	// Set new path of image
+	bool SetPath(const QString &t_path);
 	// Get path to loaded image
 	QString GetImgPath();
+	// Get copy of image
+	QImage GetImg();
+	// Save image in original path m_pathToImg
+	bool SaveImg();
+	// Save image in path t_path
+	bool SaveImg(const QString &t_path);
 	// Check if image is null (unloaded)
 	bool IsNull();
 
