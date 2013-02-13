@@ -16,50 +16,24 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef IMAGE_H
-#define IMAGE_H
+#ifndef RGBLAB_H
+#define RGBLAB_H
 
-#include <QObject>
-#include <QImage>
 #include <QDebug>
-#include "PIXEL/pixel.h"
+#include <math.h>
+#include <QColor>
+#include "./DEFINES/global.h"
 
-class Image : public QObject
+class RGBLAB
 {
-	Q_OBJECT
-
-	// == DATA ==
-private:
-	QString m_pathToImg;
-	QImage m_image;
-
-	// == METHODS ==
+// METHODS
 public:
-	explicit Image(QObject *parent = 0);
-	~Image();
+	explicit RGBLAB();
 
-	// Loading image from path
-	bool LoadImg(const QString &t_path);
-	// Set new path of image
-	bool SetPath(const QString &t_path);
-	// Get path to loaded image
-	QString GetImgPath();
-	// Get copy of image
-	QImage GetImg();
-	// Save image in original path m_pathToImg
-	bool SaveImg();
-	// Save image in path t_path
-	bool SaveImg(const QString &t_path);
-	// Check if image is null (unloaded)
-	bool IsNull();
-
-private:
-
-
-signals:
-
-public slots:
-
+	// TODO:
+	// - check qRgb behavior
+	QList<double> RGB2LAB(const int &t_Red, const int &t_Green, const int &t_Blue);
+	QList<int> LAB2RGB(const double &t_LL, const double &t_AA, const double &t_BB);
 };
 
-#endif // IMAGE_H
+#endif // RGBLAB_H

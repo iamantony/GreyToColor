@@ -16,50 +16,35 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef IMAGE_H
-#define IMAGE_H
+#include "pixel.h"
 
-#include <QObject>
-#include <QImage>
-#include <QDebug>
-#include "PIXEL/pixel.h"
-
-class Image : public QObject
+Pixel::Pixel(QObject *parent) :
+	QObject(parent)
 {
-	Q_OBJECT
+	m_pixel.SetColor(0, 0, 0);
+	m_chL = 0;
+	m_chA = 0;
+	m_chB = 0;
+}
 
-	// == DATA ==
-private:
-	QString m_pathToImg;
-	QImage m_image;
+Pixel::~Pixel()
+{
+	m_pixel.SetColor(0, 0, 0);
+	m_chL = 0;
+	m_chA = 0;
+	m_chB = 0;
+}
 
-	// == METHODS ==
-public:
-	explicit Image(QObject *parent = 0);
-	~Image();
+// Set RGB color for pixel
+// @input:
+// - t_rgbColor - exist color in RGB color space
+// @output:
+void Pixel::SetRGB(const RGB &t_rgbColor)
+{
+	m_pixel = t_rgbColor;
+	qDebug() << "Color:" << m_pixel.GetRed() << m_pixel.GetGreen() << m_pixel.GetBlue();
 
-	// Loading image from path
-	bool LoadImg(const QString &t_path);
-	// Set new path of image
-	bool SetPath(const QString &t_path);
-	// Get path to loaded image
-	QString GetImgPath();
-	// Get copy of image
-	QImage GetImg();
-	// Save image in original path m_pathToImg
-	bool SaveImg();
-	// Save image in path t_path
-	bool SaveImg(const QString &t_path);
-	// Check if image is null (unloaded)
-	bool IsNull();
-
-private:
-
-
-signals:
-
-public slots:
-
-};
-
-#endif // IMAGE_H
+	bool result = m_pixel.SetColor(-10, 255, 256);
+	qDebug() << "Color:" << m_pixel.GetRed() << m_pixel.GetGreen() << m_pixel.GetBlue();
+	qDebug() << result;
+}

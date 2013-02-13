@@ -119,6 +119,7 @@ void StatusBar::SetStatus(Program::Status t_status)
 			m_infoString->setText(tr("Error!"));
 			break;
 
+		case Program::DEFAULT_LAST:
 		default:
 			qDebug() <<"StatusBar::SetStatus(): Error - invalid status";
 	}

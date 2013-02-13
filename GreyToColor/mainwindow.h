@@ -26,7 +26,7 @@
 #include <QDebug>
 #include "UI/statusbar.h"
 #include "UI/scalelabel.h"
-#include "./IMAGES/image.h"
+#include "IMAGES/image.h"
 #include "DEFINES/programstatus.h"
 #include "DEFINES/mainwindowui.h"
 

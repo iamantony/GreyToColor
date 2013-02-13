@@ -85,6 +85,7 @@ void MainWindow::InitImg(Images::Types t_imgType)
 			break;
 		}
 
+		case Images::DEFAULT_LAST:
 		default:
 		{
 			qDebug() << "MainWindow::InitImg(): Error - undefined image type";

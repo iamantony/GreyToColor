@@ -7,59 +7,38 @@
 QT += core gui sql
 
 CONFIG += warn_on
-QMAKE_CXXFLAGS_WARN_ON += -Wall -Wextra -Werror
+QMAKE_CXXFLAGS_WARN_ON += -Werror -Wformat=2 -Wuninitialized -Winit-self -Wmissing-include-dirs -Wswitch-enum \
+	-Wundef -Wpointer-arith -Wdisabled-optimization -Wcast-align -Wcast-qual
 
 TARGET = GreyToColor
 TEMPLATE = app
 
 
 SOURCES += main.cpp\
-	idbhandler.cpp \
-	COLOR_SPACE/rgblab.cpp \
-	DATABASE/imgdatabase.cpp \
-	IMG_ENTITY/pixelentity.cpp \
-	IMG_ENTITY/imgentity.cpp \
-	METHODS/imgpassport.cpp \
-	METHODS/imgcolorwalshsimple.cpp \
-	METHODS/imgcolorwalshneighbor.cpp \
-	SERVICE/imgtransform.cpp \
-	SERVICE/imgsearchparams.cpp \
-	SERVICE/fileoperations.cpp \
-	SERVICE/comparestuff.cpp \
-	mainwindow_old.cpp \
 	mainwindow.cpp \
 	UI/statusbar.cpp \
-    UI/scalelabel.cpp \
-    IMAGES/image.cpp \
-    imghandler_old.cpp \
-    imghandler.cpp
+	UI/scalelabel.cpp \
+	IMAGES/image.cpp \
+	imghandler.cpp \
+	IMAGES/COLOR_SPACE/rgblab.cpp \
+    IMAGES/PIXEL/pixel.cpp \
+    IMAGES/PIXEL/rgb.cpp
 
 HEADERS  += \
-	defines.h \
-	idbhandler.h \
-	COLOR_SPACE/rgblab.h \
-	DATABASE/imgdatabase.h \
-	IMG_ENTITY/pixelentity.h \
-	IMG_ENTITY/imgentity.h \
-	METHODS/imgpassport.h \
-	METHODS/imgcolorwalshsimple.h \
-	METHODS/imgcolorwalshneighbor.h \
-	SERVICE/imgtransform.h \
-	SERVICE/imgsearchparams.h \
-	SERVICE/fileoperations.h \
-	SERVICE/comparestuff.h \
-	mainwindow_old.h \
 	mainwindow.h \
 	DEFINES/programstatus.h \
 	DEFINES/mainwindowui.h \
 	UI/statusbar.h \
-    UI/scalelabel.h \
-    IMAGES/image.h \
-    imghandler_old.h \
-    imghandler.h
+	UI/scalelabel.h \
+	IMAGES/image.h \
+	imghandler.h \
+	IMAGES/COLOR_SPACE/rgblab.h \
+    DEFINES/global.h \
+    IMAGES/PIXEL/pixel.h \
+    IMAGES/PIXEL/rgb.h
 
 FORMS    += \
 	mainwindow.ui
 
 RESOURCES += \
-    resources_ui.qrc
+	resources_ui.qrc
