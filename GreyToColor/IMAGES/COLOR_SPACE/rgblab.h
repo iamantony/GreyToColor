@@ -21,7 +21,8 @@
 
 #include <QDebug>
 #include <math.h>
-#include <QColor>
+#include "../PIXEL/rgb.h"
+#include "../PIXEL/lab.h"
 #include "./DEFINES/global.h"
 
 class RGBLAB
@@ -30,10 +31,8 @@ class RGBLAB
 public:
 	explicit RGBLAB();
 
-	// TODO:
-	// - check qRgb behavior
-	QList<double> RGB2LAB(const int &t_Red, const int &t_Green, const int &t_Blue);
-	QList<int> LAB2RGB(const double &t_LL, const double &t_AA, const double &t_BB);
+	LAB RGB2LAB(const RGB &t_rgbColor);
+	RGB LAB2RGB(const LAB &t_labColor);
 };
 
 #endif // RGBLAB_H

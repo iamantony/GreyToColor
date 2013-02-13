@@ -22,45 +22,11 @@ RGBLAB::RGBLAB()
 {
 }
 
-QList<double> RGBLAB::RGB2LAB(const int &t_Red, const int &t_Green, const int &t_Blue)
+LAB RGBLAB::RGB2LAB(const RGB &t_rgbColor)
 {
-	QList<double> massLAB;
-
-	if ( (ERROR == t_Red) || (ERROR == t_Green) || (ERROR == t_Blue) )
-	{
-		qDebug() << "TransToRGB(): Error - value of LAB pixel undefined.";
-		return massLAB;
-	}
-
-	int R = t_Red;
-	if(R < 0)
-	{
-		R = 0;
-	}
-	else if( 255 < R )
-	{
-		R = 255;
-	}
-
-	int G = t_Green;
-	if(G < 0)
-	{
-		G = 0;
-	}
-	else if( 255 < G )
-	{
-		G = 255;
-	}
-
-	int B = t_Blue;
-	if(B < 0)
-	{
-		B = 0;
-	}
-	else if( 255 < B )
-	{
-		B = 255;
-	}
+	const int R = t_rgbColor.GetRed();
+	const int G = t_rgbColor.GetGreen();
+	const int B = t_rgbColor.GetBlue();
 
 	double L = 0.3811*R + 0.5783*G + 0.0402*B;
 	double M = 0.1967*R + 0.7244*G + 0.0782*B;
@@ -70,28 +36,31 @@ QList<double> RGBLAB::RGB2LAB(const int &t_Red, const int &t_Green, const int &t
 	M = log10(M);
 	S = log10(S);
 
-	double LL = 0.5774*L + 0.5774*M + 0.5774*S;
-	double AA = 0.4082*L + 0.4082*M - 0.8165*S;
-	double BB = 0.7071*L - 0.7071*M;
+	double chL = 0.5774*L + 0.5774*M + 0.5774*S;
+	double chA = 0.4082*L + 0.4082*M - 0.8165*S;
+	double chB = 0.7071*L - 0.7071*M;
 
-	massLAB << LL << AA << BB;
-
-	return massLAB;
-}
-
-QList<int> RGBLAB::LAB2RGB(const double &t_LL, const double &t_AA, const double &t_BB)
-{
-	QList<int> massRGB;
-
-	if ( (ERROR == t_LL) || (ERROR == t_AA) || (ERROR == t_BB) )
+	if ( chL < 0 )
 	{
-		qDebug() << "TransToRGB(): Error - value of LAB pixel undefined.";
-		return massRGB;
+		chL = 0;
 	}
 
-	double L = 0.5774*t_LL + 0.4082*t_AA + 0.7071*t_BB;
-	double M = 0.5774*t_LL + 0.4082*t_AA - 0.7071*t_BB;
-	double S = 0.5774*t_LL - 0.8165*t_AA;
+	LAB labColor(chL,
+				 chA,
+				 chB);
+
+	return labColor;
+}
+
+RGB RGBLAB::LAB2RGB(const LAB &t_labColor)
+{
+	const double chL = t_labColor.GetChL();
+	const double chA = t_labColor.GetChA();
+	const double chB = t_labColor.GetChB();
+
+	double L = 0.5774*chL + 0.4082*chA + 0.7071*chB;
+	double M = 0.5774*chL + 0.4082*chA - 0.7071*chB;
+	double S = 0.5774*chL - 0.8165*chA;
 
 	L = pow(10, L);
 	M = pow(10, M);
@@ -128,7 +97,7 @@ QList<int> RGBLAB::LAB2RGB(const double &t_LL, const double &t_AA, const double 
 		B = 255;
 	}
 
-	massRGB << R << G << B;
+	RGB rgbColor(R, G, B);
 
-	return massRGB;
+	return rgbColor;
 }

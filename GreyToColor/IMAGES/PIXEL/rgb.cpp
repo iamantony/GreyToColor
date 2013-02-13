@@ -104,7 +104,7 @@ bool RGB::CheckChannelValue(const int &t_value)
 // @input:
 // @output:
 // - int - value [0, 255] of red RGB channel
-int RGB::GetRed()
+int RGB::GetRed() const
 {
 	return m_red;
 }
@@ -113,7 +113,7 @@ int RGB::GetRed()
 // @input:
 // @output:
 // - int - value [0, 255] of green RGB channel
-int RGB::GetGreen()
+int RGB::GetGreen() const
 {
 	return m_green;
 }
@@ -122,7 +122,7 @@ int RGB::GetGreen()
 // @input:
 // @output:
 // - int - value [0, 255] of blue RGB channel
-int RGB::GetBlue()
+int RGB::GetBlue() const
 {
 	return m_blue;
 }

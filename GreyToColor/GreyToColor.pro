@@ -22,7 +22,8 @@ SOURCES += main.cpp\
 	imghandler.cpp \
 	IMAGES/COLOR_SPACE/rgblab.cpp \
     IMAGES/PIXEL/pixel.cpp \
-    IMAGES/PIXEL/rgb.cpp
+    IMAGES/PIXEL/rgb.cpp \
+    IMAGES/PIXEL/lab.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -35,7 +36,8 @@ HEADERS  += \
 	IMAGES/COLOR_SPACE/rgblab.h \
     DEFINES/global.h \
     IMAGES/PIXEL/pixel.h \
-    IMAGES/PIXEL/rgb.h
+    IMAGES/PIXEL/rgb.h \
+    IMAGES/PIXEL/lab.h
 
 FORMS    += \
 	mainwindow.ui

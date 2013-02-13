@@ -16,38 +16,40 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef RGB_H
-#define RGB_H
+#ifndef LAB_H
+#define LAB_H
 
-class RGB
+class LAB
 {
 	// == DATA ==
 private:
-	int m_red;
-	int m_green;
-	int m_blue;
+	double m_Lum;
+	double m_A;
+	double m_B;
 
 	// == METHODS ==
 public:
-	RGB(const int &t_red = 0,
-		const int &t_green = 0,
-		const int &t_blue = 0);
-	~RGB();
+	LAB(const double &t_L = 0,
+		const double &t_A = 0,
+		const double &t_B = 0);
 
-	// Set RGB color
-	bool SetColor(const int &t_red = 0,
-				   const int &t_green = 0,
-				   const int &t_blue = 0);
+	~LAB();
 
-	// Return red channel value
-	int GetRed() const;
-	// Return green channel value
-	int GetGreen() const;
-	// Return blue channel value
-	int GetBlue() const;
+	// Set LAB color
+	bool SetColor(const double &t_L = 0,
+				   const double &t_A = 0,
+				   const double &t_B = 0);
+
+	// Return Luminance channel value
+	double GetChL() const;
+	// Return A-channel value
+	double GetChA() const;
+	// Return B-channel value
+	double GetChB() const;
 
 private:
-	bool CheckChannelValue(const int &t_value);
+	// Check value for Luminance channel
+	bool CheckLuminance(const double &t_lum);
 };
 
-#endif // RGB_H
+#endif // LAB_H
