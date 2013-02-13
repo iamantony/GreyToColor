@@ -94,6 +94,7 @@ bool RGB::CheckChannelValue(const int &t_value)
 {
 	if ( (t_value < 0) || (255 < t_value) )
 	{
+		qDebug() << "CheckChannelValue(): Error - RGB color is impossible:" << t_value;
 		return false;
 	}
 

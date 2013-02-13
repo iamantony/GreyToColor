@@ -19,6 +19,8 @@
 #ifndef LAB_H
 #define LAB_H
 
+#include <QDebug>
+
 class LAB
 {
 	// == DATA ==
@@ -46,6 +48,12 @@ public:
 	double GetChA() const;
 	// Return B-channel value
 	double GetChB() const;
+	// Set new luminance
+	bool SetChL(const double &t_l);
+	// Set new channel A
+	void SetChA(const double &t_a);
+	// Set new channel B
+	void SetChB(const double &t_b);
 
 private:
 	// Check value for Luminance channel

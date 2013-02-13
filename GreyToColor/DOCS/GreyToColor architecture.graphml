@@ -426,20 +426,18 @@
             </y:ModelParameter>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-            <y:AttributeLabel>- RGB m_pixel
-- double m_chL
-- double m_chA
-- double m_chB	</y:AttributeLabel>
-            <y:MethodLabel>+ void SetRGB( QRgb )
+            <y:AttributeLabel>- RGB m_pixelInRGB
+- LAB m_pixelInLAB</y:AttributeLabel>
+            <y:MethodLabel>+ void SetRGB( RGB )
 + void SetChL( double )
 + void SetChA( double )
 + void SetChB( double )
-+ QRgb GetRGB()
++ RGB GetRGB()
 + double GetChL()
 + double GetChA()
 + double GetChB()
-+ bool TransformRGB2LAB()
-+ bool TransformLAB2RGB()</y:MethodLabel>
++ void TransformRGB2LAB()
++ void TransformLAB2RGB()</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -854,7 +852,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="168.10268757709218" width="252.59855841089484" x="-4675.9073071510775" y="2435.948656211454"/>
+          <y:Geometry height="214.0608902202639" width="252.59855841089484" x="-4675.9073071510775" y="2435.948656211454"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="30.71728515625" x="110.94063662732242" y="3.0">LAB<y:LabelModel>
@@ -872,6 +870,9 @@
 + double GetChL()
 + double GetChA()
 + double GetChB()
++ bool SetChL( double )
++ void SetChA( double )
++ void SetChB( double )
 - bool CheckLuminance( double )</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
@@ -1196,7 +1197,7 @@
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-22.97910132158586">
             <y:Point x="-4709.999999999999" y="2520.0"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
@@ -1226,7 +1227,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="80.91801987966483" ty="0.0">
-            <y:Point x="-4350.0" y="2520.0"/>
+            <y:Point x="-4350.0" y="2542.979101321586"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>

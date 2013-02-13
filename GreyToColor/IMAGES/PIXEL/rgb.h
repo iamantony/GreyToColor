@@ -19,6 +19,8 @@
 #ifndef RGB_H
 #define RGB_H
 
+#include <QDebug>
+
 class RGB
 {
 	// == DATA ==

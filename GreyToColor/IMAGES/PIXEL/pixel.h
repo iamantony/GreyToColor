@@ -23,6 +23,7 @@
 #include <QColor>
 #include <QDebug>
 #include "rgb.h"
+#include "lab.h"
 #include "../COLOR_SPACE/rgblab.h"
 
 class Pixel : public QObject
@@ -31,10 +32,8 @@ class Pixel : public QObject
 
 	// == DATA ==
 private:
-	RGB m_pixel;
-	double m_chL;
-	double m_chA;
-	double m_chB;
+	RGB m_pixelInRGB;
+	LAB m_pixelInLAB;
 
 	// == METHODS ==
 public:
@@ -43,11 +42,24 @@ public:
 
 	// Set RGB color for pixel
 	void SetRGB(const RGB &t_rgbColor);
-
-signals:
-
-public slots:
-
+	// Get color of pixel in RGB color space
+	RGB GetRGB() const;
+	// Setup new luminance value for pixel
+	bool SetChL(const double &t_lum);
+	// Setup new value of channel A for pixel
+	void SetChA(const double &t_a);
+	// Setup new value of channel B for pixel
+	void SetChB(const double &t_b);
+	// Return Luminance channel value
+	double GetChL() const;
+	// Return A-channel value
+	double GetChA() const;
+	// Return B-channel value
+	double GetChB() const;
+	// Transform current pixels RGB coords to LAB coords
+	void TransformRGB2LAB();
+	// Transform current pixels LAB coords to RGB coords
+	void TransformLAB2RGB();
 };
 
 #endif // PIXEL_H

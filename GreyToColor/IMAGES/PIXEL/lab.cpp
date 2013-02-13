@@ -73,6 +73,7 @@ bool LAB::CheckLuminance(const double &t_lum)
 {
 	if ( t_lum < 0 )
 	{
+		qDebug() << "CheckLuminance(): Error - impossible luminance:" << t_lum;
 		return false;
 	}
 
@@ -104,4 +105,42 @@ double LAB::GetChA() const
 double LAB::GetChB() const
 {
 	return m_B;
+}
+
+// Set new luminance
+// @input:
+// - t_l - value >= 0 of Luminance channel
+// @output:
+// - true - new value set
+// - false - impossible value
+bool LAB::SetChL(const double &t_l)
+{
+	bool lumIsOK = CheckLuminance(t_l);
+	if ( false == lumIsOK )
+	{
+		qDebug() << "SetChL(): Error - can't set luminance" << t_l;
+		return false;
+	}
+
+	m_Lum = t_l;
+
+	return true;
+}
+
+// Set new channel A
+// @input:
+// - t_a - value of channel A
+// @output:
+void LAB::SetChA(const double &t_a)
+{
+	m_A = t_a;
+}
+
+// Set new channel B
+// @input:
+// - t_b - value of channel B
+// @output:
+void LAB::SetChB(const double &t_b)
+{
+	m_B = t_b;
 }

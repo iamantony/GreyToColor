@@ -21,18 +21,24 @@
 Pixel::Pixel(QObject *parent) :
 	QObject(parent)
 {
-	m_pixel.SetColor(0, 0, 0);
-	m_chL = 0;
-	m_chA = 0;
-	m_chB = 0;
+	m_pixelInRGB.SetColor(0,
+						  0,
+						  0);
+
+	m_pixelInLAB.SetColor(0,
+						  0,
+						  0);
 }
 
 Pixel::~Pixel()
 {
-	m_pixel.SetColor(0, 0, 0);
-	m_chL = 0;
-	m_chA = 0;
-	m_chB = 0;
+	m_pixelInRGB.SetColor(0,
+						  0,
+						  0);
+
+	m_pixelInLAB.SetColor(0,
+						  0,
+						  0);
 }
 
 // Set RGB color for pixel
@@ -41,10 +47,97 @@ Pixel::~Pixel()
 // @output:
 void Pixel::SetRGB(const RGB &t_rgbColor)
 {
-	m_pixel = t_rgbColor;
-	qDebug() << "Color:" << m_pixel.GetRed() << m_pixel.GetGreen() << m_pixel.GetBlue();
+	m_pixelInRGB = t_rgbColor;
+}
 
-	bool result = m_pixel.SetColor(-10, 255, 256);
-	qDebug() << "Color:" << m_pixel.GetRed() << m_pixel.GetGreen() << m_pixel.GetBlue();
-	qDebug() << result;
+// Get color of pixel in RGB color space
+// @input:
+// @output:
+// - RGB - current pixel in RGB
+RGB Pixel::GetRGB() const
+{
+	return m_pixelInRGB;
+}
+
+// Setup new luminance value for pixel
+// @input:
+// - t_lum - new luminance value >= 0
+// @output:
+// - true - value set
+// - false - impossible value
+bool Pixel::SetChL(const double &t_lum)
+{
+	bool lumSet = m_pixelInLAB.SetChL(t_lum);
+	if ( false == lumSet )
+	{
+		return false;
+	}
+
+	return true;
+}
+
+// Setup new value of channel A for pixel
+// @input:
+// - t_a - new channel A value
+// @output:
+void Pixel::SetChA(const double &t_a)
+{
+	m_pixelInLAB.SetChA(t_a);
+}
+
+// Setup new value of channel B for pixel
+// @input:
+// - t_b - new channel B value
+// @output:
+void Pixel::SetChB(const double &t_b)
+{
+	m_pixelInLAB.SetChB(t_b);
+}
+
+// Return Luminance channel value
+// @input:
+// @output:
+// - double - value >= 0 of Luminance channel
+double Pixel::GetChL() const
+{
+	return m_pixelInLAB.GetChL();
+}
+
+// Return A-channel value
+// @input:
+// @output:
+// - double - value of A channel
+double Pixel::GetChA() const
+{
+	return m_pixelInLAB.GetChA();
+}
+
+// Return B-channel value
+// @input:
+// @output:
+// - double - value of B channel
+double Pixel::GetChB() const
+{
+	return m_pixelInLAB.GetChB();
+}
+
+// TODO:
+// test transformations (use ColorConvertor!)
+
+// Transform current pixels RGB coords to LAB coords
+// @input:
+// @output:
+void Pixel::TransformRGB2LAB()
+{
+	RGBLAB transformer;
+	m_pixelInLAB = transformer.RGB2LAB(m_pixelInRGB);
+}
+
+// Transform current pixels LAB coords to RGB coords
+// @input:
+// @output:
+void Pixel::TransformLAB2RGB()
+{
+	RGBLAB transformer;
+	m_pixelInRGB = transformer.LAB2RGB(m_pixelInLAB);
 }
