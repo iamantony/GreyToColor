@@ -228,7 +228,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="116.24700918764711" width="201.6805385312298" x="-5046.677733349882" y="1921.8764954061764"/>
+          <y:Geometry height="135.83852002465164" width="201.6805385312298" x="-5046.677733349882" y="1921.8764954061764"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="90.68994140625" x="55.49529856248989" y="26.701171875">PreferedColor<y:LabelModel>
@@ -240,7 +240,8 @@
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="Pixel" use3DEffect="true">
             <y:AttributeLabel>- bool m_hasColor</y:AttributeLabel>
-            <y:MethodLabel>+ void SetPreferedColor( RGB )
+            <y:MethodLabel>+ bool HasColor()
++ void SetPreferedColor( RGB )
 + RGB GetPreferedColor()</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
