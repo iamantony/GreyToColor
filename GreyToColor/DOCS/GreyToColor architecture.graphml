@@ -240,8 +240,8 @@
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="Pixel" use3DEffect="true">
             <y:AttributeLabel>- bool m_hasColor</y:AttributeLabel>
-            <y:MethodLabel>+ void SetPreferedColor( QRgb )
-+ QRgb GetPreferedColor()</y:MethodLabel>
+            <y:MethodLabel>+ void SetPreferedColor( RGB )
++ RGB GetPreferedColor()</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -1180,7 +1180,6 @@
     </edge>
     <edge id="e23" source="n13" target="n29">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
@@ -1194,7 +1193,6 @@
     </edge>
     <edge id="e24" source="n13" target="n30">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-22.97910132158586">
@@ -1208,7 +1206,6 @@
     </edge>
     <edge id="e25" source="n29" target="n14">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="80.91801987966483" ty="0.0">
@@ -1223,7 +1220,6 @@
     </edge>
     <edge id="e26" source="n30" target="n14">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="80.91801987966483" ty="0.0">

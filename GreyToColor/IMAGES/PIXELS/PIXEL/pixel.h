@@ -24,7 +24,7 @@
 #include <QDebug>
 #include "rgb.h"
 #include "lab.h"
-#include "../COLOR_SPACE/rgblab.h"
+#include "../../COLOR_SPACE/rgblab.h"
 
 class Pixel : public QObject
 {

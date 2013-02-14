@@ -16,49 +16,32 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef IMAGE_H
-#define IMAGE_H
+#include "colorpixel.h"
 
-#include <QObject>
-#include <QImage>
-#include <QDebug>
-
-class Image : public QObject
+ColorPixel::ColorPixel()
 {
-	Q_OBJECT
+	m_sko = 0;
+}
 
-	// == DATA ==
-private:
-	QString m_pathToImg;
-	QImage m_image;
+ColorPixel::~ColorPixel()
+{
+	m_sko = 0;
+}
 
-	// == METHODS ==
-public:
-	explicit Image(QObject *parent = 0);
-	~Image();
+// Set SKO for pixel of image
+// @input:
+// - t_sko - SKO value
+// @output:
+void ColorPixel::SetSKO(const double &t_sko)
+{
+	m_sko = t_sko;
+}
 
-	// Loading image from path
-	bool LoadImg(const QString &t_path);
-	// Set new path of image
-	bool SetPath(const QString &t_path);
-	// Get path to loaded image
-	QString GetImgPath();
-	// Get copy of image
-	QImage GetImg();
-	// Save image in original path m_pathToImg
-	bool SaveImg();
-	// Save image in path t_path
-	bool SaveImg(const QString &t_path);
-	// Check if image is null (unloaded)
-	bool IsNull();
-
-private:
-
-
-signals:
-
-public slots:
-
-};
-
-#endif // IMAGE_H
+// Set SKO for pixel of image
+// @input:
+// @output:
+// - double - SKO of this pixel
+double ColorPixel::GetSKO() const
+{
+	return m_sko;
+}

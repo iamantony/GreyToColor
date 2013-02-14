@@ -21,8 +21,8 @@
 
 #include <QDebug>
 #include <math.h>
-#include "../PIXEL/rgb.h"
-#include "../PIXEL/lab.h"
+#include "../PIXELS/PIXEL/rgb.h"
+#include "../PIXELS/PIXEL/lab.h"
 #include "./DEFINES/global.h"
 
 class RGBLAB

@@ -121,9 +121,6 @@ double Pixel::GetChB() const
 	return m_pixelInLAB.GetChB();
 }
 
-// TODO:
-// test transformations (use ColorConvertor!)
-
 // Transform current pixels RGB coords to LAB coords
 // @input:
 // @output:
