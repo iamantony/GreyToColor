@@ -21,16 +21,18 @@
 Pixel::Pixel(QObject *parent) :
 	QObject(parent)
 {
-	m_pixelInRGB.SetColor(0,
-						  0,
-						  0);
-
-	m_pixelInLAB.SetColor(0,
-						  0,
-						  0);
+	Clear();
 }
 
 Pixel::~Pixel()
+{
+	Clear();
+}
+
+// Set RGB color for as black pixel
+// @input:
+// @output:
+void Pixel::Clear()
 {
 	m_pixelInRGB.SetColor(0,
 						  0,

@@ -37,6 +37,8 @@ public:
 	void SetSKO(const double &t_sko);
 	// Set SKO for pixel of image
 	double GetSKO() const;
+	// Clear color pixel
+	void ClearColor();
 };
 
 #endif // COLORPIXEL_H

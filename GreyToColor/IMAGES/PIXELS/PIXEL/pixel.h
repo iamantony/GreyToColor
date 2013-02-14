@@ -60,6 +60,10 @@ public:
 	void TransformRGB2LAB();
 	// Transform current pixels LAB coords to RGB coords
 	void TransformLAB2RGB();
+
+protected:
+	// Set RGB color for as black pixel
+	void Clear();
 };
 
 #endif // PIXEL_H

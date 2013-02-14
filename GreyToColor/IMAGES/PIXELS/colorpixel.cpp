@@ -45,3 +45,12 @@ double ColorPixel::GetSKO() const
 {
 	return m_sko;
 }
+
+// Clear color pixel
+// @input:
+// @output:
+void ColorPixel::ClearColor()
+{
+	this->Clear();
+	m_sko = 0;
+}

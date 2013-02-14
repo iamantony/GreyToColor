@@ -39,6 +39,8 @@ public:
 	void SetPreferedColor(const RGB &t_color);
 	// Get prefered color
 	RGB GetPreferedColor() const;
+	// Clear prefered color
+	void ClearColor();
 };
 
 #endif // PREFEREDCOLOR_H

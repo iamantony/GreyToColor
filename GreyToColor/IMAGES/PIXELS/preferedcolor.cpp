@@ -57,3 +57,12 @@ RGB PreferedColor::GetPreferedColor() const
 {
 	return this->GetRGB();
 }
+
+// Clear prefered color
+// @input:
+// @output:
+void PreferedColor::ClearColor()
+{
+	this->Clear();
+	m_hasColor = false;
+}
