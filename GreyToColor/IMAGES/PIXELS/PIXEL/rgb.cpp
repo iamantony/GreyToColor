@@ -127,3 +127,18 @@ int RGB::GetBlue() const
 {
 	return m_blue;
 }
+
+// Check if color is grey
+// @input:
+// @output:
+// - true - this is a grey color (all RGB channels have same value)
+// - false - this is not a grey color
+bool RGB::IsGreyColor() const
+{
+	if ( m_red == m_green == m_blue )
+	{
+		return true;
+	}
+
+	return false;
+}

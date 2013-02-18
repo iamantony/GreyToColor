@@ -47,6 +47,8 @@ public:
 	int GetGreen() const;
 	// Return blue channel value
 	int GetBlue() const;
+	// Check if color is grey
+	bool IsGreyColor() const;
 
 private:
 	bool CheckChannelValue(const int &t_value);

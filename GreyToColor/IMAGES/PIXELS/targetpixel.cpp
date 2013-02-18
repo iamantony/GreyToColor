@@ -20,29 +20,59 @@
 
 TargetPixel::TargetPixel()
 {
-	m_lumScaleFactor = 1;
+	ClearPixel();
 }
 
 TargetPixel::~TargetPixel()
 {
-	m_lumScaleFactor = 1;
+	ClearPixel();
 }
 
-// Method for check if pixel is monochrome
-bool TargetPixel::IsGrey() const
+// Clear all info about target pixel (set it to defaults)
+// @input:
+// @output:
+void TargetPixel::ClearPixel()
 {
-	return true;
+	// Clear pixels and SKO
+	this->ClearColor();
+	m_prefColor.ClearColor();
+
+	m_lumScaleFactor = DEFAULT_SCALE_LUM_FACTOR;
 }
 
 // Set pixel as grey
+// @input:
+// - t_color - 0 or color from RGB space
+// @output:
 void TargetPixel::SetAsGrey(const RGB &t_color)
 {
+	if ( NULL == t_color )
+	{
+		qDebug() << "No color in arguments";
+		RGB currColor = GetRGB();
+		ToGrey(currColor);
 
+		return;
+	}
+
+	ToGrey(t_color);
 }
 
 // Transform pixel to grey color
-void TargetPixel::ToGrey()
+void TargetPixel::ToGrey(const RGB &t_color)
 {
+	bool pixelIsGrey = t_color.IsGreyColor();
+	if ( true == pixelIsGrey )
+	{
+		SetRGB(t_color);
+	}
+	else
+	{
+		// TODO:
+		// - take all channels from t_color
+		// - transform them to RGB (see Wiki)
+		// - set as current color
+	}
 
 }
 
@@ -70,7 +100,7 @@ bool TargetPixel::ScaleLum(const double &t_factor)
 // Unscale luminance
 void TargetPixel::UnScaleLum()
 {
-
+	m_lumScaleFactor = DEFAULT_SCALE_LUM_FACTOR;
 }
 
 // Set prefered color for pixel

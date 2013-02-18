@@ -61,6 +61,16 @@ RGB Pixel::GetRGB() const
 	return m_pixelInRGB;
 }
 
+// Check if current RGB color is a grey color
+// @input:
+// @output:
+// - true - pixel is grey (all RGB channels have same value)
+// - false - pixel is not monochrome (grey)
+bool Pixel::IsGrey() const
+{
+	return m_pixelInRGB.IsGreyColor();
+}
+
 // Setup new luminance value for pixel
 // @input:
 // - t_lum - new luminance value >= 0

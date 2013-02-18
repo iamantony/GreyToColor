@@ -23,6 +23,8 @@
 #include "colorpixel.h"
 #include "preferedcolor.h"
 
+#define DEFAULT_SCALE_LUM_FACTOR 1
+
 class TargetPixel : public ColorPixel
 {
 	// == DATA ==
@@ -35,12 +37,10 @@ public:
 	TargetPixel();
 	~TargetPixel();
 
-	// Method for check if pixel is monochrome
-	bool IsGrey() const;
+	// Clear all info about target pixel (set it to defaults)
+	void ClearPixel();
 	// Set pixel as grey
-	void SetAsGrey(const RGB &t_color);
-	// Transform pixel to grey color
-	void ToGrey();
+	void SetAsGrey(const RGB &t_color = 0);
 	// Scale luminance with some factor
 	bool ScaleLum(const double &t_factor);
 	// Unscale luminance
@@ -49,6 +49,10 @@ public:
 	void SetPreferedColor(const RGB &t_prefColor);
 	// Check if pixel has prefered color
 	bool HasPreferedColor() const;
+
+private:
+	// Transform pixel to grey color
+	void ToGrey(const RGB &t_color);
 };
 
 #endif // TARGETPIXEL_H

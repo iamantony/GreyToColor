@@ -44,6 +44,8 @@ public:
 	void SetRGB(const RGB &t_rgbColor);
 	// Get color of pixel in RGB color space
 	RGB GetRGB() const;
+	// Check if current RGB color is a grey color
+	bool IsGrey() const;
 	// Setup new luminance value for pixel
 	bool SetChL(const double &t_lum);
 	// Setup new value of channel A for pixel

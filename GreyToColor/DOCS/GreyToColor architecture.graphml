@@ -54,7 +54,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="225.3955961744768" width="201.6805385312298" x="-4802.454541968911" y="1636.4808992316996"/>
+          <y:Geometry height="246.07552428020375" width="201.6805385312298" x="-4802.454541968911" y="1636.4808992316996"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.08447265625" x="63.79803293748989" y="26.701171875">TargetPixel<y:LabelModel>
@@ -65,16 +65,16 @@
             </y:ModelParameter>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="ColorPixel" use3DEffect="true">
-            <y:AttributeLabel>- uint m_grey
-- double m_lumScaleFactor
-- bool m_isGrey
+            <y:AttributeLabel>- double m_lumScaleFactor
 - PreferedColor m_prefColor</y:AttributeLabel>
-            <y:MethodLabel>+ void SetAsGrey()
-+ bool IsGrey()
+            <y:MethodLabel>+ void ClearPixel()
++ void SetAsGrey()
 + void ScaleLum( double )
 + void UnScaleLum()
 + void SetPreferedColor( RGB )
-+ bool HasPreferedColor()</y:MethodLabel>
++ bool HasPreferedColor()
+
+- void ToGrey( RGB )</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -418,7 +418,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="252.0566132158599" width="184.90908393782388" x="-4802.454541968911" y="2098.123504593824"/>
+          <y:Geometry height="269.4712895154196" width="184.90908393782388" x="-4802.454541968911" y="2098.123504593824"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="34.3544921875" x="75.27729587516194" y="3.0">Pixel<y:LabelModel>
@@ -436,6 +436,7 @@
 + void SetChA( double )
 + void SetChB( double )
 + RGB GetRGB()
++ bool IsGrey()
 + double GetChL()
 + double GetChA()
 + double GetChB()
@@ -451,7 +452,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="78.07224669603511" width="201.68053853122956" x="-4420.840269265615" y="2185.1156878537363"/>
+          <y:Geometry height="78.07224669603511" width="201.68053853122956" x="-4420.840269265615" y="2193.823026003516"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="59.60546875" x="71.03753489061478" y="3.0">RGBLAB<y:LabelModel>
@@ -830,7 +831,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="168.10268757709218" width="201.68053853123" x="-4960.840269265615" y="2435.948656211454"/>
+          <y:Geometry height="181.16369480176127" width="201.68053853123" x="-4960.840269265615" y="2435.948656211454"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="32.88818359375" x="84.39617746874" y="3.0">RGB<y:LabelModel>
@@ -848,6 +849,7 @@
 + int GetRed()
 + int GetGreen()
 + int GetBlue()
++ bool IsGreyColor()
 - bool CheckChannelValue( int )</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
@@ -887,8 +889,8 @@
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="6.056663739185979" tx="0.0" ty="0.0">
-            <y:Point x="-4945.837464084268" y="1755.235361058124"/>
+          <y:Path sx="0.0" sy="6.6123594706588085" tx="0.0" ty="0.0">
+            <y:Point x="-4945.837464084268" y="1766.1310208424602"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
@@ -1006,7 +1008,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-4945.837464084268" y="2224.151811201754"/>
+            <y:Point x="-4945.837464084268" y="2232.8591493515337"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="white_delta" target="none"/>
@@ -1188,7 +1190,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-4709.999999999999" y="2520.0"/>
+            <y:Point x="-4709.999999999999" y="2526.5305036123345"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
@@ -1238,11 +1240,10 @@
     </edge>
     <edge id="e27" source="n29" target="n7">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="-94.1625359157324" ty="-10.894605516253804">
-            <y:Point x="-5130.0" y="2520.0"/>
+            <y:Point x="-5130.0" y="2526.5305036123345"/>
             <y:Point x="-5130.0" y="1986.5200707833058"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
@@ -1253,12 +1254,11 @@
     </edge>
     <edge id="e28" source="n29" target="n1">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="-98.38572729670341" ty="-39.17869731893802">
-            <y:Point x="-5130.0" y="2520.0"/>
-            <y:Point x="-5130.0" y="1710.0"/>
+          <y:Path sx="0.0" sy="0.0" tx="-98.38572729670341" ty="-42.77332231420415">
+            <y:Point x="-5130.0" y="2526.5305036123345"/>
+            <y:Point x="-5130.0" y="1716.7453390575974"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
