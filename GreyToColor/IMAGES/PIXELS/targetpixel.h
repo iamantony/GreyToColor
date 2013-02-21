@@ -39,12 +39,14 @@ public:
 
 	// Clear all info about target pixel (set it to defaults)
 	void ClearPixel();
-	// Set pixel as grey
-	void SetAsGrey(const RGB &t_color = 0);
+	// Set pixel as grey variant of input RGB pixel
+	void SetAsGrey(const RGB &t_color);
+	// Set current pixel as grey
+	void SetAsGrey();
 	// Scale luminance with some factor
 	bool ScaleLum(const double &t_factor);
 	// Unscale luminance
-	void UnScaleLum();
+	bool UnScaleLum();
 	// Set prefered color for pixel
 	void SetPreferedColor(const RGB &t_prefColor);
 	// Check if pixel has prefered color
@@ -53,6 +55,11 @@ public:
 private:
 	// Transform pixel to grey color
 	void ToGrey(const RGB &t_color);
+
+	// == TESTS ==
+public:
+	void TestSetAsGrey();
+	void TestScaleLum();
 };
 
 #endif // TARGETPIXEL_H

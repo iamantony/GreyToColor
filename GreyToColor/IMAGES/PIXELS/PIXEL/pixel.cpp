@@ -45,7 +45,7 @@ void Pixel::Clear()
 
 // Set RGB color for pixel
 // @input:
-// - t_rgbColor - exist color in RGB color space
+// - RGB - exist color in RGB color space
 // @output:
 void Pixel::SetRGB(const RGB &t_rgbColor)
 {
@@ -73,7 +73,7 @@ bool Pixel::IsGrey() const
 
 // Setup new luminance value for pixel
 // @input:
-// - t_lum - new luminance value >= 0
+// - double - positive new luminance value
 // @output:
 // - true - value set
 // - false - impossible value
@@ -90,7 +90,7 @@ bool Pixel::SetChL(const double &t_lum)
 
 // Setup new value of channel A for pixel
 // @input:
-// - t_a - new channel A value
+// - double - new channel A value
 // @output:
 void Pixel::SetChA(const double &t_a)
 {
@@ -99,7 +99,7 @@ void Pixel::SetChA(const double &t_a)
 
 // Setup new value of channel B for pixel
 // @input:
-// - t_b - new channel B value
+// - double - new channel B value
 // @output:
 void Pixel::SetChB(const double &t_b)
 {

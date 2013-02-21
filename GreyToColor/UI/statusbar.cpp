@@ -26,6 +26,8 @@ StatusBar::StatusBar(QWidget *parent):
 }
 
 // Setup information string
+// @input:
+// @output:
 void StatusBar::SetInfoString()
 {
 	m_infoString = new QLabel();
@@ -35,6 +37,8 @@ void StatusBar::SetInfoString()
 }
 
 // Set Progress Bar as permanent widget
+// @input:
+// @output:
 void StatusBar::SetProgressBar()
 {
 	m_progrBar = new QProgressBar(this);
@@ -46,7 +50,9 @@ void StatusBar::SetProgressBar()
 }
 
 // Get minimum value of progress, which could be shown
-// @output: positive integer value
+// @input:
+// @output:
+// - int - positive integer value
 int StatusBar::GetProgressMin()
 {
 	int min = m_progrBar->minimum();
@@ -61,7 +67,9 @@ int StatusBar::GetProgressMin()
 }
 
 // Get maximum value of progress, which could be shown
-// @output: positive integer value
+// @input:
+// @output:
+// - int - positive integer value
 int StatusBar::GetProgressMax()
 {
 	int max = m_progrBar->maximum();
@@ -76,7 +84,9 @@ int StatusBar::GetProgressMax()
 }
 
 // Set new progress value of some process
-// @input: positive integer value between PROGRESS_MIN and PROGRESS_MAX
+// @input:
+// - int - positive integer value between PROGRESS_MIN and PROGRESS_MAX
+// @output:
 void StatusBar::SetProcesProgress(const int &t_progress)
 {
 	if ( (t_progress < PROGRESS_MIN) || (PROGRESS_MAX < t_progress) )
@@ -89,12 +99,17 @@ void StatusBar::SetProcesProgress(const int &t_progress)
 }
 
 // Reset progress bar to it's minimum value
+// @input:
+// @output:
 void StatusBar::ResetProcesProgress()
 {
 	m_progrBar->reset();
 }
 
 // Set program status
+// @input:
+// - Program::Status - one of the existed Program Statuses
+// @output:
 void StatusBar::SetStatus(Program::Status t_status)
 {
 	switch(t_status)

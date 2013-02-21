@@ -31,7 +31,9 @@ class RGBLAB
 public:
 	explicit RGBLAB();
 
+	// Transform color from RGB color space to LAB color space
 	LAB RGB2LAB(const RGB &t_rgbColor);
+	// Transform color from LAB color space to RGB color space
 	RGB LAB2RGB(const LAB &t_labColor);
 };
 

@@ -31,7 +31,7 @@ Image::~Image()
 
 // Loading image from path
 // @input:
-// - t_path - unnull string with path to existing image
+// - QString - unnull string with path to existing image
 // @output:
 // - true - image loaded
 // - false - can't load image
@@ -61,7 +61,7 @@ bool Image::LoadImg(const QString &t_path)
 
 // Set new path of image
 // @input:
-// - t_path - unempty string with path of image
+// - QString - unempty string with path of image
 // @output:
 // - true - path is OK
 // - false - problems with new path
@@ -82,8 +82,8 @@ bool Image::SetPath(const QString &t_path)
 // Get path to loaded image
 // @input:
 // @output:
-// - string - unempty path to existing image
-// - empty string - object doesn't have image
+// - QString - unempty path to existing image
+// - empty QString - object doesn't have image
 QString Image::GetImgPath()
 {
 	if ( true == m_image.isNull() )
@@ -127,7 +127,7 @@ bool Image::SaveImg()
 
 // Save image
 // @input:
-// - t_path - unempty string with path where we should save image
+// - QString - unempty string with path where we should save image
 // @output:
 // - true - image saved
 // - false - can't save image in path

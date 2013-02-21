@@ -30,17 +30,25 @@ ColorPixel::~ColorPixel()
 
 // Set SKO for pixel of image
 // @input:
-// - t_sko - SKO value
+// - double - positive SKO value
 // @output:
-void ColorPixel::SetSKO(const double &t_sko)
+bool ColorPixel::SetSKO(const double &t_sko)
 {
+	if ( t_sko < 0 )
+	{
+		qDebug() << "SetSKO(): Error - invalid arguments:" << t_sko;
+		return false;
+	}
+
 	m_sko = t_sko;
+
+	return true;
 }
 
 // Set SKO for pixel of image
 // @input:
 // @output:
-// - double - SKO of this pixel
+// - double - positive SKO of this pixel
 double ColorPixel::GetSKO() const
 {
 	return m_sko;

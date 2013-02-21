@@ -36,9 +36,9 @@ LAB::~LAB()
 
 // Set LAB color
 // @input:
-// - t_L - positive value of Luminance channel
-// - t_A - value of A channel
-// - t_B - value of B channel
+// - double - positive value of Luminance channel
+// - double - value of A channel
+// - double - value of B channel
 // @output:
 // - true - color is possible
 // - false - problems with seting such values
@@ -65,7 +65,7 @@ bool LAB::SetColor(const double &t_L,
 
 // Check value for Luminance channel
 // @input:
-// - t_lum - value >= 0 for luminance channel
+// - double - value >= 0 for luminance channel
 // @output:
 // - true - value for luminance channel is possible
 // - false - value is impossible
@@ -109,7 +109,7 @@ double LAB::GetChB() const
 
 // Set new luminance
 // @input:
-// - t_l - value >= 0 of Luminance channel
+// - double - value >= 0 of Luminance channel
 // @output:
 // - true - new value set
 // - false - impossible value
@@ -129,7 +129,7 @@ bool LAB::SetChL(const double &t_l)
 
 // Set new channel A
 // @input:
-// - t_a - value of channel A
+// - double - value of channel A
 // @output:
 void LAB::SetChA(const double &t_a)
 {
@@ -138,7 +138,7 @@ void LAB::SetChA(const double &t_a)
 
 // Set new channel B
 // @input:
-// - t_b - value of channel B
+// - double - value of channel B
 // @output:
 void LAB::SetChB(const double &t_b)
 {

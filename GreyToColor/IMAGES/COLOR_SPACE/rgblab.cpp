@@ -22,6 +22,14 @@ RGBLAB::RGBLAB()
 {
 }
 
+// TODO:
+// - check transformations betwen color spaces LAB and RGB
+
+// Transform color from RGB color space to LAB color space
+// @input:
+// - RGB - RGB color
+// @output:
+// - LAB - mapped RGB color in LAB color space
 LAB RGBLAB::RGB2LAB(const RGB &t_rgbColor)
 {
 	const int R = t_rgbColor.GetRed();
@@ -52,6 +60,11 @@ LAB RGBLAB::RGB2LAB(const RGB &t_rgbColor)
 	return labColor;
 }
 
+// Transform color from LAB color space to RGB color space
+// @input:
+// - LAB - LAB color
+// @output:
+// - RGB - mapped LAB color in RGB color space
 RGB RGBLAB::LAB2RGB(const LAB &t_labColor)
 {
 	const double chL = t_labColor.GetChL();

@@ -31,7 +31,7 @@ ScaleLabel::~ScaleLabel()
 
 // Set path to default image
 // @input:
-// - t_pathToDefault - unnull path to existing image
+// - QString - unnull string with path to existing image
 // @output:
 // - true - path to default image saved
 // - false - can't save path
@@ -74,7 +74,7 @@ void ScaleLabel::ShowDefaultImg()
 
 // Set image to label
 // @input:
-// - t_image - unnull loaded image
+// - QImage - unnull loaded image
 // @output:
 // - true - image set
 // - false - can't set image
@@ -96,7 +96,7 @@ bool ScaleLabel::SetImage(const QImage &t_image)
 
 // Set image to label
 // @input:
-// - t_pathToImg - unnull path to existing image
+// - QString - unnull string with path to existing image
 // @output:
 // - true - image set
 // - false - can't set image

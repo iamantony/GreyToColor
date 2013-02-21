@@ -58,7 +58,7 @@ void MainWindow::InitImgsLabels()
 
 // Put default picture to one of three labels on MainWindow
 // @input:
-// - t_imgType - type of label
+// - Images::Types - exist type of label
 // @output:
 void MainWindow::InitImg(Images::Types t_imgType)
 {
@@ -101,8 +101,8 @@ MainWindow::~MainWindow()
 
 // Show warning window with title and some text
 // @input:
-// - t_title - nonempty title of the window
-// - t_text - nonempty text for the message
+// - QString - nonempty string with title of the window
+// - QString - nonempty string with text for the message
 // @output:
 void MainWindow::ShowWarning(const QString &t_title, const QString &t_text)
 {
@@ -189,7 +189,7 @@ void MainWindow::on_findSourceImgPB_clicked()
 
 // Slot for getting new Result image
 // @input:
-// - t_resultImg - unnull new result image
+// - QImage - unnull new result image
 // @output:
 void MainWindow::SlotResultImg(QImage t_resultImg)
 {
@@ -204,7 +204,7 @@ void MainWindow::SlotResultImg(QImage t_resultImg)
 
 // Slot for getting new Source image
 // @input:
-// - t_sourceImg - unnull new source image
+// - QImage - unnull new source image
 // @output:
 void MainWindow::SlotSourceImg(QImage t_sourceImg)
 {
@@ -227,7 +227,7 @@ void MainWindow::on_saveResultPB_clicked()
 
 // Slot for saving result (colorized) image
 // @input:
-// - t_resultImg -unnull current result image to save
+// - QImage -unnull current result image to save
 // @output:
 void MainWindow::SlotSaveResult(QImage t_resultImg)
 {
@@ -254,6 +254,9 @@ void MainWindow::SlotSaveResult(QImage t_resultImg)
 // @output:
 void MainWindow::on_resetPB_clicked()
 {
+	TargetPixel pixel;
+	pixel.TestScaleLum();
+
 	// TODO:
 	// Send signal to ImgHandler. It should reload target image, calc all it's params (LAB, SKO) and then send
 	// it to us

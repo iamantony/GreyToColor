@@ -36,9 +36,9 @@ RGB::~RGB()
 
 // Set RGB color
 // @input:
-// - t_red - value [0, 255] for red RGB channel
-// - t_red - value [0, 255] for red RGB channel
-// - t_red - value [0, 255] for red RGB channel
+// - int - value [0, 255] for red RGB channel
+// - int - value [0, 255] for green RGB channel
+// - int - value [0, 255] for blue RGB channel
 // @output:
 // - true - color is set
 // - false - not all of the input values are possible RGB color space
@@ -86,7 +86,7 @@ bool RGB::SetColor(const int &t_red,
 
 // Check if value for one of the RGB channels is possible
 // @input:
-// - t_value - value [0, 255] for RGB channel
+// - int - positive value [0, 255] for RGB channel
 // @output:
 // - true - value is possible
 // - false - RGB channel can't have such value
@@ -135,7 +135,7 @@ int RGB::GetBlue() const
 // - false - this is not a grey color
 bool RGB::IsGreyColor() const
 {
-	if ( m_red == m_green == m_blue )
+	if ( (m_red == m_green) && ( m_red == m_blue ) )
 	{
 		return true;
 	}

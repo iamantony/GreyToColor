@@ -41,7 +41,7 @@ bool PreferedColor::HasColor() const
 
 // Set prefered RGB color
 // @input:
-// - t_color - RGB color
+// - RGB - RGB color
 // @output:
 void PreferedColor::SetPreferedColor(const RGB &t_color)
 {

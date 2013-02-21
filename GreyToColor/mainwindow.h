@@ -27,6 +27,7 @@
 #include "UI/statusbar.h"
 #include "UI/scalelabel.h"
 #include "IMAGES/image.h"
+#include "IMAGES/PIXELS/targetpixel.h"
 #include "DEFINES/programstatus.h"
 #include "DEFINES/mainwindowui.h"
 

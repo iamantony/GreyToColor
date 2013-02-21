@@ -34,7 +34,7 @@ public:
 	~ColorPixel();
 
 	// Set SKO for pixel of image
-	void SetSKO(const double &t_sko);
+	bool SetSKO(const double &t_sko);
 	// Set SKO for pixel of image
 	double GetSKO() const;
 	// Clear color pixel

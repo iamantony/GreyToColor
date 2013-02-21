@@ -68,9 +68,10 @@
             <y:AttributeLabel>- double m_lumScaleFactor
 - PreferedColor m_prefColor</y:AttributeLabel>
             <y:MethodLabel>+ void ClearPixel()
++ void SetAsGrey( RGB )
 + void SetAsGrey()
-+ void ScaleLum( double )
-+ void UnScaleLum()
++ bool ScaleLum( double )
++ bool UnScaleLum()
 + void SetPreferedColor( RGB )
 + bool HasPreferedColor()
 
@@ -95,7 +96,7 @@
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="Pixel" use3DEffect="true">
             <y:AttributeLabel>- double m_sko</y:AttributeLabel>
-            <y:MethodLabel>+ void SetSKO( double )
+            <y:MethodLabel>+ bool SetSKO( double )
 + double GetSKO()
 + void ClearColor()</y:MethodLabel>
           </y:UML>
