@@ -23,6 +23,9 @@
 #include <QImage>
 #include <QDebug>
 
+// TODO:
+// - should we have function, which load QImage?
+
 class Image : public QObject
 {
 	Q_OBJECT

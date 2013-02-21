@@ -486,7 +486,8 @@
             </y:ModelParameter>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-            <y:AttributeLabel>- QString m_path</y:AttributeLabel>
+            <y:AttributeLabel>- QString m_pathToImg
+- QImage m_image</y:AttributeLabel>
             <y:MethodLabel>+ bool LoadImg( QString )
 + bool SetPath( QString )
 + QString GetImgPath()
