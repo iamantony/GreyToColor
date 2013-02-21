@@ -26,7 +26,8 @@ SOURCES += main.cpp\
     IMAGES/PIXELS/PIXEL/lab.cpp \
     IMAGES/PIXELS/colorpixel.cpp \
     IMAGES/PIXELS/preferedcolor.cpp \
-    IMAGES/PIXELS/targetpixel.cpp
+    IMAGES/PIXELS/targetpixel.cpp \
+    IMAGES/PIXELS/imagepixels.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -43,7 +44,8 @@ HEADERS  += \
     IMAGES/PIXELS/PIXEL/lab.h \
     IMAGES/PIXELS/colorpixel.h \
     IMAGES/PIXELS/preferedcolor.h \
-    IMAGES/PIXELS/targetpixel.h
+    IMAGES/PIXELS/targetpixel.h \
+    IMAGES/PIXELS/imagepixels.h
 
 FORMS    += \
 	mainwindow.ui

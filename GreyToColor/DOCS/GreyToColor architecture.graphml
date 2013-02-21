@@ -265,8 +265,8 @@
             </y:ModelParameter>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-            <y:AttributeLabel>- uint m_width
-- uint m_height</y:AttributeLabel>
+            <y:AttributeLabel>+ uint m_width
++ uint m_height</y:AttributeLabel>
             <y:MethodLabel>+ virtual void FormImgPixels( QImage )
 + virtual void TransformPixRGB2LAB( uint, uint )
 + virtual void TransformPixLAB2RGB( uint, uint )
