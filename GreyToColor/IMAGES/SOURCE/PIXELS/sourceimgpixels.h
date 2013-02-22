@@ -23,6 +23,7 @@
 #include <QDebug>
 #include "../../COMMON/PIXELS/imagepixels.h"
 #include "colorpixel.h"
+#include "./SERVICE/calculatorsko.h"
 #include "./DEFINES/pixels.h"
 
 class SourceImgPixels : public ImagePixels

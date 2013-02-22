@@ -281,7 +281,7 @@ double SourceImgPixels::FindMinLum() const
 // @output:
 void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int &t_height)
 {
-	if ( false == IsPixelExist(c, t_height) )
+	if ( false == IsPixelExist(t_width, t_height) )
 	{
 		qDebug() << "CalcPixSKO(): Error - invalid arguments";
 		return;
@@ -294,7 +294,17 @@ void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int
 		return;
 	}
 
+	double pixelLum = m_pixels[t_width][t_height].GetChL();
 
+	CalculatorSKO calc;
+	double pixelSKO = calc.PixelMaskSKO(pixelLum, lumInMask);
+	if ( pixelSKO < 0 )
+	{
+		qDebug() << "CalcPixSKO(): Error - can't calc pixel SKO" << t_width << t_height;
+		return;
+	}
+
+	m_pixels[t_width][t_height].SetSKO(pixelSKO);
 }
 
 // Get list of luminances of neighbor pixels (to calc SKO)
@@ -336,6 +346,11 @@ QList<double> SourceImgPixels::GetPixNeighborsLum(const unsigned int &t_width, c
 	{
 		for ( unsigned int height = heightStart; height < heightEnd; height++ )
 		{
+			if ( (width == t_width) && (height == t_height) )
+			{
+				continue;
+			}
+
 			double pixelLum = m_pixels[width][height].GetChL();
 			luminances.append(pixelLum);
 		}

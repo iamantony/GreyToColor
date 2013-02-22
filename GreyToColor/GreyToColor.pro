@@ -28,7 +28,8 @@ SOURCES += main.cpp\
 	IMAGES/COMMON/PIXELS/pixel.cpp \
 	IMAGES/COMMON/PIXELS/lab.cpp \
 	IMAGES/COMMON/PIXELS/imagepixels.cpp \
-	IMAGES/COMMON/image.cpp
+	IMAGES/COMMON/image.cpp \
+    SERVICE/calculatorsko.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -48,7 +49,8 @@ HEADERS  += \
 	IMAGES/COMMON/PIXELS/pixel.h \
 	IMAGES/COMMON/PIXELS/lab.h \
 	IMAGES/COMMON/PIXELS/imagepixels.h \
-	IMAGES/COMMON/image.h
+	IMAGES/COMMON/image.h \
+    SERVICE/calculatorsko.h
 
 FORMS    += \
 	mainwindow.ui
