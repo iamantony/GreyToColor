@@ -254,8 +254,8 @@ void MainWindow::SlotSaveResult(QImage t_resultImg)
 // @output:
 void MainWindow::on_resetPB_clicked()
 {
-	TargetPixel pixel;
-	pixel.TestScaleLum();
+//	TargetPixel pixel;
+//	pixel.TestScaleLum();
 
 	// TODO:
 	// Send signal to ImgHandler. It should reload target image, calc all it's params (LAB, SKO) and then send

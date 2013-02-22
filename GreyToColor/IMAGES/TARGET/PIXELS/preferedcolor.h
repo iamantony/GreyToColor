@@ -16,29 +16,31 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef COLORPIXEL_H
-#define COLORPIXEL_H
+#ifndef PREFEREDCOLOR_H
+#define PREFEREDCOLOR_H
 
 #include <QDebug>
-#include "PIXEL/pixel.h"
+#include "../../COMMON/PIXELS/pixel.h"
 
-class ColorPixel : public Pixel
+class PreferedColor : public Pixel
 {
 	// == DATA ==
 private:
-	double m_sko;
+	bool m_hasColor;
 
 	// == METHODS ==
 public:
-	ColorPixel();
-	~ColorPixel();
+	PreferedColor();
+	~PreferedColor();
 
-	// Set SKO for pixel of image
-	bool SetSKO(const double &t_sko);
-	// Set SKO for pixel of image
-	double GetSKO() const;
-	// Clear color pixel
+	// Check if we have prefered color for pixel
+	bool HasColor() const;
+	// Set prefered RGB color
+	void SetPreferedColor(const RGB &t_color);
+	// Get prefered color
+	RGB GetPreferedColor() const;
+	// Clear prefered color
 	void ClearColor();
 };
 
-#endif // COLORPIXEL_H
+#endif // PREFEREDCOLOR_H

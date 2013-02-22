@@ -16,25 +16,29 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef RGBLAB_H
-#define RGBLAB_H
+#ifndef COLORPIXEL_H
+#define COLORPIXEL_H
 
 #include <QDebug>
-#include <math.h>
-#include "../PIXELS/PIXEL/rgb.h"
-#include "../PIXELS/PIXEL/lab.h"
-#include "./DEFINES/global.h"
+#include "../../COMMON/PIXELS/pixel.h"
 
-class RGBLAB
+class ColorPixel : public Pixel
 {
-// METHODS
-public:
-	explicit RGBLAB();
+	// == DATA ==
+private:
+	double m_sko;
 
-	// Transform color from RGB color space to LAB color space
-	LAB RGB2LAB(const RGB &t_rgbColor);
-	// Transform color from LAB color space to RGB color space
-	RGB LAB2RGB(const LAB &t_labColor);
+	// == METHODS ==
+public:
+	ColorPixel();
+	~ColorPixel();
+
+	// Set SKO for pixel of image
+	bool SetSKO(const double &t_sko);
+	// Set SKO for pixel of image
+	double GetSKO() const;
+	// Clear color pixel
+	void ClearColor();
 };
 
-#endif // RGBLAB_H
+#endif // COLORPIXEL_H

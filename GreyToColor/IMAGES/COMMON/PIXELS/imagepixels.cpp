@@ -31,19 +31,53 @@ ImagePixels::~ImagePixels()
 
 
 // Clear all info (set to defaults)
+// @input:
+// @output:
 void ImagePixels::Clear()
 {
 	m_width = 0;
 	m_height = 0;
 }
 
-void ImagePixels::CalcPixelsSKO()
+// Check if we have pixel with such coords
+// @input:
+// - unsigned int - width (x) position of pixel
+// - unsigned int - height (y) position of pixel
+// @output:
+// - true - pixels with such coords exist
+// - false - pixel don't exist
+bool ImagePixels::IsPixelExist(const unsigned int &t_width, const unsigned int &t_height) const
 {
-	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
+	if ( (m_width <= t_width) || (m_height <= t_height) )
 	{
-		for ( unsigned int hgt = 0; hgt < m_height; hgt++ )
-		{
-			CalcPixSKO(wdt, hgt);
-		}
+		return false;
 	}
+
+	return true;
 }
+
+// Check if we have pixels of image
+// @input:
+// @output:
+// - true - yes, we have pixels
+// - false - no, we don't have pixels
+bool ImagePixels::HasPixels() const
+{
+	if ( (0 == m_width) || (0 == m_height) )
+	{
+		return false;
+	}
+
+	return true;
+}
+
+//void ImagePixels::CalcPixelsSKO()
+//{
+//	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
+//	{
+//		for ( unsigned int hgt = 0; hgt < m_height; hgt++ )
+//		{
+//			CalcPixSKO(wdt, hgt);
+//		}
+//	}
+//}

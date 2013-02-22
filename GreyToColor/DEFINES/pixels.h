@@ -16,37 +16,10 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef IMGHANDLER_H
-#define IMGHANDLER_H
+#ifndef PIXELS_H
+#define PIXELS_H
 
-#include <QObject>
-#include <QDebug>
-#include "./IMAGES/COMMON/image.h"
+#define DEFAULT_MAX_LUM 0
+#define DEFAULT_MIN_LUM 10000
 
-class ImgHandler : public QObject
-{
-	Q_OBJECT
-
-	// == DATA ==
-private:
-	Image m_original;
-//	TargetImage m_target;
-//	SourceImage m_source;
-
-	// == METHODS ==
-public:
-	explicit ImgHandler(QObject *parent = 0);
-
-signals:
-	void SignalGetResultImg(QImage t_img);
-	void SignalHasNewTarget();
-	void SignalSendTargetImg();
-
-public slots:
-	// This slot get signal to save result (colorized or not) image and send it copy signal to some (MainWindow) UI
-	void SlotSaveResultImg();
-	// This slot get path to new original image
-	void SlotGetOriginalImg(const QString &t_imgPath);
-};
-
-#endif // IMGHANDLER_H
+#endif // PIXELS_H

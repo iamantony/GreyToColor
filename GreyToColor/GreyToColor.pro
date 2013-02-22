@@ -18,16 +18,17 @@ SOURCES += main.cpp\
 	mainwindow.cpp \
 	UI/statusbar.cpp \
 	UI/scalelabel.cpp \
-	IMAGES/image.cpp \
 	imghandler.cpp \
-	IMAGES/COLOR_SPACE/rgblab.cpp \
-    IMAGES/PIXELS/PIXEL/rgb.cpp \
-    IMAGES/PIXELS/PIXEL/pixel.cpp \
-    IMAGES/PIXELS/PIXEL/lab.cpp \
-    IMAGES/PIXELS/colorpixel.cpp \
-    IMAGES/PIXELS/preferedcolor.cpp \
-    IMAGES/PIXELS/targetpixel.cpp \
-    IMAGES/PIXELS/imagepixels.cpp
+	IMAGES/SOURCE/PIXELS/sourceimgpixels.cpp \
+	IMAGES/SOURCE/PIXELS/colorpixel.cpp \
+	IMAGES/TARGET/PIXELS/targetpixel.cpp \
+	IMAGES/TARGET/PIXELS/preferedcolor.cpp \
+	IMAGES/COMMON/PIXELS/COLOR_SPACE/rgblab.cpp \
+	IMAGES/COMMON/PIXELS/rgb.cpp \
+	IMAGES/COMMON/PIXELS/pixel.cpp \
+	IMAGES/COMMON/PIXELS/lab.cpp \
+	IMAGES/COMMON/PIXELS/imagepixels.cpp \
+	IMAGES/COMMON/image.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -35,17 +36,19 @@ HEADERS  += \
 	DEFINES/mainwindowui.h \
 	UI/statusbar.h \
 	UI/scalelabel.h \
-	IMAGES/image.h \
 	imghandler.h \
-	IMAGES/COLOR_SPACE/rgblab.h \
 	DEFINES/global.h \
-    IMAGES/PIXELS/PIXEL/rgb.h \
-    IMAGES/PIXELS/PIXEL/pixel.h \
-    IMAGES/PIXELS/PIXEL/lab.h \
-    IMAGES/PIXELS/colorpixel.h \
-    IMAGES/PIXELS/preferedcolor.h \
-    IMAGES/PIXELS/targetpixel.h \
-    IMAGES/PIXELS/imagepixels.h
+	DEFINES/pixels.h \
+	IMAGES/SOURCE/PIXELS/sourceimgpixels.h \
+	IMAGES/SOURCE/PIXELS/colorpixel.h \
+	IMAGES/TARGET/PIXELS/targetpixel.h \
+	IMAGES/TARGET/PIXELS/preferedcolor.h \
+	IMAGES/COMMON/PIXELS/COLOR_SPACE/rgblab.h \
+	IMAGES/COMMON/PIXELS/rgb.h \
+	IMAGES/COMMON/PIXELS/pixel.h \
+	IMAGES/COMMON/PIXELS/lab.h \
+	IMAGES/COMMON/PIXELS/imagepixels.h \
+	IMAGES/COMMON/image.h
 
 FORMS    += \
 	mainwindow.ui

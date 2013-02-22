@@ -16,31 +16,25 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PREFEREDCOLOR_H
-#define PREFEREDCOLOR_H
+#ifndef RGBLAB_H
+#define RGBLAB_H
 
 #include <QDebug>
-#include "PIXEL/pixel.h"
+#include <math.h>
+#include "../rgb.h"
+#include "../lab.h"
+#include "./DEFINES/global.h"
 
-class PreferedColor : public Pixel
+class RGBLAB
 {
-	// == DATA ==
-private:
-	bool m_hasColor;
-
-	// == METHODS ==
+// METHODS
 public:
-	PreferedColor();
-	~PreferedColor();
+	explicit RGBLAB();
 
-	// Check if we have prefered color for pixel
-	bool HasColor() const;
-	// Set prefered RGB color
-	void SetPreferedColor(const RGB &t_color);
-	// Get prefered color
-	RGB GetPreferedColor() const;
-	// Clear prefered color
-	void ClearColor();
+	// Transform color from RGB color space to LAB color space
+	LAB RGB2LAB(const RGB &t_rgbColor);
+	// Transform color from LAB color space to RGB color space
+	RGB LAB2RGB(const LAB &t_labColor);
 };
 
-#endif // PREFEREDCOLOR_H
+#endif // RGBLAB_H

@@ -19,17 +19,14 @@
 #ifndef PIXEL_H
 #define PIXEL_H
 
-#include <QObject>
 #include <QColor>
 #include <QDebug>
 #include "rgb.h"
 #include "lab.h"
-#include "../../COLOR_SPACE/rgblab.h"
+#include "COLOR_SPACE/rgblab.h"
 
-class Pixel : public QObject
+class Pixel
 {
-	Q_OBJECT
-
 	// == DATA ==
 private:
 	RGB m_pixelInRGB;
@@ -37,7 +34,7 @@ private:
 
 	// == METHODS ==
 public:
-	explicit Pixel(QObject *parent = 0);
+	explicit Pixel();
 	~Pixel();
 
 	// Set RGB color for pixel
