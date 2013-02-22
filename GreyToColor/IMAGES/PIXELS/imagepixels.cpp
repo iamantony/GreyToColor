@@ -36,3 +36,14 @@ void ImagePixels::Clear()
 	m_width = 0;
 	m_height = 0;
 }
+
+void ImagePixels::CalcPixelsSKO()
+{
+	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
+	{
+		for ( unsigned int hgt = 0; hgt < m_height; hgt++ )
+		{
+			CalcPixSKO(wdt, hgt);
+		}
+	}
+}

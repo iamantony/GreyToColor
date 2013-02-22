@@ -254,7 +254,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="311.07745814521445" width="371.28934048041856" x="-4895.644670240209" y="1238.815570416562"/>
+          <y:Geometry height="349.15943171349613" width="371.28934048041856" x="-4895.644670240209" y="1238.815570416562"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="79.15625" x="146.06654524020928" y="3.0">ImagePixels<y:LabelModel>
@@ -268,8 +268,8 @@
             <y:AttributeLabel>+ uint m_width
 + uint m_height</y:AttributeLabel>
             <y:MethodLabel>+ virtual void FormImgPixels( QImage )
-+ virtual void TransformPixRGB2LAB( uint, uint )
-+ virtual void TransformPixLAB2RGB( uint, uint )
++ virtual void TransAllPixRGB2LAB()
++ virtual void TransAllPixLAB2RGB( )
 + virtual double GetPixChLum( uint, uint )
 + virtual double GetPixChA( uint, uint )
 + virtual double GetPixChB( uint, uint )
@@ -278,11 +278,13 @@
 + virtual double FindMinLum()
 + virtual void ScaleLum( double )
 + virtual void UnScaleLum()
-+ virtual void CalcPixelsSKO()
++ void CalcPixelsSKO()
 + virtual double GetPixSKO( uint, uint )
 + virtual bool IsPixGrey( uint, uint )
 
-- virtual void CalcPixSKO( uint, uint )</y:MethodLabel>
+# virtual void TransformPixRGB2LAB( uint, uint )
+# virtual void CalcPixSKO( uint, uint )
+# virtual void TransformPixLAB2RGB( uint, uint )</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -302,8 +304,8 @@
             </y:ModelParameter>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="ImagePixels" use3DEffect="true">
-            <y:AttributeLabel>- TargetPixel **m_pixels</y:AttributeLabel>
-            <y:MethodLabel>+ void SetPixPrefColor( uint, uint, QRgb )
+            <y:AttributeLabel>- QList&lt; QList&lt;TargetPixel&gt; &gt; m_pixels</y:AttributeLabel>
+            <y:MethodLabel>+ void SetPixPrefColor( uint, uint, RGB )
 + void FormImgPixels( QImage )
 + void TransformPixRGB2LAB( uint, uint )
 + void TransformPixLAB2RGB( uint, uint )
@@ -339,7 +341,7 @@
             </y:ModelParameter>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="ImagePixels" use3DEffect="true">
-            <y:AttributeLabel>- ColorPixel **m_pixels</y:AttributeLabel>
+            <y:AttributeLabel>- QList&lt; QList&lt;ColorPixel&gt; &gt; m_pixels</y:AttributeLabel>
             <y:MethodLabel>+ void FormImgPixels( QImage )
 + void TransformPixRGB2LAB( uint, uint )
 + void TransformPixLAB2RGB( uint, uint )
@@ -1204,8 +1206,8 @@
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-22.97910132158586">
-            <y:Point x="-4709.999999999999" y="2520.0"/>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-16.448597709251317">
+            <y:Point x="-4709.999999999999" y="2526.5305036123345"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
