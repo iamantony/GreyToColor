@@ -77,8 +77,6 @@ bool SourceImgPixels::FormImgPixels(const QImage &t_img)
 		m_pixels.append(columnOfPixels);
 	}
 
-	TransAllPixRGB2LAB();
-
 	return true;
 }
 
@@ -283,11 +281,68 @@ double SourceImgPixels::FindMinLum() const
 // @output:
 void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int &t_height)
 {
-	if ( false == IsPixelExist(t_width, t_height) )
+	if ( false == IsPixelExist(c, t_height) )
 	{
 		qDebug() << "CalcPixSKO(): Error - invalid arguments";
 		return;
 	}
 
-//	m_pixels[t_width][t_height].
+	QList<double> lumInMask = GetPixNeighborsLum(t_width, t_height);
+	if ( true == lumInMask.isEmpty() )
+	{
+		qDebug() << "CalcPixSKO(): Error - no pixels - no SKO";
+		return;
+	}
+
+
 }
+
+// Get list of luminances of neighbor pixels (to calc SKO)
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+// - empty QList<double> - don't have pixels
+// - unempy QList<double> - luminances of neighbor pixels
+QList<double> SourceImgPixels::GetPixNeighborsLum(const unsigned int &t_width, const unsigned int &t_height) const
+{
+	QList<double> luminances;
+
+	if ( false == IsPixelExist(t_width, t_height) )
+	{
+		qDebug() << "GetPixNeighborsLum(): Error - invalid arguments";
+		return luminances;
+	}
+
+	// This is length of side of a rect, which is form a mask. Central pixel in mask is pixel with input coords.
+	// Other pixels are neighbors of central pixel.
+	int maskRectSide = MASK_RECT_SIDE_LENGTH;
+	if ( maskRectSide < 0 )
+	{
+		maskRectSide *= (-1);
+	}
+
+	// In current version we use mask with an odd length of a rect side. But it's OK if mask side length is even.
+	// Calc offset to get to extreme pixels in mask
+	unsigned int offset = (unsigned int) (maskRectSide / 2);
+
+	// Calc position of extreme pixels
+	unsigned int widthStart = qMax( (unsigned int)0, t_width - offset);
+	unsigned int widthEnd = qMin(m_width, t_width + offset);
+	unsigned int heightStart = qMax( (unsigned int)0, t_height - offset);
+	unsigned int heightEnd = qMin(m_height, t_height + offset);
+
+	for ( unsigned int width = widthStart; width < widthEnd; width++ )
+	{
+		for ( unsigned int height = heightStart; height < heightEnd; height++ )
+		{
+			double pixelLum = m_pixels[width][height].GetChL();
+			luminances.append(pixelLum);
+		}
+	}
+
+	return luminances;
+}
+
+// TODO:
+// - create test function that test mask construction

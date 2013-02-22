@@ -22,4 +22,6 @@
 #define DEFAULT_MAX_LUM 0
 #define DEFAULT_MIN_LUM 10000
 
+#define MASK_RECT_SIDE_LENGTH 5
+
 #endif // PIXELS_H

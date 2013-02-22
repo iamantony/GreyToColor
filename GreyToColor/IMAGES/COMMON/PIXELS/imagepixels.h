@@ -87,6 +87,8 @@ protected:
 	virtual void TransformPixLAB2RGB(const unsigned int &t_width, const unsigned int &t_height) = 0;
 	// Calc for certain pixel in image it's SKO
 	virtual void CalcPixSKO(const unsigned int &t_width, const unsigned int &t_height) = 0;
+	// Get list of luminances of neighbor pixels (to calc SKO)
+	virtual QList<double> GetPixNeighborsLum(const unsigned int &t_width, const unsigned int &t_height) const = 0;
 };
 
 #endif // IMAGEPIXELS_H

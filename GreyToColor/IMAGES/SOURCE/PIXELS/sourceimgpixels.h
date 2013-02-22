@@ -68,6 +68,8 @@ private:
 	void TransformPixLAB2RGB(const unsigned int &t_width, const unsigned int &t_height);
 	// Calc for certain pixel in image it's SKO
 	void CalcPixSKO(const unsigned int &t_width, const unsigned int &t_height);
+	// Get list of luminances of neighbor pixels (to calc SKO)
+	QList<double> GetPixNeighborsLum(const unsigned int &t_width, const unsigned int &t_height) const;
 };
 
 #endif // SOURCEIMGPIXELS_H

@@ -254,7 +254,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="349.43144581041247" width="371.28934048041856" x="-4895.644670240209" y="1327.4047511109088"/>
+          <y:Geometry height="374.83756246239477" width="371.28934048041856" x="-4895.644670240209" y="1327.4047511109088"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="79.15625" x="146.06654524020928" y="3.0">ImagePixels<y:LabelModel>
@@ -282,9 +282,11 @@
 
 # void Clear()
 # bool IsPixelExist( uint, uint )
+# bool HasPixels()
 # virtual void TransformPixRGB2LAB( uint, uint )
+# virtual void TransformPixLAB2RGB( uint, uint )
 # virtual void CalcPixSKO( uint, uint )
-# virtual void TransformPixLAB2RGB( uint, uint )</y:MethodLabel>
+# virtual QList&lt;double&gt; GetPixNeighborsLum( uint, uint )</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -342,19 +344,22 @@
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="ImagePixels" use3DEffect="true">
             <y:AttributeLabel>- QList&lt; QList&lt;ColorPixel&gt; &gt; m_pixels</y:AttributeLabel>
-            <y:MethodLabel>+ void FormImgPixels( QImage )
-+ void TransformPixRGB2LAB( uint, uint )
-+ void TransformPixLAB2RGB( uint, uint )
+            <y:MethodLabel>+ void ClearPixels()
++ void FormImgPixels( QImage )
++ void TransAllPixRGB2LAB()
++ void TransAllPixLAB2RGB()
 + double GetPixChLum( uint, uint )
 + double GetPixChA( uint, uint )
 + double GetPixChB( uint, uint )
 + double FindMaxLum()
 + double FindMinLum()
-+ void CalcPixelsSKO()
 + double GetPixSKO( uint, uint )
 + bool IsPixGrey( uint, uint )
 
-- virtual void CalcPixSKO( uint, uint )</y:MethodLabel>
+- void TransformPixRGB2LAB( uint, uint )
+- void TransformPixLAB2RGB( uint, uint )
+- void CalcPixSKO( uint, uint )
+- QList&lt;double&gt; GetPixNeighborsLum( uint, uint )</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -648,7 +653,8 @@
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
             <y:AttributeLabel/>
             <y:MethodLabel>+ double ImagesSKO ( Image, Image )
-+ double PassportsSKO ( QList&lt;double&gt;, QList&lt;double&gt; )</y:MethodLabel>
++ double PassportsSKO ( QList&lt;double&gt;, QList&lt;double&gt; )
++ double PixelSKO( QList&lt;double&gt; )</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -1270,7 +1276,7 @@
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="-23.623736523610205" sy="0.0" tx="0.0" ty="-153.81274867415112">
+          <y:Path sx="-23.623736523610205" sy="0.0" tx="0.0" ty="-164.99601418225228">
             <y:Point x="-4520.270510667761" y="1260.0"/>
             <y:Point x="-4710.0" y="1260.0"/>
           </y:Path>
