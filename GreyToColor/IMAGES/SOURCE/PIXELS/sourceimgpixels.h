@@ -19,6 +19,7 @@
 #ifndef SOURCEIMGPIXELS_H
 #define SOURCEIMGPIXELS_H
 
+#include <QFileDialog>
 #include <QImage>
 #include <QDebug>
 #include "../../COMMON/PIXELS/imagepixels.h"
@@ -44,9 +45,8 @@ public:
 	// Get SKO of pixel with certain coords
 	double GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const;
 
-
-
-
+	// Test functions
+	void TestFunctionality();
 
 private:
 	// Calc for certain pixel in image it's SKO

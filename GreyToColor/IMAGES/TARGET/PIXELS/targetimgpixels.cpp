@@ -25,7 +25,7 @@ TargetImgPixels::TargetImgPixels()
 
 TargetImgPixels::~TargetImgPixels()
 {
-
+	Clear();
 }
 
 // Clear info about pixels (call this function before deleting object TargetImgPixels!)
@@ -197,4 +197,40 @@ void TargetImgPixels::UnScaleLum()
 			pixel->UnScaleLum();
 		}
 	}
+}
+
+// Test functions
+void TargetImgPixels::TestFunctionality()
+{
+	QWidget wdt;
+	wdt.show();
+	QString imgName = QFileDialog::getOpenFileName(&wdt,
+												   "Open target image...",
+												   QDir::currentPath(),
+												   "IMG files (*.png *.jpg *.bmp)");
+
+	if ( true == imgName.isEmpty() )
+	{
+		return;
+	}
+
+	QImage image(imgName);
+	bool imgFormed = FormImgPixels(image);
+	if ( false == imgFormed )
+	{
+		qDebug() << "Fail: Can't form image";
+		return;
+	}
+
+	TransAllPixRGB2LAB();
+
+	TargetPixel *pixel = (TargetPixel *)m_pixels[0][0];
+	qDebug() << "Before scaling:" << pixel->GetChL();
+
+	double scaleFactor = 1.5;
+	ScaleLum(scaleFactor);
+	qDebug() << "After scaling:" << pixel->GetChL();
+
+	UnScaleLum();
+	qDebug() << "After unscaling:" << pixel->GetChL();
 }

@@ -109,8 +109,6 @@ void ImagePixels::TransformPixLAB2RGB(const unsigned int &t_width, const unsigne
 	m_pixels[t_width][t_height]->TransformLAB2RGB();
 }
 
-
-
 // Check if we have pixel with such coords
 // @input:
 // - unsigned int - width (x) position of pixel
@@ -261,7 +259,7 @@ double ImagePixels::FindMinLum() const
 		return ERROR;
 	}
 
-	double minLum = DEFAULT_MAX_LUM;
+	double minLum = DEFAULT_MIN_LUM;
 	for ( unsigned int width = 0; width < m_width; width++ )
 	{
 		for ( unsigned int height = 0; height < m_height; height++ )
@@ -304,13 +302,19 @@ QList<double> ImagePixels::GetPixNeighborsLum(const unsigned int &t_width, const
 
 	// In current version we use mask with an odd length of a rect side. But it's OK if mask side length is even.
 	// Calc offset to get to extreme pixels in mask
-	unsigned int offset = (unsigned int) (maskRectSide / 2);
+	int offset = maskRectSide / 2;
+	int minWidthCoord = (int)t_width - offset;
+	int minHeightCoord = (int)t_height - offset;
 
 	// Calc position of extreme pixels
-	unsigned int widthStart = qMax( (unsigned int)0, t_width - offset);
-	unsigned int widthEnd = qMin(m_width, t_width + offset);
-	unsigned int heightStart = qMax( (unsigned int)0, t_height - offset);
-	unsigned int heightEnd = qMin(m_height, t_height + offset);
+	unsigned int widthStart = (unsigned int)qMax( 0, minWidthCoord );
+	unsigned int widthEnd = qMin( m_width, t_width + (unsigned int)offset + 1 );
+	unsigned int heightStart = (unsigned int)qMax( 0, minHeightCoord );
+	unsigned int heightEnd = qMin( m_height, t_height + (unsigned int)offset + 1 );
+
+//	qDebug() << "Pixel" << t_width << t_height;
+//	qDebug() << "widthStart =" << widthStart << "widthEnd =" << widthEnd;
+//	qDebug() << "heightStart =" << heightStart << "heightEnd =" << heightEnd;
 
 	for ( unsigned int width = widthStart; width < widthEnd; width++ )
 	{

@@ -19,6 +19,7 @@
 #ifndef TRAGETIMGPIXELS_H
 #define TRAGETIMGPIXELS_H
 
+#include <QFileDialog>
 #include "../../COMMON/PIXELS/imagepixels.h"
 #include "targetpixel.h"
 #include "./SERVICE/calculatorsko.h"
@@ -44,6 +45,9 @@ public:
 	bool ScaleLum(const double &t_scaleFactor);
 	// Unscale luminance of all pixels in image
 	void UnScaleLum();
+
+	// Test functions
+	void TestFunctionality();
 
 private:
 	// Calc for certain pixel in image it's SKO

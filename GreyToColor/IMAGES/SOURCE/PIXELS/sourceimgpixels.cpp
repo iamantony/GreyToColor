@@ -25,34 +25,8 @@ SourceImgPixels::SourceImgPixels()
 
 SourceImgPixels::~SourceImgPixels()
 {
-
+	Clear();
 }
-
-//void SourceImgPixels::Init()
-//{
-//	for ( int i = 0; i < 5; ++i )
-//	{
-//		QList <Pixel*> list;
-//		for ( int j = 0; j < 5; ++j )
-//		{
-//			ColorPixel *pix = new ColorPixel();
-//			RGB color;
-//			color.SetColor(50, 50, 50);
-//			pix->SetRGB(color);
-//			pix->SetSKO(120);
-//			list.append( (Pixel *)(pix) );
-//		}
-//		m_pixels.append(list);
-//	}
-//}
-
-//void SourceImgPixels::Show()
-//{
-//	ColorPixel *pix = (ColorPixel *)m_pixels[0][0];
-//	RGB rgb = pix->GetRGB();
-//	qDebug() << "SourceImgPixels: red is" << rgb.GetRed();
-//	qDebug() << "SourceImgPixels: SKO is" << pix->GetSKO();
-//}
 
 // Clear info about pixels (call this function before deleting object SourceImgPixels!)
 // @input:
@@ -150,6 +124,8 @@ void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int
 		return;
 	}
 
+//	qDebug() << "Neighbor pixels:" << lumInMask.size();
+
 	double pixelLum = m_pixels[t_width][t_height]->GetChL();
 
 	CalculatorSKO calc;
@@ -162,6 +138,9 @@ void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int
 
 	ColorPixel *centralPixel = (ColorPixel *)m_pixels[t_width][t_height];
 	centralPixel->SetSKO(pixelSKO);
+
+	// TEST
+//	qDebug() << "Pixel:" << t_width << t_height << "have SKO" << centralPixel->GetSKO() << endl;
 }
 
 // Get SKO of pixel with certain coords
@@ -183,11 +162,44 @@ double SourceImgPixels::GetPixelsSKO(const unsigned int &t_width, const unsigned
 	return pixel->GetSKO();
 }
 
+// Test functions
+void SourceImgPixels::TestFunctionality()
+{
+	QWidget wdt;
+	wdt.show();
+	QString imgName = QFileDialog::getOpenFileName(&wdt,
+												 "Open target image...",
+												 QDir::currentPath(),
+												 "IMG files (*.png *.jpg *.bmp)");
 
+	if ( true == imgName.isEmpty() )
+	{
+		return;
+	}
 
+	QImage image(imgName);
+	bool imgFormed = FormImgPixels(image);
+	if ( false == imgFormed )
+	{
+		qDebug() << "Fail: Can't form image";
+		return;
+	}
 
+	TransAllPixRGB2LAB();
 
-// TODO:
-// - create test function that test mask construction
+	qDebug() << "Max Lum:" << FindMaxLum();
+	qDebug() << "Min Lum:" << FindMinLum();
 
-//
+	CalcPixelsSKO();
+
+	qDebug() << "After calculating:";
+	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
+	{
+		for ( unsigned int hgt = 0; hgt < m_height; hgt++ )
+		{
+			qDebug() << wdt << hgt << GetPixelsSKO(wdt, hgt);
+		}
+	}
+
+	TransAllPixLAB2RGB();
+}
