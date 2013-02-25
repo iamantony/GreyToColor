@@ -28,7 +28,7 @@
 class ImagePixels
 {
 	// == DATA ==
-public:
+protected:
 	unsigned int m_width;
 	unsigned int m_height;
 	QList< QList<Pixel *> > m_pixels;
