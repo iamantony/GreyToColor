@@ -29,7 +29,8 @@ SOURCES += main.cpp\
 	IMAGES/COMMON/PIXELS/lab.cpp \
 	IMAGES/COMMON/PIXELS/imagepixels.cpp \
 	IMAGES/COMMON/image.cpp \
-    SERVICE/calculatorsko.cpp
+    SERVICE/calculatorsko.cpp \
+    IMAGES/TARGET/PIXELS/targetimgpixels.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -50,7 +51,8 @@ HEADERS  += \
 	IMAGES/COMMON/PIXELS/lab.h \
 	IMAGES/COMMON/PIXELS/imagepixels.h \
 	IMAGES/COMMON/image.h \
-    SERVICE/calculatorsko.h
+    SERVICE/calculatorsko.h \
+    IMAGES/TARGET/PIXELS/targetimgpixels.h
 
 FORMS    += \
 	mainwindow.ui

@@ -16,55 +16,29 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "sourceimgpixels.h"
+#include "targetimgpixels.h"
 
-SourceImgPixels::SourceImgPixels()
+TargetImgPixels::TargetImgPixels()
 {
 
 }
 
-SourceImgPixels::~SourceImgPixels()
+TargetImgPixels::~TargetImgPixels()
 {
 
 }
 
-//void SourceImgPixels::Init()
-//{
-//	for ( int i = 0; i < 5; ++i )
-//	{
-//		QList <Pixel*> list;
-//		for ( int j = 0; j < 5; ++j )
-//		{
-//			ColorPixel *pix = new ColorPixel();
-//			RGB color;
-//			color.SetColor(50, 50, 50);
-//			pix->SetRGB(color);
-//			pix->SetSKO(120);
-//			list.append( (Pixel *)(pix) );
-//		}
-//		m_pixels.append(list);
-//	}
-//}
-
-//void SourceImgPixels::Show()
-//{
-//	ColorPixel *pix = (ColorPixel *)m_pixels[0][0];
-//	RGB rgb = pix->GetRGB();
-//	qDebug() << "SourceImgPixels: red is" << rgb.GetRed();
-//	qDebug() << "SourceImgPixels: SKO is" << pix->GetSKO();
-//}
-
-// Clear info about pixels (call this function before deleting object SourceImgPixels!)
+// Clear info about pixels (call this function before deleting object TargetImgPixels!)
 // @input:
 // @output:
-void SourceImgPixels::Clear()
+void TargetImgPixels::Clear()
 {
 	for ( int width = m_pixels.size() - 1; width >= 0; width-- )
 	{
 		int pixInColumn = m_pixels[width].size();
 		for ( int height = pixInColumn - 1; height >= 0; height-- )
 		{
-			ColorPixel *pix = (ColorPixel *)m_pixels[width][height];
+			TargetPixel *pix = (TargetPixel *)m_pixels[width][height];
 			if ( NULL != pix )
 			{
 				delete pix;
@@ -77,7 +51,7 @@ void SourceImgPixels::Clear()
 // @input:
 // - QImage - unnull image
 // @output:
-bool SourceImgPixels::FormImgPixels(const QImage &t_img)
+bool TargetImgPixels::FormImgPixels(const QImage &t_img)
 {
 	if ( true == t_img.isNull() )
 	{
@@ -104,10 +78,10 @@ bool SourceImgPixels::FormImgPixels(const QImage &t_img)
 							") has problems with RGB channels: invalid value";
 			}
 
-			ColorPixel *colorPix = new ColorPixel;
-			colorPix->SetRGB(rgbPixel);
+			TargetPixel *targetPix = new TargetPixel;
+			targetPix->SetRGB(rgbPixel);
 
-			columnOfPixels.append(colorPix);
+			columnOfPixels.append(targetPix);
 		}
 
 		m_pixels.append(columnOfPixels);
@@ -119,7 +93,7 @@ bool SourceImgPixels::FormImgPixels(const QImage &t_img)
 // Calc for each pixel in image it's SKO
 // @input:
 // @output:
-void SourceImgPixels::CalcPixelsSKO()
+void TargetImgPixels::CalcPixelsSKO()
 {
 	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
 	{
@@ -135,7 +109,7 @@ void SourceImgPixels::CalcPixelsSKO()
 // - unsigned int - exist width (x) position of pixel
 // - unsigned int - exist height (y) position of pixel
 // @output:
-void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int &t_height)
+void TargetImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int &t_height)
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
@@ -160,7 +134,7 @@ void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int
 		return;
 	}
 
-	ColorPixel *centralPixel = (ColorPixel *)m_pixels[t_width][t_height];
+	TargetPixel *centralPixel = (TargetPixel *)m_pixels[t_width][t_height];
 	centralPixel->SetSKO(pixelSKO);
 }
 
@@ -171,7 +145,7 @@ void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int
 // @output:
 // - ERROR - can't find such pixel
 // - double - pixels SKO
-double SourceImgPixels::GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const
+double TargetImgPixels::GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
@@ -179,15 +153,48 @@ double SourceImgPixels::GetPixelsSKO(const unsigned int &t_width, const unsigned
 		return ERROR;
 	}
 
-	const ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	const TargetPixel *pixel = (TargetPixel *)m_pixels[t_width][t_height];
 	return pixel->GetSKO();
 }
 
+// Scale luminance of all pixels in image with certain scale factor
+// @input:
+// - double - positive unnull scale factor for pixel luminance
+// @output:
+// - true - luminance of all pixels scaled
+// - false - can't scale luminance
+bool TargetImgPixels::ScaleLum(const double &t_scaleFactor)
+{
+	for ( unsigned int width = 0; width < m_width; width++ )
+	{
+		for ( unsigned int height = 0; height < m_height; height++ )
+		{
+			TargetPixel *pixel = (TargetPixel *)m_pixels[width][height];
+			bool pixelScaled = pixel->ScaleLum(t_scaleFactor);
+			if ( false == pixelScaled )
+			{
+				qDebug() << "ScaleLum(): Error - can't scale luminance for pixel" << width << height;
+				qDebug() << "Luminance unscaled!";
+				UnScaleLum();
+				return false;
+			}
+		}
+	}
 
+	return true;
+}
 
-
-
-// TODO:
-// - create test function that test mask construction
-
-//
+// Unscale luminance of all pixels in image
+// @input:
+// @output:
+void TargetImgPixels::UnScaleLum()
+{
+	for ( unsigned int width = 0; width < m_width; width++ )
+	{
+		for ( unsigned int height = 0; height < m_height; height++ )
+		{
+			TargetPixel *pixel = (TargetPixel *)m_pixels[width][height];
+			pixel->UnScaleLum();
+		}
+	}
+}

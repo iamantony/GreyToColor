@@ -254,6 +254,8 @@ void MainWindow::SlotSaveResult(QImage t_resultImg)
 // @output:
 void MainWindow::on_resetPB_clicked()
 {
+
+
 //	TargetPixel pixel;
 //	pixel.TestScaleLum();
 

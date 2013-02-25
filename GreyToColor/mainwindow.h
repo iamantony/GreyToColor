@@ -30,6 +30,8 @@
 #include "DEFINES/programstatus.h"
 #include "DEFINES/mainwindowui.h"
 
+#include "IMAGES/COMMON/PIXELS/imagepixels.h"
+#include "IMAGES/SOURCE/PIXELS/sourceimgpixels.h"
 
 namespace Ui
 {
