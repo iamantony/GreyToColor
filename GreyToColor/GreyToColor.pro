@@ -34,7 +34,8 @@ SOURCES += main.cpp\
     IMAGES/COMMON/SERVICE/searchimgparam.cpp \
     IMAGES/CANDIDATE/candidateimage.cpp \
     IMAGES/CANDIDATE/SERVICE/searchimgparam.cpp \
-    IMAGES/CANDIDATE/IMG_SERVICE/searchimgparam.cpp
+    IMAGES/CANDIDATE/IMG_SERVICE/searchimgparam.cpp \
+    SERVICE/FILES/filesservice.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -59,7 +60,8 @@ HEADERS  += \
     IMAGES/TARGET/PIXELS/targetimgpixels.h \
     IMAGES/CANDIDATE/candidateimage.h \
     IMAGES/CANDIDATE/IMG_SERVICE/searchimgparam.h \
-    DEFINES/images.h
+    DEFINES/images.h \
+    SERVICE/FILES/filesservice.h
 
 FORMS    += \
 	mainwindow.ui

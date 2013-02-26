@@ -55,7 +55,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="246.07552428020375" width="252.5985584108946" x="-4971.143076715434" y="1880.3027143648867"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.08447265625" x="89.2570428773223" y="26.701171875">TargetPixel<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -85,7 +85,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="144.54152760174384" width="252.5985584108946" x="-4836.2992792054465" y="2207.729236199128"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="68.29541015625" x="92.1515741273223" y="26.701171875">ColorPixel<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -231,7 +231,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="151.07636178676603" width="252.5985584108946" x="-5161.758289145279" y="2373.929564611628"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="90.68994140625" x="80.9543085023223" y="26.701171875">PreferedColor<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -255,7 +255,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="351.64806748442106" width="371.28934048041856" x="-4895.644670240209" y="1384.1759662577895"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="79.15625" x="146.06654524020928" y="3.0">ImagePixels<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -294,7 +294,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="244.68402093112564" width="371.2893404804187" x="-5095.880672354747" y="999.8629868912652"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="104.42626953125" x="133.43153547458434" y="26.701171875">TargetImgPixels<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -324,7 +324,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="220.27402621746938" width="371.2893404804188" x="-4672.527446498898" y="999.8629868912652"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="108.76806640625" x="131.2606370370844" y="26.701171875">SourceImgPixels<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -410,7 +410,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="269.4712895154196" width="252.5985584108946" x="-4836.2992792054465" y="2456.3237080979657"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="34.3544921875" x="109.1220331116973" y="3.0">Pixel<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -444,7 +444,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="78.07224669603511" width="201.68053853122956" x="-4420.840269265615" y="2552.023229507658"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="59.60546875" x="71.03753489061478" y="3.0">RGBLAB<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -649,7 +649,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="115.01960159362557" width="247.3470939949766" x="-2943.6735469974883" y="1862.4901992031873"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="79.88623046875" x="83.7304317631133" y="3.0">FilesService<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -827,7 +827,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="214.0608902202639" width="252.59855841089484" x="-5011.758289145279" y="2772.557252364931"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="32.88818359375" x="109.85518740857242" y="3.0">RGB<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -857,7 +857,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="224.7402629074886" width="252.59855841089484" x="-4675.9073071510775" y="2772.557252364931"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="30.71728515625" x="110.94063662732242" y="3.0">LAB<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
