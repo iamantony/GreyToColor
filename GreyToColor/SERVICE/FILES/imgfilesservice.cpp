@@ -172,53 +172,99 @@ bool ImgFilesService::SaveImage(const QImage &t_imgToSave,
 		return false;
 	}
 
-	//	// Get rid of image format in it's path
-	//	QString imgPath = t_path;
-	//	int pathSize = imgPath.size();
-	//	int symbolsToCut =
-	//	for ( int i = pathSize - 1; i >= 0; i-- )
-	//	{
-	//		if ( "." == imgPath[i] )
-	//		{
-
-	//		}
-	//	}
+	// Get rid of image format in it's path
+	QString cuttedPath = CutSuffix(t_path);
+	if ( true == cuttedPath.isEmpty() )
+	{
+		qDebug() << "SaveImage(): Error - can't cut suffix from image file path";
+		return false;
+	}
 
 	QString format = FormatToString(t_format);
 	if ( true == format.isEmpty() )
 	{
-		qDebug() << "No format specified. Saving image in original format as is";
-		bool imgSaved = t_imgToSave.save(t_path, 0, 100);
-		return imgSaved;
+		qDebug() << "SaveImage(): Error - invalid image file format. Can't save image";
+		return false;
 	}
 
-	return true;
+	cuttedPath.append('.');
+	cuttedPath.append(format);
+
+	bool imgSaved = t_imgToSave.save(cuttedPath, 0, 100);
+	return imgSaved;
+}
+
+// Cut from string (image path) it's suffix (image file format)
+// @input:
+// - QString - unempty image path
+// @output:
+// - empty QString - can't cut image path
+// - unempty QString - image path without suffix
+QString ImgFilesService::CutSuffix(const QString &t_path)
+{
+	if ( true == t_path.isEmpty() )
+	{
+		qDebug() << "CutSuffix(): Error - invalid arguments";
+		QString empty;
+		return empty;
+	}
+
+	QString imgPath = t_path;
+	int pathSize = imgPath.size();
+	int lastSymbol = ERROR;
+	for ( int i = pathSize - 1; i >= 0; i-- )
+	{
+		if ( '.' == imgPath[i] )
+		{
+			lastSymbol = i;
+			break;
+		}
+
+		if ( ('/' == imgPath[i]) || ('\\' == imgPath[i]) )
+		{
+			// In this string there is no info about image file format, so we don't cut anything
+			lastSymbol = ERROR;
+			break;
+		}
+	}
+
+	if ( 0 < lastSymbol )
+	{
+		imgPath.truncate(lastSymbol);
+	}
+
+	return imgPath;
 }
 
 // Transform image format to its string equivalent
+// @input:
+// - Image::Format - exist image format that we know
+// @output:
+// - empty QString - can't transform image format to QString
+// - QString - image format as string
 QString ImgFilesService::FormatToString(const ImageFormat::FormatType &t_format)
 {
 	QString format;
 	switch(t_format)
 	{
 		case ImageFormat::BMP:
-			format.append("BMP");
+			format.append("bmp");
 			break;
 
 		case ImageFormat::PNG:
-			format.append("PNG");
+			format.append("png");
 			break;
 
 		case ImageFormat::TIFF:
-			format.append("TIFF");
+			format.append("tiff");
 			break;
 
 		case ImageFormat::JPG:
-			format.append("JPG");
+			format.append("jpg");
 			break;
 
 		case ImageFormat::JPEG:
-			format.append("JPEG");
+			format.append("jpeg");
 			break;
 
 		case ImageFormat::DEFAULT_LAST:
@@ -245,9 +291,6 @@ void ImgFilesService::TestImgMoving()
 // Test image saving
 void ImgFilesService::TestImgSaving()
 {
-	// TODO:
-	// - test all possible variants of SaveImage arguments and check result
-
 	QWidget wdt;
 	QString imgPath = QFileDialog::getOpenFileName(&wdt,
 												   "Open test image...",

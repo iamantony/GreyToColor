@@ -22,6 +22,7 @@
 #include <QFileDialog>
 #include "filesservice.h"
 #include "./DEFINES/images.h"
+#include "./DEFINES/global.h"
 
 class ImgFilesService : protected FilesService
 {
@@ -54,6 +55,8 @@ public:
 private:
 	// Transform image format to its string equivalent
 	QString FormatToString(const ImageFormat::FormatType &t_format);
+	// Cut from string (image path) it's suffix (image file format)
+	QString CutSuffix(const QString &t_path);
 };
 
 #endif // IMGFILESSERVICE_H
