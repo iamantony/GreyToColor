@@ -672,10 +672,10 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="153.0" width="247.3470939949766" x="-3103.4314858171992" y="1614.2667697429852"/>
+          <y:Geometry height="244.54106166909446" width="281.1985355799752" x="-3124.003890277969" y="1522.7257080738907"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="102.998046875" x="72.1745235599883" y="26.701171875">ImgFilesService<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="102.998046875" x="89.1002443524876" y="26.701171875">ImgFilesService<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -686,9 +686,15 @@
             <y:AttributeLabel/>
             <y:MethodLabel>+ bool RemoveImg( QString )
 + bool CheckImgExist ( QString )
-+ void MoveImageToProject( QString )
-+ void MoveImagesToProject( QStringList )
-+ QString GetImgName( QString )</y:MethodLabel>
++ QString GetImgName( QString )
++ QString MoveImageToProject( QString )
++ QStringList MoveImagesToProject( QStringList )
++ bool SaveImage( QImage, QString, ImageFormat::FormatType )
+
+- QString FormatToString( ImageFormat::FormatType )
+
++ void TestImgMoving()
++ void TestImgSaving()</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -953,7 +959,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-2979.757938819711" y="1834.3156408079462"/>
+            <y:Point x="-2983.404622487981" y="1834.3156408079462"/>
             <y:Point x="-2820.0" y="1834.3156408079462"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
@@ -1294,7 +1300,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-13.726267627061361">
-            <y:Point x="-2979.757938819711" y="1336.2737323729386"/>
+            <y:Point x="-2983.404622487981" y="1336.2737323729386"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>

@@ -21,7 +21,7 @@
 
 #include <QImage>
 #include <QDebug>
-#include "../PIXELS/rgb.h"
+#include "../../COMMON/PIXELS/rgb.h"
 #include "./DEFINES/global.h"
 
 class SearchImgParam

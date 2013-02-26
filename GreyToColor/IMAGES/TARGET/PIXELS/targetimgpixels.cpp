@@ -203,7 +203,6 @@ void TargetImgPixels::UnScaleLum()
 void TargetImgPixels::TestFunctionality()
 {
 	QWidget wdt;
-	wdt.show();
 	QString imgName = QFileDialog::getOpenFileName(&wdt,
 												   "Open target image...",
 												   QDir::currentPath(),

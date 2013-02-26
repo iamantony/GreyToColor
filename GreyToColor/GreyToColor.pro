@@ -29,13 +29,12 @@ SOURCES += main.cpp\
 	IMAGES/COMMON/PIXELS/lab.cpp \
 	IMAGES/COMMON/PIXELS/imagepixels.cpp \
 	IMAGES/COMMON/image.cpp \
-    SERVICE/calculatorsko.cpp \
-    IMAGES/TARGET/PIXELS/targetimgpixels.cpp \
-    IMAGES/COMMON/SERVICE/searchimgparam.cpp \
-    IMAGES/CANDIDATE/candidateimage.cpp \
-    IMAGES/CANDIDATE/SERVICE/searchimgparam.cpp \
-    IMAGES/CANDIDATE/IMG_SERVICE/searchimgparam.cpp \
-    SERVICE/FILES/filesservice.cpp
+	SERVICE/calculatorsko.cpp \
+	IMAGES/TARGET/PIXELS/targetimgpixels.cpp \
+	IMAGES/CANDIDATE/candidateimage.cpp \
+	IMAGES/CANDIDATE/IMG_SERVICE/searchimgparam.cpp \
+	SERVICE/FILES/filesservice.cpp \
+	SERVICE/FILES/imgfilesservice.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -56,12 +55,14 @@ HEADERS  += \
 	IMAGES/COMMON/PIXELS/lab.h \
 	IMAGES/COMMON/PIXELS/imagepixels.h \
 	IMAGES/COMMON/image.h \
-    SERVICE/calculatorsko.h \
-    IMAGES/TARGET/PIXELS/targetimgpixels.h \
-    IMAGES/CANDIDATE/candidateimage.h \
-    IMAGES/CANDIDATE/IMG_SERVICE/searchimgparam.h \
-    DEFINES/images.h \
-    SERVICE/FILES/filesservice.h
+	SERVICE/calculatorsko.h \
+	IMAGES/TARGET/PIXELS/targetimgpixels.h \
+	IMAGES/CANDIDATE/candidateimage.h \
+	IMAGES/CANDIDATE/IMG_SERVICE/searchimgparam.h \
+	DEFINES/images.h \
+	SERVICE/FILES/filesservice.h \
+	SERVICE/FILES/imgfilesservice.h \
+	DEFINES/idbs.h
 
 FORMS    += \
 	mainwindow.ui

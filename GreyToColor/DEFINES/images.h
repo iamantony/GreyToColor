@@ -19,4 +19,19 @@
 #ifndef IMAGES_H
 #define IMAGES_H
 
+#define PROJECT_IMG_PATH		"/img/"
+
+namespace ImageFormat
+{
+	enum FormatType
+	{
+		BMP = 0,
+		PNG,
+		TIFF,
+		JPG,
+		JPEG,
+		DEFAULT_LAST
+	};
+}
+
 #endif // IMAGES_H

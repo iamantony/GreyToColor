@@ -166,7 +166,6 @@ double SourceImgPixels::GetPixelsSKO(const unsigned int &t_width, const unsigned
 void SourceImgPixels::TestFunctionality()
 {
 	QWidget wdt;
-	wdt.show();
 	QString imgName = QFileDialog::getOpenFileName(&wdt,
 												 "Open target image...",
 												 QDir::currentPath(),

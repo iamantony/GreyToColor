@@ -85,6 +85,8 @@ bool Image::ReloadImg()
 		qDebug() << "ReloadImg(): Error - can't load image";
 		return false;
 	}
+
+	return true;
 }
 
 // Set new path of image
