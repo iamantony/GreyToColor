@@ -16,48 +16,30 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef IMAGE_H
-#define IMAGE_H
+#ifndef CANDIDATEIMAGE_H
+#define CANDIDATEIMAGE_H
 
-#include <QObject>
-#include <QImage>
-#include <QDebug>
+#include <QList>
+#include "IMG_SERVICE/searchimgparam.h"
 #include "./DEFINES/global.h"
 
-class Image : public QObject
+class CandidateImage
 {
-	Q_OBJECT
-
 	// == DATA ==
-private:
-	QString m_pathToImg;
-	QImage m_image;
+
 
 	// == METHODS ==
 public:
-	explicit Image(QObject *parent = 0);
-	~Image();
+	CandidateImage();
 
-	// Clear all info
-	void Clear();
-	// Loading image from path
-	bool LoadImg(const QString &t_path);
-	// Reload image
-	bool ReloadImg();
-	// Set new path of image
-	bool SetImgPath(const QString &t_path);
-	// Get new QImage
-	bool SetImage(const QImage &t_img);
-	// Get path to loaded image
-	QString GetImgPath() const;
-	// Get copy of image
-	QImage GetImg() const;
-	// Save image in original path m_pathToImg
-	bool SaveImg();
-	// Save image in path t_path
-	bool SaveImg(const QString &t_path);
-	// Check if image is null (unloaded)
-	bool IsNull() const;
+	// Get value of max RGB luminance (for grey/color images)
+	int GetMaxRGBLum();
+	// Get value of min RGB luminance (for grey/color images)
+	int GetMinRGBLum();
+	// Get luminance histogram of this image
+	QList<int> GetRGBLumHistogram();
+	// Get histogram of each RGB channel (red, green, blue) of this image
+	QList< QList<int> > GetRGBHistogram();
 };
 
-#endif // IMAGE_H
+#endif // CANDIDATEIMAGE_H

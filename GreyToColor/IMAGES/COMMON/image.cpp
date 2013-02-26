@@ -21,12 +21,21 @@
 Image::Image(QObject *parent) :
 	QObject(parent)
 {
-	m_pathToImg.clear();
+	Clear();
 }
 
 Image::~Image()
 {
+	Clear();
+}
+
+// Clear all info
+// @input:
+// @output:
+void Image::Clear()
+{
 	m_pathToImg.clear();
+	m_image = QImage();
 }
 
 // Loading image from path
@@ -59,13 +68,32 @@ bool Image::LoadImg(const QString &t_path)
 	return true;
 }
 
+// Reload image
+// @input:
+// @output:
+bool Image::ReloadImg()
+{
+	if ( true == m_pathToImg.isEmpty() )
+	{
+		qDebug() << "ReloadImg(): Error - path is empty";
+		return false;
+	}
+
+	bool imgLoaded = m_image.load(m_pathToImg);
+	if ( false == imgLoaded )
+	{
+		qDebug() << "ReloadImg(): Error - can't load image";
+		return false;
+	}
+}
+
 // Set new path of image
 // @input:
 // - QString - unempty string with path of image
 // @output:
 // - true - path is OK
 // - false - problems with new path
-bool Image::SetPath(const QString &t_path)
+bool Image::SetImgPath(const QString &t_path)
 {
 	if ( true == t_path.isEmpty() )
 	{
@@ -84,21 +112,8 @@ bool Image::SetPath(const QString &t_path)
 // @output:
 // - QString - unempty path to existing image
 // - empty QString - object doesn't have image
-QString Image::GetImgPath()
+QString Image::GetImgPath() const
 {
-	if ( true == m_image.isNull() )
-	{
-		m_pathToImg.clear();
-		return m_pathToImg;
-	}
-
-	QImage testImg;
-	bool canLoad = testImg.load(m_pathToImg);
-	if ( false == canLoad )
-	{
-		m_image = QImage();
-	}
-
 	return m_pathToImg;
 }
 
@@ -106,14 +121,14 @@ QString Image::GetImgPath()
 // @input:
 // @output:
 // - QImage - current image. Possibly empty.
-QImage Image::GetImg()
+QImage Image::GetImg() const
 {
 	return m_image;
 }
 
 // TODO:
-// we can choose format of image in which we want save it
-// add states of object: NULL, HAS_STRING, HAS_IMAGE, FULL ?
+// - we can choose format of image in which we want save it
+// ? add states of object: NULL, HAS_STRING, HAS_IMAGE, FULL
 
 // Save image in original path m_pathToImg
 // @input:
@@ -139,7 +154,10 @@ bool Image::SaveImg(const QString &t_path)
 		return false;
 	}
 
-	return m_image.save(t_path);
+	// TODO:
+	// - implement this function (with possibility to save image in different formats) in class ImgFileService
+
+	return m_image.save(t_path, 0, 100);
 }
 
 // Check if image is null (unloaded)
@@ -147,7 +165,7 @@ bool Image::SaveImg(const QString &t_path)
 // @output:
 // - true - image is null
 // - false - image has something loaded
-bool Image::IsNull()
+bool Image::IsNull() const
 {
 	return m_image.isNull();
 }

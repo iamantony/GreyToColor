@@ -30,7 +30,11 @@ SOURCES += main.cpp\
 	IMAGES/COMMON/PIXELS/imagepixels.cpp \
 	IMAGES/COMMON/image.cpp \
     SERVICE/calculatorsko.cpp \
-    IMAGES/TARGET/PIXELS/targetimgpixels.cpp
+    IMAGES/TARGET/PIXELS/targetimgpixels.cpp \
+    IMAGES/COMMON/SERVICE/searchimgparam.cpp \
+    IMAGES/CANDIDATE/candidateimage.cpp \
+    IMAGES/CANDIDATE/SERVICE/searchimgparam.cpp \
+    IMAGES/CANDIDATE/IMG_SERVICE/searchimgparam.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -52,7 +56,10 @@ HEADERS  += \
 	IMAGES/COMMON/PIXELS/imagepixels.h \
 	IMAGES/COMMON/image.h \
     SERVICE/calculatorsko.h \
-    IMAGES/TARGET/PIXELS/targetimgpixels.h
+    IMAGES/TARGET/PIXELS/targetimgpixels.h \
+    IMAGES/CANDIDATE/candidateimage.h \
+    IMAGES/CANDIDATE/IMG_SERVICE/searchimgparam.h \
+    DEFINES/images.h
 
 FORMS    += \
 	mainwindow.ui
