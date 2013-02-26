@@ -75,11 +75,9 @@ void TargetPixel::ToGrey(const RGB &t_color)
 		int green = t_color.GetGreen();
 		int blue = t_color.GetBlue();
 
-		// http://en.wikipedia.org/wiki/Grayscale
-		double greyLum = 0.2126 * red + 0.7152 * green + 0.0722 * blue;
-		int grey = (int)floor(greyLum + 0.5);
+		RGB greyColor(red, green, blue);
+		greyColor.ToGrey();
 
-		RGB greyColor(grey, grey, grey);
 		SetRGB(greyColor);
 	}
 

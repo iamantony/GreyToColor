@@ -142,3 +142,22 @@ bool RGB::IsGreyColor() const
 
 	return false;
 }
+
+// Transform to grey color
+// @input:
+// @output:
+void RGB::ToGrey()
+{
+	if ( true == IsGreyColor() )
+	{
+		return;
+	}
+
+	// http://en.wikipedia.org/wiki/Grayscale
+	double greyLum = 0.2126 * m_red + 0.7152 * m_green + 0.0722 * m_blue;
+	int grey = (int)floor(greyLum + 0.5);
+
+	m_red = grey;
+	m_green = grey;
+	m_blue = grey;
+}

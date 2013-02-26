@@ -20,6 +20,7 @@
 #define RGB_H
 
 #include <QDebug>
+#include <math.h>
 
 class RGB
 {
@@ -49,6 +50,8 @@ public:
 	int GetBlue() const;
 	// Check if color is grey
 	bool IsGreyColor() const;
+	// Transform to grey color
+	void ToGrey();
 
 private:
 	bool CheckChannelValue(const int &t_value);

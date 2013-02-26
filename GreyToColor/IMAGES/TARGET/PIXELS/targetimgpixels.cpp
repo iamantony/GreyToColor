@@ -47,7 +47,7 @@ void TargetImgPixels::Clear()
 	}
 }
 
-// Save all pixels from input QImage as custom pixels
+// Save all pixels from input QImage as custom grey pixels
 // @input:
 // - QImage - unnull image
 // @output:
@@ -79,7 +79,7 @@ bool TargetImgPixels::FormImgPixels(const QImage &t_img)
 			}
 
 			TargetPixel *targetPix = new TargetPixel;
-			targetPix->SetRGB(rgbPixel);
+			targetPix->SetAsGrey(rgbPixel);
 
 			columnOfPixels.append(targetPix);
 		}
