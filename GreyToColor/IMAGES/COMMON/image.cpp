@@ -128,10 +128,6 @@ QImage Image::GetImg() const
 	return m_image;
 }
 
-// TODO:
-// - we can choose format of image in which we want save it
-// ? add states of object: NULL, HAS_STRING, HAS_IMAGE, FULL
-
 // Save image in original path m_pathToImg
 // @input:
 // @output:
@@ -156,10 +152,9 @@ bool Image::SaveImg(const QString &t_path)
 		return false;
 	}
 
-	// TODO:
-	// - implement this function (with possibility to save image in different formats) in class ImgFileService
-
-	return m_image.save(t_path, 0, 100);
+	ImgFilesService imgService;
+	bool saved = imgService.SaveImage(m_image, t_path);
+	return saved;
 }
 
 // Check if image is null (unloaded)

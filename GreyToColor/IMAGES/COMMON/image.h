@@ -23,6 +23,7 @@
 #include <QImage>
 #include <QDebug>
 #include "./DEFINES/global.h"
+#include "./SERVICE/FILES/imgfilesservice.h"
 
 class Image : public QObject
 {

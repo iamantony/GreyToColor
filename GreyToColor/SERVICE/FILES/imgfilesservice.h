@@ -43,9 +43,7 @@ public:
 	// Move images to a project path "img"
 	QStringList MoveImagesToProject(const QStringList &t_imgsPath);
 	// Save image
-	bool SaveImage(const QImage &t_imgToSave,
-				   const QString &t_path,
-				   const ImageFormat::FormatType &t_format);
+	bool SaveImage(const QImage &t_imgToSave, const QString &t_path);
 
 	// Test image moving function
 	void TestImgMoving();
@@ -53,8 +51,6 @@ public:
 	void TestImgSaving();
 
 private:
-	// Transform image format to its string equivalent
-	QString FormatToString(const ImageFormat::FormatType &t_format);
 	// Cut from string (image path) it's suffix (image file format)
 	QString CutSuffix(const QString &t_path);
 };
