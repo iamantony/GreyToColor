@@ -34,7 +34,10 @@ SOURCES += main.cpp\
 	IMAGES/CANDIDATE/candidateimage.cpp \
 	IMAGES/CANDIDATE/IMG_SERVICE/searchimgparam.cpp \
 	SERVICE/FILES/filesservice.cpp \
-	SERVICE/FILES/imgfilesservice.cpp
+	SERVICE/FILES/imgfilesservice.cpp \
+    IMAGES/COMMON/processingimage.cpp \
+    IMAGES/SOURCE/sourceimage.cpp \
+    IMAGES/TARGET/targetimage.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -62,7 +65,10 @@ HEADERS  += \
 	DEFINES/images.h \
 	SERVICE/FILES/filesservice.h \
 	SERVICE/FILES/imgfilesservice.h \
-	DEFINES/idbs.h
+	DEFINES/idbs.h \
+    IMAGES/COMMON/processingimage.h \
+    IMAGES/SOURCE/sourceimage.h \
+    IMAGES/TARGET/targetimage.h
 
 FORMS    += \
 	mainwindow.ui
