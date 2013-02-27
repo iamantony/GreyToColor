@@ -45,6 +45,8 @@ void TargetImgPixels::Clear()
 			}
 		}
 	}
+
+	m_pixels.clear();
 }
 
 // Save all pixels from input QImage as custom grey pixels
@@ -197,6 +199,26 @@ void TargetImgPixels::UnScaleLum()
 			pixel->UnScaleLum();
 		}
 	}
+}
+
+// Set prefered color for certain pixel
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// - RGB - valid color from RGB color space
+// @output:
+void TargetImgPixels::SetPixPreferedColor(const unsigned int &t_width,
+										  const unsigned int &t_height,
+										  const RGB &t_prefColor)
+{
+	if ( false == IsPixelExist(t_width, t_height) )
+	{
+		qDebug() << "SetPixPreferedColor(): Error - invalid arguments";
+		return;
+	}
+
+	TargetPixel *pixel = (TargetPixel *)m_pixels[t_width][t_height];
+	pixel->SetPreferedColor(t_prefColor);
 }
 
 // Test functions

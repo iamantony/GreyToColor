@@ -20,4 +20,101 @@
 
 TargetImage::TargetImage()
 {
+
+}
+
+TargetImage::~TargetImage()
+{
+	Clear();
+
+	if ( NULL != m_imgPixels )
+	{
+		delete m_imgPixels;
+	}
+}
+
+// Clear all info
+// @input:
+// @output:
+void TargetImage::Clear()
+{
+	m_img.Clear();
+	m_imgPixels->Clear();
+}
+
+// Construct custom pixels of loaded image
+// @input:
+// @output:
+void TargetImage::ConstructImgPixels()
+{
+	QImage currentImg = m_img.GetImg();
+	if ( true == currentImg.isNull() )
+	{
+		qDebug() << "ConstructImgPixels(): Error - can't construct pixels of null image";
+		return;
+	}
+
+	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	pixels->FormImgPixels(currentImg);
+	pixels->TransAllPixRGB2LAB();
+	CalcPixelsSKO();
+}
+
+// Calc for each pixel in image it's SKO
+// @input:
+// @output:
+void TargetImage::CalcPixelsSKO()
+{
+	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	pixels->CalcPixelsSKO();
+}
+
+// Get SKO of pixel with certain coords
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+// - ERROR - can't find such pixel
+// - double - pixels SKO
+double TargetImage::GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const
+{
+	const TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	return pixels->GetPixelsSKO(t_width, t_height);
+}
+
+// Scale luminance of all pixels in image with certain scale factor
+// @input:
+// - double - positive unnull scale factor for pixel LAB luminance
+// @output:
+// - true - luminance of all pixels scaled
+// - false - can't scale luminance
+bool TargetImage::ScaleLABLum(const double &t_scaleFactor)
+{
+	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	return pixels->ScaleLum(t_scaleFactor);
+}
+
+// Unscale luminance of all pixels in image
+// @input:
+// @output:
+void TargetImage::UnScaleLABLum()
+{
+	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	pixels->UnScaleLum();
+}
+
+// Set prefered color for certain pixel
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// - RGB - valid color from RGB color space
+// @output:
+void TargetImage::SetPixPrefColor(const unsigned int &t_width,
+								  const unsigned int &t_height,
+								  const RGB &t_prefColor)
+{
+	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	pixels->SetPixPreferedColor(t_width,
+								t_height,
+								t_prefColor);
 }

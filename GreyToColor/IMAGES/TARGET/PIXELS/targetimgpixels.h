@@ -45,6 +45,10 @@ public:
 	bool ScaleLum(const double &t_scaleFactor);
 	// Unscale luminance of all pixels in image
 	void UnScaleLum();
+	// Set prefered color for certain pixel
+	void SetPixPreferedColor(const unsigned int &t_width,
+							 const unsigned int &t_height,
+							 const RGB &t_prefColor);
 
 	// Test functions
 	void TestFunctionality();

@@ -133,8 +133,8 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="281.59287664741726" width="357.4573415835057" x="-3914.626012591658" y="899.9305945264886"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Geometry height="328.8872414051265" width="357.4573415835057" x="-3914.626012591658" y="899.9305945264887"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="111.65625" x="122.90054579175285" y="3.0">ProcessingImage<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -144,22 +144,24 @@
             </y:ModelParameter>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-            <y:AttributeLabel>+ Image m_img</y:AttributeLabel>
-            <y:MethodLabel>+ bool SetImg( QImage )
-+ uint GetWidth()
-+ uint GetHeight()
-+ virtual void TransformImgRGB2LAB()
-+ virtual void TransformImgLAB2GRB()
-+ virtual double PixelChLum( uint, uint )
-+ virtual double PixelChA( uint, uint )
-+ virtual double PixelChB( uint, uint )
-+ virtual void SetPixelChAB( uint, uint, double, double )
-+ virtual double GetMaxLABLum()
-+ virtual void ScaleLABLum( double )
-+ virtual void UnScaleLABLum()
-+ virtual void CalcPixelsSKO()
-+ virtual double GetPixelSKO( uint, uint, double )
-+ virtual bool IsPixelGrey( uint, uint )</y:MethodLabel>
+            <y:AttributeLabel># Image m_img
+# ImagePixels *m_imgPixels</y:AttributeLabel>
+            <y:MethodLabel>+ virtual void Clear()
++ bool SetImg( QImage )
++ bool SetImgPath( QString )
++ bool LoadImg( QString )
++ uint GetImageWidth()
++ uint GetImageHeight()
++ void TransformImgRGB2LAB()
++ void TransformImgLAB2GRB()
++ double PixelChLum( uint, uint )
++ double PixelChA( uint, uint )
++ double PixelChB( uint, uint )
++ void SetPixelChAB( uint, uint, double, double )
++ double GetMaxLABLum()
++ bool IsPixelGrey( uint, uint )
+
+# virtual void ConstructImgPixels()</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -168,8 +170,8 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="281.59287664741726" width="357.4573415835058" x="-4171.013253331597" y="249.20356167629137"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Geometry height="220.27402621746938" width="357.4573415835058" x="-4273.374667619947" y="233.82725650041854"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="81.3017578125" x="138.0777918855029" y="26.701171875">TargetImage<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -179,20 +181,15 @@
             </y:ModelParameter>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="ProcessingImage" use3DEffect="true">
-            <y:AttributeLabel>- TargetImgPixels m_targPixels</y:AttributeLabel>
-            <y:MethodLabel>+ void SetPixPrefColor( uint, uint, RGB )
-+ void TransformImgRGB2LAB()
-+ void TransformImgLAB2GRB()
-+ double PixelChLum( uint, uint )
-+ double PixelChA( uint, uint )
-+ double PixelChB( uint, uint )
-+ void SetPixelChAB( uint, uint, double, double )
-+ double GetMaxLABLum()
+            <y:AttributeLabel>// m_imgPixels as TargetImgPixels</y:AttributeLabel>
+            <y:MethodLabel>+ virtual void Clear()
++ void CalcPixelsSKO()
++ double GetPixelsSKO( uint, uint )
 + void ScaleLABLum( double )
 + void UnScaleLABLum()
-+ void CalcPixelsSKO()
-+ double GetPixelSKO( uint, uint, double )
-+ bool IsPixelGrey( uint, uint )</y:MethodLabel>
++ void SetPixPrefColor( uint, uint, RGB )
+
+- virtual void ConstructImgPixels()</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -201,8 +198,8 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="220.27402621746933" width="354.68286010362704" x="-4169.626012591658" y="609.0693613932573"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Geometry height="173.5899113276015" width="354.68286010362704" x="-4271.987426880008" y="560.5734731390114"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="85.6435546875" x="134.51965270806352" y="26.701171875">SourceImage<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -212,16 +209,12 @@
             </y:ModelParameter>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="ProcessingImage" use3DEffect="true">
-            <y:AttributeLabel>- ColorImgPixels m_sourcePixels</y:AttributeLabel>
-            <y:MethodLabel>+ void TransformImgRGB2LAB()
-+ void TransformImgLAB2GRB()
-+ double PixelChLum( uint, uint )
-+ double PixelChA( uint, uint )
-+ double PixelChB( uint, uint )
-+ double GetMaxLABLum()
+            <y:AttributeLabel>// m_imgPixels as SourceImgPixels</y:AttributeLabel>
+            <y:MethodLabel>+ virtual void Clear()
 + void CalcPixelsSKO()
-+ double GetPixelSKO( uint, uint, double )
-+ bool IsPixelGrey( uint, uint )</y:MethodLabel>
++ double GetPixelsSKO( uint, uint )
+
+- virtual void ConstructImgPixels()</y:MethodLabel>
           </y:UML>
         </y:UMLClassNode>
       </data>
@@ -293,7 +286,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="244.68402093112564" width="371.2893404804187" x="-5095.880672354747" y="999.8629868912652"/>
+          <y:Geometry height="258.2106587087422" width="371.2893404804187" x="-5095.880672354747" y="986.3363491136487"/>
           <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="104.42626953125" x="133.43153547458434" y="26.701171875">TargetImgPixels<y:LabelModel>
@@ -304,13 +297,14 @@
             </y:ModelParameter>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="ImagePixels" use3DEffect="true">
-            <y:AttributeLabel>- QList&lt; QList&lt;TargetPixel*&gt; &gt; m_pixels</y:AttributeLabel>
+            <y:AttributeLabel>// Pixel -&gt; TargetPixel</y:AttributeLabel>
             <y:MethodLabel>+ virtual void Clear()
 + virtual bool FormImgPixels( QImage )
 + void CalcPixelsSKO()
 + double GetPixelsSKO( uint, uint )
 + bool ScaleLum( double )
 + void UnScaleLum()
++ void SetPixPreferedColor( uint, uint, RGB )
 
 - void CalcPixSKO()
 
@@ -334,7 +328,7 @@
             </y:ModelParameter>
           </y:NodeLabel>
           <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="ImagePixels" use3DEffect="true">
-            <y:AttributeLabel>- QList&lt; QList&lt;ColorPixel*&gt; &gt; m_pixels</y:AttributeLabel>
+            <y:AttributeLabel>// Pixel -&gt; SourcePixel</y:AttributeLabel>
             <y:MethodLabel>+ virtual void Clear()
 + virtual bool FormImgPixels( QImage )
 + void CalcPixelsSKO()
@@ -352,7 +346,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="217.68585022026446" width="202.0" x="-5861.363515078558" y="116.55839696077692"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="71.92626953125" x="65.036865234375" y="26.701171875">ScaleLabel<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -381,7 +375,7 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="217.68585022026446" width="202.0" x="-5629.363515078558" y="116.55839696077692"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="65.4072265625" x="68.29638671875" y="26.701171875">StatusBar<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
@@ -465,7 +459,7 @@
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
-          <y:Geometry height="244.54106166909446" width="281.1985355799752" x="-3440.599267789988" y="1227.7294691654529"/>
+          <y:Geometry height="258.21065870874213" width="281.1985355799752" x="-3440.599267789988" y="1227.7294691654529"/>
           <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="41.57177734375" x="119.8133791181126" y="3.0">Image<y:LabelModel>
@@ -482,8 +476,11 @@
 + bool LoadImg( QString )
 + bool ReloadImg()
 + bool SetImgPath( QString )
++ bool SetImage( QImage )
 + QString GetImgPath()
 + QImage GetImg()
++ uint GetImgWidth()
++ uint GetImgHeight()
 + bool SaveImg()
 + bool SaveImg( QString )
 + bool IsNull()</y:MethodLabel>
@@ -987,7 +984,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-3735.897341799905" y="719.206374501992"/>
+            <y:Point x="-3735.897341799905" y="647.3684288028121"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
@@ -999,8 +996,8 @@
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-140.72703285019725">
-            <y:Point x="-3735.897341799905" y="390.0"/>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-164.36255837245983">
+            <y:Point x="-3735.897341799905" y="343.96426960915323"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
@@ -1013,7 +1010,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-4910.236002114538" y="390.0"/>
+            <y:Point x="-4910.236002114538" y="343.96426960915323"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
@@ -1026,7 +1023,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-4486.882776258689" y="719.206374501992"/>
+            <y:Point x="-4486.882776258689" y="647.3684288028121"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
@@ -1226,7 +1223,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-5476.129461366008" y="1122.204997356828"/>
+            <y:Point x="-5476.129461366008" y="1115.4416784680197"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
@@ -1238,8 +1235,8 @@
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="4.547473508864641E-13" ty="-60.0000000000001">
-            <y:Point x="-3300.0" y="1040.7270328501972"/>
+          <y:Path sx="0.0" sy="0.0" tx="4.547473508864641E-13" ty="-63.353939075838014">
+            <y:Point x="-3300.0" y="1064.374215229052"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
@@ -1293,8 +1290,8 @@
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-13.726267627061366">
-            <y:Point x="-2905.8206091741085" y="1336.2737323729386"/>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-14.493552049724865">
+            <y:Point x="-2905.8206091741085" y="1342.341246470099"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>

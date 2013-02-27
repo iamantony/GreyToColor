@@ -45,6 +45,8 @@ void SourceImgPixels::Clear()
 			}
 		}
 	}
+
+	m_pixels.clear();
 }
 
 // Save all pixels from input QImage as custom pixels
@@ -170,11 +172,6 @@ void SourceImgPixels::TestFunctionality()
 												 "Open target image...",
 												 QDir::currentPath(),
 												 "IMG files (*.png *.jpg *.bmp)");
-
-	if ( true == imgName.isEmpty() )
-	{
-		return;
-	}
 
 	QImage image(imgName);
 	bool imgFormed = FormImgPixels(image);

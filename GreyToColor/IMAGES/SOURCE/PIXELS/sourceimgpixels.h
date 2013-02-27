@@ -26,7 +26,6 @@
 #include "colorpixel.h"
 #include "./SERVICE/calculatorsko.h"
 
-
 class SourceImgPixels : public ImagePixels
 {
 	// == DATA ==

@@ -20,5 +20,76 @@
 
 SourceImage::SourceImage()
 {
+	m_imgPixels = new SourceImgPixels();
+}
 
+SourceImage::~SourceImage()
+{
+	Clear();
+
+	if ( NULL != m_imgPixels )
+	{
+		delete m_imgPixels;
+	}
+}
+
+// Clear all info
+// @input:
+// @output:
+void SourceImage::Clear()
+{
+	m_img.Clear();
+	m_imgPixels->Clear();
+}
+
+// Construct custom pixels of loaded image
+// @input:
+// @output:
+void SourceImage::ConstructImgPixels()
+{
+	QImage currentImg = m_img.GetImg();
+	if ( true == currentImg.isNull() )
+	{
+		qDebug() << "ConstructImgPixels(): Error - can't construct pixels of null image";
+		return;
+	}
+
+	SourceImgPixels *pixels = (SourceImgPixels *)m_imgPixels;
+	pixels->FormImgPixels(currentImg);
+	pixels->TransAllPixRGB2LAB();
+	CalcPixelsSKO();
+}
+
+// Calc for each pixel in image it's SKO
+// @input:
+// @output:
+void SourceImage::CalcPixelsSKO()
+{
+	SourceImgPixels *pixels = (SourceImgPixels *)m_imgPixels;
+	pixels->CalcPixelsSKO();
+}
+
+// Get SKO of pixel with certain coords
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+// - ERROR - can't find such pixel
+// - double - pixels SKO
+double SourceImage::GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const
+{
+	const SourceImgPixels *pixels = (SourceImgPixels *)m_imgPixels;
+	return pixels->GetPixelsSKO(t_width, t_height);
+}
+
+// Test initialising
+void SourceImage::TestInit()
+{
+	QWidget wdt;
+	QString imgName = QFileDialog::getOpenFileName(&wdt,
+												 "Open target image...",
+												 QDir::currentPath(),
+												 "IMG files (*.png *.jpg *.bmp)");
+
+	LoadImg(imgName);
 }

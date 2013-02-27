@@ -53,6 +53,10 @@ public:
 	QString GetImgPath() const;
 	// Get copy of image
 	QImage GetImg() const;
+	// Get image width
+	unsigned int GetImgWidth() const;
+	// Get image height
+	unsigned int GetImgHeight() const;
 	// Save image in original path m_pathToImg
 	bool SaveImg();
 	// Save image in path t_path

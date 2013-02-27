@@ -109,6 +109,24 @@ bool Image::SetImgPath(const QString &t_path)
 	return true;
 }
 
+// Get new QImage
+// @input:
+// - QImage - unempty image
+// @output:
+// - true - image set
+// - false - problems with new image
+bool Image::SetImage(const QImage &t_img)
+{
+	if ( true == t_img.isNull() )
+	{
+		qDebug() << "SetImage(): Error - invalid arguments";
+		return false;
+	}
+
+	m_image = t_img;
+	return true;
+}
+
 // Get path to loaded image
 // @input:
 // @output:
@@ -126,6 +144,34 @@ QString Image::GetImgPath() const
 QImage Image::GetImg() const
 {
 	return m_image;
+}
+
+// Get image width
+// @input:
+// @output:
+// - unsigned int - positive width of image (could be 0 if we don't have image)
+unsigned int Image::GetImgWidth() const
+{
+	if ( true == m_image.isNull() )
+	{
+		return 0;
+	}
+
+	return (unsigned int)m_image.width();
+}
+
+// Get image height
+// @input:
+// @output:
+// - unsigned int - positive height of image (could be 0 if we don't have image)
+unsigned int Image::GetImgHeight() const
+{
+	if ( true == m_image.isNull() )
+	{
+		return 0;
+	}
+
+	return (unsigned int)m_image.height();
 }
 
 // Save image in original path m_pathToImg

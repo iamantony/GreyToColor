@@ -30,7 +30,7 @@
 #include "DEFINES/programstatus.h"
 #include "DEFINES/mainwindowui.h"
 
-#include "SERVICE/FILES/imgfilesservice.h"
+#include "IMAGES/SOURCE/sourceimage.h"
 
 namespace Ui
 {

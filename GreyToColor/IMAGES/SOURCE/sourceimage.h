@@ -19,7 +19,10 @@
 #ifndef SOURCEIMAGE_H
 #define SOURCEIMAGE_H
 
+#include <QFileDialog>
 #include "../COMMON/processingimage.h"
+#include "../SOURCE/PIXELS/sourceimgpixels.h"
+#include "./DEFINES/images.h"
 
 class SourceImage : public ProcessingImage
 {
@@ -28,6 +31,21 @@ class SourceImage : public ProcessingImage
 	// == METHODS ==
 public:
 	SourceImage();
+	~SourceImage();
+
+	// Clear all info
+	virtual void Clear();
+	// Calc for each pixel in image it's SKO
+	void CalcPixelsSKO();
+	// Get SKO of pixel with certain coords
+	double GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const;
+
+	// Test initialising
+	void TestInit();
+
+private:
+	// Construct custom pixels of loaded image
+	virtual void ConstructImgPixels();
 };
 
 #endif // SOURCEIMAGE_H

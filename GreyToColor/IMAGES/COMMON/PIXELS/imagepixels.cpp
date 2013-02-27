@@ -47,6 +47,8 @@ void ImagePixels::Clear()
 			}
 		}
 	}
+
+	m_pixels.clear();
 }
 
 // Transform all image pixels from RGB color space to LAB
