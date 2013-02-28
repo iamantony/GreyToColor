@@ -43,6 +43,8 @@ public:
 	unsigned int GetAreaID() const;
 	// Get image area size and position
 	QRect GetAreaRect() const;
+	// Check if image area has valid params
+	bool IsValid() const;
 };
 
 #endif // IMGSIMILARITYAREA_H

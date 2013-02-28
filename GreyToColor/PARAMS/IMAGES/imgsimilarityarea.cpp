@@ -79,3 +79,18 @@ QRect ImgSimilarityArea::GetAreaRect() const
 {
 	return m_area;
 }
+
+// Check if image area has valid params
+// @input:
+// @output:
+// - true - area is valid
+// - false - area is invalid. You should not use it
+bool ImgSimilarityArea::IsValid() const
+{
+	if ( (true == m_area.isEmpty()) || (false == m_area.isValid()) )
+	{
+		return false;
+	}
+
+	return true;
+}

@@ -198,3 +198,106 @@ bool ProcessingImage::IsPixelGrey(const unsigned int &t_width, const unsigned in
 {
 	return m_imgPixels->IsPixGrey(t_width, t_height);
 }
+
+// TODO:
+// - test adding area
+
+// Add image similiarity area
+// @input:
+// - ImgSimilarityArea - valid image similarity area
+// @output:
+// - true - area added
+// - false - can't add such area
+bool ProcessingImage::AddSimilarityArea(const ImgSimilarityArea &t_area)
+{
+	if ( true == m_img.IsNull() )
+	{
+		qDebug() << "AddSimilarityArea(): Error - no image - no area";
+		return false;
+	}
+
+	if ( false == ValidateSimArea(t_area) )
+	{
+		qDebug() << "AddSimilarityArea(): Error - invalid area";
+		return false;
+	}
+
+	// Check if we already have area with the same ID
+	const unsigned int newAreaID = t_area.GetAreaID();
+	const int numOfAreas = m_similarAreas.size();
+	for ( int area = 0; area < numOfAreas; area++ )
+	{
+		unsigned int existAreaID = m_similarAreas.at(area).GetAreaID();
+		if ( newAreaID == existAreaID )
+		{
+			// If we found such area - remove it
+			m_similarAreas.removeAt(area);
+		}
+	}
+
+	m_similarAreas.append(t_area);
+	return true;
+}
+
+// Validate similarity area
+// @input:
+// - ImgSimilarityArea - valid image area
+// @output:
+// - true - area is valid
+// - false - area is invalid
+bool ProcessingImage::ValidateSimArea(const ImgSimilarityArea &t_area) const
+{
+	if ( false == t_area.IsValid() )
+	{
+		qDebug() << "ValidateSimArea(): Error - invalid arguments";
+		return false;
+	}
+
+	const unsigned int imgWidth = m_img.GetImgWidth();
+	const unsigned int imgHeight = m_img.GetImgHeight();
+
+	QRect imgRect = t_area.GetAreaRect();
+	const int startWidth = imgRect.x();
+	const int startHeight = imgRect.y();
+
+	if ( (startWidth < 0) ||
+		 (imgWidth <= (unsigned int)startWidth) ||
+		 (startHeight < 0) ||
+		 (imgHeight <= (unsigned int)startHeight))
+	{
+		qDebug() << "ValidateSimArea(): Error - area start coords are invalid";
+		return false;
+	}
+
+	const unsigned int endWidth = (unsigned int)startWidth + (unsigned int)imgRect.width();
+	const unsigned int endHeight = (unsigned int)startHeight + (unsigned int)imgRect.height();
+	if ( (imgWidth <= endWidth) || (imgHeight <= endHeight) )
+	{
+		qDebug() << "ValidateSimArea(): Error - area end coords are invalid";
+		return false;
+	}
+
+	return true;
+}
+
+// Find image similarity area by ID
+// @input:
+// - unsigned int - area ID
+// @output:
+// - zero (invalid) ImgSimilarityArea - didn't find area with such id
+// - ImgSimilarityArea - exist image similarity area
+ImgSimilarityArea ProcessingImage::FindSimilarityArea(const unsigned int &t_id) const
+{
+	ImgSimilarityArea imgSimArea;
+	const int numOfAreas = m_similarAreas.size();
+	for ( int area = 0; area < numOfAreas; area++ )
+	{
+		unsigned int existAreaID = m_similarAreas.at(area).GetAreaID();
+		if ( t_id == existAreaID )
+		{
+			imgSimArea = m_similarAreas.at(area);
+		}
+	}
+
+	return imgSimArea;
+}

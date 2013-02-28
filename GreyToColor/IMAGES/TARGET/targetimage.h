@@ -48,7 +48,6 @@ public:
 						 const unsigned int &t_height,
 						 const RGB &t_prefColor);
 
-
 private:
 	// Construct custom pixels of loaded image
 	virtual void ConstructImgPixels();

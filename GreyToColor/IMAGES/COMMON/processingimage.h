@@ -21,6 +21,7 @@
 
 #include "image.h"
 #include "../COMMON/PIXELS/imagepixels.h"
+#include "./PARAMS/IMAGES/imgsimilarityarea.h"
 
 class ProcessingImage
 {
@@ -29,6 +30,7 @@ protected:
 	Image m_img;
 	// Do not create! It's a base class! Init only in children classes
 	ImagePixels *m_imgPixels;
+	QList<ImgSimilarityArea> m_similarAreas;
 
 	// == METHODS ==
 public:
@@ -66,10 +68,18 @@ public:
 	double GetMaxLABLum() const;
 	// Check if pixel with certain coords is greyscale
 	bool IsPixelGrey(const unsigned int &t_width, const unsigned int &t_height) const;
+	// Add image similiarity area
+	bool AddSimilarityArea(const ImgSimilarityArea &t_area);
+	// Find image similarity area by ID
+	ImgSimilarityArea FindSimilarityArea(const unsigned int &t_id) const;
 
 protected:
 	// Construct custom pixels of loaded image
 	virtual void ConstructImgPixels();
+
+private:
+	// Validate similarity area
+	bool ValidateSimArea(const ImgSimilarityArea &t_area) const;
 };
 
 #endif // PROCESSINGIMAGE_H

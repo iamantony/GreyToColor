@@ -112,7 +112,7 @@
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="205.37646484375" width="933.9739354099338" x="-4094.926358317423" y="-119.1746445895983"/>
+              <y:Geometry height="205.37646484375" width="933.9739354099338" x="-3935.5992677899876" y="-83.87646484375"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
               <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="933.9739354099338" x="0.0" y="0.0">Parameters</y:NodeLabel>
@@ -139,10 +139,10 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="153.0" width="202.0" x="-4079.926358317423" y="-81.7981797458483"/>
+              <y:Geometry height="153.0" width="281.1985355799752" x="-3920.5992677899876" y="-46.5"/>
               <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="114.54443359375" x="43.727783203125" y="3.0">ImgSimilarityArea<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="114.54443359375" x="83.3270509931126" y="3.0">ImgSimilarityArea<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -155,7 +155,8 @@
                 <y:MethodLabel>+ void Clear()
 + void SetArea( uint, QRect )
 + uint GetAreaID()
-+ QRect GetAreaRect()</y:MethodLabel>
++ QRect GetAreaRect()
++ bool IsValid()</y:MethodLabel>
               </y:UML>
             </y:UMLClassNode>
           </data>
@@ -164,7 +165,7 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="153.0" width="368.09515418502224" x="-3544.0475770925113" y="-81.7981797458483"/>
+              <y:Geometry height="153.0" width="368.09515418502224" x="-3384.720486565076" y="-46.5"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="82.74267578125" x="142.67623920188612" y="3.0">ImgPassport<y:LabelModel>
@@ -440,7 +441,7 @@
               <y:Geometry height="801.8641494723119" width="824.6425663362679" x="-5440.880672354748" y="787.950083473086"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="824.6425663362679" x="0.0" y="0.0">Image Pixels</y:NodeLabel>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="824.6425663362679" x="0.0" y="0.0">Images Pixels</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
@@ -593,7 +594,7 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="328.8872414051265" width="357.4573415835057" x="-3721.1777032891337" y="899.9305945264887"/>
+              <y:Geometry height="391.3872414051265" width="357.4573415835057" x="-3721.1777032891337" y="899.9305945264887"/>
               <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="111.65625" x="122.90054579175285" y="3.0">ProcessingImage<y:LabelModel>
@@ -605,7 +606,8 @@
               </y:NodeLabel>
               <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
                 <y:AttributeLabel># Image m_img
-# ImagePixels *m_imgPixels</y:AttributeLabel>
+# ImagePixels *m_imgPixels
+# QList&lt;ImgSimilarityArea&gt; m_similarAreas</y:AttributeLabel>
                 <y:MethodLabel>+ virtual void Clear()
 + bool SetImg( QImage )
 + bool SetImgPath( QString )
@@ -620,8 +622,12 @@
 + void SetPixelChAB( uint, uint, double, double )
 + double GetMaxLABLum()
 + bool IsPixelGrey( uint, uint )
++ bool AddSimilarityArea( ImgSimilarityArea )
++ ImgSimilarityArea FindSimilarityArea( uint )
 
-# virtual void ConstructImgPixels()</y:MethodLabel>
+# virtual void ConstructImgPixels()
+
+- bool ValidateSimArea( ImgSimilarityArea )</y:MethodLabel>
               </y:UML>
             </y:UMLClassNode>
           </data>
@@ -658,7 +664,7 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="173.5899113276015" width="354.68286010362704" x="-4078.5391175774835" y="560.5734731390114"/>
+              <y:Geometry height="220.27402621746933" width="354.68286010362704" x="-4078.5391175774835" y="560.5734731390114"/>
               <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="85.6435546875" x="134.51965270806352" y="26.701171875">SourceImage<y:LabelModel>
@@ -1207,7 +1213,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-3542.449032497381" y="647.3684288028121"/>
+            <y:Point x="-3542.449032497381" y="670.7104862477461"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
@@ -1219,7 +1225,7 @@
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-164.36255837245983">
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-195.5971537139823">
             <y:Point x="-3542.449032497381" y="343.96426960915323"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
@@ -1246,7 +1252,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-4816.88277625869" y="647.3684288028121"/>
+            <y:Point x="-4816.88277625869" y="670.7104862477461"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
@@ -1445,7 +1451,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="4.547473508864641E-13" ty="-63.353939075838014">
-            <y:Point x="-3106.551690697476" y="1064.374215229052"/>
+            <y:Point x="-3106.551690697476" y="1095.624215229052"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
@@ -1498,8 +1504,8 @@
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="-148.80231247432994" ty="-73.96426960915323">
-            <y:Point x="-4619.400732210012" y="270.0"/>
+          <y:Path sx="0.0" sy="0.0" tx="-148.80231247432994" ty="-73.96426960915318">
+            <y:Point x="-4619.400732210012" y="270.00000000000006"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
@@ -1512,8 +1518,8 @@
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="-0.5992677899876071" sy="0.0" tx="0.0" ty="-47.368428802812105">
-            <y:Point x="-4620.0" y="600.0"/>
+          <y:Path sx="-0.5992677899876071" sy="0.0" tx="0.0" ty="-60.10737863849524">
+            <y:Point x="-4620.0" y="610.6031076092509"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
@@ -1521,43 +1527,13 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e9" source="n4::n1" target="n1::n0">
-      <data key="d8"/>
-      <data key="d9"/>
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="-40.602443144338736" tx="0.0" ty="5.2981797458483015">
-            <y:Point x="-3660.0" y="303.3618264648145"/>
-            <y:Point x="-3660.0" y="0.0"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="diamond" target="none"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e10" source="n4::n2" target="n1::n0">
-      <data key="d8"/>
-      <data key="d9"/>
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="-31.50660233799772" tx="48.92635831742291" ty="5.2981797458483015">
-            <y:Point x="-3660.0" y="615.8618264648144"/>
-            <y:Point x="-3660.0" y="0.0"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="diamond" target="none"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e11" source="n1::n0" target="n0::n0">
+    <edge id="e9" source="n1::n0" target="n0::n0">
       <data key="d8"/>
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="59.40073221001239" ty="93.54502490612902">
-            <y:Point x="-4560.0" y="-5.2981797458483015"/>
+            <y:Point x="-4560.0" y="30.0"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
@@ -1565,7 +1541,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e12" source="n2::n1::n1" target="n4::n3">
+    <edge id="e10" source="n2::n1::n1" target="n4::n3">
       <data key="d8"/>
       <data key="d9"/>
       <data key="d10">
@@ -1580,7 +1556,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e13" source="n2::n0::n2" target="n4::n4">
+    <edge id="e11" source="n2::n0::n2" target="n4::n4">
       <data key="d8"/>
       <data key="d9"/>
       <data key="d10">
@@ -1595,7 +1571,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e14" source="n2::n0::n1" target="n4::n4">
+    <edge id="e12" source="n2::n0::n1" target="n4::n4">
       <data key="d8"/>
       <data key="d9"/>
       <data key="d10">
@@ -1610,7 +1586,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e15" source="n2::n0::n0" target="n4::n4">
+    <edge id="e13" source="n2::n0::n0" target="n4::n4">
       <data key="d8"/>
       <data key="d9"/>
       <data key="d10">
@@ -1621,6 +1597,20 @@
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e14" source="n4::n0" target="n1::n0">
+      <data key="d8"/>
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="62.44903249738081" sy="0.0" tx="0.0" ty="0.0">
+            <y:Point x="-3480.0" y="30.0"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="diamond" target="none"/>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>
