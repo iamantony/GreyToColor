@@ -32,12 +32,13 @@ SOURCES += main.cpp\
 	SERVICE/calculatorsko.cpp \
 	IMAGES/TARGET/PIXELS/targetimgpixels.cpp \
 	IMAGES/CANDIDATE/candidateimage.cpp \
-	IMAGES/CANDIDATE/IMG_SERVICE/searchimgparam.cpp \
 	SERVICE/FILES/filesservice.cpp \
 	SERVICE/FILES/imgfilesservice.cpp \
     IMAGES/COMMON/processingimage.cpp \
     IMAGES/SOURCE/sourceimage.cpp \
-    IMAGES/TARGET/targetimage.cpp
+    IMAGES/TARGET/targetimage.cpp \
+    IMAGES/CANDIDATE/IMG_SERVICE/imgsearchparam.cpp \
+    IMAGES/CANDIDATE/IMG_SERVICE/imgtransform.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -61,14 +62,15 @@ HEADERS  += \
 	SERVICE/calculatorsko.h \
 	IMAGES/TARGET/PIXELS/targetimgpixels.h \
 	IMAGES/CANDIDATE/candidateimage.h \
-	IMAGES/CANDIDATE/IMG_SERVICE/searchimgparam.h \
 	DEFINES/images.h \
 	SERVICE/FILES/filesservice.h \
 	SERVICE/FILES/imgfilesservice.h \
 	DEFINES/idbs.h \
     IMAGES/COMMON/processingimage.h \
     IMAGES/SOURCE/sourceimage.h \
-    IMAGES/TARGET/targetimage.h
+    IMAGES/TARGET/targetimage.h \
+    IMAGES/CANDIDATE/IMG_SERVICE/imgsearchparam.h \
+    IMAGES/CANDIDATE/IMG_SERVICE/imgtransform.h
 
 FORMS    += \
 	mainwindow.ui

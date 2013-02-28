@@ -20,6 +20,112 @@
 
 CandidateImage::CandidateImage()
 {
+
+}
+
+CandidateImage::~CandidateImage()
+{
+	Clear();
+}
+
+// Clear all info
+// @input:
+// @output:
+void CandidateImage::Clear()
+{
+	m_colorImg.Clear();
+	m_greyImg.Clear();
+}
+
+// Load color image
+// @input:
+// - QString - unempty path to exist image
+// @output:
+// - true - image loaded, grey image-copy created
+// - false - can't load image
+bool CandidateImage::LoadColorImg(const QString &t_imgPath)
+{
+	if ( true == t_imgPath.isEmpty() )
+	{
+		qDebug() << "LoadColorImg(): Error - invalid arguments";
+		return false;
+	}
+
+	bool imageLoaded = m_colorImg.LoadImg(t_imgPath);
+	if ( false == imageLoaded )
+	{
+		qDebug() << "LoadColorImg(): Error - can't load image";
+		return false;
+	}
+
+	bool getGreyCopy = ToGreyImg();
+	if ( false == getGreyCopy )
+	{
+		qDebug() << "LoadColorImg(): Error - can't get greyscale copy of input image";
+		Clear();
+		return false;
+	}
+
+	return true;
+}
+
+// Set color image
+// @input:
+// - QImage - unnull image
+// @output:
+// - true - image set, grey image-copy created
+// - false - can't set image
+bool CandidateImage::SetColorImg(const QImage &t_img)
+{
+	if ( true == t_img.isNull() )
+	{
+		qDebug() << "SetColorImg(): Error - invalid arguments";
+		return false;
+	}
+
+	bool imageSet = m_colorImg.SetImage(t_img);
+	if ( false == imageSet )
+	{
+		qDebug() << "SetColorImg(): Error - can't set image";
+		return false;
+	}
+
+	bool getGreyCopy = ToGreyImg();
+	if ( false == getGreyCopy )
+	{
+		qDebug() << "SetColorImg(): Error - can't get greyscale copy of input image";
+		Clear();
+		return false;
+	}
+
+	return true;
+}
+
+// Get from color image it's greyscale copy
+// @input:
+// @output:
+// - true - greyscale image created
+// - false - can't get greyscale image
+bool CandidateImage::ToGreyImg()
+{
+	if ( true == m_colorImg.IsNull() )
+	{
+		qDebug() << "ToGreyImg(): Error - no color image";
+		return false;
+	}
+
+	ImgTransform imgTransformer;
+	Image greyscaleImg = imgTransformer.ToGrey(m_colorImg);
+	if ( true == greyscaleImg.IsNull() )
+	{
+		qDebug() << "ToGreyImg(): Error - no color image";
+		return false;
+	}
+
+	// WARNING: greyscaleImg should have the same data (besides image) as its parent (m_colorImg)! This rule will
+	// provide us copied and saved greyscale image
+	m_greyImg = greyscaleImg;
+	return true;
 }
 
 // Get value of max RGB luminance (for grey/color images)
@@ -62,4 +168,16 @@ QList< QList<int> > CandidateImage::GetRGBHistogram()
 {
 	QList< QList<int> > empty;
 	return empty;
+}
+
+// Test loading
+void CandidateImage::TestImageLoad()
+{
+	QWidget wdt;
+	QString imgName = QFileDialog::getOpenFileName(&wdt,
+												 "Open target image...",
+												 QDir::currentPath(),
+												 "IMG files (*.png *.jpg *.bmp)");
+
+	LoadColorImg(imgName);
 }

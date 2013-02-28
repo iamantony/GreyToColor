@@ -19,19 +19,31 @@
 #ifndef CANDIDATEIMAGE_H
 #define CANDIDATEIMAGE_H
 
+#include <QFileDialog>
 #include <QList>
-#include "IMG_SERVICE/searchimgparam.h"
+#include "../COMMON/image.h"
+#include "IMG_SERVICE/imgsearchparam.h"
+#include "IMG_SERVICE/imgtransform.h"
 #include "./DEFINES/global.h"
 
 class CandidateImage
 {
 	// == DATA ==
-
+private:
+	Image m_colorImg;
+	Image m_greyImg;
 
 	// == METHODS ==
 public:
 	CandidateImage();
+	~CandidateImage();
 
+	// Clear all info
+	void Clear();
+	// Load color image
+	bool LoadColorImg(const QString &t_imgPath);
+	// Set color image
+	bool SetColorImg(const QImage &t_img);
 	// Get value of max RGB luminance (for grey/color images)
 	int GetMaxRGBLum();
 	// Get value of min RGB luminance (for grey/color images)
@@ -40,6 +52,13 @@ public:
 	QList<int> GetRGBLumHistogram();
 	// Get histogram of each RGB channel (red, green, blue) of this image
 	QList< QList<int> > GetRGBHistogram();
+
+	// Test loading
+	void TestImageLoad();
+
+private:
+	// Get from color image it's greyscale copy
+	bool ToGreyImg();
 };
 
 #endif // CANDIDATEIMAGE_H

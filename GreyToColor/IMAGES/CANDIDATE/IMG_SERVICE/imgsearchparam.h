@@ -16,8 +16,30 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "searchimgparam.h"
+#ifndef IMGSEARCHPARAM_H
+#define IMGSEARCHPARAM_H
 
-SearchImgParam::SearchImgParam()
+#include <QImage>
+#include <QDebug>
+#include "../../COMMON/PIXELS/rgb.h"
+#include "./DEFINES/global.h"
+
+class ImgSearchParam
 {
-}
+	// == DATA ==
+
+	// == METHODS ==
+public:
+	ImgSearchParam();
+
+	int FindMaxLum(const QImage &t_img);
+	int FindMinLum(const QImage &t_img);
+
+private:
+	int ColorImgMaxLum(const QImage &t_img);
+	int ColorImgMinLum(const QImage &t_img);
+	int GreyImgMaxLum(const QImage &t_img);
+	int GreyImgMinLum(const QImage &t_img);
+};
+
+#endif // IMGSEARCHPARAM_H

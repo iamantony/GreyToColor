@@ -19,16 +19,13 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include <QObject>
 #include <QImage>
 #include <QDebug>
 #include "./DEFINES/global.h"
 #include "./SERVICE/FILES/imgfilesservice.h"
 
-class Image : public QObject
+class Image
 {
-	Q_OBJECT
-
 	// == DATA ==
 private:
 	QString m_pathToImg;
@@ -36,7 +33,7 @@ private:
 
 	// == METHODS ==
 public:
-	explicit Image(QObject *parent = 0);
+	explicit Image();
 	~Image();
 
 	// Clear all info
