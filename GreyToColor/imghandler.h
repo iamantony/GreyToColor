@@ -22,6 +22,9 @@
 #include <QObject>
 #include <QDebug>
 #include "./IMAGES/COMMON/image.h"
+#include "./IMAGES/CANDIDATE/candidateimage.h"
+#include "./IMAGES/SOURCE/sourceimage.h"
+#include "./IMAGES/TARGET/targetimage.h"
 
 class ImgHandler : public QObject
 {
@@ -30,12 +33,13 @@ class ImgHandler : public QObject
 	// == DATA ==
 private:
 	Image m_original;
-//	TargetImage m_target;
-//	SourceImage m_source;
+	TargetImage m_target;
+	SourceImage m_source;
 
 	// == METHODS ==
 public:
 	explicit ImgHandler(QObject *parent = 0);
+	~ImgHandler();
 
 signals:
 	void SignalGetResultImg(QImage t_img);

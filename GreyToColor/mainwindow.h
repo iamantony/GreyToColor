@@ -30,8 +30,6 @@
 #include "DEFINES/programstatus.h"
 #include "DEFINES/mainwindowui.h"
 
-#include "IMAGES/CANDIDATE/candidateimage.h"
-
 namespace Ui
 {
 	class MainWindow;

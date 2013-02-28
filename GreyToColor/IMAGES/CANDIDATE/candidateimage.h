@@ -22,8 +22,8 @@
 #include <QFileDialog>
 #include <QList>
 #include "../COMMON/image.h"
-#include "IMG_SERVICE/imgsearchparam.h"
-#include "IMG_SERVICE/imgtransform.h"
+#include "./SERVICE/IMAGES/imgsearchparam.h"
+#include "./SERVICE/IMAGES/imgtransform.h"
 #include "./DEFINES/global.h"
 
 class CandidateImage

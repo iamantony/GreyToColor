@@ -16,31 +16,28 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef IMGSEARCHPARAM_H
-#define IMGSEARCHPARAM_H
+#ifndef IMGTRANSFORM_H
+#define IMGTRANSFORM_H
 
 #include <QImage>
-#include <QPair>
 #include <QDebug>
-#include "../../COMMON/image.h"
-#include "imgtransform.h"
-#include "./DEFINES/global.h"
-#include "./DEFINES/pixels.h"
+#include "./IMAGES/COMMON/image.h"
+#include "./IMAGES/COMMON/PIXELS/rgb.h"
 
-class ImgSearchParam
+class ImgTransform
 {
 	// == DATA ==
 
 	// == METHODS ==
 public:
-	ImgSearchParam();
+	ImgTransform();
 
-	// Find min RGB luminance in image
-	int FindMinLum(const Image &t_img);
-	// Find max RGB luminance in image
-	int FindMaxLum(const Image &t_img);
-	// Find min and max RGB luminances in image
-	QPair<int, int> FindMinMaxLum(const Image &t_img);
+	// Transform color image to grey image
+	Image ToGrey(const Image &t_img);
+
+private:
+	// Create greyscale image-copy of input image
+	QImage GreyscaleImg(const QImage &t_colorImg);
 };
 
-#endif // IMGSEARCHPARAM_H
+#endif // IMGTRANSFORM_H

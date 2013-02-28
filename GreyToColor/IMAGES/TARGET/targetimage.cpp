@@ -20,7 +20,7 @@
 
 TargetImage::TargetImage()
 {
-
+	m_imgPixels = new TargetImgPixels();
 }
 
 TargetImage::~TargetImage()

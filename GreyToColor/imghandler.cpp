@@ -23,6 +23,11 @@ ImgHandler::ImgHandler(QObject *parent) :
 {
 }
 
+ImgHandler::~ImgHandler()
+{
+
+}
+
 // This slot get signal to save result (colorized or not) image and send it copy signal to some (MainWindow) UI
 void ImgHandler::SlotSaveResultImg()
 {

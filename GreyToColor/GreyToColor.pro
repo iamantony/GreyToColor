@@ -34,11 +34,11 @@ SOURCES += main.cpp\
 	IMAGES/CANDIDATE/candidateimage.cpp \
 	SERVICE/FILES/filesservice.cpp \
 	SERVICE/FILES/imgfilesservice.cpp \
-    IMAGES/COMMON/processingimage.cpp \
-    IMAGES/SOURCE/sourceimage.cpp \
-    IMAGES/TARGET/targetimage.cpp \
-    IMAGES/CANDIDATE/IMG_SERVICE/imgsearchparam.cpp \
-    IMAGES/CANDIDATE/IMG_SERVICE/imgtransform.cpp
+	IMAGES/COMMON/processingimage.cpp \
+	IMAGES/SOURCE/sourceimage.cpp \
+	IMAGES/TARGET/targetimage.cpp \
+    SERVICE/IMAGES/imgtransform.cpp \
+    SERVICE/IMAGES/imgsearchparam.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -66,11 +66,11 @@ HEADERS  += \
 	SERVICE/FILES/filesservice.h \
 	SERVICE/FILES/imgfilesservice.h \
 	DEFINES/idbs.h \
-    IMAGES/COMMON/processingimage.h \
-    IMAGES/SOURCE/sourceimage.h \
-    IMAGES/TARGET/targetimage.h \
-    IMAGES/CANDIDATE/IMG_SERVICE/imgsearchparam.h \
-    IMAGES/CANDIDATE/IMG_SERVICE/imgtransform.h
+	IMAGES/COMMON/processingimage.h \
+	IMAGES/SOURCE/sourceimage.h \
+	IMAGES/TARGET/targetimage.h \
+    SERVICE/IMAGES/imgtransform.h \
+    SERVICE/IMAGES/imgsearchparam.h
 
 FORMS    += \
 	mainwindow.ui
