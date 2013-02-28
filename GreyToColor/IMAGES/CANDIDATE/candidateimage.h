@@ -44,6 +44,10 @@ public:
 	bool LoadColorImg(const QString &t_imgPath);
 	// Set color image
 	bool SetColorImg(const QImage &t_img);
+	// Get color image
+	Image GetColorImg() const;
+	// Get grey-copy of color image
+	Image GetGreyImg() const;
 	// Get value of max RGB luminance (for grey/color images)
 	int GetMaxRGBLum();
 	// Get value of min RGB luminance (for grey/color images)

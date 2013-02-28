@@ -232,7 +232,7 @@ double ImagePixels::FindMaxLum() const
 		return ERROR;
 	}
 
-	double maxLum = DEFAULT_MAX_LUM;
+	double maxLum = DEFAULT_MAX_LAB_LUM;
 	for ( unsigned int width = 0; width < m_width; width++ )
 	{
 		for ( unsigned int height = 0; height < m_height; height++ )
@@ -261,7 +261,7 @@ double ImagePixels::FindMinLum() const
 		return ERROR;
 	}
 
-	double minLum = DEFAULT_MIN_LUM;
+	double minLum = DEFAULT_MIN_LAB_LUM;
 	for ( unsigned int width = 0; width < m_width; width++ )
 	{
 		for ( unsigned int height = 0; height < m_height; height++ )

@@ -20,9 +20,12 @@
 #define IMGSEARCHPARAM_H
 
 #include <QImage>
+#include <QPair>
 #include <QDebug>
-#include "../../COMMON/PIXELS/rgb.h"
+#include "../../COMMON/image.h"
+#include "imgtransform.h"
 #include "./DEFINES/global.h"
+#include "./DEFINES/pixels.h"
 
 class ImgSearchParam
 {
@@ -32,14 +35,12 @@ class ImgSearchParam
 public:
 	ImgSearchParam();
 
-	int FindMaxLum(const QImage &t_img);
-	int FindMinLum(const QImage &t_img);
-
-private:
-	int ColorImgMaxLum(const QImage &t_img);
-	int ColorImgMinLum(const QImage &t_img);
-	int GreyImgMaxLum(const QImage &t_img);
-	int GreyImgMinLum(const QImage &t_img);
+	// Find min RGB luminance in image
+	int FindMinLum(const Image &t_img);
+	// Find max RGB luminance in image
+	int FindMaxLum(const Image &t_img);
+	// Find min and max RGB luminances in image
+	QPair<int, int> FindMinMaxLum(const Image &t_img);
 };
 
 #endif // IMGSEARCHPARAM_H

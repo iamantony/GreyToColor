@@ -73,8 +73,8 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="153.0" width="295.26153093843095" x="-2699.6404557624924" y="849.0799231449187"/>
-              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:Geometry height="105.0" width="295.26153093843095" x="-2699.6404557624924" y="873.0799231449187"/>
+              <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="110.2216796875" x="92.51992562546548" y="3.0">ImgSearchParam<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
@@ -85,13 +85,9 @@
               </y:NodeLabel>
               <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
                 <y:AttributeLabel/>
-                <y:MethodLabel>+ int FindMaxLum( QImage )
-+ int FindMinLum( QImage )
-
-- int ColorImgMaxLum( QImage )
-- int ColorImgMinLum( QImage )
-- int GreyImgMaxLum( QImage )
-- int GreyImgMinLum( QImage )</y:MethodLabel>
+                <y:MethodLabel>+ int FindMaxLum( Image )
++ int FindMinLum( Image )
++ QPair&lt;int, int&gt; FindMinMaxLum( Image )</y:MethodLabel>
               </y:UML>
             </y:UMLClassNode>
           </data>
@@ -367,7 +363,7 @@
               <y:Geometry height="1304.4893362175264" width="1143.9739354099343" x="-4094.926358317423" y="196.45079165666854"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1143.9739354099343" x="0.0" y="0.0">Group 2</y:NodeLabel>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1143.9739354099343" x="0.0" y="0.0">Images</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
@@ -1455,6 +1451,18 @@
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="n0::e0" source="n0::n0" target="n0::n1">
+      <data key="d8"/>
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="2.00969029327689" sy="-63.690443032823396" tx="2.00969029327689" ty="44.20985666525194"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="plain"/>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>

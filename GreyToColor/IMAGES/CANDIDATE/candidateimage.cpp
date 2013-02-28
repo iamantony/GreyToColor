@@ -128,6 +128,24 @@ bool CandidateImage::ToGreyImg()
 	return true;
 }
 
+// Get color image
+// @input:
+// @output:
+// - Image - get current color image (could be NULL!)
+Image CandidateImage::GetColorImg() const
+{
+	return m_colorImg;
+}
+
+// Get grey-copy of color image
+// @input:
+// @output:
+// - Image - get current grey image (could be NULL!)
+Image CandidateImage::GetGreyImg() const
+{
+	return m_greyImg;
+}
+
 // Get value of max RGB luminance (for grey/color images)
 // @input:
 // @output:
@@ -135,6 +153,20 @@ bool CandidateImage::ToGreyImg()
 // - int - posititve value of max luminance of this image
 int CandidateImage::GetMaxRGBLum()
 {
+	ImgSearchParam imgSearcher;
+	if ( false == m_greyImg.IsNull() )
+	{
+		return imgSearcher.FindMaxLum(m_greyImg);
+	}
+	else
+	{
+		if ( false == m_colorImg.IsNull() )
+		{
+			return imgSearcher.FindMaxLum(m_colorImg);
+		}
+	}
+
+	qDebug() << "GetMaxRGBLum(): Error - no images";
 	return ERROR;
 }
 
@@ -145,6 +177,20 @@ int CandidateImage::GetMaxRGBLum()
 // - int - posititve value of min luminance of this image
 int CandidateImage::GetMinRGBLum()
 {
+	ImgSearchParam imgSearcher;
+	if ( false == m_greyImg.IsNull() )
+	{
+		return imgSearcher.FindMinLum(m_greyImg);
+	}
+	else
+	{
+		if ( false == m_colorImg.IsNull() )
+		{
+			return imgSearcher.FindMinLum(m_colorImg);
+		}
+	}
+
+	qDebug() << "GetMinRGBLum(): Error - no images";
 	return ERROR;
 }
 
@@ -180,4 +226,10 @@ void CandidateImage::TestImageLoad()
 												 "IMG files (*.png *.jpg *.bmp)");
 
 	LoadColorImg(imgName);
+	m_greyImg.SaveImg("./test_grey.bmp");
+
+	int minLim = GetMinRGBLum();
+	int maxLim = GetMaxRGBLum();
+	qDebug() << "Min luminance:" << minLim;
+	qDebug() << "Max luminance:" << maxLim;
 }

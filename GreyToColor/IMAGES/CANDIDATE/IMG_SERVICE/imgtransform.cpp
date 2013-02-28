@@ -86,5 +86,40 @@ QImage ImgTransform::GreyscaleImg(const QImage &t_colorImg)
 	QImage greyImage;
 	greyImage = t_colorImg;
 
+	// Transform all image pixels to grey
+	QRgb defaultColor;
+	defaultColor = qRgb(0, 0, 0);
+
+	QRgb imgPixelColor;
+	QRgb newGreyPixel;
+	RGB pixelRGB;
+
+	const int width = greyImage.width();
+	const int height = greyImage.height();
+	for ( int wdt = 0; wdt < width; wdt++ )
+	{
+		for ( int hgt = 0; hgt < height; hgt++ )
+		{
+			imgPixelColor = greyImage.pixel(wdt, hgt);
+			bool colorSet = pixelRGB.SetColor(qRed(imgPixelColor),
+											  qGreen(imgPixelColor),
+											  qBlue(imgPixelColor));
+
+			if ( false == colorSet )
+			{
+				qDebug() << "GreyscaleImg(): Warning - pixel [" << width << height << "] set to default";
+				greyImage.setPixel(wdt, hgt, defaultColor);
+				continue;
+			}
+
+			pixelRGB.ToGrey();
+			newGreyPixel = qRgb(pixelRGB.GetRed(),
+								pixelRGB.GetGreen(),
+								pixelRGB.GetBlue());
+
+			greyImage.setPixel(wdt, hgt, newGreyPixel);
+		}
+	}
+
 	return greyImage;
 }
