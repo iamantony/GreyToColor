@@ -38,7 +38,8 @@ SOURCES += main.cpp\
 	IMAGES/SOURCE/sourceimage.cpp \
 	IMAGES/TARGET/targetimage.cpp \
     SERVICE/IMAGES/imgtransform.cpp \
-    SERVICE/IMAGES/imgsearchparam.cpp
+    SERVICE/IMAGES/imgsearchparam.cpp \
+    PARAMS/IMAGES/imgsimilarityarea.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -70,7 +71,8 @@ HEADERS  += \
 	IMAGES/SOURCE/sourceimage.h \
 	IMAGES/TARGET/targetimage.h \
     SERVICE/IMAGES/imgtransform.h \
-    SERVICE/IMAGES/imgsearchparam.h
+    SERVICE/IMAGES/imgsearchparam.h \
+    PARAMS/IMAGES/imgsimilarityarea.h
 
 FORMS    += \
 	mainwindow.ui
