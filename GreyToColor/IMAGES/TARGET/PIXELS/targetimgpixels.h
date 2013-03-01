@@ -50,6 +50,9 @@ public:
 							 const unsigned int &t_height,
 							 const RGB &t_prefColor);
 
+	// Form from current pixels values entire QImage
+	QImage FormImage();
+
 	// Test functions
 	void TestFunctionality();
 

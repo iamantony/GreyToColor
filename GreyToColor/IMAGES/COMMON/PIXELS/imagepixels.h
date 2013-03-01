@@ -40,6 +40,8 @@ public:
 
 	// Clear all info (set to defaults)
 	virtual void Clear();
+	// Check if we have pixels of image
+	bool HasPixels() const;
 	// Save all pixels from input QImage as custom pixels
 	virtual bool FormImgPixels(const QImage &t_img) = 0;
 	// Transform all image pixels from RGB color space to LAB
@@ -68,8 +70,6 @@ public:
 protected:
 	// Check if we have pixel with such coords
 	bool IsPixelExist(const unsigned int &t_width, const unsigned int &t_height) const;
-	// Check if we have pixels of image
-	bool HasPixels() const;
 	// Transform certain pixel from RGB color space to LAB
 	void TransformPixRGB2LAB(const unsigned int &t_width, const unsigned int &t_height);
 	// Transform certain pixel from LAB color space to RGB

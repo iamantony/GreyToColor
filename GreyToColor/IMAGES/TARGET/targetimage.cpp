@@ -118,3 +118,39 @@ void TargetImage::SetPixPrefColor(const unsigned int &t_width,
 								t_height,
 								t_prefColor);
 }
+
+// Get result image. It could be colorized (if we perform colorization) or
+// greyscale as original target (if we have not performed colorizztion yet).
+// @input:
+// @output:
+// - null Image - can't return colorized image
+// - Image - colorized image
+Image TargetImage::GetColorizedImage()
+{
+	if ( (true == m_img.IsNull()) || ( true == m_imgPixels->HasPixels() ) )
+	{
+		qDebug() << "GetColorizedImage(): Error - nothing to save";
+		Image empty;
+		return empty;
+	}
+
+	// Go reverse:
+	// - bring back original value of luminance for all image pixels
+	UnScaleLABLum();
+	// - get from LAB pixels (myabe, their value was changed) new values for RGB pixels
+	TransformImgLAB2GRB();
+
+	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	QImage formedImg = pixels->FormImage();
+	if ( true == formedImg.isNull() )
+	{
+		qDebug() << "GetColorizedImage(): Error - can't form image";
+		Image empty;
+		return empty;
+	}
+
+	Image colorizedImage;
+	colorizedImage.SetImage(formedImg);
+
+	return colorizedImage;
+}

@@ -221,6 +221,21 @@ void TargetImgPixels::SetPixPreferedColor(const unsigned int &t_width,
 	pixel->SetPreferedColor(t_prefColor);
 }
 
+// Form from current pixels values entire QImage
+// @input:
+// @output:
+// - empty QImage - can't form image
+// - QImage - image from pixels
+QImage TargetImgPixels::FormImage()
+{
+	// TODO:
+	// - check if we can form image
+	// - form image from pixels
+
+	QImage empty;
+	return empty;
+}
+
 // Test functions
 void TargetImgPixels::TestFunctionality()
 {

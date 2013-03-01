@@ -96,6 +96,9 @@ bool TargetPixel::ScaleLum(const double &t_factor)
 		return false;
 	}
 
+	// We don't want to scale luminance of pixel twice
+	UnScaleLum();
+
 	m_lumScaleFactor = t_factor;
 
 	double currentLum = GetChL();
@@ -117,6 +120,12 @@ bool TargetPixel::ScaleLum(const double &t_factor)
 // - false - can't unscale luminance
 bool TargetPixel::UnScaleLum()
 {
+	if ( DEFAULT_SCALE_LUM_FACTOR == m_lumScaleFactor )
+	{
+		// Pixels luminance wasn't scale
+		return true;
+	}
+
 	double currentLum = GetChL();
 	double unscaledLum = currentLum / m_lumScaleFactor;
 

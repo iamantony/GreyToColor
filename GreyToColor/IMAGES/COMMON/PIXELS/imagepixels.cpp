@@ -135,7 +135,9 @@ bool ImagePixels::IsPixelExist(const unsigned int &t_width, const unsigned int &
 // - false - no, we don't have pixels
 bool ImagePixels::HasPixels() const
 {
-	if ( (0 == m_width) || (0 == m_height) )
+	if ( (0 == m_width) ||
+		 (0 == m_height) ||
+		 (true == m_pixels.isEmpty()) )
 	{
 		return false;
 	}

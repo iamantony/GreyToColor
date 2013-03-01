@@ -25,7 +25,9 @@ ImgHandler::ImgHandler(QObject *parent) :
 
 ImgHandler::~ImgHandler()
 {
-
+	m_original.Clear();
+	m_source.Clear();
+	m_target.Clear();
 }
 
 // This slot get signal to save result (colorized or not) image and send it copy signal to some (MainWindow) UI

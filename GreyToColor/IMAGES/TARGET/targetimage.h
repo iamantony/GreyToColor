@@ -48,6 +48,10 @@ public:
 						 const unsigned int &t_height,
 						 const RGB &t_prefColor);
 
+	// Get result image. It could be colorized (if we perform colorization) or
+	// greyscale as original target (if we have not performed colorizztion yet).
+	Image GetColorizedImage();
+
 private:
 	// Construct custom pixels of loaded image
 	virtual void ConstructImgPixels();
