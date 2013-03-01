@@ -121,7 +121,7 @@ void MainWindow::on_openTargetImgPB_clicked()
 	QString fName = QFileDialog::getOpenFileName(this,
 												 "Open target image...",
 												 QDir::currentPath(),
-												 "IMG files (*.png *.jpg *.bmp)");
+												 "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
 
 	if(true == fName.isEmpty())
 	{
@@ -131,14 +131,27 @@ void MainWindow::on_openTargetImgPB_clicked()
 	bool imgSet = ui->targetImgLbl->SetImage(fName);
 	if ( false == imgSet )
 	{
-		ShowWarning("Loading target image...", "Can't load image. Please, try another one.");
+		ShowWarning("Loading Target Image...", "Can't load image. Please, try another one.");
 		return;
 	}
 
-	emit SignalStrToOriginalImg(fName);
+	emit SignalNewTargetImg(fName);
 
 	// TODO:
 	// Get from ImgHandler greyscale image
+}
+
+// Slot for error: can't load Target Image
+// @input:
+// @output:
+void MainWindow::SlotFailLoadTargetImg()
+{
+	ui->targetImgLbl->ShowDefaultImg();
+	ui->resultImgLbl->ShowDefaultImg();
+
+	QString title("Target image...");
+	QString text("Can't load Target Image. Please, try to open another one");
+	ShowWarning(title, text);
 }
 
 // Slot for action actionOpenTargetImage to set target image
@@ -157,7 +170,7 @@ void MainWindow::on_openSourceImgPB_clicked()
 	QString fName = QFileDialog::getOpenFileName(this,
 												 "Open source image...",
 												 QDir::currentPath(),
-												 "IMG files (*.png *.jpg *.bmp)");
+												 "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
 
 	if(true == fName.isEmpty())
 	{
@@ -191,7 +204,7 @@ void MainWindow::on_findSourceImgPB_clicked()
 // @input:
 // - QImage - unnull new result image
 // @output:
-void MainWindow::SlotResultImg(QImage t_resultImg)
+void MainWindow::SlotGetResultImg(QImage t_resultImg)
 {
 	if ( true == t_resultImg.isNull() )
 	{
@@ -206,7 +219,7 @@ void MainWindow::SlotResultImg(QImage t_resultImg)
 // @input:
 // - QImage - unnull new source image
 // @output:
-void MainWindow::SlotSourceImg(QImage t_sourceImg)
+void MainWindow::SlotGetSourceImg(QImage t_sourceImg)
 {
 	if ( true == t_sourceImg.isNull() )
 	{
@@ -222,31 +235,38 @@ void MainWindow::SlotSourceImg(QImage t_sourceImg)
 // @output:
 void MainWindow::on_saveResultPB_clicked()
 {
-	emit SignalSaveResultImg();
-}
-
-// Slot for saving result (colorized) image
-// @input:
-// - QImage -unnull current result image to save
-// @output:
-void MainWindow::SlotSaveResult(QImage t_resultImg)
-{
-	if ( true == t_resultImg.isNull() )
-	{
-		qDebug() << "SlotSaveResult(): Error - invalid arguments";
-		return;
-	}
-
 	QString imgName = QFileDialog::getSaveFileName(this,
 												   "Choose name...",
 												   QDir::currentPath(),
-												   "IMG files (*.png)");
+												   "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
 
-	qDebug() << imgName;
+	if ( true == imgName.isEmpty() )
+	{
+		// User change his mind
+		return;
+	}
 
-	// TODO:
-	// save image with defined format
-	// add new formats
+	emit SignalSaveResultImg(imgName);
+}
+
+// Slot for error: don't have target image
+// @input:
+// @output:
+void MainWindow::SlotNoTargetImg()
+{
+	QString title("Target image...");
+	QString text("Don't have Target Image. Please, choose image and set it as Target Image");
+	ShowWarning(title, text);
+}
+
+// Slot for error: can't save target image
+// @input:
+// @output:
+void MainWindow::SlotFailSaveTargetImg()
+{
+	QString title("Result image...");
+	QString text("Can't save result image. Try to open other Target Image and perform Colorization again");
+	ShowWarning(title, text);
 }
 
 // Slot for resetting current target image
@@ -254,8 +274,6 @@ void MainWindow::SlotSaveResult(QImage t_resultImg)
 // @output:
 void MainWindow::on_resetPB_clicked()
 {
-	ProcessingImage testImage;
-	testImage.TestImgSimArea();
 
 	// TODO:
 	// Send signal to ImgHandler. It should reload target image, calc all it's params (LAB, SKO) and then send

@@ -30,8 +30,6 @@
 #include "DEFINES/programstatus.h"
 #include "DEFINES/mainwindowui.h"
 
-#include "IMAGES/COMMON/processingimage.h"
-
 namespace Ui
 {
 	class MainWindow;
@@ -60,16 +58,20 @@ private:
 
 signals:
 	void SignalFindSimilarInIDB();
-	void SignalSaveResultImg();
-	void SignalStrToOriginalImg(const QString &t_str);
+	void SignalNewTargetImg(const QString &t_str);
+	void SignalSaveResultImg(QString t_imgPath);
 
 public slots:
+	// Slot for error: can't load Target Image
+	void SlotFailLoadTargetImg();
 	// Slot for getting new Result image
-	void SlotResultImg(QImage t_resultImg);
+	void SlotGetResultImg(QImage t_resultImg);
 	// Slot for getting new Source image
-	void SlotSourceImg(QImage t_sourceImg);
-	// Slot for saving result (colorized) image
-	void SlotSaveResult(QImage t_resultImg);
+	void SlotGetSourceImg(QImage t_sourceImg);
+	// Slot for error: don't have target image
+	void SlotNoTargetImg();
+	// Slot for error: can't save target image
+	void SlotFailSaveTargetImg();
 
 private slots:
 	void on_openTargetImgPB_clicked();

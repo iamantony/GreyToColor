@@ -125,11 +125,11 @@ void TargetImage::SetPixPrefColor(const unsigned int &t_width,
 // @output:
 // - null Image - can't return colorized image
 // - Image - colorized image
-Image TargetImage::GetColorizedImage()
+Image TargetImage::GetResultImage()
 {
-	if ( (true == m_img.IsNull()) || ( true == m_imgPixels->HasPixels() ) )
+	if ( (true == m_img.IsNull()) || ( false == m_imgPixels->HasPixels() ) )
 	{
-		qDebug() << "GetColorizedImage(): Error - nothing to save";
+		qDebug() << "GetResultImage(): Error - nothing to save";
 		Image empty;
 		return empty;
 	}
@@ -144,7 +144,7 @@ Image TargetImage::GetColorizedImage()
 	QImage formedImg = pixels->FormImage();
 	if ( true == formedImg.isNull() )
 	{
-		qDebug() << "GetColorizedImage(): Error - can't form image";
+		qDebug() << "GetResultImage(): Error - can't form image";
 		Image empty;
 		return empty;
 	}

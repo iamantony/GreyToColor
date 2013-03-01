@@ -27,20 +27,40 @@ int main(int argc, char *argv[])
 	ImgHandler imgHandler;
 	MainWindow w;
 
-	QObject::connect(&w,
-					 SIGNAL(SignalSaveResultImg()),
-					 &imgHandler,
-					 SLOT(SlotSaveResultImg()));
-
 	QObject::connect(&imgHandler,
 					 SIGNAL(SignalGetResultImg(QImage)),
 					 &w,
-					 SLOT(SlotSaveResult(QImage)));
+					 SLOT(SlotGetResultImg(QImage)));
 
 	QObject::connect(&w,
-					 SIGNAL(SignalStrToOriginalImg(QString)),
+					 SIGNAL(SignalSaveResultImg(QString)),
 					 &imgHandler,
-					 SLOT(SlotGetOriginalImg(QString)));
+					 SLOT(SlotSaveResultImg(QString)));
+
+	QObject::connect(&imgHandler,
+					 SIGNAL(SignalFailLoadOrigTargImg()),
+					 &w,
+					 SLOT(SlotFailLoadTargetImg()));
+
+	QObject::connect(&imgHandler,
+					 SIGNAL(SignalFailLoadTargImg()),
+					 &w,
+					 SLOT(SlotFailLoadTargetImg()));
+
+	QObject::connect(&imgHandler,
+					 SIGNAL(SignalNoTargetImg()),
+					 &w,
+					 SLOT(SlotNoTargetImg()));
+
+	QObject::connect(&imgHandler,
+					 SIGNAL(SignalFailTargetImgSave()),
+					 &w,
+					 SLOT(SlotFailSaveTargetImg()));
+
+	QObject::connect(&w,
+					 SIGNAL(SignalNewTargetImg(QString)),
+					 &imgHandler,
+					 SLOT(SlotGetNewTargetImg(QString)));
 
 	w.show();
 

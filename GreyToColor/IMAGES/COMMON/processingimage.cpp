@@ -383,7 +383,7 @@ void ProcessingImage::TestValidAreaWithImage()
 	QString imgName = QFileDialog::getOpenFileName(&wdt,
 												   "Open target image...",
 												   QDir::currentPath(),
-												   "IMG files (*.png *.jpg *.bmp)");
+												   "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
 
 	bool imgLoaded = LoadImg(imgName);
 	if ( false == imgLoaded )
@@ -420,7 +420,7 @@ void ProcessingImage::TestHugeValidAreaWithImage()
 	QString imgName = QFileDialog::getOpenFileName(&wdt,
 												   "Open target image...",
 												   QDir::currentPath(),
-												   "IMG files (*.png *.jpg *.bmp)");
+												   "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
 
 	bool imgLoaded = LoadImg(imgName);
 	if ( false == imgLoaded )
@@ -458,7 +458,7 @@ void ProcessingImage::TestAddSevAreasWithImage()
 	QString imgName = QFileDialog::getOpenFileName(&wdt,
 												   "Open target image...",
 												   QDir::currentPath(),
-												   "IMG files (*.png *.jpg *.bmp)");
+												   "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
 
 	bool imgLoaded = LoadImg(imgName);
 	if ( false == imgLoaded )

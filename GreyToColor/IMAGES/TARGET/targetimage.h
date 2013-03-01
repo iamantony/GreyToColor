@@ -50,7 +50,7 @@ public:
 
 	// Get result image. It could be colorized (if we perform colorization) or
 	// greyscale as original target (if we have not performed colorizztion yet).
-	Image GetColorizedImage();
+	Image GetResultImage();
 
 private:
 	// Construct custom pixels of loaded image

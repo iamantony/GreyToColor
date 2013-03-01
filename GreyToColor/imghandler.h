@@ -32,7 +32,7 @@ class ImgHandler : public QObject
 
 	// == DATA ==
 private:
-	Image m_original;
+	Image m_targetOriginal;
 	TargetImage m_target;
 	SourceImage m_source;
 
@@ -41,16 +41,22 @@ public:
 	explicit ImgHandler(QObject *parent = 0);
 	~ImgHandler();
 
+private:
+	// Send out current result image
+	void SendResultImg();
+
 signals:
-	void SignalGetResultImg(QImage t_img);
-	void SignalHasNewTarget();
-	void SignalSendTargetImg();
+	void SignalFailLoadOrigTargImg();
+	void SignalFailLoadTargImg();
+	void SignalFailTargetImgSave();
+	void SignalNoTargetImg();
+	void SignalGetResultImg(QImage t_resultImg);
 
 public slots:
 	// This slot get signal to save result (colorized or not) image and send it copy signal to some (MainWindow) UI
-	void SlotSaveResultImg();
+	void SlotSaveResultImg(QString t_imgPath);
 	// This slot get path to new original image
-	void SlotGetOriginalImg(const QString &t_imgPath);
+	void SlotGetNewTargetImg(const QString &t_imgPath);
 };
 
 #endif // IMGHANDLER_H

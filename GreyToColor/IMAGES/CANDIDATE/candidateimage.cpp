@@ -223,7 +223,7 @@ void CandidateImage::TestImageLoad()
 	QString imgName = QFileDialog::getOpenFileName(&wdt,
 												 "Open target image...",
 												 QDir::currentPath(),
-												 "IMG files (*.png *.jpg *.bmp)");
+												 "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
 
 	LoadColorImg(imgName);
 	m_greyImg.SaveImg("./test_grey.bmp");

@@ -228,12 +228,29 @@ void TargetImgPixels::SetPixPreferedColor(const unsigned int &t_width,
 // - QImage - image from pixels
 QImage TargetImgPixels::FormImage()
 {
-	// TODO:
-	// - check if we can form image
-	// - form image from pixels
+	if ( false == HasPixels() )
+	{
+		qDebug() << "FormImage(): Error - can't form image without pixels";
+		QImage empty;
+		return empty;
+	}
 
-	QImage empty;
-	return empty;
+	QImage outputImg(m_width, m_height, QImage::Format_RGB32);
+	RGB pixelRGB;
+	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
+	{
+		for ( unsigned int hgt = 0; hgt < m_height; hgt++ )
+		{
+			pixelRGB = m_pixels[wdt][hgt]->GetRGB();
+			QRgb pixel = qRgb(pixelRGB.GetRed(),
+							  pixelRGB.GetGreen(),
+							  pixelRGB.GetBlue());
+
+			outputImg.setPixel(wdt, hgt, pixel);
+		}
+	}
+
+	return outputImg;
 }
 
 // Test functions
@@ -243,7 +260,7 @@ void TargetImgPixels::TestFunctionality()
 	QString imgName = QFileDialog::getOpenFileName(&wdt,
 												   "Open target image...",
 												   QDir::currentPath(),
-												   "IMG files (*.png *.jpg *.bmp)");
+												   "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
 
 	if ( true == imgName.isEmpty() )
 	{

@@ -25,33 +25,94 @@ ImgHandler::ImgHandler(QObject *parent) :
 
 ImgHandler::~ImgHandler()
 {
-	m_original.Clear();
+	m_targetOriginal.Clear();
 	m_source.Clear();
 	m_target.Clear();
 }
 
 // This slot get signal to save result (colorized or not) image and send it copy signal to some (MainWindow) UI
-void ImgHandler::SlotSaveResultImg()
-{
-	// TODO:
-	// save target image, not original
-
-	emit SignalGetResultImg(m_original.GetImg());
-}
-
-// This slot get path to new original image
-void ImgHandler::SlotGetOriginalImg(const QString &t_imgPath)
+// @input:
+// - QString - unempty path for saving target image
+// @output:
+void ImgHandler::SlotSaveResultImg(QString t_imgPath)
 {
 	if ( true == t_imgPath.isEmpty() )
 	{
-		qDebug() << "SlotGetOriginalImg(): Error - invalid arguments";
+		qDebug() << "SlotSaveResultImg(): Error - invalid arguments";
 		return;
 	}
 
-	bool originalLoaded = m_original.LoadImg(t_imgPath);
-	if ( false == originalLoaded )
+	Image imageToSave = m_target.GetResultImage();
+	if ( true == imageToSave.IsNull() )
 	{
-		qDebug() << "SlotGetOriginalImg(): Error - can't load original image";
+		qDebug() << "SlotSaveResultImg(): nothing to save";
+		emit SignalNoTargetImg();
 		return;
 	}
+
+	bool imageSaved = imageToSave.SaveImg(t_imgPath);
+	if ( false == imageSaved )
+	{
+		qDebug() << "SlotSaveResultImg(): Error - fail to save result image";
+		emit SignalFailTargetImgSave();
+		return;
+	}
+}
+
+// This slot get path to new original image
+// @input:
+// - QString - unempty path to new original target image
+// @output:
+void ImgHandler::SlotGetNewTargetImg(const QString &t_imgPath)
+{
+	if ( true == t_imgPath.isEmpty() )
+	{
+		qDebug() << "SlotGetNewTargetImg(): Error - invalid arguments";
+		return;
+	}
+
+	bool originalLoaded = m_targetOriginal.LoadImg(t_imgPath);
+	if ( false == originalLoaded )
+	{
+		qDebug() << "SlotGetNewTargetImg(): Error - can't load original target image";
+		emit SignalFailLoadOrigTargImg();
+		return;
+	}
+
+	bool targetLoaded = m_target.LoadImg(t_imgPath);
+	if ( false == targetLoaded )
+	{
+		qDebug() << "SlotGetNewTargetImg(): Error - can't load target image";
+		emit SignalFailLoadTargImg();
+		return;
+	}
+
+	SendResultImg();
+}
+
+// Send out current result image
+// @input:
+// @output:
+void ImgHandler::SendResultImg()
+{
+	// TODO:
+	// - change signal to SignalTargetImgError()
+
+	Image resultImage = m_target.GetResultImage();
+	if ( true == resultImage.IsNull() )
+	{
+		qDebug() << "SendResultImg(): Error - can't get result image";
+		emit SignalNoTargetImg();
+		return;
+	}
+
+	QImage result = resultImage.GetImg();
+	if ( true == result.isNull() )
+	{
+		qDebug() << "SendResultImg(): Error - can't get result image";
+		emit SignalNoTargetImg();
+		return;
+	}
+
+	emit SignalGetResultImg(result);
 }
