@@ -30,6 +30,8 @@
 #include "DEFINES/programstatus.h"
 #include "DEFINES/mainwindowui.h"
 
+#include "IMAGES/COMMON/processingimage.h"
+
 namespace Ui
 {
 	class MainWindow;

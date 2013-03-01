@@ -34,6 +34,8 @@ void ProcessingImage::Clear()
 		delete m_imgPixels;
 		m_imgPixels = NULL;
 	}
+
+	m_similarAreas.clear();
 }
 
 // Set image
@@ -48,6 +50,7 @@ bool ProcessingImage::SetImg(const QImage &t_image)
 	if ( true == imgSet )
 	{
 		ConstructImgPixels();
+		m_similarAreas.clear();
 	}
 
 	return imgSet;
@@ -76,6 +79,7 @@ bool ProcessingImage::LoadImg(const QString &t_imagePath)
 	if ( true == imgLoaded )
 	{
 		ConstructImgPixels();
+		m_similarAreas.clear();
 	}
 
 	return imgLoaded;
@@ -199,9 +203,6 @@ bool ProcessingImage::IsPixelGrey(const unsigned int &t_width, const unsigned in
 	return m_imgPixels->IsPixGrey(t_width, t_height);
 }
 
-// TODO:
-// - test adding area
-
 // Add image similiarity area
 // @input:
 // - ImgSimilarityArea - valid image similarity area
@@ -225,7 +226,7 @@ bool ProcessingImage::AddSimilarityArea(const ImgSimilarityArea &t_area)
 	// Check if we already have area with the same ID
 	const unsigned int newAreaID = t_area.GetAreaID();
 	const int numOfAreas = m_similarAreas.size();
-	for ( int area = 0; area < numOfAreas; area++ )
+	for ( int area = numOfAreas - 1; area >= 0; area-- )
 	{
 		unsigned int existAreaID = m_similarAreas.at(area).GetAreaID();
 		if ( newAreaID == existAreaID )
@@ -300,4 +301,235 @@ ImgSimilarityArea ProcessingImage::FindSimilarityArea(const unsigned int &t_id) 
 	}
 
 	return imgSimArea;
+}
+
+// Test image area creating/adding/checking
+void ProcessingImage::TestImgSimArea()
+{
+	qDebug() << endl << "TestImgSimArea():";
+
+	qDebug() << endl << "1: Creating null area";
+	TestInvalidArea();
+
+	qDebug() << endl << "2: Creating normal area. No image";
+	TestValidAreaWithoutImage();
+
+	qDebug() << endl << "3: Adding valid area to list. Have image";
+	TestValidAreaWithImage();
+
+	qDebug() << endl << "4: Adding huge area to list. Have image";
+	TestHugeValidAreaWithImage();
+
+	qDebug() << endl << "5: Adding several areas to list. Have image";
+	TestAddSevAreasWithImage();
+}
+
+// Test: create invalid area and try to add it to list
+void ProcessingImage::TestInvalidArea()
+{
+	unsigned int nullAreaID = 0;
+	QRect nullRect(0, 0, 0, 0);
+	if ( true == nullRect.isEmpty() )
+	{
+		qDebug() << " - nullRect is empty";
+	}
+
+	if ( false == nullRect.isValid() )
+	{
+		qDebug() << " - nullRect is invalid";
+	}
+
+	ImgSimilarityArea testNullArea;
+	bool nullAreaSet = testNullArea.SetArea(nullAreaID, nullRect);
+	if ( false == nullAreaSet )
+	{
+		qDebug() << "PASS";
+	}
+	else
+	{
+		qDebug() << "FAIL!";
+	}
+}
+
+// Test: create valid area and try to add it to list. No image
+void ProcessingImage::TestValidAreaWithoutImage()
+{
+	unsigned int areaID = 0;
+	QRect areaRect(3, 3, 10, 10);
+	ImgSimilarityArea testArea;
+	bool areaSet = testArea.SetArea(areaID, areaRect);
+	if ( false == areaSet )
+	{
+		qDebug() << "FAIL!";
+		return;
+	}
+
+	bool areaAdded = this->AddSimilarityArea(testArea);
+	if ( false == areaAdded )
+	{
+		qDebug() << "PASS";
+	}
+	else
+	{
+		qDebug() << "FAIL!";
+		return;
+	}
+}
+
+// Test: create valid area and try to add it to list. Have image
+void ProcessingImage::TestValidAreaWithImage()
+{
+	QWidget wdt;
+	QString imgName = QFileDialog::getOpenFileName(&wdt,
+												   "Open target image...",
+												   QDir::currentPath(),
+												   "IMG files (*.png *.jpg *.bmp)");
+
+	bool imgLoaded = LoadImg(imgName);
+	if ( false == imgLoaded )
+	{
+		qDebug() << "FAIL!";
+		return;
+	}
+
+	unsigned int areaID = 0;
+	QRect areaRect(1, 1, 2, 2);
+	ImgSimilarityArea testArea;
+	bool areaSet = testArea.SetArea(areaID, areaRect);
+	if ( false == areaSet )
+	{
+		qDebug() << "FAIL!";
+		return;
+	}
+
+	bool areaAdded = this->AddSimilarityArea(testArea);
+	if ( true == areaAdded )
+	{
+		qDebug() << "PASS";
+	}
+	else
+	{
+		qDebug() << "FAIL!";
+	}
+}
+
+// Test: create valid area and try to add it to list. Have image
+void ProcessingImage::TestHugeValidAreaWithImage()
+{
+	QWidget wdt;
+	QString imgName = QFileDialog::getOpenFileName(&wdt,
+												   "Open target image...",
+												   QDir::currentPath(),
+												   "IMG files (*.png *.jpg *.bmp)");
+
+	bool imgLoaded = LoadImg(imgName);
+	if ( false == imgLoaded )
+	{
+		qDebug() << "FAIL!";
+		return;
+	}
+
+	unsigned int areaID = 0;
+	QRect areaRect(1, 1, 10000, 10000);
+	ImgSimilarityArea testArea;
+	bool areaSet = testArea.SetArea(areaID, areaRect);
+	if ( false == areaSet )
+	{
+		qDebug() << "FAIL!";
+		return;
+	}
+
+	bool areaAdded = this->AddSimilarityArea(testArea);
+	if ( false == areaAdded )
+	{
+		qDebug() << "PASS";
+	}
+	else
+	{
+		qDebug() << "FAIL!";
+		return;
+	}
+}
+
+// Test: create several valid area and try to add them to list. Have image
+void ProcessingImage::TestAddSevAreasWithImage()
+{
+	QWidget wdt;
+	QString imgName = QFileDialog::getOpenFileName(&wdt,
+												   "Open target image...",
+												   QDir::currentPath(),
+												   "IMG files (*.png *.jpg *.bmp)");
+
+	bool imgLoaded = LoadImg(imgName);
+	if ( false == imgLoaded )
+	{
+		qDebug() << "FAIL 1!";
+		return;
+	}
+
+	for ( unsigned int i = 0; i < 5; i++)
+	{
+		unsigned int areaID = i;
+		QRect areaRect(1, 1, 3, 3);
+		ImgSimilarityArea testArea;
+		bool areaSet = testArea.SetArea(areaID, areaRect);
+		if ( false == areaSet )
+		{
+			qDebug() << "FAIL 2!";
+			return;
+		}
+
+		bool areaAdded = this->AddSimilarityArea(testArea);
+		if ( false == areaAdded )
+		{
+			qDebug() << "FAIL 3!";
+			return;
+		}
+	}
+
+	// Add new area with already used ID
+	unsigned int areaID = 0;
+	int pos = 2;
+	int facet = 3;
+	QRect areaRect(pos, pos, facet, facet);
+	ImgSimilarityArea newArea;
+	bool areaSet = newArea.SetArea(areaID, areaRect);
+	if ( false == areaSet )
+	{
+		qDebug() << "FAIL 4!";
+		return;
+	}
+
+	bool areaAdded = this->AddSimilarityArea(newArea);
+	if ( false == areaAdded )
+	{
+		qDebug() << "FAIL 5!";
+		return;
+	}
+
+	ImgSimilarityArea foundArea = this->FindSimilarityArea(areaID);
+	if ( false == foundArea.IsValid() )
+	{
+		qDebug() << "FAIL 6!";
+		return;
+	}
+
+	const unsigned int foundID = foundArea.GetAreaID();
+	if ( foundID != areaID )
+	{
+		qDebug() << "FAIL 7!";
+		return;
+	}
+
+	const QRect foundRect = foundArea.GetAreaRect();
+	if ( (pos != foundRect.x()) ||
+		 (pos != foundRect.y()) ||
+		 (facet != foundRect.width()) ||
+		 (facet != foundRect.height()) )
+	{
+		qDebug() << "FAIL 8!";
+		return;
+	}
+
+	qDebug() << "PASS";
 }

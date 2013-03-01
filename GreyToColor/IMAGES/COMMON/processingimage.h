@@ -19,6 +19,7 @@
 #ifndef PROCESSINGIMAGE_H
 #define PROCESSINGIMAGE_H
 
+#include <QFileDialog>
 #include "image.h"
 #include "../COMMON/PIXELS/imagepixels.h"
 #include "./PARAMS/IMAGES/imgsimilarityarea.h"
@@ -73,6 +74,9 @@ public:
 	// Find image similarity area by ID
 	ImgSimilarityArea FindSimilarityArea(const unsigned int &t_id) const;
 
+	// Test image area creating/adding/checking
+	void TestImgSimArea();
+
 protected:
 	// Construct custom pixels of loaded image
 	virtual void ConstructImgPixels();
@@ -80,6 +84,17 @@ protected:
 private:
 	// Validate similarity area
 	bool ValidateSimArea(const ImgSimilarityArea &t_area) const;
+
+	// Test: create invalid area and try to add it to list
+	void TestInvalidArea();
+	// Test: create valid area and try to add it to list. No image
+	void TestValidAreaWithoutImage();
+	// Test: create valid area and try to add it to list. Have image
+	void TestValidAreaWithImage();
+	// Test: create valid area and try to add it to list. Have image
+	void TestHugeValidAreaWithImage();
+	// Test: create several valid area and try to add them to list. Have image
+	void TestAddSevAreasWithImage();
 };
 
 #endif // PROCESSINGIMAGE_H
