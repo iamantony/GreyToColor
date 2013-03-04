@@ -51,12 +51,16 @@ signals:
 	void SignalFailTargetImgSave();
 	void SignalNoTargetImg();
 	void SignalGetResultImg(QImage t_resultImg);
+	void SignalNoResultImg();
+	void SignalFailLoadSourceImg();
 
 public slots:
 	// This slot get signal to save result (colorized or not) image and send it copy signal to some (MainWindow) UI
-	void SlotSaveResultImg(QString t_imgPath);
+	void SlotSaveResultImg(const QString &t_imgPath);
 	// This slot get path to new original image
 	void SlotGetNewTargetImg(const QString &t_imgPath);
+	// This slot get path to new source image
+	void SlotGetNewSourceImg(const QString &t_imgPath);
 };
 
 #endif // IMGHANDLER_H

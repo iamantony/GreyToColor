@@ -16,15 +16,38 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtGui/QApplication>
-#include "application.h"
+#ifndef APPLICATION_H
+#define APPLICATION_H
 
-int main(int argc, char *argv[])
+#include <QObject>
+#include <QThread>
+#include "mainwindow.h"
+#include "imghandler.h"
+
+class Application : public QObject
 {
-	QApplication a(argc, argv);
+	Q_OBJECT
 
-	Application app;
-	app.Construct();
+	// == DATA ==
+private:
+	MainWindow *m_mainUI;
+	QThread *m_mainUIThread;
 
-	return a.exec();
-}
+	ImgHandler *m_imgHandler;
+	QThread *m_imgHandlerThread;
+
+	// == METHODS ==
+public:
+	explicit Application(QObject *parent = 0);
+	~Application();
+
+	// Construct all main objects of application
+	void Construct();
+
+signals:
+
+public slots:
+
+};
+
+#endif // APPLICATION_H

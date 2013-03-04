@@ -26,6 +26,11 @@ MainWindow::MainWindow(QWidget *parent) :
 	InitUI();
 }
 
+MainWindow::~MainWindow()
+{
+	delete ui;
+}
+
 // Call all functions to initialise UI
 // @input:
 // @output:
@@ -94,11 +99,6 @@ void MainWindow::InitImg(Images::Types t_imgType)
 	}
 }
 
-MainWindow::~MainWindow()
-{
-	delete ui;
-}
-
 // Show warning window with title and some text
 // @input:
 // - QString - nonempty string with title of the window
@@ -136,9 +136,6 @@ void MainWindow::on_openTargetImgPB_clicked()
 	}
 
 	emit SignalNewTargetImg(fName);
-
-	// TODO:
-	// Get from ImgHandler greyscale image
 }
 
 // Slot for error: can't load Target Image
@@ -181,7 +178,10 @@ void MainWindow::on_openSourceImgPB_clicked()
 	if ( false == imgSet )
 	{
 		ShowWarning("Loading source image...", "Can't load image. Please, try another one.");
+		return;
 	}
+
+	emit SignalNewSourceImg(fName);
 }
 
 // Slot for action actionOpenSourceImage to set source image
@@ -190,6 +190,33 @@ void MainWindow::on_openSourceImgPB_clicked()
 void MainWindow::on_actionOpenSourceImage_triggered()
 {
 	on_openSourceImgPB_clicked();
+}
+
+// Slot for getting new Source image
+// @input:
+// - QImage - unnull new source image
+// @output:
+void MainWindow::SlotGetSourceImg(QImage t_sourceImg)
+{
+	if ( true == t_sourceImg.isNull() )
+	{
+		qDebug() << "SlotSourceImg(): Error - invalid arguments";
+		return;
+	}
+
+	ui->sourceImgLbl->SetImage(t_sourceImg);
+}
+
+// Slot for error: can't load Source Image
+// @input:
+// @output:
+void MainWindow::SlotFailLoadSourceImg()
+{
+	ui->sourceImgLbl->ShowDefaultImg();
+
+	QString title("Source image...");
+	QString text("Can't load Source Image. Please, try to open another one");
+	ShowWarning(title, text);
 }
 
 // Slot for button findSourceImgPB to find similar image from IDB
@@ -215,19 +242,14 @@ void MainWindow::SlotGetResultImg(QImage t_resultImg)
 	ui->resultImgLbl->SetImage(t_resultImg);
 }
 
-// Slot for getting new Source image
+// Slot for error: don't have Result Image
 // @input:
-// - QImage - unnull new source image
 // @output:
-void MainWindow::SlotGetSourceImg(QImage t_sourceImg)
+void MainWindow::SlotNoResultImg()
 {
-	if ( true == t_sourceImg.isNull() )
-	{
-		qDebug() << "SlotSourceImg(): Error - invalid arguments";
-		return;
-	}
-
-	ui->sourceImgLbl->SetImage(t_sourceImg);
+	QString title("Result image...");
+	QString text("Don't have Result Image. Please, upload Target image and perform colorization");
+	ShowWarning(title, text);
 }
 
 // Slot for button saveResultPB to save result image

@@ -55,9 +55,10 @@ void SourceImage::ConstructImgPixels()
 	}
 
 	SourceImgPixels *pixels = (SourceImgPixels *)m_imgPixels;
+	pixels->Clear();
 	pixels->FormImgPixels(currentImg);
-	pixels->TransAllPixRGB2LAB();
-	CalcPixelsSKO();
+//	pixels->TransAllPixRGB2LAB();
+//	CalcPixelsSKO();
 }
 
 // Calc for each pixel in image it's SKO

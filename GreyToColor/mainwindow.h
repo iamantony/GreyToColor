@@ -59,19 +59,24 @@ private:
 signals:
 	void SignalFindSimilarInIDB();
 	void SignalNewTargetImg(const QString &t_str);
-	void SignalSaveResultImg(QString t_imgPath);
+	void SignalNewSourceImg(const QString &t_str);
+	void SignalSaveResultImg(const QString &t_imgPath);
 
 public slots:
 	// Slot for error: can't load Target Image
 	void SlotFailLoadTargetImg();
 	// Slot for getting new Result image
 	void SlotGetResultImg(QImage t_resultImg);
+	// Slot for error: don't have Result Image
+	void SlotNoResultImg();
 	// Slot for getting new Source image
 	void SlotGetSourceImg(QImage t_sourceImg);
 	// Slot for error: don't have target image
 	void SlotNoTargetImg();
 	// Slot for error: can't save target image
 	void SlotFailSaveTargetImg();
+	// Slot for error: can't load Source Image
+	void SlotFailLoadSourceImg();
 
 private slots:
 	void on_openTargetImgPB_clicked();

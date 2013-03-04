@@ -71,7 +71,7 @@ bool FilesService::CheckFileExistance(const QString &t_filePath)
 }
 
 // TODO:
-// - do we really need this function? If yes, we should defenately make it better
+// - do we really need this function - FormFullPath()? If yes, we should defenately make it better
 
 // Form for file it's full path
 // @input:

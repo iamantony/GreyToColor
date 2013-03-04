@@ -38,6 +38,23 @@ void ProcessingImage::Clear()
 	m_similarAreas.clear();
 }
 
+// Check if we have loaded image
+// @input:
+// @output:
+// - true - we have loaded image and all pixels of it have constructed
+// - false - no image or no pixels
+bool ProcessingImage::HasImage()
+{
+	if ( (true == m_img.IsNull()) ||
+		 (NULL == m_imgPixels) ||
+		 (false == m_imgPixels->HasPixels()))
+	{
+		return false;
+	}
+
+	return true;
+}
+
 // Set image
 // @input:
 // - QImage - unempty image

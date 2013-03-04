@@ -33,10 +33,10 @@ SourceImgPixels::~SourceImgPixels()
 // @output:
 void SourceImgPixels::Clear()
 {
-	for ( int width = m_pixels.size() - 1; width >= 0; width-- )
+	for ( int width = 0; width < m_pixels.size(); width++ )
 	{
 		int pixInColumn = m_pixels[width].size();
-		for ( int height = pixInColumn - 1; height >= 0; height-- )
+		for ( int height = 0; height < pixInColumn; height++ )
 		{
 			ColorPixel *pix = (ColorPixel *)m_pixels[width][height];
 			if ( NULL != pix )
@@ -44,6 +44,8 @@ void SourceImgPixels::Clear()
 				delete pix;
 			}
 		}
+
+		m_pixels[width].clear();
 	}
 
 	m_pixels.clear();

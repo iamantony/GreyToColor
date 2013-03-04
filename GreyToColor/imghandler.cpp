@@ -34,7 +34,7 @@ ImgHandler::~ImgHandler()
 // @input:
 // - QString - unempty path for saving target image
 // @output:
-void ImgHandler::SlotSaveResultImg(QString t_imgPath)
+void ImgHandler::SlotSaveResultImg(const QString &t_imgPath)
 {
 	if ( true == t_imgPath.isEmpty() )
 	{
@@ -42,11 +42,18 @@ void ImgHandler::SlotSaveResultImg(QString t_imgPath)
 		return;
 	}
 
+	if ( false == m_target.HasImage() )
+	{
+		qDebug() << "SlotSaveResultImg(): Error - no Target Image";
+		emit SignalNoTargetImg();
+		return;
+	}
+
 	Image imageToSave = m_target.GetResultImage();
 	if ( true == imageToSave.IsNull() )
 	{
-		qDebug() << "SlotSaveResultImg(): nothing to save";
-		emit SignalNoTargetImg();
+		qDebug() << "SlotSaveResultImg(): Error - nothing to save";
+		emit SignalFailTargetImgSave();
 		return;
 	}
 
@@ -95,8 +102,12 @@ void ImgHandler::SlotGetNewTargetImg(const QString &t_imgPath)
 // @output:
 void ImgHandler::SendResultImg()
 {
-	// TODO:
-	// - change signal to SignalTargetImgError()
+	if ( false == m_target.HasImage() )
+	{
+		qDebug() << "SendResultImg(): Error - no Target Image";
+		emit SignalNoTargetImg();
+		return;
+	}
 
 	Image resultImage = m_target.GetResultImage();
 	if ( true == resultImage.IsNull() )
@@ -110,9 +121,30 @@ void ImgHandler::SendResultImg()
 	if ( true == result.isNull() )
 	{
 		qDebug() << "SendResultImg(): Error - can't get result image";
-		emit SignalNoTargetImg();
+		emit SignalNoResultImg();
 		return;
 	}
 
 	emit SignalGetResultImg(result);
+}
+
+// This slot get path to new source image
+// @input:
+// - QString - unempty path to new source image
+// @output:
+void ImgHandler::SlotGetNewSourceImg(const QString &t_imgPath)
+{
+	if ( true == t_imgPath.isEmpty() )
+	{
+		qDebug() << "SlotGetNewSourceImg(): Error - invalid arguments";
+		return;
+	}
+
+	bool sourceLoaded = m_source.LoadImg(t_imgPath);
+	if ( false == sourceLoaded )
+	{
+		qDebug() << "SlotGetNewSourceImg(): Error - can't load Source Image";
+		emit SignalFailLoadSourceImg();
+		return;
+	}
 }

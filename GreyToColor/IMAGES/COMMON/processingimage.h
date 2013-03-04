@@ -39,6 +39,8 @@ public:
 
 	// Clear class info
 	virtual void Clear();
+	// Check if we have loaded image
+	bool HasImage();
 	// Set image
 	bool SetImg(const QImage &t_image);
 	// Set image path
