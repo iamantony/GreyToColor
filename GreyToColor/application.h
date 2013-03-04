@@ -23,6 +23,7 @@
 #include <QThread>
 #include "mainwindow.h"
 #include "imghandler.h"
+#include "DEFINES/programstatus.h"
 
 class Application : public QObject
 {
@@ -31,7 +32,6 @@ class Application : public QObject
 	// == DATA ==
 private:
 	MainWindow *m_mainUI;
-	QThread *m_mainUIThread;
 
 	ImgHandler *m_imgHandler;
 	QThread *m_imgHandlerThread;
@@ -44,10 +44,27 @@ public:
 	// Construct all main objects of application
 	void Construct();
 
-signals:
-
-public slots:
-
+private:
+	// Construct all objectf for UI
+	void CreateUI();
+	// Construct all objects for Image Handler
+	void CreateImgHandler();
+	// Construct all objects for Image Database Handler
+	void CreateIDBHandler();
+	// Create signal-slot connections between UI and ImgHandler object
+	void ConnectUIandImgHand();
+	// Start all threads with application objects and show UI
+	void StartApp();
+	// Delete all application objects
+	void DeleteObjects();
+	// Disconnect UI and ImgHandler object
+	void DisconnectUIandImgHand();
+	// Delete all objects for Image Database Handler
+	void DeleteIDBHandler();
+	// Delete all objects for Image Handler
+	void DeleteImgHandler();
+	// Delete all objectf for UI
+	void DeleteUI();
 };
 
 #endif // APPLICATION_H

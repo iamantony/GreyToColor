@@ -20,6 +20,7 @@
 #define IMAGEPIXELS_H
 
 #include <QList>
+#include <QVector>
 #include <QImage>
 #include <QDebug>
 #include "pixel.h"

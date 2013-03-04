@@ -25,6 +25,7 @@
 #include "./IMAGES/CANDIDATE/candidateimage.h"
 #include "./IMAGES/SOURCE/sourceimage.h"
 #include "./IMAGES/TARGET/targetimage.h"
+#include "DEFINES/programstatus.h"
 
 class ImgHandler : public QObject
 {
@@ -41,18 +42,22 @@ public:
 	explicit ImgHandler(QObject *parent = 0);
 	~ImgHandler();
 
+	// Clear all data
+	void Clear();
+
 private:
+	// Send greyscale version of target image
+	void GetGreyTarget();
 	// Send out current result image
 	void SendResultImg();
 
 signals:
-	void SignalFailLoadOrigTargImg();
-	void SignalFailLoadTargImg();
-	void SignalFailTargetImgSave();
-	void SignalNoTargetImg();
 	void SignalGetResultImg(QImage t_resultImg);
-	void SignalNoResultImg();
-	void SignalFailLoadSourceImg();
+	void SignalCurrentProc(const Program::Status &);
+	void SignalProcDone();
+	void SignalProcError(const QString &);
+	void SignalProcFatalError();
+
 
 public slots:
 	// This slot get signal to save result (colorized or not) image and send it copy signal to some (MainWindow) UI

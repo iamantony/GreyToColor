@@ -37,6 +37,7 @@ MainWindow::~MainWindow()
 void MainWindow::InitUI()
 {
 	ui->setupUi(this);
+	m_appStatus = Program::OK;
 
 	InitStatusBar();
 	InitImgsLabels();
@@ -48,6 +49,8 @@ void MainWindow::InitUI()
 void MainWindow::InitStatusBar()
 {
 	m_statusBar = new StatusBar();
+	m_statusBar->SetStatus(m_appStatus);
+
 	this->setStatusBar(m_statusBar);
 }
 
@@ -113,11 +116,31 @@ void MainWindow::ShowWarning(const QString &t_title, const QString &t_text)
 						 QMessageBox::NoButton);
 }
 
+// Check if app status if OK (application not performing some calculations)
+// @input:
+// @output:
+// - true - app can get new work
+// - false - app is busy
+bool MainWindow::CanOperate()
+{
+	if ( Program::OK == m_appStatus )
+	{
+		return true;
+	}
+
+	return false;
+}
+
 // Slot for button TargetImgPB to set target image
 // @input:
 // @output:
 void MainWindow::on_openTargetImgPB_clicked()
 {
+	if ( false == CanOperate() )
+	{
+		return;
+	}
+
 	QString fName = QFileDialog::getOpenFileName(this,
 												 "Open target image...",
 												 QDir::currentPath(),
@@ -138,19 +161,6 @@ void MainWindow::on_openTargetImgPB_clicked()
 	emit SignalNewTargetImg(fName);
 }
 
-// Slot for error: can't load Target Image
-// @input:
-// @output:
-void MainWindow::SlotFailLoadTargetImg()
-{
-	ui->targetImgLbl->ShowDefaultImg();
-	ui->resultImgLbl->ShowDefaultImg();
-
-	QString title("Target image...");
-	QString text("Can't load Target Image. Please, try to open another one");
-	ShowWarning(title, text);
-}
-
 // Slot for action actionOpenTargetImage to set target image
 // @input:
 // @output:
@@ -164,6 +174,11 @@ void MainWindow::on_actionOpenTargetImage_triggered()
 // @output:
 void MainWindow::on_openSourceImgPB_clicked()
 {
+	if ( false == CanOperate() )
+	{
+		return;
+	}
+
 	QString fName = QFileDialog::getOpenFileName(this,
 												 "Open source image...",
 												 QDir::currentPath(),
@@ -207,18 +222,6 @@ void MainWindow::SlotGetSourceImg(QImage t_sourceImg)
 	ui->sourceImgLbl->SetImage(t_sourceImg);
 }
 
-// Slot for error: can't load Source Image
-// @input:
-// @output:
-void MainWindow::SlotFailLoadSourceImg()
-{
-	ui->sourceImgLbl->ShowDefaultImg();
-
-	QString title("Source image...");
-	QString text("Can't load Source Image. Please, try to open another one");
-	ShowWarning(title, text);
-}
-
 // Slot for button findSourceImgPB to find similar image from IDB
 // @input:
 // @output:
@@ -242,21 +245,17 @@ void MainWindow::SlotGetResultImg(QImage t_resultImg)
 	ui->resultImgLbl->SetImage(t_resultImg);
 }
 
-// Slot for error: don't have Result Image
-// @input:
-// @output:
-void MainWindow::SlotNoResultImg()
-{
-	QString title("Result image...");
-	QString text("Don't have Result Image. Please, upload Target image and perform colorization");
-	ShowWarning(title, text);
-}
 
 // Slot for button saveResultPB to save result image
 // @input:
 // @output:
 void MainWindow::on_saveResultPB_clicked()
 {
+	if ( false == CanOperate() )
+	{
+		return;
+	}
+
 	QString imgName = QFileDialog::getSaveFileName(this,
 												   "Choose name...",
 												   QDir::currentPath(),
@@ -271,33 +270,64 @@ void MainWindow::on_saveResultPB_clicked()
 	emit SignalSaveResultImg(imgName);
 }
 
-// Slot for error: don't have target image
-// @input:
-// @output:
-void MainWindow::SlotNoTargetImg()
-{
-	QString title("Target image...");
-	QString text("Don't have Target Image. Please, choose image and set it as Target Image");
-	ShowWarning(title, text);
-}
-
-// Slot for error: can't save target image
-// @input:
-// @output:
-void MainWindow::SlotFailSaveTargetImg()
-{
-	QString title("Result image...");
-	QString text("Can't save result image. Try to open other Target Image and perform Colorization again");
-	ShowWarning(title, text);
-}
 
 // Slot for resetting current target image
 // @input:
 // @output:
 void MainWindow::on_resetPB_clicked()
 {
+	if ( false == CanOperate() )
+	{
+		return;
+	}
 
 	// TODO:
 	// Send signal to ImgHandler. It should reload target image, calc all it's params (LAB, SKO) and then send
 	// it to us
+}
+
+// Info-slot: type of current proccess
+// @input:
+// - Program::Status - exist type of program status
+// @output:
+void MainWindow::SlotCurrProcess(const Program::Status &t_status)
+{
+	m_appStatus = t_status;
+	m_statusBar->SetStatus(m_appStatus);
+}
+
+// Info-slot: process ended normally
+// @input:
+// @output:
+void MainWindow::SlotProcessEnd()
+{
+	m_appStatus = Program::OK;
+	m_statusBar->SetStatus(m_appStatus);
+}
+
+// Info-slot: process failed with some reason
+// @input:
+// - QString - unempty string with warning message from some process
+// @output:
+void MainWindow::SlotProcError(const QString &t_message)
+{
+	if ( true == t_message.isEmpty() )
+	{
+		ShowWarning(tr("Warning!"), tr("Empty message!"));
+	}
+	else
+	{
+		ShowWarning(tr("Warning!"), t_message);
+	}
+
+	SlotProcessEnd();
+}
+
+// Info-slot: process failed
+// @input:
+// @output:
+void MainWindow::SlotProcessFail()
+{
+	m_appStatus = Program::ERR;
+	m_statusBar->SetStatus(m_appStatus);
 }

@@ -22,4 +22,6 @@
 #define ERROR -1
 #define NO_INFO -9999
 
+#define MAX_PERCENT 100
+
 #endif // GLOBAL_H

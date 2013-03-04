@@ -43,6 +43,7 @@ class MainWindow : public QMainWindow
 private:
 	Ui::MainWindow *ui;
 	StatusBar *m_statusBar;
+	Program::Status m_appStatus;
 
 	// == METHODS ==
 public:
@@ -50,11 +51,18 @@ public:
 	~MainWindow();
 
 private:
+	// Call all functions to initialise UI
 	void InitUI();
+	// Creating, applying settings to status bar
 	void InitStatusBar();
+	// Put default picture to all labels on MainWindow
 	void InitImgsLabels();
+	// Put default picture to one of three labels on MainWindow
 	void InitImg(Images::Types t_imgType);
+	// Show warning window with title and some text
 	void ShowWarning(const QString &t_title, const QString &t_text);
+	// Check if app status if OK (application not performing some calculations)
+	bool CanOperate();
 
 signals:
 	void SignalFindSimilarInIDB();
@@ -63,20 +71,18 @@ signals:
 	void SignalSaveResultImg(const QString &t_imgPath);
 
 public slots:
-	// Slot for error: can't load Target Image
-	void SlotFailLoadTargetImg();
-	// Slot for getting new Result image
-	void SlotGetResultImg(QImage t_resultImg);
-	// Slot for error: don't have Result Image
-	void SlotNoResultImg();
 	// Slot for getting new Source image
 	void SlotGetSourceImg(QImage t_sourceImg);
-	// Slot for error: don't have target image
-	void SlotNoTargetImg();
-	// Slot for error: can't save target image
-	void SlotFailSaveTargetImg();
-	// Slot for error: can't load Source Image
-	void SlotFailLoadSourceImg();
+	// Slot for getting new Result image
+	void SlotGetResultImg(QImage t_resultImg);
+	// Info-slot: type of current proccess
+	void SlotCurrProcess(const Program::Status &t_status);
+	// Info-slot: process ended normally
+	void SlotProcessEnd();
+	// Info-slot: process failed with some reason
+	void SlotProcError(const QString &t_message);
+	// Info-slot: process fatal fail
+	void SlotProcessFail();
 
 private slots:
 	void on_openTargetImgPB_clicked();
