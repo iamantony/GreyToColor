@@ -22,6 +22,10 @@
 #include <QObject>
 #include <QDebug>
 #include "./IMAGES/COMMON/image.h"
+#include "./IMAGES/CANDIDATE/candidateimage.h"
+#include "./IMAGES/SOURCE/sourceimage.h"
+#include "./IMAGES/TARGET/targetimage.h"
+#include "DEFINES/programstatus.h"
 
 class ImgHandler : public QObject
 {
@@ -29,24 +33,39 @@ class ImgHandler : public QObject
 
 	// == DATA ==
 private:
-	Image m_original;
-//	TargetImage m_target;
-//	SourceImage m_source;
+	Image m_targetOriginal;
+	TargetImage m_target;
+	SourceImage m_source;
 
 	// == METHODS ==
 public:
 	explicit ImgHandler(QObject *parent = 0);
+	~ImgHandler();
+
+	// Clear all data
+	void Clear();
+
+private:
+	// Send greyscale version of target image
+	void GetGreyTarget();
+	// Send out current result image
+	void SendResultImg();
 
 signals:
-	void SignalGetResultImg(QImage t_img);
-	void SignalHasNewTarget();
-	void SignalSendTargetImg();
+	void SignalGetResultImg(QImage t_resultImg);
+	void SignalCurrentProc(const Program::Status &);
+	void SignalProcDone();
+	void SignalProcError(const QString &);
+	void SignalProcFatalError();
+
 
 public slots:
 	// This slot get signal to save result (colorized or not) image and send it copy signal to some (MainWindow) UI
-	void SlotSaveResultImg();
+	void SlotSaveResultImg(const QString &t_imgPath);
 	// This slot get path to new original image
-	void SlotGetOriginalImg(const QString &t_imgPath);
+	void SlotGetNewTargetImg(const QString &t_imgPath);
+	// This slot get path to new source image
+	void SlotGetNewSourceImg(const QString &t_imgPath);
 };
 
 #endif // IMGHANDLER_H

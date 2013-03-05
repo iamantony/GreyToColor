@@ -48,5 +48,7 @@ double CalculatorSKO::PixelMaskSKO(const double t_centralPixLum, const QList<dou
 
 	SKO = pow(SKO, 0.5);
 
+	// TODO: check formula
+
 	return SKO;
 }

@@ -20,21 +20,35 @@
 
 SourceImgPixels::SourceImgPixels()
 {
-	ClearPixels();
+
 }
 
 SourceImgPixels::~SourceImgPixels()
 {
-	ClearPixels();
+	Clear();
 }
 
-// Clear all info
+// Clear info about pixels (call this function before deleting object SourceImgPixels!)
 // @input:
 // @output:
-void SourceImgPixels::ClearPixels()
+void SourceImgPixels::Clear()
 {
+	for ( int width = 0; width < m_pixels.size(); width++ )
+	{
+		int pixInColumn = m_pixels[width].size();
+		for ( int height = 0; height < pixInColumn; height++ )
+		{
+			ColorPixel *pix = (ColorPixel *)m_pixels[width][height];
+			if ( NULL != pix )
+			{
+				delete pix;
+			}
+		}
+
+		m_pixels[width].clear();
+	}
+
 	m_pixels.clear();
-	this->Clear();
 }
 
 // Save all pixels from input QImage as custom pixels
@@ -54,7 +68,7 @@ bool SourceImgPixels::FormImgPixels(const QImage &t_img)
 
 	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
 	{
-		QList<ColorPixel> columnOfPixels;
+		QList<Pixel *> columnOfPixels;
 
 		for ( unsigned int hgt = 0; hgt < m_height; hgt++ )
 		{
@@ -68,8 +82,8 @@ bool SourceImgPixels::FormImgPixels(const QImage &t_img)
 							") has problems with RGB channels: invalid value";
 			}
 
-			ColorPixel colorPix;
-			colorPix.SetRGB(rgbPixel);
+			ColorPixel *colorPix = new ColorPixel;
+			colorPix->SetRGB(rgbPixel);
 
 			columnOfPixels.append(colorPix);
 		}
@@ -80,198 +94,18 @@ bool SourceImgPixels::FormImgPixels(const QImage &t_img)
 	return true;
 }
 
-// Transform all image pixels from RGB color space to LAB
+// Calc for each pixel in image it's SKO
 // @input:
 // @output:
-void SourceImgPixels::TransAllPixRGB2LAB()
+void SourceImgPixels::CalcPixelsSKO()
 {
-	for ( unsigned int width = 0; width < m_width; width++ )
+	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
 	{
-		for ( unsigned int height = 0; height < m_height; height++ )
+		for ( unsigned int hgt = 0; hgt < m_height; hgt++ )
 		{
-			TransformPixRGB2LAB(width, height);
+			CalcPixSKO(wdt, hgt);
 		}
 	}
-}
-
-// Transform certain pixel from RGB color space to LAB
-// @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
-// @output:
-void SourceImgPixels::TransformPixRGB2LAB(const unsigned int &t_width, const unsigned int &t_height)
-{
-	if ( false == IsPixelExist(t_width, t_height) )
-	{
-		qDebug() << "TransformPixRGB2LAB(): Error - invalid arguments";
-		return;
-	}
-
-	m_pixels[t_width][t_height].TransformRGB2LAB();
-}
-
-// Transform all image pixels from LAB color space to RGB
-// @input:
-// @output:
-void SourceImgPixels::TransAllPixLAB2RGB()
-{
-	for ( unsigned int width = 0; width < m_width; width++ )
-	{
-		for ( unsigned int height = 0; height < m_height; height++ )
-		{
-			TransformPixLAB2RGB(width, height);
-		}
-	}
-}
-
-// Transform certain pixel from LAB color space to RGB
-// @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
-// @output:
-void SourceImgPixels::TransformPixLAB2RGB(const unsigned int &t_width, const unsigned int &t_height)
-{
-	if ( false == IsPixelExist(t_width, t_height) )
-	{
-		qDebug() << "TransformPixLAB2RGB(): Error - invalid arguments";
-		return;
-	}
-
-	m_pixels[t_width][t_height].TransformLAB2RGB();
-}
-
-// Get Luminance of pixel with certain coords
-// @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
-// @output:
-// - NO_INFO - can't find such pixel.
-// - double - luminance of pixel
-double SourceImgPixels::GetPixChLum(const unsigned int &t_width, const unsigned int &t_height) const
-{
-	if ( false == IsPixelExist(t_width, t_height) )
-	{
-		qDebug() << "GetPixChLum(): Error - invalid arguments";
-		return NO_INFO;
-	}
-
-	return m_pixels[t_width][t_height].GetChL();
-}
-
-// Get value of channel A of pixel with certain coords
-// @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
-// @output:
-// - NO_INFO - can't find such pixel
-// - double - cannel A of pixel
-double SourceImgPixels::GetPixChA(const unsigned int &t_width, const unsigned int &t_height) const
-{
-	if ( false == IsPixelExist(t_width, t_height) )
-	{
-		qDebug() << "GetPixChA(): Error - invalid arguments";
-		return NO_INFO;
-	}
-
-	return m_pixels[t_width][t_height].GetChA();
-}
-
-// Get value of channel B of pixel with certain coords
-// @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
-// @output:
-// - NO_INFO - can't find such pixel
-// - double - cannel B of pixel
-double SourceImgPixels::GetPixChB(const unsigned int &t_width, const unsigned int &t_height) const
-{
-	if ( false == IsPixelExist(t_width, t_height) )
-	{
-		qDebug() << "GetPixChB(): Error - invalid arguments";
-		return NO_INFO;
-	}
-
-	return m_pixels[t_width][t_height].GetChB();
-}
-
-// Set value for channels A and B of pixel with certain coords
-// @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
-// - double - value for pixels channel A
-// - double - value for pixels channel B
-// @output:
-void SourceImgPixels::SetPixChannelsAB(const unsigned int &t_width,
-					  const unsigned int &t_height,
-					  const double &t_chA,
-					  const double &t_chB)
-{
-	if ( false == IsPixelExist(t_width, t_height) )
-	{
-		qDebug() << "SetPixChannelsAB(): Error - invalid arguments";
-		return;
-	}
-
-	m_pixels[t_width][t_height].SetChA(t_chA);
-	m_pixels[t_width][t_height].SetChB(t_chB);
-}
-
-// Find among all pixels in image value of max luminance
-// @input:
-// @output:
-// - ERROR - can't find max luminance
-// - double - positive found max luminance of images pixels
-double SourceImgPixels::FindMaxLum() const
-{
-	if ( false == HasPixels() )
-	{
-		qDebug() << "FindMaxLum(): Error - no pixels";
-		return ERROR;
-	}
-
-	double maxLum = DEFAULT_MAX_LUM;
-	for ( unsigned int width = 0; width < m_width; width++ )
-	{
-		for ( unsigned int height = 0; height < m_height; height++ )
-		{
-			double pixelLum = m_pixels[width][height].GetChL();
-			if ( maxLum < pixelLum )
-			{
-				maxLum = pixelLum;
-			}
-		}
-	}
-
-	return maxLum;
-}
-
-// Find among all pixels in image value of min luminance
-// @input:
-// @output:
-// - ERROR - can't find min luminance
-// - double - positive found min luminance of images pixels
-double SourceImgPixels::FindMinLum() const
-{
-	if ( false == HasPixels() )
-	{
-		qDebug() << "FindMinLum(): Error - no pixels";
-		return ERROR;
-	}
-
-	double minLum = DEFAULT_MAX_LUM;
-	for ( unsigned int width = 0; width < m_width; width++ )
-	{
-		for ( unsigned int height = 0; height < m_height; height++ )
-		{
-			double pixelLum = m_pixels[width][height].GetChL();
-			if ( pixelLum < minLum )
-			{
-				minLum = pixelLum;
-			}
-		}
-	}
-
-	return minLum;
 }
 
 // Calc for certain pixel in image it's SKO
@@ -294,7 +128,9 @@ void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int
 		return;
 	}
 
-	double pixelLum = m_pixels[t_width][t_height].GetChL();
+//	qDebug() << "Neighbor pixels:" << lumInMask.size();
+
+	double pixelLum = m_pixels[t_width][t_height]->GetChL();
 
 	CalculatorSKO calc;
 	double pixelSKO = calc.PixelMaskSKO(pixelLum, lumInMask);
@@ -304,60 +140,64 @@ void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int
 		return;
 	}
 
-	m_pixels[t_width][t_height].SetSKO(pixelSKO);
+	ColorPixel *centralPixel = (ColorPixel *)m_pixels[t_width][t_height];
+	centralPixel->SetSKO(pixelSKO);
+
+	// TEST
+//	qDebug() << "Pixel:" << t_width << t_height << "have SKO" << centralPixel->GetSKO() << endl;
 }
 
-// Get list of luminances of neighbor pixels (to calc SKO)
+// Get SKO of pixel with certain coords
 // @input:
 // - unsigned int - exist width (x) position of pixel
 // - unsigned int - exist height (y) position of pixel
 // @output:
-// - empty QList<double> - don't have pixels
-// - unempy QList<double> - luminances of neighbor pixels
-QList<double> SourceImgPixels::GetPixNeighborsLum(const unsigned int &t_width, const unsigned int &t_height) const
+// - ERROR - can't find such pixel
+// - double - pixels SKO
+double SourceImgPixels::GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const
 {
-	QList<double> luminances;
-
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
-		qDebug() << "GetPixNeighborsLum(): Error - invalid arguments";
-		return luminances;
+		qDebug() << "GetPixelsSKO(): Error - invalid arguments";
+		return ERROR;
 	}
 
-	// This is length of side of a rect, which is form a mask. Central pixel in mask is pixel with input coords.
-	// Other pixels are neighbors of central pixel.
-	int maskRectSide = MASK_RECT_SIDE_LENGTH;
-	if ( maskRectSide < 0 )
+	const ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	return pixel->GetSKO();
+}
+
+// Test functions
+void SourceImgPixels::TestFunctionality()
+{
+	QWidget wdt;
+	QString imgName = QFileDialog::getOpenFileName(&wdt,
+												 "Open target image...",
+												 QDir::currentPath(),
+												 "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
+
+	QImage image(imgName);
+	bool imgFormed = FormImgPixels(image);
+	if ( false == imgFormed )
 	{
-		maskRectSide *= (-1);
+		qDebug() << "Fail: Can't form image";
+		return;
 	}
 
-	// In current version we use mask with an odd length of a rect side. But it's OK if mask side length is even.
-	// Calc offset to get to extreme pixels in mask
-	unsigned int offset = (unsigned int) (maskRectSide / 2);
+	TransAllPixRGB2LAB();
 
-	// Calc position of extreme pixels
-	unsigned int widthStart = qMax( (unsigned int)0, t_width - offset);
-	unsigned int widthEnd = qMin(m_width, t_width + offset);
-	unsigned int heightStart = qMax( (unsigned int)0, t_height - offset);
-	unsigned int heightEnd = qMin(m_height, t_height + offset);
+	qDebug() << "Max Lum:" << FindMaxLum();
+	qDebug() << "Min Lum:" << FindMinLum();
 
-	for ( unsigned int width = widthStart; width < widthEnd; width++ )
+	CalcPixelsSKO();
+
+	qDebug() << "After calculating:";
+	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
 	{
-		for ( unsigned int height = heightStart; height < heightEnd; height++ )
+		for ( unsigned int hgt = 0; hgt < m_height; hgt++ )
 		{
-			if ( (width == t_width) && (height == t_height) )
-			{
-				continue;
-			}
-
-			double pixelLum = m_pixels[width][height].GetChL();
-			luminances.append(pixelLum);
+			qDebug() << wdt << hgt << GetPixelsSKO(wdt, hgt);
 		}
 	}
 
-	return luminances;
+	TransAllPixLAB2RGB();
 }
-
-// TODO:
-// - create test function that test mask construction

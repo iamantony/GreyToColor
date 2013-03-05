@@ -16,26 +16,24 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SOURCEIMGPIXELS_H
-#define SOURCEIMGPIXELS_H
+#ifndef TRAGETIMGPIXELS_H
+#define TRAGETIMGPIXELS_H
 
 #include <QFileDialog>
-#include <QImage>
-#include <QDebug>
 #include "../../COMMON/PIXELS/imagepixels.h"
-#include "colorpixel.h"
+#include "targetpixel.h"
 #include "./SERVICE/calculatorsko.h"
 
-class SourceImgPixels : public ImagePixels
+class TargetImgPixels : public ImagePixels
 {
 	// == DATA ==
 
 	// == METHODS ==
 public:
-	SourceImgPixels();
-	~SourceImgPixels();
+	TargetImgPixels();
+	~TargetImgPixels();
 
-	// Clear info about pixels (call this function before deleting object SourceImgPixels!)
+	// Clear info about pixels (call this function before deleting object TragetImgPixels!)
 	virtual void Clear();
 	// Save all pixels from input QImage as custom pixels
 	virtual bool FormImgPixels(const QImage &t_img);
@@ -43,6 +41,17 @@ public:
 	void CalcPixelsSKO();
 	// Get SKO of pixel with certain coords
 	double GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const;
+	// Scale luminance of all pixels in image with certain scale factor
+	bool ScaleLum(const double &t_scaleFactor);
+	// Unscale luminance of all pixels in image
+	void UnScaleLum();
+	// Set prefered color for certain pixel
+	void SetPixPreferedColor(const unsigned int &t_width,
+							 const unsigned int &t_height,
+							 const RGB &t_prefColor);
+
+	// Form from current pixels values entire QImage
+	QImage FormImage();
 
 	// Test functions
 	void TestFunctionality();
@@ -52,4 +61,4 @@ private:
 	void CalcPixSKO(const unsigned int &t_width, const unsigned int &t_height);
 };
 
-#endif // SOURCEIMGPIXELS_H
+#endif // TRAGETIMGPIXELS_H

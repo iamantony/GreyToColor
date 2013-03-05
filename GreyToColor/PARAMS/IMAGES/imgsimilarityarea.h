@@ -16,15 +16,35 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtGui/QApplication>
-#include "application.h"
+#ifndef IMGSIMILARITYAREA_H
+#define IMGSIMILARITYAREA_H
 
-int main(int argc, char *argv[])
+#include <QRect>
+#include <QDebug>
+#include "./DEFINES/global.h"
+
+class ImgSimilarityArea
 {
-	QApplication a(argc, argv);
+	// == DATA ==
+private:
+	unsigned int m_id;
+	QRect m_area;
 
-	Application app;
-	app.Construct();
+	// == METHODS ==
+public:
+	ImgSimilarityArea();
+	~ImgSimilarityArea();
 
-	return a.exec();
-}
+	// Clear info
+	void Clear();
+	// Setup image area parameters
+	bool SetArea(const unsigned int &t_id, const QRect &t_area);
+	// Get image area ID
+	unsigned int GetAreaID() const;
+	// Get image area size and position
+	QRect GetAreaRect() const;
+	// Check if image area has valid params
+	bool IsValid() const;
+};
+
+#endif // IMGSIMILARITYAREA_H

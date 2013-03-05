@@ -16,15 +16,30 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtGui/QApplication>
-#include "application.h"
+#ifndef FILESSERVICE_H
+#define FILESSERVICE_H
 
-int main(int argc, char *argv[])
+#include <QString>
+#include <QFile>
+#include <QDir>
+#include <QDebug>
+
+class FilesService
 {
-	QApplication a(argc, argv);
+	// == DATA ==
 
-	Application app;
-	app.Construct();
+	// == METHODS ==
+public:
+	FilesService();
 
-	return a.exec();
-}
+	// Remove file
+	bool RemoveFile(const QString &t_filePath);
+	// Check if file exist
+	bool CheckFileExistance(const QString &t_filePath);
+	// Form for file it's full path
+	QString FormFullPath(const QString &t_fileName);
+	// Get file name from it's full path
+	QString GetFileName(const QString &t_filePath);
+};
+
+#endif // FILESSERVICE_H

@@ -29,7 +29,20 @@ SOURCES += main.cpp\
 	IMAGES/COMMON/PIXELS/lab.cpp \
 	IMAGES/COMMON/PIXELS/imagepixels.cpp \
 	IMAGES/COMMON/image.cpp \
-    SERVICE/calculatorsko.cpp
+	SERVICE/calculatorsko.cpp \
+	IMAGES/TARGET/PIXELS/targetimgpixels.cpp \
+	IMAGES/CANDIDATE/candidateimage.cpp \
+	SERVICE/FILES/filesservice.cpp \
+	SERVICE/FILES/imgfilesservice.cpp \
+	IMAGES/COMMON/processingimage.cpp \
+	IMAGES/SOURCE/sourceimage.cpp \
+	IMAGES/TARGET/targetimage.cpp \
+	SERVICE/IMAGES/imgtransform.cpp \
+	SERVICE/IMAGES/imgsearchparam.cpp \
+	PARAMS/IMAGES/imgsimilarityarea.cpp \
+	application.cpp \
+    SERVICE/FILES/idbfilesservice.cpp \
+    PARAMS/IMAGES/imgpassport.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -50,7 +63,22 @@ HEADERS  += \
 	IMAGES/COMMON/PIXELS/lab.h \
 	IMAGES/COMMON/PIXELS/imagepixels.h \
 	IMAGES/COMMON/image.h \
-    SERVICE/calculatorsko.h
+	SERVICE/calculatorsko.h \
+	IMAGES/TARGET/PIXELS/targetimgpixels.h \
+	IMAGES/CANDIDATE/candidateimage.h \
+	DEFINES/images.h \
+	SERVICE/FILES/filesservice.h \
+	SERVICE/FILES/imgfilesservice.h \
+	DEFINES/idbs.h \
+	IMAGES/COMMON/processingimage.h \
+	IMAGES/SOURCE/sourceimage.h \
+	IMAGES/TARGET/targetimage.h \
+	SERVICE/IMAGES/imgtransform.h \
+	SERVICE/IMAGES/imgsearchparam.h \
+	PARAMS/IMAGES/imgsimilarityarea.h \
+	application.h \
+    SERVICE/FILES/idbfilesservice.h \
+    PARAMS/IMAGES/imgpassport.h
 
 FORMS    += \
 	mainwindow.ui

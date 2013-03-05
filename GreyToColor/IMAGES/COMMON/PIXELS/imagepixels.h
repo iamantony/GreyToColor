@@ -19,76 +19,64 @@
 #ifndef IMAGEPIXELS_H
 #define IMAGEPIXELS_H
 
-#include <QObject>
+#include <QList>
+#include <QVector>
 #include <QImage>
+#include <QDebug>
+#include "pixel.h"
+#include "./DEFINES/pixels.h"
 
-class ImagePixels : public QObject
+class ImagePixels
 {
-	Q_OBJECT
-
 	// == DATA ==
-public:
+protected:
 	unsigned int m_width;
 	unsigned int m_height;
+	QList< QList<Pixel *> > m_pixels;
 
 	// == METHODS ==
 public:
-	explicit ImagePixels(QObject *parent = 0);
-	~ImagePixels();
+	ImagePixels();
+	virtual ~ImagePixels();
 
+	// Clear all info (set to defaults)
+	virtual void Clear();
+	// Check if we have pixels of image
+	bool HasPixels() const;
 	// Save all pixels from input QImage as custom pixels
 	virtual bool FormImgPixels(const QImage &t_img) = 0;
 	// Transform all image pixels from RGB color space to LAB
-	virtual void TransAllPixRGB2LAB() = 0;
+	void TransAllPixRGB2LAB();
 	// Transform all image pixels from LAB color space to RGB
-	virtual void TransAllPixLAB2RGB() = 0;
+	void TransAllPixLAB2RGB();
 	// Get Luminance of pixel with certain coords
-	virtual double GetPixChLum(const unsigned int &t_width, const unsigned int &t_height) const = 0;
+	double GetPixChLum(const unsigned int &t_width, const unsigned int &t_height) const;
 	// Get value of channel A of pixel with certain coords
-	virtual double GetPixChA(const unsigned int &t_width, const unsigned int &t_height) const = 0;
+	double GetPixChA(const unsigned int &t_width, const unsigned int &t_height) const;
 	// Get value of channel B of pixel with certain coords
-	virtual double GetPixChB(const unsigned int &t_width, const unsigned int &t_height) const = 0;
+	double GetPixChB(const unsigned int &t_width, const unsigned int &t_height) const;
 	// Set value for channels A and B of pixel with certain coords
-	virtual void SetPixChannelsAB(const unsigned int &t_width,
-								  const unsigned int &t_height,
-								  const double &t_chA,
-								  const double &t_chB)= 0;
+	void SetPixChannelsAB(const unsigned int &t_width,
+						  const unsigned int &t_height,
+						  const double &t_chA,
+						  const double &t_chB);
 
 	// Find among all pixels in image value of max luminance
-	virtual double FindMaxLum() const = 0;
+	double FindMaxLum() const;
 	// Find among all pixels in image value of min luminance
-	virtual double FindMinLum() const = 0;
-
-	// TODO:
-	// - send that functions to TargetImgPixels
-//	// Scale luminance of all pixels in image with certain scale factor
-//	virtual void ScaleLum(const double &t_scaleFactor) = 0;
-//	// Unscale luminance of all pixels in image
-//	virtual void UnScaleLum() = 0;
-
-
-	// Calc for each pixel in image it's SKO
-	void CalcPixelsSKO();
-//	// Get SKO of pixel with certain coords
-//	virtual double GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const = 0;
-//	// Check if pixel with certain coords is greyscale
-//	virtual bool IsPixGrey(const unsigned int &t_width, const unsigned int &t_height) const = 0;
+	double FindMinLum() const;
+	// Check if pixel with certain coords is greyscale
+	bool IsPixGrey(const unsigned int &t_width, const unsigned int &t_height) const;
 
 protected:
-	// Clear all info (set to defaults)
-	void Clear();
 	// Check if we have pixel with such coords
 	bool IsPixelExist(const unsigned int &t_width, const unsigned int &t_height) const;
-	// Check if we have pixels of image
-	bool HasPixels() const;
 	// Transform certain pixel from RGB color space to LAB
-	virtual void TransformPixRGB2LAB(const unsigned int &t_width, const unsigned int &t_height) = 0;
+	void TransformPixRGB2LAB(const unsigned int &t_width, const unsigned int &t_height);
 	// Transform certain pixel from LAB color space to RGB
-	virtual void TransformPixLAB2RGB(const unsigned int &t_width, const unsigned int &t_height) = 0;
-	// Calc for certain pixel in image it's SKO
-	virtual void CalcPixSKO(const unsigned int &t_width, const unsigned int &t_height) = 0;
+	void TransformPixLAB2RGB(const unsigned int &t_width, const unsigned int &t_height);
 	// Get list of luminances of neighbor pixels (to calc SKO)
-	virtual QList<double> GetPixNeighborsLum(const unsigned int &t_width, const unsigned int &t_height) const = 0;
+	QList<double> GetPixNeighborsLum(const unsigned int &t_width, const unsigned int &t_height) const;
 };
 
 #endif // IMAGEPIXELS_H

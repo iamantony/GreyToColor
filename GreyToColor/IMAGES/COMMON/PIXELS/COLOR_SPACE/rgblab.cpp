@@ -22,9 +22,6 @@ RGBLAB::RGBLAB()
 {
 }
 
-// TODO:
-// - check transformations betwen color spaces LAB and RGB
-
 // Transform color from RGB color space to LAB color space
 // @input:
 // - RGB - RGB color

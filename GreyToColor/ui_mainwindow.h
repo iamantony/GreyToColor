@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Fri 22. Feb 17:07:32 2013
+** Created: Tue 5. Mar 10:13:50 2013
 **      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -35,6 +35,7 @@ public:
     QAction *actionOpenTargetImage;
     QAction *actionClose;
     QAction *actionOpenSourceImage;
+    QAction *actionSaveResult;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *imgsLayout;
@@ -49,7 +50,7 @@ public:
     ScaleLabel *resultImgLbl;
     QHBoxLayout *resultButtonsLayout;
     QSpacerItem *leftHS_2;
-    QPushButton *saveResultPB;
+    QPushButton *startColorizationPB;
     QSpacerItem *horizontalSpacer;
     QPushButton *resetPB;
     QSpacerItem *rightHS_2;
@@ -83,6 +84,8 @@ public:
         actionClose->setObjectName(QString::fromUtf8("actionClose"));
         actionOpenSourceImage = new QAction(MainWindow);
         actionOpenSourceImage->setObjectName(QString::fromUtf8("actionOpenSourceImage"));
+        actionSaveResult = new QAction(MainWindow);
+        actionSaveResult->setObjectName(QString::fromUtf8("actionSaveResult"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -134,7 +137,7 @@ public:
 
         imgsLayout->addLayout(targetImgLayout);
 
-        targetResultImgsHS = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
+        targetResultImgsHS = new QSpacerItem(20, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
 
         imgsLayout->addItem(targetResultImgsHS);
 
@@ -159,12 +162,12 @@ public:
 
         resultButtonsLayout->addItem(leftHS_2);
 
-        saveResultPB = new QPushButton(centralwidget);
-        saveResultPB->setObjectName(QString::fromUtf8("saveResultPB"));
-        saveResultPB->setMinimumSize(QSize(75, 23));
-        saveResultPB->setMaximumSize(QSize(100, 23));
+        startColorizationPB = new QPushButton(centralwidget);
+        startColorizationPB->setObjectName(QString::fromUtf8("startColorizationPB"));
+        startColorizationPB->setMinimumSize(QSize(75, 23));
+        startColorizationPB->setMaximumSize(QSize(100, 23));
 
-        resultButtonsLayout->addWidget(saveResultPB);
+        resultButtonsLayout->addWidget(startColorizationPB);
 
         horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -185,7 +188,7 @@ public:
 
         imgsLayout->addLayout(resultImgLayout);
 
-        resultSourceImgsHS = new QSpacerItem(20, 20, QSizePolicy::Minimum, QSizePolicy::Minimum);
+        resultSourceImgsHS = new QSpacerItem(20, 20, QSizePolicy::Fixed, QSizePolicy::Minimum);
 
         imgsLayout->addItem(resultSourceImgsHS);
 
@@ -296,6 +299,8 @@ public:
         menuFile->addAction(actionOpenTargetImage);
         menuFile->addAction(actionOpenSourceImage);
         menuFile->addSeparator();
+        menuFile->addAction(actionSaveResult);
+        menuFile->addSeparator();
         menuFile->addAction(actionClose);
 
         retranslateUi(MainWindow);
@@ -310,10 +315,11 @@ public:
         actionOpenTargetImage->setText(QApplication::translate("MainWindow", "Open target image...", 0, QApplication::UnicodeUTF8));
         actionClose->setText(QApplication::translate("MainWindow", "Close", 0, QApplication::UnicodeUTF8));
         actionOpenSourceImage->setText(QApplication::translate("MainWindow", "Open source image...", 0, QApplication::UnicodeUTF8));
+        actionSaveResult->setText(QApplication::translate("MainWindow", "Save result...", 0, QApplication::UnicodeUTF8));
         targetImgLbl->setText(QString());
         openTargetImgPB->setText(QApplication::translate("MainWindow", "Open target image", 0, QApplication::UnicodeUTF8));
         resultImgLbl->setText(QString());
-        saveResultPB->setText(QApplication::translate("MainWindow", "Save result", 0, QApplication::UnicodeUTF8));
+        startColorizationPB->setText(QApplication::translate("MainWindow", "Colorize", 0, QApplication::UnicodeUTF8));
         resetPB->setText(QApplication::translate("MainWindow", "Reset", 0, QApplication::UnicodeUTF8));
         sourceImgLbl->setText(QString());
         openSourceImgPB->setText(QApplication::translate("MainWindow", "Open source image", 0, QApplication::UnicodeUTF8));

@@ -140,7 +140,7 @@
          <enum>Qt::Horizontal</enum>
         </property>
         <property name="sizeType">
-         <enum>QSizePolicy::Minimum</enum>
+         <enum>QSizePolicy::Fixed</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -208,7 +208,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="saveResultPB">
+           <widget class="QPushButton" name="startColorizationPB">
             <property name="minimumSize">
              <size>
               <width>75</width>
@@ -222,7 +222,7 @@
              </size>
             </property>
             <property name="text">
-             <string>Save result</string>
+             <string>Colorize</string>
             </property>
            </widget>
           </item>
@@ -272,7 +272,7 @@
          <enum>Qt::Horizontal</enum>
         </property>
         <property name="sizeType">
-         <enum>QSizePolicy::Minimum</enum>
+         <enum>QSizePolicy::Fixed</enum>
         </property>
         <property name="sizeHint" stdset="0">
          <size>
@@ -528,6 +528,8 @@
     <addaction name="actionOpenTargetImage"/>
     <addaction name="actionOpenSourceImage"/>
     <addaction name="separator"/>
+    <addaction name="actionSaveResult"/>
+    <addaction name="separator"/>
     <addaction name="actionClose"/>
    </widget>
    <addaction name="menuFile"/>
@@ -545,6 +547,11 @@
   <action name="actionOpenSourceImage">
    <property name="text">
     <string>Open source image...</string>
+   </property>
+  </action>
+  <action name="actionSaveResult">
+   <property name="text">
+    <string>Save result...</string>
    </property>
   </action>
  </widget>

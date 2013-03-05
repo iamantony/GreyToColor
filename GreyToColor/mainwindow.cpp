@@ -26,12 +26,18 @@ MainWindow::MainWindow(QWidget *parent) :
 	InitUI();
 }
 
+MainWindow::~MainWindow()
+{
+	delete ui;
+}
+
 // Call all functions to initialise UI
 // @input:
 // @output:
 void MainWindow::InitUI()
 {
 	ui->setupUi(this);
+	m_appStatus = Program::OK;
 
 	InitStatusBar();
 	InitImgsLabels();
@@ -43,6 +49,8 @@ void MainWindow::InitUI()
 void MainWindow::InitStatusBar()
 {
 	m_statusBar = new StatusBar();
+	m_statusBar->SetStatus(m_appStatus);
+
 	this->setStatusBar(m_statusBar);
 }
 
@@ -94,11 +102,6 @@ void MainWindow::InitImg(Images::Types t_imgType)
 	}
 }
 
-MainWindow::~MainWindow()
-{
-	delete ui;
-}
-
 // Show warning window with title and some text
 // @input:
 // - QString - nonempty string with title of the window
@@ -113,15 +116,35 @@ void MainWindow::ShowWarning(const QString &t_title, const QString &t_text)
 						 QMessageBox::NoButton);
 }
 
+// Check if app status if OK (application not performing some calculations)
+// @input:
+// @output:
+// - true - app can get new work
+// - false - app is busy
+bool MainWindow::CanOperate()
+{
+	if ( Program::OK == m_appStatus )
+	{
+		return true;
+	}
+
+	return false;
+}
+
 // Slot for button TargetImgPB to set target image
 // @input:
 // @output:
 void MainWindow::on_openTargetImgPB_clicked()
 {
+	if ( false == CanOperate() )
+	{
+		return;
+	}
+
 	QString fName = QFileDialog::getOpenFileName(this,
 												 "Open target image...",
 												 QDir::currentPath(),
-												 "IMG files (*.png *.jpg *.bmp)");
+												 "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
 
 	if(true == fName.isEmpty())
 	{
@@ -131,14 +154,11 @@ void MainWindow::on_openTargetImgPB_clicked()
 	bool imgSet = ui->targetImgLbl->SetImage(fName);
 	if ( false == imgSet )
 	{
-		ShowWarning("Loading target image...", "Can't load image. Please, try another one.");
+		ShowWarning("Loading Target Image...", "Can't load image. Please, try another one.");
 		return;
 	}
 
-	emit SignalStrToOriginalImg(fName);
-
-	// TODO:
-	// Get from ImgHandler greyscale image
+	emit SignalNewTargetImg(fName);
 }
 
 // Slot for action actionOpenTargetImage to set target image
@@ -154,10 +174,15 @@ void MainWindow::on_actionOpenTargetImage_triggered()
 // @output:
 void MainWindow::on_openSourceImgPB_clicked()
 {
+	if ( false == CanOperate() )
+	{
+		return;
+	}
+
 	QString fName = QFileDialog::getOpenFileName(this,
 												 "Open source image...",
 												 QDir::currentPath(),
-												 "IMG files (*.png *.jpg *.bmp)");
+												 "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
 
 	if(true == fName.isEmpty())
 	{
@@ -168,7 +193,10 @@ void MainWindow::on_openSourceImgPB_clicked()
 	if ( false == imgSet )
 	{
 		ShowWarning("Loading source image...", "Can't load image. Please, try another one.");
+		return;
 	}
+
+	emit SignalNewSourceImg(fName);
 }
 
 // Slot for action actionOpenSourceImage to set source image
@@ -177,6 +205,45 @@ void MainWindow::on_openSourceImgPB_clicked()
 void MainWindow::on_actionOpenSourceImage_triggered()
 {
 	on_openSourceImgPB_clicked();
+}
+
+// Slot for action actionSaveResult to save Result Image
+// @input:
+// @output:
+void MainWindow::on_actionSaveResult_triggered()
+{
+	if ( false == CanOperate() )
+	{
+		return;
+	}
+
+	QString imgName = QFileDialog::getSaveFileName(this,
+												   "Choose name...",
+												   QDir::currentPath(),
+												   "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
+
+	if ( true == imgName.isEmpty() )
+	{
+		// User change his mind
+		return;
+	}
+
+	emit SignalSaveResultImg(imgName);
+}
+
+// Slot for getting new Source image
+// @input:
+// - QImage - unnull new source image
+// @output:
+void MainWindow::SlotGetSourceImg(QImage t_sourceImg)
+{
+	if ( true == t_sourceImg.isNull() )
+	{
+		qDebug() << "SlotSourceImg(): Error - invalid arguments";
+		return;
+	}
+
+	ui->sourceImgLbl->SetImage(t_sourceImg);
 }
 
 // Slot for button findSourceImgPB to find similar image from IDB
@@ -191,7 +258,7 @@ void MainWindow::on_findSourceImgPB_clicked()
 // @input:
 // - QImage - unnull new result image
 // @output:
-void MainWindow::SlotResultImg(QImage t_resultImg)
+void MainWindow::SlotGetResultImg(QImage t_resultImg)
 {
 	if ( true == t_resultImg.isNull() )
 	{
@@ -202,51 +269,18 @@ void MainWindow::SlotResultImg(QImage t_resultImg)
 	ui->resultImgLbl->SetImage(t_resultImg);
 }
 
-// Slot for getting new Source image
+// Slot for start colrization process
 // @input:
-// - QImage - unnull new source image
 // @output:
-void MainWindow::SlotSourceImg(QImage t_sourceImg)
+void MainWindow::on_startColorizationPB_clicked()
 {
-	if ( true == t_sourceImg.isNull() )
+	if ( false == CanOperate() )
 	{
-		qDebug() << "SlotSourceImg(): Error - invalid arguments";
 		return;
 	}
-
-	ui->sourceImgLbl->SetImage(t_sourceImg);
-}
-
-// Slot for button saveResultPB to save result image
-// @input:
-// @output:
-void MainWindow::on_saveResultPB_clicked()
-{
-	emit SignalSaveResultImg();
-}
-
-// Slot for saving result (colorized) image
-// @input:
-// - QImage -unnull current result image to save
-// @output:
-void MainWindow::SlotSaveResult(QImage t_resultImg)
-{
-	if ( true == t_resultImg.isNull() )
-	{
-		qDebug() << "SlotSaveResult(): Error - invalid arguments";
-		return;
-	}
-
-	QString imgName = QFileDialog::getSaveFileName(this,
-												   "Choose name...",
-												   QDir::currentPath(),
-												   "IMG files (*.png)");
-
-	qDebug() << imgName;
 
 	// TODO:
-	// save image with defined format
-	// add new formats
+	// - start colorization
 }
 
 // Slot for resetting current target image
@@ -254,10 +288,58 @@ void MainWindow::SlotSaveResult(QImage t_resultImg)
 // @output:
 void MainWindow::on_resetPB_clicked()
 {
-//	TargetPixel pixel;
-//	pixel.TestScaleLum();
+	if ( false == CanOperate() )
+	{
+		return;
+	}
 
 	// TODO:
 	// Send signal to ImgHandler. It should reload target image, calc all it's params (LAB, SKO) and then send
 	// it to us
+}
+
+// Info-slot: type of current proccess
+// @input:
+// - Program::Status - exist type of program status
+// @output:
+void MainWindow::SlotCurrProcess(const Program::Status &t_status)
+{
+	m_appStatus = t_status;
+	m_statusBar->SetStatus(m_appStatus);
+}
+
+// Info-slot: process ended normally
+// @input:
+// @output:
+void MainWindow::SlotProcessEnd()
+{
+	m_appStatus = Program::OK;
+	m_statusBar->SetStatus(m_appStatus);
+}
+
+// Info-slot: process failed with some reason
+// @input:
+// - QString - unempty string with warning message from some process
+// @output:
+void MainWindow::SlotProcError(const QString &t_message)
+{
+	if ( true == t_message.isEmpty() )
+	{
+		ShowWarning(tr("Warning!"), tr("Empty message!"));
+	}
+	else
+	{
+		ShowWarning(tr("Warning!"), t_message);
+	}
+
+	SlotProcessEnd();
+}
+
+// Info-slot: process failed
+// @input:
+// @output:
+void MainWindow::SlotProcessFail()
+{
+	m_appStatus = Program::ERR;
+	m_statusBar->SetStatus(m_appStatus);
 }

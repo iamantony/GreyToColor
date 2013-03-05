@@ -16,15 +16,36 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtGui/QApplication>
-#include "application.h"
+#ifndef SOURCEIMAGE_H
+#define SOURCEIMAGE_H
 
-int main(int argc, char *argv[])
+#include <QFileDialog>
+#include "../COMMON/processingimage.h"
+#include "../SOURCE/PIXELS/sourceimgpixels.h"
+#include "./DEFINES/images.h"
+
+class SourceImage : public ProcessingImage
 {
-	QApplication a(argc, argv);
+	// == DATA ==
 
-	Application app;
-	app.Construct();
+	// == METHODS ==
+public:
+	SourceImage();
+	~SourceImage();
 
-	return a.exec();
-}
+	// Clear all info
+	virtual void Clear();
+	// Calc for each pixel in image it's SKO
+	void CalcPixelsSKO();
+	// Get SKO of pixel with certain coords
+	double GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const;
+
+	// Test initialising
+	void TestInit();
+
+private:
+	// Construct custom pixels of loaded image
+	virtual void ConstructImgPixels();
+};
+
+#endif // SOURCEIMAGE_H

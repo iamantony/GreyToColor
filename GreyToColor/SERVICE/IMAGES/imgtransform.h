@@ -16,15 +16,28 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtGui/QApplication>
-#include "application.h"
+#ifndef IMGTRANSFORM_H
+#define IMGTRANSFORM_H
 
-int main(int argc, char *argv[])
+#include <QImage>
+#include <QDebug>
+#include "./IMAGES/COMMON/image.h"
+#include "./IMAGES/COMMON/PIXELS/rgb.h"
+
+class ImgTransform
 {
-	QApplication a(argc, argv);
+	// == DATA ==
 
-	Application app;
-	app.Construct();
+	// == METHODS ==
+public:
+	ImgTransform();
 
-	return a.exec();
-}
+	// Transform color image to grey image
+	Image ToGrey(const Image &t_img);
+
+private:
+	// Create greyscale image-copy of input image
+	QImage GreyscaleImg(const QImage &t_colorImg);
+};
+
+#endif // IMGTRANSFORM_H

@@ -30,7 +30,6 @@
 #include "DEFINES/programstatus.h"
 #include "DEFINES/mainwindowui.h"
 
-
 namespace Ui
 {
 	class MainWindow;
@@ -44,6 +43,7 @@ class MainWindow : public QMainWindow
 private:
 	Ui::MainWindow *ui;
 	StatusBar *m_statusBar;
+	Program::Status m_appStatus;
 
 	// == METHODS ==
 public:
@@ -51,32 +51,47 @@ public:
 	~MainWindow();
 
 private:
+	// Call all functions to initialise UI
 	void InitUI();
+	// Creating, applying settings to status bar
 	void InitStatusBar();
+	// Put default picture to all labels on MainWindow
 	void InitImgsLabels();
+	// Put default picture to one of three labels on MainWindow
 	void InitImg(Images::Types t_imgType);
+	// Show warning window with title and some text
 	void ShowWarning(const QString &t_title, const QString &t_text);
+	// Check if app status if OK (application not performing some calculations)
+	bool CanOperate();
 
 signals:
 	void SignalFindSimilarInIDB();
-	void SignalSaveResultImg();
-	void SignalStrToOriginalImg(const QString &t_str);
+	void SignalNewTargetImg(const QString &t_str);
+	void SignalNewSourceImg(const QString &t_str);
+	void SignalSaveResultImg(const QString &t_imgPath);
 
 public slots:
-	// Slot for getting new Result image
-	void SlotResultImg(QImage t_resultImg);
 	// Slot for getting new Source image
-	void SlotSourceImg(QImage t_sourceImg);
-	// Slot for saving result (colorized) image
-	void SlotSaveResult(QImage t_resultImg);
+	void SlotGetSourceImg(QImage t_sourceImg);
+	// Slot for getting new Result image
+	void SlotGetResultImg(QImage t_resultImg);
+	// Info-slot: type of current proccess
+	void SlotCurrProcess(const Program::Status &t_status);
+	// Info-slot: process ended normally
+	void SlotProcessEnd();
+	// Info-slot: process failed with some reason
+	void SlotProcError(const QString &t_message);
+	// Info-slot: process fatal fail
+	void SlotProcessFail();
 
 private slots:
 	void on_openTargetImgPB_clicked();
 	void on_actionOpenTargetImage_triggered();
 	void on_openSourceImgPB_clicked();
 	void on_actionOpenSourceImage_triggered();
+	void on_actionSaveResult_triggered();
 	void on_findSourceImgPB_clicked();
-	void on_saveResultPB_clicked();
+	void on_startColorizationPB_clicked();
 	void on_resetPB_clicked();
 };
 

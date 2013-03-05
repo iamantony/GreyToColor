@@ -24,12 +24,19 @@ namespace Program
 	enum Status
 	{
 		OK = 0,
+		LOAD_TARGET,
+		LOAD_SOURCE,
+		CALC_TARGET,
+		CALC_SOURCE,
 		COLORIZATION,
 		SEARCHING_IMAGE_IN_DB,
 		DB_FORMING,
-		ERROR,
+		SAVING,
+		ERR,
 		DEFAULT_LAST
 	};
 }
+
+Q_DECLARE_METATYPE(Program::Status);
 
 #endif // PROGRAMSTATUS_H

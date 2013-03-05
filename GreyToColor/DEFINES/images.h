@@ -16,15 +16,31 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtGui/QApplication>
-#include "application.h"
+#ifndef IMAGES_H
+#define IMAGES_H
 
-int main(int argc, char *argv[])
+#define PROJECT_IMG_PATH		"/img/"
+
+namespace ImageFormat
 {
-	QApplication a(argc, argv);
-
-	Application app;
-	app.Construct();
-
-	return a.exec();
+	enum FormatType
+	{
+		BMP = 0,
+		PNG,
+		TIFF,
+		JPG,
+		JPEG,
+		DEFAULT_LAST
+	};
 }
+
+namespace Passport
+{
+	enum Type
+	{
+		LUM_HISTOGRAM = 0,
+		DEFAULT_LAST
+	};
+}
+
+#endif // IMAGES_H

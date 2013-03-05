@@ -16,15 +16,31 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtGui/QApplication>
-#include "application.h"
+#ifndef IMGSEARCHPARAM_H
+#define IMGSEARCHPARAM_H
 
-int main(int argc, char *argv[])
+#include <QImage>
+#include <QPair>
+#include <QDebug>
+#include "./IMAGES/COMMON/image.h"
+#include "imgtransform.h"
+#include "./DEFINES/global.h"
+#include "./DEFINES/pixels.h"
+
+class ImgSearchParam
 {
-	QApplication a(argc, argv);
+	// == DATA ==
 
-	Application app;
-	app.Construct();
+	// == METHODS ==
+public:
+	ImgSearchParam();
 
-	return a.exec();
-}
+	// Find min RGB luminance in image
+	int FindMinLum(const Image &t_img);
+	// Find max RGB luminance in image
+	int FindMaxLum(const Image &t_img);
+	// Find min and max RGB luminances in image
+	QPair<int, int> FindMinMaxLum(const Image &t_img);
+};
+
+#endif // IMGSEARCHPARAM_H

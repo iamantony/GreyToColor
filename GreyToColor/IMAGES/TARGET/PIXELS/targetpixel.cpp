@@ -75,11 +75,9 @@ void TargetPixel::ToGrey(const RGB &t_color)
 		int green = t_color.GetGreen();
 		int blue = t_color.GetBlue();
 
-		// http://en.wikipedia.org/wiki/Grayscale
-		double greyLum = 0.2126 * red + 0.7152 * green + 0.0722 * blue;
-		int grey = (int)floor(greyLum + 0.5);
+		RGB greyColor(red, green, blue);
+		greyColor.ToGrey();
 
-		RGB greyColor(grey, grey, grey);
 		SetRGB(greyColor);
 	}
 
@@ -97,6 +95,9 @@ bool TargetPixel::ScaleLum(const double &t_factor)
 	{
 		return false;
 	}
+
+	// We don't want to scale luminance of pixel twice
+	UnScaleLum();
 
 	m_lumScaleFactor = t_factor;
 
@@ -119,6 +120,12 @@ bool TargetPixel::ScaleLum(const double &t_factor)
 // - false - can't unscale luminance
 bool TargetPixel::UnScaleLum()
 {
+	if ( DEFAULT_SCALE_LUM_FACTOR == m_lumScaleFactor )
+	{
+		// Pixels luminance wasn't scale
+		return true;
+	}
+
 	double currentLum = GetChL();
 	double unscaledLum = currentLum / m_lumScaleFactor;
 

@@ -16,15 +16,25 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtGui/QApplication>
-#include "application.h"
+#ifndef IDBFILESSERVICE_H
+#define IDBFILESSERVICE_H
 
-int main(int argc, char *argv[])
+#include "filesservice.h"
+
+class IDBFilesService : public FilesService
 {
-	QApplication a(argc, argv);
+	// == DATA ==
 
-	Application app;
-	app.Construct();
+	// == METHODS ==
+public:
+	IDBFilesService();
 
-	return a.exec();
-}
+	// Remove ImageDataBase
+	bool RemoveIDB(const QString &t_idbPath);
+	// Check if in input path exist IDB
+	bool CheckIDBExist(const QString &t_idbPath);
+	// Get full path for IDB name
+	QString FormIDBFullPath (const QString &t_idbName);
+};
+
+#endif // IDBFILESSERVICE_H

@@ -19,17 +19,13 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include <QObject>
 #include <QImage>
 #include <QDebug>
+#include "./DEFINES/global.h"
+#include "./SERVICE/FILES/imgfilesservice.h"
 
-// TODO:
-// - should we have function, which load QImage?
-
-class Image : public QObject
+class Image
 {
-	Q_OBJECT
-
 	// == DATA ==
 private:
 	QString m_pathToImg;
@@ -37,31 +33,35 @@ private:
 
 	// == METHODS ==
 public:
-	explicit Image(QObject *parent = 0);
+	explicit Image();
 	~Image();
 
+	// Clear all info
+	void Clear();
 	// Loading image from path
 	bool LoadImg(const QString &t_path);
+	// Reload image
+	bool ReloadImg();
 	// Set new path of image
-	bool SetPath(const QString &t_path);
+	bool SetImgPath(const QString &t_path);
+	// Get new QImage
+	bool SetImage(const QImage &t_img);
 	// Get path to loaded image
-	QString GetImgPath();
+	QString GetImgPath() const;
 	// Get copy of image
-	QImage GetImg();
+	QImage GetImg() const;
+	// Get image width
+	unsigned int GetImgWidth() const;
+	// Get image height
+	unsigned int GetImgHeight() const;
 	// Save image in original path m_pathToImg
 	bool SaveImg();
 	// Save image in path t_path
 	bool SaveImg(const QString &t_path);
 	// Check if image is null (unloaded)
-	bool IsNull();
-
-private:
-
-
-signals:
-
-public slots:
-
+	bool IsNull() const;
+	// Check if image exist in it's path
+	bool IsExist() const;
 };
 
 #endif // IMAGE_H

@@ -118,6 +118,22 @@ void StatusBar::SetStatus(Program::Status t_status)
 			m_infoString->setText(tr("OK"));
 			break;
 
+		case Program::LOAD_TARGET:
+			m_infoString->setText(tr("Loadin Target Image..."));
+			break;
+
+		case Program::LOAD_SOURCE:
+			m_infoString->setText(tr("Loadin Source Image..."));
+			break;
+
+		case Program::CALC_TARGET:
+			m_infoString->setText(tr("Calculating pixels of Target Image..."));
+			break;
+
+		case Program::CALC_SOURCE:
+			m_infoString->setText(tr("Calculating pixels of Source Image..."));
+			break;
+
 		case Program::COLORIZATION:
 			m_infoString->setText(tr("Colorization of grey image..."));
 			break;
@@ -130,7 +146,11 @@ void StatusBar::SetStatus(Program::Status t_status)
 			m_infoString->setText(tr("Updating database of images..."));
 			break;
 
-		case Program::ERROR:
+		case Program::SAVING:
+			m_infoString->setText(tr("Saving Result image..."));
+			break;
+
+		case Program::ERR:
 			m_infoString->setText(tr("Error!"));
 			break;
 

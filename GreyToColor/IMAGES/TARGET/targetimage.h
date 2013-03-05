@@ -16,40 +16,45 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef SOURCEIMGPIXELS_H
-#define SOURCEIMGPIXELS_H
+#ifndef TARGETIMAGE_H
+#define TARGETIMAGE_H
 
-#include <QFileDialog>
-#include <QImage>
-#include <QDebug>
-#include "../../COMMON/PIXELS/imagepixels.h"
-#include "colorpixel.h"
-#include "./SERVICE/calculatorsko.h"
+#include "../COMMON/processingimage.h"
+#include "../TARGET/PIXELS/targetimgpixels.h"
+#include "../COMMON/PIXELS/rgb.h"
+#include "./DEFINES/images.h"
 
-class SourceImgPixels : public ImagePixels
+class TargetImage : public ProcessingImage
 {
 	// == DATA ==
 
 	// == METHODS ==
 public:
-	SourceImgPixels();
-	~SourceImgPixels();
+	TargetImage();
+	~TargetImage();
 
-	// Clear info about pixels (call this function before deleting object SourceImgPixels!)
+	// Clear all info
 	virtual void Clear();
-	// Save all pixels from input QImage as custom pixels
-	virtual bool FormImgPixels(const QImage &t_img);
 	// Calc for each pixel in image it's SKO
 	void CalcPixelsSKO();
 	// Get SKO of pixel with certain coords
 	double GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const;
+	// Scale luminance of all pixels in image with certain scale factor
+	bool ScaleLABLum(const double &t_scaleFactor);
+	// Unscale luminance of all pixels in image
+	void UnScaleLABLum();
+	// Set prefered color for certain pixel
+	void SetPixPrefColor(const unsigned int &t_width,
+						 const unsigned int &t_height,
+						 const RGB &t_prefColor);
 
-	// Test functions
-	void TestFunctionality();
+	// Get result image. It could be colorized (if we perform colorization) or
+	// greyscale as original target (if we have not performed colorizztion yet).
+	Image GetResultImage();
 
 private:
-	// Calc for certain pixel in image it's SKO
-	void CalcPixSKO(const unsigned int &t_width, const unsigned int &t_height);
+	// Construct custom pixels of loaded image
+	virtual void ConstructImgPixels();
 };
 
-#endif // SOURCEIMGPIXELS_H
+#endif // TARGETIMAGE_H

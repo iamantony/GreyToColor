@@ -22,9 +22,6 @@
 #define ERROR -1
 #define NO_INFO -9999
 
-// TODO:
-// define them in databese def-file
-//#define PROJECT_IMG_PATH		"/img/"
-//#define PROJECT_DB_NAME			"/idb/idb.sqlite"
+#define MAX_PERCENT 100
 
 #endif // GLOBAL_H
