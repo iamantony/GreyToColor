@@ -25,10 +25,6 @@ Application::Application(QObject *parent) :
 
 Application::~Application()
 {
-	// TODO:
-	// - stop threads
-	// - update architecture
-
 	// Clear all images (show progress)
 	DeleteObjects();
 }

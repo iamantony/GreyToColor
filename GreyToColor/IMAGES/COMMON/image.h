@@ -60,6 +60,8 @@ public:
 	bool SaveImg(const QString &t_path);
 	// Check if image is null (unloaded)
 	bool IsNull() const;
+	// Check if image exist in it's path
+	bool IsExist() const;
 };
 
 #endif // IMAGE_H

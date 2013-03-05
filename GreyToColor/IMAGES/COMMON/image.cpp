@@ -211,3 +211,19 @@ bool Image::IsNull() const
 {
 	return m_image.isNull();
 }
+
+// Check if image exist in it's path
+// @input:
+// @output:
+// - true - image exist
+// - false - image don't exist in current path
+bool Image::IsExist() const
+{
+	if ( (true == m_pathToImg.isEmpty()) || (true == IsNull()) )
+	{
+		return false;
+	}
+
+	ImgFilesService imgService;
+	return imgService.CheckImgExist(m_pathToImg);
+}

@@ -37,10 +37,11 @@ SOURCES += main.cpp\
 	IMAGES/COMMON/processingimage.cpp \
 	IMAGES/SOURCE/sourceimage.cpp \
 	IMAGES/TARGET/targetimage.cpp \
-    SERVICE/IMAGES/imgtransform.cpp \
-    SERVICE/IMAGES/imgsearchparam.cpp \
-    PARAMS/IMAGES/imgsimilarityarea.cpp \
-    application.cpp
+	SERVICE/IMAGES/imgtransform.cpp \
+	SERVICE/IMAGES/imgsearchparam.cpp \
+	PARAMS/IMAGES/imgsimilarityarea.cpp \
+	application.cpp \
+    SERVICE/FILES/idbfilesservice.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -71,10 +72,11 @@ HEADERS  += \
 	IMAGES/COMMON/processingimage.h \
 	IMAGES/SOURCE/sourceimage.h \
 	IMAGES/TARGET/targetimage.h \
-    SERVICE/IMAGES/imgtransform.h \
-    SERVICE/IMAGES/imgsearchparam.h \
-    PARAMS/IMAGES/imgsimilarityarea.h \
-    application.h
+	SERVICE/IMAGES/imgtransform.h \
+	SERVICE/IMAGES/imgsearchparam.h \
+	PARAMS/IMAGES/imgsimilarityarea.h \
+	application.h \
+    SERVICE/FILES/idbfilesservice.h
 
 FORMS    += \
 	mainwindow.ui
