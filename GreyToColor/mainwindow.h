@@ -89,8 +89,9 @@ private slots:
 	void on_actionOpenTargetImage_triggered();
 	void on_openSourceImgPB_clicked();
 	void on_actionOpenSourceImage_triggered();
+	void on_actionSaveResult_triggered();
 	void on_findSourceImgPB_clicked();
-	void on_saveResultPB_clicked();
+	void on_startColorizationPB_clicked();
 	void on_resetPB_clicked();
 };
 

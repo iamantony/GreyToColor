@@ -207,6 +207,30 @@ void MainWindow::on_actionOpenSourceImage_triggered()
 	on_openSourceImgPB_clicked();
 }
 
+// Slot for action actionSaveResult to save Result Image
+// @input:
+// @output:
+void MainWindow::on_actionSaveResult_triggered()
+{
+	if ( false == CanOperate() )
+	{
+		return;
+	}
+
+	QString imgName = QFileDialog::getSaveFileName(this,
+												   "Choose name...",
+												   QDir::currentPath(),
+												   "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
+
+	if ( true == imgName.isEmpty() )
+	{
+		// User change his mind
+		return;
+	}
+
+	emit SignalSaveResultImg(imgName);
+}
+
 // Slot for getting new Source image
 // @input:
 // - QImage - unnull new source image
@@ -245,31 +269,19 @@ void MainWindow::SlotGetResultImg(QImage t_resultImg)
 	ui->resultImgLbl->SetImage(t_resultImg);
 }
 
-
-// Slot for button saveResultPB to save result image
+// Slot for start colrization process
 // @input:
 // @output:
-void MainWindow::on_saveResultPB_clicked()
+void MainWindow::on_startColorizationPB_clicked()
 {
 	if ( false == CanOperate() )
 	{
 		return;
 	}
 
-	QString imgName = QFileDialog::getSaveFileName(this,
-												   "Choose name...",
-												   QDir::currentPath(),
-												   "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
-
-	if ( true == imgName.isEmpty() )
-	{
-		// User change his mind
-		return;
-	}
-
-	emit SignalSaveResultImg(imgName);
+	// TODO:
+	// - start colorization
 }
-
 
 // Slot for resetting current target image
 // @input:
