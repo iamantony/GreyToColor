@@ -78,7 +78,8 @@ HEADERS  += \
 	PARAMS/IMAGES/imgsimilarityarea.h \
 	application.h \
 	SERVICE/FILES/idbfilesservice.h \
-	PARAMS/IMAGES/imgpassport.h
+	PARAMS/IMAGES/imgpassport.h \
+    DEFINES/imgservice.h
 
 FORMS    += \
 	mainwindow.ui

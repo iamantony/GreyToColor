@@ -1,2 +1,8 @@
 Think about copy function for class Image
 http://www.devexp.ru/2010/03/o-kopirovanii-obektov-v-c/
+
+Image Historgram Normalisation and Equalisation:
+http://en.wikipedia.org/wiki/Histogram_equalization
+http://www.roborealm.com/help/Normalize.php
+http://www.roborealm.com/help/Equalize.php
+http://www.roborealm.com/forum/index.php?thread_id=4350#

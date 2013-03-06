@@ -95,7 +95,6 @@ QPair<int, int> ImgSearchParam::FindMinMaxLum(const Image &t_img)
 		{
 			pixel = greyImage.pixel(wdt, hgt);
 			pixelLum = qRed(pixel);
-			qDebug() << pixelLum;
 
 			if ( pixelLum < minLum )
 			{

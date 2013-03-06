@@ -30,6 +30,8 @@
 #include "DEFINES/programstatus.h"
 #include "DEFINES/mainwindowui.h"
 
+#include "SERVICE/IMAGES/imgtransform.h"
+
 namespace Ui
 {
 	class MainWindow;

@@ -123,3 +123,239 @@ QImage ImgTransform::GreyscaleImg(const QImage &t_colorImg)
 
 	return greyImage;
 }
+
+// Normalise image histogram
+// @input:
+// - Image - unnull image (color/greyscale)
+// @output:
+// - null Image - can't normalise histogram
+// - Image - normalised image
+Image ImgTransform::NormaliseImgHistogram(const Image &t_img)
+{
+	if ( true == t_img.IsNull() )
+	{
+		qDebug() << "NormaliseImgHistogram(): Error - invalid arguments";
+		Image empty;
+		return empty;
+	}
+
+	Image greyImg = ToGrey(t_img);
+	if ( true == greyImg.IsNull() )
+	{
+		qDebug() << "NormaliseImgHistogram(): Error - can't greyscale image";
+		Image empty;
+		return empty;
+	}
+
+	Image normalisedImg = PerformImgNormalisation(greyImg);
+	if ( true == normalisedImg.IsNull() )
+	{
+		qDebug() << "NormaliseImgHistogram(): Error - can't normalise image histogram";
+		Image empty;
+		return empty;
+	}
+
+	return normalisedImg;
+}
+
+// Create normalised image
+// @input:
+// - Image - unnull greyscale image
+// @output:
+// - null Image - can't normalise image
+// - Image - normalied image
+Image ImgTransform::PerformImgNormalisation(const Image &t_greyImg) const
+{
+	if ( true == t_greyImg.IsNull() )
+	{
+		qDebug() << "PerformImgNormalisation(): Error - invalid arguments";
+		Image empty;
+		return empty;
+	}
+
+	Image greyImage = t_greyImg;
+
+	ImgSearchParam imgSearch;
+	const QPair<int, int> minMaxLum = imgSearch.FindMinMaxLum(greyImage);
+	if ( (ERROR == minMaxLum.first) || (ERROR == minMaxLum.second) )
+	{
+		qDebug() << "PerformImgNormalisation(): Error - can't find min-max luminance of image";
+		Image empty;
+		return empty;
+	}
+
+	QImage processingImg = greyImage.GetImg();
+	if ( true == processingImg.isNull() )
+	{
+		qDebug() << "PerformImgNormalisation(): Error - no image";
+		Image empty;
+		return empty;
+	}
+
+	const double minLum = (double)minMaxLum.first;
+	const double maxLum = (double)minMaxLum.second;
+
+	double diffLum = abs( maxLum - minLum );
+	if ( diffLum <= 0 )
+	{
+		diffLum = 1;
+	}
+
+	double scaleFactor = (MAX_RGB_LUM - MIN_RGB_LUM) / diffLum;
+	if ( scaleFactor <= 0 )
+	{
+		scaleFactor = 1;
+	}
+
+	const int imgW = processingImg.width();
+	const int imgH = processingImg.height();
+	for (int wdt = 0; wdt < imgW; wdt++)
+	{
+		for (int hgt = 0; hgt < imgH; hgt++)
+		{
+			QRgb pixel = processingImg.pixel(wdt, hgt);
+			double lum = (double)qRed(pixel);
+
+			lum = (lum - minLum) * scaleFactor + (double)MIN_RGB_LUM;
+
+			int newLum = (int)floor(lum + 0.5);
+			QRgb normalizedPixel = qRgb(newLum, newLum, newLum);
+			processingImg.setPixel(wdt, hgt, normalizedPixel);
+		}
+	}
+
+	Image normalizedImg = t_greyImg;
+	normalizedImg.SetImage(processingImg);
+
+	return normalizedImg;
+}
+
+// Test image normalization function
+void ImgTransform::TestNormalization()
+{
+	QWidget wdt;
+	QString imgName = QFileDialog::getOpenFileName(&wdt,
+												 "Open target image...",
+												 QDir::currentPath(),
+												 "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
+
+	Image testImg;
+	testImg.LoadImg(imgName);
+
+	Image greyscaled = ToGrey(testImg);
+	QString pathToSaveGrey = QFileDialog::getSaveFileName(&wdt,
+														  "Save as...",
+														  QDir::currentPath(),
+														  "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
+
+	greyscaled.SetImgPath(pathToSaveGrey);
+	greyscaled.SaveImg();
+
+	Image normalizedImg = NormaliseImgHistogram(testImg);
+	if ( true == normalizedImg.IsNull() )
+	{
+		qDebug() << "TestNormalization(): Fail - normalised image is NULL";
+		return;
+	}
+
+	QString pathToSave = QFileDialog::getSaveFileName(&wdt,
+													  "Save as...",
+													  QDir::currentPath(),
+													  "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
+
+	normalizedImg.SetImgPath(pathToSave);
+	normalizedImg.SaveImg();
+}
+
+//bool ImgTransform::NormaliseImg(QImage *t_img)
+//{
+//	if ( NULL == t_img )
+//	{
+//		qDebug() << "NormaliseImg(): error - invalid arguments";
+//		return false;
+//	}
+
+//	ImgSearchParams imgSearch;
+//	int maxLum = imgSearch.FindMaxLuminanceInGrayImg(t_img);
+//	if ( ERROR == maxLum )
+//	{
+//		qDebug() << "GetImgPassports(): error - failed to get image max luminance";
+//		return false;
+//	}
+
+//	int minLum = imgSearch.FindMinLuminanceInGrayImg(t_img);
+//	if ( ERROR == minLum )
+//	{
+//		qDebug() << "GetImgPassports(): error - failed to get image min luminance";
+//		return false;
+//	}
+
+////	qDebug() << "max =" << maxLum;
+////	qDebug() << "min =" << minLum;
+
+//	QColor pixel;
+//	int R;
+//	int imgW = t_img->width();
+//	int imgH = t_img->height();
+//	for (int w = 0; w < imgW; w++)
+//	{
+//		for (int h = 0; h < imgH; h++)
+//		{
+//			pixel = t_img->pixel(w, h);
+//			R = pixel.red();
+
+//			int differenceLum = maxLum - minLum;
+//			if ( 0 >= differenceLum )
+//			{
+//				differenceLum = 1;
+//			}
+
+//			R = (R - minLum)*( (NEW_MAX_LUM - NEW_MIN_LUM) / differenceLum ) + NEW_MIN_LUM;
+
+//			pixel.setRed(R);
+//			pixel.setGreen(R);
+//			pixel.setBlue(R);
+
+//			t_img->setPixel(w, h, pixel.rgb());
+//		}
+//	}
+
+////	t_img->save("normalized.bmp");
+
+//	return true;
+//}
+
+//bool ImgTransform::LevelLuminanceOfImg(QImage *t_img, int t_levelNum)
+//{
+//	if ( NULL == t_img )
+//	{
+//		qDebug() << "LevelLuminanceOfImg(): error - invalid arguments";
+//		return false;
+//	}
+
+//	int divider = (NEW_MAX_LUM + 1)/t_levelNum;
+//	QColor pixel;
+//	int R;
+//	int imgW = t_img->width();
+//	int imgH = t_img->height();
+//	for (int w = 0; w < imgW; w++)
+//	{
+//		for (int h = 0; h < imgH; h++)
+//		{
+//			pixel = t_img->pixel(w, h);
+//			R = pixel.red();
+
+//			R /= divider;
+
+//			pixel.setRed(R);
+//			pixel.setGreen(R);
+//			pixel.setBlue(R);
+
+//			t_img->setPixel(w, h, pixel.rgb());
+//		}
+//	}
+
+//	t_img->save("leveled.bmp");
+
+//	return true;
+//}

@@ -19,10 +19,15 @@
 #ifndef IMGTRANSFORM_H
 #define IMGTRANSFORM_H
 
+#include <QFileDialog>
 #include <QImage>
+#include <QPair>
 #include <QDebug>
+#include <math.h>
 #include "./IMAGES/COMMON/image.h"
 #include "./IMAGES/COMMON/PIXELS/rgb.h"
+#include "imgsearchparam.h"
+#include "./DEFINES/imgservice.h"
 
 class ImgTransform
 {
@@ -34,10 +39,18 @@ public:
 
 	// Transform color image to grey image
 	Image ToGrey(const Image &t_img);
+	// Normalise image histogram
+	Image NormaliseImgHistogram(const Image &t_img);
+	Image LevelLuminance(const Image &t_img);
+
+	// Test image normalization function
+	void TestNormalization();
 
 private:
 	// Create greyscale image-copy of input image
 	QImage GreyscaleImg(const QImage &t_colorImg);
+	// Create normalised image
+	Image PerformImgNormalisation(const Image &t_greyImg) const;
 };
 
 #endif // IMGTRANSFORM_H
