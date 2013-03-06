@@ -42,7 +42,8 @@ SOURCES += main.cpp\
 	PARAMS/IMAGES/imgsimilarityarea.cpp \
 	application.cpp \
 	SERVICE/FILES/idbfilesservice.cpp \
-	PARAMS/IMAGES/imgpassport.cpp
+	PARAMS/IMAGES/imgpassport.cpp \
+    SERVICE/IMAGES/imghistogram.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -79,7 +80,8 @@ HEADERS  += \
 	application.h \
 	SERVICE/FILES/idbfilesservice.h \
 	PARAMS/IMAGES/imgpassport.h \
-    DEFINES/imgservice.h
+    DEFINES/imgservice.h \
+    SERVICE/IMAGES/imghistogram.h
 
 FORMS    += \
 	mainwindow.ui
