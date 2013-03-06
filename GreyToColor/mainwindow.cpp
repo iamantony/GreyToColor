@@ -294,7 +294,7 @@ void MainWindow::on_resetPB_clicked()
 	}
 
 	ImgTransform test;
-	test.TestNormalization();
+	test.TestLumLeveling();
 
 	// TODO:
 	// Send signal to ImgHandler. It should reload target image, calc all it's params (LAB, SKO) and then send

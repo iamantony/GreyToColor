@@ -41,16 +41,21 @@ public:
 	Image ToGrey(const Image &t_img);
 	// Normalise image histogram
 	Image NormaliseImgHistogram(const Image &t_img);
-	Image LevelLuminance(const Image &t_img);
+	// Level image luminance up to maximum luminance level
+	Image LevelLuminance(const Image &t_img, const int &t_maxLum);
 
 	// Test image normalization function
 	void TestNormalization();
+	// Test image luminance leveling function
+	void TestLumLeveling();
 
 private:
 	// Create greyscale image-copy of input image
 	QImage GreyscaleImg(const QImage &t_colorImg);
 	// Create normalised image
 	Image PerformImgNormalisation(const Image &t_greyImg) const;
+	// Create image with leveled luminance
+	Image PerformLumLeveling(const Image &t_greyImg, const int &t_maxLum) const;
 };
 
 #endif // IMGTRANSFORM_H

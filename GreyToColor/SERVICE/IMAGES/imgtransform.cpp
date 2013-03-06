@@ -129,7 +129,7 @@ QImage ImgTransform::GreyscaleImg(const QImage &t_colorImg)
 // - Image - unnull image (color/greyscale)
 // @output:
 // - null Image - can't normalise histogram
-// - Image - normalised image
+// - Image - normalised greyscaled image
 Image ImgTransform::NormaliseImgHistogram(const Image &t_img)
 {
 	if ( true == t_img.IsNull() )
@@ -163,7 +163,7 @@ Image ImgTransform::NormaliseImgHistogram(const Image &t_img)
 // - Image - unnull greyscale image
 // @output:
 // - null Image - can't normalise image
-// - Image - normalied image
+// - Image - normalied greyscaled image
 Image ImgTransform::PerformImgNormalisation(const Image &t_greyImg) const
 {
 	if ( true == t_greyImg.IsNull() )
@@ -230,6 +230,94 @@ Image ImgTransform::PerformImgNormalisation(const Image &t_greyImg) const
 	return normalizedImg;
 }
 
+// Level image luminance up to maximum luminance level
+// @input:
+// - Image - unnull image (color/greyscale)
+// - int - positive value of image new RGB max luminance [0, 255]
+// @output:
+// - null Image - can't level image luminance
+// - Image - normalied greyscale image
+Image ImgTransform::LevelLuminance(const Image &t_img, const int &t_maxLum)
+{
+	if ( (true == t_img.IsNull()) ||
+		 (t_maxLum < 0) ||
+		 (255 < t_maxLum))
+	{
+		qDebug() << "LevelLuminance(): Error - invalid arguments";
+		Image empty;
+		return empty;
+	}
+
+	Image greyImg = ToGrey(t_img);
+	if ( true == greyImg.IsNull() )
+	{
+		qDebug() << "LevelLuminance(): Error - can't greyscale image";
+		Image empty;
+		return empty;
+	}
+
+	Image leveledImg = PerformLumLeveling(greyImg, t_maxLum);
+	if ( true == leveledImg.IsNull() )
+	{
+		qDebug() << "LevelLuminance(): Error - can't level image luminance";
+		Image empty;
+		return empty;
+	}
+
+	return leveledImg;
+}
+
+// Create image with leveled luminance
+// @input:
+// - Image - unnull greyscale image
+// - int - positive value of image new RGB max luminance [0, 255]
+// @output:
+// - null Image - can't level image luminance
+// - Image - normalied greyscale image
+Image ImgTransform::PerformLumLeveling(const Image &t_greyImg, const int &t_maxLum) const
+{
+	if ( (true == t_greyImg.IsNull()) ||
+		 (t_maxLum < 0) ||
+		 (255 < t_maxLum))
+	{
+		qDebug() << "PerformLumLeveling(): Error - invalid arguments";
+		Image empty;
+		return empty;
+	}
+
+	Image greyImage = t_greyImg;
+	QImage processingImg = greyImage.GetImg();
+	if ( true == processingImg.isNull() )
+	{
+		qDebug() << "PerformLumLeveling(): Error - no image";
+		Image empty;
+		return empty;
+	}
+
+	const double scaleFactor = (double)t_maxLum / (double)MAX_RGB_LUM;
+	const int imgW = processingImg.width();
+	const int imgH = processingImg.height();
+	for (int wdt = 0; wdt < imgW; wdt++)
+	{
+		for (int hgt = 0; hgt < imgH; hgt++)
+		{
+			QRgb pixel = processingImg.pixel(wdt, hgt);
+			double lum = (double)qRed(pixel);
+
+			lum *= scaleFactor;
+
+			int newLum = (int)floor(lum + 0.5);
+			QRgb leveledPixel = qRgb(newLum, newLum, newLum);
+			processingImg.setPixel(wdt, hgt, leveledPixel);
+		}
+	}
+
+	Image leveledImg = t_greyImg;
+	leveledImg.SetImage(processingImg);
+
+	return leveledImg;
+}
+
 // Test image normalization function
 void ImgTransform::TestNormalization()
 {
@@ -267,95 +355,39 @@ void ImgTransform::TestNormalization()
 	normalizedImg.SaveImg();
 }
 
-//bool ImgTransform::NormaliseImg(QImage *t_img)
-//{
-//	if ( NULL == t_img )
-//	{
-//		qDebug() << "NormaliseImg(): error - invalid arguments";
-//		return false;
-//	}
+// Test image luminance leveling function
+void ImgTransform::TestLumLeveling()
+{
+	QWidget wdt;
+	QString imgName = QFileDialog::getOpenFileName(&wdt,
+												 "Open target image...",
+												 QDir::currentPath(),
+												 "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
 
-//	ImgSearchParams imgSearch;
-//	int maxLum = imgSearch.FindMaxLuminanceInGrayImg(t_img);
-//	if ( ERROR == maxLum )
-//	{
-//		qDebug() << "GetImgPassports(): error - failed to get image max luminance";
-//		return false;
-//	}
+	Image testImg;
+	testImg.LoadImg(imgName);
 
-//	int minLum = imgSearch.FindMinLuminanceInGrayImg(t_img);
-//	if ( ERROR == minLum )
-//	{
-//		qDebug() << "GetImgPassports(): error - failed to get image min luminance";
-//		return false;
-//	}
+	Image greyscaled = ToGrey(testImg);
+	QString pathToSaveGrey = QFileDialog::getSaveFileName(&wdt,
+														  "Save as...",
+														  QDir::currentPath(),
+														  "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
 
-////	qDebug() << "max =" << maxLum;
-////	qDebug() << "min =" << minLum;
+	greyscaled.SetImgPath(pathToSaveGrey);
+	greyscaled.SaveImg();
 
-//	QColor pixel;
-//	int R;
-//	int imgW = t_img->width();
-//	int imgH = t_img->height();
-//	for (int w = 0; w < imgW; w++)
-//	{
-//		for (int h = 0; h < imgH; h++)
-//		{
-//			pixel = t_img->pixel(w, h);
-//			R = pixel.red();
+	Image leveledImg = LevelLuminance(testImg, 200);
+	if ( true == leveledImg.IsNull() )
+	{
+		qDebug() << "TestLumLeveling(): Fail - leveled image is NULL";
+		return;
+	}
 
-//			int differenceLum = maxLum - minLum;
-//			if ( 0 >= differenceLum )
-//			{
-//				differenceLum = 1;
-//			}
+	QString pathToSave = QFileDialog::getSaveFileName(&wdt,
+													  "Save as...",
+													  QDir::currentPath(),
+													  "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
 
-//			R = (R - minLum)*( (NEW_MAX_LUM - NEW_MIN_LUM) / differenceLum ) + NEW_MIN_LUM;
-
-//			pixel.setRed(R);
-//			pixel.setGreen(R);
-//			pixel.setBlue(R);
-
-//			t_img->setPixel(w, h, pixel.rgb());
-//		}
-//	}
-
-////	t_img->save("normalized.bmp");
-
-//	return true;
-//}
-
-//bool ImgTransform::LevelLuminanceOfImg(QImage *t_img, int t_levelNum)
-//{
-//	if ( NULL == t_img )
-//	{
-//		qDebug() << "LevelLuminanceOfImg(): error - invalid arguments";
-//		return false;
-//	}
-
-//	int divider = (NEW_MAX_LUM + 1)/t_levelNum;
-//	QColor pixel;
-//	int R;
-//	int imgW = t_img->width();
-//	int imgH = t_img->height();
-//	for (int w = 0; w < imgW; w++)
-//	{
-//		for (int h = 0; h < imgH; h++)
-//		{
-//			pixel = t_img->pixel(w, h);
-//			R = pixel.red();
-
-//			R /= divider;
-
-//			pixel.setRed(R);
-//			pixel.setGreen(R);
-//			pixel.setBlue(R);
-
-//			t_img->setPixel(w, h, pixel.rgb());
-//		}
-//	}
-
-//	t_img->save("leveled.bmp");
-
-//	return true;
-//}
+	leveledImg.SetImgPath(pathToSave);
+	leveledImg.SaveImg();
+}
