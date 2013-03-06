@@ -37,6 +37,21 @@ void ImgPassport::Clear()
 	m_imgPassport.clear();
 }
 
+// Check if image passport is empty
+// @input:
+// @output:
+// - true - passport is empty and can't be used
+// - false - passport has information
+bool ImgPassport::IsEmpty()
+{
+	if ( (Passport::DEFAULT_LAST == m_type) || (true == m_imgPassport.isEmpty()) )
+	{
+		return true;
+	}
+
+	return false;
+}
+
 // Set image passport as list
 // @input:
 // - Passport::Type - exist image passport type

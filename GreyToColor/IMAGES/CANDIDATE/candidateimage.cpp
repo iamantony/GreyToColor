@@ -20,7 +20,7 @@
 
 CandidateImage::CandidateImage()
 {
-
+	Clear();
 }
 
 CandidateImage::~CandidateImage()
@@ -35,6 +35,7 @@ void CandidateImage::Clear()
 {
 	m_colorImg.Clear();
 	m_greyImg.Clear();
+	m_passports.clear();
 }
 
 // Load color image
@@ -122,7 +123,7 @@ bool CandidateImage::ToGreyImg()
 		return false;
 	}
 
-	// WARNING: greyscaleImg should have the same data (besides image) as its parent (m_colorImg)! This rule will
+	// NOTE: greyscaleImg should have the same data (besides image) as its parent (m_colorImg)! This rule will
 	// provide us copied and saved greyscale image
 	m_greyImg = greyscaleImg;
 	return true;
@@ -146,74 +147,118 @@ Image CandidateImage::GetGreyImg() const
 	return m_greyImg;
 }
 
-// Get value of max RGB luminance (for grey/color images)
+// Get image passport of certain type
 // @input:
+// - Passport::Type - exist type of image passport
 // @output:
-// - ERROR - can't get max luminance
-// - int - posititve value of max luminance of this image
-int CandidateImage::GetMaxRGBLum()
+// - empty ImgPassport - can't find passport of such type
+// - ImgPassport - image passport
+ImgPassport CandidateImage::GetPassport(const Passport::Type &t_type) const
 {
-	ImgSearchParam imgSearcher;
-	if ( false == m_greyImg.IsNull() )
+	if ( true == m_passports.isEmpty() )
 	{
-		return imgSearcher.FindMaxLum(m_greyImg);
+		qDebug() << "GetPassport(): image hasn't passports";
+		ImgPassport empty;
+		return empty;
 	}
-	else
+
+	ImgPassport foundPassport;
+	int numOfPassports = m_passports.size();
+	for ( int pass = 0; pass < numOfPassports; pass++ )
 	{
-		if ( false == m_colorImg.IsNull() )
+		Passport::Type passType = m_passports.at(pass).GetPassportType();
+		if ( t_type == passType )
 		{
-			return imgSearcher.FindMaxLum(m_colorImg);
+			foundPassport = m_passports.at(pass);
+			break;
 		}
 	}
 
-	qDebug() << "GetMaxRGBLum(): Error - no images";
-	return ERROR;
+	return foundPassport;
 }
 
-// Get value of min RGB luminance (for grey/color images)
+// Get all passports of image
 // @input:
 // @output:
-// - ERROR - can't get min luminance
-// - int - posititve value of min luminance of this image
-int CandidateImage::GetMinRGBLum()
+// - empty QList<ImgPassport> - image hasn't passports
+// - QList<ImgPassport> - image passports
+QList<ImgPassport> CandidateImage::GetAllPassports() const
 {
-	ImgSearchParam imgSearcher;
-	if ( false == m_greyImg.IsNull() )
+	if ( true == m_passports.isEmpty() )
 	{
-		return imgSearcher.FindMinLum(m_greyImg);
+		qDebug() << "GetPassport(): image hasn't passports";
+		QList<ImgPassport> empty;
+		return empty;
 	}
-	else
+
+	return m_passports;
+}
+
+// Form image passport of certain type
+// @input:
+// - Passport::Type - exist type of image passport
+// @output:
+// - true - passport formed
+// - false - passport forming failed
+bool CandidateImage::FormPassport(const Passport::Type &t_type)
+{
+	if ( Passport::DEFAULT_LAST == t_type )
 	{
-		if ( false == m_colorImg.IsNull() )
+		qDebug() << "FormPassport(): Error - invalid arguments";
+		return false;
+	}
+
+	if ( true == m_greyImg.IsNull() )
+	{
+		if ( true == m_colorImg.IsNull() )
 		{
-			return imgSearcher.FindMinLum(m_colorImg);
+			qDebug() << "FormPassport(): Error - can't form passports for an nonexistent image";
+			return false;
+		}
+		else
+		{
+			bool greyImgFormed = ToGreyImg();
+			if ( false == greyImgFormed )
+			{
+				qDebug() << "FormPassport(): Error - can't form grey image. Can't create passport.";
+				return false;
+			}
 		}
 	}
 
-	qDebug() << "GetMinRGBLum(): Error - no images";
-	return ERROR;
+	// TODO;
+	// - form passport
+	// - check if it already exist in list. If yes - delete it from list
+	// - add new passport to list
+
+	return true;
 }
 
-// Get luminance histogram of this image
+// Form all exist image passports
 // @input:
 // @output:
-// - empty QList<int> - can't get luminance histogram
-// - unempty QList<int> - luminance histogram of this image
-QList<int> CandidateImage::GetRGBLumHistogram()
+// - true - all (or some of them) passports formed
+// - false - no passports formed
+bool CandidateImage::FormAllPassports()
 {
-	QList<int> empty;
-	return empty;
-}
+	m_passports.clear();
+	bool hasSomePassports = false;
 
-// Get histogram of each RGB channel (red, green, blue) of this image
-// @input:
-// @output:
-// - empty QList< QList<int> > - can't get luminance histogram
-// - unempty QList< QList<int> > - histogram of each RGB channels of this image
-QList< QList<int> > CandidateImage::GetRGBHistogram()
-{
-	QList< QList<int> > empty;
-	return empty;
+	for ( int type = Passport::LUM_HISTOGRAM; type < Passport::DEFAULT_LAST; type++ )
+	{
+		Passport::Type passType = static_cast<Passport::Type>(type);
+		bool passportFormed = FormPassport(passType);
+		if ( true == passportFormed )
+		{
+			hasSomePassports = true;
+		}
+		else
+		{
+			qDebug() << "FormAllPassports(): Error - can't form passport" << type;
+		}
+	}
+
+	return hasSomePassports;
 }
 
 // Test loading
@@ -227,9 +272,4 @@ void CandidateImage::TestImageLoad()
 
 	LoadColorImg(imgName);
 	m_greyImg.SaveImg("./test_grey.bmp");
-
-	int minLim = GetMinRGBLum();
-	int maxLim = GetMaxRGBLum();
-	qDebug() << "Min luminance:" << minLim;
-	qDebug() << "Max luminance:" << maxLim;
 }

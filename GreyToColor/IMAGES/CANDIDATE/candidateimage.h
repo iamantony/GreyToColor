@@ -22,7 +22,7 @@
 #include <QFileDialog>
 #include <QList>
 #include "../COMMON/image.h"
-#include "./SERVICE/IMAGES/imgsearchparam.h"
+#include "./PARAMS/IMAGES/imgpassport.h"
 #include "./SERVICE/IMAGES/imgtransform.h"
 #include "./DEFINES/global.h"
 
@@ -32,6 +32,7 @@ class CandidateImage
 private:
 	Image m_colorImg;
 	Image m_greyImg;
+	QList<ImgPassport> m_passports;
 
 	// == METHODS ==
 public:
@@ -48,14 +49,14 @@ public:
 	Image GetColorImg() const;
 	// Get grey-copy of color image
 	Image GetGreyImg() const;
-	// Get value of max RGB luminance (for grey/color images)
-	int GetMaxRGBLum();
-	// Get value of min RGB luminance (for grey/color images)
-	int GetMinRGBLum();
-	// Get luminance histogram of this image
-	QList<int> GetRGBLumHistogram();
-	// Get histogram of each RGB channel (red, green, blue) of this image
-	QList< QList<int> > GetRGBHistogram();
+	// Get image passport of certain type
+	ImgPassport GetPassport(const Passport::Type &t_type) const;
+	// Get all passports of image
+	QList<ImgPassport> GetAllPassports() const;
+	// Form image passport of certain type
+	bool FormPassport(const Passport::Type &t_type);
+	// Form all exist image passports
+	bool FormAllPassports();
 
 	// Test loading
 	void TestImageLoad();
