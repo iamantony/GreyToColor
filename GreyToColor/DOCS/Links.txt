@@ -6,3 +6,4 @@ http://en.wikipedia.org/wiki/Histogram_equalization
 http://www.roborealm.com/help/Normalize.php
 http://www.roborealm.com/help/Equalize.php
 http://www.roborealm.com/forum/index.php?thread_id=4350#
+http://stackoverflow.com/questions/11178925/image-normalization-image-range-and-image-scaling-for-different-stack-of-images
