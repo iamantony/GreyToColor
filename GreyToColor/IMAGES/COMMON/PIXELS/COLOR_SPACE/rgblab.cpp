@@ -37,6 +37,21 @@ LAB RGBLAB::RGB2LAB(const RGB &t_rgbColor)
 	double M = 0.1967*R + 0.7244*G + 0.0782*B;
 	double S = 0.0241*R + 0.1288*G + 0.8444*B;
 
+	if ( 0 == L )
+	{
+		L = 0.0001;
+	}
+
+	if ( 0 == M )
+	{
+		M = 0.0001;
+	}
+
+	if ( 0 == S )
+	{
+		S = 0.0001;
+	}
+
 	L = log10(L);
 	M = log10(M);
 	S = log10(S);
