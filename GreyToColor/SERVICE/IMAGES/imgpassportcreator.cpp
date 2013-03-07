@@ -16,34 +16,9 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef IMAGES_H
-#define IMAGES_H
+#include "imgpassportcreator.h"
 
-#define PROJECT_IMG_PATH		"/img/"
-
-namespace ImageFormat
+ImgPassportCreator::ImgPassportCreator()
 {
-	enum FormatType
-	{
-		BMP = 0,
-		PNG,
-		TIFF,
-		JPG,
-		JPEG,
-		DEFAULT_LAST
-	};
-}
 
-namespace Passport
-{
-	enum Type
-	{
-		LUM_HISTOGRAM = 0,
-		LUM_SUBSAMPLE,
-		LUM_AND_GRAD,
-		LUM_AND_GRAD_SUBSAMPLE,
-		DEFAULT_LAST
-	};
 }
-
-#endif // IMAGES_H

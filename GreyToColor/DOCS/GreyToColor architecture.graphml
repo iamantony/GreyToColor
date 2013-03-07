@@ -100,7 +100,7 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="153.0" width="281.1985355799752" x="-2810.5992677899876" y="990.2823486328125"/>
+              <y:Geometry height="153.0" width="281.1985355799752" x="-2782.3627025688284" y="990.2823486328125"/>
               <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="114.54443359375" x="83.3270509931126" y="3.0">ImgSimilarityArea<y:LabelModel>
@@ -205,7 +205,7 @@
                   <y:Shape type="roundrectangle"/>
                   <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
                   <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-                  <y:BorderInsets bottom="0" bottomF="0.0" left="51" leftF="51.26281185984226" right="97" rightF="97.48597631567054" top="16" topF="15.796679038636455"/>
+                  <y:BorderInsets bottom="0" bottomF="0.0" left="51" leftF="51.26281185984226" right="71" rightF="70.98546981346817" top="16" topF="15.796679038636455"/>
                 </y:GroupNode>
                 <y:GroupNode>
                   <y:Geometry height="50.0" width="50.0" x="-2429.6406752064318" y="763.1218260138185"/>
@@ -225,7 +225,7 @@
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
-                  <y:Geometry height="191.0967908964874" width="295.26153093843095" x="-2076.150417075133" y="1138.0540218284452"/>
+                  <y:Geometry height="191.0967908964874" width="295.26153093843095" x="-2050.8984033443526" y="1138.0540218284452"/>
                   <y:Fill color="#66FF33" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="91.40087890625" x="101.93032601609048" y="3.0">ImgTransform<y:LabelModel>
@@ -255,7 +255,7 @@
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
-                  <y:Geometry height="105.0" width="295.26153093843095" x="-2076.150417075133" y="957.9016115177926"/>
+                  <y:Geometry height="105.0" width="295.26153093843095" x="-2050.8984033443526" y="957.9016115177926"/>
                   <y:Fill color="#66FF33" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="110.2216796875" x="92.51992562546548" y="3.0">ImgSearchParam<y:LabelModel>
@@ -278,10 +278,10 @@
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
-                  <y:Geometry height="191.0967908964874" width="399.60917786935124" x="-2116.322480060914" y="691.6524103106526"/>
+                  <y:Geometry height="191.0967908964874" width="426.10968437155384" x="-2116.322480060914" y="691.6524103106526"/>
                   <y:Fill color="#66FF33" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="91.40087890625" x="154.10414948155062" y="3.0">ImgHistogram<y:LabelModel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="91.40087890625" x="167.35440273265192" y="3.0">ImgHistogram<y:LabelModel>
                       <y:SmartNodeLabelModel distance="4.0"/>
                     </y:LabelModel>
                     <y:ModelParameter>
@@ -307,7 +307,7 @@
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
-                  <y:Geometry height="153.0" width="399.60917786935147" x="-2116.322480060914" y="463.49999999999994"/>
+                  <y:Geometry height="153.0" width="399.60917786935147" x="-2103.072226809813" y="463.49999999999994"/>
                   <y:Fill color="#FFCC00" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="128.97900390625" x="135.31508698155073" y="3.0">ImgPassportCreator<y:LabelModel>
@@ -321,9 +321,10 @@
                     <y:AttributeLabel/>
                     <y:MethodLabel>+ QList&lt;double&gt; GetImgPassport( Image, Passport::Type )
 
-- QByteArray GetScaledLuminancePassport( Image )
-- QList&lt;double&gt; CountPercentOfPixelsForEachLum( Image, int )
-</y:MethodLabel>
+- QList&lt;double&gt; GetLuminancePassport( Image )
+- QList&lt;double&gt; GetSubsamplLumPassport( Image )
+- QList&lt;double&gt; GetLumAndGradPassport( Image )
+- QList&lt;double&gt; GetSubsamplLumAndGradPassport( Image )</y:MethodLabel>
                   </y:UML>
                 </y:UMLClassNode>
               </data>
@@ -584,7 +585,7 @@
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="43" rightF="43.44830930252374" top="0" topF="0.0"/>
             </y:GroupNode>
             <y:GroupNode>
               <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
@@ -709,7 +710,7 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="270.82994751931506" width="281.1985355799752" x="-3247.150958487464" y="1227.7294691654529"/>
+              <y:Geometry height="270.82994751931506" width="281.1985355799752" x="-3290.5992677899876" y="1227.7294691654529"/>
               <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="41.57177734375" x="119.8133791181126" y="3.0">Image<y:LabelModel>
@@ -743,7 +744,7 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="290.83452281446904" width="281.1985355799752" x="-3247.150958487464" y="424.62550299805196"/>
+              <y:Geometry height="290.83452281446904" width="281.1985355799752" x="-3290.5992677899876" y="424.62550299805196"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="104.41357421875" x="88.3924806806126" y="3.0">CandidateImage<y:LabelModel>
@@ -889,7 +890,7 @@
               <y:Geometry height="269.4712895154196" width="252.5985584108946" x="-5166.299279205447" y="2456.3237080979657"/>
               <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="34.3544921875" x="109.12203311169742" y="114.79374528634435">Pixel<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="34.3544921875" x="109.1220331116973" y="3.0">Pixel<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -945,7 +946,7 @@
               <y:Geometry height="214.0608902202639" width="269.85735687763645" x="-5359.017087612022" y="2772.557252364931"/>
               <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="32.88818359375" x="118.48458664194277" y="89.14044266205156">RGB<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="32.88818359375" x="118.48458664194322" y="3.0">RGB<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -975,7 +976,7 @@
               <y:Geometry height="224.7402629074886" width="269.85735687763645" x="-5005.907307151078" y="2772.557252364931"/>
               <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="30.71728515625" x="119.57003586069277" y="94.08466221050958">LAB<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="30.71728515625" x="119.57003586069322" y="3.0">LAB<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -1133,7 +1134,7 @@
               <y:Geometry height="152.15911335947686" width="354.6828601036268" x="-4317.341430051813" y="-779.0786380931221"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.7890625" x="139.9468988018134" y="60.48183281640752">IDBHandler<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.7890625" x="139.9468988018134" y="3.0">IDBHandler<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -1296,7 +1297,7 @@
           <y:Geometry height="275.65679083700434" width="281.1985355799752" x="-4580.0" y="-1244.0"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.7763671875" x="103.2110841962376" y="117.65744125865331">Application<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.7763671875" x="103.2110841962376" y="3.0">Application<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -1632,7 +1633,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="4.547473508864641E-13" ty="-66.4501770796582">
-            <y:Point x="-3106.551690697476" y="1163.0252600687918"/>
+            <y:Point x="-3149.9999999999995" y="1163.0252600687918"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
@@ -1805,7 +1806,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="84.22332042287144" sy="0.0" tx="120.0" ty="42.99908141338369">
-            <y:Point x="-3022.328370274605" y="-240.0"/>
+            <y:Point x="-3065.7766795771286" y="-240.0"/>
             <y:Point x="-3810.0" y="-240.0"/>
             <y:Point x="-3810.0" y="-660.0"/>
           </y:Path>
@@ -1873,7 +1874,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="46.55169069747626" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-3060.0" y="832.3118915479909"/>
+            <y:Point x="-3103.4483093025237" y="832.3118915479909"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="white_diamond" target="none"/>

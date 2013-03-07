@@ -43,7 +43,8 @@ SOURCES += main.cpp\
 	application.cpp \
 	SERVICE/FILES/idbfilesservice.cpp \
 	PARAMS/IMAGES/imgpassport.cpp \
-    SERVICE/IMAGES/imghistogram.cpp
+    SERVICE/IMAGES/imghistogram.cpp \
+    SERVICE/IMAGES/imgpassportcreator.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -81,7 +82,8 @@ HEADERS  += \
 	SERVICE/FILES/idbfilesservice.h \
 	PARAMS/IMAGES/imgpassport.h \
     DEFINES/imgservice.h \
-    SERVICE/IMAGES/imghistogram.h
+    SERVICE/IMAGES/imghistogram.h \
+    SERVICE/IMAGES/imgpassportcreator.h
 
 FORMS    += \
 	mainwindow.ui
