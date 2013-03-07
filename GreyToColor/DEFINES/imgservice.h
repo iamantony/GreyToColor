@@ -19,7 +19,12 @@
 #ifndef IMGSERVICE_H
 #define IMGSERVICE_H
 
+#define NUM_OF_RGB_CHANN 3
 #define MIN_RGB_LUM 0
 #define MAX_RGB_LUM 255
+
+#define RED 0
+#define GREEN 1
+#define BLUE 2
 
 #endif // IMGSERVICE_H
