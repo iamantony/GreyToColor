@@ -226,10 +226,37 @@ bool CandidateImage::FormPassport(const Passport::Type &t_type)
 		}
 	}
 
-	// TODO;
-	// - form passport
-	// - check if it already exist in list. If yes - delete it from list
-	// - add new passport to list
+	// Form passport
+	ImgPassportCreator passCreator;
+	QList<double> passport = passCreator.GetImgPassport(m_greyImg, t_type);
+	if ( true == passport.isEmpty() )
+	{
+		qDebug() << "FormPassport(): Error - can't form passport" << t_type;
+		return false;
+	}
+
+	ImgPassport newPassport;
+	bool passportSet = newPassport.SetPassport(t_type, passport);
+	if ( false == passportSet )
+	{
+		qDebug() << "FormPassport(): Error - can't set new passport" << t_type;
+		return false;
+	}
+
+	// Check if passport of the same type already exist in list. If yes - delete it from list
+	int numOfPassports = m_passports.size();
+	for ( int pass = 0; pass < numOfPassports; pass++ )
+	{
+		Passport::Type passType = m_passports.at(pass).GetPassportType();
+		if ( t_type == passType )
+		{
+			m_passports.removeAt(pass);
+			break;
+		}
+	}
+
+	// Add new passport to list
+	m_passports.append(newPassport);
 
 	return true;
 }
@@ -272,4 +299,22 @@ void CandidateImage::TestImageLoad()
 
 	LoadColorImg(imgName);
 	m_greyImg.SaveImg("./test_grey.bmp");
+}
+
+// Test passport forming
+void CandidateImage::TestPassportForming()
+{
+	QWidget wdt;
+	QString imgName = QFileDialog::getOpenFileName(&wdt,
+												 "Open target image...",
+												 QDir::currentPath(),
+												 "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
+
+	LoadColorImg(imgName);
+
+	bool hasPassports = FormAllPassports();
+	if ( false == hasPassports )
+	{
+		qDebug() << "TestPassportForming(): Error - failed to form passports";
+	}
 }

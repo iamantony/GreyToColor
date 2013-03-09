@@ -24,6 +24,7 @@
 #include "../COMMON/image.h"
 #include "./PARAMS/IMAGES/imgpassport.h"
 #include "./SERVICE/IMAGES/imgtransform.h"
+#include "SERVICE/IMAGES/imgpassportcreator.h"
 #include "./DEFINES/global.h"
 
 class CandidateImage
@@ -60,6 +61,8 @@ public:
 
 	// Test loading
 	void TestImageLoad();
+	// Test passport forming
+	void TestPassportForming();
 
 private:
 	// Get from color image it's greyscale copy

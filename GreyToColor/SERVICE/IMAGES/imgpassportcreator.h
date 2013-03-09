@@ -24,6 +24,8 @@
 #include <QDebug>
 #include "./IMAGES/COMMON/image.h"
 #include "SERVICE/IMAGES/imgtransform.h"
+#include "imghistogram.h"
+#include "imgtransform.h"
 #include "DEFINES/images.h"
 
 class ImgPassportCreator

@@ -30,7 +30,7 @@
 #include "DEFINES/programstatus.h"
 #include "DEFINES/mainwindowui.h"
 
-#include "SERVICE/IMAGES/imghistogram.h"
+#include "IMAGES/CANDIDATE/candidateimage.h"
 
 namespace Ui
 {

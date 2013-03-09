@@ -22,3 +22,69 @@ ImgPassportCreator::ImgPassportCreator()
 {
 
 }
+
+// Get image passport of certain type
+// @input:
+// - Image - unnull image (color/grey)
+// - Passport::Type - exist image passport type
+// @output:
+// - empty QList<double> - failed to create image passport
+// - QList<double> - image passport
+QList<double> ImgPassportCreator::GetImgPassport(const Image &t_img, const Passport::Type &t_type)
+{
+	if ( true == t_img.IsNull() )
+	{
+		qDebug() << "GetImgPassport(): Error - invalid arguments";
+		QList<double> empty;
+		return empty;
+	}
+
+	QList<double> passport;
+
+	switch(t_type)
+	{
+		case Passport::LUM_HISTOGRAM:
+			passport = GetLuminancePassport(t_img);
+			break;
+
+		case Passport::LUM_SUBSAMPLE:
+		case Passport::LUM_AND_GRAD:
+		case Passport::LUM_AND_GRAD_SUBSAMPLE:
+		case Passport::DEFAULT_LAST:
+		{
+			qDebug() << "GetImgPassport(): Error - no such passport";
+			QList<double> empty;
+			return empty;
+		}
+	}
+
+	if ( true == passport.isEmpty() )
+	{
+		qDebug() << "GetImgPassport(): Error - failed to create image passport";
+		QList<double> empty;
+		return empty;
+	}
+
+	return passport;
+}
+
+// Get image passport based on luminance histogram of image
+// @input:
+// - Image - unnull image (color/grey)
+// @output:
+// - empty QList<double> - failed to create image passport
+// - QList<double> - image passport
+QList<double> ImgPassportCreator::GetLuminancePassport(const Image &t_img)
+{
+	if ( true == t_img.IsNull() )
+	{
+		qDebug() << "GetLuminancePassport(): Error - invalid arguments";
+		QList<double> empty;
+		return empty;
+	}
+
+	ImgHistogram histogramer;
+	QList<double> passport = histogramer.LuminanceHistogram(t_img);
+
+	return passport;
+}
