@@ -88,3 +88,19 @@ QList<double> ImgPassportCreator::GetLuminancePassport(const Image &t_img)
 
 	return passport;
 }
+
+// Get image passport based on luminance of sunbsampled image
+// @input:
+// - Image - unnull image (color/grey)
+// @output:
+// - empty QList<double> - failed to create image passport
+// - QList<double> - image passport
+QList<double> ImgPassportCreator::GetSubsamplLumPassport(const Image &t_img)
+{
+	if ( true == t_img.IsNull() )
+	{
+		qDebug() << "GetSubsamplLumPassport(): Error - invalid arguments";
+		QList<double> empty;
+		return empty;
+	}
+}

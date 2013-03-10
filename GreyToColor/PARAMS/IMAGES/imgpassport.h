@@ -45,7 +45,7 @@ public:
 	// Clear all info
 	void Clear();
 	// Check if image passport is empty
-	bool IsEmpty();
+	bool IsEmpty() const;
 	// Set image passport as list
 	bool SetPassport(const Passport::Type &t_type, const QList<double> &t_passport);
 	// Set passport as array of bytes

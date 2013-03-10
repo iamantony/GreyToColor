@@ -42,7 +42,7 @@ void ImgPassport::Clear()
 // @output:
 // - true - passport is empty and can't be used
 // - false - passport has information
-bool ImgPassport::IsEmpty()
+bool ImgPassport::IsEmpty() const
 {
 	if ( (Passport::DEFAULT_LAST == m_type) || (true == m_imgPassport.isEmpty()) )
 	{

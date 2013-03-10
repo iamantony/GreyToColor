@@ -243,22 +243,39 @@ bool CandidateImage::FormPassport(const Passport::Type &t_type)
 		return false;
 	}
 
-	// Check if passport of the same type already exist in list. If yes - delete it from list
+	// Add new passport to list
+	AddPasport(newPassport);
+
+	return true;
+}
+
+// Add new passport to list of pasports of current image
+// @input:
+// - ImgPassport - unnull image passport
+// @output:
+void CandidateImage::AddPasport(const ImgPassport &t_passport)
+{
+	if ( true == t_passport.IsEmpty() )
+	{
+		qDebug() << "AddPasport(): Error - invalid arguments";
+		return;
+	}
+
+	Passport::Type newPassType = t_passport.GetPassportType();
+
+	// Check if passport of the same type already exist in list. If yes - delete all such passports
 	int numOfPassports = m_passports.size();
 	for ( int pass = 0; pass < numOfPassports; pass++ )
 	{
 		Passport::Type passType = m_passports.at(pass).GetPassportType();
-		if ( t_type == passType )
+		if ( newPassType == passType )
 		{
 			m_passports.removeAt(pass);
-			break;
 		}
 	}
 
 	// Add new passport to list
-	m_passports.append(newPassport);
-
-	return true;
+	m_passports.append(t_passport);
 }
 
 // Form all exist image passports

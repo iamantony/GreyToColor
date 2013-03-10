@@ -67,6 +67,8 @@ public:
 private:
 	// Get from color image it's greyscale copy
 	bool ToGreyImg();
+	// Add new passport to list of pasports of current image
+	void AddPasport(const ImgPassport &t_passport);
 };
 
 #endif // CANDIDATEIMAGE_H
