@@ -58,6 +58,8 @@ public slots:
 	void SlotCheckIDBSet();
 	// Get name for new IDB and create it
 	void SlotCreateNewIDB(const QString &t_name);
+	// Open exist IDB
+	void SlotOpenIDB(const QString &t_name);
 };
 
 #endif // IDBHANDLER_H

@@ -30,6 +30,7 @@
 #include "IMAGES/COMMON/image.h"
 #include "DEFINES/programstatus.h"
 #include "DEFINES/mainwindowui.h"
+#include "DEFINES/idbs.h"
 
 #include "SERVICE/IMAGES/imgsubsampler.h"
 
@@ -69,6 +70,7 @@ private:
 
 signals:
 	void SignalNewIDB(const QString &t_name);
+	void SignalOpenIDB(const QString &t_name);
 	void SignalFindSimilarInIDB();
 	void SignalNewTargetImg(const QString &t_str);
 	void SignalNewSourceImg(const QString &t_str);

@@ -20,10 +20,10 @@
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="282.8160035792951" width="475.49694622663355" x="-3612.3414300518134" y="-580.5645901617155"/>
+              <y:Geometry height="1898.0614171212094" width="795.0322853689863" x="-2273.0359506611685" y="359.7748542430007"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="475.49694622663355" x="0.0" y="0.0">Database</y:NodeLabel>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="795.0322853689863" x="0.0" y="0.0">Service: 2</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
@@ -43,36 +43,290 @@
         </y:ProxyAutoBoundsNode>
       </data>
       <graph edgedefault="directed" id="n0:">
-        <node id="n0::n0">
+        <node id="n0::n0" yfiles.foldertype="group">
           <data key="d4"/>
           <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="231.3550660792951" width="445.49694622663355" x="-3597.3414300518134" y="-544.1036526617155"/>
-              <y:Fill color="#FFCC00" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="100.87158203125" x="172.31268209769178" y="3.0">ImgDatabase<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                <y:AttributeLabel>- QString m_path
-- QSqlDatabase m_idb</y:AttributeLabel>
-                <y:MethodLabel>+ void Clear()
-+ bool IsSet()
-+ bool SetIDB( QString )
-+ bool CreateNewIDB( QString )
-+ bool AddEntries( QMap&lt;QString, QList&lt;QByteArray&gt; &gt; )
-+ QMap&lt;QString, QByteArray&gt; GetImagesPassport( Passport::Type )
-+ QMap&lt;QString, QList&lt;QByteArray&gt; &gt; GetAllPassport()
-
-- bool IsSQLite( QString )
-- QString FormIDBFullName( QString )</y:MethodLabel>
-              </y:UML>
-            </y:UMLClassNode>
+            <y:ProxyAutoBoundsNode>
+              <y:Realizers active="0">
+                <y:GroupNode>
+                  <y:Geometry height="498.9220318088244" width="765.0322853689863" x="-2258.0359506611685" y="1743.9142395553856"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="765.0322853689863" x="0.0" y="0.0">File Service</y:NodeLabel>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                  <y:BorderInsets bottom="0" bottomF="0.0" left="35" leftF="34.717135892436545" right="0" rightF="0.0" top="0" topF="0.0"/>
+                </y:GroupNode>
+                <y:GroupNode>
+                  <y:Geometry height="50.0" width="50.0" x="-3099.5492799658614" y="1492.6722416442376"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="65.201171875" x="-7.6005859375" y="0.0">Folder 3</y:NodeLabel>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="true" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
+                  <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+                </y:GroupNode>
+              </y:Realizers>
+            </y:ProxyAutoBoundsNode>
           </data>
+          <graph edgedefault="directed" id="n0::n0:">
+            <node id="n0::n0::n0">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="115.01960159362557" width="247.3470939949766" x="-1936.1214842147938" y="2112.8166697705847"/>
+                  <y:Fill color="#66FF33" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="92.39111328125" x="77.4779903568633" y="43.68411504095229">FilesService<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ bool RemoveFile( QString )
++ QString FormFullName( QString )
++ bool CheckFileExistance( QString )
++ QString GetFileName( QString )</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n0::n0::n1">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="244.54106166909446" width="357.4573415835057" x="-2208.318814768732" y="1780.3751770553856"/>
+                  <y:Fill color="#66FF33" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="120.07958984375" x="118.68887586987785" y="103.64854868376756">ImgFilesService<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="FilesService" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ bool RemoveImg( QString )
++ bool CheckImgExist ( QString )
++ QString GetImgName( QString )
++ QString MoveImageToProject( QString )
++ QStringList MoveImagesToProject( QStringList )
++ bool SaveImage( QImage, QString )
+
+- QString CutSuffix( QString )
+
++ void TestImgMoving()
++ void TestImgSaving()</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n0::n0::n2">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="160.3229984140969" width="247.3470939949766" x="-1755.3507592871588" y="1864.5932403103827"/>
+                  <y:Fill color="#66FF33" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="117.927734375" x="64.7096798099883" y="64.65818783825057">IDBFilesService<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="FilesService" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ bool RemoveIDB( QString )
++ bool CheckIDBExist( QString )
++ QString FormIDBFullPath (QString)</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+          </graph>
+        </node>
+        <node id="n0::n1" yfiles.foldertype="group">
+          <data key="d4"/>
+          <data key="d6">
+            <y:ProxyAutoBoundsNode>
+              <y:Realizers active="0">
+                <y:GroupNode>
+                  <y:Geometry height="1299.2961439876844" width="765.0322853689863" x="-2258.0359506611685" y="396.2357917430007"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="765.0322853689863" x="0.0" y="0.0">Image Service</y:NodeLabel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" modelName="custom" textColor="#000000" visible="true" width="4.0" x="380.51614268449316" y="647.6480719938422">
+                    <y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                  <y:BorderInsets bottom="100" bottomF="100.13851351697508" left="143" leftF="142.6581875868742" right="112" rightF="111.61857163352374" top="16" topF="15.796679038636455"/>
+                </y:GroupNode>
+                <y:GroupNode>
+                  <y:Geometry height="981.6584317180616" width="1501.7111541850222" x="-2130.8555770925113" y="289.17078414096915"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1501.7111541850222" x="0.0" y="0.0">Folder 5</y:NodeLabel>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="true" closedHeight="981.6584317180616" closedWidth="1501.7111541850222" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
+                  <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+                </y:GroupNode>
+              </y:Realizers>
+            </y:ProxyAutoBoundsNode>
+          </data>
+          <graph edgedefault="directed" id="n0::n1:">
+            <node id="n0::n1::n0">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="191.0967908964874" width="295.26153093843095" x="-2007.6307654692155" y="1389.2966313172226"/>
+                  <y:Fill color="#66FF33" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="107.2763671875" x="93.99258187546548" y="78.90550280962952">ImgTransform<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ Image ToGreyImg( Image )
++ Image NormaliseImgHistogram( Image )
++ Image LevelLuminance( Image, int )
+
++ void TestNormalization()
++ void TestLumLeveling()
+
+- QImage GreyscaleImg( QImage )
+- Image PerformImgNormalisation( Image )
+- Image PerformLumLeveling( Image, int )</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n0::n1::n1">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="105.0" width="295.26153093843095" x="-2007.6307654692155" y="1209.1442210065698"/>
+                  <y:Fill color="#66FF33" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="129.04248046875" x="83.10952523484048" y="39.04534912109375">ImgSearchParam<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ int FindMaxLum( Image )
++ int FindMinLum( Image )
++ QPair&lt;int, int&gt; FindMinMaxLum( Image )</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n0::n1::n2">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="191.0967908964874" width="477.0780062095025" x="-2096.7002431352084" y="676.6458185922897"/>
+                  <y:Fill color="#66FF33" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="107.94287109375" x="184.56756755787637" y="78.90550280962952">ImgHistogram<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ QList&lt;double&gt; LuminanceHistogram( Image )
++ QList&lt; QList&lt;double&gt; &gt; RGBHistogram( Image )
+
++ void TestRGBHist()
+
+- QList&lt; QList&lt;double&gt; &gt; CalcRGBHistogram( QImage )
+- QList&lt; QList&lt;double&gt; &gt; CalcRGBChannStatistic( QImage )
+- QList&lt; QList&lt;double&gt; &gt; FormZeroRGBHist()
+- QList&lt; QList&lt;double&gt; &gt; FormStatHistInPercent( QList&lt; QList&lt;double&gt; &gt; )</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n0::n1::n3">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="153.0" width="399.60917786935147" x="-2057.9658289651325" y="448.49340828163713"/>
+                  <y:Fill color="#FFCC00" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="151.42431640625" x="124.09243073155085" y="61.267865862165195">ImgPassportCreator<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ QList&lt;double&gt; GetImgPassport( Image, Passport::Type )
+
+- QList&lt;double&gt; GetLuminancePassport( Image )
+- QList&lt;double&gt; GetSubsamplLumPassport( Image )
+- QList&lt;double&gt; GetLumAndGradPassport( Image )
+- QList&lt;double&gt; GetSubsamplLumAndGradPassport( Image )</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n0::n1::n4">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="191.0967908964874" width="480.7555261485884" x="-2100.3777630742943" y="942.8950197994297"/>
+                  <y:Fill color="#66FF33" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="118.65771484375" x="181.0489056524193" y="78.90550280962952">ImgSubsampler<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ QList&lt;double&gt; SubsampleImg( Image, int )
+
++ void TestDivide()
++ void TestSubsampling()
+
+- QImage GetGreyImg( Image )
+- QList&lt;QRect&gt; GetSamplesRects( int, int, int )
+- QList&lt; QPair&lt;int, int&gt; &gt; DivideFacet( int, int )
+- QList&lt;double&gt; CalcSamplesLum( QImage, QList&lt;QRect&gt; )</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+          </graph>
         </node>
       </graph>
     </node>
@@ -82,14 +336,264 @@
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="485.6019733747544" width="367.67166602229327" x="-2825.5992677899876" y="677.5613459360397"/>
+              <y:Geometry height="909.3825007032543" width="464.0" x="-5628.0" y="-815.5395755931221"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="367.67166602229327" x="0.0" y="0.0">Parameters</y:NodeLabel>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="464.0" x="0.0" y="0.0">UI</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="5" bottomF="4.880970677981622" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+            </y:GroupNode>
+            <y:GroupNode>
+              <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
+              <y:Fill color="#F5F5F5" transparent="false"/>
+              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="65.201171875" x="-7.6005859375" y="0.0">Folder 9</y:NodeLabel>
+              <y:Shape type="roundrectangle"/>
+              <y:State closed="true" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+            </y:GroupNode>
+          </y:Realizers>
+        </y:ProxyAutoBoundsNode>
+      </data>
+      <graph edgedefault="directed" id="n1:">
+        <node id="n1::n0">
+          <data key="d4"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="562.036042047249" width="301.2458644835824" x="-5533.552836079446" y="-779.0786380931221"/>
+              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="97.716796875" x="101.7645338042912" y="25.96875">MainWindow<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="QMainWindow" use3DEffect="true">
+                <y:AttributeLabel/>
+                <y:MethodLabel>- void InitUI()
+- void InitStatusBar()
+- void InitImgsLabels()
+- void InitImg( Images::Types t_imgType )
+- void ShowWarning( QString, QString )
+- bool CanOperate()
+
++ void SlotGetSourceImg( QImage )
++ void SlotGetResultImg( QImage )
++ void SlotCurrProcess( Program::Status )
++ void SlotProcessEnd()
++ void SlotProcError( QString )
++ void SlotProcessFail()
+
+- void on_openTargetImgPB_clicked()
+- void on_actionOpenTargetImage_triggered()
+- void on_openSourceImgPB_clicked()
+- void on_actionOpenSourceImage_triggered()
+- void on_actionSaveResult_triggered()
+- void on_findSourceImgPB_clicked()
+- void on_startColorizationPB_clicked()
+- void on_resetPB_clicked()
+- void on_actionCreateDatabase_triggered()
+- void on_actionOpenDatabase_triggered()
+- void on_actionAddImages_triggered()
+
+- void SignalNewIDB( QString )
+- void SignalOpenIDB( QString )
+- void SignalFindSimilarInIDB()
+- void SignalNewTargetImg( QString )
+- void SignalNewSourceImg( QString )
+- void SignalSaveResultImg( QString )</y:MethodLabel>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+        <node id="n1::n1">
+          <data key="d4"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="217.68585022026446" width="202.0" x="-5613.0" y="-138.84292511013223"/>
+              <y:Fill color="#66FF33" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="82.7490234375" x="59.62548828125" y="25.96875">ScaleLabel<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="QLabel" use3DEffect="true">
+                <y:AttributeLabel>- QString m_defaultImgPath
+- QImage m_originalImg</y:AttributeLabel>
+                <y:MethodLabel>+ void SetImage( QImage )
++ void SetImage( QString )
++ bool SetDefaultImgPath( QString )
++ void ShowDefaultImg()
+
+# void resizeEvent( QResizeEvent )
+
+- void SetImgOnLabel()</y:MethodLabel>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+        <node id="n1::n2">
+          <data key="d4"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="217.68585022026446" width="202.0" x="-5381.0" y="-138.84292511013223"/>
+              <y:Fill color="#66FF33" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="76.64892578125" x="62.675537109375" y="25.96875">StatusBar<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="QStatusBar" use3DEffect="true">
+                <y:AttributeLabel>- QLabel m_infoString
+- QProgressBar m_progrBar</y:AttributeLabel>
+                <y:MethodLabel>+ int GetProgressMin()
++ int GetProgressMax()
++ void SetProcesProgress( int )
++ void ResetProcesProgress()
++ void SetStatus( Program::Status )
+
+- void SetInfoString()
+- void SetProgressBar()</y:MethodLabel>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+      </graph>
+    </node>
+    <node id="n2" yfiles.foldertype="group">
+      <data key="d4"/>
+      <data key="d6">
+        <y:ProxyAutoBoundsNode>
+          <y:Realizers active="0">
+            <y:GroupNode>
+              <y:Geometry height="517.7909890107017" width="881.1985355799752" x="-4775.0" y="-815.5395755931221"/>
+              <y:Fill color="#F5F5F5" transparent="false"/>
+              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="881.1985355799752" x="0.0" y="0.0">Handlers</y:NodeLabel>
+              <y:Shape type="roundrectangle"/>
+              <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="50" rightF="49.58350147531473" top="0" topF="0.0"/>
+            </y:GroupNode>
+            <y:GroupNode>
+              <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
+              <y:Fill color="#F5F5F5" transparent="false"/>
+              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="65.201171875" x="-7.6005859375" y="0.0">Folder 8</y:NodeLabel>
+              <y:Shape type="roundrectangle"/>
+              <y:State closed="true" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+            </y:GroupNode>
+          </y:Realizers>
+        </y:ProxyAutoBoundsNode>
+      </data>
+      <graph edgedefault="directed" id="n2:">
+        <node id="n2::n0">
+          <data key="d4"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="466.3300515107017" width="281.1985355799752" x="-4760.0" y="-779.0786380931221"/>
+              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="89.58544921875" x="95.8065431806126" y="3.0">ImgHandler<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                <y:AttributeLabel>- Image m_targetOriginal
+- TargetImage m_target
+- SourceImage m_source</y:AttributeLabel>
+                <y:MethodLabel>+ void Clear()
++ Image GetOriginalImg()
++ Image GetTargetImg()
++ Image GetSourcelImg()
++ double GetImgSKO()
++ void StartColorizationWalshSimple()
++ void StartColorizationWalshNeighbor()
+
+- void GetGreyTarget()
+- void SendResultImg()
+
++ void SlotSaveResultImg( QString )
++ void SlotGetNewTargetImg( QString )
++ void SlotGetNewSourceImg( QString )
+
+- void SignalGetResultImg( QImage )
+- void SignalCurrentProc( Program::Status )
+- void SignalProcDone()
+- void SignalProcError( QString )
+- void SignalProcFatalError()</y:MethodLabel>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+        <node id="n2::n1">
+          <data key="d4"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="466.3300515107017" width="358.9564641564739" x="-4317.341430051813" y="-779.0786380931221"/>
+              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="87.43359375" x="135.76143520323694" y="3.0">IDBHandler<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                <y:AttributeLabel>- ImgDatabase m_idb</y:AttributeLabel>
+                <y:MethodLabel>+ void Clear()
++ bool AddImgToIDB( QString )
++ bool AddImagesToIDB( QStringList )
++ QString FindSimilarImg( Image, Passport::Type )
+
+- QString ComparePassports( Passport, QList&lt;Passport&gt; )
+
++ void SlotCheckIDBSet()
++ void SlotCreateNewIDB( QString )
++ void SlotOpenIDB( QString )
+
+- void SignalIDBStatus( bool )
+- void SignalCurrentProc( Program::Status )
+- void SignalProcDone()
+- void SignalProcError( QString )
+- void SignalProcFatalError()</y:MethodLabel>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+      </graph>
+    </node>
+    <node id="n3" yfiles.foldertype="group">
+      <data key="d4"/>
+      <data key="d6">
+        <y:ProxyAutoBoundsNode>
+          <y:Realizers active="0">
+            <y:GroupNode>
+              <y:Geometry height="166.48053909362557" width="401.289340480419" x="-5930.644670240211" y="1305.0194609063747"/>
+              <y:Fill color="#F5F5F5" transparent="false"/>
+              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="401.289340480419" x="0.0" y="0.0">Service:1</y:NodeLabel>
+              <y:Shape type="roundrectangle"/>
+              <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
             </y:GroupNode>
             <y:GroupNode>
               <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
@@ -104,233 +608,15 @@
           </y:Realizers>
         </y:ProxyAutoBoundsNode>
       </data>
-      <graph edgedefault="directed" id="n1:">
-        <node id="n1::n0">
-          <data key="d4"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="153.0" width="281.1985355799752" x="-2782.3627025688284" y="990.2823486328125"/>
-              <y:Fill color="#66FF33" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="136.35498046875" x="72.4217775556126" y="3.0">ImgSimilarityArea<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                <y:AttributeLabel>- uint m_id
-- QRect m_area</y:AttributeLabel>
-                <y:MethodLabel>+ void Clear()
-+ void SetArea( uint, QRect )
-+ uint GetAreaID()
-+ QRect GetAreaRect()
-+ bool IsValid()</y:MethodLabel>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-        <node id="n1::n1">
-          <data key="d4"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="236.5792162239021" width="337.67166602229327" x="-2810.5992677899876" y="714.0222834360397"/>
-              <y:Fill color="#66FF33" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="96.32666015625" x="120.67250293302163" y="3.0">ImgPassport<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                <y:AttributeLabel>- Passport::Type m_type
-- QList&lt;double&gt; m_imgPassport</y:AttributeLabel>
-                <y:MethodLabel>+ void Clear()
-+ bool IsEmpty()
-+ bool SetPassport( Passport::Type, QList&lt;double&gt; )
-+ bool SetPassport( Passport::Type, QByteArray )
-+ Passport::Type GetPassportType()
-+ QList&lt;double&gt; GetPassportAsList()
-+ QByteArray GetPassportAsArray()
-
-- QList&lt;double&gt; FromArrayToList( QByteArray )
-- QByteArray FromListToArray( QList&lt;double&gt; )</y:MethodLabel>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-      </graph>
-    </node>
-    <node id="n2" yfiles.foldertype="group">
-      <data key="d4"/>
-      <data key="d6">
-        <y:ProxyAutoBoundsNode>
-          <y:Realizers active="0">
-            <y:GroupNode>
-              <y:Geometry height="800.9486221285619" width="824.6425663362679" x="-5440.880672354748" y="788.865610816836"/>
-              <y:Fill color="#F5F5F5" transparent="false"/>
-              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="824.6425663362679" x="0.0" y="0.0">Images Pixels</y:NodeLabel>
-              <y:Shape type="roundrectangle"/>
-              <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
-              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
-            </y:GroupNode>
-            <y:GroupNode>
-              <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
-              <y:Fill color="#F5F5F5" transparent="false"/>
-              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="65.201171875" x="-7.6005859375" y="0.0">Folder 4</y:NodeLabel>
-              <y:Shape type="roundrectangle"/>
-              <y:State closed="true" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
-              <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
-              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
-            </y:GroupNode>
-          </y:Realizers>
-        </y:ProxyAutoBoundsNode>
-      </data>
-      <graph edgedefault="directed" id="n2:">
-        <node id="n2::n0">
-          <data key="d4"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="351.64806748442106" width="371.28934048041856" x="-5225.64467024021" y="1223.1661654609768"/>
-              <y:Fill color="#66FF33" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="92.65771484375" x="139.31581281833428" y="3.0">ImagePixels<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                <y:AttributeLabel># uint m_width
-# uint m_height
-# QList&lt; QList&lt;Pixel*&gt; &gt; m_pixels</y:AttributeLabel>
-                <y:MethodLabel>+ virtual void Clear()
-+ bool HasPixels()
-+ virtual bool FormImgPixels( QImage )
-+ void TransAllPixRGB2LAB()
-+ void TransAllPixLAB2RGB( )
-+ double GetPixChLum( uint, uint )
-+ double GetPixChA( uint, uint )
-+ double GetPixChB( uint, uint )
-+ void SetPixChannelsAB( uint, uint, double, double )
-+ double FindMaxLum()
-+ double FindMinLum()
-+ bool IsPixGrey( uint, uint )
-
-# bool IsPixelExist( uint, uint )
-# void TransformPixRGB2LAB( uint, uint )
-# void TransformPixLAB2RGB( uint, uint )
-# QList&lt;double&gt; GetPixNeighborsLum( uint, uint )</y:MethodLabel>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-        <node id="n2::n1">
-          <data key="d4"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="271.77617765147335" width="371.2893404804187" x="-5425.880672354748" y="825.326548316836"/>
-              <y:Fill color="#66FF33" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="123.45654296875" x="123.91639875583434" y="25.96875">TargetImgPixels<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="ImagePixels" use3DEffect="true">
-                <y:AttributeLabel>// Pixel -&gt; TargetPixel</y:AttributeLabel>
-                <y:MethodLabel>+ virtual void Clear()
-+ virtual bool FormImgPixels( QImage )
-+ void CalcPixelsSKO()
-+ double GetPixelsSKO( uint, uint )
-+ bool ScaleLum( double )
-+ void UnScaleLum()
-+ void SetPixPreferedColor( uint, uint, RGB )
-+ QImage FormImage()
-
-- void CalcPixSKO()
-
-+ void TestFunctionality()</y:MethodLabel>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-        <node id="n2::n2">
-          <data key="d4"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="220.27402621746938" width="371.2893404804188" x="-5002.527446498899" y="838.8531860944526"/>
-              <y:Fill color="#66FF33" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="125.55126953125" x="122.8690354745844" y="25.96875">SourceImgPixels<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="ImagePixels" use3DEffect="true">
-                <y:AttributeLabel>// Pixel -&gt; SourcePixel</y:AttributeLabel>
-                <y:MethodLabel>+ virtual void Clear()
-+ virtual bool FormImgPixels( QImage )
-+ void CalcPixelsSKO()
-+ double GetPixelsSKO( uint, uint )
-
-- void CalcPixSKO()
-
-+ void TestFunctionality()</y:MethodLabel>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-      </graph>
-    </node>
-    <node id="n3" yfiles.foldertype="group">
-      <data key="d4"/>
-      <data key="d6">
-        <y:ProxyAutoBoundsNode>
-          <y:Realizers active="0">
-            <y:GroupNode>
-              <y:Geometry height="1316.1930976843494" width="1143.9739354099343" x="-4094.926358317423" y="197.3663190004185"/>
-              <y:Fill color="#F5F5F5" transparent="false"/>
-              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1143.9739354099343" x="0.0" y="0.0">Images</y:NodeLabel>
-              <y:Shape type="roundrectangle"/>
-              <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
-              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="43" rightF="43.44830930252374" top="0" topF="0.0"/>
-            </y:GroupNode>
-            <y:GroupNode>
-              <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
-              <y:Fill color="#F5F5F5" transparent="false"/>
-              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="65.201171875" x="-7.6005859375" y="0.0">Folder 2</y:NodeLabel>
-              <y:Shape type="roundrectangle"/>
-              <y:State closed="true" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
-              <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
-              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
-            </y:GroupNode>
-          </y:Realizers>
-        </y:ProxyAutoBoundsNode>
-      </data>
       <graph edgedefault="directed" id="n3:">
         <node id="n3::n0">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="526.1893310846061" width="357.4573415835057" x="-3721.1777032891337" y="899.9305945264887"/>
-              <y:Fill color="#66FF33" transparent="false"/>
+              <y:Geometry height="115.01960159362557" width="371.289340480419" x="-5915.644670240211" y="1341.4803984063747"/>
+              <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="129.1630859375" x="114.14712782300285" y="3.0">ProcessingImage<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="64.962890625" x="153.16322492770905" y="43.68411504095229">CalcSKO<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -338,169 +624,10 @@
                 </y:ModelParameter>
               </y:NodeLabel>
               <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                <y:AttributeLabel># Image m_img
-# ImagePixels *m_imgPixels
-# QList&lt;ImgSimilarityArea&gt; m_similarAreas</y:AttributeLabel>
-                <y:MethodLabel>+ virtual void Clear()
-+ bool HasImage()
-+ bool SetImg( QImage )
-+ bool SetImgPath( QString )
-+ bool LoadImg( QString )
-+ uint GetImageWidth()
-+ uint GetImageHeight()
-+ void TransformImgRGB2LAB()
-+ void TransformImgLAB2GRB()
-+ double PixelChLum( uint, uint )
-+ double PixelChA( uint, uint )
-+ double PixelChB( uint, uint )
-+ void SetPixelChAB( uint, uint, double, double )
-+ double GetMaxLABLum()
-+ bool IsPixelGrey( uint, uint )
-+ bool AddSimilarityArea( ImgSimilarityArea )
-+ ImgSimilarityArea FindSimilarityArea( uint )
-
-+ void TestImgSimArea()
-
-# virtual void ConstructImgPixels()
-
-- bool ValidateSimArea( ImgSimilarityArea )
-
-- void TestInvalidArea()
-- void TestValidAreaWithoutImage()
-- void TestValidAreaWithImage()
-- void TestHugeValidAreaWithImage()
-- void TestAddSevAreasWithImage()</y:MethodLabel>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-        <node id="n3::n1">
-          <data key="d4"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="307.64609602463076" width="357.4573415835058" x="-4079.926358317423" y="233.8272565004185"/>
-              <y:Fill color="#66FF33" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="97.666015625" x="129.8956629792529" y="25.96875">TargetImage<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="ProcessingImage" use3DEffect="true">
-                <y:AttributeLabel>// m_imgPixels as TargetImgPixels
-- QList&lt;ImgPassport&gt; m_passports</y:AttributeLabel>
-                <y:MethodLabel>+ virtual void Clear()
-+ void CalcPixelsSKO()
-+ double GetPixelsSKO( uint, uint )
-+ void ScaleLABLum( double )
-+ void UnScaleLABLum()
-+ void SetPixPrefColor( uint, uint, RGB )
-+ ImgPassport GetPassport( Passport::Type )
-+ QList&lt;ImgPassport&gt; GetAllPassports()
-+ bool FormPassport( Passport::Type )
-+ bool FormAllPassports()
-+ Image GetResultImage()
-
-- virtual void ConstructImgPixels()
-- void AddPassport( ImgPassport )</y:MethodLabel>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-        <node id="n3::n2">
-          <data key="d4"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="220.27402621746933" width="354.68286010362704" x="-4078.5391175774835" y="609.8629868912653"/>
-              <y:Fill color="#66FF33" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="99.7607421875" x="127.46105895806352" y="25.96875">SourceImage<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="ProcessingImage" use3DEffect="true">
-                <y:AttributeLabel>// m_imgPixels as SourceImgPixels</y:AttributeLabel>
-                <y:MethodLabel>+ virtual void Clear()
-+ void CalcPixelsSKO()
-+ double GetPixelsSKO( uint, uint )
-
-- virtual void ConstructImgPixels()</y:MethodLabel>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-        <node id="n3::n3">
-          <data key="d4"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="270.82994751931506" width="281.1985355799752" x="-3290.5992677899876" y="1227.7294691654529"/>
-              <y:Fill color="#66FF33" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="49.27783203125" x="115.9603517743626" y="3.0">Image<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                <y:AttributeLabel>- QString m_pathToImg
-- QImage m_image</y:AttributeLabel>
-                <y:MethodLabel>+ void Clear()
-+ bool LoadImg( QString )
-+ bool ReloadImg()
-+ bool SetImgPath( QString )
-+ bool SetImage( QImage )
-+ QString GetImgPath()
-+ QImage GetImg()
-+ uint GetImgWidth()
-+ uint GetImgHeight()
-+ bool SaveImg()
-+ bool SaveImg( QString )
-+ bool IsNull()
-+ bool IsExist()</y:MethodLabel>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-        <node id="n3::n4">
-          <data key="d4"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="315.1460960246307" width="281.1985355799752" x="-3290.5992677899876" y="407.8139297878903"/>
-              <y:Fill color="#66FF33" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="123.716796875" x="78.7408693524876" y="3.0">CandidateImage<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                <y:AttributeLabel>- Image m_color
-- Image m_grey
-- QList&lt;ImgPassport&gt; m_passports</y:AttributeLabel>
-                <y:MethodLabel>+ void Clear()
-+ bool LoadColorImg( QString )
-+ bool SetColorImage( QImage )
-+ Image GetColorImg()
-+ Image GetGreyImg()
-+ ImgPassport GetPassport( Passport::Type )
-+ QList&lt;ImgPassport&gt; GetAllPassports()
-+ bool FormPassport( Passport::Type )
-+ bool FormAllPassports()
-
-+ void TestImageLoad()
-+ void TestPassportForming()
-
-- bool ToGreyImg()
-- void AddPassport( ImgPassport )</y:MethodLabel>
+                <y:AttributeLabel/>
+                <y:MethodLabel>+ double ImagesSKO ( Image, Image )
++ double PassportsSKO ( QList&lt;double&gt;, QList&lt;double&gt; )
++ double PixelMaskSKO( double, QList&lt;double&gt; )</y:MethodLabel>
               </y:UML>
             </y:UMLClassNode>
           </data>
@@ -738,14 +865,357 @@
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="166.48053909362557" width="401.289340480419" x="-5930.644670240211" y="1305.0194609063747"/>
+              <y:Geometry height="1316.1930976843494" width="1143.9739354099343" x="-4094.926358317423" y="197.3663190004185"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="401.289340480419" x="0.0" y="0.0">Service:1</y:NodeLabel>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1143.9739354099343" x="0.0" y="0.0">Images</y:NodeLabel>
+              <y:Shape type="roundrectangle"/>
+              <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="43" rightF="43.44830930252374" top="0" topF="0.0"/>
+            </y:GroupNode>
+            <y:GroupNode>
+              <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
+              <y:Fill color="#F5F5F5" transparent="false"/>
+              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="65.201171875" x="-7.6005859375" y="0.0">Folder 2</y:NodeLabel>
+              <y:Shape type="roundrectangle"/>
+              <y:State closed="true" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+            </y:GroupNode>
+          </y:Realizers>
+        </y:ProxyAutoBoundsNode>
+      </data>
+      <graph edgedefault="directed" id="n5:">
+        <node id="n5::n0">
+          <data key="d4"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="526.1893310846061" width="357.4573415835057" x="-3721.1777032891337" y="899.9305945264887"/>
+              <y:Fill color="#66FF33" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="129.1630859375" x="114.14712782300285" y="3.0">ProcessingImage<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                <y:AttributeLabel># Image m_img
+# ImagePixels *m_imgPixels
+# QList&lt;ImgSimilarityArea&gt; m_similarAreas</y:AttributeLabel>
+                <y:MethodLabel>+ virtual void Clear()
++ bool HasImage()
++ bool SetImg( QImage )
++ bool SetImgPath( QString )
++ bool LoadImg( QString )
++ uint GetImageWidth()
++ uint GetImageHeight()
++ void TransformImgRGB2LAB()
++ void TransformImgLAB2GRB()
++ double PixelChLum( uint, uint )
++ double PixelChA( uint, uint )
++ double PixelChB( uint, uint )
++ void SetPixelChAB( uint, uint, double, double )
++ double GetMaxLABLum()
++ bool IsPixelGrey( uint, uint )
++ bool AddSimilarityArea( ImgSimilarityArea )
++ ImgSimilarityArea FindSimilarityArea( uint )
+
++ void TestImgSimArea()
+
+# virtual void ConstructImgPixels()
+
+- bool ValidateSimArea( ImgSimilarityArea )
+
+- void TestInvalidArea()
+- void TestValidAreaWithoutImage()
+- void TestValidAreaWithImage()
+- void TestHugeValidAreaWithImage()
+- void TestAddSevAreasWithImage()</y:MethodLabel>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+        <node id="n5::n1">
+          <data key="d4"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="307.64609602463076" width="357.4573415835058" x="-4079.926358317423" y="233.8272565004185"/>
+              <y:Fill color="#66FF33" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="97.666015625" x="129.8956629792529" y="25.96875">TargetImage<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="ProcessingImage" use3DEffect="true">
+                <y:AttributeLabel>// m_imgPixels as TargetImgPixels
+- QList&lt;ImgPassport&gt; m_passports</y:AttributeLabel>
+                <y:MethodLabel>+ virtual void Clear()
++ void CalcPixelsSKO()
++ double GetPixelsSKO( uint, uint )
++ void ScaleLABLum( double )
++ void UnScaleLABLum()
++ void SetPixPrefColor( uint, uint, RGB )
++ ImgPassport GetPassport( Passport::Type )
++ QList&lt;ImgPassport&gt; GetAllPassports()
++ bool FormPassport( Passport::Type )
++ bool FormAllPassports()
++ Image GetResultImage()
+
+- virtual void ConstructImgPixels()
+- void AddPassport( ImgPassport )</y:MethodLabel>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+        <node id="n5::n2">
+          <data key="d4"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="220.27402621746933" width="354.68286010362704" x="-4078.5391175774835" y="609.8629868912653"/>
+              <y:Fill color="#66FF33" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="99.7607421875" x="127.46105895806352" y="25.96875">SourceImage<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="ProcessingImage" use3DEffect="true">
+                <y:AttributeLabel>// m_imgPixels as SourceImgPixels</y:AttributeLabel>
+                <y:MethodLabel>+ virtual void Clear()
++ void CalcPixelsSKO()
++ double GetPixelsSKO( uint, uint )
+
+- virtual void ConstructImgPixels()</y:MethodLabel>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+        <node id="n5::n3">
+          <data key="d4"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="270.82994751931506" width="281.1985355799752" x="-3290.5992677899876" y="1227.7294691654529"/>
+              <y:Fill color="#66FF33" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="49.27783203125" x="115.9603517743626" y="3.0">Image<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                <y:AttributeLabel>- QString m_pathToImg
+- QImage m_image</y:AttributeLabel>
+                <y:MethodLabel>+ void Clear()
++ bool LoadImg( QString )
++ bool ReloadImg()
++ bool SetImgPath( QString )
++ bool SetImage( QImage )
++ QString GetImgPath()
++ QImage GetImg()
++ uint GetImgWidth()
++ uint GetImgHeight()
++ bool SaveImg()
++ bool SaveImg( QString )
++ bool IsNull()
++ bool IsExist()</y:MethodLabel>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+        <node id="n5::n4">
+          <data key="d4"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="315.1460960246307" width="281.1985355799752" x="-3290.5992677899876" y="407.8139297878903"/>
+              <y:Fill color="#66FF33" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="123.716796875" x="78.7408693524876" y="3.0">CandidateImage<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                <y:AttributeLabel>- Image m_color
+- Image m_grey
+- QList&lt;ImgPassport&gt; m_passports</y:AttributeLabel>
+                <y:MethodLabel>+ void Clear()
++ bool LoadColorImg( QString )
++ bool SetColorImage( QImage )
++ Image GetColorImg()
++ Image GetGreyImg()
++ ImgPassport GetPassport( Passport::Type )
++ QList&lt;ImgPassport&gt; GetAllPassports()
++ bool FormPassport( Passport::Type )
++ bool FormAllPassports()
+
++ void TestImageLoad()
++ void TestPassportForming()
+
+- bool ToGreyImg()
+- void AddPassport( ImgPassport )</y:MethodLabel>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+      </graph>
+    </node>
+    <node id="n6" yfiles.foldertype="group">
+      <data key="d4"/>
+      <data key="d6">
+        <y:ProxyAutoBoundsNode>
+          <y:Realizers active="0">
+            <y:GroupNode>
+              <y:Geometry height="800.9486221285619" width="824.6425663362679" x="-5440.880672354748" y="788.865610816836"/>
+              <y:Fill color="#F5F5F5" transparent="false"/>
+              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="824.6425663362679" x="0.0" y="0.0">Images Pixels</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
               <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+            </y:GroupNode>
+            <y:GroupNode>
+              <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
+              <y:Fill color="#F5F5F5" transparent="false"/>
+              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="65.201171875" x="-7.6005859375" y="0.0">Folder 4</y:NodeLabel>
+              <y:Shape type="roundrectangle"/>
+              <y:State closed="true" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+            </y:GroupNode>
+          </y:Realizers>
+        </y:ProxyAutoBoundsNode>
+      </data>
+      <graph edgedefault="directed" id="n6:">
+        <node id="n6::n0">
+          <data key="d4"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="351.64806748442106" width="371.28934048041856" x="-5225.64467024021" y="1223.1661654609768"/>
+              <y:Fill color="#66FF33" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="92.65771484375" x="139.31581281833428" y="3.0">ImagePixels<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                <y:AttributeLabel># uint m_width
+# uint m_height
+# QList&lt; QList&lt;Pixel*&gt; &gt; m_pixels</y:AttributeLabel>
+                <y:MethodLabel>+ virtual void Clear()
++ bool HasPixels()
++ virtual bool FormImgPixels( QImage )
++ void TransAllPixRGB2LAB()
++ void TransAllPixLAB2RGB( )
++ double GetPixChLum( uint, uint )
++ double GetPixChA( uint, uint )
++ double GetPixChB( uint, uint )
++ void SetPixChannelsAB( uint, uint, double, double )
++ double FindMaxLum()
++ double FindMinLum()
++ bool IsPixGrey( uint, uint )
+
+# bool IsPixelExist( uint, uint )
+# void TransformPixRGB2LAB( uint, uint )
+# void TransformPixLAB2RGB( uint, uint )
+# QList&lt;double&gt; GetPixNeighborsLum( uint, uint )</y:MethodLabel>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+        <node id="n6::n1">
+          <data key="d4"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="271.77617765147335" width="371.2893404804187" x="-5425.880672354748" y="825.326548316836"/>
+              <y:Fill color="#66FF33" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="123.45654296875" x="123.91639875583434" y="25.96875">TargetImgPixels<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="ImagePixels" use3DEffect="true">
+                <y:AttributeLabel>// Pixel -&gt; TargetPixel</y:AttributeLabel>
+                <y:MethodLabel>+ virtual void Clear()
++ virtual bool FormImgPixels( QImage )
++ void CalcPixelsSKO()
++ double GetPixelsSKO( uint, uint )
++ bool ScaleLum( double )
++ void UnScaleLum()
++ void SetPixPreferedColor( uint, uint, RGB )
++ QImage FormImage()
+
+- void CalcPixSKO()
+
++ void TestFunctionality()</y:MethodLabel>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+        <node id="n6::n2">
+          <data key="d4"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="220.27402621746938" width="371.2893404804188" x="-5002.527446498899" y="838.8531860944526"/>
+              <y:Fill color="#66FF33" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="125.55126953125" x="122.8690354745844" y="25.96875">SourceImgPixels<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="ImagePixels" use3DEffect="true">
+                <y:AttributeLabel>// Pixel -&gt; SourcePixel</y:AttributeLabel>
+                <y:MethodLabel>+ virtual void Clear()
++ virtual bool FormImgPixels( QImage )
++ void CalcPixelsSKO()
++ double GetPixelsSKO( uint, uint )
+
+- void CalcPixSKO()
+
++ void TestFunctionality()</y:MethodLabel>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+      </graph>
+    </node>
+    <node id="n7" yfiles.foldertype="group">
+      <data key="d4"/>
+      <data key="d6">
+        <y:ProxyAutoBoundsNode>
+          <y:Realizers active="0">
+            <y:GroupNode>
+              <y:Geometry height="485.6019733747544" width="367.67166602229327" x="-2825.5992677899876" y="677.5613459360397"/>
+              <y:Fill color="#F5F5F5" transparent="false"/>
+              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="367.67166602229327" x="0.0" y="0.0">Parameters</y:NodeLabel>
+              <y:Shape type="roundrectangle"/>
+              <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+              <y:BorderInsets bottom="5" bottomF="4.880970677981622" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
             </y:GroupNode>
             <y:GroupNode>
               <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
@@ -760,216 +1230,29 @@
           </y:Realizers>
         </y:ProxyAutoBoundsNode>
       </data>
-      <graph edgedefault="directed" id="n5:">
-        <node id="n5::n0">
-          <data key="d4"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="115.01960159362557" width="371.289340480419" x="-5915.644670240211" y="1341.4803984063747"/>
-              <y:Fill color="#FFCC00" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="64.962890625" x="153.1632249277095" y="3.0">CalcSKO<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                <y:AttributeLabel/>
-                <y:MethodLabel>+ double ImagesSKO ( Image, Image )
-+ double PassportsSKO ( QList&lt;double&gt;, QList&lt;double&gt; )
-+ double PixelMaskSKO( double, QList&lt;double&gt; )</y:MethodLabel>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-      </graph>
-    </node>
-    <node id="n6" yfiles.foldertype="group">
-      <data key="d4"/>
-      <data key="d6">
-        <y:ProxyAutoBoundsNode>
-          <y:Realizers active="0">
-            <y:GroupNode>
-              <y:Geometry height="517.7909890107017" width="881.1985355799752" x="-4775.0" y="-815.5395755931221"/>
-              <y:Fill color="#F5F5F5" transparent="false"/>
-              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="881.1985355799752" x="0.0" y="0.0">Handlers</y:NodeLabel>
-              <y:Shape type="roundrectangle"/>
-              <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
-              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="50" rightF="49.58350147531473" top="0" topF="0.0"/>
-            </y:GroupNode>
-            <y:GroupNode>
-              <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
-              <y:Fill color="#F5F5F5" transparent="false"/>
-              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="65.201171875" x="-7.6005859375" y="0.0">Folder 8</y:NodeLabel>
-              <y:Shape type="roundrectangle"/>
-              <y:State closed="true" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
-              <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
-              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
-            </y:GroupNode>
-          </y:Realizers>
-        </y:ProxyAutoBoundsNode>
-      </data>
-      <graph edgedefault="directed" id="n6:">
-        <node id="n6::n0">
-          <data key="d4"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="466.3300515107017" width="281.1985355799752" x="-4760.0" y="-779.0786380931221"/>
-              <y:Fill color="#FFCC00" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="89.58544921875" x="95.8065431806126" y="3.0">ImgHandler<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                <y:AttributeLabel>- Image m_targetOriginal
-- TargetImage m_target
-- SourceImage m_source</y:AttributeLabel>
-                <y:MethodLabel>+ void Clear()
-+ Image GetOriginalImg()
-+ Image GetTargetImg()
-+ Image GetSourcelImg()
-+ double GetImgSKO()
-+ void StartColorizationWalshSimple()
-+ void StartColorizationWalshNeighbor()
-
-- void GetGreyTarget()
-- void SendResultImg()
-
-+ void SlotSaveResultImg( QString )
-+ void SlotGetNewTargetImg( QString )
-+ void SlotGetNewSourceImg( QString )
-
-- void SignalGetResultImg( QImage )
-- void SignalCurrentProc( Program::Status )
-- void SignalProcDone()
-- void SignalProcError( QString )
-- void SignalProcFatalError()</y:MethodLabel>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-        <node id="n6::n1">
-          <data key="d4"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="466.3300515107017" width="358.9564641564739" x="-4317.341430051813" y="-779.0786380931221"/>
-              <y:Fill color="#FFCC00" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="87.43359375" x="135.76143520323694" y="3.0">IDBHandler<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                <y:AttributeLabel>- ImgDatabase m_idb</y:AttributeLabel>
-                <y:MethodLabel>+ void Clear()
-+ bool AddImgToIDB( QString )
-+ bool AddImagesToIDB( QStringList )
-+ QString FindSimilarImg( Image, Passport::Type )
-
-- QString ComparePassports( Passport, QList&lt;Passport&gt; )
-
-+ void SlotCheckIDBSet()
-+ void SlotCreateNewIDB( QString )
-
-- void SignalIDBStatus( bool )
-- void SignalCurrentProc( Program::Status )
-- void SignalProcDone()
-- void SignalProcError( QString )
-- void SignalProcFatalError()</y:MethodLabel>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-      </graph>
-    </node>
-    <node id="n7" yfiles.foldertype="group">
-      <data key="d4"/>
-      <data key="d6">
-        <y:ProxyAutoBoundsNode>
-          <y:Realizers active="0">
-            <y:GroupNode>
-              <y:Geometry height="909.3825007032543" width="464.0" x="-5628.0" y="-815.5395755931221"/>
-              <y:Fill color="#F5F5F5" transparent="false"/>
-              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="464.0" x="0.0" y="0.0">UI</y:NodeLabel>
-              <y:Shape type="roundrectangle"/>
-              <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
-              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
-            </y:GroupNode>
-            <y:GroupNode>
-              <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
-              <y:Fill color="#F5F5F5" transparent="false"/>
-              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="65.201171875" x="-7.6005859375" y="0.0">Folder 9</y:NodeLabel>
-              <y:Shape type="roundrectangle"/>
-              <y:State closed="true" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
-              <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
-              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
-            </y:GroupNode>
-          </y:Realizers>
-        </y:ProxyAutoBoundsNode>
-      </data>
       <graph edgedefault="directed" id="n7:">
         <node id="n7::n0">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="562.036042047249" width="301.2458644835824" x="-5533.552836079446" y="-779.0786380931221"/>
-              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:Geometry height="153.0" width="281.1985355799752" x="-2782.3627025688284" y="990.2823486328125"/>
+              <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="97.716796875" x="101.7645338042912" y="25.96875">MainWindow<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="136.35498046875" x="72.4217775556126" y="3.0">ImgSimilarityArea<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
                   <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
                 </y:ModelParameter>
               </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="QMainWindow" use3DEffect="true">
-                <y:AttributeLabel/>
-                <y:MethodLabel>- void InitUI()
-- void InitStatusBar()
-- void InitImgsLabels()
-- void InitImg( Images::Types t_imgType )
-- void ShowWarning( QString, QString )
-- bool CanOperate()
-
-+ void SlotGetSourceImg( QImage )
-+ void SlotGetResultImg( QImage )
-+ void SlotCurrProcess( Program::Status )
-+ void SlotProcessEnd()
-+ void SlotProcError( QString )
-+ void SlotProcessFail()
-
-- void on_openTargetImgPB_clicked()
-- void on_actionOpenTargetImage_triggered()
-- void on_openSourceImgPB_clicked()
-- void on_actionOpenSourceImage_triggered()
-- void on_actionSaveResult_triggered()
-- void on_findSourceImgPB_clicked()
-- void on_startColorizationPB_clicked()
-- void on_resetPB_clicked()
-- void on_actionCreateDatabase_triggered()
-- void on_actionOpenDatabase_triggered()
-- void on_actionAddImages_triggered()
-
-- void SignalNewIDB( QString )
-- void SignalFindSimilarInIDB()
-- void SignalNewTargetImg( QString )
-- void SignalNewSourceImg( QString )
-- void SignalSaveResultImg( QString )</y:MethodLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                <y:AttributeLabel>- uint m_id
+- QRect m_area</y:AttributeLabel>
+                <y:MethodLabel>+ void Clear()
++ void SetArea( uint, QRect )
++ uint GetAreaID()
++ QRect GetAreaRect()
++ bool IsValid()</y:MethodLabel>
               </y:UML>
             </y:UMLClassNode>
           </data>
@@ -978,56 +1261,29 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="217.68585022026446" width="202.0" x="-5613.0" y="-138.84292511013223"/>
+              <y:Geometry height="236.5792162239021" width="337.67166602229327" x="-2810.5992677899876" y="714.0222834360397"/>
               <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="82.7490234375" x="59.62548828125" y="25.96875">ScaleLabel<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="96.32666015625" x="120.67250293302163" y="3.0">ImgPassport<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
                   <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
                 </y:ModelParameter>
               </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="QLabel" use3DEffect="true">
-                <y:AttributeLabel>- QString m_defaultImgPath
-- QImage m_originalImg</y:AttributeLabel>
-                <y:MethodLabel>+ void SetImage( QImage )
-+ void SetImage( QString )
-+ bool SetDefaultImgPath( QString )
-+ void ShowDefaultImg()
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                <y:AttributeLabel>- Passport::Type m_type
+- QList&lt;double&gt; m_imgPassport</y:AttributeLabel>
+                <y:MethodLabel>+ void Clear()
++ bool IsEmpty()
++ bool SetPassport( Passport::Type, QList&lt;double&gt; )
++ bool SetPassport( Passport::Type, QByteArray )
++ Passport::Type GetPassportType()
++ QList&lt;double&gt; GetPassportAsList()
++ QByteArray GetPassportAsArray()
 
-# void resizeEvent( QResizeEvent )
-
-- void SetImgOnLabel()</y:MethodLabel>
-              </y:UML>
-            </y:UMLClassNode>
-          </data>
-        </node>
-        <node id="n7::n2">
-          <data key="d4"/>
-          <data key="d6">
-            <y:UMLClassNode>
-              <y:Geometry height="217.68585022026446" width="202.0" x="-5381.0" y="-138.84292511013223"/>
-              <y:Fill color="#66FF33" transparent="false"/>
-              <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="76.64892578125" x="62.675537109375" y="25.96875">StatusBar<y:LabelModel>
-                  <y:SmartNodeLabelModel distance="4.0"/>
-                </y:LabelModel>
-                <y:ModelParameter>
-                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                </y:ModelParameter>
-              </y:NodeLabel>
-              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="QStatusBar" use3DEffect="true">
-                <y:AttributeLabel>- QLabel m_infoString
-- QProgressBar m_progrBar</y:AttributeLabel>
-                <y:MethodLabel>+ int GetProgressMin()
-+ int GetProgressMax()
-+ void SetProcesProgress( int )
-+ void ResetProcesProgress()
-+ void SetStatus( Program::Status )
-
-- void SetInfoString()
-- void SetProgressBar()</y:MethodLabel>
+- QList&lt;double&gt; FromArrayToList( QByteArray )
+- QByteArray FromListToArray( QList&lt;double&gt; )</y:MethodLabel>
               </y:UML>
             </y:UMLClassNode>
           </data>
@@ -1040,10 +1296,10 @@
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="1898.0614171212094" width="795.0322853689863" x="-2273.0359506611685" y="359.7748542430007"/>
+              <y:Geometry height="282.8160035792951" width="475.49694622663355" x="-3612.3414300518134" y="-580.5645901617155"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="795.0322853689863" x="0.0" y="0.0">Service: 2</y:NodeLabel>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="475.49694622663355" x="0.0" y="0.0">Database</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
@@ -1063,290 +1319,36 @@
         </y:ProxyAutoBoundsNode>
       </data>
       <graph edgedefault="directed" id="n8:">
-        <node id="n8::n0" yfiles.foldertype="group">
+        <node id="n8::n0">
           <data key="d4"/>
           <data key="d6">
-            <y:ProxyAutoBoundsNode>
-              <y:Realizers active="0">
-                <y:GroupNode>
-                  <y:Geometry height="1299.2961439876844" width="765.0322853689863" x="-2258.0359506611685" y="396.2357917430007"/>
-                  <y:Fill color="#F5F5F5" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="765.0322853689863" x="0.0" y="0.0">Image Service</y:NodeLabel>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" modelName="custom" textColor="#000000" visible="true" width="4.0" x="380.51614268449316" y="647.6480719938422">
-                    <y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:Shape type="roundrectangle"/>
-                  <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
-                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-                  <y:BorderInsets bottom="100" bottomF="100.13851351697508" left="143" leftF="142.6581875868742" right="112" rightF="111.61857163352374" top="16" topF="15.796679038636455"/>
-                </y:GroupNode>
-                <y:GroupNode>
-                  <y:Geometry height="981.6584317180616" width="1501.7111541850222" x="-2130.8555770925113" y="289.17078414096915"/>
-                  <y:Fill color="#F5F5F5" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1501.7111541850222" x="0.0" y="0.0">Folder 5</y:NodeLabel>
-                  <y:Shape type="roundrectangle"/>
-                  <y:State closed="true" closedHeight="981.6584317180616" closedWidth="1501.7111541850222" innerGraphDisplayEnabled="false"/>
-                  <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
-                  <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
-                </y:GroupNode>
-              </y:Realizers>
-            </y:ProxyAutoBoundsNode>
+            <y:UMLClassNode>
+              <y:Geometry height="231.3550660792951" width="445.49694622663355" x="-3597.3414300518134" y="-544.1036526617155"/>
+              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="100.87158203125" x="172.31268209769178" y="3.0">ImgDatabase<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                <y:AttributeLabel>- QString m_path
+- QSqlDatabase m_idb</y:AttributeLabel>
+                <y:MethodLabel>+ void Clear()
++ bool IsSet()
++ bool SetIDB( QString )
++ bool CreateNewIDB( QString )
++ bool AddEntries( QMap&lt;QString, QList&lt;QByteArray&gt; &gt; )
++ QMap&lt;QString, QByteArray&gt; GetImagesPassport( Passport::Type )
++ QMap&lt;QString, QList&lt;QByteArray&gt; &gt; GetAllPassport()
+
+- bool IsSQLite( QString )
+- QString FormIDBFullName( QString )</y:MethodLabel>
+              </y:UML>
+            </y:UMLClassNode>
           </data>
-          <graph edgedefault="directed" id="n8::n0:">
-            <node id="n8::n0::n0">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLClassNode>
-                  <y:Geometry height="191.0967908964874" width="295.26153093843095" x="-2007.6307654692155" y="1389.2966313172226"/>
-                  <y:Fill color="#66FF33" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="107.2763671875" x="93.99258187546548" y="3.0">ImgTransform<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                    <y:AttributeLabel/>
-                    <y:MethodLabel>+ Image ToGreyImg( Image )
-+ Image NormaliseImgHistogram( Image )
-+ Image LevelLuminance( Image, int )
-
-+ void TestNormalization()
-+ void TestLumLeveling()
-
-- QImage GreyscaleImg( QImage )
-- Image PerformImgNormalisation( Image )
-- Image PerformLumLeveling( Image, int )</y:MethodLabel>
-                  </y:UML>
-                </y:UMLClassNode>
-              </data>
-            </node>
-            <node id="n8::n0::n1">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLClassNode>
-                  <y:Geometry height="105.0" width="295.26153093843095" x="-2007.6307654692155" y="1209.1442210065698"/>
-                  <y:Fill color="#66FF33" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="129.04248046875" x="83.10952523484048" y="3.0">ImgSearchParam<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                    <y:AttributeLabel/>
-                    <y:MethodLabel>+ int FindMaxLum( Image )
-+ int FindMinLum( Image )
-+ QPair&lt;int, int&gt; FindMinMaxLum( Image )</y:MethodLabel>
-                  </y:UML>
-                </y:UMLClassNode>
-              </data>
-            </node>
-            <node id="n8::n0::n2">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLClassNode>
-                  <y:Geometry height="191.0967908964874" width="477.0780062095025" x="-2096.7002431352084" y="676.6458185922897"/>
-                  <y:Fill color="#66FF33" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="107.94287109375" x="184.56756755787626" y="3.0">ImgHistogram<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                    <y:AttributeLabel/>
-                    <y:MethodLabel>+ QList&lt;double&gt; LuminanceHistogram( Image )
-+ QList&lt; QList&lt;double&gt; &gt; RGBHistogram( Image )
-
-+ void TestRGBHist()
-
-- QList&lt; QList&lt;double&gt; &gt; CalcRGBHistogram( QImage )
-- QList&lt; QList&lt;double&gt; &gt; CalcRGBChannStatistic( QImage )
-- QList&lt; QList&lt;double&gt; &gt; FormZeroRGBHist()
-- QList&lt; QList&lt;double&gt; &gt; FormStatHistInPercent( QList&lt; QList&lt;double&gt; &gt; )</y:MethodLabel>
-                  </y:UML>
-                </y:UMLClassNode>
-              </data>
-            </node>
-            <node id="n8::n0::n3">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLClassNode>
-                  <y:Geometry height="153.0" width="399.60917786935147" x="-2057.9658289651325" y="448.49340828163713"/>
-                  <y:Fill color="#FFCC00" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="151.42431640625" x="124.09243073155073" y="3.0">ImgPassportCreator<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                    <y:AttributeLabel/>
-                    <y:MethodLabel>+ QList&lt;double&gt; GetImgPassport( Image, Passport::Type )
-
-- QList&lt;double&gt; GetLuminancePassport( Image )
-- QList&lt;double&gt; GetSubsamplLumPassport( Image )
-- QList&lt;double&gt; GetLumAndGradPassport( Image )
-- QList&lt;double&gt; GetSubsamplLumAndGradPassport( Image )</y:MethodLabel>
-                  </y:UML>
-                </y:UMLClassNode>
-              </data>
-            </node>
-            <node id="n8::n0::n4">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLClassNode>
-                  <y:Geometry height="191.0967908964874" width="480.7555261485884" x="-2100.3777630742943" y="942.8950197994297"/>
-                  <y:Fill color="#66FF33" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="118.65771484375" x="181.0489056524192" y="3.0">ImgSubsampler<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                    <y:AttributeLabel/>
-                    <y:MethodLabel>+ QList&lt;double&gt; SubsampleImg( Image, int )
-
-+ void TestDivide()
-+ void TestSubsampling()
-
-- QImage GetGreyImg( Image )
-- QList&lt;QRect&gt; GetSamplesRects( int, int, int )
-- QList&lt; QPair&lt;int, int&gt; &gt; DivideFacet( int, int )
-- QList&lt;double&gt; CalcSamplesLum( QImage, QList&lt;QRect&gt; )</y:MethodLabel>
-                  </y:UML>
-                </y:UMLClassNode>
-              </data>
-            </node>
-          </graph>
-        </node>
-        <node id="n8::n1" yfiles.foldertype="group">
-          <data key="d4"/>
-          <data key="d6">
-            <y:ProxyAutoBoundsNode>
-              <y:Realizers active="0">
-                <y:GroupNode>
-                  <y:Geometry height="498.9220318088244" width="765.0322853689863" x="-2258.0359506611685" y="1743.9142395553856"/>
-                  <y:Fill color="#F5F5F5" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="765.0322853689863" x="0.0" y="0.0">File Service</y:NodeLabel>
-                  <y:Shape type="roundrectangle"/>
-                  <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
-                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-                  <y:BorderInsets bottom="0" bottomF="0.0" left="35" leftF="34.717135892436545" right="0" rightF="0.0" top="0" topF="0.0"/>
-                </y:GroupNode>
-                <y:GroupNode>
-                  <y:Geometry height="50.0" width="50.0" x="-3099.5492799658614" y="1492.6722416442376"/>
-                  <y:Fill color="#F5F5F5" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="21.4609375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="65.201171875" x="-7.6005859375" y="0.0">Folder 3</y:NodeLabel>
-                  <y:Shape type="roundrectangle"/>
-                  <y:State closed="true" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
-                  <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
-                  <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
-                </y:GroupNode>
-              </y:Realizers>
-            </y:ProxyAutoBoundsNode>
-          </data>
-          <graph edgedefault="directed" id="n8::n1:">
-            <node id="n8::n1::n0">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLClassNode>
-                  <y:Geometry height="115.01960159362557" width="247.3470939949766" x="-1936.1214842147938" y="2112.8166697705847"/>
-                  <y:Fill color="#66FF33" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="92.39111328125" x="77.4779903568633" y="3.0">FilesService<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                    <y:AttributeLabel/>
-                    <y:MethodLabel>+ bool RemoveFile( QString )
-+ QString FormFullName( QString )
-+ bool CheckFileExistance( QString )
-+ QString GetFileName( QString )</y:MethodLabel>
-                  </y:UML>
-                </y:UMLClassNode>
-              </data>
-            </node>
-            <node id="n8::n1::n1">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLClassNode>
-                  <y:Geometry height="244.54106166909446" width="357.4573415835057" x="-2208.318814768732" y="1780.3751770553856"/>
-                  <y:Fill color="#66FF33" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="120.07958984375" x="118.68887586987785" y="25.96875">ImgFilesService<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="FilesService" use3DEffect="true">
-                    <y:AttributeLabel/>
-                    <y:MethodLabel>+ bool RemoveImg( QString )
-+ bool CheckImgExist ( QString )
-+ QString GetImgName( QString )
-+ QString MoveImageToProject( QString )
-+ QStringList MoveImagesToProject( QStringList )
-+ bool SaveImage( QImage, QString )
-
-- QString CutSuffix( QString )
-
-+ void TestImgMoving()
-+ void TestImgSaving()</y:MethodLabel>
-                  </y:UML>
-                </y:UMLClassNode>
-              </data>
-            </node>
-            <node id="n8::n1::n2">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLClassNode>
-                  <y:Geometry height="160.3229984140969" width="247.3470939949766" x="-1755.3507592871588" y="1864.5932403103827"/>
-                  <y:Fill color="#66FF33" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.1328125" modelName="custom" textColor="#000000" visible="true" width="117.927734375" x="64.7096798099883" y="25.96875">IDBFilesService<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="FilesService" use3DEffect="true">
-                    <y:AttributeLabel/>
-                    <y:MethodLabel>+ bool RemoveIDB( QString )
-+ bool CheckIDBExist( QString )
-+ QString FormIDBFullPath (QString)</y:MethodLabel>
-                  </y:UML>
-                </y:UMLClassNode>
-              </data>
-            </node>
-          </graph>
         </node>
       </graph>
     </node>
@@ -1400,7 +1402,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n7::e0" source="n7::n0" target="n7::n1">
+    <edge id="n1::e0" source="n1::n0" target="n1::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1414,7 +1416,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n7::e1" source="n7::n0" target="n7::n2">
+    <edge id="n1::e1" source="n1::n0" target="n1::n2">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1441,7 +1443,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n3::e0" source="n3::n4" target="n3::n3">
+    <edge id="n5::e0" source="n5::n4" target="n5::n3">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1452,7 +1454,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n3::e1" source="n3::n2" target="n3::n0">
+    <edge id="n5::e1" source="n5::n2" target="n5::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1465,7 +1467,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n3::e2" source="n3::n1" target="n3::n0">
+    <edge id="n5::e2" source="n5::n1" target="n5::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1478,7 +1480,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e0" source="n3::n1" target="n2::n1">
+    <edge id="e0" source="n5::n1" target="n6::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1491,7 +1493,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e1" source="n3::n2" target="n2::n2">
+    <edge id="e1" source="n5::n2" target="n6::n2">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1621,7 +1623,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e2" source="n2::n1" target="n4::n0">
+    <edge id="e2" source="n6::n1" target="n4::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1635,7 +1637,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e3" source="n2::n2" target="n4::n1">
+    <edge id="e3" source="n6::n2" target="n4::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1649,7 +1651,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n2::e0" source="n2::n1" target="n2::n0">
+    <edge id="n6::e0" source="n6::n1" target="n6::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1663,7 +1665,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n2::e1" source="n2::n2" target="n2::n0">
+    <edge id="n6::e1" source="n6::n2" target="n6::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1677,7 +1679,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e4" source="n5::n0" target="n2::n1">
+    <edge id="e4" source="n3::n0" target="n6::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1690,7 +1692,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n3::e3" source="n3::n0" target="n3::n3">
+    <edge id="n5::e3" source="n5::n0" target="n5::n3">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1703,7 +1705,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e5" source="n6::n0" target="n3::n1">
+    <edge id="e5" source="n2::n0" target="n5::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1716,7 +1718,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e6" source="n6::n0" target="n3::n2">
+    <edge id="e6" source="n2::n0" target="n5::n2">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1729,7 +1731,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e7" source="n8::n1::n1" target="n3::n3">
+    <edge id="e7" source="n0::n0::n1" target="n5::n3">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1743,7 +1745,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e8" source="n8::n0::n0" target="n3::n4">
+    <edge id="e8" source="n0::n1::n0" target="n5::n4">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1757,7 +1759,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e9" source="n9" target="n7::n0">
+    <edge id="e9" source="n9" target="n1::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1771,7 +1773,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e10" source="n9" target="n6::n0">
+    <edge id="e10" source="n9" target="n2::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1785,7 +1787,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e11" source="n9" target="n6::n1">
+    <edge id="e11" source="n9" target="n2::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1799,7 +1801,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e12" source="n3::n4" target="n8::n0::n3">
+    <edge id="e12" source="n5::n4" target="n0::n1::n3">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1810,7 +1812,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e13" source="n6::n1" target="n0::n0">
+    <edge id="e13" source="n2::n1" target="n8::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1824,7 +1826,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e14" source="n3::n4" target="n6::n1">
+    <edge id="e14" source="n5::n4" target="n2::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1839,7 +1841,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e15" source="n3::n0" target="n1::n0">
+    <edge id="e15" source="n5::n0" target="n7::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1850,7 +1852,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e16" source="n3::n4" target="n1::n1">
+    <edge id="e16" source="n5::n4" target="n7::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1863,7 +1865,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e17" source="n3::n1" target="n1::n1">
+    <edge id="e17" source="n5::n1" target="n7::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1877,7 +1879,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e18" source="n3::n1" target="n8::n0::n3">
+    <edge id="e18" source="n5::n1" target="n0::n1::n3">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1891,7 +1893,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n8::n0::e0" source="n8::n0::n0" target="n8::n0::n1">
+    <edge id="n0::n1::e0" source="n0::n1::n0" target="n0::n1::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1902,7 +1904,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n8::n0::e1" source="n8::n0::n0" target="n8::n0::n3">
+    <edge id="n0::n1::e1" source="n0::n1::n0" target="n0::n1::n3">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1916,7 +1918,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n8::n0::e2" source="n8::n0::n1" target="n8::n0::n3">
+    <edge id="n0::n1::e2" source="n0::n1::n1" target="n0::n1::n3">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1930,7 +1932,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n8::n0::e3" source="n8::n0::n2" target="n8::n0::n0">
+    <edge id="n0::n1::e3" source="n0::n1::n2" target="n0::n1::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1944,7 +1946,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n8::n0::e4" source="n8::n0::n2" target="n8::n0::n3">
+    <edge id="n0::n1::e4" source="n0::n1::n2" target="n0::n1::n3">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1958,7 +1960,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n8::n0::e5" source="n8::n0::n4" target="n8::n0::n0">
+    <edge id="n0::n1::e5" source="n0::n1::n4" target="n0::n1::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1972,7 +1974,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n8::n0::e6" source="n8::n0::n4" target="n8::n0::n3">
+    <edge id="n0::n1::e6" source="n0::n1::n4" target="n0::n1::n3">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1986,7 +1988,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n8::n1::e0" source="n8::n1::n1" target="n8::n1::n0">
+    <edge id="n0::n0::e0" source="n0::n0::n1" target="n0::n0::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -2000,7 +2002,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n8::n1::e1" source="n8::n1::n2" target="n8::n1::n0">
+    <edge id="n0::n0::e1" source="n0::n0::n2" target="n0::n0::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>

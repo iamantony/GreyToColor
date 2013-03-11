@@ -81,16 +81,26 @@ bool ImgDatabase::SetIDB(const QString &t_path)
 		return false;
 	}
 
-	m_path = t_path;
 	m_idb = QSqlDatabase::addDatabase("QSQLITE");
-	m_idb.setDatabaseName(m_path);
-
+	m_idb.setDatabaseName(t_path);
 	if ( false == m_idb.isValid() )
 	{
 		qDebug() << "SetIDB(): Error - can't set up database";
-		Clear();
 		return false;
 	}
+
+	bool idbOpened = m_idb.open();
+	if ( false == idbOpened )
+	{
+		qDebug() << "SetIDB(): Error - can't open database";
+		return false;
+	}
+
+	// TODO:
+	// - check if name of IDN is idb. SELECT?
+
+	m_idb.close();
+	m_path = t_path;
 
 	return true;
 }
@@ -117,7 +127,11 @@ bool ImgDatabase::IsSQLite(const QString &t_path) const
 		return false;
 	}
 
-	if ( SQLITE_SUFFIX != suffix )
+	QString sqliteSuffix(SQLITE_SUFFIX);
+	// Remove "dot" (.) from suffix
+	sqliteSuffix.remove(0, 1);
+
+	if ( sqliteSuffix != suffix )
 	{
 		return false;
 	}
@@ -159,12 +173,12 @@ bool ImgDatabase::CreateNewIDB(const QString &t_name)
 
 	QString command;
 	command.append("create table idb (");
-	command.append("id integer primary key");
-	command.append(", imgname varchar(1000)");
-	command.append(", passport_0 BLOB");
-	command.append(", passport_1 BLOB");
-	command.append(", passport_2 BLOB");
-	command.append(", passport_3 BLOB");
+	command.append("id integer primary key, ");
+	command.append("imgname varchar(1000), ");
+	command.append("passport_0 BLOB, ");
+	command.append("passport_1 BLOB, ");
+	command.append("passport_2 BLOB, ");
+	command.append("passport_3 BLOB");
 	command.append(")");
 
 	QSqlQuery query(m_idb);

@@ -64,3 +64,22 @@ void IDBHandler::SlotCreateNewIDB(const QString &t_name)
 		emit SignalProcError(tr("Can't create new image database"));
 	}
 }
+
+// Open exist IDB
+// @input:
+// - QString - unempty string with name of IDB
+// @output:
+void IDBHandler::SlotOpenIDB(const QString &t_name)
+{
+	if ( true == t_name.isEmpty() )
+	{
+		qDebug() << "SlotOpenIDB(): Error - invalid arguments";
+		return;
+	}
+
+	bool idbSet = m_idb.SetIDB(t_name);
+	if ( false == idbSet )
+	{
+		emit SignalProcError(tr("Can't open image database"));
+	}
+}

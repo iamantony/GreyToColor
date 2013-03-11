@@ -373,7 +373,21 @@ void MainWindow::on_actionCreateDatabase_triggered()
 // @output:
 void MainWindow::on_actionOpenDatabase_triggered()
 {
+	QString pathToOpen;
+	pathToOpen.append(QDir::currentPath());
+	pathToOpen.append(DEFAULT_IDB_FOLDER);
 
+	QString idbName = QFileDialog::getOpenFileName(this,
+												   "Open image database...",
+												   pathToOpen,
+													 "SQLite files (*.sqlite)");
+
+	if(true == idbName.isEmpty())
+	{
+		return;
+	}
+
+	emit SignalOpenIDB(idbName);
 }
 
 // Slot for adding images to opened database
