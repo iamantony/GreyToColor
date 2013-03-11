@@ -45,7 +45,8 @@ SOURCES += main.cpp\
 	PARAMS/IMAGES/imgpassport.cpp \
     SERVICE/IMAGES/imghistogram.cpp \
     SERVICE/IMAGES/imgpassportcreator.cpp \
-    SERVICE/IMAGES/imgsubsampler.cpp
+    SERVICE/IMAGES/imgsubsampler.cpp \
+    idbhandler.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -85,7 +86,8 @@ HEADERS  += \
     DEFINES/imgservice.h \
     SERVICE/IMAGES/imghistogram.h \
     SERVICE/IMAGES/imgpassportcreator.h \
-    SERVICE/IMAGES/imgsubsampler.h
+    SERVICE/IMAGES/imgsubsampler.h \
+    idbhandler.h
 
 FORMS    += \
 	mainwindow.ui
