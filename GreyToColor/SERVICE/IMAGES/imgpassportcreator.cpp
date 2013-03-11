@@ -48,6 +48,9 @@ QList<double> ImgPassportCreator::GetImgPassport(const Image &t_img, const Passp
 			break;
 
 		case Passport::LUM_SUBSAMPLE:
+			passport = GetSubsamplLumPassport(t_img);
+			break;
+
 		case Passport::LUM_AND_GRAD:
 		case Passport::LUM_AND_GRAD_SUBSAMPLE:
 		case Passport::DEFAULT_LAST:
@@ -104,7 +107,8 @@ QList<double> ImgPassportCreator::GetSubsamplLumPassport(const Image &t_img)
 		return empty;
 	}
 
-	// TODO
-	QList<double> empty;
-	return empty;
+	ImgSubsampler sampler;
+	QList<double> passport = sampler.SubsampleImg(t_img, SAMPLES_ON_FACET);
+
+	return passport;
 }

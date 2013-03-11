@@ -40,6 +40,8 @@ public:
 
 	// Test image dividing to samples
 	void TestDivide();
+	// Test subsampling image
+	void TestSubsampling();
 
 private:
 	// Get greyscale image
@@ -51,6 +53,8 @@ private:
 
 	// Devide facet of image to samples
 	QList< QPair<int, int> > DivideFacet(const int &t_length, const int &t_samplesNum);
+	// Calc RGB luminance for each images subsample
+	QList<double> CalcSamplesLum(const QImage &t_greyImg, const QList<QRect> &t_samples);
 };
 
 #endif // IMGSUBSAMPLER_H

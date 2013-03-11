@@ -47,8 +47,26 @@ QList<double> ImgSubsampler::SubsampleImg(const Image &t_img, const int &t_numOf
 		return empty;
 	}
 
-	QList<double> empty;
-	return empty;
+	QList<QRect> samplesRects = GetSamplesRects(t_numOfSamplesOnFacet,
+												greyImg.width(),
+												greyImg.height());
+
+	if ( true == samplesRects.isEmpty() )
+	{
+		qDebug() << "SubsampleImg(): Error - can't form subsamples rects";
+		QList<double> empty;
+		return empty;
+	}
+
+	QList<double> samplesLum = CalcSamplesLum(greyImg, samplesRects);
+	if ( true == samplesLum.isEmpty() )
+	{
+		qDebug() << "SubsampleImg(): Error - can't calc RGB luminance of images' subsamples";
+		QList<double> empty;
+		return empty;
+	}
+
+	return samplesLum;
 }
 
 // Get greyscale image
@@ -194,6 +212,50 @@ QList< QPair<int, int> > ImgSubsampler::DivideFacet(const int &t_length, const i
 	return resultSamples;
 }
 
+// Calc RGB luminance for each images subsample
+// @input:
+// - QImage - unnull grey image
+// - QList<QRect> - unempty coords of image subsamples
+// @output:
+// - empty QList<double> - can't calc subsamples RGB luminances
+// - QList<double> - RGB luminances of subsamples
+QList<double> ImgSubsampler::CalcSamplesLum(const QImage &t_greyImg, const QList<QRect> &t_samples)
+{
+	if ( (true == t_greyImg.isNull()) || (true == t_samples.isEmpty()) )
+	{
+		qDebug() << "CalcSamplesLum(): Error - invalid arguments";
+		QList<double> empty;
+		return empty;
+	}
+
+	QList<double> sampleLuminance;
+	const int samplesNum = t_samples.size();
+	for ( int samp = 0; samp < samplesNum; samp++)
+	{
+		const int startW = t_samples.at(samp).x();
+		const int startH = t_samples.at(samp).y();
+		const int endW = startW + t_samples.at(samp).width();
+		const int endH = startH + t_samples.at(samp).height();
+		QRgb pixel;
+		double summLum = 0;
+		for ( int wdt = startW; wdt < endW; wdt++ )
+		{
+			for ( int hgt = startH; hgt < endH; hgt++ )
+			{
+				pixel = t_greyImg.pixel(wdt, hgt);
+				summLum += (double)qRed(pixel);
+			}
+		}
+
+		const int numOfPixInSamp = t_samples.at(samp).width() * t_samples.at(samp).height();
+		double sampleLum = summLum / (double)numOfPixInSamp;
+
+		sampleLuminance.append(sampleLum);
+	}
+
+	return sampleLuminance;
+}
+
 // Test image dividing to samples
 void ImgSubsampler::TestDivide()
 {
@@ -235,6 +297,26 @@ void ImgSubsampler::TestDivide()
 	if ( 10 != resultRecs.at(0).width() )
 	{
 		qDebug() << "Third length" << resultRecs.at(0).width();
+		return;
+	}
+}
+
+// Test subsampling image
+void ImgSubsampler::TestSubsampling()
+{
+	QWidget wdt;
+	QString imgName = QFileDialog::getOpenFileName(&wdt,
+												 "Open target image...",
+												 QDir::currentPath(),
+												 "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
+
+	Image testImg;
+	testImg.LoadImg(imgName);
+
+	QList<double> passport = SubsampleImg(testImg, 16);
+	if ( true == passport.isEmpty() )
+	{
+		qDebug() << "Subsampling fail";
 		return;
 	}
 }

@@ -294,7 +294,7 @@ void MainWindow::on_resetPB_clicked()
 	}
 
 	ImgSubsampler test;
-	test.TestDivide();
+	test.TestSubsampling();
 
 	// TODO:
 	// Send signal to ImgHandler. It should reload target image, calc all it's params (LAB, SKO) and then send
