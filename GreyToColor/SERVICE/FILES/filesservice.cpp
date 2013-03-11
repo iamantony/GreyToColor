@@ -95,14 +95,6 @@ QString FilesService::FormFullPath(const QString &t_fileName)
 	fullName.append(t_fileName);
 	fullName = dir.toNativeSeparators(fullName);
 
-	bool fileExist = QFile::exists(fullName);
-	if ( false == fileExist )
-	{
-		qDebug() << "FormFullPath(): Error - can't form full path for file" << t_fileName;
-		QString empty;
-		return empty;
-	}
-
 	return fullName;
 }
 

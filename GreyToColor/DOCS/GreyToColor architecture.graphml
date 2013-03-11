@@ -1319,9 +1319,14 @@
                 </y:ModelParameter>
               </y:NodeLabel>
               <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                <y:AttributeLabel>- QString m_name
+                <y:AttributeLabel>- QString m_path
 - QSqlDatabase m_idb</y:AttributeLabel>
-                <y:MethodLabel/>
+                <y:MethodLabel>+ void Clear()
++ bool SetIDB( QString )
++ bool CreateDefaultIDB()
+
+- bool IsSQLite( QString )
+- QString FormDefaultIDBFullName()</y:MethodLabel>
               </y:UML>
             </y:UMLClassNode>
           </data>
@@ -1335,7 +1340,7 @@
           <y:Geometry height="275.65679083700434" width="281.1985355799752" x="-4580.0" y="-1244.0"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.7763671875" x="103.2110841962376" y="117.65744125865331">Application<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.7763671875" x="103.2110841962376" y="3.0">Application<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>

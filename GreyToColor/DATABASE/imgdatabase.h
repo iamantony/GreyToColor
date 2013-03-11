@@ -19,13 +19,43 @@
 #ifndef IMGDATABASE_H
 #define IMGDATABASE_H
 
+#include <QString>
+#include <QByteArray>
+#include <QVariant>
+#include <QImage>
+#include <QDir>
+#include <QFileInfo>
+#include <QtSql/QSqlDatabase>
+#include <QtSql/QSqlQuery>
+#include <QtSql/QSqlError>
+#include <QDebug>
+#include "SERVICE/FILES/idbfilesservice.h"
+#include "DEFINES/global.h"
+#include "DEFINES/idbs.h"
+
 class ImgDatabase
 {
 	// == DATA ==
+	QString m_path;
+	QSqlDatabase m_idb;
 
 	// == METHODS ==
 public:
 	ImgDatabase();
+	~ImgDatabase();
+
+	// Clear all info
+	void Clear();
+	// Set up exist database
+	bool SetIDB(const QString &t_path);
+	// Create new default image database
+	bool CreateDefaultIDB();
+
+private:
+	// Check if type of database is SQLite
+	bool IsSQLite(const QString &t_path);
+	// Form full path to default IDB
+	QString FormDefaultIDBFullName();
 };
 
 #endif // IMGDATABASE_H
