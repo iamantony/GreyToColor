@@ -47,9 +47,8 @@ QList<double> ImgSubsampler::SubsampleImg(const Image &t_img, const int &t_numOf
 		return empty;
 	}
 
-	// TODO:
-	// - even and odd number of samples
-	// - what if size of input image is not divided in samples
+	QList<double> empty;
+	return empty;
 }
 
 // Get greyscale image
@@ -89,6 +88,7 @@ QImage ImgSubsampler::GetGreyImg(const Image &t_img)
 
 // Get images samples rectangulars coordinates
 // @input:
+// - int - num of samples on each of rects facets
 // - int - positive image width
 // - int - positive image height
 // @output:
@@ -98,7 +98,7 @@ QList<QRect> ImgSubsampler::GetSamplesRects(const int &t_numOfSamplesOnFacet,
 											const int &t_imgWidth,
 											const int &t_imgHeight)
 {
-	if ( (t_numOfSamples <= 0) ||
+	if ( (t_numOfSamplesOnFacet <= 0) ||
 		 (t_imgWidth <= 0) ||
 		 (t_imgHeight <= 0) )
 	{
@@ -107,27 +107,134 @@ QList<QRect> ImgSubsampler::GetSamplesRects(const int &t_numOfSamplesOnFacet,
 		return empty;
 	}
 
-	// Number of samples must be even
-	unsigned int numOfSamples = t_numOfSamples;
-	unsigned int modulo = numOfSamples % 2;
-	if ( (1 == modulo) && (1 < numOfSamples) )
+	QList< QPair<int, int> > wdtSamples = DivideFacet(t_imgWidth, t_numOfSamplesOnFacet);
+	QList< QPair<int, int> > hgtSamples = DivideFacet(t_imgHeight, t_numOfSamplesOnFacet);
+	if ( (true == wdtSamples.isEmpty()) ||
+		 (t_numOfSamplesOnFacet != wdtSamples.size()) ||
+		 (true == hgtSamples.isEmpty()) ||
+		 (t_numOfSamplesOnFacet != hgtSamples.size()))
 	{
-		numOfSamples--;
+		qDebug() << "GetSamplesRects(): Error - can't divide to samples";
+		QList<QRect> empty;
+		return empty;
 	}
 
-//	unsigned int numOfRows = t_imgWidth / numOfSamples;
-//	if ( t_imgWidth < numOfSamples )
-//	{
-//		numOfRows = 1;
-//	}
+	const int lastWdtSample = wdtSamples.size();
+	const int lastHgtSample = hgtSamples.size();
+	QList<QRect> samplesRects;
+	for ( int wSamp = 0; wSamp < lastWdtSample; wSamp++ )
+	{
+		int coordX = wdtSamples.at(wSamp).first;
+		int width = wdtSamples.at(wSamp).second;
 
-//	unsigned int moduloRow = t_imgWidth % numOfSamples;
-//	if ( 0 != moduloRow )
-//	{
-//		unsigned int rowLenth = t_imgWidth
-//		if (  )
-//	}
+		for ( int hSamp = 0; hSamp < lastHgtSample; hSamp++ )
+		{
+			int coordY = hgtSamples.at(hSamp).first;
+			int height = hgtSamples.at(hSamp).second;
 
-	QList<QRect> empty;
-	return empty;
+			QRect sample(coordX, coordY, width, height);
+			samplesRects.append(sample);
+		}
+	}
+
+	return samplesRects;
+}
+
+// Devide facet of image to samples
+// @input:
+// - int - length of facet to divide
+// - int - number of samples
+// @output:
+// - empty QList< QPair<int, int> > - can't divide facet to samples
+// - QList< QPair<int, int> > - samples params (start coord and length)
+QList< QPair<int, int> > ImgSubsampler::DivideFacet(const int &t_length, const int &t_samplesNum)
+{
+	if ( (t_length <= 0) || ( t_samplesNum <= 0) )
+	{
+		qDebug() << "DivideFacet(): Error - invalid arguments";
+		QList< QPair<int, int> > empty;
+		return empty;
+	}
+
+	QList< QPair<int, int> > resultSamples;
+
+	if ( t_length < t_samplesNum )
+	{
+		// If facet is too small, all samples will be the same
+		int startCoord = 0;
+		int sampleLength = t_length;
+		QPair<int, int> sample(startCoord, sampleLength);
+		for ( int samp = 0; samp < t_samplesNum; samp++ )
+		{
+			resultSamples.append(sample);
+		}
+	}
+	else
+	{
+		int pixPerSample = t_length / t_samplesNum;
+		int pixInEnd = t_length % t_samplesNum;
+		int pixToAdd = pixInEnd / t_samplesNum;
+		pixPerSample += pixToAdd;
+
+		// Create samples with same length. Last sample will have different length
+		for ( int samp = 0; samp < t_samplesNum - 1; samp++ )
+		{
+			int startCoord = pixPerSample * samp;
+			QPair<int, int> sample(startCoord, pixPerSample);
+			resultSamples.append(sample);
+		}
+
+		// Calc last sample coord and length
+		int coord = pixPerSample * (t_samplesNum - 1);
+		int length = t_length - coord;
+		QPair<int, int> lastSample(coord, length);
+		resultSamples.append(lastSample);
+	}
+
+	return resultSamples;
+}
+
+// Test image dividing to samples
+void ImgSubsampler::TestDivide()
+{
+	QList<QRect> resultRecs = GetSamplesRects(16, 100, 80);
+	if ( 16 * 16 != resultRecs.size() )
+	{
+		qDebug() << "First failed";
+		return;
+	}
+
+	if ( 6 != resultRecs.at(0).width() )
+	{
+		qDebug() << "First length" << resultRecs.at(0).width();
+		return;
+	}
+
+	resultRecs.clear();
+	resultRecs = GetSamplesRects(16, 16, 16);
+	if ( 16 * 16 != resultRecs.size() )
+	{
+		qDebug() << "Second failed";
+		return;
+	}
+
+	if ( 1 != resultRecs.at(0).width() )
+	{
+		qDebug() << "Second length" << resultRecs.at(0).width();
+		return;
+	}
+
+	resultRecs.clear();
+	resultRecs = GetSamplesRects(16, 10, 6);
+	if ( 16 * 16 != resultRecs.size() )
+	{
+		qDebug() << "Third failed";
+		return;
+	}
+
+	if ( 10 != resultRecs.at(0).width() )
+	{
+		qDebug() << "Third length" << resultRecs.at(0).width();
+		return;
+	}
 }

@@ -293,8 +293,8 @@ void MainWindow::on_resetPB_clicked()
 		return;
 	}
 
-	CandidateImage test;
-	test.TestPassportForming();
+	ImgSubsampler test;
+	test.TestDivide();
 
 	// TODO:
 	// Send signal to ImgHandler. It should reload target image, calc all it's params (LAB, SKO) and then send

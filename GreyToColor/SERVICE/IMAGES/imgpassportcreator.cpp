@@ -103,4 +103,8 @@ QList<double> ImgPassportCreator::GetSubsamplLumPassport(const Image &t_img)
 		QList<double> empty;
 		return empty;
 	}
+
+	// TODO
+	QList<double> empty;
+	return empty;
 }
