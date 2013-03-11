@@ -20,21 +20,44 @@
 #define IDBHANDLER_H
 
 #include <QObject>
+#include "IMAGES/COMMON/image.h"
+#include "IMAGES/CANDIDATE/candidateimage.h"
+#include "PARAMS/IMAGES/imgpassport.h"
+#include "DATABASE/imgdatabase.h"
+#include "DEFINES/global.h"
+#include "DEFINES/programstatus.h"
 
 class IDBHandler : public QObject
 {
 	Q_OBJECT
 
 	// == DATA ==
+private:
+	ImgDatabase m_idb;
 
 	// == METHODS ==
 public:
 	explicit IDBHandler(QObject *parent = 0);
+	~IDBHandler();
+
+	// Clear all info
+	void Clear();
+//	+ bool AddImgToIDB( QString )
+//	+ bool AddImagesToIDB( QStringList )
+//	+ QString FindSimilarImg( Image, Passport::Type )
 
 signals:
+	void SignalIDBStatus(const bool &t_status);
+	void SignalCurrentProc(const Program::Status &);
+	void SignalProcDone();
+	void SignalProcError(const QString &);
+	void SignalProcFatalError();
 
 public slots:
-
+	// Check if IDB is set up and ready to work
+	void SlotCheckIDBSet();
+	// Get name for new IDB and create it
+	void SlotCreateNewIDB(const QString &t_name);
 };
 
 #endif // IDBHANDLER_H

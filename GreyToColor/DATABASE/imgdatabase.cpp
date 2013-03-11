@@ -37,6 +37,21 @@ void ImgDatabase::Clear()
 	m_path.clear();
 }
 
+// Check if database set (name, driver) and ready to work
+// @input:
+// @output:
+// - true - database ready
+// - false - database not set yet
+bool ImgDatabase::IsSet()
+{
+	if ( (true == m_path.isEmpty()) || (false == m_idb.isValid()) )
+	{
+		return false;
+	}
+
+	return true;
+}
+
 // Set up exist database
 // @input:
 // - QString - unempty path to exist database
@@ -112,15 +127,16 @@ bool ImgDatabase::IsSQLite(const QString &t_path) const
 
 // Create new default image database
 // @input:
+// - QString - unempty name for new database (without suffix)
 // @output:
 // - true - new IDB created
 // - false - can't create new IDB
-bool ImgDatabase::CreateDefaultIDB()
+bool ImgDatabase::CreateNewIDB(const QString &t_name)
 {
-	QString path = FormDefaultIDBFullName();
+	QString path = FormIDBFullName(t_name);
 	if ( true == path.isEmpty() )
 	{
-		qDebug() << "CreateDefaultIDB(): Error - no default name for IDB";
+		qDebug() << "CreateDefaultIDB(): Error - no name for new IDB";
 		return false;
 	}
 
@@ -128,7 +144,7 @@ bool ImgDatabase::CreateDefaultIDB()
 	bool prevIDBRemoved = idbService.RemoveIDB(path);
 	if ( false == prevIDBRemoved )
 	{
-		qDebug() << "CreateDefaultIDB(): Error - can't delete previous default IDB";
+		qDebug() << "CreateDefaultIDB(): Error - can't delete previous IDB with name" << path;
 		return false;
 	}
 
@@ -156,23 +172,40 @@ bool ImgDatabase::CreateDefaultIDB()
 	if ( false == result )
 	{
 		qDebug() << "CreateIDB(): Error - can't create database";
+		idbService.RemoveIDB(path);
 		return false;
 	}
 
 	m_idb.close();
+	m_path = path;
 
 	return true;
 }
 
-// Form full path to default IDB
+// Form full path to IDB
 // @input:
+// - QString - unempty name for new database (without suffix)
 // @output:
 // - empty QString - can't form path
 // - QString - full path to default IDB
-QString ImgDatabase::FormDefaultIDBFullName() const
+QString ImgDatabase::FormIDBFullName(const QString &t_name) const
 {
+	QString partOfPath;
+	partOfPath.append(DEFAULT_IDB_FOLDER);
+
+	if ( true == t_name.isEmpty() )
+	{
+		partOfPath.append(DEFAULT_IDB_NAME);
+	}
+	else
+	{
+		partOfPath.append(t_name);
+	}
+
+	partOfPath.append(SQLITE_SUFFIX);
+
 	IDBFilesService idbService;
-	QString defPath = idbService.FormIDBFullPath(DEFAULT_IDB_NAME);
+	QString defPath = idbService.FormIDBFullPath(partOfPath);
 	return defPath;
 }
 

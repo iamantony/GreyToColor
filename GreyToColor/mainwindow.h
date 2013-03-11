@@ -21,6 +21,7 @@
 
 #include <QMainWindow>
 #include <QFileDialog>
+#include <QInputDialog>
 #include <QMessageBox>
 #include <QDir>
 #include <QDebug>
@@ -67,6 +68,7 @@ private:
 	bool CanOperate();
 
 signals:
+	void SignalNewIDB(const QString &t_name);
 	void SignalFindSimilarInIDB();
 	void SignalNewTargetImg(const QString &t_str);
 	void SignalNewSourceImg(const QString &t_str);
@@ -95,6 +97,9 @@ private slots:
 	void on_findSourceImgPB_clicked();
 	void on_startColorizationPB_clicked();
 	void on_resetPB_clicked();
+	void on_actionCreateDatabase_triggered();
+	void on_actionOpenDatabase_triggered();
+	void on_actionAddImages_triggered();
 };
 
 #endif // MAINWINDOW_H

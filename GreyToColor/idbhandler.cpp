@@ -21,5 +21,46 @@
 IDBHandler::IDBHandler(QObject *parent) :
 	QObject(parent)
 {
+	Clear();
+}
 
+IDBHandler::~IDBHandler()
+{
+	Clear();
+}
+
+// Clear all info
+// @input:
+// @output:
+void IDBHandler::Clear()
+{
+	m_idb.Clear();
+}
+
+// Check if IDB is set up and ready to work
+// @input:
+// @output:
+void IDBHandler::SlotCheckIDBSet()
+{
+	bool idbReady = m_idb.IsSet();
+	emit SignalIDBStatus(idbReady);
+}
+
+// Get name for new IDB and create it
+// @input:
+// - QString - unempty string with name for new IDB
+// @output:
+void IDBHandler::SlotCreateNewIDB(const QString &t_name)
+{
+	if ( true == t_name.isEmpty() )
+	{
+		qDebug() << "SlotCreateNewIDB(): Error - invalid arguments";
+		return;
+	}
+
+	bool newIDBCreated = m_idb.CreateNewIDB(t_name);
+	if ( false == newIDBCreated )
+	{
+		emit SignalProcError(tr("Can't create new image database"));
+	}
 }

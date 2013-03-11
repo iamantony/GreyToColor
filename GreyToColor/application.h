@@ -23,6 +23,7 @@
 #include <QThread>
 #include "mainwindow.h"
 #include "imghandler.h"
+#include "idbhandler.h"
 #include "DEFINES/programstatus.h"
 
 class Application : public QObject
@@ -35,6 +36,9 @@ private:
 
 	ImgHandler *m_imgHandler;
 	QThread *m_imgHandlerThread;
+
+	IDBHandler *m_idbHandler;
+	QThread *m_idbHandlerThread;
 
 	// == METHODS ==
 public:
@@ -53,12 +57,16 @@ private:
 	void CreateIDBHandler();
 	// Create signal-slot connections between UI and ImgHandler object
 	void ConnectUIandImgHand();
+	// Create signal-slot connections between UI and IDBHandler object
+	void ConnectUIandIDBHand();
 	// Start all threads with application objects and show UI
 	void StartApp();
 	// Delete all application objects
 	void DeleteObjects();
 	// Disconnect UI and ImgHandler object
 	void DisconnectUIandImgHand();
+	// Disconnect UI and IDBHandler object
+	void DisconnectUIandIDBHand();
 	// Delete all objects for Image Database Handler
 	void DeleteIDBHandler();
 	// Delete all objects for Image Handler

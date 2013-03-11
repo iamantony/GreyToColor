@@ -346,3 +346,40 @@ void MainWindow::SlotProcessFail()
 	m_appStatus = Program::ERR;
 	m_statusBar->SetStatus(m_appStatus);
 }
+
+// Slot for creating new database
+// @input:
+// @output:
+void MainWindow::on_actionCreateDatabase_triggered()
+{
+	bool okButton = false;
+	QString idbName = QInputDialog::getText(this,
+											"Choose name of new image database...",
+											"Enter name:",
+											QLineEdit::Normal,
+											"default",
+											&okButton);
+
+	if ( (false == okButton) || (true == idbName.isEmpty()) )
+	{
+		return;
+	}
+
+	emit SignalNewIDB(idbName);
+}
+
+// Slot for opening exist database
+// @input:
+// @output:
+void MainWindow::on_actionOpenDatabase_triggered()
+{
+
+}
+
+// Slot for adding images to opened database
+// @input:
+// @output:
+void MainWindow::on_actionAddImages_triggered()
+{
+
+}

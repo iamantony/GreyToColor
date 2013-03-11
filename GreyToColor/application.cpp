@@ -39,6 +39,7 @@ void Application::Construct()
 	CreateIDBHandler();
 
 	ConnectUIandImgHand();
+	ConnectUIandIDBHand();
 
 	StartApp();
 }
@@ -68,7 +69,9 @@ void Application::CreateImgHandler()
 // @output:
 void Application::CreateIDBHandler()
 {
-
+	m_idbHandler = new IDBHandler();
+	m_idbHandlerThread = new QThread();
+	m_idbHandler->moveToThread(m_idbHandlerThread);
 }
 
 // Create signal-slot connections between UI and ImgHandler object
@@ -117,11 +120,43 @@ void Application::ConnectUIandImgHand()
 					 SLOT(SlotProcessFail()));
 }
 
+// Create signal-slot connections between UI and IDBHandler object
+// @input:
+// @output:
+void Application::ConnectUIandIDBHand()
+{
+	QObject::connect(m_mainUI,
+					 SIGNAL(SignalNewIDB(QString)),
+					 m_idbHandler,
+					 SLOT(SlotCreateNewIDB(QString)));
+
+	QObject::connect(m_idbHandler,
+					 SIGNAL(SignalCurrentProc(Program::Status)),
+					 m_mainUI,
+					 SLOT(SlotCurrProcess(Program::Status)));
+
+	QObject::connect(m_idbHandler,
+					 SIGNAL(SignalProcDone()),
+					 m_mainUI,
+					 SLOT(SlotProcessEnd()));
+
+	QObject::connect(m_idbHandler,
+					 SIGNAL(SignalProcError(const QString &)),
+					 m_mainUI,
+					 SLOT(SlotProcError(const QString &)));
+
+	QObject::connect(m_idbHandler,
+					 SIGNAL(SignalProcFatalError()),
+					 m_mainUI,
+					 SLOT(SlotProcessFail()));
+}
+
 // Start all threads with application objects and show UI
 // @input:
 // @output:
 void Application::StartApp()
 {
+	m_idbHandlerThread->start();
 	m_imgHandlerThread->start();
 
 	m_mainUI->show();
@@ -133,6 +168,7 @@ void Application::StartApp()
 void Application::DeleteObjects()
 {
 	// 1. Disconnect all signals
+	DisconnectUIandIDBHand();
 	DisconnectUIandImgHand();
 
 	// 2. Stop all threads and delete objects
@@ -152,12 +188,33 @@ void Application::DisconnectUIandImgHand()
 	m_mainUI->disconnect(m_imgHandler);
 }
 
+// Disconnect UI and IDBHandler object
+// @input:
+// @output:
+void Application::DisconnectUIandIDBHand()
+{
+	m_idbHandler->disconnect(m_mainUI);
+	m_mainUI->disconnect(m_idbHandler);
+}
+
 // Delete all objects for Image Database Handler
 // @input:
 // @output:
 void Application::DeleteIDBHandler()
 {
+	m_idbHandler->Clear();
 
+	m_idbHandlerThread->quit();
+
+	bool threadStoped = false;
+	do
+	{
+		threadStoped = m_idbHandlerThread->wait();
+	}
+	while( false == threadStoped );
+
+	delete m_idbHandlerThread;
+	delete m_idbHandler;
 }
 
 // Delete all objects for Image Handler

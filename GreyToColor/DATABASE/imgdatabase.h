@@ -47,10 +47,12 @@ public:
 
 	// Clear all info
 	void Clear();
+	// Check if database set (name, driver) and ready to work
+	bool IsSet();
 	// Set up exist database
 	bool SetIDB(const QString &t_path);
-	// Create new default image database
-	bool CreateDefaultIDB();
+	// Create new image database
+	bool CreateNewIDB(const QString &t_name);
 	// Add new entry (image name and it's passports) to IDB
 	bool AddEntries(const QMap<QString, QList<QByteArray> > &t_entries);
 	// Get passports of certain type from all images in IDB
@@ -61,8 +63,8 @@ public:
 private:
 	// Check if type of database is SQLite
 	bool IsSQLite(const QString &t_path) const;
-	// Form full path to default IDB
-	QString FormDefaultIDBFullName() const;
+	// Form full path to IDB
+	QString FormIDBFullName(const QString &t_name) const;
 };
 
 #endif // IMGDATABASE_H

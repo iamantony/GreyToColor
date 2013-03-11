@@ -518,7 +518,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -532,7 +532,17 @@
     <addaction name="separator"/>
     <addaction name="actionClose"/>
    </widget>
+   <widget class="QMenu" name="menuDatabase">
+    <property name="title">
+     <string>Database</string>
+    </property>
+    <addaction name="actionCreateDatabase"/>
+    <addaction name="actionOpenDatabase"/>
+    <addaction name="separator"/>
+    <addaction name="actionAddImages"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuDatabase"/>
   </widget>
   <action name="actionOpenTargetImage">
    <property name="text">
@@ -552,6 +562,21 @@
   <action name="actionSaveResult">
    <property name="text">
     <string>Save result...</string>
+   </property>
+  </action>
+  <action name="actionCreateDatabase">
+   <property name="text">
+    <string>Create database...</string>
+   </property>
+  </action>
+  <action name="actionAddImages">
+   <property name="text">
+    <string>Add images...</string>
+   </property>
+  </action>
+  <action name="actionOpenDatabase">
+   <property name="text">
+    <string>Open database...</string>
    </property>
   </action>
  </widget>
