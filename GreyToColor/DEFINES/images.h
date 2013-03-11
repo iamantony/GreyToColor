@@ -21,9 +21,6 @@
 
 #define PROJECT_IMG_PATH		"/img/"
 
-#define PASSPORT_LENGTH 256
-#define SAMPLES_ON_FACET 16
-
 namespace ImageFormat
 {
 	enum FormatType
@@ -36,6 +33,9 @@ namespace ImageFormat
 		DEFAULT_LAST
 	};
 }
+
+#define PASSPORT_LENGTH 256
+#define SAMPLES_ON_FACET 16
 
 namespace Passport
 {

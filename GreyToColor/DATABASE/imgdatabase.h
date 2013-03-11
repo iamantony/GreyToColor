@@ -31,6 +31,7 @@
 #include <QDebug>
 #include "SERVICE/FILES/idbfilesservice.h"
 #include "DEFINES/global.h"
+#include "DEFINES/images.h"
 #include "DEFINES/idbs.h"
 
 class ImgDatabase
@@ -50,12 +51,18 @@ public:
 	bool SetIDB(const QString &t_path);
 	// Create new default image database
 	bool CreateDefaultIDB();
+	// Add new entry (image name and it's passports) to IDB
+	bool AddEntries(const QMap<QString, QList<QByteArray> > &t_entries);
+	// Get passports of certain type from all images in IDB
+	QMap<QString, QByteArray> GetImagesPassport(const Passport::Type &t_passType);
+	// Get all passports from all images in IDB
+	QMap<QString, QList<QByteArray> > GetAllPassport();
 
 private:
 	// Check if type of database is SQLite
-	bool IsSQLite(const QString &t_path);
+	bool IsSQLite(const QString &t_path) const;
 	// Form full path to default IDB
-	QString FormDefaultIDBFullName();
+	QString FormDefaultIDBFullName() const;
 };
 
 #endif // IMGDATABASE_H

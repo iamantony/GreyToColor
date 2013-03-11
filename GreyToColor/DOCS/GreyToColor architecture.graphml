@@ -1324,6 +1324,9 @@
                 <y:MethodLabel>+ void Clear()
 + bool SetIDB( QString )
 + bool CreateDefaultIDB()
++ bool AddEntries( QMap&lt;QString, QList&lt;QByteArray&gt; &gt; )
++ QMap&lt;QString, QByteArray&gt; GetImagesPassport( Passport::Type )
++ QMap&lt;QString, QList&lt;QByteArray&gt; &gt; GetAllPassport()
 
 - bool IsSQLite( QString )
 - QString FormDefaultIDBFullName()</y:MethodLabel>
