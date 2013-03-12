@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Tue 12. Mar 10:48:42 2013
-**      by: Qt User Interface Compiler version 4.8.3
+** Created: Tue 12. Mar 18:57:56 2013
+**      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -39,6 +39,11 @@ public:
     QAction *actionCreateDatabase;
     QAction *actionAddImages;
     QAction *actionOpenDatabase;
+    QAction *actionPreferences;
+    QAction *actionLumHist;
+    QAction *actionSubsampLum;
+    QAction *actionLumGradHists;
+    QAction *actionSubsampLumGrad;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *imgsLayout;
@@ -74,6 +79,7 @@ public:
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuDatabase;
+    QMenu *menuPassport_type;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -96,6 +102,22 @@ public:
         actionAddImages->setObjectName(QString::fromUtf8("actionAddImages"));
         actionOpenDatabase = new QAction(MainWindow);
         actionOpenDatabase->setObjectName(QString::fromUtf8("actionOpenDatabase"));
+        actionPreferences = new QAction(MainWindow);
+        actionPreferences->setObjectName(QString::fromUtf8("actionPreferences"));
+        actionPreferences->setEnabled(false);
+        actionLumHist = new QAction(MainWindow);
+        actionLumHist->setObjectName(QString::fromUtf8("actionLumHist"));
+        actionLumHist->setCheckable(true);
+        actionLumHist->setChecked(false);
+        actionSubsampLum = new QAction(MainWindow);
+        actionSubsampLum->setObjectName(QString::fromUtf8("actionSubsampLum"));
+        actionSubsampLum->setCheckable(true);
+        actionLumGradHists = new QAction(MainWindow);
+        actionLumGradHists->setObjectName(QString::fromUtf8("actionLumGradHists"));
+        actionLumGradHists->setCheckable(true);
+        actionSubsampLumGrad = new QAction(MainWindow);
+        actionSubsampLumGrad->setObjectName(QString::fromUtf8("actionSubsampLumGrad"));
+        actionSubsampLumGrad->setCheckable(true);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -300,11 +322,13 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 25));
+        menubar->setGeometry(QRect(0, 0, 800, 21));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuDatabase = new QMenu(menubar);
         menuDatabase->setObjectName(QString::fromUtf8("menuDatabase"));
+        menuPassport_type = new QMenu(menuDatabase);
+        menuPassport_type->setObjectName(QString::fromUtf8("menuPassport_type"));
         MainWindow->setMenuBar(menubar);
 
         menubar->addAction(menuFile->menuAction());
@@ -314,11 +338,18 @@ public:
         menuFile->addSeparator();
         menuFile->addAction(actionSaveResult);
         menuFile->addSeparator();
+        menuFile->addAction(actionPreferences);
+        menuFile->addSeparator();
         menuFile->addAction(actionClose);
         menuDatabase->addAction(actionCreateDatabase);
         menuDatabase->addAction(actionOpenDatabase);
         menuDatabase->addSeparator();
         menuDatabase->addAction(actionAddImages);
+        menuDatabase->addAction(menuPassport_type->menuAction());
+        menuPassport_type->addAction(actionLumHist);
+        menuPassport_type->addAction(actionSubsampLum);
+        menuPassport_type->addAction(actionLumGradHists);
+        menuPassport_type->addAction(actionSubsampLumGrad);
 
         retranslateUi(MainWindow);
         QObject::connect(actionClose, SIGNAL(triggered()), MainWindow, SLOT(close()));
@@ -336,6 +367,11 @@ public:
         actionCreateDatabase->setText(QApplication::translate("MainWindow", "Create database...", 0, QApplication::UnicodeUTF8));
         actionAddImages->setText(QApplication::translate("MainWindow", "Add images...", 0, QApplication::UnicodeUTF8));
         actionOpenDatabase->setText(QApplication::translate("MainWindow", "Open database...", 0, QApplication::UnicodeUTF8));
+        actionPreferences->setText(QApplication::translate("MainWindow", "Preferences", 0, QApplication::UnicodeUTF8));
+        actionLumHist->setText(QApplication::translate("MainWindow", "Luminance Histogram", 0, QApplication::UnicodeUTF8));
+        actionSubsampLum->setText(QApplication::translate("MainWindow", "Subsampled Luminance", 0, QApplication::UnicodeUTF8));
+        actionLumGradHists->setText(QApplication::translate("MainWindow", "Luminance and Gradient Histograms", 0, QApplication::UnicodeUTF8));
+        actionSubsampLumGrad->setText(QApplication::translate("MainWindow", "Subsampled Luminance and Gradient", 0, QApplication::UnicodeUTF8));
         targetImgLbl->setText(QString());
         openTargetImgPB->setText(QApplication::translate("MainWindow", "Open target image", 0, QApplication::UnicodeUTF8));
         resultImgLbl->setText(QString());
@@ -347,6 +383,7 @@ public:
         skoLbl->setText(QApplication::translate("MainWindow", "SKO:", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
         menuDatabase->setTitle(QApplication::translate("MainWindow", "Database", 0, QApplication::UnicodeUTF8));
+        menuPassport_type->setTitle(QApplication::translate("MainWindow", "Passport type", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

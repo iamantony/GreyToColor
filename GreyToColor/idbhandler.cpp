@@ -35,6 +35,22 @@ IDBHandler::~IDBHandler()
 void IDBHandler::Clear()
 {
 	m_idb.Clear();
+	m_passportToUse = Passport::LUM_HISTOGRAM;
+}
+
+// Set type of passport to use for image searching
+// @input:
+// - Passport::Type - exist image passport type
+// @output:
+void IDBHandler::SlotSetPassportType(const Passport::Type &t_type)
+{
+	if ( Passport::DEFAULT_LAST == t_type )
+	{
+		qDebug() << "SlotSetPassportType(): Error - invalid arguments";
+		return;
+	}
+
+	m_passportToUse = t_type;
 }
 
 // Check if IDB is set up and ready to work
@@ -205,7 +221,7 @@ void IDBHandler::SlotFindSimilar(const Image &t_img)
 		return;
 	}
 
-	const ImgPassport imgPassport = GetImgPassport(t_img, Passport::LUM_HISTOGRAM);
+	const ImgPassport imgPassport = GetImgPassport(t_img, m_passportToUse);
 	if ( true == imgPassport.IsEmpty() )
 	{
 		qDebug() << "SlotFindSimilar(): Error - can't get passport for input image";
@@ -213,7 +229,7 @@ void IDBHandler::SlotFindSimilar(const Image &t_img)
 		return;
 	}
 
-	const QMap<QString, ImgPassport> idbPassports = GetPassportsFromIDB(Passport::LUM_HISTOGRAM);
+	const QMap<QString, ImgPassport> idbPassports = GetPassportsFromIDB(m_passportToUse);
 	if ( true == idbPassports.isEmpty() )
 	{
 		qDebug() << "SlotFindSimilar(): Error - can't get passport from IDB";

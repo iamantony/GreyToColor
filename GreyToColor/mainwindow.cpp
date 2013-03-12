@@ -41,6 +41,7 @@ void MainWindow::InitUI()
 
 	InitStatusBar();
 	InitImgsLabels();
+	InitPassportActionsGroup();
 }
 
 // Creating, applying settings to status bar
@@ -100,6 +101,29 @@ void MainWindow::InitImg(Images::Types t_imgType)
 			return;
 		}
 	}
+}
+
+// Init group of passport type actions
+// @input:
+// @output:
+void MainWindow::InitPassportActionsGroup()
+{
+	m_passports = new QActionGroup(this);
+	m_passports->addAction(ui->actionLumHist);
+	m_passports->addAction(ui->actionSubsampLum);
+	m_passports->addAction(ui->actionLumGradHists);
+	m_passports->addAction(ui->actionSubsampLumGrad);
+
+	ui->actionLumHist->setChecked(true);
+
+	m_passports->setExclusive(true);
+	m_passports->setEnabled(true);
+	m_passports->setVisible(true);
+
+	connect(m_passports,
+			SIGNAL(triggered(QAction*)),
+			this,
+			SLOT(SlotPassportType(QAction*)));
 }
 
 // Show warning window with title and some text
@@ -396,4 +420,38 @@ void MainWindow::on_actionAddImages_triggered()
 	}
 
 	emit SignalAddImagesToIDB(imagesNames);
+}
+
+// Slot for open Preferences dialog
+// @input:
+// @output:
+void MainWindow::on_actionPreferences_triggered()
+{
+	// TODO:
+	// - create preferences dialog
+	// - create connections
+	// - show
+}
+
+// Slot for choosing image passport type
+// @input:
+// @output:
+void MainWindow::SlotPassportType(QAction *t_action)
+{
+	if ( ui->actionLumHist == t_action )
+	{
+		emit SignalUseImgPassport(Passport::LUM_HISTOGRAM);
+	}
+	else if ( ui->actionSubsampLum == t_action )
+	{
+		emit SignalUseImgPassport(Passport::LUM_SUBSAMPLE);
+	}
+	else if ( ui->actionLumGradHists == t_action )
+	{
+		emit SignalUseImgPassport(Passport::LUM_AND_GRAD);
+	}
+	else if ( ui->actionSubsampLumGrad == t_action )
+	{
+		emit SignalUseImgPassport(Passport::LUM_AND_GRAD_SUBSAMPLE);
+	}
 }

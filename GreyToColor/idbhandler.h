@@ -36,6 +36,7 @@ class IDBHandler : public QObject
 	// == DATA ==
 private:
 	ImgDatabase m_idb;
+	Passport::Type m_passportToUse;
 
 	// == METHODS ==
 public:
@@ -62,6 +63,8 @@ signals:
 	void SignalProcFatalError();
 
 public slots:
+	// Set type of passport to use for image searching
+	void SlotSetPassportType(const Passport::Type &t_type);
 	// Check if IDB is set up and ready to work
 	void SlotCheckIDBSet();
 	// Get name for new IDB and create it

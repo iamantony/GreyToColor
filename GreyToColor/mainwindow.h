@@ -20,6 +20,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QActionGroup>
 #include <QFileDialog>
 #include <QInputDialog>
 #include <QMessageBox>
@@ -45,6 +46,7 @@ class MainWindow : public QMainWindow
 private:
 	Ui::MainWindow *ui;
 	StatusBar *m_statusBar;
+	QActionGroup *m_passports;
 	Program::Status m_appStatus;
 
 	// == METHODS ==
@@ -61,6 +63,8 @@ private:
 	void InitImgsLabels();
 	// Put default picture to one of three labels on MainWindow
 	void InitImg(Images::Types t_imgType);
+	// Init group of passport type actions
+	void InitPassportActionsGroup();
 	// Show warning window with title and some text
 	void ShowWarning(const QString &t_title, const QString &t_text);
 	// Check if app status if OK (application not performing some calculations)
@@ -74,6 +78,7 @@ signals:
 	void SignalNewTargetImg(const QString &t_str);
 	void SignalNewSourceImg(const QString &t_str);
 	void SignalSaveResultImg(const QString &t_imgPath);
+	void SignalUseImgPassport(const Passport::Type &t_type);
 
 public slots:
 	// Slot for getting new Source image
@@ -101,6 +106,8 @@ private slots:
 	void on_actionCreateDatabase_triggered();
 	void on_actionOpenDatabase_triggered();
 	void on_actionAddImages_triggered();
+	void on_actionPreferences_triggered();
+	void SlotPassportType(QAction *t_action);
 };
 
 #endif // MAINWINDOW_H

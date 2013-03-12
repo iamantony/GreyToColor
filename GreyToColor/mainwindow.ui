@@ -518,7 +518,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -530,16 +530,28 @@
     <addaction name="separator"/>
     <addaction name="actionSaveResult"/>
     <addaction name="separator"/>
+    <addaction name="actionPreferences"/>
+    <addaction name="separator"/>
     <addaction name="actionClose"/>
    </widget>
    <widget class="QMenu" name="menuDatabase">
     <property name="title">
      <string>Database</string>
     </property>
+    <widget class="QMenu" name="menuPassport_type">
+     <property name="title">
+      <string>Passport type</string>
+     </property>
+     <addaction name="actionLumHist"/>
+     <addaction name="actionSubsampLum"/>
+     <addaction name="actionLumGradHists"/>
+     <addaction name="actionSubsampLumGrad"/>
+    </widget>
     <addaction name="actionCreateDatabase"/>
     <addaction name="actionOpenDatabase"/>
     <addaction name="separator"/>
     <addaction name="actionAddImages"/>
+    <addaction name="menuPassport_type"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuDatabase"/>
@@ -577,6 +589,49 @@
   <action name="actionOpenDatabase">
    <property name="text">
     <string>Open database...</string>
+   </property>
+  </action>
+  <action name="actionPreferences">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Preferences</string>
+   </property>
+  </action>
+  <action name="actionLumHist">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Luminance Histogram</string>
+   </property>
+  </action>
+  <action name="actionSubsampLum">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Subsampled Luminance</string>
+   </property>
+  </action>
+  <action name="actionLumGradHists">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Luminance and Gradient Histograms</string>
+   </property>
+  </action>
+  <action name="actionSubsampLumGrad">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Subsampled Luminance and Gradient</string>
    </property>
   </action>
  </widget>

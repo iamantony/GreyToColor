@@ -53,6 +53,7 @@ void Application::CreateUI()
 	m_mainUI = new MainWindow();
 
 	qRegisterMetaType<Program::Status>("Program::Status");
+	qRegisterMetaType<Passport::Type>("Passport::Type");
 	qRegisterMetaType<Image>("Image");
 }
 
@@ -137,6 +138,11 @@ void Application::ConnectUIandImgHand()
 // @output:
 void Application::ConnectUIandIDBHand()
 {
+	QObject::connect(m_mainUI,
+					 SIGNAL(SignalUseImgPassport(Passport::Type)),
+					 m_idbHandler,
+					 SLOT(SlotSetPassportType(Passport::Type)));
+
 	QObject::connect(m_mainUI,
 					 SIGNAL(SignalNewIDB(QString)),
 					 m_idbHandler,
