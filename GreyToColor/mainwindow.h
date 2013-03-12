@@ -71,6 +71,7 @@ private:
 signals:
 	void SignalNewIDB(const QString &t_name);
 	void SignalOpenIDB(const QString &t_name);
+	void SignalAddImagesToIDB(const QStringList &t_names);
 	void SignalFindSimilarInIDB();
 	void SignalNewTargetImg(const QString &t_str);
 	void SignalNewSourceImg(const QString &t_str);

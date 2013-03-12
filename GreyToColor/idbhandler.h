@@ -42,9 +42,11 @@ public:
 
 	// Clear all info
 	void Clear();
-//	+ bool AddImgToIDB( QString )
-//	+ bool AddImagesToIDB( QStringList )
 //	+ QString FindSimilarImg( Image, Passport::Type )
+
+private:
+	// Get all passports of image
+	QList<QByteArray> CreateImgPasports(const QString &t_imgPath);
 
 signals:
 	void SignalIDBStatus(const bool &t_status);
@@ -60,6 +62,8 @@ public slots:
 	void SlotCreateNewIDB(const QString &t_name);
 	// Open exist IDB
 	void SlotOpenIDB(const QString &t_name);
+	// Add to current database new image entries
+	void SlotAddImagesToIDB(const QStringList &t_names);
 };
 
 #endif // IDBHANDLER_H

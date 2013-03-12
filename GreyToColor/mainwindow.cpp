@@ -380,7 +380,7 @@ void MainWindow::on_actionOpenDatabase_triggered()
 	QString idbName = QFileDialog::getOpenFileName(this,
 												   "Open image database...",
 												   pathToOpen,
-													 "SQLite files (*.sqlite)");
+												   "SQLite files (*.sqlite)");
 
 	if(true == idbName.isEmpty())
 	{
@@ -395,5 +395,15 @@ void MainWindow::on_actionOpenDatabase_triggered()
 // @output:
 void MainWindow::on_actionAddImages_triggered()
 {
+	QStringList imagesNames = QFileDialog::getOpenFileNames(this,
+															"Select images to add to database...",
+															QDir::currentPath(),
+															"IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
 
+	if ( true == imagesNames.isEmpty() )
+	{
+		return;
+	}
+
+	emit SignalAddImagesToIDB(imagesNames);
 }

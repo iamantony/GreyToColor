@@ -83,3 +83,102 @@ void IDBHandler::SlotOpenIDB(const QString &t_name)
 		emit SignalProcError(tr("Can't open image database"));
 	}
 }
+
+// Add to current database new image entries
+// @input:
+// - QStringList - unempty list of strings with names of exist images
+// @output:
+void IDBHandler::SlotAddImagesToIDB(const QStringList &t_names)
+{
+	if ( true == t_names.isEmpty() )
+	{
+		qDebug() << "SlotAddImagesToIDB(): Error - invalid arguments";
+		return;
+	}
+
+	emit SignalCurrentProc(Program::DB_FORMING);
+
+	if ( false == m_idb.IsSet() )
+	{
+		emit SignalProcError(tr("Image database is not set yet"));
+		return;
+	}
+
+	QMap<QString, QList<QByteArray> > newEntries;
+	const int imagesNum = t_names.size();
+	for( int img = 0; img < imagesNum; img++ )
+	{
+		qDebug() << "Processing image:" << t_names.at(img);
+
+		QList<QByteArray> passports = CreateImgPasports(t_names.at(img));
+		if ( true == passports.isEmpty() )
+		{
+			qDebug() << "SlotAddImagesToIDB(): Warning - failed to get passports for image #" << img << ":"
+					 << t_names.at(img);
+
+			continue;
+		}
+
+		newEntries.insert(t_names.at(img), passports);
+	}
+
+	bool imagesAdded = m_idb.AddEntries(newEntries);
+	if ( false == imagesAdded )
+	{
+		emit SignalProcError(tr("Can't add images database"));
+		return;
+	}
+
+	emit SignalProcDone();
+}
+
+// Get all passports of image
+// @input:
+// - QString - unempty path to exist image
+// @output:
+// - empty QList<QByteArray> - failed to form passports
+// - QList<QByteArray> - image passports
+QList<QByteArray> IDBHandler::CreateImgPasports(const QString &t_imgPath)
+{
+	if ( true == t_imgPath.isEmpty() )
+	{
+		qDebug() << "CreateImgPasports(): Error - invalid arguments";
+		QList<QByteArray> empty;
+		return empty;
+	}
+
+	CandidateImage procImg;
+	bool imgLoaded = procImg.LoadColorImg(t_imgPath);
+	if ( false == imgLoaded )
+	{
+		qDebug() << "CreateImgPasports(): can't load image :" << t_imgPath;
+		QList<QByteArray> empty;
+		return empty;
+	}
+
+	bool passportsFormed = procImg.FormAllPassports();
+	if ( false == passportsFormed )
+	{
+		qDebug() << "CreateImgPasports(): can't form passports for image:" << t_imgPath;
+		QList<QByteArray> empty;
+		return empty;
+	}
+
+	QList<ImgPassport> imgPassports = procImg.GetAllPassports();
+	if ( true == imgPassports.isEmpty() )
+	{
+		qDebug() << "CreateImgPasports(): can't form passports for image:" << t_imgPath;
+		QList<QByteArray> empty;
+		return empty;
+	}
+
+	QList<QByteArray> passportsArrays;
+	const int passportsNum = imgPassports.size();
+	for ( int pass = 0; pass < passportsNum; pass++ )
+	{
+		QByteArray arrayPass = imgPassports.at(pass).GetPassportAsArray();
+		passportsArrays.append(arrayPass);
+	}
+
+	return passportsArrays;
+}

@@ -135,6 +135,11 @@ void Application::ConnectUIandIDBHand()
 					 m_idbHandler,
 					 SLOT(SlotOpenIDB(QString)));
 
+	QObject::connect(m_mainUI,
+					 SIGNAL(SignalAddImagesToIDB(QStringList)),
+					 m_idbHandler,
+					 SLOT(SlotAddImagesToIDB(QStringList)));
+
 	QObject::connect(m_idbHandler,
 					 SIGNAL(SignalCurrentProc(Program::Status)),
 					 m_mainUI,

@@ -48,6 +48,8 @@ private:
 	QList<double> GetLumAndGradPassport(const Image &t_img);
 	// Get image passport based on luminance and gradien of subsampled image
 	QList<double> GetSubsamplLumAndGradPassport(const Image &t_img);
+	// Create dummy passport
+	QList<double> CreateDummyPassport();
 };
 
 #endif // IMGPASSPORTCREATOR_H

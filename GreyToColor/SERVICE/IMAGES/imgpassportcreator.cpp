@@ -53,6 +53,12 @@ QList<double> ImgPassportCreator::GetImgPassport(const Image &t_img, const Passp
 
 		case Passport::LUM_AND_GRAD:
 		case Passport::LUM_AND_GRAD_SUBSAMPLE:
+		{
+			qDebug() << "GetImgPassport(): Warning - passport" << t_type << "created is dummy";
+			passport = CreateDummyPassport();
+			break;
+		}
+
 		case Passport::DEFAULT_LAST:
 		{
 			qDebug() << "GetImgPassport(): Error - no such passport";
@@ -111,4 +117,19 @@ QList<double> ImgPassportCreator::GetSubsamplLumPassport(const Image &t_img)
 	QList<double> passport = sampler.SubsampleImg(t_img, SAMPLES_ON_FACET);
 
 	return passport;
+}
+
+// Create dummy passport
+// @input:
+// @output:
+// - QList<double> - dummy passport, full of (-1)
+QList<double> ImgPassportCreator::CreateDummyPassport()
+{
+	QList<double> dummyPass;
+	for ( int ent = 0; ent < PASSPORT_LENGTH; ent++ )
+	{
+		dummyPass.append(-1);
+	}
+
+	return dummyPass;
 }
