@@ -92,6 +92,11 @@ void Application::ConnectUIandImgHand()
 					 SLOT(SlotGetNewSourceImg(const QString &)));
 
 	QObject::connect(m_imgHandler,
+					 SIGNAL(SignalCurrentSourceImg(QString)),
+					 m_mainUI,
+					 SLOT(SlotGetSourceImg(QString)));
+
+	QObject::connect(m_imgHandler,
 					 SIGNAL(SignalGetResultImg(QImage)),
 					 m_mainUI,
 					 SLOT(SlotGetResultImg(QImage)));
@@ -177,6 +182,11 @@ void Application::ConnectImgHandAndIDBHand()
 					 SIGNAL(SignalFindSimilarInIDB(Image)),
 					 m_idbHandler,
 					 SLOT(SlotFindSimilar(Image)));
+
+	QObject::connect(m_idbHandler,
+					 SIGNAL(SignalSimilarImg(QString)),
+					 m_imgHandler,
+					 SLOT(SlotGetNewSourceImg(QString)));
 }
 
 // Start all threads with application objects and show UI

@@ -189,13 +189,6 @@ void MainWindow::on_openSourceImgPB_clicked()
 		return;
 	}
 
-	bool imgSet = ui->sourceImgLbl->SetImage(fName);
-	if ( false == imgSet )
-	{
-		ShowWarning("Loading source image...", "Can't load image. Please, try another one.");
-		return;
-	}
-
 	emit SignalNewSourceImg(fName);
 }
 
@@ -235,15 +228,15 @@ void MainWindow::on_actionSaveResult_triggered()
 // @input:
 // - QImage - unnull new source image
 // @output:
-void MainWindow::SlotGetSourceImg(QImage t_sourceImg)
+void MainWindow::SlotGetSourceImg(const QString &t_sourceImgPath)
 {
-	if ( true == t_sourceImg.isNull() )
+	if ( true == t_sourceImgPath.isEmpty() )
 	{
 		qDebug() << "SlotSourceImg(): Error - invalid arguments";
 		return;
 	}
 
-	ui->sourceImgLbl->SetImage(t_sourceImg);
+	ui->sourceImgLbl->SetImage(t_sourceImgPath);
 }
 
 // Slot for button findSourceImgPB to find similar image from IDB

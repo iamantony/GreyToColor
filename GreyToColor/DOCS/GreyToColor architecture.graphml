@@ -733,14 +733,14 @@
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="181.6937650504267" width="464.0" x="-5930.644670240211" y="364.6984710729214"/>
+              <y:Geometry height="381.31239886245066" width="464.0000000000009" x="-5930.644670240212" y="459.8492170670647"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="464.0" x="0.0" y="0.0">Service:1</y:NodeLabel>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="464.0000000000009" x="0.0" y="0.0">Service:1</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="14" bottomF="14.297698613051125" left="30" leftF="30.00000000000182" right="33" rightF="32.71065951957917" top="0" topF="0.0"/>
+              <y:BorderInsets bottom="19" bottomF="18.65181513270261" left="12" leftF="11.782493265200173" right="14" rightF="14.493152784777521" top="15" topF="15.264517292372602"/>
             </y:GroupNode>
             <y:GroupNode>
               <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
@@ -760,7 +760,7 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="115.01960159362557" width="371.289340480419" x="-5885.644670240209" y="402.0749359166714"/>
+              <y:Geometry height="115.01960159362557" width="371.289340480419" x="-5885.644670240209" y="692.4901992031872"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="59.630859375" x="155.8292405527095" y="3.0">CalcSKO<y:LabelModel>
@@ -775,6 +775,28 @@
                 <y:MethodLabel>+ double ImagesSKO ( Image, Image )
 + double PassportsSKO ( QList&lt;double&gt;, QList&lt;double&gt; )
 + double PixelMaskSKO( double, QList&lt;double&gt; )</y:MethodLabel>
+              </y:UML>
+            </y:UMLClassNode>
+          </data>
+        </node>
+        <node id="n5::n1">
+          <data key="d4"/>
+          <data key="d5"/>
+          <data key="d6">
+            <y:UMLClassNode>
+              <y:Geometry height="115.01960159362551" width="407.7243539500232" x="-5903.862176975012" y="512.4901992031873"/>
+              <y:Fill color="#66FF33" transparent="false"/>
+              <y:BorderStyle color="#000000" type="line" width="1.0"/>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="144.14990234375" x="131.7872258031366" y="3.0">ImgPassportComparer<y:LabelModel>
+                  <y:SmartNodeLabelModel distance="4.0"/>
+                </y:LabelModel>
+                <y:ModelParameter>
+                  <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                </y:ModelParameter>
+              </y:NodeLabel>
+              <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                <y:AttributeLabel/>
+                <y:MethodLabel>QString FindMostSimilar( ImgPassport, QMap&lt;QString, ImgPassport&gt; )</y:MethodLabel>
               </y:UML>
             </y:UMLClassNode>
           </data>
@@ -846,6 +868,8 @@
 
 - void SignalGetResultImg( QImage )
 - void SignalFindSimilarInIDB( Image )
+- void SignalCurrentSourceImg( QString )
+- void SignalGetPassFromIDB()
 - void SignalCurrentProc( Program::Status )
 - void SignalProcDone()
 - void SignalProcError( QString )
@@ -858,7 +882,7 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="466.3300515107017" width="358.9564641564739" x="-4317.341430051813" y="-779.0786380931221"/>
+              <y:Geometry height="344.5817745062963" width="358.9564641564739" x="-4317.341430051813" y="-779.0786380931221"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.7890625" x="142.08370082823694" y="3.0">IDBHandler<y:LabelModel>
@@ -871,12 +895,10 @@
               <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
                 <y:AttributeLabel>- ImgDatabase m_idb</y:AttributeLabel>
                 <y:MethodLabel>+ void Clear()
-+ QString FindSimilarImg( Image, Passport::Type )
 
 - QList&lt;QByteArray&gt; CreateImgPasports( QString )
 - ImgPassport GetImgPassport( Image, Passport::Type )
 - QMap&lt;QString, ImgPassport&gt; GetPassportsFromIDB( Passport::Type )
-- QString ComparePassports( Passport, QList&lt;Passport&gt; )
 
 + void SlotCheckIDBSet()
 + void SlotCreateNewIDB( QString )
@@ -885,6 +907,7 @@
 + void SlotFindSimilar( Image )
 
 - void SignalIDBStatus( bool )
+- void SignalSimilarImg( QString )
 - void SignalCurrentProc( Program::Status )
 - void SignalProcDone()
 - void SignalProcError( QString )
@@ -943,11 +966,11 @@
                 <y:MethodLabel>- void InitUI()
 - void InitStatusBar()
 - void InitImgsLabels()
-- void InitImg( Images::Types t_imgType )
+- void InitImg( Images::Types )
 - void ShowWarning( QString, QString )
 - bool CanOperate()
 
-+ void SlotGetSourceImg( QImage )
++ void SlotGetSourceImg( QString )
 + void SlotGetResultImg( QImage )
 + void SlotCurrProcess( Program::Status )
 + void SlotProcessEnd()
@@ -1808,7 +1831,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-3750.0" y="-545.9136123377713"/>
+            <y:Point x="-3750.0" y="-606.7877508399739"/>
             <y:Point x="-3750.0" y="-428.426119622068"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
@@ -1821,10 +1844,10 @@
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="121.4458902417552" ty="131.78155029757338">
+          <y:Path sx="0.0" sy="0.0" tx="121.4458902417552" ty="97.37635458324408">
             <y:Point x="-3150.0" y="-240.0"/>
             <y:Point x="-3810.0" y="-240.0"/>
-            <y:Point x="-3810.0" y="-414.13206204019787"/>
+            <y:Point x="-3810.0" y="-509.41139625672986"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
@@ -1993,14 +2016,13 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e17" source="n5::n0" target="n6::n1">
+    <edge id="e17" source="n5::n0" target="n2::n1">
       <data key="d8"/>
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-5700.0" y="180.0"/>
-            <y:Point x="-4137.8631979735765" y="180.0"/>
+          <y:Path sx="0.0" sy="0.0" tx="-69.76399788546132" ty="28.785362857427344">
+            <y:Point x="-5700.0" y="990.0"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
@@ -2008,13 +2030,26 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e18" source="n5::n0" target="n2::n1">
+    <edge id="n5::e0" source="n5::n1" target="n5::n0">
       <data key="d8"/>
       <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="-69.76399788546132" ty="28.785362857427344">
-            <y:Point x="-5700.0" y="990.0"/>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="plain"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e18" source="n5::n1" target="n6::n1">
+      <data key="d8"/>
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
+            <y:Point x="-5700.0" y="150.0"/>
+            <y:Point x="-4137.8631979735765" y="150.0"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>

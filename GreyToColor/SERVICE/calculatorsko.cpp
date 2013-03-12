@@ -52,3 +52,34 @@ double CalculatorSKO::PixelMaskSKO(const double t_centralPixLum, const QList<dou
 
 	return SKO;
 }
+
+// Calc SKO of two image passports
+// @input:
+// - QList<double> - unempty passport of one image
+// - QList<double> - unempty passport of another image
+// @output:
+// - ERROR - can't calc SKO
+// - double - positive value of input passports SKO
+double CalculatorSKO::PassportsSKO(const QList<double> &t_first, const QList<double> &t_second)
+{
+	if ( (true == t_first.isEmpty()) ||
+		 (true == t_second.isEmpty()) ||
+		 (t_first.size() != t_second.size()) )
+	{
+		qDebug() << "PassportsSKO(): Error - invalid arguments";
+		return ERROR;
+	}
+
+	double resultSKO = BEST_SKO;
+	const int numOfValues = t_first.size();
+	for (int value = 0; value < numOfValues; value++)
+	{
+		double diff = pow( (t_first.at(value) - t_second.at(value)), 2 );
+		resultSKO += diff;
+	}
+
+	resultSKO /= (double)numOfValues;
+	resultSKO = pow(resultSKO, 0.5);
+
+	return resultSKO;
+}

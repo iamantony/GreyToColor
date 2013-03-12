@@ -77,7 +77,7 @@ signals:
 
 public slots:
 	// Slot for getting new Source image
-	void SlotGetSourceImg(QImage t_sourceImg);
+	void SlotGetSourceImg(const QString &t_sourceImgPath);
 	// Slot for getting new Result image
 	void SlotGetResultImg(QImage t_resultImg);
 	// Info-slot: type of current proccess

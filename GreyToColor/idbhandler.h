@@ -23,6 +23,8 @@
 #include "IMAGES/COMMON/image.h"
 #include "IMAGES/CANDIDATE/candidateimage.h"
 #include "PARAMS/IMAGES/imgpassport.h"
+#include "SERVICE/IMAGES/imgpassportcomparer.h"
+#include "SERVICE/FILES/imgfilesservice.h"
 #include "DATABASE/imgdatabase.h"
 #include "DEFINES/global.h"
 #include "DEFINES/programstatus.h"
@@ -42,7 +44,6 @@ public:
 
 	// Clear all info
 	void Clear();
-//	+ QString FindSimilarImg( Image, Passport::Type )
 
 private:
 	// Get all passports of image
@@ -54,6 +55,7 @@ private:
 
 signals:
 	void SignalIDBStatus(const bool &t_status);
+	void SignalSimilarImg(const QString &t_name);
 	void SignalCurrentProc(const Program::Status &);
 	void SignalProcDone();
 	void SignalProcError(const QString &);

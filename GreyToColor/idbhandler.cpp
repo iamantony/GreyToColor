@@ -221,6 +221,16 @@ void IDBHandler::SlotFindSimilar(const Image &t_img)
 		return;
 	}
 
+	ImgPassportComparer comparer;
+	QString similarImg = comparer.FindMostSimilar(imgPassport, idbPassports);
+	if ( true == similarImg.isEmpty() )
+	{
+		qDebug() << "SlotFindSimilar(): Error - can't compare passports";
+		emit SignalProcError(tr("Failed to compare passports of images"));
+		return;
+	}
+
+	emit SignalSimilarImg(similarImg);
 	emit SignalProcDone();
 }
 
@@ -299,17 +309,26 @@ QMap<QString, ImgPassport> IDBHandler::GetPassportsFromIDB(const Passport::Type 
 		return empty;
 	}
 
+	ImgFilesService imgFile;
 	QMap<QString, ImgPassport> foundPassports;
 	QMap<QString, QByteArray>::const_iterator pass = passports.begin();
 	while( pass != passports.end() )
 	{
 		QString imgName = pass.key();
-		QByteArray passport = pass.value();
+		bool imgExist = imgFile.CheckImgExist(imgName);
+		if ( true == imgExist )
+		{
+			QByteArray passport = pass.value();
 
-		ImgPassport imgPass;
-		imgPass.SetPassport(t_type, passport);
+			ImgPassport imgPass;
+			imgPass.SetPassport(t_type, passport);
 
-		foundPassports.insert(imgName, imgPass);
+			foundPassports.insert(imgName, imgPass);
+		}
+		else
+		{
+			qDebug() << "GetPassportsFromIDB(): Warning - image not exist:" << imgName;
+		}
 
 		++pass;
 	}

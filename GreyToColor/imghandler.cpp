@@ -212,6 +212,7 @@ void ImgHandler::SlotGetNewSourceImg(const QString &t_imgPath)
 		return;
 	}
 
+	emit SignalCurrentSourceImg(t_imgPath);
 	emit SignalProcDone();
 }
 

@@ -16,31 +16,27 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef CALCULATORSKO_H
-#define CALCULATORSKO_H
+#ifndef IMGPASSPORTCOMPARER_H
+#define IMGPASSPORTCOMPARER_H
 
-#include <QObject>
+#include <QMap>
+#include <QList>
+#include <QString>
 #include <QDebug>
-#include <math.h>
-#include "./DEFINES/global.h"
+#include "./PARAMS/IMAGES/imgpassport.h"
+#include "./SERVICE/calculatorsko.h"
 #include "./DEFINES/calcsko.h"
 
-class CalculatorSKO : public QObject
+class ImgPassportComparer
 {
-	Q_OBJECT
-
 	// == DATA ==
 
 	// == METHODS ==
 public:
-	explicit CalculatorSKO(QObject *parent = 0);
+	ImgPassportComparer();
 
-	// Calc SKO of two images
-	double ImagesSKO(/*const Image &t_first, const Image &t_second*/);
-	// Calc SKO of two image passports
-	double PassportsSKO(const QList<double> &t_first, const QList<double> &t_second);
-	// Calc SKO for a pixel mask
-	double PixelMaskSKO(const double t_centralPixLum, const QList<double> &t_luminances);
+	// Find the most similar image passport
+	QString FindMostSimilar(const ImgPassport &t_reference, const QMap<QString, ImgPassport> &t_variants);
 };
 
-#endif // CALCULATORSKO_H
+#endif // IMGPASSPORTCOMPARER_H

@@ -47,7 +47,8 @@ SOURCES += main.cpp\
     SERVICE/IMAGES/imgpassportcreator.cpp \
     SERVICE/IMAGES/imgsubsampler.cpp \
     idbhandler.cpp \
-    DATABASE/imgdatabase.cpp
+    DATABASE/imgdatabase.cpp \
+    SERVICE/IMAGES/imgpassportcomparer.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -89,7 +90,9 @@ HEADERS  += \
     SERVICE/IMAGES/imgpassportcreator.h \
     SERVICE/IMAGES/imgsubsampler.h \
     idbhandler.h \
-    DATABASE/imgdatabase.h
+    DATABASE/imgdatabase.h \
+    SERVICE/IMAGES/imgpassportcomparer.h \
+    DEFINES/calcsko.h
 
 FORMS    += \
 	mainwindow.ui

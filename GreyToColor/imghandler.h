@@ -53,12 +53,13 @@ private:
 
 signals:
 	void SignalGetResultImg(QImage t_resultImg);
+	void SignalFindSimilarInIDB(const Image &t_img);
+	void SignalCurrentSourceImg(const QString &t_name);
 	void SignalGetPassFromIDB();
 	void SignalCurrentProc(const Program::Status &);
 	void SignalProcDone();
 	void SignalProcError(const QString &);
 	void SignalProcFatalError();
-	void SignalFindSimilarInIDB(const Image &t_img);
 
 public slots:
 	// This slot get signal to save result (colorized or not) image and send it copy signal to some (MainWindow) UI
