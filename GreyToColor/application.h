@@ -25,6 +25,7 @@
 #include "imghandler.h"
 #include "idbhandler.h"
 #include "DEFINES/programstatus.h"
+#include "IMAGES/COMMON/image.h"
 
 class Application : public QObject
 {
@@ -59,6 +60,8 @@ private:
 	void ConnectUIandImgHand();
 	// Create signal-slot connections between UI and IDBHandler object
 	void ConnectUIandIDBHand();
+	// Create signal-slot connections between ImgHandler and IDBHandler objects
+	void ConnectImgHandAndIDBHand();
 	// Start all threads with application objects and show UI
 	void StartApp();
 	// Delete all application objects
@@ -67,6 +70,8 @@ private:
 	void DisconnectUIandImgHand();
 	// Disconnect UI and IDBHandler object
 	void DisconnectUIandIDBHand();
+	// Disconnect ImgHandler and IDBHandler objects
+	void DisconnectImgHandAndIDBHand();
 	// Delete all objects for Image Database Handler
 	void DeleteIDBHandler();
 	// Delete all objects for Image Handler

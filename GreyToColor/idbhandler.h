@@ -47,6 +47,10 @@ public:
 private:
 	// Get all passports of image
 	QList<QByteArray> CreateImgPasports(const QString &t_imgPath);
+	// Get for image passport of certain type
+	ImgPassport GetImgPassport(const Image &t_img, const Passport::Type &t_type);
+	// Get from IDB passport of certain type
+	QMap<QString, ImgPassport> GetPassportsFromIDB(const Passport::Type &t_type);
 
 signals:
 	void SignalIDBStatus(const bool &t_status);
@@ -64,6 +68,8 @@ public slots:
 	void SlotOpenIDB(const QString &t_name);
 	// Add to current database new image entries
 	void SlotAddImagesToIDB(const QStringList &t_names);
+	// Find for input image similar pixture from IDB
+	void SlotFindSimilar(const Image &t_img);
 };
 
 #endif // IDBHANDLER_H

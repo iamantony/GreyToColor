@@ -214,3 +214,19 @@ void ImgHandler::SlotGetNewSourceImg(const QString &t_imgPath)
 
 	emit SignalProcDone();
 }
+
+// Start process of searching image in IDB
+// @input:
+// @output:
+void ImgHandler::SlotFindSimilarForTarget()
+{
+	Image currentTarget = m_target.GetCurrentImage();
+	if ( true == currentTarget.IsNull() )
+	{
+		qDebug() << "SlotSearchSimilarImgForTarget(): Error - no Target Image";
+		emit SignalProcError(tr("Target Image is not loaded yet"));
+		return;
+	}
+
+	emit SignalFindSimilarInIDB(currentTarget);
+}

@@ -22,16 +22,11 @@
 #include "../COMMON/processingimage.h"
 #include "../TARGET/PIXELS/targetimgpixels.h"
 #include "../COMMON/PIXELS/rgb.h"
-#include "./PARAMS/IMAGES/imgpassport.h"
-#include "./SERVICE/IMAGES/imgtransform.h"
-#include "./SERVICE/IMAGES/imgpassportcreator.h"
 #include "./DEFINES/images.h"
 
 class TargetImage : public ProcessingImage
 {
 	// == DATA ==
-private:
-	QList<ImgPassport> m_passports;
 
 	// == METHODS ==
 public:
@@ -53,23 +48,15 @@ public:
 						 const unsigned int &t_height,
 						 const RGB &t_prefColor);
 
-	// Get image passport of certain type
-	ImgPassport GetPassport(const Passport::Type &t_type) const;
-	// Get all passports of image
-	QList<ImgPassport> GetAllPassports() const;
-	// Form image passport of certain type for Target Image
-	bool FormPassport(const Passport::Type &t_type);
-	// Form all exist image passports
-	bool FormAllPassports();
 	// Get result image. It could be colorized (if we perform colorization) or
 	// greyscale as original target (if we have not performed colorizztion yet).
 	Image GetResultImage();
+	// Get current version of target image
+	Image GetCurrentImage();
 
 private:
 	// Construct custom pixels of loaded image
 	virtual void ConstructImgPixels();
-	// Add new passport to list of pasports of current image
-	void AddPasport(const ImgPassport &t_passport);
 };
 
 #endif // TARGETIMAGE_H

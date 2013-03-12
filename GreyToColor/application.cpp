@@ -40,6 +40,7 @@ void Application::Construct()
 
 	ConnectUIandImgHand();
 	ConnectUIandIDBHand();
+	ConnectImgHandAndIDBHand();
 
 	StartApp();
 }
@@ -52,6 +53,7 @@ void Application::CreateUI()
 	m_mainUI = new MainWindow();
 
 	qRegisterMetaType<Program::Status>("Program::Status");
+	qRegisterMetaType<Image>("Image");
 }
 
 // Construct all objects for Image Handler
@@ -98,6 +100,11 @@ void Application::ConnectUIandImgHand()
 					 SIGNAL(SignalSaveResultImg(const QString &)),
 					 m_imgHandler,
 					 SLOT(SlotSaveResultImg(const QString &)));
+
+	QObject::connect(m_mainUI,
+					 SIGNAL(SignalFindSimilarImgInIDB()),
+					 m_imgHandler,
+					 SLOT(SlotFindSimilarForTarget()));
 
 	QObject::connect(m_imgHandler,
 					 SIGNAL(SignalCurrentProc(Program::Status)),
@@ -161,6 +168,17 @@ void Application::ConnectUIandIDBHand()
 					 SLOT(SlotProcessFail()));
 }
 
+// Create signal-slot connections between ImgHandler and IDBHandler objects
+// @input:
+// @output:
+void Application::ConnectImgHandAndIDBHand()
+{
+	QObject::connect(m_imgHandler,
+					 SIGNAL(SignalFindSimilarInIDB(Image)),
+					 m_idbHandler,
+					 SLOT(SlotFindSimilar(Image)));
+}
+
 // Start all threads with application objects and show UI
 // @input:
 // @output:
@@ -180,6 +198,7 @@ void Application::DeleteObjects()
 	// 1. Disconnect all signals
 	DisconnectUIandIDBHand();
 	DisconnectUIandImgHand();
+	DisconnectImgHandAndIDBHand();
 
 	// 2. Stop all threads and delete objects
 	DeleteIDBHandler();
@@ -205,6 +224,15 @@ void Application::DisconnectUIandIDBHand()
 {
 	m_idbHandler->disconnect(m_mainUI);
 	m_mainUI->disconnect(m_idbHandler);
+}
+
+// Disconnect ImgHandler and IDBHandler objects
+// @input:
+// @output:
+void Application::DisconnectImgHandAndIDBHand()
+{
+	m_imgHandler->disconnect(m_idbHandler);
+	m_idbHandler->disconnect(m_imgHandler);
 }
 
 // Delete all objects for Image Database Handler

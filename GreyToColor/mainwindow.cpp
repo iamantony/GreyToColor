@@ -251,7 +251,7 @@ void MainWindow::SlotGetSourceImg(QImage t_sourceImg)
 // @output:
 void MainWindow::on_findSourceImgPB_clicked()
 {
-	emit SignalFindSimilarInIDB();
+	emit SignalFindSimilarImgInIDB();
 }
 
 // Slot for getting new Result image
@@ -292,9 +292,6 @@ void MainWindow::on_resetPB_clicked()
 	{
 		return;
 	}
-
-	ImgSubsampler test;
-	test.TestSubsampling();
 
 	// TODO:
 	// Send signal to ImgHandler. It should reload target image, calc all it's params (LAB, SKO) and then send

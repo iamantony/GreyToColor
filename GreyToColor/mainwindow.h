@@ -32,8 +32,6 @@
 #include "DEFINES/mainwindowui.h"
 #include "DEFINES/idbs.h"
 
-#include "SERVICE/IMAGES/imgsubsampler.h"
-
 namespace Ui
 {
 	class MainWindow;
@@ -72,7 +70,7 @@ signals:
 	void SignalNewIDB(const QString &t_name);
 	void SignalOpenIDB(const QString &t_name);
 	void SignalAddImagesToIDB(const QStringList &t_names);
-	void SignalFindSimilarInIDB();
+	void SignalFindSimilarImgInIDB();
 	void SignalNewTargetImg(const QString &t_str);
 	void SignalNewSourceImg(const QString &t_str);
 	void SignalSaveResultImg(const QString &t_imgPath);

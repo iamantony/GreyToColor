@@ -182,3 +182,137 @@ QList<QByteArray> IDBHandler::CreateImgPasports(const QString &t_imgPath)
 
 	return passportsArrays;
 }
+
+// Find for input image similar pixture from IDB
+// @input:
+// - Image - unnull image
+// @output:
+void IDBHandler::SlotFindSimilar(const Image &t_img)
+{
+	emit SignalCurrentProc(Program::SEARCHING_IMAGE_IN_DB);
+
+	if ( true == t_img.IsNull() )
+	{
+		qDebug() << "SlotFindSimilar(): Error - invalid arguments";
+		emit SignalProcError(tr("Can't find similar image from database"));
+		return;
+	}
+
+	if ( false == m_idb.IsSet() )
+	{
+		qDebug() << "SlotFindSimilar(): Error - database is not set yet";
+		emit SignalProcError(tr("Image Database not set yet"));
+		return;
+	}
+
+	const ImgPassport imgPassport = GetImgPassport(t_img, Passport::LUM_HISTOGRAM);
+	if ( true == imgPassport.IsEmpty() )
+	{
+		qDebug() << "SlotFindSimilar(): Error - can't get passport for input image";
+		emit SignalProcError(tr("Failed to get image passport"));
+		return;
+	}
+
+	const QMap<QString, ImgPassport> idbPassports = GetPassportsFromIDB(Passport::LUM_HISTOGRAM);
+	if ( true == idbPassports.isEmpty() )
+	{
+		qDebug() << "SlotFindSimilar(): Error - can't get passport from IDB";
+		emit SignalProcError(tr("Failed to get image passports from IDB"));
+		return;
+	}
+
+	emit SignalProcDone();
+}
+
+// Get for image passport of certain type
+// @input:
+// - Image - unnull image
+// - Passport::Type - exist type of image passport
+// @output:
+// - empty ImgPassport - failed to create image passport
+// - ImgPassport - image passport
+ImgPassport IDBHandler::GetImgPassport(const Image &t_img, const Passport::Type &t_type)
+{
+	if ( (true == t_img.IsNull()) || (Passport::DEFAULT_LAST == t_type) )
+	{
+		qDebug() << "GetImgPassport(): Error - invalid arguments";
+		ImgPassport empty;
+		return empty;
+	}
+
+	QImage inputImg = t_img.GetImg();
+	if ( true == inputImg.isNull() )
+	{
+		qDebug() << "GetImgPassport(): Error - image is null";
+		ImgPassport empty;
+		return empty;
+	}
+
+	CandidateImage procImage;
+	bool imgSet = procImage.SetColorImg(inputImg);
+	if ( false == imgSet )
+	{
+		qDebug() << "GetImgPassport(): Error - can't set image";
+		ImgPassport empty;
+		return empty;
+	}
+
+	bool passportFormed = procImage.FormPassport(t_type);
+	if ( false == passportFormed )
+	{
+		qDebug() << "GetImgPassport(): Error - can't form images passport";
+		ImgPassport empty;
+		return empty;
+	}
+
+	ImgPassport passport = procImage.GetPassport(t_type);
+	if ( true == passport.IsEmpty() )
+	{
+		qDebug() << "GetImgPassport(): Error - can't get images passport";
+		ImgPassport empty;
+		return empty;
+	}
+
+	return passport;
+}
+
+// Get from IDB passport of certain type
+// @input:
+// - Passport::Type - exist type of image passport
+// @output:
+// - empty QList<ImgPassport> - can't get passports from IDB
+// - QList<ImgPassport> - passports from IDB
+QMap<QString, ImgPassport> IDBHandler::GetPassportsFromIDB(const Passport::Type &t_type)
+{
+	if ( Passport::DEFAULT_LAST == t_type )
+	{
+		qDebug() << "GetPassportsFromIDB(): Error - invalid arguments";
+		QMap<QString, ImgPassport> empty;
+		return empty;
+	}
+
+	QMap<QString, QByteArray> passports = m_idb.GetImagesPassport(t_type);
+	if ( true == passports.isEmpty() )
+	{
+		qDebug() << "GetPassportsFromIDB(): Error - can't get passports from IDB";
+		QMap<QString, ImgPassport> empty;
+		return empty;
+	}
+
+	QMap<QString, ImgPassport> foundPassports;
+	QMap<QString, QByteArray>::const_iterator pass = passports.begin();
+	while( pass != passports.end() )
+	{
+		QString imgName = pass.key();
+		QByteArray passport = pass.value();
+
+		ImgPassport imgPass;
+		imgPass.SetPassport(t_type, passport);
+
+		foundPassports.insert(imgName, imgPass);
+
+		++pass;
+	}
+
+	return foundPassports;
+}
