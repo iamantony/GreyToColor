@@ -20,6 +20,7 @@
 #define IMGHANDLER_H
 
 #include <QObject>
+#include <QElapsedTimer>
 #include <QDebug>
 #include "./IMAGES/COMMON/image.h"
 #include "./IMAGES/CANDIDATE/candidateimage.h"

@@ -51,8 +51,8 @@ QList<double> ImgPassportCreator::GetImgPassport(const Image &t_img, const Passp
 			passport = GetSubsamplLumPassport(t_img);
 			break;
 
-		case Passport::LUM_AND_GRAD:
-		case Passport::LUM_AND_GRAD_SUBSAMPLE:
+		case Passport::LUM_AND_GRAD_HIST:
+		case Passport::LUM_AND_GRAD_SUB:
 		{
 			qDebug() << "GetImgPassport(): Warning - passport" << t_type << "created is dummy";
 			passport = CreateDummyPassport();
@@ -93,7 +93,7 @@ QList<double> ImgPassportCreator::GetLuminancePassport(const Image &t_img)
 	}
 
 	ImgHistogram histogramer;
-	QList<double> passport = histogramer.LuminanceHistogram(t_img);
+	QList<double> passport = histogramer.LuminanceHistogram(t_img, 256);
 
 	return passport;
 }
@@ -128,62 +128,8 @@ QList<double> ImgPassportCreator::CreateDummyPassport()
 	QList<double> dummyPass;
 	for ( int ent = 0; ent < PASSPORT_LENGTH; ent++ )
 	{
-		dummyPass.append(-1);
+		dummyPass.append(ERROR);
 	}
 
 	return dummyPass;
-}
-
-// Resize passport
-// @input:
-// - QList<double> - unempty image passport
-// - int - positive value of new size of passport
-// @output:
-// - empty QList<double> - can't resize passport
-// - QList<double> - resized passport
-QList<double> ImgPassportCreator::ResizePassport(const QList<double> &t_passport, const int &t_newSize)
-{
-	if ( (true == t_passport.isEmpty()) || (t_newSize < 1) )
-	{
-		qDebug() << "ScalePassport(): Error - invalid arguments";
-		QList<double> empty;
-		return empty;
-	}
-
-	const int passSize = t_passport.size();
-	int fullIter = passSize / t_newSize;
-	int modulo = passSize % t_newSize;
-	if ( 1 <= fullIter )
-	{
-		// TODO:
-		// - multiply passport
-		// - add modulo
-
-		if ( 0 == modulo )
-		{
-			qDebug() << "ScalePassport(): don't need to resize";
-			return t_passport;
-		}
-		else if ( modulo < 0 )
-		{
-			qDebug() << "ScalePassport(): Error - invalid modulo!";
-			QList<double> empty;
-			return empty;
-		}
-		else if ( 0 < modulo )
-		{
-
-		}
-	}
-	else
-	{
-		int scaleFactor = t_newSize / passSize;
-		// TODO:
-		// - scale passport
-		// - add modulo
-	}
-
-	// TODO:
-	// - check size of new passport. Resize if needed
-
 }

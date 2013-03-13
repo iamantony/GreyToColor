@@ -27,6 +27,7 @@
 #include "imgsubsampler.h"
 #include "imgtransform.h"
 #include "DEFINES/images.h"
+#include "DEFINES/global.h"
 
 class ImgPassportCreator
 {
@@ -50,8 +51,6 @@ private:
 	QList<double> GetSubsamplLumAndGradPassport(const Image &t_img);
 	// Create dummy passport
 	QList<double> CreateDummyPassport();
-	// Resize passport
-	QList<double> ResizePassport(const QList<double> &t_passport, const int &t_newSize);
 };
 
 #endif // IMGPASSPORTCREATOR_H

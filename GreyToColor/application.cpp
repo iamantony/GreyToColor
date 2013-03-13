@@ -256,8 +256,6 @@ void Application::DisconnectImgHandAndIDBHand()
 // @output:
 void Application::DeleteIDBHandler()
 {
-	m_idbHandler->Clear();
-
 	m_idbHandlerThread->quit();
 
 	bool threadStoped = false;
@@ -276,9 +274,6 @@ void Application::DeleteIDBHandler()
 // @output:
 void Application::DeleteImgHandler()
 {
-	m_imgHandler->Clear();
-
-
 	m_imgHandlerThread->quit();
 
 	bool threadStoped = false;

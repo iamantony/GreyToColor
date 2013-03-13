@@ -310,6 +310,8 @@ void MainWindow::on_resetPB_clicked()
 		return;
 	}
 
+
+
 	// TODO:
 	// Send signal to ImgHandler. It should reload target image, calc all it's params (LAB, SKO) and then send
 	// it to us
@@ -448,10 +450,10 @@ void MainWindow::SlotPassportType(QAction *t_action)
 	}
 	else if ( ui->actionLumGradHists == t_action )
 	{
-		emit SignalUseImgPassport(Passport::LUM_AND_GRAD);
+		emit SignalUseImgPassport(Passport::LUM_AND_GRAD_HIST);
 	}
 	else if ( ui->actionSubsampLumGrad == t_action )
 	{
-		emit SignalUseImgPassport(Passport::LUM_AND_GRAD_SUBSAMPLE);
+		emit SignalUseImgPassport(Passport::LUM_AND_GRAD_SUB);
 	}
 }

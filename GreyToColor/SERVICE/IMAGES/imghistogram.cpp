@@ -26,12 +26,13 @@ ImgHistogram::ImgHistogram()
 // Get image luminance histogram (in percent)
 // @input:
 // - Image - unnull image (color/grey)
+// - int - size of histogram (power of 2, [0, 256])
 // @output:
-// - empty QList<unsigned int> - failed to form histogram
-// - QList<unsigned int> - images luminance histogram
-QList<double> ImgHistogram::LuminanceHistogram(const Image &t_img)
+// - empty QList<double> - failed to form histogram
+// - QList<double> - images luminance histogram
+QList<double> ImgHistogram::LuminanceHistogram(const Image &t_img, const int t_size)
 {
-	if ( true == t_img.IsNull() )
+	if ( (true == t_img.IsNull()) || (false == CheckHistSize(t_size)) )
 	{
 		qDebug() << "LuminanceHistogram(): Error - invalid arguments";
 		QList<double> empty;
@@ -56,19 +57,28 @@ QList<double> ImgHistogram::LuminanceHistogram(const Image &t_img)
 		return empty;
 	}
 
+	QList< QList<double> > shrinkedHist = ShrinkHistogram(lumHist, t_size);
+	if ( true == shrinkedHist.isEmpty() )
+	{
+		qDebug() << "LuminanceHistogram(): Error - can't shrink luminance histogram";
+		QList<double> empty;
+		return empty;
+	}
+
 	// All histograms of greyscaled image are the same. You can return any one.
-	return lumHist.at(RED);
+	return shrinkedHist.at(Histogram::RED);
 }
 
 // Get image channels histogram (in percent)
 // @input:
 // - Image - unnull image (color/grey)
+// - int - size of histogram (power of 2, [0, 256])
 // @output:
-// - empty QList< QList<unsigned int> > - failed to form RGB channels histogram
-// - QList< QList<unsigned int> > - histograms of all image channels
-QList<QList<double> > ImgHistogram::RGBHistogram(const Image &t_img)
+// - empty QList< QList<double> > - failed to form RGB channels histogram
+// - QList< QList<double> > - histograms of all image channels
+QList< QList<double> > ImgHistogram::RGBHistogram(const Image &t_img, const int t_size)
 {
-	if ( true == t_img.IsNull() )
+	if ( (true == t_img.IsNull()) || (false == CheckHistSize(t_size)) )
 	{
 		qDebug() << "RGBHistogram(): Error - invalid arguments";
 		QList< QList<double> > empty;
@@ -84,16 +94,44 @@ QList<QList<double> > ImgHistogram::RGBHistogram(const Image &t_img)
 		return empty;
 	}
 
-	return rgbHist;
+	QList< QList<double> > shrinkHist = ShrinkHistogram(rgbHist, t_size);
+	if ( true == shrinkHist.isEmpty() )
+	{
+		qDebug() << "RGBHistogram(): Error - can't shrink images' channels histogram";
+		QList< QList<double> > empty;
+		return empty;
+	}
+
+	return shrinkHist;
+}
+
+// Check histogram size
+// @input:
+// - int - size of histogram (power of 2, [0, 256])
+// @output:
+// - true - size is OK
+// - false - size is not OK
+bool ImgHistogram::CheckHistSize(const int &t_size)
+{
+	for ( int power = 0; power < 9; power++ )
+	{
+		int poweredTwo = pow(2, power);
+		if ( t_size == poweredTwo )
+		{
+			return true;
+		}
+	}
+
+	return false;
 }
 
 // Get RGB image channels histogram (in percent)
 // @input:
 // - QImage - unnull image (color/grey)
 // @output:
-// - empty QList< QList<unsigned int> > - failed to form RGB channels histogram
-// - QList< QList<unsigned int> > - histograms of all images' channels
-QList<QList<double> > ImgHistogram::CalcRGBHistogram(const QImage &t_img)
+// - empty QList< QList<double> > - failed to form RGB channels histogram
+// - QList< QList<double> > - histograms of all images' channels
+QList< QList<double> > ImgHistogram::CalcRGBHistogram(const QImage &t_img)
 {
 	if ( true == t_img.isNull() )
 	{
@@ -119,8 +157,8 @@ QList<QList<double> > ImgHistogram::CalcRGBHistogram(const QImage &t_img)
 // @input:
 // - QImage - unnull image (color/grey)
 // @output:
-// - empty QList< QList<unsigned int> > - failed to form RGB channels histogram statistic
-// - QList< QList<unsigned int> > - statistic histograms of all RGB images' channels
+// - empty QList< QList<double> > - failed to form RGB channels histogram statistic
+// - QList< QList<double> > - statistic histograms of all RGB images' channels
 QList< QList<double> > ImgHistogram::CalcRGBChannStatistic(const QImage &t_img)
 {
 	if ( true == t_img.isNull() )
@@ -142,24 +180,24 @@ QList< QList<double> > ImgHistogram::CalcRGBChannStatistic(const QImage &t_img)
 			QRgb pixel = t_img.pixel(wdt, hgt);
 
 			int redValue = qRed(pixel);
-			rgbHistogram[RED][redValue]++;
+			rgbHistogram[Histogram::RED][redValue]++;
 
 			if ( false == imgIsGrey )
 			{
 				int greenValue = qGreen(pixel);
-				rgbHistogram[GREEN][greenValue]++;
+				rgbHistogram[Histogram::GREEN][greenValue]++;
 
 				int blueValue = qBlue(pixel);
-				rgbHistogram[BLUE][blueValue]++;
+				rgbHistogram[Histogram::BLUE][blueValue]++;
 			}
 		}
 	}
 
 	if ( true == imgIsGrey )
 	{
-		QList<double> redChannelHist = rgbHistogram.at(RED);
-		rgbHistogram.replace(GREEN, redChannelHist);
-		rgbHistogram.replace(BLUE, redChannelHist);
+		QList<double> redChannelHist = rgbHistogram.at(Histogram::RED);
+		rgbHistogram.replace(Histogram::GREEN, redChannelHist);
+		rgbHistogram.replace(Histogram::BLUE, redChannelHist);
 	}
 
 	return rgbHistogram;
@@ -168,8 +206,8 @@ QList< QList<double> > ImgHistogram::CalcRGBChannStatistic(const QImage &t_img)
 // Get zero RGB histogram
 // @input:
 // @output:
-// - QList< QList<unsigned int> > - zero RGB histograms
-QList<QList<double> > ImgHistogram::FormZeroRGBHist()
+// - QList< QList<double> > - zero RGB histograms
+QList< QList<double> > ImgHistogram::FormZeroRGBHist()
 {
 	QList< QList<double> > zeroRGBHist;
 	QList<double> channelHistogram;
@@ -186,16 +224,13 @@ QList<QList<double> > ImgHistogram::FormZeroRGBHist()
 	return zeroRGBHist;
 }
 
-// NOTE:
-// - maybe we should use other charactrictic which will better describe our statistic?
-
 // Transform statistic histogram to statistic histogram in percent
 // @input:
 // - QList< QList<unsigned int> > - unempty statistic histogram of some image
 // @output:
-// - empty QList< QList<unsigned int> > - failed to form statistic histogram in percent
-// - QList< QList<unsigned int> > - statistic histogram in percent
-QList<QList<double> > ImgHistogram::FormStatHistInPercent(const QList<QList<double> > &t_statHist)
+// - empty QList< QList<double> > - failed to form statistic histogram in percent
+// - QList< QList<double> > - statistic histogram in percent
+QList< QList<double> > ImgHistogram::FormStatHistInPercent(const QList<QList<double> > &t_statHist)
 {
 	if ( true == t_statHist.isEmpty() )
 	{
@@ -237,6 +272,53 @@ QList<QList<double> > ImgHistogram::FormStatHistInPercent(const QList<QList<doub
 	return statHistInPercent;
 }
 
+// Shrink histogram
+// @input:
+// - QList<QList<double> > - unempty formed image histogram
+// - int - new size of histograms (power of 2, [0, 256])
+// @output:
+// - empty QList< QList<double> > - failed to shrink RGB channels histogram
+// - QList< QList<double> > - shrinked histograms of all image channels
+QList< QList<double> > ImgHistogram::ShrinkHistogram(const QList< QList<double> > &t_hists, const int &t_newSize)
+{
+	if ( (true == t_hists.isEmpty()) || (false == CheckHistSize(t_newSize)) )
+	{
+		qDebug() << "ShrinkHistogram(): Error - invalid arguments";
+		QList< QList<double> > empty;
+		return empty;
+	}
+
+	const int shrinkFactor = t_hists.at(Histogram::RED).size() / t_newSize;
+	if ( shrinkFactor <= 1 )
+	{
+		return t_hists;
+	}
+
+	QList< QList<double> > shrinkedHists;
+	for (int hist = Histogram::RED; hist < Histogram::DEFAULT_LAST; hist++)
+	{
+		QList<double> channelHist;
+		const int histSize = t_hists.at(hist).size();
+		int valuesCounter = 0;
+		double summ = 0;
+		for (int val = 0; val < histSize; val++)
+		{
+			summ += t_hists.at(hist).at(val);
+			valuesCounter++;
+			if ( shrinkFactor == valuesCounter )
+			{
+				channelHist.append(summ);
+				valuesCounter = 0;
+				summ = 0;
+			}
+		}
+
+		shrinkedHists.append(channelHist);
+	}
+
+	return shrinkedHists;
+}
+
 // Test of forming image histogram
 void ImgHistogram::TestRGBHist()
 {
@@ -249,17 +331,24 @@ void ImgHistogram::TestRGBHist()
 	Image testImg;
 	testImg.LoadImg(imgName);
 
-	QList< QList<double> > hist = RGBHistogram(testImg);
+	QList< QList<double> > hist = RGBHistogram(testImg, 256);
 	if ( true == hist.isEmpty() )
 	{
 		qDebug() << "TestRGBHist(): Fail - no histogram";
 		return;
 	}
 
-	QList<double> lumHist = LuminanceHistogram(testImg);
+	QList<double> lumHist = LuminanceHistogram(testImg, 256);
 	if ( true == lumHist.isEmpty() )
 	{
 		qDebug() << "TestRGBHist(): Fail - no lum histogram";
+		return;
+	}
+
+	QList<double> shrinkHist = LuminanceHistogram(testImg, 128);
+	if ( true == shrinkHist.isEmpty() )
+	{
+		qDebug() << "TestRGBHist(): Fail - no shrinked lum histogram";
 		return;
 	}
 }

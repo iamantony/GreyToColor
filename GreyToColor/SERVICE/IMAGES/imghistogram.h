@@ -35,14 +35,16 @@ public:
 	ImgHistogram();
 
 	// Get image luminance histogram (in percent)
-	QList<double> LuminanceHistogram(const Image &t_img);
+	QList<double> LuminanceHistogram(const Image &t_img, const int t_size);
 	// Get image channels histogram (in percent)
-	QList< QList<double> > RGBHistogram(const Image &t_img);
+	QList< QList<double> > RGBHistogram(const Image &t_img, const int t_size);
 
 	// Test of forming image histogram
 	void TestRGBHist();
 
 private:
+	// Check histogram size
+	bool CheckHistSize(const int &t_size);
 	// Get RGB image channels histogram (in percent)
 	QList< QList<double> > CalcRGBHistogram(const QImage &t_img);
 	// Calc images' channels statistics
@@ -51,6 +53,8 @@ private:
 	QList< QList<double> > FormZeroRGBHist();
 	// Transform statistic histogram to statistic histogram in percent
 	QList< QList<double> > FormStatHistInPercent(const QList< QList<double> > &t_statHist);
+	// Shrink histogram
+	QList< QList<double> > ShrinkHistogram(const QList< QList<double> > &t_hists, const int &t_newSize);
 };
 
 #endif // IMGHISTOGRAM_H

@@ -23,8 +23,20 @@
 #define MIN_RGB_LUM 0
 #define MAX_RGB_LUM 255
 
-#define RED 0
-#define GREEN 1
-#define BLUE 2
+namespace Histogram
+{
+	enum Type
+	{
+		RED = 0,
+		GREEN,
+		BLUE,
+		DEFAULT_LAST
+	};
+}
+
+
+//#define RED 0
+//#define GREEN 1
+//#define BLUE 2
 
 #endif // IMGSERVICE_H

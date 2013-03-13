@@ -16,6 +16,381 @@
     <data key="d7"/>
     <node id="n0" yfiles.foldertype="group">
       <data key="d4"/>
+      <data key="d5"/>
+      <data key="d6">
+        <y:ProxyAutoBoundsNode>
+          <y:Realizers active="0">
+            <y:GroupNode>
+              <y:Geometry height="1433.6996226582091" width="795.0322853689863" x="-2273.0359506611685" y="357.9437995555007"/>
+              <y:Fill color="#F5F5F5" transparent="false"/>
+              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="795.0322853689863" x="0.0" y="0.0">Service: 3</y:NodeLabel>
+              <y:Shape type="roundrectangle"/>
+              <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+            </y:GroupNode>
+            <y:GroupNode>
+              <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
+              <y:Fill color="#F5F5F5" transparent="false"/>
+              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="67.369140625" x="-8.6845703125" y="0.0">Folder 13</y:NodeLabel>
+              <y:Shape type="roundrectangle"/>
+              <y:State closed="true" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+            </y:GroupNode>
+          </y:Realizers>
+        </y:ProxyAutoBoundsNode>
+      </data>
+      <graph edgedefault="directed" id="n0:">
+        <node id="n0::n0" yfiles.foldertype="group">
+          <data key="d4"/>
+          <data key="d6">
+            <y:ProxyAutoBoundsNode>
+              <y:Realizers active="0">
+                <y:GroupNode>
+                  <y:Geometry height="1381.3231578144591" width="765.0322853689863" x="-2258.0359506611685" y="395.3202643992507"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="765.0322853689863" x="0.0" y="0.0">Image Service: 2</y:NodeLabel>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" modelName="custom" textColor="#000000" visible="true" width="4.0" x="380.51614268449316" y="688.6615789072296">
+                    <y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                  <y:BorderInsets bottom="0" bottomF="0.0" left="143" leftF="142.6581875868742" right="112" rightF="111.61857163352374" top="16" topF="15.796679038636455"/>
+                </y:GroupNode>
+                <y:GroupNode>
+                  <y:Geometry height="981.6584317180616" width="1501.7111541850222" x="-2130.8555770925113" y="289.17078414096915"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1501.7111541850222" x="0.0" y="0.0">Folder 5</y:NodeLabel>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="true" closedHeight="981.6584317180616" closedWidth="1501.7111541850222" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
+                  <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+                </y:GroupNode>
+              </y:Realizers>
+            </y:ProxyAutoBoundsNode>
+          </data>
+          <graph edgedefault="directed" id="n0::n0:">
+            <node id="n0::n0::n0">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="191.0967908964874" width="295.26153093843095" x="-2007.6307654692155" y="1570.5466313172224"/>
+                  <y:Fill color="#66FF33" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="91.40087890625" x="101.93032601609048" y="3.0">ImgTransform<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ Image ToGreyImg( Image )
++ Image NormaliseImgHistogram( Image )
++ Image LevelLuminance( Image, int )
+
++ void TestNormalization()
++ void TestLumLeveling()
+
+- QImage GreyscaleImg( QImage )
+- Image PerformImgNormalisation( Image )
+- Image PerformLumLeveling( Image, int )</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n0::n0::n1">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="105.0" width="295.26153093843095" x="-2007.6307654692155" y="1390.3942210065695"/>
+                  <y:Fill color="#66FF33" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="110.2216796875" x="92.51992562546548" y="3.0">ImgSearchParam<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ int FindMaxLum( Image )
++ int FindMinLum( Image )
++ QPair&lt;int, int&gt; FindMinMaxLum( Image )</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n0::n0::n2">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="191.0967908964874" width="477.0780062095025" x="-2096.7002431352084" y="676.6458185922897"/>
+                  <y:Fill color="#66FF33" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="91.40087890625" x="192.83856365162626" y="3.0">ImgHistogram<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ QList&lt;double&gt; LuminanceHistogram( Image )
++ QList&lt; QList&lt;double&gt; &gt; RGBHistogram( Image )
+
++ void TestRGBHist()
+
+- QList&lt; QList&lt;double&gt; &gt; CalcRGBHistogram( QImage )
+- QList&lt; QList&lt;double&gt; &gt; CalcRGBChannStatistic( QImage )
+- QList&lt; QList&lt;double&gt; &gt; FormZeroRGBHist()
+- QList&lt; QList&lt;double&gt; &gt; FormStatHistInPercent( QList&lt; QList&lt;double&gt; &gt; )</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n0::n0::n3">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="153.0" width="399.60917786935147" x="-2057.9658289651325" y="448.49340828163713"/>
+                  <y:Fill color="#FFCC00" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="128.97900390625" x="135.31508698155073" y="3.0">ImgPassportCreator<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ QList&lt;double&gt; GetImgPassport( Image, Passport::Type )
+
+- QList&lt;double&gt; GetLuminancePassport( Image )
+- QList&lt;double&gt; GetSubsamplLumPassport( Image )
+- QList&lt;double&gt; GetLumAndGradPassport( Image )
+- QList&lt;double&gt; GetSubsamplLumAndGradPassport( Image )
+- QList&lt;double&gt; CreateDummyPassport()</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n0::n0::n4">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="191.0967908964874" width="480.7555261485884" x="-2100.3777630742943" y="942.8950197994297"/>
+                  <y:Fill color="#66FF33" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="101.525390625" x="189.6150677617942" y="3.0">ImgSubsampler<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ QList&lt;double&gt; SubsampleImg( Image, int )
+
++ void TestDivide()
++ void TestSubsampling()
+
+- QImage GetGreyImg( Image )
+- QList&lt;QRect&gt; GetSamplesRects( int, int, int )
+- QList&lt; QPair&lt;int, int&gt; &gt; DivideFacet( int, int )
+- QList&lt;double&gt; CalcSamplesLum( QImage, QList&lt;QRect&gt; )</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n0::n0::n5">
+              <data key="d4"/>
+              <data key="d5"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="105.0" width="480.7555261485884" x="-2100.3777630742943" y="1209.6930158512432"/>
+                  <y:Fill color="#FFCC00" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="128.99169921875" x="175.8819134649192" y="3.0">ImgPassportResizer<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ QList&lt;double&gt; ResizePassport( QList&lt;double&gt;, Passport::Type, int )
+
+- QList&lt;double&gt; IncreasePassSize( QList&lt;double&gt;, Passport::Type, int )
+- QList&lt;double&gt; DecreasePassSize( QList&lt;double&gt;, Passport::Type, int )</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+          </graph>
+        </node>
+      </graph>
+    </node>
+    <node id="n1" yfiles.foldertype="group">
+      <data key="d4"/>
+      <data key="d5"/>
+      <data key="d6">
+        <y:ProxyAutoBoundsNode>
+          <y:Realizers active="0">
+            <y:GroupNode>
+              <y:Geometry height="552.2140239963242" width="795.0322853689863" x="-3393.4458066841894" y="1710.8675078504543"/>
+              <y:Fill color="#F5F5F5" transparent="false"/>
+              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="795.0322853689863" x="0.0" y="0.0">Service: 2</y:NodeLabel>
+              <y:Shape type="roundrectangle"/>
+              <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+            </y:GroupNode>
+            <y:GroupNode>
+              <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
+              <y:Fill color="#F5F5F5" transparent="false"/>
+              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="67.369140625" x="-8.6845703125" y="0.0">Folder 13</y:NodeLabel>
+              <y:Shape type="roundrectangle"/>
+              <y:State closed="true" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+              <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+            </y:GroupNode>
+          </y:Realizers>
+        </y:ProxyAutoBoundsNode>
+      </data>
+      <graph edgedefault="directed" id="n1:">
+        <node id="n1::n0" yfiles.foldertype="group">
+          <data key="d4"/>
+          <data key="d6">
+            <y:ProxyAutoBoundsNode>
+              <y:Realizers active="0">
+                <y:GroupNode>
+                  <y:Geometry height="499.83755915257416" width="765.0322853689863" x="-3378.4458066841894" y="1748.2439726942043"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="765.0322853689863" x="0.0" y="0.0">File Service</y:NodeLabel>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
+                  <y:BorderInsets bottom="0" bottomF="0.0" left="35" leftF="34.717135892436545" right="0" rightF="0.0" top="0" topF="0.0"/>
+                </y:GroupNode>
+                <y:GroupNode>
+                  <y:Geometry height="50.0" width="50.0" x="-2242.516142684493" y="1762.6722416442385"/>
+                  <y:Fill color="#F5F5F5" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
+                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="59.02685546875" x="-4.513427734375" y="0.0">Folder 3</y:NodeLabel>
+                  <y:Shape type="roundrectangle"/>
+                  <y:State closed="true" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
+                  <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
+                  <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
+                </y:GroupNode>
+              </y:Realizers>
+            </y:ProxyAutoBoundsNode>
+          </data>
+          <graph edgedefault="directed" id="n1::n0:">
+            <node id="n1::n0::n0">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="115.01960159362557" width="247.3470939949766" x="-3056.531340237815" y="2118.061930253153"/>
+                  <y:Fill color="#66FF33" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="79.88623046875" x="83.7304317631133" y="3.0">FilesService<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ bool RemoveFile( QString )
++ QString FormFullName( QString )
++ bool CheckFileExistance( QString )
++ QString GetFileName( QString )</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n1::n0::n1">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="244.54106166909446" width="357.4573415835057" x="-3328.728670791753" y="1785.6204375379543"/>
+                  <y:Fill color="#66FF33" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="102.998046875" x="127.22964735425285" y="26.701171875">ImgFilesService<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="FilesService" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ bool RemoveImg( QString )
++ bool CheckImgExist ( QString )
++ QString GetImgName( QString )
++ QString MoveImageToProject( QString )
++ QStringList MoveImagesToProject( QStringList )
++ bool SaveImage( QImage, QString )
+
+- QString CutSuffix( QString )
+
++ void TestImgMoving()
++ void TestImgSaving()</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+            <node id="n1::n0::n2">
+              <data key="d4"/>
+              <data key="d6">
+                <y:UMLClassNode>
+                  <y:Geometry height="160.3229984140969" width="247.3470939949766" x="-2875.7606153101797" y="1869.8385007929514"/>
+                  <y:Fill color="#66FF33" transparent="false"/>
+                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
+                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="102.2744140625" x="72.5363399662383" y="26.701171875">IDBFilesService<y:LabelModel>
+                      <y:SmartNodeLabelModel distance="4.0"/>
+                    </y:LabelModel>
+                    <y:ModelParameter>
+                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
+                    </y:ModelParameter>
+                  </y:NodeLabel>
+                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="FilesService" use3DEffect="true">
+                    <y:AttributeLabel/>
+                    <y:MethodLabel>+ bool RemoveIDB( QString )
++ bool CheckIDBExist( QString )
++ QString FormIDBFullPath (QString)</y:MethodLabel>
+                  </y:UML>
+                </y:UMLClassNode>
+              </data>
+            </node>
+          </graph>
+        </node>
+      </graph>
+    </node>
+    <node id="n2" yfiles.foldertype="group">
+      <data key="d4"/>
       <data key="d6">
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
@@ -42,8 +417,8 @@
           </y:Realizers>
         </y:ProxyAutoBoundsNode>
       </data>
-      <graph edgedefault="directed" id="n0:">
-        <node id="n0::n0">
+      <graph edgedefault="directed" id="n2:">
+        <node id="n2::n0">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -76,7 +451,7 @@
         </node>
       </graph>
     </node>
-    <node id="n1" yfiles.foldertype="group">
+    <node id="n3" yfiles.foldertype="group">
       <data key="d4"/>
       <data key="d6">
         <y:ProxyAutoBoundsNode>
@@ -104,8 +479,8 @@
           </y:Realizers>
         </y:ProxyAutoBoundsNode>
       </data>
-      <graph edgedefault="directed" id="n1:">
-        <node id="n1::n0">
+      <graph edgedefault="directed" id="n3:">
+        <node id="n3::n0">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -131,7 +506,7 @@
             </y:UMLClassNode>
           </data>
         </node>
-        <node id="n1::n1">
+        <node id="n3::n1">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -164,7 +539,7 @@
         </node>
       </graph>
     </node>
-    <node id="n2" yfiles.foldertype="group">
+    <node id="n4" yfiles.foldertype="group">
       <data key="d4"/>
       <data key="d6">
         <y:ProxyAutoBoundsNode>
@@ -192,8 +567,8 @@
           </y:Realizers>
         </y:ProxyAutoBoundsNode>
       </data>
-      <graph edgedefault="directed" id="n2:">
-        <node id="n2::n0">
+      <graph edgedefault="directed" id="n4:">
+        <node id="n4::n0">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -232,7 +607,7 @@
             </y:UMLClassNode>
           </data>
         </node>
-        <node id="n2::n1">
+        <node id="n4::n1">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -264,7 +639,7 @@
             </y:UMLClassNode>
           </data>
         </node>
-        <node id="n2::n2">
+        <node id="n4::n2">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -294,7 +669,7 @@
         </node>
       </graph>
     </node>
-    <node id="n3" yfiles.foldertype="group">
+    <node id="n5" yfiles.foldertype="group">
       <data key="d4"/>
       <data key="d6">
         <y:ProxyAutoBoundsNode>
@@ -322,8 +697,8 @@
           </y:Realizers>
         </y:ProxyAutoBoundsNode>
       </data>
-      <graph edgedefault="directed" id="n3:">
-        <node id="n3::n0">
+      <graph edgedefault="directed" id="n5:">
+        <node id="n5::n0">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -374,7 +749,7 @@
             </y:UMLClassNode>
           </data>
         </node>
-        <node id="n3::n1">
+        <node id="n5::n1">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -404,7 +779,7 @@
             </y:UMLClassNode>
           </data>
         </node>
-        <node id="n3::n2">
+        <node id="n5::n2">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -429,7 +804,7 @@
             </y:UMLClassNode>
           </data>
         </node>
-        <node id="n3::n3">
+        <node id="n5::n3">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -463,7 +838,7 @@
             </y:UMLClassNode>
           </data>
         </node>
-        <node id="n3::n4">
+        <node id="n5::n4">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -502,7 +877,7 @@
         </node>
       </graph>
     </node>
-    <node id="n4" yfiles.foldertype="group">
+    <node id="n6" yfiles.foldertype="group">
       <data key="d4"/>
       <data key="d6">
         <y:ProxyAutoBoundsNode>
@@ -530,8 +905,8 @@
           </y:Realizers>
         </y:ProxyAutoBoundsNode>
       </data>
-      <graph edgedefault="directed" id="n4:">
-        <node id="n4::n0">
+      <graph edgedefault="directed" id="n6:">
+        <node id="n6::n0">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -561,7 +936,7 @@
             </y:UMLClassNode>
           </data>
         </node>
-        <node id="n4::n1">
+        <node id="n6::n1">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -584,7 +959,7 @@
             </y:UMLClassNode>
           </data>
         </node>
-        <node id="n4::n2">
+        <node id="n6::n2">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -608,7 +983,7 @@
             </y:UMLClassNode>
           </data>
         </node>
-        <node id="n4::n3">
+        <node id="n6::n3">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -642,7 +1017,7 @@
             </y:UMLClassNode>
           </data>
         </node>
-        <node id="n4::n4">
+        <node id="n6::n4">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -664,7 +1039,7 @@
             </y:UMLClassNode>
           </data>
         </node>
-        <node id="n4::n5">
+        <node id="n6::n5">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -694,7 +1069,7 @@
             </y:UMLClassNode>
           </data>
         </node>
-        <node id="n4::n6">
+        <node id="n6::n6">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -727,7 +1102,7 @@
         </node>
       </graph>
     </node>
-    <node id="n5" yfiles.foldertype="group">
+    <node id="n7" yfiles.foldertype="group">
       <data key="d4"/>
       <data key="d6">
         <y:ProxyAutoBoundsNode>
@@ -736,7 +1111,7 @@
               <y:Geometry height="418.68886370620066" width="494.0000000000009" x="-5945.644670240212" y="422.4727522233147"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="494.0000000000009" x="0.0" y="0.0">Service:1</y:NodeLabel>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="494.0000000000009" x="0.0" y="0.0">Service: 1</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
@@ -755,8 +1130,8 @@
           </y:Realizers>
         </y:ProxyAutoBoundsNode>
       </data>
-      <graph edgedefault="directed" id="n5:">
-        <node id="n5::n0" yfiles.foldertype="group">
+      <graph edgedefault="directed" id="n7:">
+        <node id="n7::n0" yfiles.foldertype="group">
           <data key="d4"/>
           <data key="d5"/>
           <data key="d6">
@@ -785,8 +1160,8 @@
               </y:Realizers>
             </y:ProxyAutoBoundsNode>
           </data>
-          <graph edgedefault="directed" id="n5::n0:">
-            <node id="n5::n0::n0">
+          <graph edgedefault="directed" id="n7::n0:">
+            <node id="n7::n0::n0">
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
@@ -809,7 +1184,7 @@
             </node>
           </graph>
         </node>
-        <node id="n5::n1">
+        <node id="n7::n1">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -834,7 +1209,7 @@
         </node>
       </graph>
     </node>
-    <node id="n6" yfiles.foldertype="group">
+    <node id="n8" yfiles.foldertype="group">
       <data key="d4"/>
       <data key="d6">
         <y:ProxyAutoBoundsNode>
@@ -862,8 +1237,8 @@
           </y:Realizers>
         </y:ProxyAutoBoundsNode>
       </data>
-      <graph edgedefault="directed" id="n6:">
-        <node id="n6::n0">
+      <graph edgedefault="directed" id="n8:">
+        <node id="n8::n0">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -909,7 +1284,7 @@
             </y:UMLClassNode>
           </data>
         </node>
-        <node id="n6::n1">
+        <node id="n8::n1">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -950,7 +1325,7 @@
         </node>
       </graph>
     </node>
-    <node id="n7" yfiles.foldertype="group">
+    <node id="n9" yfiles.foldertype="group">
       <data key="d4"/>
       <data key="d6">
         <y:ProxyAutoBoundsNode>
@@ -978,8 +1353,8 @@
           </y:Realizers>
         </y:ProxyAutoBoundsNode>
       </data>
-      <graph edgedefault="directed" id="n7:">
-        <node id="n7::n0">
+      <graph edgedefault="directed" id="n9:">
+        <node id="n9::n0">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -1039,7 +1414,7 @@
             </y:UMLClassNode>
           </data>
         </node>
-        <node id="n7::n1">
+        <node id="n9::n1">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -1068,7 +1443,7 @@
             </y:UMLClassNode>
           </data>
         </node>
-        <node id="n7::n2">
+        <node id="n9::n2">
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
@@ -1099,331 +1474,14 @@
         </node>
       </graph>
     </node>
-    <node id="n8" yfiles.foldertype="group">
-      <data key="d4"/>
-      <data key="d6">
-        <y:ProxyAutoBoundsNode>
-          <y:Realizers active="0">
-            <y:GroupNode>
-              <y:Geometry height="1899.8924718087094" width="795.0322853689863" x="-2273.0359506611685" y="357.9437995555007"/>
-              <y:Fill color="#F5F5F5" transparent="false"/>
-              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="795.0322853689863" x="0.0" y="0.0">Service: 2</y:NodeLabel>
-              <y:Shape type="roundrectangle"/>
-              <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
-              <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
-            </y:GroupNode>
-            <y:GroupNode>
-              <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
-              <y:Fill color="#F5F5F5" transparent="false"/>
-              <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="67.369140625" x="-8.6845703125" y="0.0">Folder 11</y:NodeLabel>
-              <y:Shape type="roundrectangle"/>
-              <y:State closed="true" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
-              <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
-              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
-            </y:GroupNode>
-          </y:Realizers>
-        </y:ProxyAutoBoundsNode>
-      </data>
-      <graph edgedefault="directed" id="n8:">
-        <node id="n8::n0" yfiles.foldertype="group">
-          <data key="d4"/>
-          <data key="d6">
-            <y:ProxyAutoBoundsNode>
-              <y:Realizers active="0">
-                <y:GroupNode>
-                  <y:Geometry height="1300.2116713314344" width="765.0322853689863" x="-2258.0359506611685" y="395.3202643992507"/>
-                  <y:Fill color="#F5F5F5" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="765.0322853689863" x="0.0" y="0.0">Image Service: 2</y:NodeLabel>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" hasBackgroundColor="false" hasLineColor="false" hasText="false" height="4.0" modelName="custom" textColor="#000000" visible="true" width="4.0" x="380.51614268449316" y="648.1058356657172">
-                    <y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="0.0" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:Shape type="roundrectangle"/>
-                  <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
-                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-                  <y:BorderInsets bottom="100" bottomF="100.13851351697508" left="143" leftF="142.6581875868742" right="112" rightF="111.61857163352374" top="16" topF="15.796679038636455"/>
-                </y:GroupNode>
-                <y:GroupNode>
-                  <y:Geometry height="981.6584317180616" width="1501.7111541850222" x="-2130.8555770925113" y="289.17078414096915"/>
-                  <y:Fill color="#F5F5F5" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1501.7111541850222" x="0.0" y="0.0">Folder 5</y:NodeLabel>
-                  <y:Shape type="roundrectangle"/>
-                  <y:State closed="true" closedHeight="981.6584317180616" closedWidth="1501.7111541850222" innerGraphDisplayEnabled="false"/>
-                  <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
-                  <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
-                </y:GroupNode>
-              </y:Realizers>
-            </y:ProxyAutoBoundsNode>
-          </data>
-          <graph edgedefault="directed" id="n8::n0:">
-            <node id="n8::n0::n0">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLClassNode>
-                  <y:Geometry height="191.0967908964874" width="295.26153093843095" x="-2007.6307654692155" y="1389.2966313172226"/>
-                  <y:Fill color="#66FF33" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="91.40087890625" x="101.93032601609048" y="3.0">ImgTransform<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                    <y:AttributeLabel/>
-                    <y:MethodLabel>+ Image ToGreyImg( Image )
-+ Image NormaliseImgHistogram( Image )
-+ Image LevelLuminance( Image, int )
-
-+ void TestNormalization()
-+ void TestLumLeveling()
-
-- QImage GreyscaleImg( QImage )
-- Image PerformImgNormalisation( Image )
-- Image PerformLumLeveling( Image, int )</y:MethodLabel>
-                  </y:UML>
-                </y:UMLClassNode>
-              </data>
-            </node>
-            <node id="n8::n0::n1">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLClassNode>
-                  <y:Geometry height="105.0" width="295.26153093843095" x="-2007.6307654692155" y="1209.1442210065698"/>
-                  <y:Fill color="#66FF33" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="110.2216796875" x="92.51992562546548" y="3.0">ImgSearchParam<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                    <y:AttributeLabel/>
-                    <y:MethodLabel>+ int FindMaxLum( Image )
-+ int FindMinLum( Image )
-+ QPair&lt;int, int&gt; FindMinMaxLum( Image )</y:MethodLabel>
-                  </y:UML>
-                </y:UMLClassNode>
-              </data>
-            </node>
-            <node id="n8::n0::n2">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLClassNode>
-                  <y:Geometry height="191.0967908964874" width="477.0780062095025" x="-2096.7002431352084" y="676.6458185922897"/>
-                  <y:Fill color="#66FF33" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="91.40087890625" x="192.83856365162626" y="3.0">ImgHistogram<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                    <y:AttributeLabel/>
-                    <y:MethodLabel>+ QList&lt;double&gt; LuminanceHistogram( Image )
-+ QList&lt; QList&lt;double&gt; &gt; RGBHistogram( Image )
-
-+ void TestRGBHist()
-
-- QList&lt; QList&lt;double&gt; &gt; CalcRGBHistogram( QImage )
-- QList&lt; QList&lt;double&gt; &gt; CalcRGBChannStatistic( QImage )
-- QList&lt; QList&lt;double&gt; &gt; FormZeroRGBHist()
-- QList&lt; QList&lt;double&gt; &gt; FormStatHistInPercent( QList&lt; QList&lt;double&gt; &gt; )</y:MethodLabel>
-                  </y:UML>
-                </y:UMLClassNode>
-              </data>
-            </node>
-            <node id="n8::n0::n3">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLClassNode>
-                  <y:Geometry height="153.0" width="399.60917786935147" x="-2057.9658289651325" y="448.49340828163713"/>
-                  <y:Fill color="#FFCC00" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="128.97900390625" x="135.31508698155073" y="3.0">ImgPassportCreator<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                    <y:AttributeLabel/>
-                    <y:MethodLabel>+ QList&lt;double&gt; GetImgPassport( Image, Passport::Type )
-
-- QList&lt;double&gt; GetLuminancePassport( Image )
-- QList&lt;double&gt; GetSubsamplLumPassport( Image )
-- QList&lt;double&gt; GetLumAndGradPassport( Image )
-- QList&lt;double&gt; GetSubsamplLumAndGradPassport( Image )
-- QList&lt;double&gt; CreateDummyPassport()</y:MethodLabel>
-                  </y:UML>
-                </y:UMLClassNode>
-              </data>
-            </node>
-            <node id="n8::n0::n4">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLClassNode>
-                  <y:Geometry height="191.0967908964874" width="480.7555261485884" x="-2100.3777630742943" y="942.8950197994297"/>
-                  <y:Fill color="#66FF33" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="101.525390625" x="189.6150677617942" y="3.0">ImgSubsampler<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                    <y:AttributeLabel/>
-                    <y:MethodLabel>+ QList&lt;double&gt; SubsampleImg( Image, int )
-
-+ void TestDivide()
-+ void TestSubsampling()
-
-- QImage GetGreyImg( Image )
-- QList&lt;QRect&gt; GetSamplesRects( int, int, int )
-- QList&lt; QPair&lt;int, int&gt; &gt; DivideFacet( int, int )
-- QList&lt;double&gt; CalcSamplesLum( QImage, QList&lt;QRect&gt; )</y:MethodLabel>
-                  </y:UML>
-                </y:UMLClassNode>
-              </data>
-            </node>
-          </graph>
-        </node>
-        <node id="n8::n1" yfiles.foldertype="group">
-          <data key="d4"/>
-          <data key="d6">
-            <y:ProxyAutoBoundsNode>
-              <y:Realizers active="0">
-                <y:GroupNode>
-                  <y:Geometry height="499.8375591525744" width="765.0322853689863" x="-2258.0359506611685" y="1742.9987122116356"/>
-                  <y:Fill color="#F5F5F5" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="765.0322853689863" x="0.0" y="0.0">File Service</y:NodeLabel>
-                  <y:Shape type="roundrectangle"/>
-                  <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
-                  <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-                  <y:BorderInsets bottom="0" bottomF="0.0" left="35" leftF="34.717135892436545" right="0" rightF="0.0" top="0" topF="0.0"/>
-                </y:GroupNode>
-                <y:GroupNode>
-                  <y:Geometry height="50.0" width="50.0" x="-3099.5492799658614" y="1492.6722416442376"/>
-                  <y:Fill color="#F5F5F5" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-                  <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="59.02685546875" x="-4.513427734375" y="0.0">Folder 3</y:NodeLabel>
-                  <y:Shape type="roundrectangle"/>
-                  <y:State closed="true" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
-                  <y:Insets bottom="5" bottomF="5.0" left="5" leftF="5.0" right="5" rightF="5.0" top="5" topF="5.0"/>
-                  <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="0" rightF="0.0" top="0" topF="0.0"/>
-                </y:GroupNode>
-              </y:Realizers>
-            </y:ProxyAutoBoundsNode>
-          </data>
-          <graph edgedefault="directed" id="n8::n1:">
-            <node id="n8::n1::n0">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLClassNode>
-                  <y:Geometry height="115.01960159362557" width="247.3470939949766" x="-1936.1214842147938" y="2112.8166697705847"/>
-                  <y:Fill color="#66FF33" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="79.88623046875" x="83.7304317631133" y="3.0">FilesService<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                    <y:AttributeLabel/>
-                    <y:MethodLabel>+ bool RemoveFile( QString )
-+ QString FormFullName( QString )
-+ bool CheckFileExistance( QString )
-+ QString GetFileName( QString )</y:MethodLabel>
-                  </y:UML>
-                </y:UMLClassNode>
-              </data>
-            </node>
-            <node id="n8::n1::n1">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLClassNode>
-                  <y:Geometry height="244.54106166909446" width="357.4573415835057" x="-2208.318814768732" y="1780.3751770553856"/>
-                  <y:Fill color="#66FF33" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="102.998046875" x="127.22964735425285" y="26.701171875">ImgFilesService<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="FilesService" use3DEffect="true">
-                    <y:AttributeLabel/>
-                    <y:MethodLabel>+ bool RemoveImg( QString )
-+ bool CheckImgExist ( QString )
-+ QString GetImgName( QString )
-+ QString MoveImageToProject( QString )
-+ QStringList MoveImagesToProject( QStringList )
-+ bool SaveImage( QImage, QString )
-
-- QString CutSuffix( QString )
-
-+ void TestImgMoving()
-+ void TestImgSaving()</y:MethodLabel>
-                  </y:UML>
-                </y:UMLClassNode>
-              </data>
-            </node>
-            <node id="n8::n1::n2">
-              <data key="d4"/>
-              <data key="d6">
-                <y:UMLClassNode>
-                  <y:Geometry height="160.3229984140969" width="247.3470939949766" x="-1755.3507592871588" y="1864.5932403103827"/>
-                  <y:Fill color="#66FF33" transparent="false"/>
-                  <y:BorderStyle color="#000000" type="line" width="1.0"/>
-                  <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="102.2744140625" x="72.5363399662383" y="26.701171875">IDBFilesService<y:LabelModel>
-                      <y:SmartNodeLabelModel distance="4.0"/>
-                    </y:LabelModel>
-                    <y:ModelParameter>
-                      <y:SmartNodeLabelModelParameter labelRatioX="0.0" labelRatioY="0.0" nodeRatioX="0.0" nodeRatioY="-0.03703090122767855" offsetX="0.0" offsetY="0.0" upX="0.0" upY="-1.0"/>
-                    </y:ModelParameter>
-                  </y:NodeLabel>
-                  <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="FilesService" use3DEffect="true">
-                    <y:AttributeLabel/>
-                    <y:MethodLabel>+ bool RemoveIDB( QString )
-+ bool CheckIDBExist( QString )
-+ QString FormIDBFullPath (QString)</y:MethodLabel>
-                  </y:UML>
-                </y:UMLClassNode>
-              </data>
-            </node>
-          </graph>
-        </node>
-      </graph>
-    </node>
-    <node id="n9">
+    <node id="n10">
       <data key="d4"/>
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="343.2384943083316" width="281.1985355799752" x="-4580.0" y="-1507.7284690470847"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.7763671875" x="103.2110841962376" y="148.9456816082718">Application<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.7763671875" x="103.2110841962376" y="3.0">Application<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -1455,7 +1513,7 @@
         </y:UMLClassNode>
       </data>
     </node>
-    <edge id="n4::e0" source="n4::n0" target="n4::n2">
+    <edge id="n6::e0" source="n6::n0" target="n6::n2">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1468,7 +1526,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n7::e0" source="n7::n0" target="n7::n1">
+    <edge id="n9::e0" source="n9::n0" target="n9::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1482,7 +1540,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n7::e1" source="n7::n0" target="n7::n2">
+    <edge id="n9::e1" source="n9::n0" target="n9::n2">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1496,7 +1554,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n4::e1" source="n4::n3" target="n4::n2">
+    <edge id="n6::e1" source="n6::n3" target="n6::n2">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1509,7 +1567,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n3::e0" source="n3::n4" target="n3::n3">
+    <edge id="n5::e0" source="n5::n4" target="n5::n3">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1520,7 +1578,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n3::e1" source="n3::n2" target="n3::n0">
+    <edge id="n5::e1" source="n5::n2" target="n5::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1533,7 +1591,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n3::e2" source="n3::n1" target="n3::n0">
+    <edge id="n5::e2" source="n5::n1" target="n5::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1546,7 +1604,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e0" source="n3::n1" target="n2::n1">
+    <edge id="e0" source="n5::n1" target="n4::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1559,7 +1617,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e1" source="n3::n2" target="n2::n2">
+    <edge id="e1" source="n5::n2" target="n4::n2">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1572,7 +1630,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n4::e2" source="n4::n4" target="n4::n3">
+    <edge id="n6::e2" source="n6::n4" target="n6::n3">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1583,7 +1641,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n4::e3" source="n4::n3" target="n4::n5">
+    <edge id="n6::e3" source="n6::n3" target="n6::n5">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1596,7 +1654,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n4::e4" source="n4::n3" target="n4::n6">
+    <edge id="n6::e4" source="n6::n3" target="n6::n6">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1609,7 +1667,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n4::e5" source="n4::n5" target="n4::n4">
+    <edge id="n6::e5" source="n6::n5" target="n6::n4">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1623,7 +1681,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n4::e6" source="n4::n6" target="n4::n4">
+    <edge id="n6::e6" source="n6::n6" target="n6::n4">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1636,7 +1694,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n4::e7" source="n4::n5" target="n4::n2">
+    <edge id="n6::e7" source="n6::n5" target="n6::n2">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1650,7 +1708,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n4::e8" source="n4::n5" target="n4::n0">
+    <edge id="n6::e8" source="n6::n5" target="n6::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1664,7 +1722,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n4::e9" source="n4::n1" target="n4::n3">
+    <edge id="n6::e9" source="n6::n1" target="n6::n3">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1675,7 +1733,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n4::e10" source="n4::n0" target="n4::n1">
+    <edge id="n6::e10" source="n6::n0" target="n6::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1689,7 +1747,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e2" source="n2::n1" target="n4::n0">
+    <edge id="e2" source="n4::n1" target="n6::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1703,7 +1761,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e3" source="n2::n2" target="n4::n1">
+    <edge id="e3" source="n4::n2" target="n6::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1717,7 +1775,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n2::e0" source="n2::n1" target="n2::n0">
+    <edge id="n4::e0" source="n4::n1" target="n4::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1731,7 +1789,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n2::e1" source="n2::n2" target="n2::n0">
+    <edge id="n4::e1" source="n4::n2" target="n4::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1745,7 +1803,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n3::e3" source="n3::n0" target="n3::n3">
+    <edge id="n5::e3" source="n5::n0" target="n5::n3">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1758,7 +1816,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e4" source="n6::n0" target="n3::n1">
+    <edge id="e4" source="n8::n0" target="n5::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1771,7 +1829,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e5" source="n6::n0" target="n3::n2">
+    <edge id="e5" source="n8::n0" target="n5::n2">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1784,26 +1842,23 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e6" source="n8::n1::n1" target="n3::n3">
+    <edge id="e6" source="n1::n0::n1" target="n5::n3">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="-2.7284841053187847E-12" sy="-1.3642420526593924E-12" tx="76.55169069747626" ty="2.8617693645581745">
-            <y:Point x="-2790.0" y="1902.6457078899316"/>
-            <y:Point x="-2790.0" y="1366.0062122896686"/>
-          </y:Path>
+          <y:Path sx="0.0" sy="-4.547473508864641E-13" tx="0.0" ty="2.8617693645580857"/>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e7" source="n8::n0::n0" target="n3::n4">
+    <edge id="e7" source="n0::n0::n0" target="n5::n4">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="-1.912973035479581" sy="-50.67521657821567" tx="16.55169069747626" ty="-0.04886907826747476">
-            <y:Point x="-2400.0" y="1434.1698101872505"/>
+          <y:Path sx="-1.9129730354798085" sy="-50.67521657821476" tx="16.55169069747626" ty="-0.04886907826747476">
+            <y:Point x="-2400.0" y="1615.4198101872514"/>
             <y:Point x="-2400.0" y="573.9408202355946"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
@@ -1812,18 +1867,21 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e8" source="n3::n4" target="n8::n0::n3">
+    <edge id="e8" source="n5::n4" target="n0::n0::n3">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="-63.98968931386207" tx="-101.19084025364191" ty="-14.99340828163713"/>
+          <y:Path sx="0.0" sy="-63.98968931386207" tx="-101.1908402536435" ty="-14.99340828163804">
+            <y:Point x="-2701.842968845736" y="510.0"/>
+            <y:Point x="-2701.842968845736" y="509.9999999999991"/>
+          </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e9" source="n6::n1" target="n0::n0">
+    <edge id="e9" source="n8::n1" target="n2::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1837,7 +1895,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e10" source="n3::n4" target="n6::n1">
+    <edge id="e10" source="n5::n4" target="n8::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1852,7 +1910,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e11" source="n3::n0" target="n1::n0">
+    <edge id="e11" source="n5::n0" target="n3::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1863,7 +1921,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e12" source="n3::n4" target="n1::n1">
+    <edge id="e12" source="n5::n4" target="n3::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -1876,144 +1934,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e13" source="n3::n1" target="n8::n0::n3">
-      <data key="d8"/>
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="-61.96213559330549" tx="-1.9129730354800358" ty="-14.99340828163713">
-            <y:Point x="-2880.0" y="307.28009466677054"/>
-            <y:Point x="-2880.0" y="510.0"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
-          <y:Arrows source="none" target="plain"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="n8::n0::e0" source="n8::n0::n0" target="n8::n0::n1">
-      <data key="d8"/>
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="2.00969029327689" sy="-94.86604747210241" tx="2.00969029327689" ty="44.20985666525194"/>
-          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
-          <y:Arrows source="plain" target="plain"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="n8::n0::e1" source="n8::n0::n0" target="n8::n0::n3">
-      <data key="d8"/>
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="156.97226221522783" ty="0.0">
-            <y:Point x="-1570.3777630742943" y="1484.8450267654662"/>
-            <y:Point x="-1570.3777630742943" y="524.9934082816371"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
-          <y:Arrows source="none" target="plain"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="n8::n0::e2" source="n8::n0::n1" target="n8::n0::n3">
-      <data key="d8"/>
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="154.80103462189473" ty="0.0">
-            <y:Point x="-1570.3777630742943" y="1261.6442210065698"/>
-            <y:Point x="-1570.3777630742943" y="524.9934082816371"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
-          <y:Arrows source="none" target="plain"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="n8::n0::e3" source="n8::n0::n2" target="n8::n0::n0">
-      <data key="d8"/>
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-1.2419012576187924">
-            <y:Point x="-2170.3777630742943" y="772.1942140405334"/>
-            <y:Point x="-2170.3777630742943" y="1483.6031255078474"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
-          <y:Arrows source="none" target="plain"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="n8::n0::e4" source="n8::n0::n2" target="n8::n0::n3">
-      <data key="d8"/>
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-1570.3777630742943" y="772.1942140405334"/>
-            <y:Point x="-1570.3777630742943" y="524.9934082816371"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
-          <y:Arrows source="none" target="plain"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="n8::n0::e5" source="n8::n0::n4" target="n8::n0::n0">
-      <data key="d8"/>
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-1.2419012576187924">
-            <y:Point x="-2170.3777630742943" y="1038.4434152476733"/>
-            <y:Point x="-2170.3777630742943" y="1483.6031255078474"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
-          <y:Arrows source="none" target="plain"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="n8::n0::e6" source="n8::n0::n4" target="n8::n0::n3">
-      <data key="d8"/>
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-1570.3777630742943" y="1038.4434152476733"/>
-            <y:Point x="-1570.3777630742943" y="524.9934082816371"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
-          <y:Arrows source="none" target="plain"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="n8::n1::e0" source="n8::n1::n1" target="n8::n1::n0">
-      <data key="d8"/>
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-2029.590143976979" y="2084.642111375344"/>
-            <y:Point x="-1812.4479372173055" y="2084.642111375344"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="white_delta"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="n8::n1::e1" source="n8::n1::n2" target="n8::n1::n0">
-      <data key="d8"/>
-      <data key="d10">
-        <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-1631.6772122896705" y="2084.7713812749616"/>
-            <y:Point x="-1812.4479372173055" y="2084.7713812749616"/>
-          </y:Path>
-          <y:LineStyle color="#000000" type="line" width="1.0"/>
-          <y:Arrows source="none" target="white_delta"/>
-          <y:BendStyle smoothed="false"/>
-        </y:PolyLineEdge>
-      </data>
-    </edge>
-    <edge id="e14" source="n5::n1" target="n2::n1">
+    <edge id="e13" source="n7::n1" target="n4::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -2026,7 +1947,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="n5::e0" source="n5::n0::n0" target="n5::n1">
+    <edge id="n7::e0" source="n7::n0::n0" target="n7::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -2037,7 +1958,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e15" source="n5::n0::n0" target="n6::n1">
+    <edge id="e14" source="n7::n0::n0" target="n8::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -2051,7 +1972,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e16" source="n7::n0" target="n9">
+    <edge id="e15" source="n9::n0" target="n10">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -2065,7 +1986,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e17" source="n9" target="n6::n0">
+    <edge id="e16" source="n10" target="n8::n0">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -2079,7 +2000,7 @@
         </y:PolyLineEdge>
       </data>
     </edge>
-    <edge id="e18" source="n9" target="n6::n1">
+    <edge id="e17" source="n10" target="n8::n1">
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
@@ -2089,6 +2010,158 @@
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e18" source="n5::n1" target="n0::n0::n3">
+      <data key="d8"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="-61.96213559330549" tx="-1.912973035478899" ty="-14.99340828163804">
+            <y:Point x="-2880.0" y="307.28009466677054"/>
+            <y:Point x="-2880.0" y="509.9999999999991"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="plain"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="n0::n0::e0" source="n0::n0::n0" target="n0::n0::n1">
+      <data key="d8"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="2.00969029327689" sy="-94.86604747210241" tx="2.00969029327689" ty="44.20985666525194"/>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="plain" target="plain"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="n0::n0::e1" source="n0::n0::n0" target="n0::n0::n3">
+      <data key="d8"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="156.97226221522783" ty="0.0">
+            <y:Point x="-1570.3777630742943" y="1666.0950267654662"/>
+            <y:Point x="-1570.3777630742943" y="524.9934082816371"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="plain"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="n0::n0::e2" source="n0::n0::n1" target="n0::n0::n3">
+      <data key="d8"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="154.80103462189473" ty="0.0">
+            <y:Point x="-1570.3777630742943" y="1442.8942210065695"/>
+            <y:Point x="-1570.3777630742943" y="524.9934082816371"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="plain"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="n0::n0::e3" source="n0::n0::n2" target="n0::n0::n0">
+      <data key="d8"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-1.2419012576187924">
+            <y:Point x="-2170.3777630742943" y="772.1942140405334"/>
+            <y:Point x="-2170.3777630742943" y="1664.8531255078474"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="plain"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="n0::n0::e4" source="n0::n0::n2" target="n0::n0::n3">
+      <data key="d8"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
+            <y:Point x="-1570.3777630742943" y="772.1942140405334"/>
+            <y:Point x="-1570.3777630742943" y="524.9934082816371"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="plain"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="n0::n0::e5" source="n0::n0::n4" target="n0::n0::n0">
+      <data key="d8"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-1.2419012576187924">
+            <y:Point x="-2170.3777630742943" y="1038.4434152476733"/>
+            <y:Point x="-2170.3777630742943" y="1664.8531255078474"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="plain"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="n0::n0::e6" source="n0::n0::n4" target="n0::n0::n3">
+      <data key="d8"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
+            <y:Point x="-1570.3777630742943" y="1038.4434152476733"/>
+            <y:Point x="-1570.3777630742943" y="524.9934082816371"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="plain"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="n1::n0::e0" source="n1::n0::n1" target="n1::n0::n0">
+      <data key="d8"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
+            <y:Point x="-3150.0" y="2089.8873718579125"/>
+            <y:Point x="-2932.857793240327" y="2089.8873718579125"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="white_delta"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="n1::n0::e1" source="n1::n0::n2" target="n1::n0::n0">
+      <data key="d8"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
+            <y:Point x="-2752.0870683126914" y="2090.01664175753"/>
+            <y:Point x="-2932.857793240327" y="2090.01664175753"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="white_delta"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="n0::n0::e7" source="n0::n0::n5" target="n0::n0::n3">
+      <data key="d8"/>
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="88.16124003045661" ty="0.0">
+            <y:Point x="-1570.3777630742943" y="1262.1930158512432"/>
+            <y:Point x="-1570.3777630742943" y="524.9934082816371"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="plain"/>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>
