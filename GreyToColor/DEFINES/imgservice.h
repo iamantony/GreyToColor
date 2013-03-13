@@ -34,9 +34,13 @@ namespace Histogram
 	};
 }
 
-
-//#define RED 0
-//#define GREEN 1
-//#define BLUE 2
+namespace Kernel
+{
+	enum Type
+	{
+		SOBEL = 0,
+		DEFAULT_LAST
+	};
+}
 
 #endif // IMGSERVICE_H

@@ -16,40 +16,23 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef IMGFILTER_H
-#define IMGFILTER_H
+#ifndef KERNELCREATOR_H
+#define KERNELCREATOR_H
 
-#include <QFileDialog>
-#include <QImage>
+#include <QList>
 #include <QDebug>
-#include "./IMAGES/COMMON/image.h"
-#include "./SERVICE/KERNELS/kernelcreator.h"
-#include "imgtransform.h"
 #include "./DEFINES/imgservice.h"
-#include "./DEFINES/global.h"
 
-class ImgFilter
+class KernelCreator
 {
-	// == DATA ==
-
-	// == METHODS ==
 public:
-	ImgFilter();
+	KernelCreator();
 
-	// Get gradiented image, processed by special kernel (operator)
-	Image GetGradientImage(const Image &t_greyImg, const Kernel::Type &t_type);
-
-	// Test image gradient processing
-	void TestGradientProc();
+	QList< QList< QList<double> > > GetKernel(const Kernel::Type &t_type);
 
 private:
-	// Form gradient image copy
-	QImage FormGradientImgCopy(const QImage &t_img,
-							   const Kernel::Type &t_type,
-							   const QList<QList<QList<double> > > &t_kernels);
-
-	// Get pixel result value
-	int PixelResultValue(const QList<double> t_results, const Kernel::Type &t_type);
+	// Create Sobel kernel matrix
+	QList< QList< QList<double> > > GetSobelKernel();
 };
 
-#endif // IMGFILTER_H
+#endif // KERNELCREATOR_H
