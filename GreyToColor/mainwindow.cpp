@@ -175,13 +175,6 @@ void MainWindow::on_openTargetImgPB_clicked()
 		return;
 	}
 
-	bool imgSet = ui->targetImgLbl->SetImage(fName);
-	if ( false == imgSet )
-	{
-		ShowWarning("Loading Target Image...", "Can't load image. Please, try another one.");
-		return;
-	}
-
 	emit SignalNewTargetImg(fName);
 }
 
@@ -248,15 +241,30 @@ void MainWindow::on_actionSaveResult_triggered()
 	emit SignalSaveResultImg(imgName);
 }
 
+// Slot for getting new Target image
+// @input:
+// - QString - unempty path to new Target image
+// @output:
+void MainWindow::SlotGetTargetImg(const QString &t_targetImgPath)
+{
+	if ( true == t_targetImgPath.isEmpty() )
+	{
+		qDebug() << "SlotGetTargetImg(): Error - invalid arguments";
+		return;
+	}
+
+	ui->targetImgLbl->SetImage(t_targetImgPath);
+}
+
 // Slot for getting new Source image
 // @input:
-// - QImage - unnull new source image
+// - QString - unempty path to new Source image
 // @output:
 void MainWindow::SlotGetSourceImg(const QString &t_sourceImgPath)
 {
 	if ( true == t_sourceImgPath.isEmpty() )
 	{
-		qDebug() << "SlotSourceImg(): Error - invalid arguments";
+		qDebug() << "SlotGetSourceImg(): Error - invalid arguments";
 		return;
 	}
 

@@ -81,6 +81,8 @@ signals:
 	void SignalUseImgPassport(const Passport::Type &t_type);
 
 public slots:
+	// Slot for getting new Target image
+	void SlotGetTargetImg(const QString &t_targetImgPath);
 	// Slot for getting new Source image
 	void SlotGetSourceImg(const QString &t_sourceImgPath);
 	// Slot for getting new Result image

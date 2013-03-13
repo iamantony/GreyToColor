@@ -53,6 +53,7 @@ private:
 	void SendResultImg();
 
 signals:
+	void SignalGetTargetImg(const QString &t_path);
 	void SignalGetResultImg(QImage t_resultImg);
 	void SignalFindSimilarInIDB(const Image &t_img);
 	void SignalCurrentSourceImg(const QString &t_name);

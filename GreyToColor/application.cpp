@@ -87,6 +87,11 @@ void Application::ConnectUIandImgHand()
 					 m_imgHandler,
 					 SLOT(SlotGetNewTargetImg(const QString &)));
 
+	QObject::connect(m_imgHandler,
+					 SIGNAL(SignalGetTargetImg(QString)),
+					 m_mainUI,
+					 SLOT(SlotGetTargetImg(QString)));
+
 	QObject::connect(m_mainUI,
 					 SIGNAL(SignalNewSourceImg(const QString &)),
 					 m_imgHandler,
