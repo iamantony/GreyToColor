@@ -26,13 +26,18 @@ ImgSubsampler::ImgSubsampler()
 // Subsample image and get RGB luminances of each sample
 // @input:
 // - Image - unnul image (color/grey)
-// - unsigned int - num of samples we should divide input image
+// - int - num of samples we should horizontally divide input image
+// - int - num of samples we should vertically divide input image
 // @output:
 // - empty QList<double> - failed to subsample image
 // - QList<double> - RGB luminances of each sample of subsampled image
-QList<double> ImgSubsampler::SubsampleImg(const Image &t_img, const int &t_numOfSamplesOnFacet)
+QList<double> ImgSubsampler::SubsampleImg(const Image &t_img,
+										  const int &t_samplesOnHorizFacet,
+										  const int &t_samplesOnVerticFacet)
 {
-	if ( (true == t_img.IsNull()) || (t_numOfSamplesOnFacet <= 0) )
+	if ( (true == t_img.IsNull()) ||
+		 (t_samplesOnHorizFacet <= 0) ||
+		 (t_samplesOnVerticFacet <= 0))
 	{
 		qDebug() << "SubsampleImg(): Error - invalid arguments";
 		QList<double> empty;
@@ -47,7 +52,8 @@ QList<double> ImgSubsampler::SubsampleImg(const Image &t_img, const int &t_numOf
 		return empty;
 	}
 
-	QList<QRect> samplesRects = GetSamplesRects(t_numOfSamplesOnFacet,
+	QList<QRect> samplesRects = GetSamplesRects(t_samplesOnHorizFacet,
+												t_samplesOnVerticFacet,
 												greyImg.width(),
 												greyImg.height());
 
@@ -106,17 +112,20 @@ QImage ImgSubsampler::GetGreyImg(const Image &t_img)
 
 // Get images samples rectangulars coordinates
 // @input:
-// - int - num of samples on each of rects facets
+// - int - num of samples on horizontal facet of big image rect
+// - int - num of samples on vertical facet of big image rect
 // - int - positive image width
 // - int - positive image height
 // @output:
 // - empty QList<QRect> - failed calc rects of samples
 // - QList<QRect> - samples coords
-QList<QRect> ImgSubsampler::GetSamplesRects(const int &t_numOfSamplesOnFacet,
+QList<QRect> ImgSubsampler::GetSamplesRects(const int &t_samplesOnHorizontal,
+											const int &t_samplesOnVertical,
 											const int &t_imgWidth,
 											const int &t_imgHeight)
 {
-	if ( (t_numOfSamplesOnFacet <= 0) ||
+	if ( (t_samplesOnHorizontal <= 0) ||
+		 (t_samplesOnVertical <= 0) ||
 		 (t_imgWidth <= 0) ||
 		 (t_imgHeight <= 0) )
 	{
@@ -125,12 +134,12 @@ QList<QRect> ImgSubsampler::GetSamplesRects(const int &t_numOfSamplesOnFacet,
 		return empty;
 	}
 
-	QList< QPair<int, int> > wdtSamples = DivideFacet(t_imgWidth, t_numOfSamplesOnFacet);
-	QList< QPair<int, int> > hgtSamples = DivideFacet(t_imgHeight, t_numOfSamplesOnFacet);
+	QList< QPair<int, int> > wdtSamples = DivideFacet(t_imgWidth, t_samplesOnHorizontal);
+	QList< QPair<int, int> > hgtSamples = DivideFacet(t_imgHeight, t_samplesOnVertical);
 	if ( (true == wdtSamples.isEmpty()) ||
-		 (t_numOfSamplesOnFacet != wdtSamples.size()) ||
+		 (t_samplesOnHorizontal != wdtSamples.size()) ||
 		 (true == hgtSamples.isEmpty()) ||
-		 (t_numOfSamplesOnFacet != hgtSamples.size()))
+		 (t_samplesOnVertical != hgtSamples.size()))
 	{
 		qDebug() << "GetSamplesRects(): Error - can't divide to samples";
 		QList<QRect> empty;
@@ -259,7 +268,7 @@ QList<double> ImgSubsampler::CalcSamplesLum(const QImage &t_greyImg, const QList
 // Test image dividing to samples
 void ImgSubsampler::TestDivide()
 {
-	QList<QRect> resultRecs = GetSamplesRects(16, 100, 80);
+	QList<QRect> resultRecs = GetSamplesRects(16, 16, 100, 80);
 	if ( 16 * 16 != resultRecs.size() )
 	{
 		qDebug() << "First failed";
@@ -273,7 +282,7 @@ void ImgSubsampler::TestDivide()
 	}
 
 	resultRecs.clear();
-	resultRecs = GetSamplesRects(16, 16, 16);
+	resultRecs = GetSamplesRects(16, 8, 16, 16);
 	if ( 16 * 16 != resultRecs.size() )
 	{
 		qDebug() << "Second failed";
@@ -287,7 +296,7 @@ void ImgSubsampler::TestDivide()
 	}
 
 	resultRecs.clear();
-	resultRecs = GetSamplesRects(16, 10, 6);
+	resultRecs = GetSamplesRects(16, 32, 10, 6);
 	if ( 16 * 16 != resultRecs.size() )
 	{
 		qDebug() << "Third failed";
@@ -313,7 +322,7 @@ void ImgSubsampler::TestSubsampling()
 	Image testImg;
 	testImg.LoadImg(imgName);
 
-	QList<double> passport = SubsampleImg(testImg, 16);
+	QList<double> passport = SubsampleImg(testImg, 16, 16);
 	if ( true == passport.isEmpty() )
 	{
 		qDebug() << "Subsampling fail";

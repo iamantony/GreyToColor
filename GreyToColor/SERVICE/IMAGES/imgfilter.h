@@ -37,7 +37,7 @@ public:
 	ImgFilter();
 
 	// Get gradiented image, processed by special kernel (operator)
-	Image GetGradientImage(const Image &t_greyImg, const Kernel::Type &t_type);
+	Image GetGradientImage(const Image &t_img, const Kernel::Type &t_type);
 
 	// Test image gradient processing
 	void TestGradientProc();

@@ -175,10 +175,10 @@ bool ImgDatabase::CreateNewIDB(const QString &t_name)
 	command.append("create table idb (");
 	command.append("id integer primary key, ");
 	command.append("imgname varchar(1000), ");
-	command.append("passport_0 BLOB, ");
-	command.append("passport_1 BLOB, ");
-	command.append("passport_2 BLOB, ");
-	command.append("passport_3 BLOB");
+	command.append("imgPassLumHist BLOB, ");
+	command.append("imgPassLumSub BLOB, ");
+	command.append("imgPassLumGradHist BLOB, ");
+	command.append("imgPassLumGradSub BLOB");
 	command.append(")");
 
 	QSqlQuery query(m_idb);
@@ -248,7 +248,7 @@ bool ImgDatabase::AddEntries(const QMap<QString, QList<QByteArray> > &t_entries)
 	}
 
 	QSqlQuery query(m_idb);
-	query.prepare("INSERT INTO idb (imgname, passport_0, passport_1, passport_2, passport_3) "
+	query.prepare("INSERT INTO idb (imgname, imgPassLumHist, imgPassLumSub, imgPassLumGradHist, imgPassLumGradSub) "
 				  "VALUES (?, ?, ?, ?, ?)");
 
 	QMap<QString, QList<QByteArray> >::const_iterator entry = t_entries.begin();
@@ -309,15 +309,45 @@ QMap<QString, QByteArray> ImgDatabase::GetImagesPassport(const Passport::Type &t
 
 	QMap<QString, QByteArray> imgsPassports;
 
+	QString passportName;
+	switch(t_passType)
+	{
+		case Passport::LUM_HISTOGRAM:
+			passportName.append("imgPassLumHist");
+			break;
+
+		case Passport::LUM_SUBSAMPLE:
+			passportName.append("imgPassLumSub");
+			break;
+
+		case Passport::LUM_AND_GRAD_HIST:
+			passportName.append("imgPassLumGradHist");
+			break;
+
+		case Passport::LUM_AND_GRAD_SUB:
+			passportName.append("imgPassLumGradSub");
+			break;
+
+		case Passport::DEFAULT_LAST:
+		default:
+		{
+			qDebug() << "GetImagesPassport(): Error - invalid passport type";
+			QMap<QString, QByteArray> empty;
+			return empty;
+		}
+	}
+
+	// TODO: names for passports in idb
+
 	QSqlQuery query(m_idb);
-	QString idbRequest = QString("SELECT imgname, passport_%1 FROM idb").arg(t_passType);
+	QString idbRequest = QString("SELECT imgname, %1 FROM idb").arg(passportName);
 	query.prepare(idbRequest);
 	if ( true == query.exec() )
 	{
 		while ( true == query.next() )
 		{
 			QString imgPath(query.value(0).toString());
-			QByteArray passport = query.value(t_passType + 1).toByteArray();
+			QByteArray passport = query.value(1).toByteArray();
 			imgsPassports.insert(imgPath, passport);
 		}
 	}

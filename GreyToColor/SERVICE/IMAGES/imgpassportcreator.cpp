@@ -52,12 +52,12 @@ QList<double> ImgPassportCreator::GetImgPassport(const Image &t_img, const Passp
 			break;
 
 		case Passport::LUM_AND_GRAD_HIST:
-		case Passport::LUM_AND_GRAD_SUB:
-		{
-			qDebug() << "GetImgPassport(): Warning - passport" << t_type << "created is dummy";
-			passport = CreateDummyPassport();
+			passport = GetLumGradHistPassport(t_img);
 			break;
-		}
+
+		case Passport::LUM_AND_GRAD_SUB:
+			passport = GetSubsamplLumGradPassport(t_img);
+			break;
 
 		case Passport::DEFAULT_LAST:
 		{
@@ -67,7 +67,7 @@ QList<double> ImgPassportCreator::GetImgPassport(const Image &t_img, const Passp
 		}
 	}
 
-	if ( true == passport.isEmpty() )
+	if ( PASSPORT_LENGTH != passport.size() )
 	{
 		qDebug() << "GetImgPassport(): Error - failed to create image passport";
 		QList<double> empty;
@@ -93,7 +93,7 @@ QList<double> ImgPassportCreator::GetLuminancePassport(const Image &t_img)
 	}
 
 	ImgHistogram histogramer;
-	QList<double> passport = histogramer.LuminanceHistogram(t_img, 256);
+	QList<double> passport = histogramer.LuminanceHistogram(t_img, PASSPORT_LENGTH);
 
 	return passport;
 }
@@ -114,9 +114,74 @@ QList<double> ImgPassportCreator::GetSubsamplLumPassport(const Image &t_img)
 	}
 
 	ImgSubsampler sampler;
-	QList<double> passport = sampler.SubsampleImg(t_img, SAMPLES_ON_FACET);
+	QList<double> passport = sampler.SubsampleImg(t_img,
+												  SAMPLES_ON_FACET,
+												  SAMPLES_ON_FACET);
 
 	return passport;
+}
+
+// Get image passport based on luminance and gradien histograms of image
+// @input:
+// - Image - unnull image (color/grey)
+// @output:
+// - empty QList<double> - failed to create image passport
+// - QList<double> - image passport
+QList<double> ImgPassportCreator::GetLumGradHistPassport(const Image &t_img)
+{
+	if ( true == t_img.IsNull() )
+	{
+		qDebug() << "GetLumGradHistPassport(): Error - invalid arguments";
+		QList<double> empty;
+		return empty;
+	}
+
+	ImgFilter filter;
+	Image gradImg = filter.GetGradientImage(t_img, Kernel::SOBEL);
+
+	ImgHistogram histogramer;
+	QList<double> lumPassport = histogramer.LuminanceHistogram(t_img, PASSPORT_LENGTH / 2);
+	QList<double> gradPassport = histogramer.LuminanceHistogram(gradImg, PASSPORT_LENGTH / 2);
+
+	QList<double> resultPassport;
+	resultPassport.append(lumPassport);
+	resultPassport.append(gradPassport);
+
+	return resultPassport;
+}
+
+// Get image passport based on luminance and gradien of subsampled image
+// @input:
+// - Image - unnull image (color/grey)
+// @output:
+// - empty QList<double> - failed to create image passport
+// - QList<double> - image passport
+QList<double> ImgPassportCreator::GetSubsamplLumGradPassport(const Image &t_img)
+{
+	if ( true == t_img.IsNull() )
+	{
+		qDebug() << "GetLumGradHistPassport(): Error - invalid arguments";
+		QList<double> empty;
+		return empty;
+	}
+
+	ImgFilter filter;
+	Image gradImg = filter.GetGradientImage(t_img, Kernel::SOBEL);
+
+	ImgSubsampler sampler;
+	QList<double> lumPassport = sampler.SubsampleImg(t_img,
+													 SAMPLES_ON_FACET,
+													 SAMPLES_ON_FACET / 2);
+
+	QList<double> gradPassport = sampler.SubsampleImg(gradImg,
+													  SAMPLES_ON_FACET,
+													  SAMPLES_ON_FACET / 2);
+
+	QList<double> resultPassport;
+	resultPassport.append(lumPassport);
+	resultPassport.append(gradPassport);
+
+	return resultPassport;
 }
 
 // Create dummy passport

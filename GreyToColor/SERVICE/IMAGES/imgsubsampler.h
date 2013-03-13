@@ -36,7 +36,9 @@ public:
 	ImgSubsampler();
 
 	// Subsample image and get RGB luminances of each sample
-	QList<double> SubsampleImg(const Image &t_img, const int &t_numOfSamplesOnFacet);
+	QList<double> SubsampleImg(const Image &t_img,
+							   const int &t_samplesOnHorizFacet,
+							   const int &t_samplesOnVerticFacet);
 
 	// Test image dividing to samples
 	void TestDivide();
@@ -47,7 +49,8 @@ private:
 	// Get greyscale image
 	QImage GetGreyImg(const Image &t_img);
 	// Get images samples rectangulars coordinates
-	QList<QRect> GetSamplesRects(const int &t_numOfSamplesOnFacet,
+	QList<QRect> GetSamplesRects(const int &t_samplesOnHorizontal,
+								 const int &t_samplesOnVertical,
 								 const int &t_imgWidth,
 								 const int &t_imgHeight);
 

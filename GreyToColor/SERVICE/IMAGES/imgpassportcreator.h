@@ -25,6 +25,7 @@
 #include "./IMAGES/COMMON/image.h"
 #include "imghistogram.h"
 #include "imgsubsampler.h"
+#include "imgfilter.h"
 #include "imgtransform.h"
 #include "DEFINES/images.h"
 #include "DEFINES/global.h"
@@ -46,9 +47,9 @@ private:
 	// Get image passport based on luminance of sunbsampled image
 	QList<double> GetSubsamplLumPassport(const Image &t_img);
 	// Get image passport based on luminance and gradien histograms of image
-	QList<double> GetLumAndGradPassport(const Image &t_img);
+	QList<double> GetLumGradHistPassport(const Image &t_img);
 	// Get image passport based on luminance and gradien of subsampled image
-	QList<double> GetSubsamplLumAndGradPassport(const Image &t_img);
+	QList<double> GetSubsamplLumGradPassport(const Image &t_img);
 	// Create dummy passport
 	QList<double> CreateDummyPassport();
 };

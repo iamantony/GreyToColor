@@ -30,17 +30,26 @@ ImgFilter::ImgFilter()
 // @output:
 // - null Image - failed to create gradient image
 // - Image - gradient image
-Image ImgFilter::GetGradientImage(const Image &t_greyImg, const Kernel::Type &t_type)
+Image ImgFilter::GetGradientImage(const Image &t_img, const Kernel::Type &t_type)
 {
-	if ( (true == t_greyImg.IsNull()) || (Kernel::DEFAULT_LAST == t_type) )
+	if ( (true == t_img.IsNull()) || (Kernel::DEFAULT_LAST == t_type) )
 	{
 		qDebug() << "GetGradientImage(): Error - invalid arguments";
 		Image empty;
 		return empty;
 	}
 
+	ImgTransform imgTransformer;
+	Image greyscaledImg = imgTransformer.ToGrey(t_img);
+	if ( true == greyscaledImg.IsNull() )
+	{
+		qDebug() << "GetGradientImage(): Error - can't greyscale image";
+		Image empty;
+		return empty;
+	}
+
 	// Get image
-	QImage greyImg = t_greyImg.GetImg();
+	QImage greyImg = greyscaledImg.GetImg();
 	if ( (true == greyImg.isNull()) || (false == greyImg.isGrayscale()) )
 	{
 		qDebug() << "GetGradientImage(): Error - invalid image";
@@ -62,7 +71,7 @@ Image ImgFilter::GetGradientImage(const Image &t_greyImg, const Kernel::Type &t_
 											t_type,
 											kernels);
 
-	Image resultImg = t_greyImg;
+	Image resultImg = t_img;
 	resultImg.SetImage(gradientImg);
 
 	return resultImg;
