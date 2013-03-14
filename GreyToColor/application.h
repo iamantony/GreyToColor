@@ -71,6 +71,8 @@ private:
 	void ConnectUIandColMethHand();
 	// Create signal-slot connections between ImgHandler and IDBHandler objects
 	void ConnectImgHandAndIDBHand();
+	// Create signal-slot connections between ImgHandler and ColorMethodsHandler objects
+	void ConnectImgHandAndColMethHand();
 	// Start all threads with application objects and show UI
 	void StartApp();
 	// Delete all application objects
@@ -83,6 +85,8 @@ private:
 	void DisconnectUIandColMethHand();
 	// Disconnect ImgHandler and IDBHandler objects
 	void DisconnectImgHandAndIDBHand();
+	// Disconnect ImgHandler and IDBHandler objects
+	void DisconnectImgHandAndColMethHand();
 	// Delete all objects for Colorization Methods Handler
 	void DeleteColMethHandler();
 	// Delete all objects for Image Database Handler

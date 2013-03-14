@@ -71,11 +71,11 @@ void ColorMethodsHandler::SlotStartColorization()
 	switch( m_methodToUse )
 	{
 		case Methods::WALSH_SIMPLE:
-			// start walsh simple
+			ColorizeByWalshSimple();
 			break;
 
 		case Methods::WALSH_NEIGHBOR:
-			// start walsh neighbor
+			ColorizeByWalshNeighbor();
 			break;
 
 		case Methods::DEFAULT_LAST:
@@ -85,4 +85,50 @@ void ColorMethodsHandler::SlotStartColorization()
 			return;
 		}
 	}
+}
+
+// Get pointer to current target image
+// @input:
+// - TargetImage - unnull unempty pointer to loaded Target Image
+// @output:
+void ColorMethodsHandler::SlotGetTargetImg(TargetImage *t_targ)
+{
+	if ( (NULL == t_targ) || (false == t_targ->HasImage()) )
+	{
+		qDebug() << "SlotGetTargetImg(): Error - invalid arguments";
+		return;
+	}
+
+	m_targetImg = t_targ;
+}
+
+// Get pointer to current source image
+// @input:
+// - SourceImage - unnull unempty pointer to loaded Source Image
+// @output:
+void ColorMethodsHandler::SlotGetSourceImg(SourceImage *t_source)
+{
+	if ( (NULL == t_source) || (false == t_source->HasImage()) )
+	{
+		qDebug() << "SlotGetSourceImg(): Error - invalid arguments";
+		return;
+	}
+
+	m_sourceImg = t_source;
+}
+
+// Start colorization method Walsh Simple
+// @input:
+// @output:
+void ColorMethodsHandler::ColorizeByWalshSimple()
+{
+
+}
+
+// Start colorization method Walsh Neighbor
+// @input:
+// @output:
+void ColorMethodsHandler::ColorizeByWalshNeighbor()
+{
+
 }

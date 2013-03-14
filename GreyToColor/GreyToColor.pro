@@ -51,7 +51,8 @@ SOURCES += main.cpp\
     SERVICE/IMAGES/imgpassportcomparer.cpp \
     SERVICE/IMAGES/imgfilter.cpp \
     SERVICE/KERNELS/kernelcreator.cpp \
-    colormethodshandler.cpp
+    colormethodshandler.cpp \
+    METHODS/colorizator.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -99,7 +100,8 @@ HEADERS  += \
     SERVICE/IMAGES/imgfilter.h \
     SERVICE/KERNELS/kernelcreator.h \
     colormethodshandler.h \
-    DEFINES/colorization.h
+    DEFINES/colorization.h \
+    METHODS/colorizator.h
 
 FORMS    += \
 	mainwindow.ui

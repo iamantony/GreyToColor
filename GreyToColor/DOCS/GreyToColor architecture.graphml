@@ -273,14 +273,14 @@
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="518.7065163544517" width="1513.466821720519" x="-4775.0" y="-967.4459889456456"/>
+              <y:Geometry height="546.6762418170067" width="1346.4090699235876" x="-4775.0" y="-967.4459889456456"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
-              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1513.466821720519" x="0.0" y="0.0">Handlers</y:NodeLabel>
+              <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1346.4090699235876" x="0.0" y="0.0">Handlers</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="113" rightF="113.37526337690679" top="0" topF="0.0"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="0" leftF="0.0" right="17" rightF="17.088459365013932" top="0" topF="0.0"/>
             </y:GroupNode>
             <y:GroupNode>
               <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
@@ -300,7 +300,7 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="466.3300515107017" width="306.5006282672002" x="-4760.0" y="-930.0695241018956"/>
+              <y:Geometry height="494.29977697325677" width="306.5006282672002" x="-4760.0" y="-930.0695241018956"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="75.5126953125" x="115.49396647735011" y="3.0">ImgHandler<y:LabelModel>
@@ -335,6 +335,8 @@
 - void SignalFindSimilarInIDB( Image )
 - void SignalCurrentSourceImg( QString )
 - void SignalGetPassFromIDB()
+- void SignalTargetSet( TargetImage* )
+- void SignalSourceSet( SourceImage * )
 - void SignalCurrentProc( Program::Status )
 - void SignalProcDone()
 - void SignalProcError( QString )
@@ -388,10 +390,10 @@
           <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="346.9811162591932" width="360.1831166872248" x="-3750.0915583436126" y="-914.0"/>
+              <y:Geometry height="346.9811162591932" width="306.5006282672002" x="-3767.1800177086266" y="-914.0"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="139.78271484375" x="110.2002009217374" y="3.0">ColorMethodsHandler<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="139.78271484375" x="83.35895671172511" y="3.0">ColorMethodsHandler<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -404,8 +406,13 @@
 - SourceImage *m_sourceImg</y:AttributeLabel>
                 <y:MethodLabel>+ void Clear()
 
+- void ColorizeByWalshSimple()
+- void ColorizeByWalshNeighbor()
+
 + void SlotSetMethodType( Methods::Type )
 + void SlotStartColorization()
++ void SlotGetTargetImg( TargetImage *)
++ void SlotGetSourceImg( SourceImage * )
 
 - void SignalCurrentProc( Program::Status )
 - void SignalProcDone()
@@ -2381,7 +2388,7 @@
         <y:PolyLineEdge>
           <y:Path sx="-3.2614039035643145" sy="0.0" tx="0.0" ty="0.0">
             <y:Point x="-4442.662136113577" y="-1170.0"/>
-            <y:Point x="-3570.0" y="-1170.0"/>
+            <y:Point x="-3613.9297035750265" y="-1170.0"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>

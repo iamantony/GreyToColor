@@ -109,6 +109,8 @@ void ImgHandler::SlotGetNewTargetImg(const QString &t_imgPath)
 	}
 
 	emit SignalGetTargetImg(t_imgPath);
+	emit SignalTargetSet(&m_target);
+
 	GetGreyTarget();
 
 	emit SignalProcDone();
@@ -214,6 +216,8 @@ void ImgHandler::SlotGetNewSourceImg(const QString &t_imgPath)
 	}
 
 	emit SignalCurrentSourceImg(t_imgPath);
+	emit SignalSourceSet(&m_source);
+
 	emit SignalProcDone();
 }
 

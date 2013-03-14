@@ -58,6 +58,8 @@ signals:
 	void SignalFindSimilarInIDB(const Image &t_img);
 	void SignalCurrentSourceImg(const QString &t_name);
 	void SignalGetPassFromIDB();
+	void SignalTargetSet(TargetImage *t_targ);
+	void SignalSourceSet(SourceImage *t_source);
 	void SignalCurrentProc(const Program::Status &);
 	void SignalProcDone();
 	void SignalProcError(const QString &);

@@ -44,6 +44,12 @@ public:
 	// Clear all info
 	void Clear();
 
+private:
+	// Start colorization method Walsh Simple
+	void ColorizeByWalshSimple();
+	// Start colorization method Walsh Neighbor
+	void ColorizeByWalshNeighbor();
+
 signals:
 	void SignalCurrentProc(const Program::Status &);
 	void SignalProcDone();
@@ -55,7 +61,10 @@ public slots:
 	void SlotSetMethodType(const Methods::Type &t_type);
 	// Start Colorization
 	void SlotStartColorization();
-
+	// Get pointer to current target image
+	void SlotGetTargetImg(TargetImage *t_targ);
+	// Get pointer to current source image
+	void SlotGetSourceImg(SourceImage *t_source);
 };
 
 #endif // COLORMETHODSHANDLER_H
