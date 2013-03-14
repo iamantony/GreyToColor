@@ -41,6 +41,9 @@ private:
 	IDBHandler *m_idbHandler;
 	QThread *m_idbHandlerThread;
 
+//	ColorMethodsHandler *m_colorMethHandler;
+//	QThread *m_colorMethHandlerThread;
+
 	// == METHODS ==
 public:
 	explicit Application(QObject *parent = 0);

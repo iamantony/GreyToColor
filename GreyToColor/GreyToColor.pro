@@ -50,7 +50,8 @@ SOURCES += main.cpp\
     DATABASE/imgdatabase.cpp \
     SERVICE/IMAGES/imgpassportcomparer.cpp \
     SERVICE/IMAGES/imgfilter.cpp \
-    SERVICE/KERNELS/kernelcreator.cpp
+    SERVICE/KERNELS/kernelcreator.cpp \
+    colormethodshandler.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -96,7 +97,8 @@ HEADERS  += \
     SERVICE/IMAGES/imgpassportcomparer.h \
     DEFINES/calcsko.h \
     SERVICE/IMAGES/imgfilter.h \
-    SERVICE/KERNELS/kernelcreator.h
+    SERVICE/KERNELS/kernelcreator.h \
+    colormethodshandler.h
 
 FORMS    += \
 	mainwindow.ui
