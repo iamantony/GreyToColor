@@ -20,11 +20,33 @@
 #define WALSHNEIGHBORCOLORIZATOR_H
 
 #include "colorizator.h"
+#include <QDebug>
+#include <time.h>
+#include <math.h>
+#include "./DEFINES/global.h"
+#include "./DEFINES/colorization.h"
 
 class WalshNeighborColorizator : public Colorizator
 {
+	// == DATA ==
+
+	// == METHODS ==
 public:
 	WalshNeighborColorizator();
+
+	// Start Colorization
+	virtual bool Colorize(TargetImage *t_targetImg, SourceImage *t_sourceImg);
+
+private:
+	// Prepare images to colorization
+	virtual bool PrepareImages();
+	// Colorize Target image using color information from Source image
+	virtual bool ColorizeImage();
+	// Try to colorize neighbor pixels by the same color
+	void ColorizeNeighbor(const unsigned int &t_startWidth, const unsigned int &t_startHeight);
+
+	// Restore images params if needed
+	virtual bool PostColorization();
 };
 
 #endif // WALSHNEIGHBORCOLORIZATOR_H

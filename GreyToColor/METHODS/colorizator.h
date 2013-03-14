@@ -37,11 +37,16 @@ public:
 	// Start Colorization
 	virtual bool Colorize(TargetImage *t_targetImg, SourceImage *t_sourceImg) = 0;
 
+protected:
+	// Prepare images to colorization
+	virtual bool PrepareImages() = 0;
+	// Colorize Target image using color information from Source image
+	virtual bool ColorizeImage() = 0;
+	// Restore images params if needed
+	virtual bool PostColorization() = 0;
+
 private:
 	void Clear();
-	virtual bool PrepareImages() = 0;
-	virtual bool PostColorization() = 0;
-	virtual bool ColorizeImage() = 0;
 };
 
 #endif // COLORIZATOR_H

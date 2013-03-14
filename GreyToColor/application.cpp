@@ -262,6 +262,11 @@ void Application::ConnectImgHandAndColMethHand()
 					 SIGNAL(SignalSourceSet(SourceImage*)),
 					 m_colorMethHandler,
 					 SLOT(SlotGetSourceImg(SourceImage*)));
+
+	QObject::connect(m_colorMethHandler,
+					 SIGNAL(SignalColorizationDone()),
+					 m_imgHandler,
+					 SLOT(SlotTargetColorized()));
 }
 
 // Start all threads with application objects and show UI

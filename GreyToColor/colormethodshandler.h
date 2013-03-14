@@ -23,6 +23,8 @@
 #include <QDebug>
 #include "./IMAGES/SOURCE/sourceimage.h"
 #include "./IMAGES/TARGET/targetimage.h"
+#include "METHODS/walshsimplecolorizator.h"
+#include "METHODS/walshneighborcolorizator.h"
 #include "DEFINES/programstatus.h"
 #include "DEFINES/colorization.h"
 
@@ -51,6 +53,7 @@ private:
 	void ColorizeByWalshNeighbor();
 
 signals:
+	void SignalColorizationDone();
 	void SignalCurrentProc(const Program::Status &);
 	void SignalProcDone();
 	void SignalProcError(const QString &);

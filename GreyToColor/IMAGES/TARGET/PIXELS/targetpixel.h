@@ -29,6 +29,7 @@ class TargetPixel : public ColorPixel
 {
 	// == DATA ==
 private:
+	bool m_colored;
 	double m_lumScaleFactor;
 	PreferedColor m_prefColor;
 
@@ -51,6 +52,10 @@ public:
 	void SetPreferedColor(const RGB &t_prefColor);
 	// Check if pixel has prefered color
 	bool HasPreferedColor() const;
+	// Set that pixel colorized (has color)
+	void SetColored();
+	// Check if pixel colorized
+	bool IsColored() const;
 
 private:
 	// Transform pixel to grey color

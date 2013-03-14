@@ -223,6 +223,28 @@ void TargetImgPixels::SetPixPreferedColor(const unsigned int &t_width,
 	pixel->SetPreferedColor(t_prefColor);
 }
 
+// Set flag that pixel coloured
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+void TargetImgPixels::SetPixColoured(const unsigned int &t_width, const unsigned int &t_height)
+{
+	TargetPixel *pixel = (TargetPixel *)m_pixels[t_width][t_height];
+	pixel->SetColored();
+}
+
+// Check if pixel is coloured
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+bool TargetImgPixels::IsPixColoured(const unsigned int &t_width, const unsigned int &t_height) const
+{
+	TargetPixel *pixel = (TargetPixel *)m_pixels[t_width][t_height];
+	return pixel->IsColored();
+}
+
 // Form from current pixels values entire QImage
 // @input:
 // @output:

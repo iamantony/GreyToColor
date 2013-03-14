@@ -20,11 +20,30 @@
 #define WALSHSIMPLECOLORIZATOR_H
 
 #include "colorizator.h"
+#include <QDebug>
+#include <time.h>
+#include <math.h>
+#include "./DEFINES/global.h"
+#include "./DEFINES/colorization.h"
 
 class WalshSimpleColorizator : public Colorizator
 {
+	// == DATA ==
+
+	// == METHODS ==
 public:
 	WalshSimpleColorizator();
+
+	// Start Colorization
+	virtual bool Colorize(TargetImage *t_targetImg, SourceImage *t_sourceImg);
+
+private:
+	// Prepare images to colorization
+	virtual bool PrepareImages();
+	// Colorize Target image using color information from Source image
+	virtual bool ColorizeImage();
+	// Restore images params if needed
+	virtual bool PostColorization();
 };
 
 #endif // WALSHSIMPLECOLORIZATOR_H

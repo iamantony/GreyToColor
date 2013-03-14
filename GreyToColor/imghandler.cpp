@@ -236,3 +236,11 @@ void ImgHandler::SlotFindSimilarForTarget()
 
 	emit SignalFindSimilarInIDB(currentTarget);
 }
+
+// Colorization performed. Show result
+// @input:
+// @output:
+void ImgHandler::SlotTargetColorized()
+{
+	SendResultImg();
+}

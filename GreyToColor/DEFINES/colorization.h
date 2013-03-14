@@ -29,4 +29,11 @@ namespace Methods
 	};
 }
 
+#define DEFAULT_LUM 999999
+#define DEFAULT_SKO 999999
+#define LUM_TRESHOLD 0.09
+#define SKO_TRESHOLD 0.01
+
+#define NUM_OF_ATTEMPTS 200
+
 #endif // COLORIZATION_H

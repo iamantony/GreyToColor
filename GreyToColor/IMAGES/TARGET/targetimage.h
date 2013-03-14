@@ -48,6 +48,10 @@ public:
 						 const unsigned int &t_height,
 						 const RGB &t_prefColor);
 
+	// Set flag that pixel colored
+	void SetPixColoured(const unsigned int &t_width, const unsigned int &t_height);
+	// Check if pixel is colored
+	bool IsPixColoured(const unsigned int &t_width, const unsigned int &t_height) const;
 	// Get result image. It could be colorized (if we perform colorization) or
 	// greyscale as original target (if we have not performed colorizztion yet).
 	Image GetResultImage();

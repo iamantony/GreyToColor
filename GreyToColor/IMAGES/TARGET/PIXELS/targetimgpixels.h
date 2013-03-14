@@ -50,6 +50,10 @@ public:
 							 const unsigned int &t_height,
 							 const RGB &t_prefColor);
 
+	// Set flag that pixel coloured
+	void SetPixColoured(const unsigned int &t_width, const unsigned int &t_height);
+	// Check if pixel is coloured
+	bool IsPixColoured(const unsigned int &t_width, const unsigned int &t_height) const;
 	// Form from current pixels values entire QImage
 	QImage FormImage();
 

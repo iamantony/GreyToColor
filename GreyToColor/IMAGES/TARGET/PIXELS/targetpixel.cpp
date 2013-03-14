@@ -38,6 +38,7 @@ void TargetPixel::ClearPixel()
 	m_prefColor.ClearColor();
 
 	m_lumScaleFactor = DEFAULT_SCALE_LUM_FACTOR;
+	m_colored = false;
 }
 
 // Set pixel as grey variant of input RGB pixel
@@ -157,6 +158,25 @@ void TargetPixel::SetPreferedColor(const RGB &t_prefColor)
 bool TargetPixel::HasPreferedColor() const
 {
 	return m_prefColor.HasColor();
+}
+
+// TODO:
+// how we would know what prefered color have pixel?
+
+// Set that pixel colorized (has color)
+// @input:
+// @output:
+void TargetPixel::SetColored()
+{
+	m_colored = true;
+}
+
+// Check if pixel colorized
+// @input:
+// @output:
+bool TargetPixel::IsColored() const
+{
+	return m_colored;
 }
 
 // Test function SetAsGrey()

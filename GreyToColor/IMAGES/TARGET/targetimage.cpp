@@ -57,8 +57,6 @@ void TargetImage::ConstructImgPixels()
 	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
 	pixels->Clear();
 	pixels->FormImgPixels(currentImg);
-//	pixels->TransAllPixRGB2LAB();
-//	CalcPixelsSKO();
 }
 
 // Calc for each pixel in image it's SKO
@@ -118,6 +116,28 @@ void TargetImage::SetPixPrefColor(const unsigned int &t_width,
 	pixels->SetPixPreferedColor(t_width,
 								t_height,
 								t_prefColor);
+}
+
+// Set flag that pixel colored
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+void TargetImage::SetPixColoured(const unsigned int &t_width, const unsigned int &t_height)
+{
+	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	pixels->SetPixColoured(t_width, t_height);
+}
+
+// Check if pixel is colored
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+bool TargetImage::IsPixColoured(const unsigned int &t_width, const unsigned int &t_height) const
+{
+	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	return pixels->IsPixColoured(t_width, t_height);
 }
 
 // Get result image. It could be colorized (if we perform colorization) or

@@ -122,7 +122,19 @@ void ColorMethodsHandler::SlotGetSourceImg(SourceImage *t_source)
 // @output:
 void ColorMethodsHandler::ColorizeByWalshSimple()
 {
+	emit SignalCurrentProc(Program::COLORIZATION);
 
+	WalshSimpleColorizator colorizator;
+	bool targetColorized = colorizator.Colorize(m_targetImg, m_sourceImg);
+	if ( false == targetColorized )
+	{
+		qDebug() << "ColorizeByWalshSimple(): Error - can't colorize by Waslh Simple Method";
+		emit SignalProcError(tr("Colorization failed"));
+		return;
+	}
+
+	emit SignalColorizationDone();
+	emit SignalProcDone();
 }
 
 // Start colorization method Walsh Neighbor
@@ -130,5 +142,17 @@ void ColorMethodsHandler::ColorizeByWalshSimple()
 // @output:
 void ColorMethodsHandler::ColorizeByWalshNeighbor()
 {
+	emit SignalCurrentProc(Program::COLORIZATION);
 
+	WalshNeighborColorizator colorizator;
+	bool targetColorized = colorizator.Colorize(m_targetImg, m_sourceImg);
+	if ( false == targetColorized )
+	{
+		qDebug() << "ColorizeByWalshNeighbor(): Error - can't colorize by Waslh Neighbor Method";
+		emit SignalProcError(tr("Colorization failed"));
+		return;
+	}
+
+	emit SignalColorizationDone();
+	emit SignalProcDone();
 }

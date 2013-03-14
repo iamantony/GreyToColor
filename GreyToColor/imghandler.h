@@ -74,6 +74,8 @@ public slots:
 	void SlotGetNewSourceImg(const QString &t_imgPath);
 	// Start process of searching image in IDB
 	void SlotFindSimilarForTarget();
+	// Colorization performed. Show result
+	void SlotTargetColorized();
 };
 
 #endif // IMGHANDLER_H
