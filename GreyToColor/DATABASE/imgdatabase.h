@@ -65,6 +65,10 @@ private:
 	bool IsSQLite(const QString &t_path) const;
 	// Form full path to IDB
 	QString FormIDBFullName(const QString &t_name) const;
+	// Get all passports names
+	QStringList GetPassportsNames();
+	// Get passport name
+	QString GetPassportName(const Passport::Type &t_type);
 };
 
 #endif // IMGDATABASE_H

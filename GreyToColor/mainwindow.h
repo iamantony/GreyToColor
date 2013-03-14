@@ -33,8 +33,6 @@
 #include "DEFINES/mainwindowui.h"
 #include "DEFINES/idbs.h"
 
-#include "SERVICE/IMAGES/imgfilter.h"
-
 namespace Ui
 {
 	class MainWindow;
