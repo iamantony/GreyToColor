@@ -42,6 +42,7 @@ void MainWindow::InitUI()
 	InitStatusBar();
 	InitImgsLabels();
 	InitPassportActionsGroup();
+	InitMethodsActionsGroup();
 }
 
 // Creating, applying settings to status bar
@@ -124,6 +125,27 @@ void MainWindow::InitPassportActionsGroup()
 			SIGNAL(triggered(QAction*)),
 			this,
 			SLOT(SlotPassportType(QAction*)));
+}
+
+// Init group of methods type actions
+// @input:
+// @output:
+void MainWindow::InitMethodsActionsGroup()
+{
+	m_methods = new QActionGroup(this);
+	m_methods->addAction(ui->actionWalshSimple);
+	m_methods->addAction(ui->actionWalshNeighbor);
+
+	ui->actionWalshSimple->setChecked(true);
+
+	m_methods->setExclusive(true);
+	m_methods->setEnabled(true);
+	m_methods->setVisible(true);
+
+	connect(m_methods,
+			SIGNAL(triggered(QAction*)),
+			this,
+			SLOT(SlotMethodType(QAction*)));
 }
 
 // Show warning window with title and some text
@@ -304,8 +326,7 @@ void MainWindow::on_startColorizationPB_clicked()
 		return;
 	}
 
-	// TODO:
-	// - start colorization
+	emit SignalStartColorization();
 }
 
 // Slot for resetting current target image
@@ -461,5 +482,20 @@ void MainWindow::SlotPassportType(QAction *t_action)
 	else if ( ui->actionSubsampLumGrad == t_action )
 	{
 		emit SignalUseImgPassport(Passport::LUM_AND_GRAD_SUB);
+	}
+}
+
+// Slot for choosing type of colorization method
+// @input:
+// @output:
+void MainWindow::SlotMethodType(QAction *t_action)
+{
+	if ( ui->actionWalshSimple == t_action )
+	{
+		emit SignalUseColorMethod(Methods::WALSH_SIMPLE);
+	}
+	else if ( ui->actionWalshNeighbor == t_action )
+	{
+		emit SignalUseColorMethod(Methods::WALSH_NEIGHBOR);
 	}
 }

@@ -98,7 +98,8 @@ HEADERS  += \
     DEFINES/calcsko.h \
     SERVICE/IMAGES/imgfilter.h \
     SERVICE/KERNELS/kernelcreator.h \
-    colormethodshandler.h
+    colormethodshandler.h \
+    DEFINES/colorization.h
 
 FORMS    += \
 	mainwindow.ui

@@ -118,7 +118,7 @@
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="1056.9044900397323" width="464.0" x="-5628.0" y="-1114.0524509383736"/>
+              <y:Geometry height="1147.8953760485058" width="464.0" x="-5628.0" y="-1114.0524509383736"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
               <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="464.0" x="0.0" y="0.0">UI</y:NodeLabel>
@@ -145,7 +145,7 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="708.642504039977" width="301.2458644835824" x="-5533.552836079446" y="-1076.6759860946236"/>
+              <y:Geometry height="787.4774391292449" width="301.2458644835824" x="-5533.552836079446" y="-1076.6759860946236"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="83.42822265625" x="108.9088209136662" y="26.701171875">MainWindow<y:LabelModel>
@@ -159,12 +159,14 @@
                 <y:AttributeLabel>- Ui::MainWindow *ui
 - StatusBar *m_statusBar
 - QActionGroup *m_passports
+- QActionGroup *m_methods
 - Program::Status m_appStatus</y:AttributeLabel>
                 <y:MethodLabel>- void InitUI()
 - void InitStatusBar()
 - void InitImgsLabels()
 - void InitImg( Images::Types )
 - void InitPassportActionsGroup()
+- void InitMethodsActionsGroup()
 - void ShowWarning( QString, QString )
 - bool CanOperate()
 
@@ -189,6 +191,7 @@
 - void on_actionAddImages_triggered()
 - void on_actionPreferences_triggered()
 - void SlotPassportType( QAction )
+- void SlotMethodType( QAction )
 
 - void SignalNewIDB( QString )
 - void SignalOpenIDB( QString )
@@ -197,7 +200,9 @@
 - void SignalNewTargetImg( QString )
 - void SignalNewSourceImg( QString )
 - void SignalSaveResultImg( QString )
-- void SignalUseImgPassport( Passport::Type )</y:MethodLabel>
+- void SignalUseImgPassport( Passport::Type )
+- void SignalUseColorMethod( Methods::Type )
+- void SignalStartColorization()</y:MethodLabel>
               </y:UML>
             </y:UMLClassNode>
           </data>
@@ -206,7 +211,7 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="217.68585022026446" width="202.0" x="-5613.0" y="-289.8338111189057"/>
+              <y:Geometry height="217.68585022026446" width="202.0" x="-5613.0" y="-198.84292511013223"/>
               <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="71.92626953125" x="65.036865234375" y="26.701171875">ScaleLabel<y:LabelModel>
@@ -235,7 +240,7 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="217.68585022026446" width="202.0" x="-5381.0" y="-289.8338111189057"/>
+              <y:Geometry height="217.68585022026446" width="202.0" x="-5381.0" y="-198.84292511013223"/>
               <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="65.4072265625" x="68.29638671875" y="26.701171875">StatusBar<y:LabelModel>
@@ -394,8 +399,18 @@
                 </y:ModelParameter>
               </y:NodeLabel>
               <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
-                <y:AttributeLabel/>
-                <y:MethodLabel/>
+                <y:AttributeLabel>- Methods::Type m_methodToUse
+- TargetImage *m_targetImg
+- SourceImage *m_sourceImg</y:AttributeLabel>
+                <y:MethodLabel>+ void Clear()
+
++ void SlotSetMethodType( Methods::Type )
++ void SlotStartColorization()
+
+- void SignalCurrentProc( Program::Status )
+- void SignalProcDone()
+- void SignalProcError( QString );
+- void SignalProcFatalError()</y:MethodLabel>
               </y:UML>
             </y:UMLClassNode>
           </data>
@@ -1681,14 +1696,18 @@
 - void CreateUI()
 - void CreateImgHandler()
 - void CreateIDBHandler()
+- void CreateColorMethHandler()
 - void ConnectUIandImgHand()
 - void ConnectUIandIDBHand()
+- void ConnectUIandColMethHand()
 - void ConnectImgHandAndIDBHand()
 - void StartApp()
 - void DeleteObjects()
 - void DisconnectUIandImgHand()
 - void DisconnectUIandIDBHand()
+- void DisconnectUIandColMethHand()
 - void DisconnectImgHandAndIDBHand()
+- void DeleteColMethHandler()
 - void DeleteIDBHandler()
 - void DeleteImgHandler()
 - void DeleteUI()</y:MethodLabel>
@@ -1714,8 +1733,8 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-5382.929903837655" y="-330.9908860087735"/>
-            <y:Point x="-5512.0" y="-330.9908860087735"/>
+            <y:Point x="-5382.929903837655" y="-240.0"/>
+            <y:Point x="-5512.0" y="-240.0"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="white_diamond" target="none"/>
@@ -1728,8 +1747,8 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-5382.929903837655" y="-330.9908860087735"/>
-            <y:Point x="-5280.0" y="-330.9908860087735"/>
+            <y:Point x="-5382.929903837655" y="-240.0"/>
+            <y:Point x="-5280.0" y="-240.0"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="white_diamond" target="none"/>

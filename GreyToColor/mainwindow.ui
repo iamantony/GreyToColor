@@ -549,12 +549,26 @@
     </widget>
     <addaction name="actionCreateDatabase"/>
     <addaction name="actionOpenDatabase"/>
-    <addaction name="separator"/>
     <addaction name="actionAddImages"/>
+    <addaction name="separator"/>
     <addaction name="menuPassport_type"/>
+   </widget>
+   <widget class="QMenu" name="menuColorization">
+    <property name="title">
+     <string>Colorization</string>
+    </property>
+    <widget class="QMenu" name="menuMethodType">
+     <property name="title">
+      <string>Method type</string>
+     </property>
+     <addaction name="actionWalshSimple"/>
+     <addaction name="actionWalshNeighbor"/>
+    </widget>
+    <addaction name="menuMethodType"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuDatabase"/>
+   <addaction name="menuColorization"/>
   </widget>
   <action name="actionOpenTargetImage">
    <property name="text">
@@ -632,6 +646,22 @@
    </property>
    <property name="text">
     <string>Subsampled Luminance and Gradient</string>
+   </property>
+  </action>
+  <action name="actionWalshSimple">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Walsh Simple</string>
+   </property>
+  </action>
+  <action name="actionWalshNeighbor">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Walsh Neighbor</string>
    </property>
   </action>
  </widget>

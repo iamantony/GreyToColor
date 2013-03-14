@@ -32,6 +32,7 @@
 #include "DEFINES/programstatus.h"
 #include "DEFINES/mainwindowui.h"
 #include "DEFINES/idbs.h"
+#include "DEFINES/colorization.h"
 
 namespace Ui
 {
@@ -47,6 +48,7 @@ private:
 	Ui::MainWindow *ui;
 	StatusBar *m_statusBar;
 	QActionGroup *m_passports;
+	QActionGroup *m_methods;
 	Program::Status m_appStatus;
 
 	// == METHODS ==
@@ -65,6 +67,8 @@ private:
 	void InitImg(Images::Types t_imgType);
 	// Init group of passport type actions
 	void InitPassportActionsGroup();
+	// Init group of methods type actions
+	void InitMethodsActionsGroup();
 	// Show warning window with title and some text
 	void ShowWarning(const QString &t_title, const QString &t_text);
 	// Check if app status if OK (application not performing some calculations)
@@ -79,6 +83,8 @@ signals:
 	void SignalNewSourceImg(const QString &t_str);
 	void SignalSaveResultImg(const QString &t_imgPath);
 	void SignalUseImgPassport(const Passport::Type &t_type);
+	void SignalUseColorMethod(const Methods::Type &t_type);
+	void SignalStartColorization();
 
 public slots:
 	// Slot for getting new Target image
@@ -110,6 +116,7 @@ private slots:
 	void on_actionAddImages_triggered();
 	void on_actionPreferences_triggered();
 	void SlotPassportType(QAction *t_action);
+	void SlotMethodType(QAction *t_action);
 };
 
 #endif // MAINWINDOW_H

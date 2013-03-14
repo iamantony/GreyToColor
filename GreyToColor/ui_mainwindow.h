@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Tue 12. Mar 18:57:56 2013
-**      by: Qt User Interface Compiler version 4.8.1
+** Created: Thu 14. Mar 11:44:17 2013
+**      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -44,6 +44,8 @@ public:
     QAction *actionSubsampLum;
     QAction *actionLumGradHists;
     QAction *actionSubsampLumGrad;
+    QAction *actionWalshSimple;
+    QAction *actionWalshNeighbor;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *imgsLayout;
@@ -80,6 +82,8 @@ public:
     QMenu *menuFile;
     QMenu *menuDatabase;
     QMenu *menuPassport_type;
+    QMenu *menuColorization;
+    QMenu *menuMethodType;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -118,6 +122,12 @@ public:
         actionSubsampLumGrad = new QAction(MainWindow);
         actionSubsampLumGrad->setObjectName(QString::fromUtf8("actionSubsampLumGrad"));
         actionSubsampLumGrad->setCheckable(true);
+        actionWalshSimple = new QAction(MainWindow);
+        actionWalshSimple->setObjectName(QString::fromUtf8("actionWalshSimple"));
+        actionWalshSimple->setCheckable(true);
+        actionWalshNeighbor = new QAction(MainWindow);
+        actionWalshNeighbor->setObjectName(QString::fromUtf8("actionWalshNeighbor"));
+        actionWalshNeighbor->setCheckable(true);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -329,10 +339,15 @@ public:
         menuDatabase->setObjectName(QString::fromUtf8("menuDatabase"));
         menuPassport_type = new QMenu(menuDatabase);
         menuPassport_type->setObjectName(QString::fromUtf8("menuPassport_type"));
+        menuColorization = new QMenu(menubar);
+        menuColorization->setObjectName(QString::fromUtf8("menuColorization"));
+        menuMethodType = new QMenu(menuColorization);
+        menuMethodType->setObjectName(QString::fromUtf8("menuMethodType"));
         MainWindow->setMenuBar(menubar);
 
         menubar->addAction(menuFile->menuAction());
         menubar->addAction(menuDatabase->menuAction());
+        menubar->addAction(menuColorization->menuAction());
         menuFile->addAction(actionOpenTargetImage);
         menuFile->addAction(actionOpenSourceImage);
         menuFile->addSeparator();
@@ -343,13 +358,16 @@ public:
         menuFile->addAction(actionClose);
         menuDatabase->addAction(actionCreateDatabase);
         menuDatabase->addAction(actionOpenDatabase);
-        menuDatabase->addSeparator();
         menuDatabase->addAction(actionAddImages);
+        menuDatabase->addSeparator();
         menuDatabase->addAction(menuPassport_type->menuAction());
         menuPassport_type->addAction(actionLumHist);
         menuPassport_type->addAction(actionSubsampLum);
         menuPassport_type->addAction(actionLumGradHists);
         menuPassport_type->addAction(actionSubsampLumGrad);
+        menuColorization->addAction(menuMethodType->menuAction());
+        menuMethodType->addAction(actionWalshSimple);
+        menuMethodType->addAction(actionWalshNeighbor);
 
         retranslateUi(MainWindow);
         QObject::connect(actionClose, SIGNAL(triggered()), MainWindow, SLOT(close()));
@@ -372,6 +390,8 @@ public:
         actionSubsampLum->setText(QApplication::translate("MainWindow", "Subsampled Luminance", 0, QApplication::UnicodeUTF8));
         actionLumGradHists->setText(QApplication::translate("MainWindow", "Luminance and Gradient Histograms", 0, QApplication::UnicodeUTF8));
         actionSubsampLumGrad->setText(QApplication::translate("MainWindow", "Subsampled Luminance and Gradient", 0, QApplication::UnicodeUTF8));
+        actionWalshSimple->setText(QApplication::translate("MainWindow", "Walsh Simple", 0, QApplication::UnicodeUTF8));
+        actionWalshNeighbor->setText(QApplication::translate("MainWindow", "Walsh Neighbor", 0, QApplication::UnicodeUTF8));
         targetImgLbl->setText(QString());
         openTargetImgPB->setText(QApplication::translate("MainWindow", "Open target image", 0, QApplication::UnicodeUTF8));
         resultImgLbl->setText(QString());
@@ -384,6 +404,8 @@ public:
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
         menuDatabase->setTitle(QApplication::translate("MainWindow", "Database", 0, QApplication::UnicodeUTF8));
         menuPassport_type->setTitle(QApplication::translate("MainWindow", "Passport type", 0, QApplication::UnicodeUTF8));
+        menuColorization->setTitle(QApplication::translate("MainWindow", "Colorization", 0, QApplication::UnicodeUTF8));
+        menuMethodType->setTitle(QApplication::translate("MainWindow", "Method type", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

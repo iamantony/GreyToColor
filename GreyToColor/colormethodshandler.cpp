@@ -21,7 +21,7 @@
 ColorMethodsHandler::ColorMethodsHandler(QObject *parent) :
 	QObject(parent)
 {
-
+	Clear();
 }
 
 ColorMethodsHandler::~ColorMethodsHandler()
@@ -30,7 +30,59 @@ ColorMethodsHandler::~ColorMethodsHandler()
 }
 
 // Clear all info
+// @input:
+// @output:
 void ColorMethodsHandler::Clear()
 {
+	m_targetImg = NULL;
+	m_sourceImg = NULL;
+	m_methodToUse = Methods::WALSH_SIMPLE;
+}
 
+// Set type of colorization method to use
+// @input:
+// @output:
+void ColorMethodsHandler::SlotSetMethodType(const Methods::Type &t_type)
+{
+	if ( Methods::DEFAULT_LAST == t_type )
+	{
+		qDebug() << "SlotSetMethodType(): Error - invalid arguments";
+		return;
+	}
+
+	m_methodToUse = t_type;
+}
+
+// Start Colorization
+// @input:
+// @output:
+void ColorMethodsHandler::SlotStartColorization()
+{
+	if ( (NULL == m_targetImg) ||
+		 (NULL == m_sourceImg) ||
+		 (false == m_targetImg->HasImage()) ||
+		 (false == m_sourceImg->HasImage()) )
+	{
+		qDebug() << "SlotStartColorization(): Error - images not set yet";
+		emit SignalProcError(tr("Can't start colorization. Please, set Target and Source images"));
+		return;
+	}
+
+	switch( m_methodToUse )
+	{
+		case Methods::WALSH_SIMPLE:
+			// start walsh simple
+			break;
+
+		case Methods::WALSH_NEIGHBOR:
+			// start walsh neighbor
+			break;
+
+		case Methods::DEFAULT_LAST:
+		default:
+		{
+			qDebug() << "SlotStartColorization(): Error - invalid colorization method type";
+			return;
+		}
+	}
 }

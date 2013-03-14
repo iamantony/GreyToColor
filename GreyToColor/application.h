@@ -24,8 +24,10 @@
 #include "mainwindow.h"
 #include "imghandler.h"
 #include "idbhandler.h"
+#include "colormethodshandler.h"
 #include "DEFINES/programstatus.h"
 #include "IMAGES/COMMON/image.h"
+#include "DEFINES/colorization.h"
 
 class Application : public QObject
 {
@@ -41,8 +43,8 @@ private:
 	IDBHandler *m_idbHandler;
 	QThread *m_idbHandlerThread;
 
-//	ColorMethodsHandler *m_colorMethHandler;
-//	QThread *m_colorMethHandlerThread;
+	ColorMethodsHandler *m_colorMethHandler;
+	QThread *m_colorMethHandlerThread;
 
 	// == METHODS ==
 public:
@@ -59,10 +61,14 @@ private:
 	void CreateImgHandler();
 	// Construct all objects for Image Database Handler
 	void CreateIDBHandler();
+	// Construct all objects for Colorization Methods Handler
+	void CreateColorMethHandler();
 	// Create signal-slot connections between UI and ImgHandler object
 	void ConnectUIandImgHand();
 	// Create signal-slot connections between UI and IDBHandler object
 	void ConnectUIandIDBHand();
+	// Create signal-slot connections between UI and ColorMethodsHandler object
+	void ConnectUIandColMethHand();
 	// Create signal-slot connections between ImgHandler and IDBHandler objects
 	void ConnectImgHandAndIDBHand();
 	// Start all threads with application objects and show UI
@@ -73,8 +79,12 @@ private:
 	void DisconnectUIandImgHand();
 	// Disconnect UI and IDBHandler object
 	void DisconnectUIandIDBHand();
+	// Disconnect UI and ColorMethodsHandler object
+	void DisconnectUIandColMethHand();
 	// Disconnect ImgHandler and IDBHandler objects
 	void DisconnectImgHandAndIDBHand();
+	// Delete all objects for Colorization Methods Handler
+	void DeleteColMethHandler();
 	// Delete all objects for Image Database Handler
 	void DeleteIDBHandler();
 	// Delete all objects for Image Handler

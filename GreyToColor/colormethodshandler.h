@@ -20,6 +20,11 @@
 #define COLORMETHODSHANDLER_H
 
 #include <QObject>
+#include <QDebug>
+#include "./IMAGES/SOURCE/sourceimage.h"
+#include "./IMAGES/TARGET/targetimage.h"
+#include "DEFINES/programstatus.h"
+#include "DEFINES/colorization.h"
 
 class ColorMethodsHandler : public QObject
 {
@@ -27,6 +32,9 @@ class ColorMethodsHandler : public QObject
 
 	// == DATA ==
 private:
+	Methods::Type m_methodToUse;
+	TargetImage *m_targetImg;
+	SourceImage *m_sourceImg;
 
 	// == METHODS ==
 public:
@@ -37,8 +45,16 @@ public:
 	void Clear();
 
 signals:
+	void SignalCurrentProc(const Program::Status &);
+	void SignalProcDone();
+	void SignalProcError(const QString &);
+	void SignalProcFatalError();
 
 public slots:
+	// Set type of colorization method to use
+	void SlotSetMethodType(const Methods::Type &t_type);
+	// Start Colorization
+	void SlotStartColorization();
 
 };
 

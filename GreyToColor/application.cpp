@@ -37,9 +37,11 @@ void Application::Construct()
 	CreateUI();
 	CreateImgHandler();
 	CreateIDBHandler();
+	CreateColorMethHandler();
 
 	ConnectUIandImgHand();
 	ConnectUIandIDBHand();
+	ConnectUIandColMethHand();
 	ConnectImgHandAndIDBHand();
 
 	StartApp();
@@ -54,6 +56,7 @@ void Application::CreateUI()
 
 	qRegisterMetaType<Program::Status>("Program::Status");
 	qRegisterMetaType<Passport::Type>("Passport::Type");
+	qRegisterMetaType<Methods::Type>("Methods::Type");
 	qRegisterMetaType<Image>("Image");
 }
 
@@ -75,6 +78,14 @@ void Application::CreateIDBHandler()
 	m_idbHandler = new IDBHandler();
 	m_idbHandlerThread = new QThread();
 	m_idbHandler->moveToThread(m_idbHandlerThread);
+}
+
+// Construct all objects for Colorization Methods Handler
+void Application::CreateColorMethHandler()
+{
+	m_colorMethHandler = new ColorMethodsHandler();
+	m_colorMethHandlerThread = new QThread();
+	m_colorMethHandler->moveToThread(m_colorMethHandlerThread);
 }
 
 // Create signal-slot connections between UI and ImgHandler object
@@ -184,6 +195,42 @@ void Application::ConnectUIandIDBHand()
 					 SLOT(SlotProcessFail()));
 }
 
+// Create signal-slot connections between UI and ColorMethodsHandler object
+// @input:
+// @output:
+void Application::ConnectUIandColMethHand()
+{
+	QObject::connect(m_mainUI,
+					 SIGNAL(SignalUseColorMethod(Methods::Type)),
+					 m_colorMethHandler,
+					 SLOT(SlotSetMethodType(Methods::Type)));
+
+	QObject::connect(m_mainUI,
+					 SIGNAL(SignalStartColorization()),
+					 m_colorMethHandler,
+					 SLOT(SlotStartColorization()));
+
+	QObject::connect(m_colorMethHandler,
+					 SIGNAL(SignalCurrentProc(Program::Status)),
+					 m_mainUI,
+					 SLOT(SlotCurrProcess(Program::Status)));
+
+	QObject::connect(m_colorMethHandler,
+					 SIGNAL(SignalProcDone()),
+					 m_mainUI,
+					 SLOT(SlotProcessEnd()));
+
+	QObject::connect(m_colorMethHandler,
+					 SIGNAL(SignalProcError(const QString &)),
+					 m_mainUI,
+					 SLOT(SlotProcError(const QString &)));
+
+	QObject::connect(m_colorMethHandler,
+					 SIGNAL(SignalProcFatalError()),
+					 m_mainUI,
+					 SLOT(SlotProcessFail()));
+}
+
 // Create signal-slot connections between ImgHandler and IDBHandler objects
 // @input:
 // @output:
@@ -207,6 +254,7 @@ void Application::StartApp()
 {
 	m_idbHandlerThread->start();
 	m_imgHandlerThread->start();
+	m_colorMethHandlerThread->start();
 
 	m_mainUI->show();
 }
@@ -219,9 +267,11 @@ void Application::DeleteObjects()
 	// 1. Disconnect all signals
 	DisconnectUIandIDBHand();
 	DisconnectUIandImgHand();
+	DisconnectUIandColMethHand();
 	DisconnectImgHandAndIDBHand();
 
 	// 2. Stop all threads and delete objects
+	DeleteColMethHandler();
 	DeleteIDBHandler();
 	DeleteImgHandler();
 
@@ -247,6 +297,15 @@ void Application::DisconnectUIandIDBHand()
 	m_mainUI->disconnect(m_idbHandler);
 }
 
+// Disconnect UI and ColorMethodsHandler object
+// @input:
+// @output:
+void Application::DisconnectUIandColMethHand()
+{
+	m_colorMethHandler->disconnect(m_mainUI);
+	m_mainUI->disconnect(m_colorMethHandler);
+}
+
 // Disconnect ImgHandler and IDBHandler objects
 // @input:
 // @output:
@@ -254,6 +313,24 @@ void Application::DisconnectImgHandAndIDBHand()
 {
 	m_imgHandler->disconnect(m_idbHandler);
 	m_idbHandler->disconnect(m_imgHandler);
+}
+
+// Delete all objects for Colorization Methods Handler
+// @input:
+// @output:
+void Application::DeleteColMethHandler()
+{
+	m_colorMethHandlerThread->quit();
+
+	bool threadStoped = false;
+	do
+	{
+		threadStoped = m_colorMethHandlerThread->wait();
+	}
+	while( false == threadStoped );
+
+	delete m_colorMethHandlerThread;
+	delete m_colorMethHandler;
 }
 
 // Delete all objects for Image Database Handler
