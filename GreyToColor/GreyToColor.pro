@@ -52,7 +52,9 @@ SOURCES += main.cpp\
     SERVICE/IMAGES/imgfilter.cpp \
     SERVICE/KERNELS/kernelcreator.cpp \
     colormethodshandler.cpp \
-    METHODS/colorizator.cpp
+    METHODS/colorizator.cpp \
+    METHODS/walshsimplecolorizator.cpp \
+    METHODS/walshneighborcolorizator.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -101,7 +103,9 @@ HEADERS  += \
     SERVICE/KERNELS/kernelcreator.h \
     colormethodshandler.h \
     DEFINES/colorization.h \
-    METHODS/colorizator.h
+    METHODS/colorizator.h \
+    METHODS/walshsimplecolorizator.h \
+    METHODS/walshneighborcolorizator.h
 
 FORMS    += \
 	mainwindow.ui

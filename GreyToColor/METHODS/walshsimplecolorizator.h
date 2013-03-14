@@ -16,32 +16,15 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef COLORIZATOR_H
-#define COLORIZATOR_H
+#ifndef WALSHSIMPLECOLORIZATOR_H
+#define WALSHSIMPLECOLORIZATOR_H
 
-#include "./IMAGES/SOURCE/sourceimage.h"
-#include "./IMAGES/TARGET/targetimage.h"
+#include "colorizator.h"
 
-class Colorizator
+class WalshSimpleColorizator : public Colorizator
 {
-	// == DATA ==
-protected:
-	TargetImage *m_target;
-	SourceImage *m_source;
-
-	// == METHODS ==
 public:
-	Colorizator();
-	~Colorizator();
-
-	// Start Colorization
-	virtual bool Colorize(TargetImage *t_targetImg, SourceImage *t_sourceImg) = 0;
-
-private:
-	void Clear();
-	virtual bool PrepareImages() = 0;
-	virtual bool PostColorization() = 0;
-	virtual bool ColorizeImage() = 0;
+	WalshSimpleColorizator();
 };
 
-#endif // COLORIZATOR_H
+#endif // WALSHSIMPLECOLORIZATOR_H
