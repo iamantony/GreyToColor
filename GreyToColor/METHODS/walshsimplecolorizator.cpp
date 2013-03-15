@@ -108,10 +108,6 @@ bool WalshSimpleColorizator::PrepareImages()
 // @output:
 bool WalshSimpleColorizator::ColorizeImage()
 {
-	qDebug() << "Start colorization!";
-	QElapsedTimer timer;
-	timer.start();
-
 	if ( (NULL == m_target) ||
 		 (NULL == m_source) ||
 		 (false == m_target->HasImage()) ||
@@ -125,6 +121,10 @@ bool WalshSimpleColorizator::ColorizeImage()
 	const unsigned int targetHgt = m_target->GetImageHeight();
 	const unsigned int sourceWdt = m_source->GetImageWidth();
 	const unsigned int sourceHgt = m_source->GetImageHeight();
+
+	qDebug() << "Start colorization!";
+	QElapsedTimer timer;
+	timer.start();
 
 	for ( unsigned int width = 0; width < targetWdt; width++ )
 	{

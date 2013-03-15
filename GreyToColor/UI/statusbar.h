@@ -35,27 +35,25 @@ class StatusBar : public QStatusBar
 	// == DATA ==
 private:
 	QLabel *m_infoString;
-	QProgressBar *m_progrBar;
+	static QProgressBar *m_progrBar;
+	static int m_maxEntries;
+	static int m_entriesInOnePercent;
+	static int m_currEntriesNum;
 
 	// == METHODS ==
 public:
 	explicit StatusBar(QWidget *parent = 0);
 
 	// Get minimum value of progress, which could be shown
-	// @output: positive integer value
 	int GetProgressMin();
-
 	// Get maximum value of progress, which could be shown
-	// @output: positive integer value
 	int GetProgressMax();
-
-	// Set new progress value of some process
-	// @input: positive integer value between PROGRESS_MIN and PROGRESS_MAX
-	void SetProcesProgress(const int &t_progress);
-
+	// Set max number of entries
+	static void SetMaxProcesEntries(const int t_max);
+	// Signal to progress bar that we have one more new entry
+	static void AddProcesEntry();
 	// Reset progress bar to it's minimum value
-	void ResetProcesProgress();
-
+	static void ResetProcesProgress();
 	// Set program status
 	void SetStatus(Program::Status t_status);
 

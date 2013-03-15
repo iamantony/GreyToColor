@@ -18,6 +18,11 @@
 
 #include "statusbar.h"
 
+QProgressBar *StatusBar::m_progrBar = NULL;
+int StatusBar::m_maxEntries = 0;
+int StatusBar::m_entriesInOnePercent = 0;
+int StatusBar::m_currEntriesNum = 0;
+
 StatusBar::StatusBar(QWidget *parent):
 	QStatusBar(parent)
 {
@@ -55,15 +60,7 @@ void StatusBar::SetProgressBar()
 // - int - positive integer value
 int StatusBar::GetProgressMin()
 {
-	int min = m_progrBar->minimum();
-	if ( min != PROGRESS_MIN )
-	{
-		qDebug() << "StatusBar::GetProgressMin(): wrong minimum progress value. Set to default.";
-		m_progrBar->setMinimum(PROGRESS_MIN);
-		min = PROGRESS_MIN;
-	}
-
-	return min;
+	return PROGRESS_MIN;
 }
 
 // Get maximum value of progress, which could be shown
@@ -72,30 +69,44 @@ int StatusBar::GetProgressMin()
 // - int - positive integer value
 int StatusBar::GetProgressMax()
 {
-	int max = m_progrBar->maximum();
-	if ( max != PROGRESS_MAX )
-	{
-		qDebug() << "StatusBar::GetProgressMin(): wrong maximum progress value. Set to default.";
-		m_progrBar->setMaximum(PROGRESS_MAX);
-		max = PROGRESS_MAX;
-	}
-
-	return max;
+	return m_maxEntries;
 }
 
-// Set new progress value of some process
+// Set max number of entries
 // @input:
-// - int - positive integer value between PROGRESS_MIN and PROGRESS_MAX
+// - int - positive integer value
 // @output:
-void StatusBar::SetProcesProgress(const int &t_progress)
+void StatusBar::SetMaxProcesEntries(const int t_max)
 {
-	if ( (t_progress < PROGRESS_MIN) || (PROGRESS_MAX < t_progress) )
+	if ( t_max <= 0 )
 	{
-		qDebug() << "StatusBar::SetProcesProgress(): Error - invalid progress value:" << t_progress;
+		qDebug() << "SetMaxEntries(): Error - invalid arguments";
 		return;
 	}
 
-	m_progrBar->setValue(t_progress);
+	m_maxEntries = t_max;
+	m_entriesInOnePercent = m_maxEntries / PROGRESS_MAX;
+	m_currEntriesNum = 0;
+}
+
+// Signal to progress bar that we have one more new entry
+// @input:
+// @output:
+void StatusBar::AddProcesEntry()
+{
+	m_currEntriesNum++;
+	if ( m_currEntriesNum == m_entriesInOnePercent )
+	{
+		m_currEntriesNum = 0;
+		int currProgress = m_progrBar->value();
+		currProgress++;
+		if ( PROGRESS_MAX < currProgress )
+		{
+			currProgress = PROGRESS_MAX;
+		}
+
+		m_progrBar->setValue(currProgress);
+	}
 }
 
 // Reset progress bar to it's minimum value
