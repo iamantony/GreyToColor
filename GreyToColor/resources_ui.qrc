@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/defaultPics">
+        <file>UI/PICS/result_image.png</file>
+        <file>UI/PICS/source_image.png</file>
+        <file>UI/PICS/target_image.png</file>
+    </qresource>
+</RCC>

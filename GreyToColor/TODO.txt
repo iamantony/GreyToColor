@@ -1,4 +1,3 @@
-1. Create all GUIs with help of Designer
-2. Save all additional GUIs in folder Dialogs
-3. ImgHandler and IdbHandler create in main() - MainWindow should care only about GUI.
-4. It's time for refactoring!
+1) вычисление параметров для пикселей:
+- дисперсия
+- гистограмма
