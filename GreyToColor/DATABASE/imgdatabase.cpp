@@ -1,262 +1,472 @@
+/* === This file is part of GreyToColor ===
+ *
+ *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *
+ *	GreyToColor is free software: you can redistribute it and/or modify
+ *	it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	GreyToColor is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "imgdatabase.h"
 
-ImgDataBase::ImgDataBase(QObject *parent) :
-	QObject(parent)
+ImgDatabase::ImgDatabase()
 {
-	bool idbExist = CheckIDBExist();
+	Clear();
+}
+
+ImgDatabase::~ImgDatabase()
+{
+	Clear();
+}
+
+// Clear all info
+// @input:
+// @output:
+void ImgDatabase::Clear()
+{
+	m_idb.close();
+	m_path.clear();
+}
+
+// Check if database set (name, driver) and ready to work
+// @input:
+// @output:
+// - true - database ready
+// - false - database not set yet
+bool ImgDatabase::IsSet()
+{
+	if ( (true == m_path.isEmpty()) || (false == m_idb.isValid()) )
+	{
+		return false;
+	}
+
+	return true;
+}
+
+// Set up exist database
+// @input:
+// - QString - unempty path to exist database
+// @output:
+// - true - database set up
+// - false  - can't set up database
+bool ImgDatabase::SetIDB(const QString &t_path)
+{
+	if ( true == t_path.isEmpty() )
+	{
+		qDebug() << "SetIDB(): Error - invalid arguments";
+		return false;
+	}
+
+	IDBFilesService idbService;
+	bool idbExist = idbService.CheckIDBExist(t_path);
 	if ( false == idbExist )
 	{
-		bool dbCreated = CreateIDB();
-		if ( false == dbCreated )
-		{
-			qDebug() << "AddEntriesToIDB(): error - can't create DB";
-		}
+		qDebug() << "SetIDB(): Error - image database with such name don't exist";
+		return false;
 	}
-	else
+
+	bool isSQLite = IsSQLite(t_path);
+	if ( false == isSQLite )
 	{
-		IDB = QSqlDatabase::addDatabase("QSQLITE");
-		QString path = FormIDBFullName();
-		IDB.setDatabaseName(path);
+		qDebug() << "SetIDB(): Error - type of image database is not a SQLite";
+		return false;
 	}
+
+	m_idb = QSqlDatabase::addDatabase("QSQLITE");
+	m_idb.setDatabaseName(t_path);
+	if ( false == m_idb.isValid() )
+	{
+		qDebug() << "SetIDB(): Error - can't set up database";
+		return false;
+	}
+
+	bool idbOpened = m_idb.open();
+	if ( false == idbOpened )
+	{
+		qDebug() << "SetIDB(): Error - can't open database";
+		return false;
+	}
+
+	// TODO:
+	// - check if name of IDN is idb. SELECT?
+
+	m_idb.close();
+	m_path = t_path;
+
+	return true;
 }
 
-ImgDataBase::~ImgDataBase()
+// Check if type of database is SQLite
+// @input:
+// - QString - unempty path to exist database
+// @output:
+// - true - database is SQLite
+// - false  - databes is not SQLite
+bool ImgDatabase::IsSQLite(const QString &t_path) const
 {
-	IDB.close();
+	if ( true == t_path.isEmpty() )
+	{
+		qDebug() << "IsSQLite(): Error - invalid arguments";
+		return false;
+	}
+
+	QFileInfo idbInfo(t_path);
+	QString suffix = idbInfo.completeSuffix();
+	if ( true == suffix.isEmpty() )
+	{
+		qDebug() << "IsSQLite(): Error - no suffix";
+		return false;
+	}
+
+	QString sqliteSuffix(SQLITE_SUFFIX);
+	// Remove "dot" (.) from suffix
+	sqliteSuffix.remove(0, 1);
+
+	if ( sqliteSuffix != suffix )
+	{
+		return false;
+	}
+
+	return true;
 }
 
-//bool ImgDataBase::CreateIDB()
-//{
-
-//	IDB = QSqlDatabase::addDatabase("QSQLITE");
-//	QString path;
-//	QDir dir;
-//	path.append(dir.absolutePath());
-//	path.append("/idb/idb.sqlite");
-//	IDB.setDatabaseName(path);
-
-//	bool openIDB = IDB.open();
-//	qDebug() << openIDB;
-
-//	QSqlQuery query(IDB);
-//	bool result = query.exec("create table test (id integer primary key, string varchar(30), passport BLOB)");
-//	if ( false == result )
-//		qDebug() << query.lastError();
-
-//	QString str;
-//	str.append("this is string");
-
-//	QByteArray list;
-//	list.append(100);
-//	list.append(101);
-//	list.append(102);
-//	list.append(103);
-
-//	query.prepare("INSERT INTO test (string, passport) VALUES (?, ?)");
-//	for (int i = 0; i < 5; ++i)
-//	{
-////		query.bindValue(0, i);
-//		query.bindValue(0, str);
-//		query.bindValue(1, list);
-
-//		if (!query.exec())
-//			qWarning() << query.lastError();
-//	}
-
-//	query.exec(QString("delete from test where id=%1").arg(2));
-
-//	qDebug() << "Now get info from database";
-
-//	query.prepare("SELECT id, string, passport FROM test");
-//	if (query.exec())
-//	{
-//		while ( query.next() )
-//		{
-//			qDebug() << query.isActive();
-//			qDebug() << query.isValid();
-//			qDebug() << query.value(0).toInt();
-//			qDebug() << query.value(1).toString();
-//			QVariant var = query.value(2);
-//			QByteArray newList =var.toByteArray();
-//			qDebug() << newList.size();
-//		}
-//	}
-//	else
-//		qDebug() << query.lastError();
-
-//	IDB.close();
-
-//	return true;
-//}
-
-bool ImgDataBase::CreateIDB()
+// Create new default image database
+// @input:
+// - QString - unempty name for new database (without suffix)
+// @output:
+// - true - new IDB created
+// - false - can't create new IDB
+bool ImgDatabase::CreateNewIDB(const QString &t_name)
 {
-	IDB = QSqlDatabase::addDatabase("QSQLITE");
-
-	QString path = FormIDBFullName();
-
-	FileOperations removeFile;
-	removeFile.RemoveFileIfExist(path);
-
-	IDB.setDatabaseName(path);
-	bool openIDB = IDB.open();
-	if ( false == openIDB )
+	QString path = FormIDBFullName(t_name);
+	if ( true == path.isEmpty() )
 	{
-		qDebug() << "CreateIDB(): error - can't open database";
+		qDebug() << "CreateDefaultIDB(): Error - no name for new IDB";
+		return false;
+	}
+
+	IDBFilesService idbService;
+	bool prevIDBRemoved = idbService.RemoveIDB(path);
+	if ( false == prevIDBRemoved )
+	{
+		qDebug() << "CreateDefaultIDB(): Error - can't delete previous IDB with name" << path;
+		return false;
+	}
+
+	// Prepare query
+	QStringList passNames = GetPassportsNames();
+	if ( (true == passNames.isEmpty()) || (PASSPORTS_NUM != passNames.size()) )
+	{
+		qDebug() << "CreateDefaultIDB(): Error - can't get passports names in IDB";
 		return false;
 	}
 
 	QString command;
-	command.append("create table idb (");
-	command.append("id integer primary key");
-	command.append(", imgname varchar(100)");
-	command.append(", passport_0 BLOB");
-//	command.append(", passport_1 BLOB");
-//	command.append(", passport_2 BLOB");
-//	command.append(", passport_3 BLOB");
-	command.append(")");
+	command = QString("CREATE table idb (id integer primary key, imgName varchar(1000), "
+					  "%1 BLOB, %2 BLOB, %3 BLOB, %4 BLOB)")
+			.arg(passNames.at(0))
+			.arg(passNames.at(1))
+			.arg(passNames.at(2))
+			.arg(passNames.at(3));
 
-	QSqlQuery query(IDB);
+	m_idb = QSqlDatabase::addDatabase("QSQLITE");
+	m_idb.setDatabaseName(path);
+	bool idbOpened = m_idb.open();
+	if ( false == idbOpened )
+	{
+		qDebug() << "CreateDefaultIDB(): Error - can't open database";
+		return false;
+	}
+
+	QSqlQuery query(m_idb);
 	bool result = query.exec(command);
 	if ( false == result )
 	{
-		qDebug() << "CreateIDB(): error - can't create database";
+		qDebug() << "CreateIDB(): Error - can't create database";
+		idbService.RemoveIDB(path);
 		return false;
 	}
 
-	IDB.close();
+	m_idb.close();
+	m_path = path;
 
 	return true;
 }
 
-QString ImgDataBase::FormIDBFullName()
+// Form full path to IDB
+// @input:
+// - QString - unempty name for new database (without suffix)
+// @output:
+// - empty QString - can't form path
+// - QString - full path to default IDB
+QString ImgDatabase::FormIDBFullName(const QString &t_name) const
 {
-	FileOperations fileName;
-	QString partOfPath(PROJECT_DB_NAME);
-	QString fullIDBName = fileName.FormFullName(partOfPath);
-	return fullIDBName;
-}
+	QString partOfPath;
+	partOfPath.append(DEFAULT_IDB_FOLDER);
 
-bool ImgDataBase::AddEntriesToIDB(QMap<QString, QList<QByteArray> > &t_entries)
-{
-	if ( t_entries.isEmpty() )
+	if ( true == t_name.isEmpty() )
 	{
-		return true;
+		partOfPath.append(DEFAULT_IDB_NAME);
+	}
+	else
+	{
+		partOfPath.append(t_name);
 	}
 
-	bool openIDB = IDB.open();
-	if ( false == openIDB )
+	partOfPath.append(SQLITE_SUFFIX);
+
+	IDBFilesService idbService;
+	QString defPath = idbService.FormIDBFullPath(partOfPath);
+	return defPath;
+}
+
+// Add new entry (image name and it's passports) to IDB
+// @input:
+// - QMap<QString, QList<QByteArray> > - unempty map of entries (full name of image and it's passports)
+// @output:.
+// - true - entries have been added
+// - false - failed to add entries
+bool ImgDatabase::AddEntries(const QMap<QString, QList<QByteArray> > &t_entries)
+{
+	if ( true == t_entries.isEmpty() )
 	{
-		qDebug() << "AddEntriesToIDB(): error - can't open database";
+		qDebug() << "AddEntries(): Error - invalid arguments";
 		return false;
 	}
 
-	QSqlQuery query(IDB);
-	query.prepare("INSERT INTO idb (imgname, passport_0) VALUES (?, ?)");
+	// TODO:
+	// - check if entry with the same image path already exist in IDB. If yes - delete it
 
-	QMap<QString, QList<QByteArray> >::iterator iter = t_entries.begin();
-	while( iter != t_entries.end() )
+	// Prepare query command
+	QStringList passNames = GetPassportsNames();
+	if ( (true == passNames.isEmpty()) || (PASSPORTS_NUM != passNames.size()) )
 	{
-		QString imgName = iter.key();
-		QList<QByteArray> imgPassports = iter.value();
+		qDebug() << "AddEntries(): Error - can't get passports names in IDB";
+		return false;
+	}
 
-		query.bindValue(0, imgName);
-		query.bindValue(1, imgPassports.at(0));
+	QString command;
+	command = QString("INSERT INTO idb (imgname, %1, %2, %3, %4) VALUES (?, ?, ?, ?, ?)")
+			.arg(passNames.at(0))
+			.arg(passNames.at(1))
+			.arg(passNames.at(2))
+			.arg(passNames.at(3));;
 
-		bool entryAppended = query.exec();
-		if ( false == entryAppended )
+	// Add entries to IDB
+	bool idbOpened = m_idb.open();
+	if ( false == idbOpened )
+	{
+		qDebug() << "AddEntries(): Error - can't open database";
+		return false;
+	}
+
+	QSqlQuery query(m_idb);
+	query.prepare(command);
+
+	QMap<QString, QList<QByteArray> >::const_iterator entry = t_entries.begin();
+	while( entry != t_entries.end() )
+	{
+		QString imgName = entry.key();
+		QList<QByteArray> imgPassports = entry.value();
+		if ( PASSPORTS_NUM != imgPassports.size() )
 		{
-			qDebug() << "AddEntriesToIDB(): error - can't append to database image" << imgName;
-			qWarning() << query.lastError();
+			qDebug() << "AddEntries(): Error - can't add to database image" << imgName;
+		}
+		else
+		{
+			query.bindValue(0, imgName);
+			query.bindValue(1, imgPassports.at(0));
+			query.bindValue(2, imgPassports.at(1));
+			query.bindValue(3, imgPassports.at(2));
+			query.bindValue(4, imgPassports.at(3));
+
+			bool entryAppended = query.exec();
+			if ( false == entryAppended )
+			{
+				qDebug() << "AddEntries(): error - failed to append to database image" << imgName;
+				qDebug() << query.lastError();
+			}
 		}
 
-		++iter;
+		++entry;
 	}
 
-	IDB.close();
-
-	ReadAllEntries();
+	m_idb.close();
 
 	return true;
 }
 
-bool ImgDataBase::CheckIDBExist()
+// Get passports of certain type from all images in IDB
+// @input:
+// - Passport::Type - exist passport type
+// @output:
+// - empty QMap<QString, QByteArray> - failed to get image passports
+// - QMap<QString, QByteArray> - passports of images in IDB
+QMap<QString, QByteArray> ImgDatabase::GetImagesPassport(const Passport::Type &t_passType)
 {
-	QString path = FormIDBFullName();
-	FileOperations file;
-	return file.CheckFileExistance(path);
-}
+	if ( Passport::DEFAULT_LAST == t_passType )
+	{
+		qDebug() << "GetImagesPassport(): Error - invalid passport type";
+		QMap<QString, QByteArray> empty;
+		return empty;
+	}
 
-QMap<QString, QByteArray> ImgDataBase::GetImagesPassport(int t_passportType)
-{
+	QString passportName = GetPassportName(t_passType);
+	if ( true == passportName.isEmpty() )
+	{
+		qDebug() << "GetImagesPassport(): Error - can't get passport name in IDB";
+		QMap<QString, QByteArray> empty;
+		return empty;
+	}
+
+	QString command = QString("SELECT imgname, %1 FROM idb").arg(passportName);
+
+	bool idbOpened = m_idb.open();
+	if ( false == idbOpened )
+	{
+		qDebug() << "GetImagesPassport(): Error - can't open database";
+		QMap<QString, QByteArray> empty;
+		return empty;
+	}
+
+	QSqlQuery query(m_idb);
+	query.prepare(command);
+
 	QMap<QString, QByteArray> imgsPassports;
-
-	// TODO: use enums and namespace instead of defines!
-	if ( (t_passportType < FIRST_PASSPORT) && (LAST_PASSPORT < t_passportType) )
+	if ( true == query.exec() )
 	{
-		qDebug() << "GetImagesPassport(): error - passport out of range";
-		return imgsPassports;
-	}
-
-	bool openIDB = IDB.open();
-	if ( false == openIDB )
-	{
-		qDebug() << "GetImagesPassport(): error - can't open database";
-		return imgsPassports;
-	}
-
-	QSqlQuery query(IDB);
-	query.prepare("SELECT imgname, passport_0 FROM idb");
-	if (query.exec())
-	{
-		while ( query.next() )
+		while ( true == query.next() )
 		{
-			QVariant var = query.value(1);
-			imgsPassports.insert(query.value(0).toString(), var.toByteArray());
+			QString imgPath(query.value(0).toString());
+			QByteArray passport = query.value(1).toByteArray();
+			imgsPassports.insert(imgPath, passport);
 		}
 	}
 	else
+	{
+		qDebug() << "GetImagesPassport(): Error - SELECT from IDB failed";
 		qDebug() << query.lastError();
+	}
 
-	IDB.close();
+	m_idb.close();
 
 	return imgsPassports;
 }
 
-bool ImgDataBase::LoadIDB()
+// Get all passports from all images in IDB
+// @input:
+// @output:
+// - empty QMap<QString, QList<QByteArray> > - failed to get image passports
+// - QMap<QString, QList<QByteArray> > - passports of images in IDB
+QMap<QString, QList<QByteArray> > ImgDatabase::GetAllPassport()
 {
-	return true;
-}
-
-void ImgDataBase::UpdateIDB()
-{
-
-}
-
-void ImgDataBase::ReadAllEntries()
-{
-	bool openIDB = IDB.open();
-	if ( false == openIDB )
+	bool idbOpened = m_idb.open();
+	if ( false == idbOpened )
 	{
-		qDebug() << "ReadAllEntries(): error - can't open database";
-		return;
+		qDebug() << "GetAllPassport(): Error - can't open database";
+		QMap<QString, QList<QByteArray> > empty;
+		return empty;
 	}
 
-	QSqlQuery query(IDB);
-	query.prepare("SELECT id, imgname, passport_0 FROM idb");
-	if (query.exec())
+	QMap<QString, QList<QByteArray> > imgsPassports;
+
+	QSqlQuery query(m_idb);
+	query.prepare("SELECT imgname, passport_0, passport_1, passport_2, passport_3 FROM idb");
+	if ( true == query.exec() )
 	{
-		while ( query.next() )
+		while ( true == query.next() )
 		{
-			qDebug() << query.value(0).toInt();
-			qDebug() << query.value(1).toString();
-			QVariant var = query.value(2);
-			QByteArray newList =var.toByteArray();
-			qDebug() << newList.size();
+			QString imgPath(query.value(0).toString());
+			QList<QByteArray> passports;
+			for ( int val = 1; val < PASSPORTS_NUM + 1; val++ )
+			{
+				QVariant var = query.value(val);
+				passports.append(var.toByteArray());
+			}
+
+			imgsPassports.insert(imgPath, passports);
 		}
 	}
 	else
+	{
+		qDebug() << "GetAllPassport(): Error - SELECT from IDB failed";
 		qDebug() << query.lastError();
+	}
 
-	IDB.close();
+	m_idb.close();
+
+	return imgsPassports;
+}
+
+// Get all passports names
+// @input:
+// @output:
+// - empty QStringList - can't get passports name in IDB
+// - QStringList - names of all passports in IDB
+QStringList ImgDatabase::GetPassportsNames()
+{
+	QStringList passportNames;
+	for ( int type = Passport::LUM_HISTOGRAM; type < Passport::DEFAULT_LAST; type++ )
+	{
+		Passport::Type passType = static_cast<Passport::Type>(type);
+		QString passName = GetPassportName(passType);
+		if ( true == passName.isEmpty() )
+		{
+			qDebug() << "GetPassportsNames(): Error - failed to get name for passport" << passType;
+			QStringList empty;
+			return empty;
+		}
+
+		passportNames.append(passName);
+	}
+
+	return passportNames;
+}
+
+// Get passport name
+// @input:
+// - Passport::Type - exist passport name
+// @output:
+// - empty QString - can't get passport name in IDB
+// - QString - passport name in IDB
+QString ImgDatabase::GetPassportName(const Passport::Type &t_type)
+{
+	QString name;
+	switch(t_type)
+	{
+		case Passport::LUM_HISTOGRAM:
+			name.append("imgPassLumHist");
+			break;
+
+		case Passport::LUM_SUBSAMPLE:
+			name.append("imgPassLumSub");
+			break;
+
+		case Passport::LUM_AND_GRAD_HIST:
+			name.append("imgPassLumGradHist");
+			break;
+
+		case Passport::LUM_AND_GRAD_SUB:
+			name.append("imgPassLumGradSub");
+			break;
+
+		case Passport::DEFAULT_LAST:
+		default:
+		{
+			qDebug() << "GetPassportName(): Error - invalid arguments";
+			QString empty;
+			return empty;
+		}
+	}
+
+	return name;
 }

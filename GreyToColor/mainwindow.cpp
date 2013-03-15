@@ -1,355 +1,513 @@
+/* === This file is part of GreyToColor ===
+ *
+ *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *
+ *	GreyToColor is free software: you can redistribute it and/or modify
+ *	it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+ *
+ *	GreyToColor is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 #include "mainwindow.h"
-//#include "ui_mainwindow.h"
+#include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-	QMainWindow(parent)
+	QMainWindow(parent),
+	ui(new Ui::MainWindow)
 {
-	m_ih = new ImgHandler();
-	connect(m_ih, SIGNAL(signalSetTargetImg(QImage)), this, SLOT(slotSetTargetImg(QImage)));
-	connect(m_ih, SIGNAL(signalSetResultImg(QImage)), this, SLOT(slotSetResultImg(QImage)));
-	connect(m_ih, SIGNAL(signalSetOriginalImg(QImage)), this, SLOT(slotSetOriginalImg(QImage)));
-
-	connect(m_ih, SIGNAL(signalEnableProcButtn(int)), this, SLOT(slotColoriseButton(int)));
-	connect(m_ih, SIGNAL(signalEnableProcButtn(int)), this, SLOT(slotGetImgIDBButton(int)));
-	connect(m_ih, SIGNAL(signalImagesSKO(QString)), this, SLOT(slotSetSKO(QString)));
-
-	m_idbh = new IDBHandler();
-
-	m_imgState = NONE;
-	m_loadedState = NONE_PARTS;
-
-	constructWindow();
-	construcMenu();
-	initLabels();
-	initButtons();
-	initLines();
-	constructWindowView();
+	InitUI();
 }
 
 MainWindow::~MainWindow()
 {
-	delete m_ih;
-	delete m_idbh;
+	delete ui;
 }
 
-// Set main parameters for Main Window
-void MainWindow::constructWindow()
+// Call all functions to initialise UI
+// @input:
+// @output:
+void MainWindow::InitUI()
 {
-	this->setGeometry(X_WINDOW, Y_WINDOW, W_WINDOW, H_WINDOW);
-//	this->setFixedSize(W_WINDOW, H_WINDOW);
+	ui->setupUi(this);
+	m_appStatus = Program::OK;
+
+	InitStatusBar();
+	InitImgsLabels();
+	InitPassportActionsGroup();
+	InitMethodsActionsGroup();
 }
 
-void MainWindow::construcMenu()
+// Creating, applying settings to status bar
+// @input:
+// @output:
+void MainWindow::InitStatusBar()
 {
-	// Set up File menu
-	m_fileMenu = new QMenu(MENU_FILE);
+	m_statusBar = new StatusBar();
+	m_statusBar->SetStatus(m_appStatus);
 
-	m_openGrayImg = new QAction (ACTION_OPEN_GRAY, m_fileMenu);
-	connect(m_openGrayImg, SIGNAL(triggered()), this, SLOT(slotGetGrayImg()));
-	m_fileMenu->addAction(m_openGrayImg);
-
-	m_openColorImg = new QAction (ACTION_OPEN_COLOR, m_fileMenu);
-	connect(m_openColorImg, SIGNAL(triggered()), this, SLOT(slotGetColorImg()));
-	m_fileMenu->addAction(m_openColorImg);
-
-	m_fileMenu->addSeparator();
-
-	m_exit = new QAction (ACTION_EXIT, m_fileMenu);
-	connect(m_exit, SIGNAL(triggered()), this, SLOT(close()));
-	m_fileMenu->addAction(m_exit);
-
-	// Set up Colorization menu
-	m_colorizationMenu = new QMenu (MENU_COLORIZATION);
-
-	m_colorActGroup = new QActionGroup(m_colorizationMenu);
-	m_colorActGroup->setExclusive(true);
-
-	m_mWSimple = new QAction (ACTION_MW_SIMPLE, m_colorizationMenu);
-	connect(m_mWSimple, SIGNAL(triggered()), this, SLOT(slotMethodWSimple()));
-	m_colorActGroup->addAction(m_mWSimple);
-	m_mWSimple->setChecked(true);
-	m_colorizationMenu->addAction(m_mWSimple);
-
-	m_mWNeighbor = new QAction (ACTION_MW_NEIGHBOR, m_colorizationMenu);
-	connect(m_mWNeighbor, SIGNAL(triggered()), this, SLOT(slotMethodWNeighbor()));
-	m_colorActGroup->addAction(m_mWNeighbor);
-	m_colorizationMenu->addAction(m_mWNeighbor);
-
-	// Set up Database menu
-	m_IDBMenu = new QMenu(MENU_DATABASE);
-
-	m_addNewPicsToIDB = new QAction(ACTION_ADD_NEW_PICS_IDB, m_IDBMenu);
-	connect(m_addNewPicsToIDB, SIGNAL(triggered()), this, SLOT(slotAddPicsToIDB()));
-	m_IDBMenu->addAction(m_addNewPicsToIDB);
-
-	m_updateIDB = new QAction(ACTION_UPDATE_IDB, m_IDBMenu);
-	connect(m_updateIDB, SIGNAL(triggered()), this, SLOT(slotUpdateIDB()));
-	m_IDBMenu->addAction(m_updateIDB);
-
-	// Set up main menu
-	this->menuBar()->addMenu(m_fileMenu);
-	this->menuBar()->addMenu(m_colorizationMenu);
-	this->menuBar()->addMenu(m_IDBMenu);
-
-	this->menuBar()->show();
+	this->setStatusBar(m_statusBar);
 }
 
-// Initialisation of labels, which will show pictures
-void MainWindow::initLabels()
+// Put default picture to all labels on MainWindow
+// @input:
+// @output:
+void MainWindow::InitImgsLabels()
 {
-	// color labels
-	QPixmap pm(W_IMG, H_IMG);
-
-	m_grayImg = new QLabel(this);
-	m_grayImg->setGeometry(X_FIRST_IMG_OFFSET, Y_IMG_OFFSET, W_IMG, H_IMG);
-	pm.fill(Qt::red);
-	m_grayImg->setPixmap(pm);
-
-	m_resultImg = new QLabel(this);
-	m_resultImg->setGeometry(X_FIRST_IMG_OFFSET + W_IMG, Y_IMG_OFFSET, W_IMG, H_IMG);
-	pm.fill(Qt::green);
-	m_resultImg->setPixmap(pm);
-
-	m_colorImg = new QLabel(this);
-	m_colorImg->setGeometry(X_FIRST_IMG_OFFSET + 2*W_IMG, Y_IMG_OFFSET, W_IMG, H_IMG);
-	pm.fill(Qt::blue);
-	m_colorImg->setPixmap(pm);
+	InitImg(Images::TARGET);
+	InitImg(Images::RESULT);
+	InitImg(Images::SOURCE);
 }
 
-// Initialisation of buttons, which will perform some usefull actions
-void MainWindow::initButtons()
+// Put default picture to one of three labels on MainWindow
+// @input:
+// - Images::Types - exist type of label
+// @output:
+void MainWindow::InitImg(Images::Types t_imgType)
 {
-	int yOffset = 0 /*Y_IMG_OFFSET + H_IMG + Y_BUTT_OFFSET*/;
-	int xOffset = 0 /*X_FIRST_IMG_OFFSET + X_FIRST_BUTT_OFFSET*/;
-
-	m_grayImgButt = new QPushButton(BUTTON_GREY_IMG ,this);
-	m_grayImgButt->setGeometry(xOffset, yOffset, W_BUTT, H_2LINE_BUTT);
-	connect(m_grayImgButt, SIGNAL(pressed()), this, SLOT(slotGetGrayImg()));
-
-	m_startProcButt = new QPushButton(BUTTON_START ,this);
-	m_startProcButt->setGeometry(xOffset/* + W_IMG*/, yOffset, W_BUTT, H_1LINE_BUTT);
-	m_startProcButt->setEnabled(false);
-
-	m_colorImgButt = new QPushButton(BUTTON_COLOR_IMG ,this);
-	m_colorImgButt->setGeometry(xOffset/* + 2*W_IMG*/, yOffset, W_BUTT, H_2LINE_BUTT);
-	connect(m_colorImgButt, SIGNAL(pressed()), this, SLOT(slotGetColorImg()));
-
-	m_colorIDBImgButt = new QPushButton(BUTTON_COLOR_IDB_IMG, this);
-	m_colorIDBImgButt->setGeometry(xOffset/* + 2*W_IMG*/, yOffset, W_BUTT, H_3LINE_BUTT);
-	connect(m_colorIDBImgButt, SIGNAL(pressed()), this, SLOT(slotGetColorImgFromIDB()));
-	m_colorIDBImgButt->setEnabled(false);
-}
-
-void MainWindow::initLines()
-{
-	m_labelSKO = new QLabel(LABEL_SKO, this);
-	int xOffset = 0 /*X_FIRST_IMG_OFFSET + X_FIRST_BUTT_OFFSET + W_IMG*/;
-	int yOffset = 0 /*Y_IMG_OFFSET + H_IMG + 2*Y_BUTT_OFFSET + H_BUTT*/;
-	m_labelSKO->setGeometry(xOffset, yOffset, 60, 40);
-
-	m_lineSKO = new QLineEdit(this);
-	m_lineSKO->setReadOnly(true);
-	m_lineSKO->setGeometry(xOffset + 40, yOffset, W_LINE_SKO, H_LINE_SKO);
-}
-
-void MainWindow::constructWindowView()
-{
-	m_hBoxImgs = new QHBoxLayout(this);
-	m_hBoxImgs->addWidget(m_grayImg);
-	m_hBoxImgs->addWidget(m_resultImg);
-	m_hBoxImgs->addWidget(m_colorImg);
-
-	m_hBoxButts = new QHBoxLayout(this);
-	m_hBoxButts->addStretch(3);
-	m_hBoxButts->addWidget(m_grayImgButt);
-	m_hBoxButts->addStretch(6);
-	m_hBoxButts->addWidget(m_startProcButt);
-	m_hBoxButts->addStretch(4);
-	m_hBoxButts->addWidget(m_colorImgButt);
-	m_hBoxButts->addStretch(1);
-	m_hBoxButts->addWidget(m_colorIDBImgButt);
-	m_hBoxButts->addStretch(1);
-
-	m_hBoxLowLine = new QHBoxLayout(this);
-	m_hBoxLowLine->addStretch(1);
-	m_hBoxLowLine->addWidget(m_labelSKO);
-	m_hBoxLowLine->addWidget(m_lineSKO);
-	m_hBoxLowLine->addStretch(1);
-
-	m_vBoxLow = new QVBoxLayout(this);
-	m_vBoxLow->addLayout(m_hBoxButts);
-	m_vBoxLow->addLayout(m_hBoxLowLine);
-
-	m_vBoxMain = new QVBoxLayout(this);
-	m_vBoxMain->addLayout(m_hBoxImgs);
-	m_vBoxMain->addLayout(m_vBoxLow);
-
-	QWidget *wdt = new QWidget(this);
-	wdt->setLayout(m_vBoxMain);
-
-	this->setCentralWidget(wdt);
-}
-
-// Write value of SKO to m_lineSKO
-void MainWindow::slotSetSKO(QString t_str)
-{
-	m_lineSKO->setText(t_str);
-}
-
-void MainWindow::slotGetGrayImg()
-{
-	QString fName = QFileDialog::getOpenFileName(this, "Open target image...", QDir::currentPath(),
-													  "IMG files (*.png *.jpg *.bmp)");
-
-	if(fName.isEmpty())
-		return;
-
-	m_ih->getGrayImg(fName);
-}
-
-void MainWindow::slotGetColorImg()
-{
-	QString fName = QFileDialog::getOpenFileName(this, "Open target image...", QDir::currentPath(),
-													  "IMG files (*.png *.jpg *.bmp)");
-
-	if(fName.isEmpty())
-		return;
-
-	m_ih->getColorImg(fName);
-}
-
-void MainWindow::slotGetColorImgFromIDB()
-{
-	QImage targetImg = m_ih->getImg(TARGET);
-
-	QString fName = m_idbh->FindSameImg(targetImg);
-
-	if(fName.isEmpty())
-		return;
-
-	m_ih->getColorImg(fName);
-}
-
-// connect start buttom to method Walsh Simple
-void MainWindow::slotMethodWSimple()
-{
-	disconnect(m_startProcButt, SIGNAL(clicked()), 0, 0);
-	connect(m_startProcButt, SIGNAL(clicked()), this, SLOT(slotWalshSimple()));
-}
-
-// connect start buttom to method Walsh Neighbor
-void MainWindow::slotMethodWNeighbor()
-{
-	disconnect(m_startProcButt, SIGNAL(clicked()), 0, 0);
-	connect(m_startProcButt, SIGNAL(clicked()), this, SLOT(slotWalshNeighbor()));
-}
-
-// start first method of colorization: Walsh Simple
-void MainWindow::slotWalshSimple()
-{
-	QImage result;
-	result = m_ih->startImgColorizationWSimple();
-	QImage scaledResult = result.scaled(W_IMG, H_IMG, Qt::KeepAspectRatio);
-	m_resultImg->setPixmap(QPixmap::fromImage(scaledResult));
-}
-
-// start second method of colorization: Walsh Neighbor
-void MainWindow::slotWalshNeighbor()
-{
-	QImage result;
-	result = m_ih->startImgColorizationWNeighbor();
-	QImage scaledResult = result.scaled(W_IMG, H_IMG, Qt::KeepAspectRatio);
-	m_resultImg->setPixmap(QPixmap::fromImage(scaledResult));
-}
-
-void MainWindow::slotSetTargetImg(QImage t_imgTarg)
-{
-	m_grayImg->setPixmap(QPixmap::fromImage(t_imgTarg));
-}
-
-void MainWindow::slotSetResultImg(QImage t_imgRes)
-{
-	m_resultImg->setPixmap(QPixmap::fromImage(t_imgRes));
-}
-
-void MainWindow::slotSetOriginalImg(QImage t_imgOrig)
-{
-	m_colorImg->setPixmap(QPixmap::fromImage(t_imgOrig));
-}
-
-// decide whether we schould activate button "Colorise" or not
-void MainWindow::slotColoriseButton (int t_lbl)
-{
-	switch (m_imgState)
+	switch (t_imgType)
 	{
-		case (NONE):
+		case Images::TARGET:
 		{
-			if (t_lbl == TARGET || t_lbl == RESULT)
-				m_imgState = ONLY_TARGET;
-			else if (t_lbl == ORIGINAL)
-				m_imgState = ONLY_ORIGINAL;
+			ui->targetImgLbl->SetDefaultImgPath(DEFAULT_TARGET_IMG_PATH);
+			ui->targetImgLbl->ShowDefaultImg();
+			break;
 		}
-		break;
-		case (ONLY_TARGET):
-		{
-			if(t_lbl == ORIGINAL)
-				m_imgState = BOTH;
-		}
-		break;
-		case (ONLY_ORIGINAL):
-		{
-			if(t_lbl == TARGET || t_lbl == RESULT)
-				m_imgState = BOTH;
-		}
-		break;
-		case (BOTH):
-		break;
-	}
 
-	// are we ready to enable button "Colorise"?
-	if (m_imgState == BOTH)
-		m_startProcButt->setEnabled(true);
-}
-
-void MainWindow::slotGetImgIDBButton(int t_loaded)
-{
-	switch(m_loadedState)
-	{
-		case (NONE_PARTS):
+		case Images::RESULT:
 		{
-			if ( TARGET == t_loaded )
-			{
-				m_loadedState = TARGET_IMG;
-			}
+			ui->resultImgLbl->SetDefaultImgPath(DEFAULT_RESULT_IMG_PATH);
+			ui->resultImgLbl->ShowDefaultImg();
+			break;
 		}
-		break;
-		case (TARGET_IMG):
-		break;
-	}
 
-	if ( TARGET_IMG == m_loadedState )
-	{
-		m_colorIDBImgButt->setEnabled(true);
+		case Images::SOURCE:
+		{
+			ui->sourceImgLbl->SetDefaultImgPath(DEFAULT_SOURCE_IMG_PATH);
+			ui->sourceImgLbl->ShowDefaultImg();
+			break;
+		}
+
+		case Images::DEFAULT_LAST:
+		default:
+		{
+			qDebug() << "MainWindow::InitImg(): Error - undefined image type";
+			return;
+		}
 	}
 }
 
-void MainWindow::slotAddPicsToIDB()
+// Init group of passport type actions
+// @input:
+// @output:
+void MainWindow::InitPassportActionsGroup()
 {
-	QStringList namesOfImagesToAdd =
-			QFileDialog::getOpenFileNames(this, "Select images to add to database...",
-										QDir::currentPath(),
-										"IMG files (*.png *.jpg *.bmp)");
+	m_passports = new QActionGroup(this);
+	m_passports->addAction(ui->actionLumHist);
+	m_passports->addAction(ui->actionSubsampLum);
+	m_passports->addAction(ui->actionLumGradHists);
+	m_passports->addAction(ui->actionSubsampLumGrad);
 
-	if ( true == namesOfImagesToAdd.isEmpty() )
+	ui->actionLumHist->setChecked(true);
+
+	m_passports->setExclusive(true);
+	m_passports->setEnabled(true);
+	m_passports->setVisible(true);
+
+	connect(m_passports,
+			SIGNAL(triggered(QAction*)),
+			this,
+			SLOT(SlotPassportType(QAction*)));
+}
+
+// Init group of methods type actions
+// @input:
+// @output:
+void MainWindow::InitMethodsActionsGroup()
+{
+	m_methods = new QActionGroup(this);
+	m_methods->addAction(ui->actionWalshSimple);
+	m_methods->addAction(ui->actionWalshNeighbor);
+
+	ui->actionWalshSimple->setChecked(true);
+
+	m_methods->setExclusive(true);
+	m_methods->setEnabled(true);
+	m_methods->setVisible(true);
+
+	connect(m_methods,
+			SIGNAL(triggered(QAction*)),
+			this,
+			SLOT(SlotMethodType(QAction*)));
+}
+
+// Show warning window with title and some text
+// @input:
+// - QString - nonempty string with title of the window
+// - QString - nonempty string with text for the message
+// @output:
+void MainWindow::ShowWarning(const QString &t_title, const QString &t_text)
+{
+	QMessageBox::warning(this,
+						 t_title,
+						 t_text,
+						 QMessageBox::Ok,
+						 QMessageBox::NoButton);
+}
+
+// Check if app status if OK (application not performing some calculations)
+// @input:
+// @output:
+// - true - app can get new work
+// - false - app is busy
+bool MainWindow::CanOperate()
+{
+	if ( Program::OK == m_appStatus )
+	{
+		return true;
+	}
+
+	return false;
+}
+
+// Slot for button TargetImgPB to set target image
+// @input:
+// @output:
+void MainWindow::on_openTargetImgPB_clicked()
+{
+	if ( false == CanOperate() )
 	{
 		return;
 	}
 
-	m_idbh->AddImgsToDatabase(namesOfImagesToAdd);
+	QString fName = QFileDialog::getOpenFileName(this,
+												 "Open target image...",
+												 QDir::currentPath(),
+												 "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
+
+	if(true == fName.isEmpty())
+	{
+		return;
+	}
+
+	emit SignalNewTargetImg(fName);
 }
 
-void MainWindow::slotUpdateIDB()
+// Slot for action actionOpenTargetImage to set target image
+// @input:
+// @output:
+void MainWindow::on_actionOpenTargetImage_triggered()
 {
-	m_idbh->UpdateIDB();
+	on_openTargetImgPB_clicked();
 }
 
+// Slot for button SourceImgPB to set source image
+// @input:
+// @output:
+void MainWindow::on_openSourceImgPB_clicked()
+{
+	if ( false == CanOperate() )
+	{
+		return;
+	}
+
+	QString fName = QFileDialog::getOpenFileName(this,
+												 "Open source image...",
+												 QDir::currentPath(),
+												 "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
+
+	if(true == fName.isEmpty())
+	{
+		return;
+	}
+
+	emit SignalNewSourceImg(fName);
+}
+
+// Slot for action actionOpenSourceImage to set source image
+// @input:
+// @output:
+void MainWindow::on_actionOpenSourceImage_triggered()
+{
+	on_openSourceImgPB_clicked();
+}
+
+// Slot for action actionSaveResult to save Result Image
+// @input:
+// @output:
+void MainWindow::on_actionSaveResult_triggered()
+{
+	if ( false == CanOperate() )
+	{
+		return;
+	}
+
+	QString imgName = QFileDialog::getSaveFileName(this,
+												   "Choose name...",
+												   QDir::currentPath(),
+												   "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
+
+	if ( true == imgName.isEmpty() )
+	{
+		// User change his mind
+		return;
+	}
+
+	emit SignalSaveResultImg(imgName);
+}
+
+// Slot for getting new Target image
+// @input:
+// - QString - unempty path to new Target image
+// @output:
+void MainWindow::SlotGetTargetImg(const QString &t_targetImgPath)
+{
+	if ( true == t_targetImgPath.isEmpty() )
+	{
+		qDebug() << "SlotGetTargetImg(): Error - invalid arguments";
+		return;
+	}
+
+	ui->targetImgLbl->SetImage(t_targetImgPath);
+}
+
+// Slot for getting new Source image
+// @input:
+// - QString - unempty path to new Source image
+// @output:
+void MainWindow::SlotGetSourceImg(const QString &t_sourceImgPath)
+{
+	if ( true == t_sourceImgPath.isEmpty() )
+	{
+		qDebug() << "SlotGetSourceImg(): Error - invalid arguments";
+		return;
+	}
+
+	ui->sourceImgLbl->SetImage(t_sourceImgPath);
+}
+
+// Slot for button findSourceImgPB to find similar image from IDB
+// @input:
+// @output:
+void MainWindow::on_findSourceImgPB_clicked()
+{
+	emit SignalFindSimilarImgInIDB();
+}
+
+// Slot for getting new Result image
+// @input:
+// - QImage - unnull new result image
+// @output:
+void MainWindow::SlotGetResultImg(QImage t_resultImg)
+{
+	if ( true == t_resultImg.isNull() )
+	{
+		qDebug() << "SlotResultImg(): Error - invalid arguments";
+		return;
+	}
+
+	ui->resultImgLbl->SetImage(t_resultImg);
+}
+
+// Slot for start colrization process
+// @input:
+// @output:
+void MainWindow::on_startColorizationPB_clicked()
+{
+	if ( false == CanOperate() )
+	{
+		return;
+	}
+
+	emit SignalStartColorization();
+}
+
+// Slot for resetting current target image
+// @input:
+// @output:
+void MainWindow::on_resetPB_clicked()
+{
+	if ( false == CanOperate() )
+	{
+		return;
+	}
+
+	// TODO:
+	// Send signal to ImgHandler. It should reload target image, calc all it's params (LAB, SKO) and then send
+	// it to us
+}
+
+// Info-slot: type of current proccess
+// @input:
+// - Program::Status - exist type of program status
+// @output:
+void MainWindow::SlotCurrProcess(const Program::Status &t_status)
+{
+	m_appStatus = t_status;
+	m_statusBar->SetStatus(m_appStatus);
+}
+
+// Info-slot: process ended normally
+// @input:
+// @output:
+void MainWindow::SlotProcessEnd()
+{
+	m_appStatus = Program::OK;
+	m_statusBar->SetStatus(m_appStatus);
+}
+
+// Info-slot: process failed with some reason
+// @input:
+// - QString - unempty string with warning message from some process
+// @output:
+void MainWindow::SlotProcError(const QString &t_message)
+{
+	if ( true == t_message.isEmpty() )
+	{
+		ShowWarning(tr("Warning!"), tr("Empty message!"));
+	}
+	else
+	{
+		ShowWarning(tr("Warning!"), t_message);
+	}
+
+	SlotProcessEnd();
+}
+
+// Info-slot: process failed
+// @input:
+// @output:
+void MainWindow::SlotProcessFail()
+{
+	m_appStatus = Program::ERR;
+	m_statusBar->SetStatus(m_appStatus);
+}
+
+// Slot for creating new database
+// @input:
+// @output:
+void MainWindow::on_actionCreateDatabase_triggered()
+{
+	bool okButton = false;
+	QString idbName = QInputDialog::getText(this,
+											"Choose name of new image database...",
+											"Enter name:",
+											QLineEdit::Normal,
+											"default",
+											&okButton);
+
+	if ( (false == okButton) || (true == idbName.isEmpty()) )
+	{
+		return;
+	}
+
+	emit SignalNewIDB(idbName);
+}
+
+// Slot for opening exist database
+// @input:
+// @output:
+void MainWindow::on_actionOpenDatabase_triggered()
+{
+	QString pathToOpen;
+	pathToOpen.append(QDir::currentPath());
+	pathToOpen.append(DEFAULT_IDB_FOLDER);
+
+	QString idbName = QFileDialog::getOpenFileName(this,
+												   "Open image database...",
+												   pathToOpen,
+												   "SQLite files (*.sqlite)");
+
+	if(true == idbName.isEmpty())
+	{
+		return;
+	}
+
+	emit SignalOpenIDB(idbName);
+}
+
+// Slot for adding images to opened database
+// @input:
+// @output:
+void MainWindow::on_actionAddImages_triggered()
+{
+	QStringList imagesNames = QFileDialog::getOpenFileNames(this,
+															"Select images to add to database...",
+															QDir::currentPath(),
+															"IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
+
+	if ( true == imagesNames.isEmpty() )
+	{
+		return;
+	}
+
+	emit SignalAddImagesToIDB(imagesNames);
+}
+
+// Slot for open Preferences dialog
+// @input:
+// @output:
+void MainWindow::on_actionPreferences_triggered()
+{
+	// TODO:
+	// - create preferences dialog
+	// - create connections
+	// - show
+}
+
+// Slot to set SKO value
+// @input:
+// - double - SKO value
+// @output:
+void MainWindow::SlotGetImagesSKO(const double &t_sko)
+{
+	QString skoString;
+	skoString = QString::number(t_sko);
+
+	ui->lineSKO->setText(skoString);
+}
+
+// Slot for choosing image passport type
+// @input:
+// @output:
+void MainWindow::SlotPassportType(QAction *t_action)
+{
+	if ( ui->actionLumHist == t_action )
+	{
+		emit SignalUseImgPassport(Passport::LUM_HISTOGRAM);
+	}
+	else if ( ui->actionSubsampLum == t_action )
+	{
+		emit SignalUseImgPassport(Passport::LUM_SUBSAMPLE);
+	}
+	else if ( ui->actionLumGradHists == t_action )
+	{
+		emit SignalUseImgPassport(Passport::LUM_AND_GRAD_HIST);
+	}
+	else if ( ui->actionSubsampLumGrad == t_action )
+	{
+		emit SignalUseImgPassport(Passport::LUM_AND_GRAD_SUB);
+	}
+}
+
+// Slot for choosing type of colorization method
+// @input:
+// @output:
+void MainWindow::SlotMethodType(QAction *t_action)
+{
+	if ( ui->actionWalshSimple == t_action )
+	{
+		emit SignalUseColorMethod(Methods::WALSH_SIMPLE);
+	}
+	else if ( ui->actionWalshNeighbor == t_action )
+	{
+		emit SignalUseColorMethod(Methods::WALSH_NEIGHBOR);
+	}
+}
