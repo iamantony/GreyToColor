@@ -16,19 +16,18 @@
     <data key="d7"/>
     <node id="n0" yfiles.foldertype="group">
       <data key="d4"/>
-      <data key="d5"/>
       <data key="d6">
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="544.0088381110041" width="658.7805782385904" x="-2639.390289119295" y="-491.0042711521198"/>
+              <y:Geometry height="500.89902959852236" width="658.7805782385904" x="-3034.926359964758" y="-674.9093551937881"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
               <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="658.7805782385904" x="0.0" y="0.0">Colorization Methods</y:NodeLabel>
               <y:Shape type="roundrectangle"/>
               <y:State closed="false" closedHeight="50.0" closedWidth="50.0" innerGraphDisplayEnabled="false"/>
               <y:Insets bottom="15" bottomF="15.0" left="15" leftF="15.0" right="15" rightF="15.0" top="15" topF="15.0"/>
-              <y:BorderInsets bottom="0" bottomF="0.0" left="15" leftF="14.666780757709148" right="0" rightF="0.0" top="21" topF="20.598443418502256"/>
+              <y:BorderInsets bottom="0" bottomF="0.0" left="15" leftF="14.666780757709148" right="0" rightF="0.0" top="0" topF="0.0"/>
             </y:GroupNode>
             <y:GroupNode>
               <y:Geometry height="50.0" width="50.0" x="0.0" y="60.0"/>
@@ -46,11 +45,10 @@
       <graph edgedefault="directed" id="n0:">
         <node id="n0::n0">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="183.06809851835544" width="365.5588009162998" x="-2484.622499163348" y="-145.06353155947113"/>
-              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:Geometry height="183.06809851835544" width="365.5588009162998" x="-2880.1585700088103" y="-372.07842411362117"/>
+              <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="72.61181640625" x="146.4734922550249" y="3.0">Colorizator<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
@@ -62,11 +60,11 @@
               <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
                 <y:AttributeLabel># TargetImage *m_target
 # SourceImage *m_source</y:AttributeLabel>
-                <y:MethodLabel>+ virtual bool Colorize( TargetImage*, SourceImage* ) = 0
+                <y:MethodLabel>+ virtual bool Colorize( TargetImage*, SourceImage* )
 
-# virtual bool PrepareImages() = 0
-# virtual bool PostColorization() = 0
-# virtual bool ColorizeImage() = 0
+# virtual bool PrepareImages()
+# virtual bool PostColorization()
+# virtual bool ColorizeImage()
 
 - void Clear()</y:MethodLabel>
               </y:UML>
@@ -75,11 +73,10 @@
         </node>
         <node id="n0::n1">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="169.91806364757713" width="250.5191584140971" x="-2609.723508361586" y="-433.02936288986757"/>
-              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:Geometry height="148.6946359665904" width="250.5191584140971" x="-3005.259579207049" y="-614.3473179832952"/>
+              <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="153.51904296875" x="48.500057722673546" y="26.701171875">WalshSimpleColorizator<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
@@ -90,18 +87,21 @@
               </y:NodeLabel>
               <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="Colorizator" use3DEffect="true">
                 <y:AttributeLabel/>
-                <y:MethodLabel/>
+                <y:MethodLabel>+ virtual bool Colorize( TargetImage*, SourceImage* )
+
+- virtual bool PrepareImages()
+- virtual bool PostColorization()
+- virtual bool ColorizeImage()</y:MethodLabel>
               </y:UML>
             </y:UMLClassNode>
           </data>
         </node>
         <node id="n0::n2">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="169.91806364757713" width="250.5191584140971" x="-2246.128869294802" y="-433.02936288986757"/>
-              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:Geometry height="171.88020833333331" width="250.5191584140971" x="-2641.6649401402647" y="-637.5328903500381"/>
+              <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="167.947265625" x="41.285946394548546" y="26.701171875">WalshNeighborColorizator<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
@@ -112,7 +112,12 @@
               </y:NodeLabel>
               <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="Colorizator" use3DEffect="true">
                 <y:AttributeLabel/>
-                <y:MethodLabel/>
+                <y:MethodLabel>+ virtual bool Colorize( TargetImage*, SourceImage* )
+
+- virtual bool PrepareImages()
+- virtual bool PostColorization()
+- virtual bool ColorizeImage()
+- void ColorizeNeighbor( uint, uint )</y:MethodLabel>
               </y:UML>
             </y:UMLClassNode>
           </data>
@@ -153,7 +158,7 @@
           <data key="d6">
             <y:UMLClassNode>
               <y:Geometry height="787.4774391292449" width="301.2458644835824" x="-5533.552836079446" y="-1076.6759860946236"/>
-              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="83.42822265625" x="108.9088209136662" y="26.701171875">MainWindow<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
@@ -180,6 +185,7 @@
 + void SlotGetTargetImg( QString )
 + void SlotGetSourceImg( QString )
 + void SlotGetResultImg( QImage )
++ void SlotGetImagesSKO( double )
 + void SlotCurrProcess( Program::Status )
 + void SlotProcessEnd()
 + void SlotProcError( QString )
@@ -280,7 +286,7 @@
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="546.6762418170067" width="1346.4090699235876" x="-4775.0" y="-967.4459889456456"/>
+              <y:Geometry height="503.9081893147197" width="1346.4090699235876" x="-4775.0" y="-967.4459889456456"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
               <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1346.4090699235876" x="0.0" y="0.0">Handlers</y:NodeLabel>
@@ -307,8 +313,8 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="494.29977697325677" width="306.5006282672002" x="-4760.0" y="-930.0695241018956"/>
-              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:Geometry height="451.5317244709697" width="306.5006282672002" x="-4760.0" y="-930.0695241018956"/>
+              <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="75.5126953125" x="115.49396647735011" y="3.0">ImgHandler<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
@@ -322,20 +328,16 @@
 - TargetImage m_target
 - SourceImage m_source</y:AttributeLabel>
                 <y:MethodLabel>+ void Clear()
-+ Image GetOriginalImg()
-+ Image GetTargetImg()
-+ Image GetSourcelImg()
-+ double GetImgSKO()
-+ void StartColorizationWalshSimple()
-+ void StartColorizationWalshNeighbor()
 
 - void GetGreyTarget()
-- void SendResultImg()
+- QImage GetResultTargetImg()
+- void CalcTargetsSKO( QImage )
 
 + void SlotSaveResultImg( QString )
 + void SlotGetNewTargetImg( QString )
 + void SlotGetNewSourceImg( QString )
 + void SlotFindSimilarForTarget()
++ void SlotTargetColorized()
 
 - void SignalGetTargetImg( QString )
 - void SignalGetResultImg( QImage )
@@ -344,6 +346,7 @@
 - void SignalGetPassFromIDB()
 - void SignalTargetSet( TargetImage* )
 - void SignalSourceSet( SourceImage * )
+- void SignalTargetResultSKO( double )
 - void SignalCurrentProc( Program::Status )
 - void SignalProcDone()
 - void SignalProcError( QString )
@@ -394,11 +397,10 @@
         </node>
         <node id="n2::n2">
           <data key="d4"/>
-          <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
               <y:Geometry height="346.9811162591932" width="306.5006282672002" x="-3767.1800177086266" y="-914.0"/>
-              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="139.78271484375" x="83.35895671172511" y="3.0">ColorMethodsHandler<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
@@ -421,6 +423,7 @@
 + void SlotGetTargetImg( TargetImage *)
 + void SlotGetSourceImg( SourceImage * )
 
+- void SignalColorizationDone()
 - void SignalCurrentProc( Program::Status )
 - void SignalProcDone()
 - void SignalProcError( QString );
@@ -437,7 +440,7 @@
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="418.68886370620066" width="494.0000000000009" x="-6035.644670240212" y="422.4727522233147"/>
+              <y:Geometry height="418.68886370620066" width="494.0000000000009" x="-6035.644670240212" y="274.5574889367987"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
               <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="494.0000000000009" x="0.0" y="0.0">Service: 1</y:NodeLabel>
@@ -466,7 +469,7 @@
             <y:ProxyAutoBoundsNode>
               <y:Realizers active="0">
                 <y:GroupNode>
-                  <y:Geometry height="167.39606643737557" width="437.7243539500232" x="-6008.862176975012" y="475.11373435943733"/>
+                  <y:Geometry height="167.3960664373755" width="437.7243539500232" x="-6008.862176975012" y="327.1984710729213"/>
                   <y:Fill color="#F5F5F5" transparent="false"/>
                   <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
                   <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="437.7243539500232" x="0.0" y="0.0">Image Service: 1</y:NodeLabel>
@@ -493,7 +496,7 @@
               <data key="d4"/>
               <data key="d6">
                 <y:UMLClassNode>
-                  <y:Geometry height="115.01960159362551" width="407.7243539500232" x="-5993.862176975012" y="512.4901992031873"/>
+                  <y:Geometry height="115.01960159362551" width="407.7243539500232" x="-5993.862176975012" y="364.5749359166713"/>
                   <y:Fill color="#66FF33" transparent="false"/>
                   <y:BorderStyle color="#000000" type="line" width="1.0"/>
                   <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="144.14990234375" x="131.7872258031366" y="3.0">ImgPassportComparer<y:LabelModel>
@@ -516,8 +519,8 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="115.01960159362557" width="371.289340480419" x="-5975.64467024021" y="692.4901992031872"/>
-              <y:Fill color="#FFCC00" transparent="false"/>
+              <y:Geometry height="115.01960159362557" width="371.289340480419" x="-5975.64467024021" y="544.5749359166712"/>
+              <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="59.630859375" x="155.8292405527095" y="3.0">CalcSKO<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
@@ -528,7 +531,7 @@
               </y:NodeLabel>
               <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="" use3DEffect="true">
                 <y:AttributeLabel/>
-                <y:MethodLabel>+ double ImagesSKO ( Image, Image )
+                <y:MethodLabel>+ double ImagesSKO ( QImage, QImage )
 + double PassportsSKO ( QList&lt;double&gt;, QList&lt;double&gt; )
 + double PixelMaskSKO( double, QList&lt;double&gt; )</y:MethodLabel>
               </y:UML>
@@ -543,7 +546,7 @@
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="1301.2690527327807" width="1120.091210393275" x="-5654.250941127661" y="1804.887422892062"/>
+              <y:Geometry height="1312.0094273104016" width="1120.091210393275" x="-5654.250941127661" y="1794.147048314441"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
               <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1120.091210393275" x="0.0" y="0.0">Pixels</y:NodeLabel>
@@ -570,7 +573,7 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="284.11435090927847" width="252.5985584108946" x="-5301.143076715435" y="1842.263887735812"/>
+              <y:Geometry height="294.85472548689944" width="252.5985584108946" x="-5301.143076715435" y="1831.523513158191"/>
               <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.08447265625" x="89.2570428773223" y="26.701171875">TargetPixel<y:LabelModel>
@@ -592,6 +595,7 @@
 + void SetPreferedColor( RGB )
 + bool HasPreferedColor()
 + void SetColored()
++ void SetUncolored()
 + bool IsColored()
 
 - void ToGrey( RGB )</y:MethodLabel>
@@ -849,7 +853,7 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="270.82994751931506" width="357.4573415835058" x="-4079.926358317423" y="233.8272565004185"/>
+              <y:Geometry height="289.01026906997595" width="357.4573415835058" x="-4079.926358317423" y="233.8272565004185"/>
               <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="81.3017578125" x="138.0777918855029" y="26.701171875">TargetImage<y:LabelModel>
@@ -868,6 +872,7 @@
 + void UnScaleLABLum()
 + void SetPixPrefColor( uint, uint, RGB )
 + void SetPixColoured( uint, uint )
++ void SetPixelsUncoloured()
 + bool IsPixColoured( uint, uint )
 + Image GetResultImage()
 + Image GetCurrentImage()
@@ -1047,7 +1052,7 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="271.77617765147335" width="371.2893404804187" x="-5425.880672354748" y="825.326548316836"/>
+              <y:Geometry height="282.51655222909454" width="371.2893404804187" x="-5425.880672354748" y="825.326548316836"/>
               <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="104.42626953125" x="133.43153547458434" y="26.701171875">TargetImgPixels<y:LabelModel>
@@ -1067,6 +1072,7 @@
 + void UnScaleLum()
 + void SetPixPreferedColor( uint, uint, RGB )
 + void SetPixColoured( uint, uint )
++ void SetPixelsUncoloured()
 + bool IsPixColoured( uint, uint )
 + QImage FormImage()
 
@@ -1695,9 +1701,9 @@
       <data key="d6">
         <y:UMLClassNode>
           <y:Geometry height="466.33005151070165" width="281.1985355799752" x="-4580.0" y="-1716.0375980406945"/>
-          <y:Fill color="#FFCC00" transparent="false"/>
+          <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.7763671875" x="103.2110841962376" y="205.93326891273477">Application<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.7763671875" x="103.2110841962376" y="3.0">Application<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -1740,8 +1746,8 @@
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="7.634510683174766" tx="0.0" ty="0.0">
-            <y:Point x="-5365.459009939833" y="1991.955573873626"/>
+          <y:Path sx="0.0" sy="7.923118084355742" tx="0.0" ty="0.0">
+            <y:Point x="-5365.459009939833" y="1986.8739939859965"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
@@ -1819,7 +1825,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-262.964973271265">
-            <y:Point x="-3542.449032497381" y="369.24223026007604"/>
+            <y:Point x="-3542.449032497381" y="378.3323910354065"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
@@ -1832,7 +1838,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-5240.236002114539" y="369.24223026007604"/>
+            <y:Point x="-5240.236002114539" y="378.3323910354065"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
@@ -1935,9 +1941,9 @@
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="-123.22504225912895" ty="-49.38530453640533">
+          <y:Path sx="0.0" sy="0.0" tx="-123.22504225912895" ty="-51.25221716385036">
             <y:Point x="-5580.000000000001" y="2879.587697475063"/>
-            <y:Point x="-5580.000000000001" y="1934.935758654046"/>
+            <y:Point x="-5580.000000000001" y="1927.6986587377903"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
@@ -2043,8 +2049,8 @@
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="-148.80231247432994" ty="-90.94008767413517">
-            <y:Point x="-4606.7496858664" y="278.3021425859409"/>
+          <y:Path sx="0.0" sy="0.0" tx="-148.80231247432994" ty="-97.04473027701108">
+            <y:Point x="-4606.7496858664" y="281.2876607583954"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
@@ -2154,8 +2160,8 @@
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="-69.76399788546132" ty="28.785362857427344">
-            <y:Point x="-5790.0" y="990.0"/>
+          <y:Path sx="0.0" sy="0.0" tx="-69.76399788546132" ty="29.92293710000127">
+            <y:Point x="-5790.0" y="996.5077615313845"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
@@ -2234,8 +2240,8 @@
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="-61.96213559330549" tx="-1.912973035478899" ty="-16.843595680226617">
-            <y:Point x="-2880.0" y="307.28009466677054"/>
+          <y:Path sx="0.0" sy="-66.12154100385969" tx="-1.912973035478899" ty="-16.843595680226617">
+            <y:Point x="-2880.0" y="312.2108500315468"/>
             <y:Point x="-2880.0" y="498.7097084347438"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
@@ -2397,7 +2403,6 @@
     </edge>
     <edge id="e19" source="n11" target="n2::n2">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="-3.2614039035643145" sy="0.0" tx="0.0" ty="0.0">
@@ -2412,12 +2417,11 @@
     </edge>
     <edge id="n0::e0" source="n0::n1" target="n0::n0">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-2484.4639291545373" y="-193.4495548359123"/>
-            <y:Point x="-2301.843098705198" y="-193.4495548359123"/>
+            <y:Point x="-2880.0" y="-420.46444739006233"/>
+            <y:Point x="-2697.3791695506607" y="-420.46444739006233"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
@@ -2427,12 +2431,11 @@
     </edge>
     <edge id="n0::e1" source="n0::n2" target="n0::n0">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="-0.2966636634882889" ty="-8.868701825180286">
-            <y:Point x="-2120.869290087753" y="-193.4495548359123"/>
-            <y:Point x="-2302.139762368686" y="-193.4495548359123"/>
+            <y:Point x="-2516.405360933216" y="-420.46444739006233"/>
+            <y:Point x="-2697.675833214149" y="-420.46444739006233"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="white_delta"/>
@@ -2442,11 +2445,10 @@
     </edge>
     <edge id="e20" source="n2::n2" target="n0::n1">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="-3.4583268736023456" ty="0.0">
-            <y:Point x="-2487.9222560281396" y="-740.5094418704034"/>
+          <y:Path sx="0.0" sy="0.0" tx="-3.4583268736023425" ty="0.0">
+            <y:Point x="-2883.4583268736023" y="-740.5094418704034"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
@@ -2456,14 +2458,29 @@
     </edge>
     <edge id="e21" source="n2::n2" target="n0::n2">
       <data key="d8"/>
-      <data key="d9"/>
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="0.0">
-            <y:Point x="-2120.869290087753" y="-740.5094418704034"/>
+            <y:Point x="-2516.405360933216" y="-740.5094418704034"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="diamond" target="none"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e22" source="n3::n1" target="n2::n0">
+      <data key="d8"/>
+      <data key="d9"/>
+      <data key="d10">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="-73.25031413360011" ty="164.30366186641072">
+            <y:Point x="-5400.0" y="602.084736713484"/>
+            <y:Point x="-5400.0" y="210.0"/>
+            <y:Point x="-4680.0" y="210.0"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="dashed" width="1.0"/>
+          <y:Arrows source="none" target="plain"/>
           <y:BendStyle smoothed="false"/>
         </y:PolyLineEdge>
       </data>

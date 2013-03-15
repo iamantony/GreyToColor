@@ -462,6 +462,18 @@ void MainWindow::on_actionPreferences_triggered()
 	// - show
 }
 
+// Slot to set SKO value
+// @input:
+// - double - SKO value
+// @output:
+void MainWindow::SlotGetImagesSKO(const double &t_sko)
+{
+	QString skoString;
+	skoString = QString::number(t_sko);
+
+	ui->lineSKO->setText(skoString);
+}
+
 // Slot for choosing image passport type
 // @input:
 // @output:

@@ -162,35 +162,37 @@ void ImgHandler::GetGreyTarget()
 	emit SignalGetResultImg(greyscaledTarget);
 }
 
-// Send out current result image
+// Get result Target image
 // @input:
 // @output:
-void ImgHandler::SendResultImg()
+// - null QImage - failed to get image
+// - QImage - result Target image
+QImage ImgHandler::GetResultTargetImg()
 {
 	if ( false == m_target.HasImage() )
 	{
-		qDebug() << "SendResultImg(): Error - no Target Image";
-		emit SignalProcError(tr("No Target Image - No Result Image"));
-		return;
+		qDebug() << "GetResultTargetImg(): Error - no Target Image";
+		QImage empty;
+		return empty;
 	}
 
 	Image resultImage = m_target.GetResultImage();
 	if ( true == resultImage.IsNull() )
 	{
-		qDebug() << "SendResultImg(): Error - can't get result image";
-		emit SignalProcError(tr("Can't get Target Image"));
-		return;
+		qDebug() << "GetResultTargetImg(): Error - can't get result image";
+		QImage empty;
+		return empty;
 	}
 
 	QImage result = resultImage.GetImg();
 	if ( true == result.isNull() )
 	{
-		qDebug() << "SendResultImg(): Error - can't get result image";
-		emit SignalProcError(tr("Can't get Result Image"));
-		return;
+		qDebug() << "GetResultTargetImg(): Error - can't get result image";
+		QImage empty;
+		return empty;
 	}
 
-	emit SignalGetResultImg(result);
+	return result;
 }
 
 // This slot get path to new source image
@@ -242,5 +244,39 @@ void ImgHandler::SlotFindSimilarForTarget()
 // @output:
 void ImgHandler::SlotTargetColorized()
 {
-	SendResultImg();
+	QImage result = GetResultTargetImg();
+	if ( true == result.isNull() )
+	{
+		qDebug() <<"SlotTargetColorized(): Error - can't get from Target image it's' Result image";
+		emit SignalProcError(tr("Failed to get Result image"));
+		return;
+	}
+
+	emit SignalGetResultImg(result);
+
+	CalcTargetsSKO(result);
+}
+
+// Calc SKO of coloured Target and original target images
+// @input:
+// @output:
+void ImgHandler::CalcTargetsSKO(const QImage &t_resultImg)
+{
+	if ( true == t_resultImg.isNull() )
+	{
+		qDebug() << "CalcTargetsSKO(): Error - invalid arguments";
+		return;
+	}
+
+	QImage originalTarget = m_targetOriginal.GetImg();
+
+	CalculatorSKO calc;
+	double imagesSKO = calc.ImagesSKO(t_resultImg, originalTarget);
+	if ( ERROR == imagesSKO )
+	{
+		qDebug() << "CalcTargetsSKO(): Error - failed to calc images SKO";
+		return;
+	}
+
+	emit SignalTargetResultSKO(imagesSKO);
 }

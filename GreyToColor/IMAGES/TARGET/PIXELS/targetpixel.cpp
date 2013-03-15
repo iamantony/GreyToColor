@@ -38,7 +38,7 @@ void TargetPixel::ClearPixel()
 	m_prefColor.ClearColor();
 
 	m_lumScaleFactor = DEFAULT_SCALE_LUM_FACTOR;
-	m_colored = false;
+	SetUncolored();
 }
 
 // Set pixel as grey variant of input RGB pixel
@@ -169,6 +169,14 @@ bool TargetPixel::HasPreferedColor() const
 void TargetPixel::SetColored()
 {
 	m_colored = true;
+}
+
+// Set that pixel not colorized (has not color)
+// @input:
+// @output:
+void TargetPixel::SetUncolored()
+{
+	m_colored = false;
 }
 
 // Check if pixel colorized

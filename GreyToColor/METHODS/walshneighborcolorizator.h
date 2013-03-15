@@ -23,6 +23,7 @@
 #include <QDebug>
 #include <time.h>
 #include <math.h>
+#include <QElapsedTimer>
 #include "./DEFINES/global.h"
 #include "./DEFINES/colorization.h"
 

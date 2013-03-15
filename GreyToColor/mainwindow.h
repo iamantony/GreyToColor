@@ -93,6 +93,8 @@ public slots:
 	void SlotGetSourceImg(const QString &t_sourceImgPath);
 	// Slot for getting new Result image
 	void SlotGetResultImg(QImage t_resultImg);
+	// Slot to set SKO value
+	void SlotGetImagesSKO(const double &t_sko);
 	// Info-slot: type of current proccess
 	void SlotCurrProcess(const Program::Status &t_status);
 	// Info-slot: process ended normally

@@ -50,6 +50,8 @@ public:
 
 	// Set flag that pixel colored
 	void SetPixColoured(const unsigned int &t_width, const unsigned int &t_height);
+	// Set flag that all pixels uncolored
+	void SetPixelsUncoloured();
 	// Check if pixel is colored
 	bool IsPixColoured(const unsigned int &t_width, const unsigned int &t_height) const;
 	// Get result image. It could be colorized (if we perform colorization) or

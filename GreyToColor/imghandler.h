@@ -20,12 +20,12 @@
 #define IMGHANDLER_H
 
 #include <QObject>
-#include <QElapsedTimer>
 #include <QDebug>
 #include "./IMAGES/COMMON/image.h"
 #include "./IMAGES/CANDIDATE/candidateimage.h"
 #include "./IMAGES/SOURCE/sourceimage.h"
 #include "./IMAGES/TARGET/targetimage.h"
+#include "SERVICE/calculatorsko.h"
 #include "DEFINES/programstatus.h"
 
 class ImgHandler : public QObject
@@ -49,8 +49,10 @@ public:
 private:
 	// Send greyscale version of target image
 	void GetGreyTarget();
-	// Send out current result image
-	void SendResultImg();
+	// Get result Target image
+	QImage GetResultTargetImg();
+	// Calc SKO of coloured Target and original target images
+	void CalcTargetsSKO(const QImage &t_resultImg);
 
 signals:
 	void SignalGetTargetImg(const QString &t_path);
@@ -60,6 +62,7 @@ signals:
 	void SignalGetPassFromIDB();
 	void SignalTargetSet(TargetImage *t_targ);
 	void SignalSourceSet(SourceImage *t_source);
+	void SignalTargetResultSKO(const double &t_sko);
 	void SignalCurrentProc(const Program::Status &);
 	void SignalProcDone();
 	void SignalProcError(const QString &);

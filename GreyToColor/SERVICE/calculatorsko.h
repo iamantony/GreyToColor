@@ -20,6 +20,7 @@
 #define CALCULATORSKO_H
 
 #include <QObject>
+#include <QImage>
 #include <QDebug>
 #include <math.h>
 #include "./DEFINES/global.h"
@@ -36,7 +37,7 @@ public:
 	explicit CalculatorSKO(QObject *parent = 0);
 
 	// Calc SKO of two images
-	double ImagesSKO(/*const Image &t_first, const Image &t_second*/);
+	double ImagesSKO(const QImage &t_firstImg, const QImage &t_secondImg);
 	// Calc SKO of two image passports
 	double PassportsSKO(const QList<double> &t_first, const QList<double> &t_second);
 	// Calc SKO for a pixel mask

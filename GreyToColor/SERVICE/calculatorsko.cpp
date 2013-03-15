@@ -39,7 +39,7 @@ double CalculatorSKO::PixelMaskSKO(const double t_centralPixLum, const QList<dou
 		return ERROR;
 	}
 
-	double SKO = 0;
+	double SKO = BEST_SKO;
 	for ( int pix = 0; pix < t_luminances.size(); pix++ )
 	{
 		double diff = t_centralPixLum - t_luminances.at(pix);
@@ -82,4 +82,60 @@ double CalculatorSKO::PassportsSKO(const QList<double> &t_first, const QList<dou
 	resultSKO = pow(resultSKO, 0.5);
 
 	return resultSKO;
+}
+
+// Calc SKO of two images
+// @input:
+// - QImage - unnull image
+// - QImage - unnull image
+// @output:
+// - ERROR - can't calc SKO
+// - double - positive value of input images SKO
+double CalculatorSKO::ImagesSKO(const QImage &t_firstImg, const QImage &t_secondImg)
+{
+	if ( (true == t_firstImg.isNull()) || (true == t_secondImg.isNull()) )
+	{
+		qDebug() << "ImagesSKO(): Error - invalid arguments";
+		return ERROR;
+	}
+
+	const int firstWdt = t_firstImg.width();
+	const int firstHgt = t_firstImg.height();
+	const int secondWdt = t_secondImg.width();
+	const int secondHgt = t_secondImg.height();
+
+	if ( (firstWdt != secondWdt) || (firstHgt != secondHgt) )
+	{
+		qDebug() << "ImagesSKO(): Error - images has different size";
+		return ERROR;
+	}
+
+	double SKO = BEST_SKO;
+	for (int width = 0; width < firstWdt; width++)
+	{
+		for (int height = 0; height < firstHgt; height++)
+		{
+			QRgb firstImgPix = t_firstImg.pixel(width, height);
+			QRgb secondImgPix = t_secondImg.pixel(width, height);
+
+			double redFirst = (double)qRed(firstImgPix);
+			double redSecond = (double)qRed(secondImgPix);
+			double diffRed = pow( (redFirst - redSecond), 2 );
+
+			double greenFirst = (double)qGreen(firstImgPix);
+			double greenSecond = (double)qGreen(secondImgPix);
+			double diffGreen = pow( (greenFirst - greenSecond), 2 );
+
+			double blueFirst = (double)qBlue(firstImgPix);
+			double blueSecond = (double)qBlue(secondImgPix);
+			double diffBlue = pow( (blueFirst - blueSecond), 2 );
+
+			SKO += diffRed + diffGreen + diffBlue;
+		}
+	}
+
+	SKO = SKO / (firstWdt * firstHgt);
+	SKO = pow(SKO, 0.5);
+
+	return SKO;
 }

@@ -129,6 +129,15 @@ void TargetImage::SetPixColoured(const unsigned int &t_width, const unsigned int
 	pixels->SetPixColoured(t_width, t_height);
 }
 
+// Set flag that pixel uncolored
+// @input:
+// @output:
+void TargetImage::SetPixelsUncoloured()
+{
+	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	pixels->SetPixelsUncoloured();
+}
+
 // Check if pixel is colored
 // @input:
 // - unsigned int - exist width (x) position of pixel

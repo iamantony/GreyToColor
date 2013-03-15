@@ -130,6 +130,11 @@ void Application::ConnectUIandImgHand()
 					 SLOT(SlotFindSimilarForTarget()));
 
 	QObject::connect(m_imgHandler,
+					 SIGNAL(SignalTargetResultSKO(double)),
+					 m_mainUI,
+					 SLOT(SlotGetImagesSKO(double)));
+
+	QObject::connect(m_imgHandler,
 					 SIGNAL(SignalCurrentProc(Program::Status)),
 					 m_mainUI,
 					 SLOT(SlotCurrProcess(Program::Status)));

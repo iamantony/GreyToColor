@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Thu 14. Mar 15:11:40 2013
+** Created: Fri 15. Mar 16:05:32 2013
 **      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -90,6 +90,11 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(800, 507);
+        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
+        MainWindow->setSizePolicy(sizePolicy);
         MainWindow->setSizeIncrement(QSize(1, 1));
         MainWindow->setBaseSize(QSize(800, 600));
         actionOpenTargetImage = new QAction(MainWindow);
@@ -139,11 +144,11 @@ public:
         targetImgLayout->setObjectName(QString::fromUtf8("targetImgLayout"));
         targetImgLbl = new ScaleLabel(centralwidget);
         targetImgLbl->setObjectName(QString::fromUtf8("targetImgLbl"));
-        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(targetImgLbl->sizePolicy().hasHeightForWidth());
-        targetImgLbl->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(targetImgLbl->sizePolicy().hasHeightForWidth());
+        targetImgLbl->setSizePolicy(sizePolicy1);
         targetImgLbl->setMinimumSize(QSize(200, 200));
         targetImgLbl->setMaximumSize(QSize(660, 660));
         targetImgLbl->setFrameShape(QFrame::NoFrame);
@@ -188,8 +193,8 @@ public:
         resultImgLayout->setContentsMargins(0, -1, -1, -1);
         resultImgLbl = new ScaleLabel(centralwidget);
         resultImgLbl->setObjectName(QString::fromUtf8("resultImgLbl"));
-        sizePolicy.setHeightForWidth(resultImgLbl->sizePolicy().hasHeightForWidth());
-        resultImgLbl->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(resultImgLbl->sizePolicy().hasHeightForWidth());
+        resultImgLbl->setSizePolicy(sizePolicy1);
         resultImgLbl->setMinimumSize(QSize(200, 200));
         resultImgLbl->setMaximumSize(QSize(660, 660));
         resultImgLbl->setFrameShape(QFrame::NoFrame);
@@ -238,8 +243,8 @@ public:
         sourceImgLayout->setObjectName(QString::fromUtf8("sourceImgLayout"));
         sourceImgLbl = new ScaleLabel(centralwidget);
         sourceImgLbl->setObjectName(QString::fromUtf8("sourceImgLbl"));
-        sizePolicy.setHeightForWidth(sourceImgLbl->sizePolicy().hasHeightForWidth());
-        sourceImgLbl->setSizePolicy(sizePolicy);
+        sizePolicy1.setHeightForWidth(sourceImgLbl->sizePolicy().hasHeightForWidth());
+        sourceImgLbl->setSizePolicy(sizePolicy1);
         sourceImgLbl->setMinimumSize(QSize(200, 200));
         sourceImgLbl->setMaximumSize(QSize(660, 660));
         sourceImgLbl->setFrameShape(QFrame::NoFrame);
@@ -300,11 +305,8 @@ public:
 
         skoLbl = new QLabel(centralwidget);
         skoLbl->setObjectName(QString::fromUtf8("skoLbl"));
-        QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(skoLbl->sizePolicy().hasHeightForWidth());
-        skoLbl->setSizePolicy(sizePolicy1);
+        sizePolicy.setHeightForWidth(skoLbl->sizePolicy().hasHeightForWidth());
+        skoLbl->setSizePolicy(sizePolicy);
 
         skoLayout->addWidget(skoLbl);
 

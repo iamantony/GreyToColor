@@ -52,6 +52,8 @@ public:
 
 	// Set flag that pixel coloured
 	void SetPixColoured(const unsigned int &t_width, const unsigned int &t_height);
+	// Set flag that all pixels uncoloured
+	void SetPixelsUncoloured();
 	// Check if pixel is coloured
 	bool IsPixColoured(const unsigned int &t_width, const unsigned int &t_height) const;
 	// Form from current pixels values entire QImage

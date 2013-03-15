@@ -54,6 +54,8 @@ public:
 	bool HasPreferedColor() const;
 	// Set that pixel colorized (has color)
 	void SetColored();
+	// Set that pixel not colorized (has not color)
+	void SetUncolored();
 	// Check if pixel colorized
 	bool IsColored() const;
 

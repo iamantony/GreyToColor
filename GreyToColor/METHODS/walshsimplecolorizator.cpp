@@ -82,6 +82,8 @@ bool WalshSimpleColorizator::PrepareImages()
 		return false;
 	}
 
+	m_target->SetPixelsUncoloured();
+
 	m_target->TransformImgRGB2LAB();
 	m_source->TransformImgRGB2LAB();
 
@@ -106,6 +108,10 @@ bool WalshSimpleColorizator::PrepareImages()
 // @output:
 bool WalshSimpleColorizator::ColorizeImage()
 {
+	qDebug() << "Start colorization!";
+	QElapsedTimer timer;
+	timer.start();
+
 	if ( (NULL == m_target) ||
 		 (NULL == m_source) ||
 		 (false == m_target->HasImage()) ||
@@ -170,6 +176,8 @@ bool WalshSimpleColorizator::ColorizeImage()
 								   sourceChB);
 		}
 	}
+
+	qDebug() << "Elapsed time in nanosec:" << timer.nsecsElapsed();
 
 	return true;
 }
