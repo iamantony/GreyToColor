@@ -48,7 +48,7 @@ Image ImgTransform::ToGrey(const Image &t_img)
 
 	if ( true == colorImage.isGrayscale() )
 	{
-		qDebug() << "ToGrey(): image is already greyscale";
+//		qDebug() << "ToGrey(): image is already greyscale";
 		return t_img;
 	}
 
