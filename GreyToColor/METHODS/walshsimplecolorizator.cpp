@@ -124,10 +124,10 @@ bool WalshSimpleColorizator::ColorizeImage()
 
 	// Define number of attempts for each target pixel of searching similar pixel in source image
 	const unsigned int pixelsInTargetImg = targetWdt * targetHgt;
-	int numOfAttempts = NUM_OF_ATTEMPTS;
+	unsigned int numOfAttempts = NUM_OF_ATTEMPTS;
 	if ( pixelsInTargetImg < NUM_OF_ATTEMPTS )
 	{
-		numOfAttempts = (int)pixelsInTargetImg;
+		numOfAttempts = pixelsInTargetImg;
 	}
 
 	// Values of best found pixels characteristics
@@ -182,7 +182,7 @@ bool WalshSimpleColorizator::ColorizeImage()
 			}
 
 			// Try to fins best similar source image pixel
-			for ( int pix = 0; pix < numOfAttempts; pix++ )
+			for ( unsigned int pix = 0; pix < numOfAttempts; pix++ )
 			{
 				sourceRandWdt = rand() % sourceWdt;
 				sourceRandHgt = rand() % sourceHgt;

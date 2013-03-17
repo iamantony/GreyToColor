@@ -16,24 +16,24 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef WALSHNEIGHBORCOLORIZATOR_H
-#define WALSHNEIGHBORCOLORIZATOR_H
+#ifndef WNNORANDCOLORIZATOR_H
+#define WNNORANDCOLORIZATOR_H
 
 #include "colorizator.h"
+#include <QPair>
 #include <QDebug>
-#include <time.h>
 #include <math.h>
 #include <QElapsedTimer>
 #include "./DEFINES/global.h"
 #include "./DEFINES/colorization.h"
 
-class WalshNeighborColorizator : public Colorizator
+class WNNoRandColorizator : public Colorizator
 {
 	// == DATA ==
 
 	// == METHODS ==
 public:
-	WalshNeighborColorizator();
+	WNNoRandColorizator();
 
 	// Start Colorization
 	virtual bool Colorize(TargetImage *t_targetImg, SourceImage *t_sourceImg);
@@ -47,6 +47,8 @@ private:
 	void ColorizeNeighbor(const unsigned int &t_startWidth, const unsigned int &t_startHeight);
 	// Restore images params if needed
 	virtual bool PostColorization();
+	// Form coords of reference pixels in source image
+	QList< QPair<unsigned int, unsigned int> > FormRefPixelCoords(const unsigned int &t_pixelsNum);
 };
 
-#endif // WALSHNEIGHBORCOLORIZATOR_H
+#endif // WNNORANDCOLORIZATOR_H

@@ -16,9 +16,9 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "walshneighborcolorizator.h"
+#include "wnnorandcolorizator.h"
 
-WalshNeighborColorizator::WalshNeighborColorizator()
+WNNoRandColorizator::WNNoRandColorizator()
 {
 
 }
@@ -30,7 +30,7 @@ WalshNeighborColorizator::WalshNeighborColorizator()
 // @output:
 // - false - can't colorize
 // - true - Target Image colorized
-bool WalshNeighborColorizator::Colorize(TargetImage *t_targetImg, SourceImage *t_sourceImg)
+bool WNNoRandColorizator::Colorize(TargetImage *t_targetImg, SourceImage *t_sourceImg)
 {
 	if ( (NULL == t_targetImg) ||
 		 (NULL == t_sourceImg) ||
@@ -71,7 +71,7 @@ bool WalshNeighborColorizator::Colorize(TargetImage *t_targetImg, SourceImage *t
 // Prepare images to colorization
 // @input:
 // @output:
-bool WalshNeighborColorizator::PrepareImages()
+bool WNNoRandColorizator::PrepareImages()
 {
 	if ( (NULL == m_target) ||
 		 (NULL == m_source) ||
@@ -106,7 +106,7 @@ bool WalshNeighborColorizator::PrepareImages()
 // Colorize Target image using color information from Source image
 // @input:
 // @output:
-bool WalshNeighborColorizator::ColorizeImage()
+bool WNNoRandColorizator::ColorizeImage()
 {
 	if ( (NULL == m_target) ||
 		 (NULL == m_source) ||
@@ -119,8 +119,6 @@ bool WalshNeighborColorizator::ColorizeImage()
 
 	const unsigned int targetWdt = m_target->GetImageWidth();
 	const unsigned int targetHgt = m_target->GetImageHeight();
-	const unsigned int sourceWdt = m_source->GetImageWidth();
-	const unsigned int sourceHgt = m_source->GetImageHeight();
 
 	// Define number of attempts for each target pixel of searching similar pixel in source image
 	const unsigned int pixelsInTargetImg = targetWdt * targetHgt;
@@ -128,6 +126,13 @@ bool WalshNeighborColorizator::ColorizeImage()
 	if ( pixelsInTargetImg < NUM_OF_ATTEMPTS )
 	{
 		numOfAttempts = pixelsInTargetImg;
+	}
+
+	QList< QPair<unsigned int, unsigned int> > sourceRefPixs = FormRefPixelCoords(numOfAttempts);
+	if ( true == sourceRefPixs.isEmpty() )
+	{
+		qDebug() << "ColorizeImage(): Error - can't get source reference pixels coordinates";
+		return false;
 	}
 
 	// Values of best found pixels characteristics
@@ -166,8 +171,6 @@ bool WalshNeighborColorizator::ColorizeImage()
 				continue;
 			}
 
-			srand(time(NULL));
-
 			// Reset best params
 			bestDiffLum = DEFAULT_LUM;
 			bestDiffSKO = DEFAULT_SKO;
@@ -186,8 +189,8 @@ bool WalshNeighborColorizator::ColorizeImage()
 			// Try to fins best similar source image pixel
 			for ( unsigned int pix = 0; pix < numOfAttempts; pix++ )
 			{
-				sourceRandWdt = rand() % sourceWdt;
-				sourceRandHgt = rand() % sourceHgt;
+				sourceRandWdt = sourceRefPixs.at(pix).first;
+				sourceRandHgt = sourceRefPixs.at(pix).second;
 
 				sourcePixLum = m_source->PixelChLum(sourceRandWdt, sourceRandHgt);
 				sourcePixSKO = m_source->GetPixelsSKO(sourceRandWdt, sourceRandHgt);
@@ -226,7 +229,7 @@ bool WalshNeighborColorizator::ColorizeImage()
 }
 
 // Try to colorize neighbor pixels by the same color
-void WalshNeighborColorizator::ColorizeNeighbor(const unsigned int &t_startWidth, const unsigned int &t_startHeight)
+void WNNoRandColorizator::ColorizeNeighbor(const unsigned int &t_startWidth, const unsigned int &t_startHeight)
 {
 	const unsigned int targetWdt = m_target->GetImageWidth();
 	const unsigned int targetHgt = m_target->GetImageHeight();
@@ -331,8 +334,55 @@ void WalshNeighborColorizator::ColorizeNeighbor(const unsigned int &t_startWidth
 // Restore images params if needed
 // @input:
 // @output:
-bool WalshNeighborColorizator::PostColorization()
+bool WNNoRandColorizator::PostColorization()
 {
 	m_target->UnScaleLABLum();
 	return true;
+}
+
+// Form coords of reference pixels in source image
+// @input:
+// - unsigned int - num of reference pixels
+// @output:
+// - empty QList< QPair<unsigned int, unsigned int> > - failed to form pixels coords
+// - QList< QPair<unsigned int, unsigned int> > -  list of reference pixels
+QList< QPair<unsigned int, unsigned int> > WNNoRandColorizator::FormRefPixelCoords(const unsigned int &t_pixelsNum)
+{
+	if ( t_pixelsNum < 2 )
+	{
+		qDebug() << "FormRefPixel(): Error - invalid arguments";
+		QList< QPair<unsigned int, unsigned int> > empty;
+		return empty;
+	}
+
+	const unsigned int sourceWdt = m_source->GetImageWidth();
+	const unsigned int sourceHgt = m_source->GetImageHeight();
+
+	double facetsRelation = (double)sourceWdt / (double)sourceHgt;
+	double equalPixsNum = (double)t_pixelsNum / 2;
+	unsigned int wdtPixsNum = (unsigned int)floor( equalPixsNum * facetsRelation + 0.5 );
+	if ( t_pixelsNum <= wdtPixsNum )
+	{
+		wdtPixsNum = t_pixelsNum;
+	}
+
+	unsigned int hgtPixsNum = t_pixelsNum - wdtPixsNum;
+
+	unsigned int wdtBtwPixsDist = sourceWdt / wdtPixsNum;
+	unsigned int hgtBtwPixsDist = sourceHgt / hgtPixsNum;
+
+	QList< QPair<unsigned int, unsigned int> > pixelsCoords;
+	for ( unsigned int wdtPix = 0; wdtPix <= wdtPixsNum; wdtPix++ )
+	{
+		for ( unsigned int hgtPix = 0; hgtPix <= hgtPixsNum; hgtPix++ )
+		{
+			unsigned int width = wdtPix * wdtBtwPixsDist;
+			unsigned int height = hgtPix * hgtBtwPixsDist;
+
+			QPair<unsigned int, unsigned int> sourcePixCoord(width, height);
+			pixelsCoords.append(sourcePixCoord);
+		}
+	}
+
+	return pixelsCoords;
 }

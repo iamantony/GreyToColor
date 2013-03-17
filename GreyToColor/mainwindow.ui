@@ -524,7 +524,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -569,6 +569,7 @@
      </property>
      <addaction name="actionWalshSimple"/>
      <addaction name="actionWalshNeighbor"/>
+     <addaction name="actionWNNoRand"/>
     </widget>
     <addaction name="menuMethodType"/>
    </widget>
@@ -668,6 +669,14 @@
    </property>
    <property name="text">
     <string>Walsh Neighbor</string>
+   </property>
+  </action>
+  <action name="actionWNNoRand">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Wals Neighbor No Rand</string>
    </property>
   </action>
  </widget>

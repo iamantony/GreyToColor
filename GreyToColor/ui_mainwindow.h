@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Sun 17. Mar 10:45:27 2013
+** Created: Sun 17. Mar 13:03:40 2013
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -46,6 +46,7 @@ public:
     QAction *actionSubsampLumGrad;
     QAction *actionWalshSimple;
     QAction *actionWalshNeighbor;
+    QAction *actionWNNoRand;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *imgsLayout;
@@ -133,6 +134,9 @@ public:
         actionWalshNeighbor = new QAction(MainWindow);
         actionWalshNeighbor->setObjectName(QString::fromUtf8("actionWalshNeighbor"));
         actionWalshNeighbor->setCheckable(true);
+        actionWNNoRand = new QAction(MainWindow);
+        actionWNNoRand->setObjectName(QString::fromUtf8("actionWNNoRand"));
+        actionWNNoRand->setCheckable(true);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -334,7 +338,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 800, 21));
+        menubar->setGeometry(QRect(0, 0, 800, 20));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuDatabase = new QMenu(menubar);
@@ -370,6 +374,7 @@ public:
         menuColorization->addAction(menuMethodType->menuAction());
         menuMethodType->addAction(actionWalshSimple);
         menuMethodType->addAction(actionWalshNeighbor);
+        menuMethodType->addAction(actionWNNoRand);
 
         retranslateUi(MainWindow);
         QObject::connect(actionClose, SIGNAL(triggered()), MainWindow, SLOT(close()));
@@ -394,6 +399,7 @@ public:
         actionSubsampLumGrad->setText(QApplication::translate("MainWindow", "Subsampled Luminance and Gradient", 0, QApplication::UnicodeUTF8));
         actionWalshSimple->setText(QApplication::translate("MainWindow", "Walsh Simple", 0, QApplication::UnicodeUTF8));
         actionWalshNeighbor->setText(QApplication::translate("MainWindow", "Walsh Neighbor", 0, QApplication::UnicodeUTF8));
+        actionWNNoRand->setText(QApplication::translate("MainWindow", "Wals Neighbor No Rand", 0, QApplication::UnicodeUTF8));
         targetImgLbl->setText(QString());
         openTargetImgPB->setText(QApplication::translate("MainWindow", "Open target image", 0, QApplication::UnicodeUTF8));
         resultImgLbl->setText(QString());

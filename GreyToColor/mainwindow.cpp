@@ -135,6 +135,7 @@ void MainWindow::InitMethodsActionsGroup()
 	m_methods = new QActionGroup(this);
 	m_methods->addAction(ui->actionWalshSimple);
 	m_methods->addAction(ui->actionWalshNeighbor);
+	m_methods->addAction(ui->actionWNNoRand);
 
 	ui->actionWalshSimple->setChecked(true);
 
@@ -509,5 +510,9 @@ void MainWindow::SlotMethodType(QAction *t_action)
 	else if ( ui->actionWalshNeighbor == t_action )
 	{
 		emit SignalUseColorMethod(Methods::WALSH_NEIGHBOR);
+	}
+	else if ( ui->actionWNNoRand == t_action )
+	{
+		emit SignalUseColorMethod(Methods::WALSH_NEIGHBOR_NORAND);
 	}
 }

@@ -25,6 +25,7 @@ namespace Methods
 	{
 		WALSH_SIMPLE = 0,
 		WALSH_NEIGHBOR,
+		WALSH_NEIGHBOR_NORAND,
 		DEFAULT_LAST
 	};
 }

@@ -25,6 +25,7 @@
 #include "./IMAGES/TARGET/targetimage.h"
 #include "METHODS/walshsimplecolorizator.h"
 #include "METHODS/walshneighborcolorizator.h"
+#include "METHODS/wnnorandcolorizator.h"
 #include "DEFINES/programstatus.h"
 #include "DEFINES/colorization.h"
 
@@ -51,6 +52,8 @@ private:
 	void ColorizeByWalshSimple();
 	// Start colorization method Walsh Neighbor
 	void ColorizeByWalshNeighbor();
+	// Start colorization method Walsh Neighbor No Rand
+	void ColorizeByWNNoRand();
 
 signals:
 	void SignalColorizationDone();
