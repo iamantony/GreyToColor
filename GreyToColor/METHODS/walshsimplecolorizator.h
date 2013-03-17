@@ -24,6 +24,8 @@
 #include <time.h>
 #include <math.h>
 #include <QElapsedTimer>
+#include <QFileDialog>
+#include <QWidget>
 #include "./DEFINES/global.h"
 #include "./DEFINES/colorization.h"
 
@@ -45,6 +47,11 @@ private:
 	virtual bool ColorizeImage();
 	// Restore images params if needed
 	virtual bool PostColorization();
+
+	// Create mass of zeros for statistic
+	QList<QList<double> > GetMassForStat(const unsigned int &t_width, const unsigned int &t_height);
+	// Form statistic image
+	void FormStatImage(const QList< QList<double> > &t_statMass);
 };
 
 #endif // WALSHSIMPLECOLORIZATOR_H

@@ -122,6 +122,28 @@ bool WalshNeighborColorizator::ColorizeImage()
 	const unsigned int sourceWdt = m_source->GetImageWidth();
 	const unsigned int sourceHgt = m_source->GetImageHeight();
 
+	// Values of best found pixels characteristics
+	double bestDiffLum = DEFAULT_LUM;
+	double bestDiffSKO = DEFAULT_SKO;
+	unsigned int bestSourcePixWdt = 0;
+	unsigned int bestSourcePixHgt = 0;
+
+	// Targets pixel variables
+	double targPixLum = DEFAULT_LUM;
+	double targPixSKO = DEFAULT_SKO;
+
+	// Source pixel variables
+	unsigned int sourceRandWdt = 0;
+	unsigned int sourceRandHgt = 0;
+	double sourcePixLum = DEFAULT_LUM;
+	double sourcePixSKO = DEFAULT_SKO;
+	double sourceChA = 0;
+	double sourceChB = 0;
+
+	// Decision variables
+	double diffLum = DEFAULT_LUM;
+	double diffSKO = DEFAULT_SKO;
+
 	qDebug() << "Start colorization!";
 	QElapsedTimer timer;
 	timer.start();
@@ -138,29 +160,32 @@ bool WalshNeighborColorizator::ColorizeImage()
 
 			srand(time(NULL));
 
-			double bestDiffLum = DEFAULT_LUM;
-			double bestDiffSKO = DEFAULT_SKO;
-			unsigned int bestSourcePixWdt = 0;
-			unsigned int bestSourcePixHgt = 0;
+			// Reset best params
+			bestDiffLum = DEFAULT_LUM;
+			bestDiffSKO = DEFAULT_SKO;
+			bestSourcePixWdt = 0;
+			bestSourcePixHgt = 0;
 
-			double targPixLum = m_target->PixelChLum(width, height);
-			double targPixSKO = m_target->GetPixelsSKO(width, height);
+			// Get target pixel params
+			targPixLum = m_target->PixelChLum(width, height);
+			targPixSKO = m_target->GetPixelsSKO(width, height);
 			if ( (targPixLum <= NO_INFO) || (targPixSKO <= ERROR) )
 			{
 				qDebug() << "ColorizeImage(): Warning - failed to colorize pixel" << width << height;
 				continue;
 			}
 
+			// Try to fins best similar source image pixel
 			for ( int pix = 0; pix < NUM_OF_ATTEMPTS; pix++ )
 			{
-				const unsigned int sourceRandWdt = rand() % sourceWdt;
-				const unsigned int sourceRandHgt = rand() % sourceHgt;
+				sourceRandWdt = rand() % sourceWdt;
+				sourceRandHgt = rand() % sourceHgt;
 
-				const double sourcePixLum = m_source->PixelChLum(sourceRandWdt, sourceRandHgt);
-				const double sourcePixSKO = m_source->GetPixelsSKO(sourceRandWdt, sourceRandHgt);
+				sourcePixLum = m_source->PixelChLum(sourceRandWdt, sourceRandHgt);
+				sourcePixSKO = m_source->GetPixelsSKO(sourceRandWdt, sourceRandHgt);
 
-				const double diffLum = fabs( targPixLum - sourcePixLum );
-				const double diffSKO = fabs( targPixSKO - sourcePixSKO );
+				diffLum = fabs( targPixLum - sourcePixLum );
+				diffSKO = fabs( targPixSKO - sourcePixSKO );
 
 				if ( ( (diffLum < bestDiffLum) && (diffSKO < (bestDiffSKO + SKO_TRESHOLD)) ) ||
 					 ( (diffLum < (bestDiffLum + LUM_TRESHOLD)) && (diffSKO < bestDiffSKO) ) )
@@ -172,8 +197,9 @@ bool WalshNeighborColorizator::ColorizeImage()
 				}
 			}
 
-			double sourceChA = m_source->PixelChA(bestSourcePixWdt, bestSourcePixHgt);
-			double sourceChB = m_source->PixelChB(bestSourcePixWdt, bestSourcePixHgt);
+			// Transfer color from Source pixel to Target pixel
+			sourceChA = m_source->PixelChA(bestSourcePixWdt, bestSourcePixHgt);
+			sourceChB = m_source->PixelChB(bestSourcePixWdt, bestSourcePixHgt);
 			m_target->SetPixelChAB(width,
 								   height,
 								   sourceChA,
@@ -181,6 +207,7 @@ bool WalshNeighborColorizator::ColorizeImage()
 
 			m_target->SetPixColoured(width, height);
 
+			// Try to color coloured target pixels neighbor pixels by the same color
 			ColorizeNeighbor(width, height);
 		}
 	}
@@ -198,27 +225,58 @@ void WalshNeighborColorizator::ColorizeNeighbor(const unsigned int &t_startWidth
 	unsigned int targCurrWdt = t_startWidth;
 	unsigned int targCurrHgt = t_startHeight;
 
+	// Coords of next pixel to try to color
+	double targHgtTry = 0;
+	double targWdtTry = 0;
+
+	// Params of current pixel
+	double targPixLum = DEFAULT_LUM;
+	double targPixSKO = DEFAULT_SKO;
+
+	// Params of lower neighbor pixel
+	double lowerTargPixLum = DEFAULT_LUM;
+	double lowerTargPixSKO = DEFAULT_SKO;
+
+	// Decision variables
+	double lowerNeighborDiffLum = DEFAULT_LUM;
+	double lowerNeighborDiffSKO = DEFAULT_SKO;
+
+	// A and B channels of LAB color space
+	double chA = 0;
+	double chB = 0;
+
+	// Coord of right neighbor pixel
+	double targRightWdt = 0;
+
+	// Params of right neighbor pixel
+	double rightTargPixLum = DEFAULT_LUM;
+	double rightTargPixSKO = DEFAULT_SKO;
+
+	// Decision variables
+	double rightNeighborDiffLum = DEFAULT_LUM;
+	double rightNeighborDiffSKO = DEFAULT_SKO;
+
 	// Try to color lower neighbor pixel
-	double targHgtTry = targCurrHgt + 1;
+	targHgtTry = targCurrHgt + 1;
 	while( (true == m_target->IsPixColoured(targCurrWdt, targCurrHgt)) &&
 		   (targHgtTry < targetHgt) &&
 		   (false == m_target->IsPixColoured(targCurrWdt, targHgtTry)) )
 	{
 		// Get characteristics of current pixel
-		double targPixLum = m_target->PixelChLum(targCurrWdt, targCurrHgt);
-		double targPixSKO = m_target->GetPixelsSKO(targCurrWdt, targCurrHgt);
+		targPixLum = m_target->PixelChLum(targCurrWdt, targCurrHgt);
+		targPixSKO = m_target->GetPixelsSKO(targCurrWdt, targCurrHgt);
 
 		// Get characteristics of next lower pixel
-		double lowerTargPixLum = m_target->PixelChLum(targCurrWdt, targHgtTry);
-		double lowerTargPixSKO = m_target->GetPixelsSKO(targCurrWdt, targHgtTry);
+		lowerTargPixLum = m_target->PixelChLum(targCurrWdt, targHgtTry);
+		lowerTargPixSKO = m_target->GetPixelsSKO(targCurrWdt, targHgtTry);
 
-		double lowerNeighborDiffLum = fabs( targPixLum - lowerTargPixLum );
-		double lowerNeighborDiffSKO = fabs( targPixSKO - lowerTargPixSKO );
+		lowerNeighborDiffLum = fabs( targPixLum - lowerTargPixLum );
+		lowerNeighborDiffSKO = fabs( targPixSKO - lowerTargPixSKO );
 		if ( (lowerNeighborDiffLum < LUM_TRESHOLD) && (lowerNeighborDiffSKO < SKO_TRESHOLD) )
 		{
 			// If neighbor pixel has quite the same characteristics, apply to it the same color
-			double chA = m_target->PixelChA(targCurrWdt, targCurrHgt);
-			double chB = m_target->PixelChB(targCurrWdt, targCurrHgt);
+			chA = m_target->PixelChA(targCurrWdt, targCurrHgt);
+			chB = m_target->PixelChB(targCurrWdt, targCurrHgt);
 			m_target->SetPixelChAB(targCurrWdt,
 								   targHgtTry,
 								   chA,
@@ -227,17 +285,17 @@ void WalshNeighborColorizator::ColorizeNeighbor(const unsigned int &t_startWidth
 			m_target->SetPixColoured(targCurrWdt, targHgtTry);
 
 			// Try to color neighbor right pixel
-			double targRightWdt = targCurrWdt;
-			double targWdtTry = targCurrWdt + 1;
+			targRightWdt = targCurrWdt;
+			targWdtTry = targCurrWdt + 1;
 			while( (true == m_target->IsPixColoured(targRightWdt, targHgtTry)) &&
 				   (targWdtTry < targetWdt) &&
 				   (false == m_target->IsPixColoured(targWdtTry, targHgtTry)) )
 			{
-				double rightTargPixLum = m_target->PixelChLum(targWdtTry, targHgtTry);
-				double rightTargPixSKO = m_target->GetPixelsSKO(targWdtTry, targHgtTry);
+				rightTargPixLum = m_target->PixelChLum(targWdtTry, targHgtTry);
+				rightTargPixSKO = m_target->GetPixelsSKO(targWdtTry, targHgtTry);
 
-				double rightNeighborDiffLum = fabs( lowerTargPixLum - rightTargPixLum );
-				double rightNeighborDiffSKO = fabs( lowerTargPixSKO - rightTargPixSKO );
+				rightNeighborDiffLum = fabs( lowerTargPixLum - rightTargPixLum );
+				rightNeighborDiffSKO = fabs( lowerTargPixSKO - rightTargPixSKO );
 				if ( (rightNeighborDiffLum < LUM_TRESHOLD) && (rightNeighborDiffSKO < SKO_TRESHOLD) )
 				{
 					m_target->SetPixelChAB(targWdtTry,
