@@ -40,15 +40,15 @@ double CalculatorSKO::PixelMaskSKO(const double t_centralPixLum, const QList<dou
 	}
 
 	double SKO = BEST_SKO;
-	for ( int pix = 0; pix < t_luminances.size(); pix++ )
+	int pixNum = t_luminances.size();
+	for ( int pix = 0; pix < pixNum; pix++ )
 	{
 		double diff = t_centralPixLum - t_luminances.at(pix);
 		SKO += pow(diff, 2);
 	}
 
+	SKO /= pixNum;
 	SKO = pow(SKO, 0.5);
-
-	// TODO: check formula
 
 	return SKO;
 }

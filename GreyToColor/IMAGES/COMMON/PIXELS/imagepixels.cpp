@@ -316,10 +316,6 @@ QList<double> ImagePixels::GetPixNeighborsLum(const unsigned int &t_width, const
 	unsigned int heightStart = (unsigned int)qMax( 0, minHeightCoord );
 	unsigned int heightEnd = qMin( m_height, t_height + (unsigned int)offset + 1 );
 
-//	qDebug() << "Pixel" << t_width << t_height;
-//	qDebug() << "widthStart =" << widthStart << "widthEnd =" << widthEnd;
-//	qDebug() << "heightStart =" << heightStart << "heightEnd =" << heightEnd;
-
 	for ( unsigned int width = widthStart; width < widthEnd; width++ )
 	{
 		for ( unsigned int height = heightStart; height < heightEnd; height++ )
@@ -330,8 +326,7 @@ QList<double> ImagePixels::GetPixNeighborsLum(const unsigned int &t_width, const
 				// (central) pixel
 				continue;
 			}
-
-			double pixelLum = m_pixels[width][height]->GetChL();
+				double pixelLum = m_pixels[width][height]->GetChL();
 			luminances.append(pixelLum);
 		}
 	}

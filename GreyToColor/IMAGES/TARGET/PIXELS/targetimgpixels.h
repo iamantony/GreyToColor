@@ -20,6 +20,7 @@
 #define TRAGETIMGPIXELS_H
 
 #include <QFileDialog>
+#include <QElapsedTimer>
 #include "../../COMMON/PIXELS/imagepixels.h"
 #include "targetpixel.h"
 #include "./SERVICE/calculatorsko.h"
@@ -61,6 +62,8 @@ public:
 
 	// Test functions
 	void TestFunctionality();
+	// Test Calc SKO
+	void TestSKO();
 
 private:
 	// Calc for certain pixel in image it's SKO

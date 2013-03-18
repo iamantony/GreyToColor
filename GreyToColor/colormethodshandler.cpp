@@ -82,6 +82,10 @@ void ColorMethodsHandler::SlotStartColorization()
 			ColorizeByWNNoRand();
 			break;
 
+		case Methods::WALSH_NEIGHBOR_ONERAND:
+			ColorizeByWNOneRand();
+			break;
+
 		case Methods::DEFAULT_LAST:
 		default:
 		{
@@ -173,6 +177,26 @@ void ColorMethodsHandler::ColorizeByWNNoRand()
 	if ( false == targetColorized )
 	{
 		qDebug() << "ColorizeByWNNoRand(): Error - can't colorize by Waslh Neighbor Method";
+		emit SignalProcError(tr("Colorization failed"));
+		return;
+	}
+
+	emit SignalColorizationDone();
+	emit SignalProcDone();
+}
+
+// Start colorization method Walsh Neighbor One Rand
+// @input:
+// @output:
+void ColorMethodsHandler::ColorizeByWNOneRand()
+{
+	emit SignalCurrentProc(Program::COLORIZATION);
+
+	WNOneRandColorizator colorizator;
+	bool targetColorized = colorizator.Colorize(m_targetImg, m_sourceImg);
+	if ( false == targetColorized )
+	{
+		qDebug() << "ColorizeByWNOneRand(): Error - can't colorize by Waslh Neighbor Method";
 		emit SignalProcError(tr("Colorization failed"));
 		return;
 	}

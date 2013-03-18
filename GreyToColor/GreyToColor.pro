@@ -55,7 +55,8 @@ SOURCES += main.cpp\
     METHODS/colorizator.cpp \
     METHODS/walshsimplecolorizator.cpp \
     METHODS/walshneighborcolorizator.cpp \
-    METHODS/wnnorandcolorizator.cpp
+    METHODS/wnnorandcolorizator.cpp \
+    METHODS/wnonerandcolorizator.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -107,7 +108,8 @@ HEADERS  += \
     METHODS/colorizator.h \
     METHODS/walshsimplecolorizator.h \
     METHODS/walshneighborcolorizator.h \
-    METHODS/wnnorandcolorizator.h
+    METHODS/wnnorandcolorizator.h \
+    METHODS/wnonerandcolorizator.h
 
 FORMS    += \
 	mainwindow.ui

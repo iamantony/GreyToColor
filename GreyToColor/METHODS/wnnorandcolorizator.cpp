@@ -163,7 +163,7 @@ bool WNNoRandColorizator::ColorizeImage()
 
 	for ( unsigned int width = 0; width < targetWdt; width++ )
 	{
-		qDebug() << "ColorizeImage(): row =" << width;
+//		qDebug() << "ColorizeImage(): row =" << width;
 		for ( unsigned int height = 0; height < targetHgt; height++ )
 		{
 			if ( true == m_target->IsPixColoured(width, height) )

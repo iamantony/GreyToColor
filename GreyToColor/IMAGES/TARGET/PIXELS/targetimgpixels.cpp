@@ -326,3 +326,37 @@ void TargetImgPixels::TestFunctionality()
 	UnScaleLum();
 	qDebug() << "After unscaling:" << pixel->GetChL();
 }
+
+// Test Calc SKO
+void TargetImgPixels::TestSKO()
+{
+	QWidget wdt;
+	QString imgName = QFileDialog::getOpenFileName(&wdt,
+												   "Open target image...",
+												   QDir::currentPath(),
+												   "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
+
+	if ( true == imgName.isEmpty() )
+	{
+		return;
+	}
+
+	QImage image(imgName);
+	bool imgFormed = FormImgPixels(image);
+	if ( false == imgFormed )
+	{
+		qDebug() << "Fail: Can't form image";
+		return;
+	}
+
+	TransAllPixRGB2LAB();
+
+	QElapsedTimer timer;
+	timer.start();
+
+	// Calc SKO for some pixel (in the middle of the image)
+	CalcPixSKO(5, 5);
+
+	qint64 elapsed = timer.nsecsElapsed();
+	qDebug() << "Elapsed:" << elapsed;
+}
