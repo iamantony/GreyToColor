@@ -41,8 +41,10 @@ public:
 	double GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const;
 	// Scale luminance of all pixels in image with certain scale factor
 	bool ScaleLABLum(const double &t_scaleFactor);
+	// Normalise luminance of all pixels in image
+	bool NormaliseLABLum(const double &t_newMinLABLum, const double &t_newMaxLABLum);
 	// Unscale luminance of all pixels in image
-	void UnScaleLABLum();
+	void RestoreLABLum();
 	// Set prefered color for certain pixel
 	void SetPixPrefColor(const unsigned int &t_width,
 						 const unsigned int &t_height,

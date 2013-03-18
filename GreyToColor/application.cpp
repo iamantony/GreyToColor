@@ -58,6 +58,7 @@ void Application::CreateUI()
 	qRegisterMetaType<Program::Status>("Program::Status");
 	qRegisterMetaType<Passport::Type>("Passport::Type");
 	qRegisterMetaType<Methods::Type>("Methods::Type");
+	qRegisterMetaType<LumEqualization::Type>("LumEqualization::Type");
 	qRegisterMetaType<Image>("Image");
 }
 
@@ -210,6 +211,11 @@ void Application::ConnectUIandColMethHand()
 					 SIGNAL(SignalUseColorMethod(Methods::Type)),
 					 m_colorMethHandler,
 					 SLOT(SlotSetMethodType(Methods::Type)));
+
+	QObject::connect(m_mainUI,
+					 SIGNAL(SignalUseLumEqual(LumEqualization::Type)),
+					 m_colorMethHandler,
+					 SLOT(SlotSetLumEqualType(LumEqualization::Type)));
 
 	QObject::connect(m_mainUI,
 					 SIGNAL(SignalStartColorization()),

@@ -178,8 +178,8 @@ bool TargetImgPixels::ScaleLum(const double &t_scaleFactor)
 			if ( false == pixelScaled )
 			{
 				qDebug() << "ScaleLum(): Error - can't scale luminance for pixel" << width << height;
-				qDebug() << "Luminance unscaled!";
-				UnScaleLum();
+				qDebug() << "Luminance restored!";
+				RestoreLum();
 				return false;
 			}
 		}
@@ -188,17 +188,67 @@ bool TargetImgPixels::ScaleLum(const double &t_scaleFactor)
 	return true;
 }
 
-// Unscale luminance of all pixels in image
+// Normalize pixels luminances
+// @input:
+// - double - positive value of new min LAB luminance
+// - double - positive value of new max LAB luminance
+// @output:
+// - true - luminance of all pixels normalised
+// - false - can't normalise luminance
+bool TargetImgPixels::NormaliseLum(const double &t_newMinLum, const double &t_newMaxLum)
+{
+	if ( (t_newMinLum < 0) ||
+		 (t_newMaxLum < 0) ||
+		 (t_newMaxLum < t_newMinLum ))
+	{
+		qDebug() << "NormaliseLum(): Error - invalid arguments";
+		return false;
+	}
+
+	const double currMinLum = FindMinLum();
+	const double currMaxLum = FindMaxLum();
+	const double diffLum = qAbs( currMaxLum - currMinLum );
+
+	double scaleFactor = ( t_newMaxLum - t_newMinLum ) / diffLum;
+	if ( scaleFactor <= 0 )
+	{
+		scaleFactor = 1;
+	}
+
+	for ( unsigned int width = 0; width < m_width; width++ )
+	{
+		for ( unsigned int height = 0; height < m_height; height++ )
+		{
+			TargetPixel *pixel = (TargetPixel *)m_pixels[width][height];
+			double luminance = pixel->GetChL();
+
+			luminance = (luminance - currMinLum) * scaleFactor + t_newMinLum;
+
+			bool pixNormalised = pixel->SetNormalizedLum(luminance);
+			if ( false == pixNormalised )
+			{
+				qDebug() << "NormaliseLum(): Error - can't normalize luminance for pixel" << width << height;
+				qDebug() << "Luminance restored!";
+				RestoreLum();
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+
+// Restore original luminance of all pixels in image
 // @input:
 // @output:
-void TargetImgPixels::UnScaleLum()
+void TargetImgPixels::RestoreLum()
 {
 	for ( unsigned int width = 0; width < m_width; width++ )
 	{
 		for ( unsigned int height = 0; height < m_height; height++ )
 		{
 			TargetPixel *pixel = (TargetPixel *)m_pixels[width][height];
-			pixel->UnScaleLum();
+			pixel->RestoreLum();
 		}
 	}
 }
@@ -323,7 +373,7 @@ void TargetImgPixels::TestFunctionality()
 	ScaleLum(scaleFactor);
 	qDebug() << "After scaling:" << pixel->GetChL();
 
-	UnScaleLum();
+	RestoreLum();
 	qDebug() << "After unscaling:" << pixel->GetChL();
 }
 

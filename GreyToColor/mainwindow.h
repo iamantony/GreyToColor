@@ -28,6 +28,7 @@
 #include <QDebug>
 #include "UI/statusbar.h"
 #include "UI/scalelabel.h"
+#include "UI/DIALOGS/preferencesdialog.h"
 #include "IMAGES/COMMON/image.h"
 #include "DEFINES/programstatus.h"
 #include "DEFINES/mainwindowui.h"
@@ -47,9 +48,11 @@ class MainWindow : public QMainWindow
 private:
 	Ui::MainWindow *ui;
 	StatusBar *m_statusBar;
-	QActionGroup *m_passports;
-	QActionGroup *m_methods;
 	Program::Status m_appStatus;
+
+	Passport::Type m_imgPassport;
+	Methods::Type m_colorizationMethod;
+	LumEqualization::Type m_lumEqualType;
 
 	// == METHODS ==
 public:
@@ -59,16 +62,14 @@ public:
 private:
 	// Call all functions to initialise UI
 	void InitUI();
+	// Init default settings
+	void InitSettings();
 	// Creating, applying settings to status bar
 	void InitStatusBar();
 	// Put default picture to all labels on MainWindow
 	void InitImgsLabels();
 	// Put default picture to one of three labels on MainWindow
 	void InitImg(Images::Types t_imgType);
-	// Init group of passport type actions
-	void InitPassportActionsGroup();
-	// Init group of methods type actions
-	void InitMethodsActionsGroup();
 	// Show warning window with title and some text
 	void ShowWarning(const QString &t_title, const QString &t_text);
 	// Check if app status if OK (application not performing some calculations)
@@ -84,6 +85,7 @@ signals:
 	void SignalSaveResultImg(const QString &t_imgPath);
 	void SignalUseImgPassport(const Passport::Type &t_type);
 	void SignalUseColorMethod(const Methods::Type &t_type);
+	void SignalUseLumEqual(const LumEqualization::Type &t_type);
 	void SignalStartColorization();
 
 public slots:
@@ -117,8 +119,9 @@ private slots:
 	void on_actionOpenDatabase_triggered();
 	void on_actionAddImages_triggered();
 	void on_actionPreferences_triggered();
-	void SlotPassportType(QAction *t_action);
-	void SlotMethodType(QAction *t_action);
+	void SlotGetPassportType(const Passport::Type &t_passType);
+	void SlotGetColorMethodType(const Methods::Type &t_colorMethodType);
+	void SlotGetLumEqualType(const LumEqualization::Type &t_lumEqualType);
 };
 
 #endif // MAINWINDOW_H

@@ -37,7 +37,7 @@ void TargetPixel::ClearPixel()
 	this->ClearColor();
 	m_prefColor.ClearColor();
 
-	m_lumScaleFactor = DEFAULT_SCALE_LUM_FACTOR;
+	m_originalLum = ERROR;
 	SetUncolored();
 }
 
@@ -98,12 +98,13 @@ bool TargetPixel::ScaleLum(const double &t_factor)
 	}
 
 	// We don't want to scale luminance of pixel twice
-	UnScaleLum();
+	if ( (ERROR != m_originalLum) && (m_originalLum != GetChL()) )
+	{
+		RestoreLum();
+	}
 
-	m_lumScaleFactor = t_factor;
-
-	double currentLum = GetChL();
-	double scaledLum = currentLum * t_factor;
+	m_originalLum = GetChL();
+	double scaledLum = m_originalLum * t_factor;
 
 	bool lumSet = SetChL(scaledLum);
 	if ( false == lumSet )
@@ -114,29 +115,52 @@ bool TargetPixel::ScaleLum(const double &t_factor)
 	return true;
 }
 
-// Unscale luminance
+// Set normalised luminance
 // @input:
+// - double - positive value of LAB luminance
 // @output:
-// - true - luminance unscaled and factor set to default
-// - false - can't unscale luminance
-bool TargetPixel::UnScaleLum()
+// - true - luminance restored
+// - false - can't restore luminance
+bool TargetPixel::SetNormalizedLum(const double &t_newLum)
 {
-	if ( DEFAULT_SCALE_LUM_FACTOR == m_lumScaleFactor )
+	if ( t_newLum < 0 )
 	{
-		// Pixels luminance wasn't scale
-		return true;
+		return false;
 	}
 
-	double currentLum = GetChL();
-	double unscaledLum = currentLum / m_lumScaleFactor;
+	// If pixel was not previously scaled or normalised, we need to save pixels orignal lumiance value
+	if ( ERROR == m_originalLum )
+	{
+		m_originalLum = GetChL();
+	}
 
-	bool lumSet = SetChL(unscaledLum);
+	bool lumSet = SetChL(t_newLum);
 	if ( false == lumSet )
 	{
 		return false;
 	}
 
-	m_lumScaleFactor = DEFAULT_SCALE_LUM_FACTOR;
+	return true;
+}
+
+// Restore original luminance
+// @input:
+// @output:
+// - true - luminance restored
+// - false - can't restore luminance
+bool TargetPixel::RestoreLum()
+{
+	if ( ERROR == m_originalLum )
+	{
+		// Pixels luminance wasn't scale
+		return false;
+	}
+
+	bool lumSet = SetChL(m_originalLum);
+	if ( false == lumSet )
+	{
+		return false;
+	}
 
 	return true;
 }
@@ -237,7 +261,7 @@ void TargetPixel::TestScaleLum()
 	TransformRGB2LAB();
 
 	ScaleLum(1.243);
-	UnScaleLum();
+	RestoreLum();
 
 	TransformLAB2RGB();
 

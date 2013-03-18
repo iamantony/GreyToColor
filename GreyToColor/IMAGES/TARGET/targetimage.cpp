@@ -93,13 +93,26 @@ bool TargetImage::ScaleLABLum(const double &t_scaleFactor)
 	return pixels->ScaleLum(t_scaleFactor);
 }
 
-// Unscale luminance of all pixels in image
+// Normalise luminance of all pixels in image
 // @input:
+// - double - positive value of new min LAB luminance
+// - double - positive value of new max LAB luminance
 // @output:
-void TargetImage::UnScaleLABLum()
+// - true - luminance of all pixels normalised
+// - false - can't normalise luminance
+bool TargetImage::NormaliseLABLum(const double &t_newMinLABLum, const double &t_newMaxLABLum)
 {
 	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
-	pixels->UnScaleLum();
+	return pixels->NormaliseLum(t_newMinLABLum, t_newMaxLABLum);
+}
+
+// Restore luminance of all pixels in image
+// @input:
+// @output:
+void TargetImage::RestoreLABLum()
+{
+	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	pixels->RestoreLum();
 }
 
 // Set prefered color for certain pixel
@@ -166,7 +179,7 @@ Image TargetImage::GetResultImage()
 
 	// Go reverse:
 	// - bring back original value of luminance for all image pixels
-	UnScaleLABLum();
+	RestoreLABLum();
 	// - get from LAB pixels (myabe, their value was changed) new values for RGB pixels
 	TransformImgLAB2GRB();
 

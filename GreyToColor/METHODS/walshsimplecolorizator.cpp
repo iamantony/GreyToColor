@@ -30,7 +30,9 @@ WalshSimpleColorizator::WalshSimpleColorizator()
 // @output:
 // - false - can't colorize
 // - true - Target Image colorized
-bool WalshSimpleColorizator::Colorize(TargetImage *t_targetImg, SourceImage *t_sourceImg)
+bool WalshSimpleColorizator::Colorize(TargetImage *t_targetImg,
+									  SourceImage *t_sourceImg,
+									  const LumEqualization::Type &t_type)
 {
 	if ( (NULL == t_targetImg) ||
 		 (NULL == t_sourceImg) ||
@@ -44,7 +46,7 @@ bool WalshSimpleColorizator::Colorize(TargetImage *t_targetImg, SourceImage *t_s
 	m_target = t_targetImg;
 	m_source = t_sourceImg;
 
-	bool imagesPrepared = PrepareImages();
+	bool imagesPrepared = PrepareImages(t_type);
 	if ( false == imagesPrepared )
 	{
 		qDebug() << "Colorize(): Error - can't prepare images for colorization";
@@ -71,7 +73,7 @@ bool WalshSimpleColorizator::Colorize(TargetImage *t_targetImg, SourceImage *t_s
 // Prepare images to colorization
 // @input:
 // @output:
-bool WalshSimpleColorizator::PrepareImages()
+bool WalshSimpleColorizator::PrepareImages(const LumEqualization::Type &t_type)
 {
 	if ( (NULL == m_target) ||
 		 (NULL == m_source) ||
@@ -87,10 +89,7 @@ bool WalshSimpleColorizator::PrepareImages()
 	m_target->TransformImgRGB2LAB();
 	m_source->TransformImgRGB2LAB();
 
-	const double targMaxLum = m_target->GetMaxLABLum();
-	const double sourceMaxLum = m_source->GetMaxLABLum();
-	const double scaleFactor = sourceMaxLum / targMaxLum;
-	bool lumScaled = m_target->ScaleLABLum(scaleFactor);
+	bool lumScaled = ScaleTargetImgLum(t_type);
 	if ( false == lumScaled )
 	{
 		qDebug() << "PrepareImages(): Error - can't scale luminance of Target image";
@@ -239,7 +238,7 @@ bool WalshSimpleColorizator::PostColorization()
 		return false;
 	}
 
-	m_target->UnScaleLABLum();
+	m_target->RestoreLABLum();
 	return true;
 }
 

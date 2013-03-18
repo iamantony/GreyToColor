@@ -279,6 +279,33 @@ double ImagePixels::FindMinLum() const
 	return minLum;
 }
 
+// Find average image luminance
+// @input:
+// @output:
+// - ERROR - can't find average luminance
+// - double - positive found average luminance of images pixels
+double ImagePixels::FindAverageLum() const
+{
+	if ( false == HasPixels() )
+	{
+		qDebug() << "FindAverageLum(): Error - no pixels";
+		return ERROR;
+	}
+
+	double averageLum = DEFAULT_MIN_LAB_LUM;
+	for ( unsigned int width = 0; width < m_width; width++ )
+	{
+		for ( unsigned int height = 0; height < m_height; height++ )
+		{
+			averageLum += m_pixels[width][height]->GetChL();
+		}
+	}
+
+	averageLum /= m_width * m_height;
+
+	return averageLum;
+}
+
 // Get list of luminances of neighbor pixels (to calc SKO, for example)
 // @input:
 // - unsigned int - exist width (x) position of pixel

@@ -37,6 +37,7 @@ class ColorMethodsHandler : public QObject
 	// == DATA ==
 private:
 	Methods::Type m_methodToUse;
+	LumEqualization::Type m_lumEqualType;
 	TargetImage *m_targetImg;
 	SourceImage *m_sourceImg;
 
@@ -68,6 +69,8 @@ signals:
 public slots:
 	// Set type of colorization method to use
 	void SlotSetMethodType(const Methods::Type &t_type);
+	// Set type of luminance equalisation to use
+	void SlotSetLumEqualType(const LumEqualization::Type &t_type);
 	// Start Colorization
 	void SlotStartColorization();
 	// Get pointer to current target image

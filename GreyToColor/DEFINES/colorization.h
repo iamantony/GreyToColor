@@ -31,6 +31,17 @@ namespace Methods
 	};
 }
 
+namespace LumEqualization
+{
+	enum Type
+	{
+		SCALE_BY_MAX = 0,
+		SCALE_BY_AVERAGE,
+		NORMALIZE_LUM,
+		DEFAULT_LAST
+	};
+}
+
 #define DEFAULT_LUM 999999
 #define DEFAULT_SKO 999999
 #define LUM_TRESHOLD 0.09

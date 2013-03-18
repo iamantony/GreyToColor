@@ -67,8 +67,12 @@ public:
 					  const double &t_chA,
 					  const double &t_chB);
 
+	// Find among all pixels in image value of min luminance
+	double GetMinLABLum() const;
 	// Find among all pixels in image value of max luminance
 	double GetMaxLABLum() const;
+	// Find average image luminance
+	double GetAverageLABLum() const;
 	// Check if pixel with certain coords is greyscale
 	bool IsPixelGrey(const unsigned int &t_width, const unsigned int &t_height) const;
 	// Add image similiarity area

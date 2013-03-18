@@ -36,11 +36,13 @@ public:
 	WalshNeighborColorizator();
 
 	// Start Colorization
-	virtual bool Colorize(TargetImage *t_targetImg, SourceImage *t_sourceImg);
+	virtual bool Colorize(TargetImage *t_targetImg,
+						  SourceImage *t_sourceImg,
+						  const LumEqualization::Type &t_type);
 
 private:
 	// Prepare images to colorization
-	virtual bool PrepareImages();
+	virtual bool PrepareImages(const LumEqualization::Type &t_type);
 	// Colorize Target image using color information from Source image
 	virtual bool ColorizeImage();
 	// Try to colorize neighbor pixels by the same color

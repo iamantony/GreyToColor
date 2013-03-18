@@ -37,12 +37,22 @@ MainWindow::~MainWindow()
 void MainWindow::InitUI()
 {
 	ui->setupUi(this);
-	m_appStatus = Program::OK;
 
+	InitSettings();
 	InitStatusBar();
 	InitImgsLabels();
-	InitPassportActionsGroup();
-	InitMethodsActionsGroup();
+}
+
+// Init default settings
+// @input:
+// @output:
+void MainWindow::InitSettings()
+{
+	m_appStatus = Program::OK;
+
+	m_imgPassport = Passport::LUM_HISTOGRAM;
+	m_colorizationMethod = Methods::WALSH_SIMPLE;
+	m_lumEqualType = LumEqualization::SCALE_BY_MAX;
 }
 
 // Creating, applying settings to status bar
@@ -102,52 +112,6 @@ void MainWindow::InitImg(Images::Types t_imgType)
 			return;
 		}
 	}
-}
-
-// Init group of passport type actions
-// @input:
-// @output:
-void MainWindow::InitPassportActionsGroup()
-{
-	m_passports = new QActionGroup(this);
-	m_passports->addAction(ui->actionLumHist);
-	m_passports->addAction(ui->actionSubsampLum);
-	m_passports->addAction(ui->actionLumGradHists);
-	m_passports->addAction(ui->actionSubsampLumGrad);
-
-	ui->actionLumHist->setChecked(true);
-
-	m_passports->setExclusive(true);
-	m_passports->setEnabled(true);
-	m_passports->setVisible(true);
-
-	connect(m_passports,
-			SIGNAL(triggered(QAction*)),
-			this,
-			SLOT(SlotPassportType(QAction*)));
-}
-
-// Init group of methods type actions
-// @input:
-// @output:
-void MainWindow::InitMethodsActionsGroup()
-{
-	m_methods = new QActionGroup(this);
-	m_methods->addAction(ui->actionWalshSimple);
-	m_methods->addAction(ui->actionWalshNeighbor);
-	m_methods->addAction(ui->actionWNNoRand);
-	m_methods->addAction(ui->actionWNOneRand);
-
-	ui->actionWalshSimple->setChecked(true);
-
-	m_methods->setExclusive(true);
-	m_methods->setEnabled(true);
-	m_methods->setVisible(true);
-
-	connect(m_methods,
-			SIGNAL(triggered(QAction*)),
-			this,
-			SLOT(SlotMethodType(QAction*)));
 }
 
 // Show warning window with title and some text
@@ -458,10 +422,27 @@ void MainWindow::on_actionAddImages_triggered()
 // @output:
 void MainWindow::on_actionPreferences_triggered()
 {
-	// TODO:
-	// - create preferences dialog
-	// - create connections
-	// - show
+	PreferencesDialog prefs(this);
+	prefs.InitPrefs(m_imgPassport,
+					m_colorizationMethod,
+					m_lumEqualType);
+
+	connect(&prefs,
+			SIGNAL(SignalPassportType(Passport::Type)),
+			this,
+			SLOT(SlotGetPassportType(Passport::Type)));
+
+	connect(&prefs,
+			SIGNAL(SignalColorMethodType(Methods::Type)),
+			this,
+			SLOT(SlotGetColorMethodType(Methods::Type)));
+
+	connect(&prefs,
+			SIGNAL(SignalLumEqualType(LumEqualization::Type)),
+			this,
+			SLOT(SlotGetLumEqualType(LumEqualization::Type)));
+
+	prefs.exec();
 }
 
 // Slot to set SKO value
@@ -476,48 +457,29 @@ void MainWindow::SlotGetImagesSKO(const double &t_sko)
 	ui->lineSKO->setText(skoString);
 }
 
-// Slot for choosing image passport type
+// Slot for getting Passport Type from Preferences Dialog
 // @input:
 // @output:
-void MainWindow::SlotPassportType(QAction *t_action)
+void MainWindow::SlotGetPassportType(const Passport::Type &t_passType)
 {
-	if ( ui->actionLumHist == t_action )
-	{
-		emit SignalUseImgPassport(Passport::LUM_HISTOGRAM);
-	}
-	else if ( ui->actionSubsampLum == t_action )
-	{
-		emit SignalUseImgPassport(Passport::LUM_SUBSAMPLE);
-	}
-	else if ( ui->actionLumGradHists == t_action )
-	{
-		emit SignalUseImgPassport(Passport::LUM_AND_GRAD_HIST);
-	}
-	else if ( ui->actionSubsampLumGrad == t_action )
-	{
-		emit SignalUseImgPassport(Passport::LUM_AND_GRAD_SUB);
-	}
+	m_imgPassport = t_passType;
+	emit SignalUseImgPassport(m_imgPassport);
 }
 
-// Slot for choosing type of colorization method
+// Slot for getting Colorization Method type from Preferences Dialog
 // @input:
 // @output:
-void MainWindow::SlotMethodType(QAction *t_action)
+void MainWindow::SlotGetColorMethodType(const Methods::Type &t_colorMethodType)
 {
-	if ( ui->actionWalshSimple == t_action )
-	{
-		emit SignalUseColorMethod(Methods::WALSH_SIMPLE);
-	}
-	else if ( ui->actionWalshNeighbor == t_action )
-	{
-		emit SignalUseColorMethod(Methods::WALSH_NEIGHBOR);
-	}
-	else if ( ui->actionWNNoRand == t_action )
-	{
-		emit SignalUseColorMethod(Methods::WALSH_NEIGHBOR_NORAND);
-	}
-	else if ( ui->actionWNOneRand == t_action )
-	{
-		emit SignalUseColorMethod(Methods::WALSH_NEIGHBOR_ONERAND);
-	}
+	m_colorizationMethod = t_colorMethodType;
+	emit SignalUseColorMethod(m_colorizationMethod);
+}
+
+// Slot for getting Luminance Equalization type from Preferences Dialog
+// @input:
+// @output:
+void MainWindow::SlotGetLumEqualType(const LumEqualization::Type &t_lumEqualType)
+{
+	m_lumEqualType = t_lumEqualType;
+	emit SignalUseLumEqual(m_lumEqualType);
 }

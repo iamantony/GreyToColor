@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Mon 18. Mar 12:25:00 2013
+** Created: Mon 18. Mar 16:36:25 2013
 **      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -115,7 +115,7 @@ public:
         actionOpenDatabase->setObjectName(QString::fromUtf8("actionOpenDatabase"));
         actionPreferences = new QAction(MainWindow);
         actionPreferences->setObjectName(QString::fromUtf8("actionPreferences"));
-        actionPreferences->setEnabled(false);
+        actionPreferences->setEnabled(true);
         actionLumHist = new QAction(MainWindow);
         actionLumHist->setObjectName(QString::fromUtf8("actionLumHist"));
         actionLumHist->setCheckable(true);

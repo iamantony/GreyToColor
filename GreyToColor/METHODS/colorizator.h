@@ -19,8 +19,10 @@
 #ifndef COLORIZATOR_H
 #define COLORIZATOR_H
 
+#include <QDebug>
 #include "./IMAGES/SOURCE/sourceimage.h"
 #include "./IMAGES/TARGET/targetimage.h"
+#include "./DEFINES/colorization.h"
 
 class Colorizator
 {
@@ -35,18 +37,28 @@ public:
 	~Colorizator();
 
 	// Start Colorization
-	virtual bool Colorize(TargetImage *t_targetImg, SourceImage *t_sourceImg) = 0;
+	virtual bool Colorize(TargetImage *t_targetImg,
+						  SourceImage *t_sourceImg,
+						  const LumEqualization::Type &t_type) = 0;
 
 protected:
 	// Prepare images to colorization
-	virtual bool PrepareImages() = 0;
+	virtual bool PrepareImages(const LumEqualization::Type &t_type) = 0;
 	// Colorize Target image using color information from Source image
 	virtual bool ColorizeImage() = 0;
 	// Restore images params if needed
 	virtual bool PostColorization() = 0;
+	// Scale Target Image luminance
+	bool ScaleTargetImgLum(const LumEqualization::Type &t_type);
 
 private:
 	void Clear();
+	// Scale Target Image pixels luminances by Max luminance value of Source Image
+	bool ScaleTargetImgLumByMax();
+	// Scale Target Image pixels luminances by Average luminance value of Source Image
+	bool ScaleTargetImgLumByAverage();
+	// Normalize Target Image pixels luminances using min/max luminances of Source Image
+	bool NormalizeTargetImg();
 };
 
 #endif // COLORIZATOR_H

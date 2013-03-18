@@ -198,14 +198,34 @@ void ProcessingImage::SetPixelChAB(const unsigned int &t_width,
 								  t_chB);
 }
 
+// Find among all pixels in image value of min luminance
+// @input:
+// @output:
+// - ERROR - can't find min luminance
+// - double - positive found min luminance of image pixels
+double ProcessingImage::GetMinLABLum() const
+{
+	return m_imgPixels->FindMinLum();
+}
+
 // Find among all pixels in image value of max luminance
 // @input:
 // @output:
 // - ERROR - can't find max luminance
-// - double - positive found max luminance of images pixels
+// - double - positive found max luminance of image pixels
 double ProcessingImage::GetMaxLABLum() const
 {
 	return m_imgPixels->FindMaxLum();
+}
+
+// Find average image luminance
+// @input:
+// @output:
+// - ERROR - can't find average luminance
+// - double - positive found average luminance of image pixels
+double ProcessingImage::GetAverageLABLum() const
+{
+	return m_imgPixels->FindAverageLum();
 }
 
 // Check if pixel with certain coords is greyscale

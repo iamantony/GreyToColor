@@ -30,7 +30,7 @@ class TargetPixel : public ColorPixel
 	// == DATA ==
 private:
 	bool m_colored;
-	double m_lumScaleFactor;
+	double m_originalLum;
 	PreferedColor m_prefColor;
 
 	// == METHODS ==
@@ -46,8 +46,10 @@ public:
 	void SetAsGrey();
 	// Scale luminance with some factor
 	bool ScaleLum(const double &t_factor);
-	// Unscale luminance
-	bool UnScaleLum();
+	// Set normalised luminance
+	bool SetNormalizedLum(const double &t_newLum);
+	// Restore original luminance
+	bool RestoreLum();
 	// Set prefered color for pixel
 	void SetPreferedColor(const RGB &t_prefColor);
 	// Check if pixel has prefered color

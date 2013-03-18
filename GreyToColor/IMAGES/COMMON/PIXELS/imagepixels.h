@@ -65,6 +65,8 @@ public:
 	double FindMaxLum() const;
 	// Find among all pixels in image value of min luminance
 	double FindMinLum() const;
+	// Find average pixels luminance
+	double FindAverageLum() const;
 	// Check if pixel with certain coords is greyscale
 	bool IsPixGrey(const unsigned int &t_width, const unsigned int &t_height) const;
 

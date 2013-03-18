@@ -37,10 +37,12 @@ void ColorMethodsHandler::Clear()
 	m_targetImg = NULL;
 	m_sourceImg = NULL;
 	m_methodToUse = Methods::WALSH_SIMPLE;
+	m_lumEqualType = LumEqualization::SCALE_BY_MAX;
 }
 
 // Set type of colorization method to use
 // @input:
+// - Methods::Type - exist colorization method
 // @output:
 void ColorMethodsHandler::SlotSetMethodType(const Methods::Type &t_type)
 {
@@ -51,6 +53,21 @@ void ColorMethodsHandler::SlotSetMethodType(const Methods::Type &t_type)
 	}
 
 	m_methodToUse = t_type;
+}
+
+// Set type of luminance equalisation to use
+// @input:
+// - LumEqualization::Type - exist luminance equalisation type
+// @output:
+void ColorMethodsHandler::SlotSetLumEqualType(const LumEqualization::Type &t_type)
+{
+	if ( LumEqualization::DEFAULT_LAST == t_type )
+	{
+		qDebug() << "SlotSetLumEqualType(): Error - invalid arguments";
+		return;
+	}
+
+	m_lumEqualType = t_type;
 }
 
 // Start Colorization
@@ -133,7 +150,10 @@ void ColorMethodsHandler::ColorizeByWalshSimple()
 	emit SignalCurrentProc(Program::COLORIZATION);
 
 	WalshSimpleColorizator colorizator;
-	bool targetColorized = colorizator.Colorize(m_targetImg, m_sourceImg);
+	bool targetColorized = colorizator.Colorize(m_targetImg,
+												m_sourceImg,
+												m_lumEqualType);
+
 	if ( false == targetColorized )
 	{
 		qDebug() << "ColorizeByWalshSimple(): Error - can't colorize by Waslh Simple Method";
@@ -153,7 +173,10 @@ void ColorMethodsHandler::ColorizeByWalshNeighbor()
 	emit SignalCurrentProc(Program::COLORIZATION);
 
 	WalshNeighborColorizator colorizator;
-	bool targetColorized = colorizator.Colorize(m_targetImg, m_sourceImg);
+	bool targetColorized = colorizator.Colorize(m_targetImg,
+												m_sourceImg,
+												m_lumEqualType);
+
 	if ( false == targetColorized )
 	{
 		qDebug() << "ColorizeByWalshNeighbor(): Error - can't colorize by Waslh Neighbor Method";
@@ -173,7 +196,10 @@ void ColorMethodsHandler::ColorizeByWNNoRand()
 	emit SignalCurrentProc(Program::COLORIZATION);
 
 	WNNoRandColorizator colorizator;
-	bool targetColorized = colorizator.Colorize(m_targetImg, m_sourceImg);
+	bool targetColorized = colorizator.Colorize(m_targetImg,
+												m_sourceImg,
+												m_lumEqualType);
+
 	if ( false == targetColorized )
 	{
 		qDebug() << "ColorizeByWNNoRand(): Error - can't colorize by Waslh Neighbor Method";
@@ -193,7 +219,10 @@ void ColorMethodsHandler::ColorizeByWNOneRand()
 	emit SignalCurrentProc(Program::COLORIZATION);
 
 	WNOneRandColorizator colorizator;
-	bool targetColorized = colorizator.Colorize(m_targetImg, m_sourceImg);
+	bool targetColorized = colorizator.Colorize(m_targetImg,
+												m_sourceImg,
+												m_lumEqualType);
+
 	if ( false == targetColorized )
 	{
 		qDebug() << "ColorizeByWNOneRand(): Error - can't colorize by Waslh Neighbor Method";

@@ -56,7 +56,8 @@ SOURCES += main.cpp\
     METHODS/walshsimplecolorizator.cpp \
     METHODS/walshneighborcolorizator.cpp \
     METHODS/wnnorandcolorizator.cpp \
-    METHODS/wnonerandcolorizator.cpp
+    METHODS/wnonerandcolorizator.cpp \
+    UI/DIALOGS/preferencesdialog.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -109,10 +110,12 @@ HEADERS  += \
     METHODS/walshsimplecolorizator.h \
     METHODS/walshneighborcolorizator.h \
     METHODS/wnnorandcolorizator.h \
-    METHODS/wnonerandcolorizator.h
+    METHODS/wnonerandcolorizator.h \
+    UI/DIALOGS/preferencesdialog.h
 
 FORMS    += \
-	mainwindow.ui
+	mainwindow.ui \
+    UI/DIALOGS/preferencesdialog.ui
 
 RESOURCES += \
 	resources_ui.qrc
