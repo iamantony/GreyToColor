@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
+    <width>590</width>
     <height>240</height>
    </rect>
   </property>
@@ -21,13 +21,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>600</width>
+    <width>590</width>
     <height>240</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>600</width>
+    <width>595</width>
     <height>240</height>
    </size>
   </property>
@@ -37,8 +37,8 @@
   <widget class="QDialogButtonBox" name="exitBBox">
    <property name="geometry">
     <rect>
-     <x>430</x>
-     <y>210</y>
+     <x>420</x>
+     <y>200</y>
      <width>156</width>
      <height>23</height>
     </rect>
@@ -55,7 +55,7 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>581</width>
+     <width>571</width>
      <height>181</height>
     </rect>
    </property>

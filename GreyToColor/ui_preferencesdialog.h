@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'preferencesdialog.ui'
 **
-** Created: Mon Mar 18 21:47:07 2013
+** Created: Mon 18. Mar 22:06:07 2013
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -54,22 +54,22 @@ public:
         if (PreferencesDialog->objectName().isEmpty())
             PreferencesDialog->setObjectName(QString::fromUtf8("PreferencesDialog"));
         PreferencesDialog->setWindowModality(Qt::ApplicationModal);
-        PreferencesDialog->resize(600, 240);
+        PreferencesDialog->resize(590, 240);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(PreferencesDialog->sizePolicy().hasHeightForWidth());
         PreferencesDialog->setSizePolicy(sizePolicy);
-        PreferencesDialog->setMinimumSize(QSize(600, 240));
-        PreferencesDialog->setMaximumSize(QSize(600, 240));
+        PreferencesDialog->setMinimumSize(QSize(590, 240));
+        PreferencesDialog->setMaximumSize(QSize(595, 240));
         exitBBox = new QDialogButtonBox(PreferencesDialog);
         exitBBox->setObjectName(QString::fromUtf8("exitBBox"));
-        exitBBox->setGeometry(QRect(430, 210, 156, 23));
+        exitBBox->setGeometry(QRect(420, 200, 156, 23));
         exitBBox->setOrientation(Qt::Horizontal);
         exitBBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
         prefCategories = new QTabWidget(PreferencesDialog);
         prefCategories->setObjectName(QString::fromUtf8("prefCategories"));
-        prefCategories->setGeometry(QRect(10, 10, 581, 181));
+        prefCategories->setGeometry(QRect(10, 10, 571, 181));
         QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
