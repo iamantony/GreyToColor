@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'preferencesdialog.ui'
 **
-** Created: Mon 18. Mar 17:23:26 2013
-**      by: Qt User Interface Compiler version 4.8.3
+** Created: Mon Mar 18 21:47:07 2013
+**      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -32,18 +32,17 @@ public:
     QTabWidget *prefCategories;
     QWidget *tabDatabase;
     QGroupBox *gbPassType;
-    QVBoxLayout *verticalLayout_2;
+    QVBoxLayout *verticalLayout;
     QRadioButton *rbLumHist;
     QRadioButton *rbSubLum;
     QRadioButton *rbLumGradHist;
     QRadioButton *rbSubLumGrad;
     QWidget *tabColorization;
     QGroupBox *gbColorMethod;
-    QVBoxLayout *verticalLayout_3;
     QRadioButton *rbWSimple;
-    QRadioButton *rbWNeighbor;
     QRadioButton *rbWNNoRand;
     QRadioButton *rbWNOneRand;
+    QRadioButton *rbWNeighbor;
     QGroupBox *gbImgLumEqual;
     QVBoxLayout *verticalLayout_4;
     QRadioButton *rbScaleMaxLum;
@@ -55,22 +54,22 @@ public:
         if (PreferencesDialog->objectName().isEmpty())
             PreferencesDialog->setObjectName(QString::fromUtf8("PreferencesDialog"));
         PreferencesDialog->setWindowModality(Qt::ApplicationModal);
-        PreferencesDialog->resize(470, 210);
+        PreferencesDialog->resize(600, 240);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(PreferencesDialog->sizePolicy().hasHeightForWidth());
         PreferencesDialog->setSizePolicy(sizePolicy);
-        PreferencesDialog->setMinimumSize(QSize(470, 210));
-        PreferencesDialog->setMaximumSize(QSize(470, 210));
+        PreferencesDialog->setMinimumSize(QSize(600, 240));
+        PreferencesDialog->setMaximumSize(QSize(600, 240));
         exitBBox = new QDialogButtonBox(PreferencesDialog);
         exitBBox->setObjectName(QString::fromUtf8("exitBBox"));
-        exitBBox->setGeometry(QRect(300, 180, 156, 23));
+        exitBBox->setGeometry(QRect(430, 210, 156, 23));
         exitBBox->setOrientation(Qt::Horizontal);
         exitBBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
         prefCategories = new QTabWidget(PreferencesDialog);
         prefCategories->setObjectName(QString::fromUtf8("prefCategories"));
-        prefCategories->setGeometry(QRect(10, 10, 451, 161));
+        prefCategories->setGeometry(QRect(10, 10, 581, 181));
         QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -80,65 +79,60 @@ public:
         tabDatabase->setObjectName(QString::fromUtf8("tabDatabase"));
         gbPassType = new QGroupBox(tabDatabase);
         gbPassType->setObjectName(QString::fromUtf8("gbPassType"));
-        gbPassType->setGeometry(QRect(10, 10, 210, 120));
+        gbPassType->setGeometry(QRect(10, 10, 302, 142));
         gbPassType->setCheckable(false);
-        verticalLayout_2 = new QVBoxLayout(gbPassType);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+        verticalLayout = new QVBoxLayout(gbPassType);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         rbLumHist = new QRadioButton(gbPassType);
         rbLumHist->setObjectName(QString::fromUtf8("rbLumHist"));
         rbLumHist->setChecked(true);
 
-        verticalLayout_2->addWidget(rbLumHist);
+        verticalLayout->addWidget(rbLumHist);
 
         rbSubLum = new QRadioButton(gbPassType);
         rbSubLum->setObjectName(QString::fromUtf8("rbSubLum"));
 
-        verticalLayout_2->addWidget(rbSubLum);
+        verticalLayout->addWidget(rbSubLum);
 
         rbLumGradHist = new QRadioButton(gbPassType);
         rbLumGradHist->setObjectName(QString::fromUtf8("rbLumGradHist"));
 
-        verticalLayout_2->addWidget(rbLumGradHist);
+        verticalLayout->addWidget(rbLumGradHist);
 
         rbSubLumGrad = new QRadioButton(gbPassType);
         rbSubLumGrad->setObjectName(QString::fromUtf8("rbSubLumGrad"));
 
-        verticalLayout_2->addWidget(rbSubLumGrad);
+        verticalLayout->addWidget(rbSubLumGrad);
 
         prefCategories->addTab(tabDatabase, QString());
-        gbPassType->raise();
-        exitBBox->raise();
         tabColorization = new QWidget();
         tabColorization->setObjectName(QString::fromUtf8("tabColorization"));
         gbColorMethod = new QGroupBox(tabColorization);
         gbColorMethod->setObjectName(QString::fromUtf8("gbColorMethod"));
-        gbColorMethod->setGeometry(QRect(10, 10, 210, 120));
-        verticalLayout_3 = new QVBoxLayout(gbColorMethod);
-        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
+        gbColorMethod->setGeometry(QRect(10, 10, 276, 142));
         rbWSimple = new QRadioButton(gbColorMethod);
         rbWSimple->setObjectName(QString::fromUtf8("rbWSimple"));
+        rbWSimple->setGeometry(QRect(17, 25, 120, 22));
         rbWSimple->setChecked(true);
-
-        verticalLayout_3->addWidget(rbWSimple);
-
-        rbWNeighbor = new QRadioButton(gbColorMethod);
-        rbWNeighbor->setObjectName(QString::fromUtf8("rbWNeighbor"));
-
-        verticalLayout_3->addWidget(rbWNeighbor);
-
         rbWNNoRand = new QRadioButton(gbColorMethod);
         rbWNNoRand->setObjectName(QString::fromUtf8("rbWNNoRand"));
-
-        verticalLayout_3->addWidget(rbWNNoRand);
-
+        rbWNNoRand->setGeometry(QRect(17, 81, 209, 22));
+        QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(rbWNNoRand->sizePolicy().hasHeightForWidth());
+        rbWNNoRand->setSizePolicy(sizePolicy2);
         rbWNOneRand = new QRadioButton(gbColorMethod);
         rbWNOneRand->setObjectName(QString::fromUtf8("rbWNOneRand"));
-
-        verticalLayout_3->addWidget(rbWNOneRand);
-
+        rbWNOneRand->setGeometry(QRect(17, 109, 250, 22));
+        sizePolicy2.setHeightForWidth(rbWNOneRand->sizePolicy().hasHeightForWidth());
+        rbWNOneRand->setSizePolicy(sizePolicy2);
+        rbWNeighbor = new QRadioButton(gbColorMethod);
+        rbWNeighbor->setObjectName(QString::fromUtf8("rbWNeighbor"));
+        rbWNeighbor->setGeometry(QRect(17, 53, 137, 22));
         gbImgLumEqual = new QGroupBox(tabColorization);
         gbImgLumEqual->setObjectName(QString::fromUtf8("gbImgLumEqual"));
-        gbImgLumEqual->setGeometry(QRect(230, 10, 210, 120));
+        gbImgLumEqual->setGeometry(QRect(300, 10, 251, 120));
         verticalLayout_4 = new QVBoxLayout(gbImgLumEqual);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         rbScaleMaxLum = new QRadioButton(gbImgLumEqual);
@@ -163,7 +157,7 @@ public:
         QObject::connect(exitBBox, SIGNAL(accepted()), PreferencesDialog, SLOT(accept()));
         QObject::connect(exitBBox, SIGNAL(rejected()), PreferencesDialog, SLOT(reject()));
 
-        prefCategories->setCurrentIndex(0);
+        prefCategories->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(PreferencesDialog);
@@ -189,9 +183,9 @@ public:
 #endif // QT_NO_ACCESSIBILITY
         gbColorMethod->setTitle(QApplication::translate("PreferencesDialog", "Colorization Methods", 0, QApplication::UnicodeUTF8));
         rbWSimple->setText(QApplication::translate("PreferencesDialog", "Walsh Simple", 0, QApplication::UnicodeUTF8));
-        rbWNeighbor->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor", 0, QApplication::UnicodeUTF8));
         rbWNNoRand->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor (fixed net)", 0, QApplication::UnicodeUTF8));
         rbWNOneRand->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor (same pixels set)", 0, QApplication::UnicodeUTF8));
+        rbWNeighbor->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor", 0, QApplication::UnicodeUTF8));
         gbImgLumEqual->setTitle(QApplication::translate("PreferencesDialog", "Images Luminance Equalization", 0, QApplication::UnicodeUTF8));
         rbScaleMaxLum->setText(QApplication::translate("PreferencesDialog", "Scale by Max Luminance", 0, QApplication::UnicodeUTF8));
         rbScaleAverLum->setText(QApplication::translate("PreferencesDialog", "Scale by Average Luminance", 0, QApplication::UnicodeUTF8));

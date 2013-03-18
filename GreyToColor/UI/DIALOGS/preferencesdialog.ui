@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>470</width>
-    <height>210</height>
+    <width>600</width>
+    <height>240</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -21,14 +21,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>470</width>
-    <height>210</height>
+    <width>600</width>
+    <height>240</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>470</width>
-    <height>210</height>
+    <width>600</width>
+    <height>240</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -37,8 +37,8 @@
   <widget class="QDialogButtonBox" name="exitBBox">
    <property name="geometry">
     <rect>
-     <x>300</x>
-     <y>180</y>
+     <x>430</x>
+     <y>210</y>
      <width>156</width>
      <height>23</height>
     </rect>
@@ -55,8 +55,8 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>451</width>
-     <height>161</height>
+     <width>581</width>
+     <height>181</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -66,7 +66,7 @@
     </sizepolicy>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tabDatabase">
     <attribute name="title">
@@ -77,8 +77,8 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>210</width>
-       <height>120</height>
+       <width>302</width>
+       <height>142</height>
       </rect>
      </property>
      <property name="title">
@@ -87,7 +87,7 @@
      <property name="checkable">
       <bool>false</bool>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QRadioButton" name="rbLumHist">
         <property name="text">
@@ -121,8 +121,6 @@
       </item>
      </layout>
     </widget>
-    <zorder>gbPassType</zorder>
-    <zorder>exitBBox</zorder>
    </widget>
    <widget class="QWidget" name="tabColorization">
     <property name="toolTip">
@@ -142,53 +140,87 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>210</width>
-       <height>120</height>
+       <width>276</width>
+       <height>142</height>
       </rect>
      </property>
      <property name="title">
       <string>Colorization Methods</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <widget class="QRadioButton" name="rbWSimple">
-        <property name="text">
-         <string>Walsh Simple</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="rbWNeighbor">
-        <property name="text">
-         <string>Walsh Neighbor</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="rbWNNoRand">
-        <property name="text">
-         <string>Walsh Neighbor (fixed net)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="rbWNOneRand">
-        <property name="text">
-         <string>Walsh Neighbor (same pixels set)</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QRadioButton" name="rbWSimple">
+      <property name="geometry">
+       <rect>
+        <x>17</x>
+        <y>25</y>
+        <width>120</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Walsh Simple</string>
+      </property>
+      <property name="checked">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbWNNoRand">
+      <property name="geometry">
+       <rect>
+        <x>17</x>
+        <y>81</y>
+        <width>209</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Walsh Neighbor (fixed net)</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbWNOneRand">
+      <property name="geometry">
+       <rect>
+        <x>17</x>
+        <y>109</y>
+        <width>250</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Walsh Neighbor (same pixels set)</string>
+      </property>
+     </widget>
+     <widget class="QRadioButton" name="rbWNeighbor">
+      <property name="geometry">
+       <rect>
+        <x>17</x>
+        <y>53</y>
+        <width>137</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Walsh Neighbor</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QGroupBox" name="gbImgLumEqual">
      <property name="geometry">
       <rect>
-       <x>230</x>
+       <x>300</x>
        <y>10</y>
-       <width>210</width>
+       <width>251</width>
        <height>120</height>
       </rect>
      </property>
