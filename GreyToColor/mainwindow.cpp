@@ -280,6 +280,8 @@ void MainWindow::SlotGetResultImg(QImage t_resultImg)
 	}
 
 	ui->resultImgLbl->SetImage(t_resultImg);
+
+	m_result = t_resultImg;
 }
 
 // Slot for start colrization process
@@ -304,6 +306,8 @@ void MainWindow::on_resetPB_clicked()
 	{
 		return;
 	}
+
+//	TestAutoColorization();
 
 	// TODO:
 	// Send signal to ImgHandler. It should reload target image, calc all it's params (LAB, SKO) and then send
@@ -455,6 +459,8 @@ void MainWindow::SlotGetImagesSKO(const double &t_sko)
 	skoString = QString::number(t_sko);
 
 	ui->lineSKO->setText(skoString);
+
+	qDebug() << "SKO = " << skoString;
 }
 
 // Slot for getting Passport Type from Preferences Dialog
@@ -482,4 +488,78 @@ void MainWindow::SlotGetLumEqualType(const LumEqualization::Type &t_lumEqualType
 {
 	m_lumEqualType = t_lumEqualType;
 	emit SignalUseLumEqual(m_lumEqualType);
+}
+
+// Automatic colorization: all methods, all luminance equalization types. Test!
+// @input:
+// @output:
+void MainWindow::TestAutoColorization()
+{
+	QString pathToTarget = QFileDialog::getOpenFileName(this,
+														"Open Target image...",
+														QDir::currentPath(),
+														"IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
+
+	QString pathToSource = QFileDialog::getOpenFileName(this,
+														"Open Source image...",
+														QDir::currentPath(),
+														"IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
+
+	QString saveResultName = QInputDialog::getText(this,
+												   tr("Result image name..."),
+												   tr("Name:"));
+
+	if ( (true == pathToTarget.isEmpty()) ||
+		 (true == pathToSource.isEmpty()) ||
+		 (true == saveResultName.isEmpty()) )
+	{
+		qDebug() << "TestAutoColorization(): Error - invalid files names";
+		return;
+	}
+
+	saveResultName.prepend("./TEST/");
+
+	emit SignalNewTargetImg(pathToTarget);
+	emit SignalNewSourceImg(pathToSource);
+
+	QTime dieTime= QTime::currentTime().addSecs(10);
+	while( QTime::currentTime() < dieTime )
+	{
+		QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+	}
+
+	for ( int method = Methods::WALSH_SIMPLE; method < Methods::DEFAULT_LAST; method++ )
+	{
+		Methods::Type methodType = static_cast<Methods::Type>(method);
+		emit SignalUseColorMethod(methodType);
+
+		for ( int lumEqual = LumEqualization::SCALE_BY_MAX; lumEqual < LumEqualization::DEFAULT_LAST; lumEqual++ )
+		{
+			LumEqualization::Type lumEqType = static_cast<LumEqualization::Type>(lumEqual);
+			emit SignalUseLumEqual(lumEqType);
+
+			QImage empty;
+			m_result = empty;
+
+			emit SignalStartColorization();
+
+			while ( true == m_result.isNull() )
+			{
+				QTime dieTime= QTime::currentTime().addSecs(30);
+				while( QTime::currentTime() < dieTime )
+				{
+					QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+				}
+			}
+
+			QString saveToPath = saveResultName;
+			saveToPath.append( QString::number(method) );
+			saveToPath.append( QString::number(lumEqual) );
+			saveToPath.append(".bmp");
+
+			m_result.save(saveToPath);
+
+			qDebug() << "Image saved:" << saveToPath;
+		}
+	}
 }

@@ -25,6 +25,7 @@
 #include <QInputDialog>
 #include <QMessageBox>
 #include <QDir>
+#include <QTime>
 #include <QDebug>
 #include "UI/statusbar.h"
 #include "UI/scalelabel.h"
@@ -54,6 +55,8 @@ private:
 	Methods::Type m_colorizationMethod;
 	LumEqualization::Type m_lumEqualType;
 
+//	QImage m_result;
+
 	// == METHODS ==
 public:
 	explicit MainWindow(QWidget *parent = 0);
@@ -74,6 +77,9 @@ private:
 	void ShowWarning(const QString &t_title, const QString &t_text);
 	// Check if app status if OK (application not performing some calculations)
 	bool CanOperate();
+
+	// Automatic colorization: all methods, all luminance equalization types. Test!
+	void TestAutoColorization();
 
 signals:
 	void SignalNewIDB(const QString &t_name);
