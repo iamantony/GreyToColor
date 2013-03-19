@@ -281,7 +281,7 @@ void MainWindow::SlotGetResultImg(QImage t_resultImg)
 
 	ui->resultImgLbl->SetImage(t_resultImg);
 
-	m_result = t_resultImg;
+//	m_result = t_resultImg;
 }
 
 // Slot for start colrization process

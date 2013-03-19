@@ -55,7 +55,7 @@ private:
 	Methods::Type m_colorizationMethod;
 	LumEqualization::Type m_lumEqualType;
 
-//	QImage m_result;
+	QImage m_result;
 
 	// == METHODS ==
 public:
