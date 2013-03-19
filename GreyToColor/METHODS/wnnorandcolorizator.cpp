@@ -134,6 +134,8 @@ bool WNNoRandColorizator::ColorizeImage()
 		return false;
 	}
 
+	numOfAttempts = sourceRefPixs.size();
+
 	// Values of best found pixels characteristics
 	double bestDiffLum = DEFAULT_LUM;
 	double bestDiffSKO = DEFAULT_SKO;
@@ -354,29 +356,44 @@ QList< QPair<unsigned int, unsigned int> > WNNoRandColorizator::FormRefPixelCoor
 		return empty;
 	}
 
-	const unsigned int sourceWdt = m_source->GetImageWidth();
-	const unsigned int sourceHgt = m_source->GetImageHeight();
-
-	double facetsRelation = (double)sourceWdt / (double)sourceHgt;
-	double equalPixsNum = (double)t_pixelsNum / 2;
-	unsigned int wdtPixsNum = (unsigned int)floor( equalPixsNum * facetsRelation + 0.5 );
-	if ( t_pixelsNum <= wdtPixsNum )
+	// We want that on each facet of image would be equal num of points. So we get root from input number of pixels
+	const double root = pow( (double)t_pixelsNum, 0.5 );
+	if ( root <= 1 )
 	{
-		wdtPixsNum = t_pixelsNum;
+		qDebug() << "FormRefPixel(): Error - invalid arguments";
+		QList< QPair<unsigned int, unsigned int> > empty;
+		return empty;
 	}
 
-	unsigned int hgtPixsNum = t_pixelsNum - wdtPixsNum;
+	unsigned int pixOnWdt = (unsigned int)floor(root);
+	unsigned int pixOnHgt = pixOnWdt;
 
-	unsigned int wdtBtwPixsDist = sourceWdt / wdtPixsNum;
-	unsigned int hgtBtwPixsDist = sourceHgt / hgtPixsNum;
+	// It's possible, that result of multiplying pixOnWdt * pixOnHgt will be less than input value. Try to get
+	// nearest product result to input value
+	unsigned int allPixsNum = pixOnWdt * pixOnHgt;
+	while( allPixsNum < t_pixelsNum )
+	{
+		allPixsNum = (pixOnWdt + 1) * pixOnHgt;
+		if ( t_pixelsNum < allPixsNum )
+		{
+			break;
+		}
+
+		pixOnWdt++;
+	}
+
+	const unsigned int sourceWdt = m_source->GetImageWidth();
+	const unsigned int sourceHgt = m_source->GetImageHeight();
+	const unsigned int distBtwPixsOnWdt = sourceWdt / pixOnWdt;
+	const unsigned int distBtwPixsOnHgt = sourceHgt / pixOnHgt;
 
 	QList< QPair<unsigned int, unsigned int> > pixelsCoords;
-	for ( unsigned int wdtPix = 0; wdtPix <= wdtPixsNum; wdtPix++ )
+	for ( unsigned int wdtPix = 1; wdtPix <= pixOnWdt; wdtPix++ )
 	{
-		for ( unsigned int hgtPix = 0; hgtPix <= hgtPixsNum; hgtPix++ )
+		for ( unsigned int hgtPix = 1; hgtPix <= pixOnHgt; hgtPix++ )
 		{
-			unsigned int width = wdtPix * wdtBtwPixsDist;
-			unsigned int height = hgtPix * hgtBtwPixsDist;
+			unsigned int width = wdtPix * distBtwPixsOnWdt;
+			unsigned int height = hgtPix * distBtwPixsOnHgt;
 
 			QPair<unsigned int, unsigned int> sourcePixCoord(width, height);
 			pixelsCoords.append(sourcePixCoord);
