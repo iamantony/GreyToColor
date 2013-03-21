@@ -21,19 +21,6 @@
 
 #define PROJECT_IMG_PATH		"/img/"
 
-namespace ImageFormat
-{
-	enum FormatType
-	{
-		BMP = 0,
-		PNG,
-		TIFF,
-		JPG,
-		JPEG,
-		DEFAULT_LAST
-	};
-}
-
 #define PASSPORT_LENGTH 256
 #define SAMPLES_ON_FACET 16
 
@@ -47,6 +34,27 @@ namespace Passport
 //		GRAD_SUBSAMPLE,
 		LUM_AND_GRAD_HIST,
 		LUM_AND_GRAD_SUB,
+		DEFAULT_LAST
+	};
+}
+
+namespace ImageKind
+{
+	enum Type
+	{
+		TARGET_ORIGINAL = 0,
+		TARGET_COLORIZED,
+		SOURCE,
+		DEFAULT_LAST
+	};
+}
+
+namespace ColorSpace
+{
+	enum Type
+	{
+		RGB = 0,
+		LAB,
 		DEFAULT_LAST
 	};
 }

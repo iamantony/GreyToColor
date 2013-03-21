@@ -561,3 +561,16 @@ void MainWindow::TestAutoColorization()
 		}
 	}
 }
+
+// Slot for showing Histogram window
+// @input:
+// @output:
+void MainWindow::on_actionFormHist_triggered()
+{
+	HistogramWindow *histWind = new HistogramWindow;
+
+	// TODO:
+	// - make connections
+
+	histWind->show();
+}

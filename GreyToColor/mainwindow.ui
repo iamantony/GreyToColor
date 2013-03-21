@@ -556,9 +556,16 @@
      <string>Colorization</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuHistogram">
+    <property name="title">
+     <string>Histogram</string>
+    </property>
+    <addaction name="actionFormHist"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuDatabase"/>
    <addaction name="menuColorization"/>
+   <addaction name="menuHistogram"/>
   </widget>
   <action name="actionOpenTargetImage">
    <property name="text">
@@ -668,6 +675,11 @@
    </property>
    <property name="text">
     <string>Walsh Neighbor One Rand</string>
+   </property>
+  </action>
+  <action name="actionFormHist">
+   <property name="text">
+    <string>Form histogram</string>
    </property>
   </action>
  </widget>

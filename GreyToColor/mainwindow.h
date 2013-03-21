@@ -30,6 +30,7 @@
 #include "UI/statusbar.h"
 #include "UI/scalelabel.h"
 #include "UI/DIALOGS/preferencesdialog.h"
+#include "UI/DIALOGS/histogramwindow.h"
 #include "IMAGES/COMMON/image.h"
 #include "DEFINES/programstatus.h"
 #include "DEFINES/mainwindowui.h"
@@ -128,6 +129,7 @@ private slots:
 	void SlotGetPassportType(const Passport::Type &t_passType);
 	void SlotGetColorMethodType(const Methods::Type &t_colorMethodType);
 	void SlotGetLumEqualType(const LumEqualization::Type &t_lumEqualType);
+	void on_actionFormHist_triggered();
 };
 
 #endif // MAINWINDOW_H

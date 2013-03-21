@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Thu 21. Mar 14:35:22 2013
+** Created: Thu 21. Mar 19:00:42 2013
 **      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -48,6 +48,7 @@ public:
     QAction *actionWalshNeighbor;
     QAction *actionWNNoRand;
     QAction *actionWNOneRand;
+    QAction *actionFormHist;
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *imgsLayout;
@@ -84,6 +85,7 @@ public:
     QMenu *menuFile;
     QMenu *menuDatabase;
     QMenu *menuColorization;
+    QMenu *menuHistogram;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -139,6 +141,8 @@ public:
         actionWNOneRand = new QAction(MainWindow);
         actionWNOneRand->setObjectName(QString::fromUtf8("actionWNOneRand"));
         actionWNOneRand->setCheckable(true);
+        actionFormHist = new QAction(MainWindow);
+        actionFormHist->setObjectName(QString::fromUtf8("actionFormHist"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         verticalLayout = new QVBoxLayout(centralwidget);
@@ -348,11 +352,14 @@ public:
         menuColorization = new QMenu(menubar);
         menuColorization->setObjectName(QString::fromUtf8("menuColorization"));
         menuColorization->setEnabled(false);
+        menuHistogram = new QMenu(menubar);
+        menuHistogram->setObjectName(QString::fromUtf8("menuHistogram"));
         MainWindow->setMenuBar(menubar);
 
         menubar->addAction(menuFile->menuAction());
         menubar->addAction(menuDatabase->menuAction());
         menubar->addAction(menuColorization->menuAction());
+        menubar->addAction(menuHistogram->menuAction());
         menuFile->addAction(actionOpenTargetImage);
         menuFile->addAction(actionOpenSourceImage);
         menuFile->addSeparator();
@@ -364,6 +371,7 @@ public:
         menuDatabase->addAction(actionCreateDatabase);
         menuDatabase->addAction(actionOpenDatabase);
         menuDatabase->addAction(actionAddImages);
+        menuHistogram->addAction(actionFormHist);
 
         retranslateUi(MainWindow);
         QObject::connect(actionClose, SIGNAL(triggered()), MainWindow, SLOT(close()));
@@ -390,6 +398,7 @@ public:
         actionWalshNeighbor->setText(QApplication::translate("MainWindow", "Walsh Neighbor", 0, QApplication::UnicodeUTF8));
         actionWNNoRand->setText(QApplication::translate("MainWindow", "Walsh Neighbor No Rand", 0, QApplication::UnicodeUTF8));
         actionWNOneRand->setText(QApplication::translate("MainWindow", "Walsh Neighbor One Rand", 0, QApplication::UnicodeUTF8));
+        actionFormHist->setText(QApplication::translate("MainWindow", "Form histogram", 0, QApplication::UnicodeUTF8));
         targetImgLbl->setText(QString());
         openTargetImgPB->setText(QApplication::translate("MainWindow", "Open target image", 0, QApplication::UnicodeUTF8));
         resultImgLbl->setText(QString());
@@ -402,6 +411,7 @@ public:
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
         menuDatabase->setTitle(QApplication::translate("MainWindow", "Database", 0, QApplication::UnicodeUTF8));
         menuColorization->setTitle(QApplication::translate("MainWindow", "Colorization", 0, QApplication::UnicodeUTF8));
+        menuHistogram->setTitle(QApplication::translate("MainWindow", "Histogram", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

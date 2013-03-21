@@ -20,6 +20,11 @@
 #define HISTOGRAMWINDOW_H
 
 #include <QMainWindow>
+#include <QActionGroup>
+#include <QDebug>
+#include "IMAGES/COMMON/image.h"
+#include "UI/scalelabel.h"
+#include "DEFINES/images.h"
 
 namespace Ui {
 	class HistogramWindow;
@@ -32,11 +37,39 @@ class HistogramWindow : public QMainWindow
 	// == DATA ==
 private:
 	Ui::HistogramWindow *ui;
+	QActionGroup *m_imgTypeGroup;
+	QActionGroup *m_histTypeGroup;
+	ImageKind::Type m_imgType;
+	ColorSpace::Type m_colorSpaceType;
+	Image m_image;
 
 	// == METHODS ==
 public:
 	explicit HistogramWindow(QWidget *parent = 0);
 	~HistogramWindow();
+
+private:
+	// Init default settings
+	void InitSettings();
+	// Init action group of images type
+	void InitImgTypeGroup();
+	// Init action group of histogram type
+	void InitHistTypeGroup();
+	// Init image labels
+	void InitImgLabels();
+	// Form window name
+	void FormWindowName();
+
+signals:
+	void SignalGetImage(const ImageKind::Type &t_imgType);
+
+private slots:
+	// Slot for catching what type of image user want to use
+	void SlotSetImgType(QAction *t_action);
+	// Slot for catching in what type of colorspace we should build histogram
+	void SlotSetColorSpType(QAction *t_action);
+	// Slot get image for building histogram
+	void SlotGetImage(const Image &t_img);
 };
 
 #endif // HISTOGRAMWINDOW_H

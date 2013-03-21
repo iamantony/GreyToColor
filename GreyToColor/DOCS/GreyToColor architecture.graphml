@@ -387,10 +387,10 @@
           <data key="d5"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="205.63134968173125" width="259.7032060052861" x="-6470.0" y="-854.0"/>
+              <y:Geometry height="341.99936507488985" width="301.2458644835824" x="-6470.0" y="-854.0"/>
               <y:Fill color="#FFCC00" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
-              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="108.0126953125" x="75.84525534639306" y="26.701171875">HistogramDialog<y:LabelModel>
+              <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="108.0126953125" x="96.6165845855412" y="26.701171875">HistogramDialog<y:LabelModel>
                   <y:SmartNodeLabelModel distance="4.0"/>
                 </y:LabelModel>
                 <y:ModelParameter>
@@ -398,9 +398,23 @@
                 </y:ModelParameter>
               </y:NodeLabel>
               <y:UML clipContent="true" constraint="" omitDetails="false" stereotype="QMainWindow" use3DEffect="true">
-                <y:AttributeLabel/>
-                <y:MethodLabel>+ void SlotShowRGBHist( Image )
-+ void SlotShowLABHist( Image )</y:MethodLabel>
+                <y:AttributeLabel>- Ui::HistogramWindow *ui
+- QActionGroup *m_imgTypeGroup
+- QActionGroup *m_histTypeGroup
+- ImageKind::Type m_imgType
+- ColorSpace::Type m_colorSpaceType
+- Image m_image</y:AttributeLabel>
+                <y:MethodLabel>- void InitSettings()
+- void InitImgTypeGroup()
+- void InitHistTypeGroup()
+- void InitImgLabels()
+- void FormWindowName()
+
+- void SignalGetImage( ImageKind::Type )
+
+- void SlotSetImgType( QAction* )
+- void SlotSetColorSpType( QAction* )
+- void SlotGetImage( Image )</y:MethodLabel>
               </y:UML>
             </y:UMLClassNode>
           </data>
@@ -2705,7 +2719,7 @@
       <data key="d10">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="-107.07009616234518" ty="-257.8993323922232">
-            <y:Point x="-6340.148396997357" y="-930.0"/>
+            <y:Point x="-6319.377067758209" y="-930.0"/>
           </y:Path>
           <y:LineStyle color="#000000" type="dashed" width="1.0"/>
           <y:Arrows source="none" target="plain"/>
