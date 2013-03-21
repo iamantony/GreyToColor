@@ -57,7 +57,8 @@ SOURCES += main.cpp\
     METHODS/walshneighborcolorizator.cpp \
     METHODS/wnnorandcolorizator.cpp \
     METHODS/wnonerandcolorizator.cpp \
-    UI/DIALOGS/preferencesdialog.cpp
+    UI/DIALOGS/preferencesdialog.cpp \
+    UI/DIALOGS/histogramwindow.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -111,11 +112,13 @@ HEADERS  += \
     METHODS/walshneighborcolorizator.h \
     METHODS/wnnorandcolorizator.h \
     METHODS/wnonerandcolorizator.h \
-    UI/DIALOGS/preferencesdialog.h
+    UI/DIALOGS/preferencesdialog.h \
+    UI/DIALOGS/histogramwindow.h
 
 FORMS    += \
 	mainwindow.ui \
-    UI/DIALOGS/preferencesdialog.ui
+    UI/DIALOGS/preferencesdialog.ui \
+    UI/DIALOGS/histogramwindow.ui
 
 RESOURCES += \
 	resources_ui.qrc

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HistogramWindow</class>
+ <widget class="QMainWindow" name="HistogramWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuImage_type">
+    <property name="title">
+     <string>Image type</string>
+    </property>
+    <addaction name="actionTargOriginal"/>
+    <addaction name="actionTargColorized"/>
+    <addaction name="actionSource"/>
+   </widget>
+   <widget class="QMenu" name="menuHistogram">
+    <property name="title">
+     <string>Histogram</string>
+    </property>
+    <addaction name="actionHistRGB"/>
+    <addaction name="actionHistLAB"/>
+   </widget>
+   <addaction name="menuImage_type"/>
+   <addaction name="menuHistogram"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionTargOriginal">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Target Original</string>
+   </property>
+  </action>
+  <action name="actionTargColorized">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Target Colorized</string>
+   </property>
+  </action>
+  <action name="actionSource">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Source</string>
+   </property>
+  </action>
+  <action name="actionHistRGB">
+   <property name="text">
+    <string>RGB</string>
+   </property>
+  </action>
+  <action name="actionHistLAB">
+   <property name="text">
+    <string>LAB</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

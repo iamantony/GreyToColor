@@ -16,38 +16,17 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef COLORIZATION_H
-#define COLORIZATION_H
+#include "histogramwindow.h"
+#include "ui_histogramwindow.h"
 
-namespace Methods
+HistogramWindow::HistogramWindow(QWidget *parent) :
+	QMainWindow(parent),
+	ui(new Ui::HistogramWindow)
 {
-	enum Type
-	{
-		WALSH_SIMPLE = 0,
-		WALSH_NEIGHBOR,
-		WALSH_NEIGHBOR_NORAND,
-		WALSH_NEIGHBOR_ONERAND,
-		DEFAULT_LAST
-	};
+	ui->setupUi(this);
 }
 
-namespace LumEqualization
+HistogramWindow::~HistogramWindow()
 {
-	enum Type
-	{
-		SCALE_BY_MAX = 0,
-		SCALE_BY_AVERAGE,
-		NORMALIZE_LUM_BORDER,
-		NORMALIZE_LUM_CENTER,
-		DEFAULT_LAST
-	};
+	delete ui;
 }
-
-#define DEFAULT_LUM 999999
-#define DEFAULT_SKO 999999
-#define LUM_TRESHOLD 0.09
-#define SKO_TRESHOLD 0.01
-
-#define NUM_OF_ATTEMPTS 200
-
-#endif // COLORIZATION_H
