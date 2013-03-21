@@ -54,8 +54,12 @@ bool Colorizator::ScaleTargetImgLum(const LumEqualization::Type &t_type)
 			targImgLumScaled = ScaleTargetImgLumByAverage();
 			break;
 
-		case LumEqualization::NORMALIZE_LUM:
-			targImgLumScaled = NormalizeTargetImg();
+		case LumEqualization::NORMALIZE_LUM_BORDER:
+			targImgLumScaled = NormalizeTargetImgByBorder();
+			break;
+
+		case LumEqualization::NORMALIZE_LUM_CENTER:
+			targImgLumScaled = NormalizeTargetImgByCenter();
 			break;
 
 		case LumEqualization::DEFAULT_LAST:
@@ -122,7 +126,7 @@ bool Colorizator::ScaleTargetImgLumByAverage()
 // Normalize Target Image pixels luminances using min/max luminances of Source Image
 // @input:
 // @output:
-bool Colorizator::NormalizeTargetImg()
+bool Colorizator::NormalizeTargetImgByBorder()
 {
 	if ( (NULL == m_target) ||
 		 (NULL == m_source) )
@@ -133,7 +137,7 @@ bool Colorizator::NormalizeTargetImg()
 
 	const double sourceMinLum = m_source->GetMinLABLum();
 	const double sourceMaxLum = m_source->GetMaxLABLum();
-	bool lumNormalised = m_target->NormaliseLABLum(sourceMinLum, sourceMaxLum);
+	bool lumNormalised = m_target->NormaliseLABLumByBorders(sourceMinLum, sourceMaxLum);
 	if ( false == lumNormalised )
 	{
 		qDebug() << "NormalizeTargetImg(): Error - can't normalise luminance of Target image";
@@ -143,3 +147,29 @@ bool Colorizator::NormalizeTargetImg()
 	return true;
 }
 
+// Normalize Target Image pixels luminance using min, max and central luminances of Source Imge
+// @input:
+// @output:
+bool Colorizator::NormalizeTargetImgByCenter()
+{
+	if ( (NULL == m_target) ||
+		 (NULL == m_source) )
+	{
+		qDebug() << "NormalizeTargetImg(): Error - invalid arguments";
+		return false;
+	}
+
+	const double sourceMinLum = m_source->GetMinLABLum();
+	const double sourceMaxLum = m_source->GetMaxLABLum();
+	const double sourceCommonLum = m_source->GetCommonLABLum();
+	bool lumNormalised = m_target->NormaliseLABLumByCenter(sourceMinLum,
+														  sourceCommonLum,
+														  sourceMaxLum);
+	if ( false == lumNormalised )
+	{
+		qDebug() << "NormalizeTargetImgByCenter(): Error - can't normalise luminance of Target image";
+		return false;
+	}
+
+	return true;
+}

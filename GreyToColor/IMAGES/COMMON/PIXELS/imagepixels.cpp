@@ -306,6 +306,58 @@ double ImagePixels::FindAverageLum() const
 	return averageLum;
 }
 
+// Find most common luminance value
+// @input:
+// @output:
+// - ERROR - can't find most common luminance
+// - double - positive found most common luminance of images pixels
+double ImagePixels::FindMostCommonLum() const
+{
+	if ( false == HasPixels() )
+	{
+		qDebug() << "FindMostCommonLum(): Error - no pixels";
+		return ERROR;
+	}
+
+	// Create zero mass for statistic
+	const int numberOfLevels = LAB_MAX_LUM / LAB_LUM_HIST_DIVIDER;
+	QList<int> lumStatistic;
+	for ( int lumLvl = 0; lumLvl < numberOfLevels; lumLvl++ )
+	{
+		lumStatistic.append(0);
+	}
+
+	// Form statistic
+	for ( unsigned int width = 0; width < m_width; width++ )
+	{
+		for ( unsigned int height = 0; height < m_height; height++ )
+		{
+			double pixLum = m_pixels[width][height]->GetChL();
+			double lumLvl = pixLum / LAB_LUM_HIST_DIVIDER;
+			int lvlNum = (int)floor(lumLvl + 0.5);
+
+			lumStatistic[lvlNum]++;
+		}
+	}
+
+	// Find number of most popular luminance level
+	int mostCommonLvl = 0;
+	int maxNumInLvl = 0;
+	for ( int lvl = 0; lvl < numberOfLevels; lvl++ )
+	{
+		if ( maxNumInLvl < lumStatistic.at(lvl) )
+		{
+			maxNumInLvl = lumStatistic.at(lvl);
+			mostCommonLvl = lvl;
+		}
+	}
+
+	// Transform number of luminance level to LAB luminance value
+	double mostCommonLum = mostCommonLvl * LAB_LUM_HIST_DIVIDER;
+
+	return mostCommonLum;
+}
+
 // Get list of luminances of neighbor pixels (to calc SKO, for example)
 // @input:
 // - unsigned int - exist width (x) position of pixel

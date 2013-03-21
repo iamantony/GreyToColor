@@ -544,35 +544,17 @@
     <property name="title">
      <string>Database</string>
     </property>
-    <widget class="QMenu" name="menuPassport_type">
-     <property name="title">
-      <string>Passport type</string>
-     </property>
-     <addaction name="actionLumHist"/>
-     <addaction name="actionSubsampLum"/>
-     <addaction name="actionLumGradHists"/>
-     <addaction name="actionSubsampLumGrad"/>
-    </widget>
     <addaction name="actionCreateDatabase"/>
     <addaction name="actionOpenDatabase"/>
     <addaction name="actionAddImages"/>
-    <addaction name="separator"/>
-    <addaction name="menuPassport_type"/>
    </widget>
    <widget class="QMenu" name="menuColorization">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="title">
      <string>Colorization</string>
     </property>
-    <widget class="QMenu" name="menuMethodType">
-     <property name="title">
-      <string>Method type</string>
-     </property>
-     <addaction name="actionWalshSimple"/>
-     <addaction name="actionWalshNeighbor"/>
-     <addaction name="actionWNNoRand"/>
-     <addaction name="actionWNOneRand"/>
-    </widget>
-    <addaction name="menuMethodType"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuDatabase"/>

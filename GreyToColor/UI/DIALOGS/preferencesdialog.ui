@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>590</width>
+    <width>595</width>
     <height>240</height>
    </rect>
   </property>
@@ -140,80 +140,58 @@
       <rect>
        <x>10</x>
        <y>10</y>
-       <width>276</width>
-       <height>142</height>
+       <width>271</width>
+       <height>141</height>
       </rect>
      </property>
      <property name="title">
       <string>Colorization Methods</string>
      </property>
-     <widget class="QRadioButton" name="rbWSimple">
-      <property name="geometry">
-       <rect>
-        <x>17</x>
-        <y>25</y>
-        <width>120</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Walsh Simple</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="rbWNNoRand">
-      <property name="geometry">
-       <rect>
-        <x>17</x>
-        <y>81</y>
-        <width>209</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>Walsh Neighbor (fixed net)</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="rbWNOneRand">
-      <property name="geometry">
-       <rect>
-        <x>17</x>
-        <y>109</y>
-        <width>250</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="text">
-       <string>Walsh Neighbor (same pixels set)</string>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="rbWNeighbor">
-      <property name="geometry">
-       <rect>
-        <x>17</x>
-        <y>53</y>
-        <width>137</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Walsh Neighbor</string>
-      </property>
-     </widget>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QRadioButton" name="rbWSimple">
+        <property name="text">
+         <string>Walsh Simple</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="rbWNeighbor">
+        <property name="text">
+         <string>Walsh Neighbor</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="rbWNNoRand">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Walsh Neighbor (fixed net)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="rbWNOneRand">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>Walsh Neighbor (same pixels set)</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
     <widget class="QGroupBox" name="gbImgLumEqual">
      <property name="geometry">
@@ -221,7 +199,7 @@
        <x>300</x>
        <y>10</y>
        <width>251</width>
-       <height>120</height>
+       <height>141</height>
       </rect>
      </property>
      <property name="title">
@@ -246,9 +224,16 @@
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="rbNormLum">
+       <widget class="QRadioButton" name="rbNormLumBorder">
         <property name="text">
-         <string>Normalize Luminance</string>
+         <string>Normalize Luminance (by borders)</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="rbNormLumCentral">
+        <property name="text">
+         <string>Normalize Luminance (by center)</string>
         </property>
        </widget>
       </item>

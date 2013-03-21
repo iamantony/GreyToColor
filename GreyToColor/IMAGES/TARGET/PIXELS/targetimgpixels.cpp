@@ -188,14 +188,14 @@ bool TargetImgPixels::ScaleLum(const double &t_scaleFactor)
 	return true;
 }
 
-// Normalize pixels luminances
+// Normalise pixels luminances by min/max borders
 // @input:
 // - double - positive value of new min LAB luminance
 // - double - positive value of new max LAB luminance
 // @output:
 // - true - luminance of all pixels normalised
 // - false - can't normalise luminance
-bool TargetImgPixels::NormaliseLum(const double &t_newMinLum, const double &t_newMaxLum)
+bool TargetImgPixels::NormaliseLumByBorders(const double &t_newMinLum, const double &t_newMaxLum)
 {
 	if ( (t_newMinLum < 0) ||
 		 (t_newMaxLum < 0) ||
@@ -207,7 +207,13 @@ bool TargetImgPixels::NormaliseLum(const double &t_newMinLum, const double &t_ne
 
 	const double currMinLum = FindMinLum();
 	const double currMaxLum = FindMaxLum();
-	const double diffLum = qAbs( currMaxLum - currMinLum );
+	if ( (currMinLum < 0) || (currMaxLum < 0) )
+	{
+		qDebug() << "NormaliseLum(): Error - invalid current min/max luminances";
+		return false;
+	}
+
+	const double diffLum = currMaxLum - currMinLum;
 
 	double scaleFactor = ( t_newMaxLum - t_newMinLum ) / diffLum;
 	if ( scaleFactor <= 0 )
@@ -228,6 +234,83 @@ bool TargetImgPixels::NormaliseLum(const double &t_newMinLum, const double &t_ne
 			if ( false == pixNormalised )
 			{
 				qDebug() << "NormaliseLum(): Error - can't normalize luminance for pixel" << width << height;
+				qDebug() << "Luminance restored!";
+				RestoreLum();
+				return false;
+			}
+		}
+	}
+
+	return true;
+}
+
+// Normalise pixels luminance by center
+// @input:
+// - double - positive value of new min LAB luminance
+// - double - positive value of new center (common) LAB luminance
+// - double - positive value of new max LAB luminance
+// @output:
+// - true - luminance of all pixels normalised
+// - false - can't normalise luminance
+bool TargetImgPixels::NormaliseLumByCenter(const double &t_newMinLum,
+										   const double &t_newCenterLum,
+										   const double &t_newMaxLum)
+{
+	if ( (t_newMinLum < 0) ||
+		 (t_newCenterLum < 0) ||
+		 (t_newMaxLum < 0) )
+	{
+		qDebug() << "NormaliseLumByCenter(): Error - invalid arguments";
+		return false;
+	}
+
+	const double currMinLum = FindMinLum();
+	const double currCommonLum = FindMostCommonLum();
+	const double currMaxLum = FindMaxLum();
+	if ( (currMinLum < 0) ||
+		 (currCommonLum < 0) ||
+		 (currMaxLum < 0) )
+	{
+		qDebug() << "NormaliseLumByCenter(): Error - invalid current min/common/max luminances";
+		return false;
+	}
+
+	// Params for lower area (current luminance between min and common)
+	const double currDiffLumLA = currCommonLum - currMinLum;
+	const double newDiffLumLA = t_newCenterLum - t_newMinLum;
+	const double scaleFactorLA = newDiffLumLA / currDiffLumLA;
+
+	// Params for upper area (current luminance between common and max)
+	const double currDiffLumUA = currMaxLum - currCommonLum;
+	const double newDiffLumUA = t_newMaxLum - t_newCenterLum;
+	const double scaleFactorUA = newDiffLumUA / currDiffLumUA;
+
+	if ( (scaleFactorLA <= 0) || (scaleFactorUA <= 0) )
+	{
+		qDebug() << "NormaliseLumByCenter(): Error - invalid scale factors";
+		return false;
+	}
+
+	for ( unsigned int width = 0; width < m_width; width++ )
+	{
+		for ( unsigned int height = 0; height < m_height; height++ )
+		{
+			TargetPixel *pixel = (TargetPixel *)m_pixels[width][height];
+			double luminance = pixel->GetChL();
+
+			if ( luminance <= currCommonLum )
+			{
+				luminance = (luminance - currMinLum) * scaleFactorLA + t_newMinLum;
+			}
+			else
+			{
+				luminance = (luminance - currCommonLum) * scaleFactorUA + t_newCenterLum;
+			}
+
+			bool pixNormalised = pixel->SetNormalizedLum(luminance);
+			if ( false == pixNormalised )
+			{
+				qDebug() << "NormaliseLumByCenter(): Error - can't normalize luminance for pixel" << width << height;
 				qDebug() << "Luminance restored!";
 				RestoreLum();
 				return false;

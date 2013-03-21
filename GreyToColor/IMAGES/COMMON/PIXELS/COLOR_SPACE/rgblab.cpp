@@ -37,19 +37,19 @@ LAB RGBLAB::RGB2LAB(const RGB &t_rgbColor)
 	double M = 0.1967*R + 0.7244*G + 0.0782*B;
 	double S = 0.0241*R + 0.1288*G + 0.8444*B;
 
-	if ( 0 == L )
+	if ( L < 0.01 )
 	{
-		L = 0.0001;
+		L = 0.01;
 	}
 
-	if ( 0 == M )
+	if ( M < 0.01 )
 	{
-		M = 0.0001;
+		M = 0.01;
 	}
 
-	if ( 0 == S )
+	if ( S < 0.01 )
 	{
-		S = 0.0001;
+		S = 0.01;
 	}
 
 	L = log10(L);
@@ -60,7 +60,7 @@ LAB RGBLAB::RGB2LAB(const RGB &t_rgbColor)
 	double chA = 0.4082*L + 0.4082*M - 0.8165*S;
 	double chB = 0.7071*L - 0.7071*M;
 
-	if ( chL < 0 )
+	if ( chL < 0.01 )
 	{
 		chL = 0;
 	}

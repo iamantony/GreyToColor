@@ -86,9 +86,24 @@ void SourceImage::TestInit()
 {
 	QWidget wdt;
 	QString imgName = QFileDialog::getOpenFileName(&wdt,
-												 "Open target image...",
+												 "Open source image...",
 												 QDir::currentPath(),
 												 "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
 
 	LoadImg(imgName);
+}
+
+// Test find LAB histogram central pixel
+void SourceImage::TestFindCentral()
+{
+	QWidget wdt;
+	QString imgName = QFileDialog::getOpenFileName(&wdt,
+												 "Open source image...",
+												 QDir::currentPath(),
+												 "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
+
+	LoadImg(imgName);
+	TransformImgRGB2LAB();
+	double commonLum = GetCommonLABLum();
+	qDebug() << "commonLum = " << commonLum;
 }

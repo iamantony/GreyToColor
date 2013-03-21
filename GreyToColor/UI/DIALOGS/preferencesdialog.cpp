@@ -123,8 +123,12 @@ void PreferencesDialog::SetUpLumEqualType()
 			ui->rbScaleAverLum->setChecked(true);
 			break;
 
-		case LumEqualization::NORMALIZE_LUM:
-			ui->rbNormLum->setChecked(true);
+		case LumEqualization::NORMALIZE_LUM_BORDER:
+			ui->rbNormLumBorder->setChecked(true);
+			break;
+
+		case LumEqualization::NORMALIZE_LUM_CENTER:
+			ui->rbNormLumCentral->setChecked(true);
 			break;
 
 		case LumEqualization::DEFAULT_LAST:
@@ -195,9 +199,13 @@ void PreferencesDialog::DefineLumEqualType()
 	{
 		m_lumEqualType = LumEqualization::SCALE_BY_AVERAGE;
 	}
-	else if ( true == ui->rbNormLum->isChecked() )
+	else if ( true == ui->rbNormLumBorder->isChecked() )
 	{
-		m_lumEqualType = LumEqualization::NORMALIZE_LUM;
+		m_lumEqualType = LumEqualization::NORMALIZE_LUM_BORDER;
+	}
+	else if ( true == ui->rbNormLumCentral->isChecked() )
+	{
+		m_lumEqualType = LumEqualization::NORMALIZE_LUM_CENTER;
 	}
 }
 

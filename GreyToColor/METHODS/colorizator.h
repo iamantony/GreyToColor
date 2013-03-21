@@ -58,7 +58,9 @@ private:
 	// Scale Target Image pixels luminances by Average luminance value of Source Image
 	bool ScaleTargetImgLumByAverage();
 	// Normalize Target Image pixels luminances using min/max luminances of Source Image
-	bool NormalizeTargetImg();
+	bool NormalizeTargetImgByBorder();
+	// Normalize Target Image pixels luminance using min, max and central luminances of Source Imge
+	bool NormalizeTargetImgByCenter();
 };
 
 #endif // COLORIZATOR_H

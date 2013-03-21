@@ -20,7 +20,6 @@
 #define IMAGEPIXELS_H
 
 #include <QList>
-#include <QVector>
 #include <QImage>
 #include <QDebug>
 #include "pixel.h"
@@ -67,6 +66,8 @@ public:
 	double FindMinLum() const;
 	// Find average pixels luminance
 	double FindAverageLum() const;
+	// Find most common luminance value
+	double FindMostCommonLum() const;
 	// Check if pixel with certain coords is greyscale
 	bool IsPixGrey(const unsigned int &t_width, const unsigned int &t_height) const;
 

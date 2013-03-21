@@ -73,6 +73,8 @@ public:
 	double GetMaxLABLum() const;
 	// Find average image luminance
 	double GetAverageLABLum() const;
+	// Find most common image luminance
+	double GetCommonLABLum() const;
 	// Check if pixel with certain coords is greyscale
 	bool IsPixelGrey(const unsigned int &t_width, const unsigned int &t_height) const;
 	// Add image similiarity area

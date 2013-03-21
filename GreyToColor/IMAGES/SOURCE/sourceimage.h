@@ -42,6 +42,8 @@ public:
 
 	// Test initialising
 	void TestInit();
+	// Test find LAB histogram central pixel
+	void TestFindCentral();
 
 private:
 	// Construct custom pixels of loaded image

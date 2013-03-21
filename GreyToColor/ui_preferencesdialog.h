@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'preferencesdialog.ui'
 **
-** Created: Tue 19. Mar 15:40:49 2013
+** Created: Thu 21. Mar 09:23:10 2013
 **      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -39,22 +39,24 @@ public:
     QRadioButton *rbSubLumGrad;
     QWidget *tabColorization;
     QGroupBox *gbColorMethod;
+    QVBoxLayout *verticalLayout_2;
     QRadioButton *rbWSimple;
+    QRadioButton *rbWNeighbor;
     QRadioButton *rbWNNoRand;
     QRadioButton *rbWNOneRand;
-    QRadioButton *rbWNeighbor;
     QGroupBox *gbImgLumEqual;
     QVBoxLayout *verticalLayout_4;
     QRadioButton *rbScaleMaxLum;
     QRadioButton *rbScaleAverLum;
-    QRadioButton *rbNormLum;
+    QRadioButton *rbNormLumBorder;
+    QRadioButton *rbNormLumCentral;
 
     void setupUi(QDialog *PreferencesDialog)
     {
         if (PreferencesDialog->objectName().isEmpty())
             PreferencesDialog->setObjectName(QString::fromUtf8("PreferencesDialog"));
         PreferencesDialog->setWindowModality(Qt::ApplicationModal);
-        PreferencesDialog->resize(590, 240);
+        PreferencesDialog->resize(595, 240);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -109,30 +111,40 @@ public:
         tabColorization->setObjectName(QString::fromUtf8("tabColorization"));
         gbColorMethod = new QGroupBox(tabColorization);
         gbColorMethod->setObjectName(QString::fromUtf8("gbColorMethod"));
-        gbColorMethod->setGeometry(QRect(10, 10, 276, 142));
+        gbColorMethod->setGeometry(QRect(10, 10, 271, 141));
+        verticalLayout_2 = new QVBoxLayout(gbColorMethod);
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         rbWSimple = new QRadioButton(gbColorMethod);
         rbWSimple->setObjectName(QString::fromUtf8("rbWSimple"));
-        rbWSimple->setGeometry(QRect(17, 25, 120, 22));
         rbWSimple->setChecked(true);
+
+        verticalLayout_2->addWidget(rbWSimple);
+
+        rbWNeighbor = new QRadioButton(gbColorMethod);
+        rbWNeighbor->setObjectName(QString::fromUtf8("rbWNeighbor"));
+
+        verticalLayout_2->addWidget(rbWNeighbor);
+
         rbWNNoRand = new QRadioButton(gbColorMethod);
         rbWNNoRand->setObjectName(QString::fromUtf8("rbWNNoRand"));
-        rbWNNoRand->setGeometry(QRect(17, 81, 209, 22));
         QSizePolicy sizePolicy2(QSizePolicy::Preferred, QSizePolicy::Fixed);
         sizePolicy2.setHorizontalStretch(0);
         sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(rbWNNoRand->sizePolicy().hasHeightForWidth());
         rbWNNoRand->setSizePolicy(sizePolicy2);
+
+        verticalLayout_2->addWidget(rbWNNoRand);
+
         rbWNOneRand = new QRadioButton(gbColorMethod);
         rbWNOneRand->setObjectName(QString::fromUtf8("rbWNOneRand"));
-        rbWNOneRand->setGeometry(QRect(17, 109, 250, 22));
         sizePolicy2.setHeightForWidth(rbWNOneRand->sizePolicy().hasHeightForWidth());
         rbWNOneRand->setSizePolicy(sizePolicy2);
-        rbWNeighbor = new QRadioButton(gbColorMethod);
-        rbWNeighbor->setObjectName(QString::fromUtf8("rbWNeighbor"));
-        rbWNeighbor->setGeometry(QRect(17, 53, 137, 22));
+
+        verticalLayout_2->addWidget(rbWNOneRand);
+
         gbImgLumEqual = new QGroupBox(tabColorization);
         gbImgLumEqual->setObjectName(QString::fromUtf8("gbImgLumEqual"));
-        gbImgLumEqual->setGeometry(QRect(300, 10, 251, 120));
+        gbImgLumEqual->setGeometry(QRect(300, 10, 251, 141));
         verticalLayout_4 = new QVBoxLayout(gbImgLumEqual);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         rbScaleMaxLum = new QRadioButton(gbImgLumEqual);
@@ -146,10 +158,15 @@ public:
 
         verticalLayout_4->addWidget(rbScaleAverLum);
 
-        rbNormLum = new QRadioButton(gbImgLumEqual);
-        rbNormLum->setObjectName(QString::fromUtf8("rbNormLum"));
+        rbNormLumBorder = new QRadioButton(gbImgLumEqual);
+        rbNormLumBorder->setObjectName(QString::fromUtf8("rbNormLumBorder"));
 
-        verticalLayout_4->addWidget(rbNormLum);
+        verticalLayout_4->addWidget(rbNormLumBorder);
+
+        rbNormLumCentral = new QRadioButton(gbImgLumEqual);
+        rbNormLumCentral->setObjectName(QString::fromUtf8("rbNormLumCentral"));
+
+        verticalLayout_4->addWidget(rbNormLumCentral);
 
         prefCategories->addTab(tabColorization, QString());
 
@@ -183,13 +200,14 @@ public:
 #endif // QT_NO_ACCESSIBILITY
         gbColorMethod->setTitle(QApplication::translate("PreferencesDialog", "Colorization Methods", 0, QApplication::UnicodeUTF8));
         rbWSimple->setText(QApplication::translate("PreferencesDialog", "Walsh Simple", 0, QApplication::UnicodeUTF8));
+        rbWNeighbor->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor", 0, QApplication::UnicodeUTF8));
         rbWNNoRand->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor (fixed net)", 0, QApplication::UnicodeUTF8));
         rbWNOneRand->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor (same pixels set)", 0, QApplication::UnicodeUTF8));
-        rbWNeighbor->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor", 0, QApplication::UnicodeUTF8));
         gbImgLumEqual->setTitle(QApplication::translate("PreferencesDialog", "Images Luminance Equalization", 0, QApplication::UnicodeUTF8));
         rbScaleMaxLum->setText(QApplication::translate("PreferencesDialog", "Scale by Max Luminance", 0, QApplication::UnicodeUTF8));
         rbScaleAverLum->setText(QApplication::translate("PreferencesDialog", "Scale by Average Luminance", 0, QApplication::UnicodeUTF8));
-        rbNormLum->setText(QApplication::translate("PreferencesDialog", "Normalize Luminance", 0, QApplication::UnicodeUTF8));
+        rbNormLumBorder->setText(QApplication::translate("PreferencesDialog", "Normalize Luminance (by borders)", 0, QApplication::UnicodeUTF8));
+        rbNormLumCentral->setText(QApplication::translate("PreferencesDialog", "Normalize Luminance (by center)", 0, QApplication::UnicodeUTF8));
         prefCategories->setTabText(prefCategories->indexOf(tabColorization), QApplication::translate("PreferencesDialog", "Colorization", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

@@ -93,17 +93,35 @@ bool TargetImage::ScaleLABLum(const double &t_scaleFactor)
 	return pixels->ScaleLum(t_scaleFactor);
 }
 
-// Normalise luminance of all pixels in image
+// Normalise luminance of all pixels in image by min/max borders
 // @input:
 // - double - positive value of new min LAB luminance
 // - double - positive value of new max LAB luminance
 // @output:
 // - true - luminance of all pixels normalised
 // - false - can't normalise luminance
-bool TargetImage::NormaliseLABLum(const double &t_newMinLABLum, const double &t_newMaxLABLum)
+bool TargetImage::NormaliseLABLumByBorders(const double &t_newMinLABLum, const double &t_newMaxLABLum)
 {
 	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
-	return pixels->NormaliseLum(t_newMinLABLum, t_newMaxLABLum);
+	return pixels->NormaliseLumByBorders(t_newMinLABLum, t_newMaxLABLum);
+}
+
+// Normalise luminance of all pixels in image by center
+// @input:
+// - double - positive value of new min LAB luminance
+// - double - positive value of new center (common) LAB luminance
+// - double - positive value of new max LAB luminance
+// @output:
+// - true - luminance of all pixels normalised
+// - false - can't normalise luminance
+bool TargetImage::NormaliseLABLumByCenter(const double &t_newMinLABLum,
+										 const double &t_newCenterLABLum,
+										 const double &t_newMaxLABLum)
+{
+	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	return pixels->NormaliseLumByCenter(t_newMinLABLum,
+										t_newCenterLABLum,
+										t_newMaxLABLum);
 }
 
 // Restore luminance of all pixels in image

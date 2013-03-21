@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Tue 19. Mar 11:05:34 2013
+** Created: Thu 21. Mar 14:01:36 2013
 **      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -83,9 +83,7 @@ public:
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuDatabase;
-    QMenu *menuPassport_type;
     QMenu *menuColorization;
-    QMenu *menuMethodType;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -347,12 +345,9 @@ public:
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuDatabase = new QMenu(menubar);
         menuDatabase->setObjectName(QString::fromUtf8("menuDatabase"));
-        menuPassport_type = new QMenu(menuDatabase);
-        menuPassport_type->setObjectName(QString::fromUtf8("menuPassport_type"));
         menuColorization = new QMenu(menubar);
         menuColorization->setObjectName(QString::fromUtf8("menuColorization"));
-        menuMethodType = new QMenu(menuColorization);
-        menuMethodType->setObjectName(QString::fromUtf8("menuMethodType"));
+        menuColorization->setEnabled(false);
         MainWindow->setMenuBar(menubar);
 
         menubar->addAction(menuFile->menuAction());
@@ -369,17 +364,6 @@ public:
         menuDatabase->addAction(actionCreateDatabase);
         menuDatabase->addAction(actionOpenDatabase);
         menuDatabase->addAction(actionAddImages);
-        menuDatabase->addSeparator();
-        menuDatabase->addAction(menuPassport_type->menuAction());
-        menuPassport_type->addAction(actionLumHist);
-        menuPassport_type->addAction(actionSubsampLum);
-        menuPassport_type->addAction(actionLumGradHists);
-        menuPassport_type->addAction(actionSubsampLumGrad);
-        menuColorization->addAction(menuMethodType->menuAction());
-        menuMethodType->addAction(actionWalshSimple);
-        menuMethodType->addAction(actionWalshNeighbor);
-        menuMethodType->addAction(actionWNNoRand);
-        menuMethodType->addAction(actionWNOneRand);
 
         retranslateUi(MainWindow);
         QObject::connect(actionClose, SIGNAL(triggered()), MainWindow, SLOT(close()));
@@ -417,9 +401,7 @@ public:
         skoLbl->setText(QApplication::translate("MainWindow", "SKO:", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
         menuDatabase->setTitle(QApplication::translate("MainWindow", "Database", 0, QApplication::UnicodeUTF8));
-        menuPassport_type->setTitle(QApplication::translate("MainWindow", "Passport type", 0, QApplication::UnicodeUTF8));
         menuColorization->setTitle(QApplication::translate("MainWindow", "Colorization", 0, QApplication::UnicodeUTF8));
-        menuMethodType->setTitle(QApplication::translate("MainWindow", "Method type", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

@@ -307,8 +307,6 @@ void MainWindow::on_resetPB_clicked()
 		return;
 	}
 
-//	TestAutoColorization();
-
 	// TODO:
 	// Send signal to ImgHandler. It should reload target image, calc all it's params (LAB, SKO) and then send
 	// it to us

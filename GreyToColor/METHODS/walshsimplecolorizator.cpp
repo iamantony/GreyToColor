@@ -158,14 +158,14 @@ bool WalshSimpleColorizator::ColorizeImage()
 	QElapsedTimer timer;
 	timer.start();
 
-	srand(time(NULL));
+//	srand(time(NULL));
 
 	for ( unsigned int width = 0; width < targetWdt; width++ )
 	{
 //		qDebug() << "ColorizeImage(): row =" << width;
 		for ( unsigned int height = 0; height < targetHgt; height++ )
 		{
-
+			srand(time(NULL));
 
 			// Reset best params
 			bestDiffLum = DEFAULT_LUM;

@@ -228,6 +228,16 @@ double ProcessingImage::GetAverageLABLum() const
 	return m_imgPixels->FindAverageLum();
 }
 
+// Find most common image luminance
+// @input:
+// @output:
+// - ERROR - can't find most common luminance
+// - double - positive found most common luminance of image pixels
+double ProcessingImage::GetCommonLABLum() const
+{
+	return m_imgPixels->FindMostCommonLum();
+}
+
 // Check if pixel with certain coords is greyscale
 // @input:
 // - unsigned int - exist width (x) position of pixel
