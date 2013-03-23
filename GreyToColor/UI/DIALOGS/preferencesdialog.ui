@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>595</width>
+    <width>620</width>
     <height>240</height>
    </rect>
   </property>
@@ -21,13 +21,13 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>590</width>
+    <width>620</width>
     <height>240</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>595</width>
+    <width>620</width>
     <height>240</height>
    </size>
   </property>
@@ -37,7 +37,7 @@
   <widget class="QDialogButtonBox" name="exitBBox">
    <property name="geometry">
     <rect>
-     <x>420</x>
+     <x>450</x>
      <y>200</y>
      <width>156</width>
      <height>23</height>
@@ -55,7 +55,7 @@
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>571</width>
+     <width>601</width>
      <height>181</height>
     </rect>
    </property>
@@ -66,7 +66,7 @@
     </sizepolicy>
    </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="tabDatabase">
     <attribute name="title">
@@ -196,9 +196,9 @@
     <widget class="QGroupBox" name="gbImgLumEqual">
      <property name="geometry">
       <rect>
-       <x>300</x>
+       <x>290</x>
        <y>10</y>
-       <width>251</width>
+       <width>301</width>
        <height>141</height>
       </rect>
      </property>
