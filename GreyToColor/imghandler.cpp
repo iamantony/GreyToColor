@@ -228,7 +228,7 @@ void ImgHandler::SlotGetNewSourceImg(const QString &t_imgPath)
 // @output:
 void ImgHandler::SlotFindSimilarForTarget()
 {
-	Image currentTarget = m_target.GetCurrentImage();
+	Image currentTarget = m_target.GetImage();
 	if ( true == currentTarget.IsNull() )
 	{
 		qDebug() << "SlotSearchSimilarImgForTarget(): Error - no Target Image";
@@ -279,4 +279,50 @@ void ImgHandler::CalcTargetsSKO(const QImage &t_resultImg)
 	}
 
 	emit SignalTargetResultSKO(imagesSKO);
+}
+
+// Slot to send Target Original Image
+// @input:
+// @output:
+void ImgHandler::SlotSendTargOrigImg()
+{
+	if ( true == m_targetOriginal.IsNull() )
+	{
+		emit SignalProcError(tr("No original image"));
+		return;
+	}
+
+	emit SignalSendImage(m_targetOriginal);
+}
+
+// Slot to send Target Image
+// @input:
+// @output:
+void ImgHandler::SlotSendTargImg()
+{
+	if ( false == m_target.HasImage() )
+	{
+		emit SignalProcError(tr("No target image"));
+		return;
+	}
+
+	Image targetImg = m_target.GetImage();
+
+	emit SignalSendImage(targetImg);
+}
+
+// Slot to send Source Image
+// @input:
+// @output:
+void ImgHandler::SlotSendSourceImg()
+{
+	if ( false == m_source.HasImage() )
+	{
+		emit SignalProcError(tr("No source image"));
+		return;
+	}
+
+	Image sourceImg = m_source.GetImage();
+
+	emit SignalSendImage(sourceImg);
 }

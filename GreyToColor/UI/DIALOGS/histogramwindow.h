@@ -23,10 +23,12 @@
 #include <QActionGroup>
 #include <QDebug>
 #include "IMAGES/COMMON/image.h"
+#include "SERVICE/IMAGES/imghistogram.h"
 #include "UI/scalelabel.h"
 #include "DEFINES/images.h"
 
-namespace Ui {
+namespace Ui
+{
 	class HistogramWindow;
 }
 
@@ -42,6 +44,7 @@ private:
 	ImageKind::Type m_imgType;
 	ColorSpace::Type m_colorSpaceType;
 	Image m_image;
+	bool m_processing;
 
 	// == METHODS ==
 public:
@@ -70,6 +73,7 @@ private slots:
 	void SlotSetColorSpType(QAction *t_action);
 	// Slot get image for building histogram
 	void SlotGetImage(const Image &t_img);
+	void on_pbShowHist_clicked();
 };
 
 #endif // HISTOGRAMWINDOW_H

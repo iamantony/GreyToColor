@@ -60,6 +60,7 @@ void Application::CreateUI()
 	qRegisterMetaType<Methods::Type>("Methods::Type");
 	qRegisterMetaType<LumEqualization::Type>("LumEqualization::Type");
 	qRegisterMetaType<Image>("Image");
+	qRegisterMetaType<ImageKind::Type>("ImageKind::Type");
 }
 
 // Construct all objects for Image Handler
@@ -134,6 +135,26 @@ void Application::ConnectUIandImgHand()
 					 SIGNAL(SignalTargetResultSKO(double)),
 					 m_mainUI,
 					 SLOT(SlotGetImagesSKO(double)));
+
+	QObject::connect(m_mainUI,
+					 SIGNAL(SignalGetOrigTargImg()),
+					 m_imgHandler,
+					 SLOT(SlotSendTargOrigImg()));
+
+	QObject::connect(m_mainUI,
+					 SIGNAL(SignalGetColorTargImg()),
+					 m_imgHandler,
+					 SLOT(SlotSendTargImg()));
+
+	QObject::connect(m_mainUI,
+					 SIGNAL(SignalGetSourceImg()),
+					 m_imgHandler,
+					 SLOT(SlotSendSourceImg()));
+
+	QObject::connect(m_imgHandler,
+					 SIGNAL(SignalSendImage(Image)),
+					 m_mainUI,
+					 SLOT(SlotRecieveImg(Image)));
 
 	QObject::connect(m_imgHandler,
 					 SIGNAL(SignalCurrentProc(Program::Status)),

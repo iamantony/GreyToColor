@@ -44,6 +44,7 @@ void HistogramWindow::InitSettings()
 {
 	m_imgType = ImageKind::DEFAULT_LAST;
 	m_colorSpaceType = ColorSpace::DEFAULT_LAST;
+	m_processing = false;
 }
 
 // Init action group of images type
@@ -144,7 +145,7 @@ void HistogramWindow::FormWindowName()
 	this->setWindowTitle(windName);
 }
 
-// Slot for catching what type of image user want to use
+// Slot for catching type of image user want to use
 // @input:
 // - QAction - unnull action choosed by user
 // @output:
@@ -164,11 +165,9 @@ void HistogramWindow::SlotSetImgType(QAction *t_action)
 	}
 
 	FormWindowName();
-
-	emit SignalGetImage(m_imgType);
 }
 
-// Slot for catching in what type of colorspace we should build histogram
+// Slot for catching type of colorspace we should build histogram
 // @input:
 // - QAction - unnull action choosed by user
 // @output:
@@ -199,4 +198,19 @@ void HistogramWindow::SlotGetImage(const Image &t_img)
 	}
 
 	m_image = t_img;
+}
+
+// Slot for button Show Histogram
+// @input:
+// @output:
+void HistogramWindow::on_pbShowHist_clicked()
+{
+	if ( true == m_processing )
+	{
+		return;
+	}
+
+	m_processing = true;
+
+	emit SignalGetImage(m_imgType);
 }

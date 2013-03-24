@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'preferencesdialog.ui'
 **
-** Created: Sat Mar 23 14:31:24 2013
+** Created: Sun 24. Mar 12:49:10 2013
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -56,22 +56,22 @@ public:
         if (PreferencesDialog->objectName().isEmpty())
             PreferencesDialog->setObjectName(QString::fromUtf8("PreferencesDialog"));
         PreferencesDialog->setWindowModality(Qt::ApplicationModal);
-        PreferencesDialog->resize(595, 240);
+        PreferencesDialog->resize(620, 240);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(PreferencesDialog->sizePolicy().hasHeightForWidth());
         PreferencesDialog->setSizePolicy(sizePolicy);
-        PreferencesDialog->setMinimumSize(QSize(590, 240));
-        PreferencesDialog->setMaximumSize(QSize(595, 240));
+        PreferencesDialog->setMinimumSize(QSize(620, 240));
+        PreferencesDialog->setMaximumSize(QSize(620, 240));
         exitBBox = new QDialogButtonBox(PreferencesDialog);
         exitBBox->setObjectName(QString::fromUtf8("exitBBox"));
-        exitBBox->setGeometry(QRect(420, 200, 156, 23));
+        exitBBox->setGeometry(QRect(450, 200, 156, 23));
         exitBBox->setOrientation(Qt::Horizontal);
         exitBBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
         prefCategories = new QTabWidget(PreferencesDialog);
         prefCategories->setObjectName(QString::fromUtf8("prefCategories"));
-        prefCategories->setGeometry(QRect(10, 10, 571, 181));
+        prefCategories->setGeometry(QRect(10, 10, 601, 181));
         QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -144,7 +144,7 @@ public:
 
         gbImgLumEqual = new QGroupBox(tabColorization);
         gbImgLumEqual->setObjectName(QString::fromUtf8("gbImgLumEqual"));
-        gbImgLumEqual->setGeometry(QRect(300, 10, 251, 141));
+        gbImgLumEqual->setGeometry(QRect(290, 10, 301, 141));
         verticalLayout_4 = new QVBoxLayout(gbImgLumEqual);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         rbScaleMaxLum = new QRadioButton(gbImgLumEqual);
@@ -174,7 +174,7 @@ public:
         QObject::connect(exitBBox, SIGNAL(accepted()), PreferencesDialog, SLOT(accept()));
         QObject::connect(exitBBox, SIGNAL(rejected()), PreferencesDialog, SLOT(reject()));
 
-        prefCategories->setCurrentIndex(0);
+        prefCategories->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(PreferencesDialog);

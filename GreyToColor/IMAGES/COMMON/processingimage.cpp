@@ -102,6 +102,23 @@ bool ProcessingImage::LoadImg(const QString &t_imagePath)
 	return imgLoaded;
 }
 
+// Get current image
+// @input:
+// @output:
+// - null Image - can't get image
+// - Image - current image
+Image ProcessingImage::GetImage()
+{
+	if ( false == HasImage() )
+	{
+		qDebug() << "GetCurrentImage(): Error - no image";
+		Image empty;
+		return empty;
+	}
+
+	return m_img;
+}
+
 // Construct custom pixels of loaded image
 // @input:
 // @output:

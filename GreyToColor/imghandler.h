@@ -63,6 +63,7 @@ signals:
 	void SignalTargetSet(TargetImage *t_targ);
 	void SignalSourceSet(SourceImage *t_source);
 	void SignalTargetResultSKO(const double &t_sko);
+	void SignalSendImage(const Image &t_img);
 	void SignalCurrentProc(const Program::Status &);
 	void SignalProcDone();
 	void SignalProcError(const QString &);
@@ -79,6 +80,12 @@ public slots:
 	void SlotFindSimilarForTarget();
 	// Colorization performed. Show result
 	void SlotTargetColorized();
+	// Slot to send Target Original Image
+	void SlotSendTargOrigImg();
+	// Slot to send Target Image
+	void SlotSendTargImg();
+	// Slot to send Source Image
+	void SlotSendSourceImg();
 };
 
 #endif // IMGHANDLER_H

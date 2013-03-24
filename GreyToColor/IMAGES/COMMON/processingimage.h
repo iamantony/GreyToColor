@@ -47,6 +47,8 @@ public:
 	bool SetImgPath(const QString &t_imgPath);
 	// Load image from path
 	bool LoadImg(const QString &t_imagePath);
+	// Get current image
+	Image GetImage();
 	// Get width of image
 	unsigned int GetImageWidth() const;
 	// Get height of image

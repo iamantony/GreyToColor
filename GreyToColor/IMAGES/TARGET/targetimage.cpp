@@ -215,20 +215,3 @@ Image TargetImage::GetResultImage()
 
 	return colorizedImage;
 }
-
-// Get current version of target image
-// @input:
-// @output:
-// - null Image - can't get Target image
-// - Image - current Target image
-Image TargetImage::GetCurrentImage()
-{
-	if ( false == HasImage() )
-	{
-		qDebug() << "GetCurrentImage(): Error - no Target image";
-		Image empty;
-		return empty;
-	}
-
-	return m_img;
-}

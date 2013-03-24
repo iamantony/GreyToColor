@@ -567,10 +567,53 @@ void MainWindow::TestAutoColorization()
 // @output:
 void MainWindow::on_actionFormHist_triggered()
 {
-	HistogramWindow *histWind = new HistogramWindow;
+	HistogramWindow *histWind = new HistogramWindow(this);
 
-	// TODO:
-	// - make connections
+	connect(histWind,
+			SIGNAL(SignalGetImage(ImageKind::Type)),
+			this,
+			SLOT(SlotGetImgType(ImageKind::Type)));
+
+	connect(this,
+			SIGNAL(SignalSendImg(const Image&)),
+			histWind,
+			SLOT(SlotGetImage(const Image&)));
 
 	histWind->show();
+}
+
+// Slot for getting type of image which needs Histogram window
+// @input:
+// @output:
+void MainWindow::SlotGetImgType(const ImageKind::Type &t_type)
+{
+	switch(t_type)
+	{
+		case ImageKind::TARGET_ORIGINAL:
+			emit SignalGetOrigTargImg();
+			break;
+
+		case ImageKind::TARGET_COLORIZED:
+			emit SignalGetColorTargImg();
+			break;
+
+		case ImageKind::SOURCE:
+			emit SignalGetSourceImg();
+			break;
+
+		case ImageKind::DEFAULT_LAST:
+		default:
+		{
+			qDebug() << "SlotGetImgType(): Error - invalid arguments";
+			return;
+		}
+	}
+}
+
+// Get image from Image Handler and send it to Histogram Window
+// @input:
+// @output:
+void MainWindow::SlotRecieveImg(const Image &t_img)
+{
+	emit SignalSendImg(t_img);
 }
