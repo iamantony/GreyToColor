@@ -261,7 +261,7 @@ QList< QList<double> > ImgHistogram::FormStatHistInPercent(const QList<QList<dou
 		for( int value = 0; value < sizeOfHist; value++ )
 		{
 			double channelValue = t_statHist[hist][value];
-			double valueInPercent = (channelValue * (double)MAX_PERCENT) / summOfAllValues;
+			double valueInPercent = ( channelValue * (double)MAX_PERCENT ) / summOfAllValues;
 
 			channelHistInPercent.append(valueInPercent);
 		}

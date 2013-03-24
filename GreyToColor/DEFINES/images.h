@@ -53,7 +53,8 @@ namespace ColorSpace
 {
 	enum Type
 	{
-		RGB = 0,
+		GREY = 0,
+		RGB,
 		LAB,
 		DEFAULT_LAST
 	};

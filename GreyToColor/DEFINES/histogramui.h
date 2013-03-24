@@ -16,27 +16,9 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef PROGRAMSTATUS_H
-#define PROGRAMSTATUS_H
+#ifndef HISTOGRAMUI_H
+#define HISTOGRAMUI_H
 
-namespace Program
-{
-	enum Status
-	{
-		OK = 0,
-		LOAD_TARGET,
-		LOAD_SOURCE,
-		CALC_TARGET,
-		CALC_SOURCE,
-		COLORIZATION,
-		SEARCHING_IMAGE_IN_DB,
-		DB_FORMING,
-		SAVING,
-		ERR,
-		DEFAULT_LAST
-	};
-}
+#define NUM_RGB_VALUES 256
 
-//Q_DECLARE_METATYPE(Program::Status);
-
-#endif // PROGRAMSTATUS_H
+#endif // HISTOGRAMUI_H

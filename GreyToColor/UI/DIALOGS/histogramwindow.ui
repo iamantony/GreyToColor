@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>180</width>
+    <height>242</height>
    </rect>
   </property>
   <property name="sizeIncrement">
@@ -26,101 +26,111 @@
    <string>Histogram</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_3">
     <item>
-     <layout class="QVBoxLayout" name="histLayout" stretch="1,0">
-      <property name="sizeConstraint">
-       <enum>QLayout::SetDefaultConstraint</enum>
+     <widget class="QGroupBox" name="gbImageType">
+      <property name="title">
+       <string>Image type</string>
       </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QRadioButton" name="rbTargOrig">
+         <property name="text">
+          <string>Target Oiginal</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="rbTargColor">
+         <property name="text">
+          <string>TargetColorized</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="rbSource">
+         <property name="text">
+          <string>Source</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="gbColorSpaceType">
+      <property name="title">
+       <string>Color space</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QRadioButton" name="rbRGBGrey">
+         <property name="text">
+          <string>RGB Grey</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="rbRGB">
+         <property name="text">
+          <string>RGB</string>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QRadioButton" name="rbLAB">
+         <property name="text">
+          <string>LAB</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="rbLayout">
       <item>
-       <widget class="ScaleLabel" name="labelHist">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
-        <property name="minimumSize">
+        <property name="sizeHint" stdset="0">
          <size>
-          <width>150</width>
-          <height>100</height>
+          <width>40</width>
+          <height>20</height>
          </size>
         </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pbFormHist">
         <property name="text">
-         <string/>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+         <string>Form histogram</string>
         </property>
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="pbShowHist">
-          <property name="text">
-           <string>Show histogram</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </item>
    </layout>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>400</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <widget class="QMenu" name="menuImage_type">
-    <property name="title">
-     <string>Image type</string>
-    </property>
-    <addaction name="actionTargOriginal"/>
-    <addaction name="actionTargColorized"/>
-    <addaction name="actionSource"/>
-   </widget>
-   <widget class="QMenu" name="menuHistogram">
-    <property name="title">
-     <string>Histogram</string>
-    </property>
-    <addaction name="actionHistRGB"/>
-    <addaction name="actionHistLAB"/>
-   </widget>
-   <addaction name="menuImage_type"/>
-   <addaction name="menuHistogram"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionTargOriginal">
@@ -159,18 +169,14 @@
    <property name="checkable">
     <bool>true</bool>
    </property>
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>LAB</string>
    </property>
   </action>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>ScaleLabel</class>
-   <extends>QLabel</extends>
-   <header location="global">UI/scalelabel.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -26,10 +26,8 @@ HistogramWindow::HistogramWindow(QWidget *parent) :
 	ui->setupUi(this);
 
 	InitSettings();
-	InitImgTypeGroup();
-	InitHistTypeGroup();
-	InitImgLabels();
-	FormWindowName();
+	SetUpImgType();
+	SetUpColorSpaceType();
 }
 
 HistogramWindow::~HistogramWindow()
@@ -42,147 +40,103 @@ HistogramWindow::~HistogramWindow()
 // @output:
 void HistogramWindow::InitSettings()
 {
-	m_imgType = ImageKind::DEFAULT_LAST;
-	m_colorSpaceType = ColorSpace::DEFAULT_LAST;
-	m_processing = false;
+	m_imgType = ImageKind::TARGET_ORIGINAL;
+	m_colorSpaceType = ColorSpace::GREY;
+	m_processing.unlock();
 }
 
-// Init action group of images type
+// Set up image type
 // @input:
 // @output:
-void HistogramWindow::InitImgTypeGroup()
+void HistogramWindow::SetUpImgType()
 {
-	m_imgTypeGroup = new QActionGroup(this);
-	m_imgTypeGroup->addAction(ui->actionTargOriginal);
-	m_imgTypeGroup->addAction(ui->actionTargColorized);
-	m_imgTypeGroup->addAction(ui->actionSource);
-
-	connect(m_imgTypeGroup,
-			SIGNAL(triggered(QAction*)),
-			this,
-			SLOT(SlotSetImgType(QAction*)));
-
-	ui->actionTargOriginal->setChecked(true);
-	SlotSetImgType(ui->actionTargOriginal);
-
-	m_imgTypeGroup->setExclusive(true);
-	m_imgTypeGroup->setVisible(true);
-}
-
-// Init action group of histogram type
-// @input:
-// @output:
-void HistogramWindow::InitHistTypeGroup()
-{
-	m_histTypeGroup = new QActionGroup(this);
-	m_histTypeGroup->addAction(ui->actionHistRGB);
-	m_histTypeGroup->addAction(ui->actionHistLAB);
-
-	connect(m_histTypeGroup,
-			SIGNAL(triggered(QAction*)),
-			this,
-			SLOT(SlotSetColorSpType(QAction*)));
-
-	ui->actionHistRGB->setChecked(true);
-	SlotSetColorSpType(ui->actionHistRGB);
-
-	m_histTypeGroup->setExclusive(true);
-	m_histTypeGroup->setVisible(true);
-}
-
-// Init image labels
-// @input:
-// @output:
-void HistogramWindow::InitImgLabels()
-{
-	ui->labelHist->ShowDefaultImg();
-}
-
-// Form window name
-// @input:
-// @output:
-void HistogramWindow::FormWindowName()
-{
-	QString windName;
-	windName.append("Histogram - ");
-
 	switch(m_imgType)
 	{
 		case ImageKind::TARGET_ORIGINAL:
-			windName.append("Target Original - ");
+			ui->rbTargOrig->setChecked(true);
 			break;
 
 		case ImageKind::TARGET_COLORIZED:
-			windName.append("Target Colorized - ");
+			ui->rbTargColor->setChecked(true);
 			break;
 
 		case ImageKind::SOURCE:
-			windName.append("Source - ");
+			ui->rbSource->setChecked(true);
 			break;
 
 		case ImageKind::DEFAULT_LAST:
 		default:
-			windName.append("No image type -");
-			break;
+		{
+			qDebug() << "SetUpImgType(): Error - invalid image type";
+			return;
+		}
 	}
+}
 
+// Set up color space in which we should calc histogram
+// @input:
+// @output:
+void HistogramWindow::SetUpColorSpaceType()
+{
 	switch(m_colorSpaceType)
 	{
+		case ColorSpace::GREY:
+			ui->rbRGBGrey->setChecked(true);
+			break;
+
 		case ColorSpace::RGB:
-			windName.append("RGB");
+			ui->rbRGB->setChecked(true);
 			break;
 
 		case ColorSpace::LAB:
-			windName.append("LAB");
+			ui->rbLAB->setChecked(true);
 			break;
 
 		case ColorSpace::DEFAULT_LAST:
 		default:
-			windName.append("No color space");
-			break;
+		{
+			qDebug() << "SetUpColorSpaceType(): Error - invalid color space type";
+			return;
+		}
 	}
-
-	this->setWindowTitle(windName);
 }
 
-// Slot for catching type of image user want to use
+// Define checked Image Type
 // @input:
-// - QAction - unnull action choosed by user
 // @output:
-void HistogramWindow::SlotSetImgType(QAction *t_action)
+void HistogramWindow::DefineImageType()
 {
-	if ( t_action == ui->actionTargOriginal )
+	if ( true == ui->rbTargOrig->isChecked() )
 	{
 		m_imgType = ImageKind::TARGET_ORIGINAL;
 	}
-	else if ( t_action == ui->actionTargColorized )
+	else if ( true == ui->rbTargColor->isChecked() )
 	{
 		m_imgType = ImageKind::TARGET_COLORIZED;
 	}
-	else if ( t_action == ui->actionSource )
+	else if ( true == ui->rbSource->isChecked() )
 	{
 		m_imgType = ImageKind::SOURCE;
 	}
-
-	FormWindowName();
 }
 
-// Slot for catching type of colorspace we should build histogram
+// Define checked Color Space Type
 // @input:
-// - QAction - unnull action choosed by user
 // @output:
-void HistogramWindow::SlotSetColorSpType(QAction *t_action)
+void HistogramWindow::DefineColorSpaceType()
 {
-	if ( t_action == ui->actionHistRGB )
+	if ( true == ui->rbRGBGrey->isChecked() )
+	{
+		m_colorSpaceType = ColorSpace::GREY;
+	}
+	else if ( true == ui->rbRGB->isChecked() )
 	{
 		m_colorSpaceType = ColorSpace::RGB;
 	}
-	else if ( t_action == ui->actionHistLAB )
+	else if ( true == ui->rbLAB->isChecked() )
 	{
 		m_colorSpaceType = ColorSpace::LAB;
 	}
-
-	FormWindowName();
 }
 
 // Slot get image for building histogram
@@ -198,19 +152,166 @@ void HistogramWindow::SlotGetImage(const Image &t_img)
 	}
 
 	m_image = t_img;
+
+	FormHistogram();
 }
 
 // Slot for button Show Histogram
 // @input:
 // @output:
-void HistogramWindow::on_pbShowHist_clicked()
+void HistogramWindow::on_pbFormHist_clicked()
 {
-	if ( true == m_processing )
+	if ( false == m_processing.tryLock() )
 	{
 		return;
 	}
 
-	m_processing = true;
+	m_processing.lock();
 
 	emit SignalGetImage(m_imgType);
+}
+
+// Decide which type of histogram we gonna make
+// @input:
+// @output:
+void HistogramWindow::FormHistogram()
+{
+	m_processing.lock();
+
+	switch(m_colorSpaceType)
+	{
+		case ColorSpace::GREY:
+			FormRGBGreyHist();
+			break;
+
+		case ColorSpace::RGB:
+			FormRGBHist();
+			break;
+
+		case ColorSpace::LAB:
+			FormLABHist();
+			break;
+
+		case ColorSpace::DEFAULT_LAST:
+		default:
+		{
+			qDebug() << "FormHistogram(): Error - invalid color space type";
+			m_processing.unlock();
+			return;
+		}
+	}
+
+	m_processing.unlock();
+}
+
+// Form Greyscaled RGB histogram
+// @input:
+// @output:
+void HistogramWindow::FormRGBGreyHist()
+{
+	ImgHistogram histogramer;
+	QList<double> rgbHist = histogramer.LuminanceHistogram(m_image, NUM_RGB_VALUES);
+	if ( (true == rgbHist.isEmpty()) || ( NUM_RGB_VALUES != rgbHist.size() ) )
+	{
+		qDebug() << "FromRGBGreyHist(): Error - invalid Grey RGB histogram size";
+		return;
+	}
+
+	QString histFileName = QFileDialog::getSaveFileName(this,
+														"Choose name...",
+														QDir::currentPath(),
+														"CSV file (*.csv)");
+
+	if ( true == histFileName.isEmpty() )
+	{
+		return;
+	}
+
+	QFile histFile;
+	histFile.setFileName(histFileName);
+
+	bool fileOpened = histFile.open(QIODevice::WriteOnly);
+	if ( false == fileOpened )
+	{
+		qDebug() << "Can't open file!";
+		return;
+	}
+
+	QTextStream streamToFile;
+	streamToFile.setDevice(&histFile);
+
+	streamToFile << "NUM;Grey" << endl;
+	for ( int i = 0; i < NUM_RGB_VALUES; i++ )
+	{
+		streamToFile << i << ";" << rgbHist[i] << endl;
+	}
+
+	histFile.close();
+}
+
+// Form RGB histogram
+// @input:
+// @output:
+void HistogramWindow::FormRGBHist()
+{
+	ImgHistogram histogramer;
+	QList< QList<double> > rgbHist = histogramer.RGBHistogram(m_image, NUM_RGB_VALUES);
+	if ( (true == rgbHist.isEmpty()) || ( NUM_OF_RGB_CHANN != rgbHist.size() ) )
+	{
+		qDebug() << "FromRGBHist(): Error - invalid RGB histogram size";
+		return;
+	}
+
+	const int chanRedLength = rgbHist.at(Histogram::RED).size();
+	const int chanGreenLength = rgbHist.at(Histogram::GREEN).size();
+	const int chanBlueLength = rgbHist.at(Histogram::BLUE).size();
+	if ( (chanRedLength != chanGreenLength) || (chanRedLength != chanBlueLength) )
+	{
+		qDebug() << "FromRGBHist(): Error - invalid RGB histogram channels length";
+		return;
+	}
+
+	QString histFileName = QFileDialog::getSaveFileName(this,
+														"Choose name...",
+														QDir::currentPath(),
+														"CSV file (*.csv)");
+
+	if ( true == histFileName.isEmpty() )
+	{
+		return;
+	}
+
+	QFile histFile;
+	histFile.setFileName(histFileName);
+
+	bool fileOpened = histFile.open(QIODevice::WriteOnly);
+	if ( false == fileOpened )
+	{
+		qDebug() << "Can't open file!";
+		return;
+	}
+
+	QTextStream streamToFile;
+	streamToFile.setDevice(&histFile);
+
+	streamToFile << "NUM;R;G;B" << endl;
+	for ( int i = 0; i < chanRedLength; i++ )
+	{
+		streamToFile << i << ";" <<
+						rgbHist[Histogram::RED][i] << ";" <<
+						rgbHist[Histogram::GREEN][i] << ";" <<
+						rgbHist[Histogram::BLUE][i] << endl;
+	}
+
+	histFile.close();
+}
+
+// Form LAB histogram
+// @input:
+// @output:
+void HistogramWindow::FormLABHist()
+{
+	// TODO:
+	// - form histogram
+	// - use TargetImage
 }

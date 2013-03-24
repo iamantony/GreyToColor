@@ -113,7 +113,8 @@ HEADERS  += \
     METHODS/wnnorandcolorizator.h \
     METHODS/wnonerandcolorizator.h \
     UI/DIALOGS/preferencesdialog.h \
-    UI/DIALOGS/histogramwindow.h
+    UI/DIALOGS/histogramwindow.h \
+    DEFINES/histogramui.h
 
 FORMS    += \
 	mainwindow.ui \
