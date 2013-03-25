@@ -22,6 +22,7 @@
 #include <QDebug>
 #include "./IMAGES/SOURCE/sourceimage.h"
 #include "./IMAGES/TARGET/targetimage.h"
+#include "./SERVICE/IMAGES/imglumscaler.h"
 #include "./DEFINES/colorization.h"
 
 class Colorizator
@@ -53,14 +54,6 @@ protected:
 
 private:
 	void Clear();
-	// Scale Target Image pixels luminances by Max luminance value of Source Image
-	bool ScaleTargetImgLumByMax();
-	// Scale Target Image pixels luminances by Average luminance value of Source Image
-	bool ScaleTargetImgLumByAverage();
-	// Normalize Target Image pixels luminances using min/max luminances of Source Image
-	bool NormalizeTargetImgByBorder();
-	// Normalize Target Image pixels luminance using min, max and central luminances of Source Imge
-	bool NormalizeTargetImgByCenter();
 };
 
 #endif // COLORIZATOR_H

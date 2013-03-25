@@ -44,22 +44,23 @@ void Colorizator::Clear()
 bool Colorizator::ScaleTargetImgLum(const LumEqualization::Type &t_type)
 {
 	bool targImgLumScaled = false;
+	ImgLumScaler scaler;
 	switch(t_type)
 	{
 		case LumEqualization::SCALE_BY_MAX:
-			targImgLumScaled = ScaleTargetImgLumByMax();
+			targImgLumScaled = scaler.ScaleTargetImgLumByMax(m_target, m_source);
 			break;
 
 		case LumEqualization::SCALE_BY_AVERAGE:
-			targImgLumScaled = ScaleTargetImgLumByAverage();
+			targImgLumScaled = scaler.ScaleTargetImgLumByAverage(m_target, m_source);
 			break;
 
 		case LumEqualization::NORMALIZE_LUM_BORDER:
-			targImgLumScaled = NormalizeTargetImgByBorder();
+			targImgLumScaled = scaler.NormalizeTargetImgByBorder(m_target, m_source);
 			break;
 
 		case LumEqualization::NORMALIZE_LUM_CENTER:
-			targImgLumScaled = NormalizeTargetImgByCenter();
+			targImgLumScaled = scaler.NormalizeTargetImgByCenter(m_target, m_source);
 			break;
 
 		case LumEqualization::DEFAULT_LAST:
@@ -71,105 +72,4 @@ bool Colorizator::ScaleTargetImgLum(const LumEqualization::Type &t_type)
 	}
 
 	return targImgLumScaled;
-}
-
-// Scale Target Image pixels luminances by Max luminance value of Source Image
-// @input:
-// @output:
-bool Colorizator::ScaleTargetImgLumByMax()
-{
-	if ( (NULL == m_target) ||
-		 (NULL == m_source) )
-	{
-		qDebug() << "ScaleTargetImgLumByMax(): Error - invalid arguments";
-		return false;
-	}
-
-	const double targMaxLum = m_target->GetMaxLABLum();
-	const double sourceMaxLum = m_source->GetMaxLABLum();
-	const double scaleFactor = sourceMaxLum / targMaxLum;
-	bool lumScaled = m_target->ScaleLABLum(scaleFactor);
-	if ( false == lumScaled )
-	{
-		qDebug() << "ScaleTargetImgLumByMax(): Error - can't scale luminance of Target image";
-		return false;
-	}
-
-	return true;
-}
-
-// Scale Target Image pixels luminances by Average luminance value of Source Image
-// @input:
-// @output:
-bool Colorizator::ScaleTargetImgLumByAverage()
-{
-	if ( (NULL == m_target) ||
-		 (NULL == m_source) )
-	{
-		qDebug() << "ScaleTargetImgLumByAverage(): Error - invalid arguments";
-		return false;
-	}
-
-	const double targAverLum = m_target->GetAverageLABLum();
-	const double sourceAverLum = m_source->GetAverageLABLum();
-	const double scaleFactor = sourceAverLum / targAverLum;
-	bool lumScaled = m_target->ScaleLABLum(scaleFactor);
-	if ( false == lumScaled )
-	{
-		qDebug() << "ScaleTargetImgLumByAverage(): Error - can't scale luminance of Target image";
-		return false;
-	}
-
-	return true;
-}
-
-// Normalize Target Image pixels luminances using min/max luminances of Source Image
-// @input:
-// @output:
-bool Colorizator::NormalizeTargetImgByBorder()
-{
-	if ( (NULL == m_target) ||
-		 (NULL == m_source) )
-	{
-		qDebug() << "NormalizeTargetImg(): Error - invalid arguments";
-		return false;
-	}
-
-	const double sourceMinLum = m_source->GetMinLABLum();
-	const double sourceMaxLum = m_source->GetMaxLABLum();
-	bool lumNormalised = m_target->NormaliseLABLumByBorders(sourceMinLum, sourceMaxLum);
-	if ( false == lumNormalised )
-	{
-		qDebug() << "NormalizeTargetImg(): Error - can't normalise luminance of Target image";
-		return false;
-	}
-
-	return true;
-}
-
-// Normalize Target Image pixels luminance using min, max and central luminances of Source Imge
-// @input:
-// @output:
-bool Colorizator::NormalizeTargetImgByCenter()
-{
-	if ( (NULL == m_target) ||
-		 (NULL == m_source) )
-	{
-		qDebug() << "NormalizeTargetImg(): Error - invalid arguments";
-		return false;
-	}
-
-	const double sourceMinLum = m_source->GetMinLABLum();
-	const double sourceMaxLum = m_source->GetMaxLABLum();
-	const double sourceCommonLum = m_source->GetCommonLABLum();
-	bool lumNormalised = m_target->NormaliseLABLumByCenter(sourceMinLum,
-														   sourceCommonLum,
-														   sourceMaxLum);
-	if ( false == lumNormalised )
-	{
-		qDebug() << "NormalizeTargetImgByCenter(): Error - can't normalise luminance of Target image";
-		return false;
-	}
-
-	return true;
 }

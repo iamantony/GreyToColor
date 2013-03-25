@@ -58,7 +58,8 @@ SOURCES += main.cpp\
     METHODS/wnnorandcolorizator.cpp \
     METHODS/wnonerandcolorizator.cpp \
     UI/DIALOGS/preferencesdialog.cpp \
-    UI/DIALOGS/histogramwindow.cpp
+    UI/DIALOGS/histogramwindow.cpp \
+    SERVICE/IMAGES/imglumscaler.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -114,7 +115,8 @@ HEADERS  += \
     METHODS/wnonerandcolorizator.h \
     UI/DIALOGS/preferencesdialog.h \
     UI/DIALOGS/histogramwindow.h \
-    DEFINES/histogramui.h
+    DEFINES/histogramui.h \
+    SERVICE/IMAGES/imglumscaler.h
 
 FORMS    += \
 	mainwindow.ui \
