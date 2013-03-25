@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'histogramwindow.ui'
 **
-** Created: Mon 25. Mar 17:59:00 2013
+** Created: Mon 25. Mar 19:31:50 2013
 **      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -47,6 +47,12 @@ public:
     QRadioButton *rbRGBGrey;
     QRadioButton *rbRGB;
     QRadioButton *rbLAB;
+    QGroupBox *gbTargLum;
+    QVBoxLayout *verticalLayout_4;
+    QRadioButton *rbScaleMax;
+    QRadioButton *rbScaleAver;
+    QRadioButton *rbNormBorder;
+    QRadioButton *rbNormCenter;
     QHBoxLayout *rbLayout;
     QSpacerItem *horizontalSpacer;
     QPushButton *pbFormHist;
@@ -58,7 +64,7 @@ public:
         if (HistogramWindow->objectName().isEmpty())
             HistogramWindow->setObjectName(QString::fromUtf8("HistogramWindow"));
         HistogramWindow->setWindowModality(Qt::ApplicationModal);
-        HistogramWindow->resize(180, 265);
+        HistogramWindow->resize(323, 447);
         HistogramWindow->setSizeIncrement(QSize(1, 1));
         HistogramWindow->setBaseSize(QSize(400, 300));
         actionTargOriginal = new QAction(HistogramWindow);
@@ -106,6 +112,7 @@ public:
 
         gbColorSpaceType = new QGroupBox(centralwidget);
         gbColorSpaceType->setObjectName(QString::fromUtf8("gbColorSpaceType"));
+        gbColorSpaceType->setEnabled(true);
         verticalLayout_2 = new QVBoxLayout(gbColorSpaceType);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         rbRGBGrey = new QRadioButton(gbColorSpaceType);
@@ -124,6 +131,35 @@ public:
         rbLAB->setObjectName(QString::fromUtf8("rbLAB"));
 
         verticalLayout_2->addWidget(rbLAB);
+
+        gbTargLum = new QGroupBox(gbColorSpaceType);
+        gbTargLum->setObjectName(QString::fromUtf8("gbTargLum"));
+        gbTargLum->setEnabled(false);
+        verticalLayout_4 = new QVBoxLayout(gbTargLum);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        rbScaleMax = new QRadioButton(gbTargLum);
+        rbScaleMax->setObjectName(QString::fromUtf8("rbScaleMax"));
+        rbScaleMax->setChecked(true);
+
+        verticalLayout_4->addWidget(rbScaleMax);
+
+        rbScaleAver = new QRadioButton(gbTargLum);
+        rbScaleAver->setObjectName(QString::fromUtf8("rbScaleAver"));
+
+        verticalLayout_4->addWidget(rbScaleAver);
+
+        rbNormBorder = new QRadioButton(gbTargLum);
+        rbNormBorder->setObjectName(QString::fromUtf8("rbNormBorder"));
+
+        verticalLayout_4->addWidget(rbNormBorder);
+
+        rbNormCenter = new QRadioButton(gbTargLum);
+        rbNormCenter->setObjectName(QString::fromUtf8("rbNormCenter"));
+
+        verticalLayout_4->addWidget(rbNormCenter);
+
+
+        verticalLayout_2->addWidget(gbTargLum);
 
 
         verticalLayout_3->addWidget(gbColorSpaceType);
@@ -171,7 +207,12 @@ public:
         gbColorSpaceType->setTitle(QApplication::translate("HistogramWindow", "Color space", 0, QApplication::UnicodeUTF8));
         rbRGBGrey->setText(QApplication::translate("HistogramWindow", "RGB Grey", 0, QApplication::UnicodeUTF8));
         rbRGB->setText(QApplication::translate("HistogramWindow", "RGB", 0, QApplication::UnicodeUTF8));
-        rbLAB->setText(QApplication::translate("HistogramWindow", "LAB", 0, QApplication::UnicodeUTF8));
+        rbLAB->setText(QApplication::translate("HistogramWindow", "LAB Luminance", 0, QApplication::UnicodeUTF8));
+        gbTargLum->setTitle(QApplication::translate("HistogramWindow", "Target LAB Luminance", 0, QApplication::UnicodeUTF8));
+        rbScaleMax->setText(QApplication::translate("HistogramWindow", "Scale by Source Image Max Luminance", 0, QApplication::UnicodeUTF8));
+        rbScaleAver->setText(QApplication::translate("HistogramWindow", "Scale by Source Image Average Luminance", 0, QApplication::UnicodeUTF8));
+        rbNormBorder->setText(QApplication::translate("HistogramWindow", "Normalise by Source Image Luminance borders", 0, QApplication::UnicodeUTF8));
+        rbNormCenter->setText(QApplication::translate("HistogramWindow", "Normalise by Source Image Central Luminance", 0, QApplication::UnicodeUTF8));
         pbFormHist->setText(QApplication::translate("HistogramWindow", "Form histogram", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

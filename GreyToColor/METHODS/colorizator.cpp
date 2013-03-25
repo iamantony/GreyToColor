@@ -41,35 +41,13 @@ void Colorizator::Clear()
 // @input:
 // - LumEqualization::Type - exist Luminance Equalization type
 // @output:
-bool Colorizator::ScaleTargetImgLum(const LumEqualization::Type &t_type)
+// - true -
+bool Colorizator::EquliseTargetImgLum(const LumEqualization::Type &t_type)
 {
-	bool targImgLumScaled = false;
 	ImgLumScaler scaler;
-	switch(t_type)
-	{
-		case LumEqualization::SCALE_BY_MAX:
-			targImgLumScaled = scaler.ScaleTargetImgLumByMax(m_target, m_source);
-			break;
-
-		case LumEqualization::SCALE_BY_AVERAGE:
-			targImgLumScaled = scaler.ScaleTargetImgLumByAverage(m_target, m_source);
-			break;
-
-		case LumEqualization::NORMALIZE_LUM_BORDER:
-			targImgLumScaled = scaler.NormalizeTargetImgByBorder(m_target, m_source);
-			break;
-
-		case LumEqualization::NORMALIZE_LUM_CENTER:
-			targImgLumScaled = scaler.NormalizeTargetImgByCenter(m_target, m_source);
-			break;
-
-		case LumEqualization::DEFAULT_LAST:
-		default:
-		{
-			qDebug() << "ScaleTargetImgLum(): Error - invalid arguments";
-			return false;
-		}
-	}
+	bool targImgLumScaled = scaler.ScaleTargetImgLum(t_type,
+													 m_target,
+													 m_source);
 
 	return targImgLumScaled;
 }

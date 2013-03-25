@@ -22,6 +22,7 @@
 #include <QDebug>
 #include "IMAGES/TARGET/targetimage.h"
 #include "IMAGES/SOURCE/sourceimage.h"
+#include "./DEFINES/imgservice.h"
 
 class ImgLumScaler
 {
@@ -31,6 +32,12 @@ class ImgLumScaler
 public:
 	ImgLumScaler();
 
+	// Scale target image LAB luminance by some equalisation rule
+	bool ScaleTargetImgLum(const LumEqualization::Type &t_type,
+						   TargetImage *t_target,
+						   SourceImage *t_source);
+
+private:
 	// Scale Target Image pixels luminances by Max luminance value of Source Image
 	bool ScaleTargetImgLumByMax(TargetImage *t_target, SourceImage *t_source);
 	// Scale Target Image pixels luminances by Average luminance value of Source Image

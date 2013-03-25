@@ -376,3 +376,41 @@ void HistogramWindow::SlotRecieveLABLumHist(const QList<double> &t_hist)
 
 	m_processing.unlock();
 }
+
+void HistogramWindow::on_rbLAB_clicked(bool checked)
+{
+	if ( false == checked )
+	{
+		ui->gbTargLum->setEnabled(false);
+	}
+	else
+	{
+		if ( true == ui->rbTargColor->isChecked() )
+		{
+			ui->gbTargLum->setEnabled(true);
+		}
+		else
+		{
+			ui->gbTargLum->setEnabled(false);
+		}
+	}
+}
+
+void HistogramWindow::on_rbTargColor_clicked(bool checked)
+{
+	if ( false == checked )
+	{
+		ui->gbTargLum->setEnabled(false);
+	}
+	else
+	{
+		if ( true == ui->rbLAB->isChecked() )
+		{
+			ui->gbTargLum->setEnabled(true);
+		}
+		else
+		{
+			ui->gbTargLum->setEnabled(false);
+		}
+	}
+}

@@ -283,6 +283,7 @@ void ImgHandler::CalcTargetsSKO(const QImage &t_resultImg)
 
 // Slot to form Grey RGB Histogram
 // @input:
+// - ImageKind::Type - exist image type
 // @output:
 void ImgHandler::SlotGreyRGBHist(const ImageKind::Type &t_type)
 {
@@ -332,6 +333,7 @@ void ImgHandler::SlotGreyRGBHist(const ImageKind::Type &t_type)
 
 // Slot to form RGB Histogram
 // @input:
+// - ImageKind::Type - exist image type
 // @output:
 void ImgHandler::SlotRGBHist(const ImageKind::Type &t_type)
 {
@@ -381,6 +383,7 @@ void ImgHandler::SlotRGBHist(const ImageKind::Type &t_type)
 
 // Slot to form LAB Luminance Histogram
 // @input:
+// - ImageKind::Type - exist image type
 // @output:
 void ImgHandler::SlotLABLumHist(const ImageKind::Type &t_type)
 {
@@ -435,4 +438,47 @@ void ImgHandler::SlotLABLumHist(const ImageKind::Type &t_type)
 	}
 
 	emit SignalGetLABLumHist(lumHist);
+}
+
+// Slot for scaling/normalising Target image LAB Luminance
+// @input:
+// -LumEqualization::Type - exist type of luminance equalization
+// @output:
+void ImgHandler::SlotTargImgScale(const LumEqualization::Type &t_type)
+{
+	if ( (false == m_target.HasImage()) || (false == m_source.HasImage()) )
+	{
+		emit SignalProcError(tr("Please load Target and Source images"));
+
+		qDebug() << "SlotTargImgScale(): Error - no images";
+		return;
+	}
+
+	ImgLumScaler scaler;
+	bool lumScaled = scaler.ScaleTargetImgLum(t_type, &m_target, &m_source);
+	if ( false == lumScaled )
+	{
+		m_target.RestoreLABLum();
+
+		emit SignalProcError(tr("Can't scale Target Image luminance"));
+
+		qDebug() << "SlotTargImgScale(): Error - can't scale Target image luminance";
+		return;
+	}
+
+	ImgHistogram histogramer;
+	QList<double> lumHist = histogramer.LABLumHistogram(&m_target);
+	if ( true == lumHist.isEmpty() )
+	{
+		m_target.RestoreLABLum();
+
+		emit SignalProcError(tr("Can't form LAB Luminance Histogram"));
+
+		qDebug() << "SlotTargImgScale(): Error - failed to form LAB Luminance Histogram";
+		return;
+	}
+
+//	emit SignalGetLABLumHist(lumHist);
+
+	m_target.RestoreLABLum();
 }

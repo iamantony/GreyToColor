@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>180</width>
-    <height>265</height>
+    <width>323</width>
+    <height>447</height>
    </rect>
   </property>
   <property name="sizeIncrement">
@@ -65,6 +65,9 @@
     </item>
     <item>
      <widget class="QGroupBox" name="gbColorSpaceType">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
       <property name="title">
        <string>Color space</string>
       </property>
@@ -92,8 +95,51 @@
        <item>
         <widget class="QRadioButton" name="rbLAB">
          <property name="text">
-          <string>LAB</string>
+          <string>LAB Luminance</string>
          </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gbTargLum">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="title">
+          <string>Target LAB Luminance</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QRadioButton" name="rbScaleMax">
+            <property name="text">
+             <string>Scale by Source Image Max Luminance</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="rbScaleAver">
+            <property name="text">
+             <string>Scale by Source Image Average Luminance</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="rbNormBorder">
+            <property name="text">
+             <string>Normalise by Source Image Luminance borders</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="rbNormCenter">
+            <property name="text">
+             <string>Normalise by Source Image Central Luminance</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
       </layout>

@@ -24,6 +24,7 @@
 #include "./IMAGES/TARGET/targetimage.h"
 #include "./SERVICE/IMAGES/imglumscaler.h"
 #include "./DEFINES/colorization.h"
+#include "./DEFINES/imgservice.h"
 
 class Colorizator
 {
@@ -50,7 +51,7 @@ protected:
 	// Restore images params if needed
 	virtual bool PostColorization() = 0;
 	// Scale Target Image luminance
-	bool ScaleTargetImgLum(const LumEqualization::Type &t_type);
+	bool EquliseTargetImgLum(const LumEqualization::Type &t_type);
 
 private:
 	void Clear();

@@ -79,6 +79,8 @@ public slots:
 
 private slots:
 	void on_pbFormHist_clicked();
+	void on_rbLAB_clicked(bool checked);
+	void on_rbTargColor_clicked(bool checked);
 };
 
 #endif // HISTOGRAMWINDOW_H

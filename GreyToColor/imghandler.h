@@ -27,6 +27,7 @@
 #include "./IMAGES/TARGET/targetimage.h"
 #include "SERVICE/calculatorsko.h"
 #include "SERVICE/IMAGES/imghistogram.h"
+#include "SERVICE/IMAGES/imglumscaler.h"
 #include "DEFINES/programstatus.h"
 
 class ImgHandler : public QObject
@@ -89,6 +90,8 @@ public slots:
 	void SlotRGBHist(const ImageKind::Type &t_type);
 	// Slot to form LAB Histogram
 	void SlotLABLumHist(const ImageKind::Type &t_type);
+	// Slot for scaling/normalising Target image LAB Luminance
+	void SlotTargImgScale(const LumEqualization::Type &t_type);
 };
 
 #endif // IMGHANDLER_H

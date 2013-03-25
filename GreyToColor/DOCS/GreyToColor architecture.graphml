@@ -1328,7 +1328,7 @@
         <y:ProxyAutoBoundsNode>
           <y:Realizers active="0">
             <y:GroupNode>
-              <y:Geometry height="586.4830599579304" width="1346.4090699235876" x="-4775.0" y="-1245.3847517587244"/>
+              <y:Geometry height="609.6429626892079" width="1346.4090699235876" x="-4775.0" y="-1268.544654490002"/>
               <y:Fill color="#F5F5F5" transparent="false"/>
               <y:BorderStyle color="#000000" type="dashed" width="1.0"/>
               <y:NodeLabel alignment="right" autoSizePolicy="node_width" backgroundColor="#EBEBEB" borderDistance="0.0" fontFamily="Dialog" fontSize="15" fontStyle="plain" hasLineColor="false" height="22.37646484375" modelName="internal" modelPosition="t" textColor="#000000" visible="true" width="1346.4090699235876" x="0.0" y="0.0">Handlers</y:NodeLabel>
@@ -1355,7 +1355,7 @@
           <data key="d4"/>
           <data key="d6">
             <y:UMLClassNode>
-              <y:Geometry height="534.1065951141804" width="306.5006282672002" x="-4760.0" y="-1208.0082869149744"/>
+              <y:Geometry height="557.2664978454579" width="306.5006282672002" x="-4760.0" y="-1231.168189646252"/>
               <y:Fill color="#66FF33" transparent="false"/>
               <y:BorderStyle color="#000000" type="line" width="1.0"/>
               <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="75.5126953125" x="115.49396647735011" y="3.0">ImgHandler<y:LabelModel>
@@ -1383,6 +1383,7 @@
 + void SlotGreyRGBHist( ImageKind::Type )
 + void SlotRGBHist( ImageKind::Type )
 + void SlotLABLumHist( ImageKind::Type )
++ void SlotTargImgScale( LumEqualization::Type )
 
 - void SignalGetTargetImg( QString )
 - void SignalGetResultImg( QImage )
@@ -1787,7 +1788,7 @@
 # virtual bool PrepareImages( LumEqualization::Type )
 # virtual bool ColorizeImage()
 # virtual bool PostColorization()
-# bool ScaleTargetImgLum( LumEqualization::Type )
+# bool EquliseTargetImgLum( LumEqualization::Type )
 
 - void Clear()</y:MethodLabel>
               </y:UML>
@@ -1910,7 +1911,7 @@
           <y:Geometry height="466.33005151070165" width="281.1985355799752" x="-4580.0" y="-2121.563709420163"/>
           <y:Fill color="#66FF33" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
-          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.7763671875" x="103.2110841962376" y="205.93326891273477">Application<y:LabelModel>
+          <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="custom" textColor="#000000" visible="true" width="74.7763671875" x="103.2110841962376" y="3.0">Application<y:LabelModel>
               <y:SmartNodeLabelModel distance="4.0"/>
             </y:LabelModel>
             <y:ModelParameter>
@@ -2610,7 +2611,7 @@
       <data key="d8"/>
       <data key="d10">
         <y:PolyLineEdge>
-          <y:Path sx="0.0" sy="0.0" tx="-73.25031413360011" ty="194.35106028724297">
+          <y:Path sx="0.0" sy="0.0" tx="-73.25031413360011" ty="202.7785009763267">
             <y:Point x="-5400.0" y="602.084736713484"/>
             <y:Point x="-5400.0" y="210.0"/>
             <y:Point x="-4680.0" y="210.0"/>

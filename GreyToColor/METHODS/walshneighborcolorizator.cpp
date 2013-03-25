@@ -86,7 +86,7 @@ bool WalshNeighborColorizator::PrepareImages(const LumEqualization::Type &t_type
 
 	m_target->SetPixelsUncoloured();
 
-	bool lumScaled = ScaleTargetImgLum(t_type);
+	bool lumScaled = EquliseTargetImgLum(t_type);
 	if ( false == lumScaled )
 	{
 		qDebug() << "PrepareImages(): Error - can't scale luminance of Target image";

@@ -45,4 +45,16 @@ namespace Kernel
 	};
 }
 
+namespace LumEqualization
+{
+	enum Type
+	{
+		SCALE_BY_MAX = 0,
+		SCALE_BY_AVERAGE,
+		NORMALIZE_LUM_BORDER,
+		NORMALIZE_LUM_CENTER,
+		DEFAULT_LAST
+	};
+}
+
 #endif // IMGSERVICE_H

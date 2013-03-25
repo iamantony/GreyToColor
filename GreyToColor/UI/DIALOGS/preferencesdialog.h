@@ -23,6 +23,7 @@
 #include <QDebug>
 #include "./DEFINES/images.h"
 #include "./DEFINES/colorization.h"
+#include "./DEFINES/imgservice.h"
 
 namespace Ui {
 	class PreferencesDialog;

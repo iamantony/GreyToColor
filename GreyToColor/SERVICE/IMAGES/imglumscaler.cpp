@@ -23,9 +23,65 @@ ImgLumScaler::ImgLumScaler()
 
 }
 
+// Scale target image LAB luminance by some equalisation rule
+// @input:
+// -LumEqualization::Type - exist type of luminance equalization
+// - TargetImage - unnull, unempty Target Image
+// - SourceImage - unnull, unempty Source Image
+// @output:
+// - true - LAB Luminance of target image scaled
+// - false - can't scale LAB Luminance of Target Image
+bool ImgLumScaler::ScaleTargetImgLum(const LumEqualization::Type &t_type,
+									 TargetImage *t_target,
+									 SourceImage *t_source)
+{
+	if ( (NULL == t_target) ||
+		 (NULL == t_source) ||
+		 (false == t_target->HasImage()) ||
+		 (false == t_source->HasImage()) )
+	{
+		qDebug() << "ScaleTargetImgLum(): Error - invalid arguments";
+		return false;
+	}
+
+	bool targImgLumScaled = false;
+	switch(t_type)
+	{
+		case LumEqualization::SCALE_BY_MAX:
+			targImgLumScaled = ScaleTargetImgLumByMax(t_target, t_source);
+			break;
+
+		case LumEqualization::SCALE_BY_AVERAGE:
+			targImgLumScaled = ScaleTargetImgLumByAverage(t_target, t_source);
+			break;
+
+		case LumEqualization::NORMALIZE_LUM_BORDER:
+			targImgLumScaled = NormalizeTargetImgByBorder(t_target, t_source);
+			break;
+
+		case LumEqualization::NORMALIZE_LUM_CENTER:
+			targImgLumScaled = NormalizeTargetImgByCenter(t_target, t_source);
+			break;
+
+		case LumEqualization::DEFAULT_LAST:
+		default:
+		{
+			qDebug() << "ScaleTargetImgLum(): Error - invalid arguments";
+			return false;
+		}
+	}
+
+	return targImgLumScaled;
+
+}
+
 // Scale Target Image pixels luminances by Max luminance value of Source Image
 // @input:
+// - TargetImage - unnull, unempty Target Image
+// - SourceImage - unnull, unempty Source Image
 // @output:
+// - true - LAB Luminance of target image scaled
+// - false - can't scale LAB Luminance of Target Image
 bool ImgLumScaler::ScaleTargetImgLumByMax(TargetImage *t_target, SourceImage *t_source)
 {
 	if ( (NULL == t_target) ||
@@ -51,8 +107,11 @@ bool ImgLumScaler::ScaleTargetImgLumByMax(TargetImage *t_target, SourceImage *t_
 }
 
 // Scale Target Image pixels luminances by Average luminance value of Source Image
-// @input:
+// - TargetImage - unnull, unempty Target Image
+// - SourceImage - unnull, unempty Source Image
 // @output:
+// - true - LAB Luminance of target image scaled
+// - false - can't scale LAB Luminance of Target Image
 bool ImgLumScaler::ScaleTargetImgLumByAverage(TargetImage *t_target, SourceImage *t_source)
 {
 	if ( (NULL == t_target) ||
@@ -78,8 +137,11 @@ bool ImgLumScaler::ScaleTargetImgLumByAverage(TargetImage *t_target, SourceImage
 }
 
 // Normalize Target Image pixels luminances using min/max luminances of Source Image
-// @input:
+// - TargetImage - unnull, unempty Target Image
+// - SourceImage - unnull, unempty Source Image
 // @output:
+// - true - LAB Luminance of target image normalised
+// - false - can't normalise LAB Luminance of Target Image
 bool ImgLumScaler::NormalizeTargetImgByBorder(TargetImage *t_target, SourceImage *t_source)
 {
 	if ( (NULL == t_target) ||
@@ -104,8 +166,11 @@ bool ImgLumScaler::NormalizeTargetImgByBorder(TargetImage *t_target, SourceImage
 }
 
 // Normalize Target Image pixels luminance using min, max and central luminances of Source Imge
-// @input:
+// - TargetImage - unnull, unempty Target Image
+// - SourceImage - unnull, unempty Source Image
 // @output:
+// - true - LAB Luminance of target image normalised
+// - false - can't normalise LAB Luminance of Target Image
 bool ImgLumScaler::NormalizeTargetImgByCenter(TargetImage *t_target, SourceImage *t_source)
 {
 	if ( (NULL == t_target) ||
