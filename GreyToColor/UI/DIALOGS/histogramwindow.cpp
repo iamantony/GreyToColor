@@ -26,8 +26,11 @@ HistogramWindow::HistogramWindow(QWidget *parent) :
 	ui->setupUi(this);
 
 	InitSettings();
-	SetUpImgType();
-	SetUpColorSpaceType();
+	InitImgTypeBG();
+	InitColorSpaceBG();
+	InitTargLumScaleBG();
+//	SetUpImgType();
+//	SetUpColorSpaceType();
 }
 
 HistogramWindow::~HistogramWindow()
@@ -40,103 +43,87 @@ HistogramWindow::~HistogramWindow()
 // @output:
 void HistogramWindow::InitSettings()
 {
-	m_imgType = ImageKind::TARGET_ORIGINAL;
-	m_colorSpaceType = ColorSpace::GREY;
 	m_processing.unlock();
 }
 
-// Set up image type
+// Init Button group for image types
 // @input:
 // @output:
-void HistogramWindow::SetUpImgType()
+void HistogramWindow::InitImgTypeBG()
 {
-	switch(m_imgType)
-	{
-		case ImageKind::TARGET_ORIGINAL:
-			ui->rbTargOrig->setChecked(true);
-			break;
+	m_imgTypeBG.setExclusive(true);
 
-		case ImageKind::TARGET_COLORIZED:
-			ui->rbTargColor->setChecked(true);
-			break;
+	connect(&m_imgTypeBG,
+			SIGNAL(buttonClicked(int)),
+			this,
+			SLOT(SlotImgTypeRBClicked(int)));
 
-		case ImageKind::SOURCE:
-			ui->rbSource->setChecked(true);
-			break;
+	int buttonID = 0;
+	m_imgTypeBG.addButton(ui->rbTargOrig, buttonID);
+	m_imgTypes.insert(buttonID, ImageKind::TARGET_ORIGINAL);
 
-		case ImageKind::DEFAULT_LAST:
-		default:
-		{
-			qDebug() << "SetUpImgType(): Error - invalid image type";
-			return;
-		}
-	}
+	buttonID++;
+	m_imgTypeBG.addButton(ui->rbTargColor, buttonID);
+	m_imgTypes.insert(buttonID, ImageKind::TARGET_COLORIZED);
+
+	buttonID++;
+	m_imgTypeBG.addButton(ui->rbSource, buttonID);
+	m_imgTypes.insert(buttonID, ImageKind::SOURCE);
+
+	ui->rbTargOrig->setChecked(true);
 }
 
-// Set up color space in which we should calc histogram
+// Init Button group for color space types
 // @input:
 // @output:
-void HistogramWindow::SetUpColorSpaceType()
+void HistogramWindow::InitColorSpaceBG()
 {
-	switch(m_colorSpaceType)
-	{
-		case ColorSpace::GREY:
-			ui->rbRGBGrey->setChecked(true);
-			break;
+	m_colorSpcaeBG.setExclusive(true);
 
-		case ColorSpace::RGB:
-			ui->rbRGB->setChecked(true);
-			break;
+	connect(&m_colorSpcaeBG,
+			SIGNAL(buttonClicked(int)),
+			this,
+			SLOT(SlotColorSPTypeRBClicked(int)));
 
-		case ColorSpace::LAB:
-			ui->rbLAB->setChecked(true);
-			break;
+	int buttonID = 0;
+	m_colorSpcaeBG.addButton(ui->rbRGBGrey, buttonID);
+	m_csTypes.insert(buttonID, ColorSpace::GREY);
 
-		case ColorSpace::DEFAULT_LAST:
-		default:
-		{
-			qDebug() << "SetUpColorSpaceType(): Error - invalid color space type";
-			return;
-		}
-	}
+	buttonID++;
+	m_colorSpcaeBG.addButton(ui->rbRGB, buttonID);
+	m_csTypes.insert(buttonID, ColorSpace::RGB);
+
+	buttonID++;
+	m_colorSpcaeBG.addButton(ui->rbLAB, buttonID);
+	m_csTypes.insert(buttonID, ColorSpace::LAB);
+
+	ui->rbRGBGrey->setChecked(true);
 }
 
-// Define checked Image Type
+// Init Button group for types of Target image luminance scale
 // @input:
 // @output:
-void HistogramWindow::DefineImageType()
+void HistogramWindow::InitTargLumScaleBG()
 {
-	if ( true == ui->rbTargOrig->isChecked() )
-	{
-		m_imgType = ImageKind::TARGET_ORIGINAL;
-	}
-	else if ( true == ui->rbTargColor->isChecked() )
-	{
-		m_imgType = ImageKind::TARGET_COLORIZED;
-	}
-	else if ( true == ui->rbSource->isChecked() )
-	{
-		m_imgType = ImageKind::SOURCE;
-	}
-}
+	m_targetLumScaleBG.setExclusive(true);
 
-// Define checked Color Space Type
-// @input:
-// @output:
-void HistogramWindow::DefineColorSpaceType()
-{
-	if ( true == ui->rbRGBGrey->isChecked() )
-	{
-		m_colorSpaceType = ColorSpace::GREY;
-	}
-	else if ( true == ui->rbRGB->isChecked() )
-	{
-		m_colorSpaceType = ColorSpace::RGB;
-	}
-	else if ( true == ui->rbLAB->isChecked() )
-	{
-		m_colorSpaceType = ColorSpace::LAB;
-	}
+	int buttonID = 0;
+	m_targetLumScaleBG.addButton(ui->rbScaleMax, buttonID);
+	m_targScaleTypes.insert(buttonID, LumEqualization::SCALE_BY_MAX);
+
+	buttonID++;
+	m_targetLumScaleBG.addButton(ui->rbScaleAver, buttonID);
+	m_targScaleTypes.insert(buttonID, LumEqualization::SCALE_BY_AVERAGE);
+
+	buttonID++;
+	m_targetLumScaleBG.addButton(ui->rbNormBorder, buttonID);
+	m_targScaleTypes.insert(buttonID, LumEqualization::NORMALIZE_LUM_BORDER);
+
+	buttonID++;
+	m_targetLumScaleBG.addButton(ui->rbNormCenter, buttonID);
+	m_targScaleTypes.insert(buttonID, LumEqualization::NORMALIZE_LUM_CENTER);
+
+	ui->rbScaleMax->setChecked(true);
 }
 
 // Slot for button Show Histogram
@@ -153,21 +140,27 @@ void HistogramWindow::on_pbFormHist_clicked()
 		return;
 	}
 
-	DefineImageType();
-	DefineColorSpaceType();
+	int imgTypeRBID = m_imgTypeBG.checkedId();
+	ImageKind::Type imgType = m_imgTypes.value(imgTypeRBID);
 
-	switch(m_colorSpaceType)
+	int colorSpRBID = m_colorSpcaeBG.checkedId();
+	ColorSpace::Type colorSpaceType = m_csTypes.value(colorSpRBID);
+
+//	int lumScaleRBID = m_targetLumScaleBG.checkedId();
+//	LumEqualization::Type lumEqType = m_targScaleTypes.value(lumScaleRBID);
+
+	switch(colorSpaceType)
 	{
 		case ColorSpace::GREY:
-			emit SignalFormGreyRGBHist(m_imgType);
+			emit SignalFormGreyRGBHist(imgType);
 			break;
 
 		case ColorSpace::RGB:
-			emit SignalFormRGBHist(m_imgType);
+			emit SignalFormRGBHist(imgType);
 			break;
 
 		case ColorSpace::LAB:
-			emit SignalFormLABLumHist(m_imgType);
+			emit SignalFormLABLumHist(imgType);
 			break;
 
 		case ColorSpace::DEFAULT_LAST:
@@ -176,6 +169,51 @@ void HistogramWindow::on_pbFormHist_clicked()
 			qDebug() << "on_pbFormHist_clicked(): Error - invalid color space type";
 			return;
 		}
+	}
+}
+
+// Slot for getting ID number of current checked Image Type RB
+// @input:
+// - int - exist ID of Image type RB
+// @output:
+void HistogramWindow::SlotImgTypeRBClicked(int t_id)
+{
+	ImageKind::Type imgType = m_imgTypes.value(t_id);
+
+	int colorSpRBID = m_colorSpcaeBG.checkedId();
+	ColorSpace::Type colorSpaceType = m_csTypes.value(colorSpRBID);
+
+	CheckLumScaleGBRule(imgType, colorSpaceType);
+}
+
+// Slot for getting ID number of current checked Color Space Type RB
+// @input:
+// - int - exist ID of Color Space type RB
+// @output:
+void HistogramWindow::SlotColorSPTypeRBClicked(int t_id)
+{
+	ColorSpace::Type colorSpaceType = m_csTypes.value(t_id);
+
+	int imgTypeRBID = m_imgTypeBG.checkedId();
+	ImageKind::Type imgType = m_imgTypes.value(imgTypeRBID);
+
+	CheckLumScaleGBRule(imgType, colorSpaceType);
+}
+
+// Checking rule for enabling Group Box of Target Luminance scale types
+// @input:
+// - ImageKind::Type - exist Image Type
+// - ColorSpace::Type - exist Color Space type
+// @output:
+void HistogramWindow::CheckLumScaleGBRule(const ImageKind::Type &t_imgType, const ColorSpace::Type &t_csType)
+{
+	if ( (ImageKind::TARGET_COLORIZED == t_imgType) && (ColorSpace::LAB == t_csType) )
+	{
+		ui->gbTargLum->setEnabled(true);
+	}
+	else
+	{
+		ui->gbTargLum->setEnabled(false);
 	}
 }
 
@@ -375,42 +413,4 @@ void HistogramWindow::SlotRecieveLABLumHist(const QList<double> &t_hist)
 	histFile.close();
 
 	m_processing.unlock();
-}
-
-void HistogramWindow::on_rbLAB_clicked(bool checked)
-{
-	if ( false == checked )
-	{
-		ui->gbTargLum->setEnabled(false);
-	}
-	else
-	{
-		if ( true == ui->rbTargColor->isChecked() )
-		{
-			ui->gbTargLum->setEnabled(true);
-		}
-		else
-		{
-			ui->gbTargLum->setEnabled(false);
-		}
-	}
-}
-
-void HistogramWindow::on_rbTargColor_clicked(bool checked)
-{
-	if ( false == checked )
-	{
-		ui->gbTargLum->setEnabled(false);
-	}
-	else
-	{
-		if ( true == ui->rbLAB->isChecked() )
-		{
-			ui->gbTargLum->setEnabled(true);
-		}
-		else
-		{
-			ui->gbTargLum->setEnabled(false);
-		}
-	}
 }

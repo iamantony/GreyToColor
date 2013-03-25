@@ -20,7 +20,9 @@
 #define HISTOGRAMWINDOW_H
 
 #include <QMainWindow>
+#include <QButtonGroup>
 #include <QMutex>
+#include <QMap>
 #include <QFileDialog>
 #include <QTextStream>
 #include <QFile>
@@ -43,8 +45,12 @@ class HistogramWindow : public QMainWindow
 	// == DATA ==
 private:
 	Ui::HistogramWindow *ui;
-	ImageKind::Type m_imgType;
-	ColorSpace::Type m_colorSpaceType;
+	QButtonGroup m_imgTypeBG;
+	QButtonGroup m_colorSpcaeBG;
+	QButtonGroup m_targetLumScaleBG;
+	QMap<int, ImageKind::Type> m_imgTypes;
+	QMap<int, ColorSpace::Type> m_csTypes;
+	QMap<int, LumEqualization::Type> m_targScaleTypes;
 	QMutex m_processing;
 
 	// == METHODS ==
@@ -55,14 +61,14 @@ public:
 private:
 	// Init default settings
 	void InitSettings();
-	// Set up image type
-	void SetUpImgType();
-	// Set up color space in which we should calc histogram
-	void SetUpColorSpaceType();
-	// Define checked Image Type
-	void DefineImageType();
-	// Define checked Color Space Type
-	void DefineColorSpaceType();
+	// Init Button group for image types
+	void InitImgTypeBG();
+	// Init Button group for color space types
+	void InitColorSpaceBG();
+	// Init Button group for types of Target image luminance scale
+	void InitTargLumScaleBG();
+	// Checking rule for enabling Group Box of Target Luminance scale types
+	void CheckLumScaleGBRule(const ImageKind::Type &t_imgType, const ColorSpace::Type &t_csType);
 
 signals:
 	void SignalFormGreyRGBHist(const ImageKind::Type &t_imgType);
@@ -79,8 +85,10 @@ public slots:
 
 private slots:
 	void on_pbFormHist_clicked();
-	void on_rbLAB_clicked(bool checked);
-	void on_rbTargColor_clicked(bool checked);
+	// Slot for getting ID number of current checked Image Type RB
+	void SlotImgTypeRBClicked(int t_id);
+	// Slot for getting ID number of current checked Color Space Type RB
+	void SlotColorSPTypeRBClicked(int t_id);
 };
 
 #endif // HISTOGRAMWINDOW_H
