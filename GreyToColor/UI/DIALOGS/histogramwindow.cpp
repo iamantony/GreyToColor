@@ -139,91 +139,73 @@ void HistogramWindow::DefineColorSpaceType()
 	}
 }
 
-// Slot get image for building histogram
-// @input:
-// - Image - unempty image
-// @output:
-void HistogramWindow::SlotGetImage(const Image &t_img)
-{
-	if ( true == t_img.IsNull() )
-	{
-		qDebug() << "SlotGetImage(): Error - invalid arguments";
-		return;
-	}
-
-	m_image = t_img;
-
-	FormHistogram();
-}
-
 // Slot for button Show Histogram
 // @input:
 // @output:
 void HistogramWindow::on_pbFormHist_clicked()
 {
-	if ( false == m_processing.tryLock() )
+	if ( true == m_processing.tryLock() )
+	{
+		m_processing.unlock();
+	}
+	else
 	{
 		return;
 	}
 
-	m_processing.lock();
-
-	emit SignalGetImage(m_imgType);
-}
-
-// Decide which type of histogram we gonna make
-// @input:
-// @output:
-void HistogramWindow::FormHistogram()
-{
-	m_processing.lock();
+	DefineImageType();
+	DefineColorSpaceType();
 
 	switch(m_colorSpaceType)
 	{
 		case ColorSpace::GREY:
-			FormRGBGreyHist();
+			emit SignalFormGreyRGBHist(m_imgType);
 			break;
 
 		case ColorSpace::RGB:
-			FormRGBHist();
+			emit SignalFormRGBHist(m_imgType);
 			break;
 
 		case ColorSpace::LAB:
-			FormLABHist();
+			emit SignalFormLABLumHist(m_imgType);
 			break;
 
 		case ColorSpace::DEFAULT_LAST:
 		default:
 		{
-			qDebug() << "FormHistogram(): Error - invalid color space type";
-			m_processing.unlock();
+			qDebug() << "on_pbFormHist_clicked(): Error - invalid color space type";
 			return;
 		}
 	}
-
-	m_processing.unlock();
 }
 
-// Form Greyscaled RGB histogram
+// Slot for recieving greyscaled RGB histogram
 // @input:
+// - QList<double> - unempty histogram
 // @output:
-void HistogramWindow::FormRGBGreyHist()
+void HistogramWindow::SlotRecieveGreyRGBHist(const QList<double> &t_hist)
 {
-	ImgHistogram histogramer;
-	QList<double> rgbHist = histogramer.LuminanceHistogram(m_image, NUM_RGB_VALUES);
-	if ( (true == rgbHist.isEmpty()) || ( NUM_RGB_VALUES != rgbHist.size() ) )
+	if ( true == t_hist.isEmpty() )
 	{
-		qDebug() << "FromRGBGreyHist(): Error - invalid Grey RGB histogram size";
+		m_processing.unlock();
+
+		qDebug() << "SlotRecieveGreyRGBHist(): Error - invalid arguments";
+		return;
+	}
+
+	if ( false == m_processing.tryLock() )
+	{
 		return;
 	}
 
 	QString histFileName = QFileDialog::getSaveFileName(this,
-														"Choose name...",
+														"Choose name for Grey RGB Histogram...",
 														QDir::currentPath(),
 														"CSV file (*.csv)");
 
 	if ( true == histFileName.isEmpty() )
 	{
+		m_processing.unlock();
 		return;
 	}
 
@@ -233,51 +215,75 @@ void HistogramWindow::FormRGBGreyHist()
 	bool fileOpened = histFile.open(QIODevice::WriteOnly);
 	if ( false == fileOpened )
 	{
-		qDebug() << "Can't open file!";
+		m_processing.unlock();
+
+		qDebug() << "SlotRecieveGreyRGBHist(): Error - can't open file!";
 		return;
 	}
 
 	QTextStream streamToFile;
 	streamToFile.setDevice(&histFile);
 
+	const int numOfValues = t_hist.size();
+
 	streamToFile << "NUM;Grey" << endl;
-	for ( int i = 0; i < NUM_RGB_VALUES; i++ )
+	for ( int i = 0; i < numOfValues; i++ )
 	{
-		streamToFile << i << ";" << rgbHist[i] << endl;
+		streamToFile << i << ";" << t_hist[i] << endl;
 	}
 
 	histFile.close();
+
+	m_processing.unlock();
 }
 
-// Form RGB histogram
+// Slot for recieving RGB histogram
 // @input:
+// - QList< QList<double> > - unempty 3-channels RGB histogram
 // @output:
-void HistogramWindow::FormRGBHist()
+void HistogramWindow::SlotRecieveRGBHist(const QList< QList<double> > &t_hist)
 {
-	ImgHistogram histogramer;
-	QList< QList<double> > rgbHist = histogramer.RGBHistogram(m_image, NUM_RGB_VALUES);
-	if ( (true == rgbHist.isEmpty()) || ( NUM_OF_RGB_CHANN != rgbHist.size() ) )
+	if ( true == t_hist.isEmpty() )
 	{
-		qDebug() << "FromRGBHist(): Error - invalid RGB histogram size";
+		m_processing.unlock();
+
+		qDebug() << "SlotRecieveRGBHist(): Error - invalid arguments";
 		return;
 	}
 
-	const int chanRedLength = rgbHist.at(Histogram::RED).size();
-	const int chanGreenLength = rgbHist.at(Histogram::GREEN).size();
-	const int chanBlueLength = rgbHist.at(Histogram::BLUE).size();
+	if ( false == m_processing.tryLock() )
+	{
+		return;
+	}
+
+	const int numOfChannels = t_hist.size();
+	if ( NUM_OF_RGB_CHANN != numOfChannels )
+	{
+		m_processing.unlock();
+
+		qDebug() << "SlotRecieveRGBHist(): Error - histogram has invalid number of channels";
+		return;
+	}
+
+	const int chanRedLength = t_hist.at(Histogram::RED).size();
+	const int chanGreenLength = t_hist.at(Histogram::GREEN).size();
+	const int chanBlueLength = t_hist.at(Histogram::BLUE).size();
 	if ( (chanRedLength != chanGreenLength) || (chanRedLength != chanBlueLength) )
 	{
-		qDebug() << "FromRGBHist(): Error - invalid RGB histogram channels length";
+		m_processing.unlock();
+
+		qDebug() << "SlotRecieveRGBHist(): Error - invalid RGB histogram channels length";
 		return;
 	}
 
 	QString histFileName = QFileDialog::getSaveFileName(this,
-														"Choose name...",
+														"Choose name for RGB Histogram...",
 														QDir::currentPath(),
 														"CSV file (*.csv)");
 
 	if ( true == histFileName.isEmpty() )
 	{
+		m_processing.unlock();
 		return;
 	}
 
@@ -287,7 +293,9 @@ void HistogramWindow::FormRGBHist()
 	bool fileOpened = histFile.open(QIODevice::WriteOnly);
 	if ( false == fileOpened )
 	{
-		qDebug() << "Can't open file!";
+		m_processing.unlock();
+
+		qDebug() << "SlotRecieveRGBHist(): Error - can't open file!";
 		return;
 	}
 
@@ -298,20 +306,73 @@ void HistogramWindow::FormRGBHist()
 	for ( int i = 0; i < chanRedLength; i++ )
 	{
 		streamToFile << i << ";" <<
-						rgbHist[Histogram::RED][i] << ";" <<
-						rgbHist[Histogram::GREEN][i] << ";" <<
-						rgbHist[Histogram::BLUE][i] << endl;
+						t_hist[Histogram::RED][i] << ";" <<
+						t_hist[Histogram::GREEN][i] << ";" <<
+						t_hist[Histogram::BLUE][i] << endl;
 	}
 
 	histFile.close();
+
+	m_processing.unlock();
 }
 
-// Form LAB histogram
+// Slot for recieving LAB Luminance histogram
 // @input:
+// - QList<double> - unempty LAB luminance histogram
 // @output:
-void HistogramWindow::FormLABHist()
+void HistogramWindow::SlotRecieveLABLumHist(const QList<double> &t_hist)
 {
-	// TODO:
-	// - form histogram
-	// - use TargetImage
+	if ( true == t_hist.isEmpty() )
+	{
+		m_processing.unlock();
+
+		qDebug() << "SlotRecieveLABLumHist(): Error - invalid arguments";
+		return;
+	}
+
+	if ( false == m_processing.tryLock() )
+	{
+		return;
+	}
+
+	QString histFileName = QFileDialog::getSaveFileName(this,
+														"Choose name for LAB Luminance Histogram...",
+														QDir::currentPath(),
+														"CSV file (*.csv)");
+
+	if ( true == histFileName.isEmpty() )
+	{
+		m_processing.unlock();
+		return;
+	}
+
+	QFile histFile;
+	histFile.setFileName(histFileName);
+
+	bool fileOpened = histFile.open(QIODevice::WriteOnly);
+	if ( false == fileOpened )
+	{
+		m_processing.unlock();
+
+		qDebug() << "SlotRecieveLABLumHist(): Error - can't open file!";
+		return;
+	}
+
+	QTextStream streamToFile;
+	streamToFile.setDevice(&histFile);
+
+	const int numOfValues = t_hist.size();
+
+	streamToFile << "NUM;Step;LAB Lum" << endl;
+	for ( int i = 0; i < numOfValues; i++ )
+	{
+		double lum = t_hist[i] * LAB_LUM_HIST_DIVIDER;
+		streamToFile << i << ";" <<
+						t_hist[i] << ";" <<
+						lum << endl;
+	}
+
+	histFile.close();
+
+	m_processing.unlock();
 }

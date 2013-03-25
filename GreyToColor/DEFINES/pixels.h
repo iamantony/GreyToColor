@@ -27,9 +27,9 @@
 
 #define MASK_RECT_SIDE_LENGTH 5
 
-#define LAB_MIN_LUM 0
+#define LAB_MIN_LUM 0.0
 #define LAB_MAX_LUM 4.2
 
-#define LAB_LUM_HIST_DIVIDER 0.01
+#define LAB_LUM_HIST_DIVIDER 0.001
 
 #endif // PIXELS_H

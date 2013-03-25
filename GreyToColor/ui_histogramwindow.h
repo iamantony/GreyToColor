@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'histogramwindow.ui'
 **
-** Created: Sun 24. Mar 18:21:07 2013
-**      by: Qt User Interface Compiler version 4.8.1
+** Created: Mon 25. Mar 17:59:00 2013
+**      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -57,7 +57,8 @@ public:
     {
         if (HistogramWindow->objectName().isEmpty())
             HistogramWindow->setObjectName(QString::fromUtf8("HistogramWindow"));
-        HistogramWindow->resize(180, 242);
+        HistogramWindow->setWindowModality(Qt::ApplicationModal);
+        HistogramWindow->resize(180, 265);
         HistogramWindow->setSizeIncrement(QSize(1, 1));
         HistogramWindow->setBaseSize(QSize(400, 300));
         actionTargOriginal = new QAction(HistogramWindow);
@@ -109,12 +110,13 @@ public:
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         rbRGBGrey = new QRadioButton(gbColorSpaceType);
         rbRGBGrey->setObjectName(QString::fromUtf8("rbRGBGrey"));
+        rbRGBGrey->setChecked(true);
 
         verticalLayout_2->addWidget(rbRGBGrey);
 
         rbRGB = new QRadioButton(gbColorSpaceType);
         rbRGB->setObjectName(QString::fromUtf8("rbRGB"));
-        rbRGB->setChecked(true);
+        rbRGB->setChecked(false);
 
         verticalLayout_2->addWidget(rbRGB);
 
@@ -164,7 +166,7 @@ public:
         actionHistLAB->setText(QApplication::translate("HistogramWindow", "LAB", 0, QApplication::UnicodeUTF8));
         gbImageType->setTitle(QApplication::translate("HistogramWindow", "Image type", 0, QApplication::UnicodeUTF8));
         rbTargOrig->setText(QApplication::translate("HistogramWindow", "Target Oiginal", 0, QApplication::UnicodeUTF8));
-        rbTargColor->setText(QApplication::translate("HistogramWindow", "TargetColorized", 0, QApplication::UnicodeUTF8));
+        rbTargColor->setText(QApplication::translate("HistogramWindow", "Target Colorized", 0, QApplication::UnicodeUTF8));
         rbSource->setText(QApplication::translate("HistogramWindow", "Source", 0, QApplication::UnicodeUTF8));
         gbColorSpaceType->setTitle(QApplication::translate("HistogramWindow", "Color space", 0, QApplication::UnicodeUTF8));
         rbRGBGrey->setText(QApplication::translate("HistogramWindow", "RGB Grey", 0, QApplication::UnicodeUTF8));

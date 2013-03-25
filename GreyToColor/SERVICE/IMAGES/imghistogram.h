@@ -23,8 +23,10 @@
 #include <QImage>
 #include <QDebug>
 #include "./IMAGES/COMMON/image.h"
+#include "IMAGES/TARGET/targetimage.h"
 #include "imgtransform.h"
 #include "DEFINES/imgservice.h"
+#include "DEFINES/pixels.h"
 
 class ImgHistogram
 {
@@ -35,9 +37,11 @@ public:
 	ImgHistogram();
 
 	// Get image luminance histogram (in percent)
-	QList<double> LuminanceHistogram(const Image &t_img, const int t_size);
+	QList<double> RGBLumHistogram(const Image &t_img, const int t_size);
 	// Get image channels histogram (in percent)
 	QList< QList<double> > RGBHistogram(const Image &t_img, const int t_size);
+	// Get images histogram of luminance L channel of LAB color space
+	QList<double> LABLumHistogram(TargetImage *t_img);
 
 	// Test of forming image histogram
 	void TestRGBHist();
@@ -51,6 +55,8 @@ private:
 	QList< QList<double> > CalcRGBChannStatistic(const QImage &t_img);
 	// Get zero RGB histogram
 	QList< QList<double> > FormZeroRGBHist();
+	// Get zero LAB histogram for channel L
+	QList<double> FormZeroLABLumHist();
 	// Transform statistic histogram to statistic histogram in percent
 	QList< QList<double> > FormStatHistInPercent(const QList< QList<double> > &t_statHist);
 	// Shrink histogram

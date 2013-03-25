@@ -26,6 +26,7 @@
 #include "./IMAGES/SOURCE/sourceimage.h"
 #include "./IMAGES/TARGET/targetimage.h"
 #include "SERVICE/calculatorsko.h"
+#include "SERVICE/IMAGES/imghistogram.h"
 #include "DEFINES/programstatus.h"
 
 class ImgHandler : public QObject
@@ -63,11 +64,13 @@ signals:
 	void SignalTargetSet(TargetImage *t_targ);
 	void SignalSourceSet(SourceImage *t_source);
 	void SignalTargetResultSKO(const double &t_sko);
-	void SignalSendImage(const Image &t_img);
 	void SignalCurrentProc(const Program::Status &);
 	void SignalProcDone();
 	void SignalProcError(const QString &);
 	void SignalProcFatalError();
+	void SignalGetGreyRGBHist(const QList<double> &t_hist);
+	void SignalGetRGBHist(const QList< QList<double> > &t_hist);
+	void SignalGetLABLumHist(const QList<double> &t_hist);
 
 public slots:
 	// This slot get signal to save result (colorized or not) image and send it copy signal to some (MainWindow) UI
@@ -80,12 +83,12 @@ public slots:
 	void SlotFindSimilarForTarget();
 	// Colorization performed. Show result
 	void SlotTargetColorized();
-	// Slot to send Target Original Image
-	void SlotSendTargOrigImg();
-	// Slot to send Target Image
-	void SlotSendTargImg();
-	// Slot to send Source Image
-	void SlotSendSourceImg();
+	// Slot to form Grey RGB Histogram
+	void SlotGreyRGBHist(const ImageKind::Type &t_type);
+	// Slot to form RGB Histogram
+	void SlotRGBHist(const ImageKind::Type &t_type);
+	// Slot to form LAB Histogram
+	void SlotLABLumHist(const ImageKind::Type &t_type);
 };
 
 #endif // IMGHANDLER_H

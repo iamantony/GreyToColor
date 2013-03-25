@@ -94,6 +94,21 @@ bool TargetImgPixels::FormImgPixels(const QImage &t_img)
 	return true;
 }
 
+// Set current LAB luminance as original
+// @input:
+// @output:
+void TargetImgPixels::SetOriginalLuminance()
+{
+	for ( unsigned int width = 0; width < m_width; width++ )
+	{
+		for ( unsigned int height = 0; height < m_height; height++ )
+		{
+			TargetPixel *pixel = (TargetPixel *)m_pixels[width][height];
+			pixel->SaveOriginalLum();
+		}
+	}
+}
+
 // Calc for each pixel in image it's SKO
 // @input:
 // @output:

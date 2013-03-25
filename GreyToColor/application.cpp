@@ -61,6 +61,8 @@ void Application::CreateUI()
 	qRegisterMetaType<LumEqualization::Type>("LumEqualization::Type");
 	qRegisterMetaType<Image>("Image");
 	qRegisterMetaType<ImageKind::Type>("ImageKind::Type");
+	qRegisterMetaType< QList<double> >("QList<double>");
+	qRegisterMetaType< QList< QList<double> > >("QList< QList<double> >");
 }
 
 // Construct all objects for Image Handler
@@ -137,24 +139,34 @@ void Application::ConnectUIandImgHand()
 					 SLOT(SlotGetImagesSKO(double)));
 
 	QObject::connect(m_mainUI,
-					 SIGNAL(SignalGetOrigTargImg()),
+					 SIGNAL(SignalBuildGreyRGBHist(ImageKind::Type)),
 					 m_imgHandler,
-					 SLOT(SlotSendTargOrigImg()));
+					 SLOT(SlotGreyRGBHist(ImageKind::Type)));
 
 	QObject::connect(m_mainUI,
-					 SIGNAL(SignalGetColorTargImg()),
+					 SIGNAL(SignalBuildRGBHist(ImageKind::Type)),
 					 m_imgHandler,
-					 SLOT(SlotSendTargImg()));
+					 SLOT(SlotRGBHist(ImageKind::Type)));
 
 	QObject::connect(m_mainUI,
-					 SIGNAL(SignalGetSourceImg()),
+					 SIGNAL(SignalBuildLABLumHist(ImageKind::Type)),
 					 m_imgHandler,
-					 SLOT(SlotSendSourceImg()));
+					 SLOT(SlotLABLumHist(ImageKind::Type)));
 
 	QObject::connect(m_imgHandler,
-					 SIGNAL(SignalSendImage(Image)),
+					 SIGNAL(SignalGetGreyRGBHist(QList<double>)),
 					 m_mainUI,
-					 SLOT(SlotRecieveImg(Image)));
+					 SLOT(SlotGetGreyRGBHist(QList<double>)));
+
+	QObject::connect(m_imgHandler,
+					 SIGNAL(SignalGetRGBHist(QList< QList<double> >)),
+					 m_mainUI,
+					 SLOT(SlotGetRGBHist(QList< QList<double> >)));
+
+	QObject::connect(m_imgHandler,
+					 SIGNAL(SignalGetLABLumHist(QList<double>)),
+					 m_mainUI,
+					 SLOT(SlotGetLABLumHist(QList<double>)));
 
 	QObject::connect(m_imgHandler,
 					 SIGNAL(SignalCurrentProc(Program::Status)),

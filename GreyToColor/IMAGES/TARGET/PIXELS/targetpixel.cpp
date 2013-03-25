@@ -98,14 +98,9 @@ bool TargetPixel::ScaleLum(const double &t_factor)
 	}
 
 	// We don't want to scale luminance of pixel twice
-	if ( (ERROR != m_originalLum) && (m_originalLum != GetChL()) )
-	{
-		RestoreLum();
-	}
+	RestoreLum();
 
-	m_originalLum = GetChL();
 	double scaledLum = m_originalLum * t_factor;
-
 	bool lumSet = SetChL(scaledLum);
 	if ( false == lumSet )
 	{
@@ -128,8 +123,8 @@ bool TargetPixel::SetNormalizedLum(const double &t_newLum)
 		return false;
 	}
 
-	// If pixel was not previously scaled or normalised, we need to save pixels orignal lumiance value
-	if ( ERROR == m_originalLum )
+	// If pixel was not previously set or scaled or normalised, we need to save pixels orignal lumiance value
+	if ( m_originalLum < 0 )
 	{
 		m_originalLum = GetChL();
 	}
@@ -150,10 +145,11 @@ bool TargetPixel::SetNormalizedLum(const double &t_newLum)
 // - false - can't restore luminance
 bool TargetPixel::RestoreLum()
 {
-	if ( ERROR == m_originalLum )
+	// If pixel was not previously set or scaled or normalised, we need to save pixels orignal lumiance value
+	if ( m_originalLum < 0 )
 	{
-		// Pixels luminance wasn't scale
-		return false;
+		m_originalLum = GetChL();
+		return true;
 	}
 
 	bool lumSet = SetChL(m_originalLum);
@@ -209,6 +205,14 @@ void TargetPixel::SetUncolored()
 bool TargetPixel::IsColored() const
 {
 	return m_colored;
+}
+
+// Save current LAB luminance as original
+// @input:
+// @output:
+void TargetPixel::SaveOriginalLum()
+{
+	m_originalLum = GetChL();
 }
 
 // Test function SetAsGrey()

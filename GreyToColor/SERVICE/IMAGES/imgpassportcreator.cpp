@@ -93,7 +93,7 @@ QList<double> ImgPassportCreator::GetLuminancePassport(const Image &t_img)
 	}
 
 	ImgHistogram histogramer;
-	QList<double> passport = histogramer.LuminanceHistogram(t_img, PASSPORT_LENGTH);
+	QList<double> passport = histogramer.RGBLumHistogram(t_img, PASSPORT_LENGTH);
 
 	return passport;
 }
@@ -140,8 +140,8 @@ QList<double> ImgPassportCreator::GetLumGradHistPassport(const Image &t_img)
 	Image gradImg = filter.GetGradientImage(t_img, Kernel::SOBEL);
 
 	ImgHistogram histogramer;
-	QList<double> lumPassport = histogramer.LuminanceHistogram(t_img, PASSPORT_LENGTH / 2);
-	QList<double> gradPassport = histogramer.LuminanceHistogram(gradImg, PASSPORT_LENGTH / 2);
+	QList<double> lumPassport = histogramer.RGBLumHistogram(t_img, PASSPORT_LENGTH / 2);
+	QList<double> gradPassport = histogramer.RGBLumHistogram(gradImg, PASSPORT_LENGTH / 2);
 
 	QList<double> resultPassport;
 	resultPassport.append(lumPassport);

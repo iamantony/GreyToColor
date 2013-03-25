@@ -30,11 +30,11 @@ ImgHistogram::ImgHistogram()
 // @output:
 // - empty QList<double> - failed to form histogram
 // - QList<double> - images luminance histogram
-QList<double> ImgHistogram::LuminanceHistogram(const Image &t_img, const int t_size)
+QList<double> ImgHistogram::RGBLumHistogram(const Image &t_img, const int t_size)
 {
 	if ( (true == t_img.IsNull()) || (false == CheckHistSize(t_size)) )
 	{
-		qDebug() << "LuminanceHistogram(): Error - invalid arguments";
+		qDebug() << "RGBLumHistogram(): Error - invalid arguments";
 		QList<double> empty;
 		return empty;
 	}
@@ -43,7 +43,7 @@ QList<double> ImgHistogram::LuminanceHistogram(const Image &t_img, const int t_s
 	Image greyImg = imgTransformer.ToGrey(t_img);
 	if ( true == greyImg.IsNull() )
 	{
-		qDebug() << "LuminanceHistogram(): Error - can't greyscale image";
+		qDebug() << "RGBLumHistogram(): Error - can't greyscale image";
 		QList<double> empty;
 		return empty;
 	}
@@ -52,7 +52,7 @@ QList<double> ImgHistogram::LuminanceHistogram(const Image &t_img, const int t_s
 	QList< QList<double> > lumHist = CalcRGBHistogram(greyscaledImg);
 	if ( true == lumHist.isEmpty() )
 	{
-		qDebug() << "LuminanceHistogram(): Error - can't form luminance histogram";
+		qDebug() << "RGBLumHistogram(): Error - can't form luminance histogram";
 		QList<double> empty;
 		return empty;
 	}
@@ -60,7 +60,7 @@ QList<double> ImgHistogram::LuminanceHistogram(const Image &t_img, const int t_s
 	QList< QList<double> > shrinkedHist = ShrinkHistogram(lumHist, t_size);
 	if ( true == shrinkedHist.isEmpty() )
 	{
-		qDebug() << "LuminanceHistogram(): Error - can't shrink luminance histogram";
+		qDebug() << "RGBLumHistogram(): Error - can't shrink luminance histogram";
 		QList<double> empty;
 		return empty;
 	}
@@ -319,6 +319,53 @@ QList< QList<double> > ImgHistogram::ShrinkHistogram(const QList< QList<double> 
 	return shrinkedHists;
 }
 
+// Get images histogram of luminance L channel of LAB color space
+// @input:
+// - TargetImage - unnull Target image
+// @output:
+// - empty QList<double> - failed to form histogram
+// - QList<double> - images luminance histogram
+QList<double> ImgHistogram::LABLumHistogram(TargetImage *t_img)
+{
+	if ( false == t_img->HasImage() )
+	{
+		qDebug() << "LABLumHistogram(): Error - invalid arguments";
+		QList<double> empty;
+		return empty;
+	}
+
+	QList<double> lumHist = FormZeroLABLumHist();
+	const unsigned int imgWdt = t_img->GetImageWidth();
+	const unsigned int imgHgt = t_img->GetImageHeight();
+	for ( unsigned int width = 0; width < imgWdt; width++ )
+	{
+		for( unsigned int height = 0; height < imgHgt; height++ )
+		{
+			double luminance = t_img->PixelChLum(width, height);
+			int stepNum = floor( luminance / LAB_LUM_HIST_DIVIDER );
+			lumHist[stepNum]++;
+		}
+	}
+
+	return lumHist;
+}
+
+// Get zero LAB histogram for channel L
+// @input:
+// @output:
+// - QList<double> - zero LAB histograms
+QList<double> ImgHistogram::FormZeroLABLumHist()
+{
+	QList<double> zeroLABLumHist;
+	int numOfSteps = LAB_MAX_LUM / LAB_LUM_HIST_DIVIDER;
+	for ( int step = 0; step < numOfSteps; step++ )
+	{
+		zeroLABLumHist.append(0);
+	}
+
+	return zeroLABLumHist;
+}
+
 // Test of forming image histogram
 void ImgHistogram::TestRGBHist()
 {
@@ -338,14 +385,14 @@ void ImgHistogram::TestRGBHist()
 		return;
 	}
 
-	QList<double> lumHist = LuminanceHistogram(testImg, 256);
+	QList<double> lumHist = RGBLumHistogram(testImg, 256);
 	if ( true == lumHist.isEmpty() )
 	{
 		qDebug() << "TestRGBHist(): Fail - no lum histogram";
 		return;
 	}
 
-	QList<double> shrinkHist = LuminanceHistogram(testImg, 128);
+	QList<double> shrinkHist = RGBLumHistogram(testImg, 128);
 	if ( true == shrinkHist.isEmpty() )
 	{
 		qDebug() << "TestRGBHist(): Fail - no shrinked lum histogram";

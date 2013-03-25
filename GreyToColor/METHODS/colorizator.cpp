@@ -163,8 +163,8 @@ bool Colorizator::NormalizeTargetImgByCenter()
 	const double sourceMaxLum = m_source->GetMaxLABLum();
 	const double sourceCommonLum = m_source->GetCommonLABLum();
 	bool lumNormalised = m_target->NormaliseLABLumByCenter(sourceMinLum,
-														  sourceCommonLum,
-														  sourceMaxLum);
+														   sourceCommonLum,
+														   sourceMaxLum);
 	if ( false == lumNormalised )
 	{
 		qDebug() << "NormalizeTargetImgByCenter(): Error - can't normalise luminance of Target image";

@@ -23,6 +23,8 @@
 #define MIN_RGB_LUM 0
 #define MAX_RGB_LUM 255
 
+#define NUM_RGB_VALUES 256
+
 namespace Histogram
 {
 	enum Type

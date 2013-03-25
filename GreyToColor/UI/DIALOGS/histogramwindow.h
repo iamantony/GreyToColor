@@ -20,17 +20,16 @@
 #define HISTOGRAMWINDOW_H
 
 #include <QMainWindow>
+#include <QMutex>
 #include <QFileDialog>
 #include <QTextStream>
 #include <QFile>
-#include <QMutex>
 #include <QDebug>
-#include "IMAGES/COMMON/image.h"
-#include "SERVICE/IMAGES/imghistogram.h"
 #include "UI/scalelabel.h"
+#include "DEFINES/imgservice.h"
+#include "DEFINES/pixels.h"
 #include "DEFINES/images.h"
 #include "DEFINES/histogramui.h"
-//#include "DEFINES/imgservice.h"
 
 namespace Ui
 {
@@ -46,7 +45,6 @@ private:
 	Ui::HistogramWindow *ui;
 	ImageKind::Type m_imgType;
 	ColorSpace::Type m_colorSpaceType;
-	Image m_image;
 	QMutex m_processing;
 
 	// == METHODS ==
@@ -65,21 +63,21 @@ private:
 	void DefineImageType();
 	// Define checked Color Space Type
 	void DefineColorSpaceType();
-	// Decide which type of histogram we gonna make
-	void FormHistogram();
-	// Form Greyscaled RGB histogram
-	void FormRGBGreyHist();
-	// Form RGB histogram
-	void FormRGBHist();
-	// Form LAB histogram
-	void FormLABHist();
 
 signals:
-	void SignalGetImage(const ImageKind::Type &t_imgType);
+	void SignalFormGreyRGBHist(const ImageKind::Type &t_imgType);
+	void SignalFormRGBHist(const ImageKind::Type &t_imgType);
+	void SignalFormLABLumHist(const ImageKind::Type &t_imgType);
+
+public slots:
+	// Slot for recieving greyscaled RGB histogram
+	void SlotRecieveGreyRGBHist(const QList<double> &t_hist);
+	// Slot for recieving RGB histogram
+	void SlotRecieveRGBHist(const QList< QList<double> > &t_hist);
+	// Slot for recieving LAB Luminance histogram
+	void SlotRecieveLABLumHist(const QList<double> &t_hist);
 
 private slots:
-	// Slot get image for building histogram
-	void SlotGetImage(const Image &t_img);
 	void on_pbFormHist_clicked();
 };
 

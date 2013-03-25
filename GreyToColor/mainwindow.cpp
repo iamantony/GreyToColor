@@ -570,50 +570,88 @@ void MainWindow::on_actionFormHist_triggered()
 	HistogramWindow *histWind = new HistogramWindow(this);
 
 	connect(histWind,
-			SIGNAL(SignalGetImage(ImageKind::Type)),
+			SIGNAL(SignalFormGreyRGBHist(ImageKind::Type)),
 			this,
-			SLOT(SlotGetImgType(ImageKind::Type)));
+			SLOT(SlotNeedGreyRGBHist(ImageKind::Type)));
 
 	connect(this,
-			SIGNAL(SignalSendImg(const Image&)),
+			SIGNAL(SignalSendGreyRGBHist(QList<double>)),
 			histWind,
-			SLOT(SlotGetImage(const Image&)));
+			SLOT(SlotRecieveGreyRGBHist(QList<double>)));
+
+	connect(histWind,
+			SIGNAL(SignalFormRGBHist(ImageKind::Type)),
+			this,
+			SLOT(SlotNeedRGBHist(ImageKind::Type)));
+
+	connect(this,
+			SIGNAL(SignalSendRGBHist(QList< QList<double> >)),
+			histWind,
+			SLOT(SlotRecieveRGBHist(QList< QList<double> >)));
+
+	connect(histWind,
+			SIGNAL(SignalFormLABLumHist(ImageKind::Type)),
+			this,
+			SLOT(SlotNeedLABLumHist(ImageKind::Type)));
+
+	connect(this,
+			SIGNAL(SignalSendLABLumHist(QList<double>)),
+			histWind,
+			SLOT(SlotRecieveLABLumHist(QList<double>)));
 
 	histWind->show();
 }
 
-// Slot for getting type of image which needs Histogram window
+// Slot for emitting signal from Histogram Window. Need Grey RGB Histogram
 // @input:
+// - ImageKind::Type - exist image type
 // @output:
-void MainWindow::SlotGetImgType(const ImageKind::Type &t_type)
+void MainWindow::SlotNeedGreyRGBHist(const ImageKind::Type &t_type)
 {
-	switch(t_type)
-	{
-		case ImageKind::TARGET_ORIGINAL:
-			emit SignalGetOrigTargImg();
-			break;
-
-		case ImageKind::TARGET_COLORIZED:
-			emit SignalGetColorTargImg();
-			break;
-
-		case ImageKind::SOURCE:
-			emit SignalGetSourceImg();
-			break;
-
-		case ImageKind::DEFAULT_LAST:
-		default:
-		{
-			qDebug() << "SlotGetImgType(): Error - invalid arguments";
-			return;
-		}
-	}
+	emit SignalBuildGreyRGBHist(t_type);
 }
 
-// Get image from Image Handler and send it to Histogram Window
+// Slot to get Grey RGB histogram
 // @input:
+// - QList<double> - unempty histogram
 // @output:
-void MainWindow::SlotRecieveImg(const Image &t_img)
+void MainWindow::SlotGetGreyRGBHist(const QList<double> &t_hist)
 {
-	emit SignalSendImg(t_img);
+	emit SignalSendGreyRGBHist(t_hist);
+}
+
+// Slot for emitting signal from Histogram Window. Need RGB Histogram
+// @input:
+// - ImageKind::Type - exist image type
+// @output:
+void MainWindow::SlotNeedRGBHist(const ImageKind::Type &t_type)
+{
+	emit SignalBuildRGBHist(t_type);
+}
+
+// Slot to get RGB histogram
+// @input:
+// - QList<double> - unempty histogram
+// @output:
+void MainWindow::SlotGetRGBHist(const QList< QList<double> > &t_hist)
+{
+	emit SignalSendRGBHist(t_hist);
+}
+
+// Slot for emitting signal from Histogram Window. Need LAB Luminance Histogram
+// @input:
+// - ImageKind::Type - exist image type
+// @output:
+void MainWindow::SlotNeedLABLumHist(const ImageKind::Type &t_type)
+{
+	emit SignalBuildLABLumHist(t_type);
+}
+
+// Slot to get LAB Luminance histogram
+// @input:
+// - QList<double> - unempty histogram
+// @output:
+void MainWindow::SlotGetLABLumHist(const QList<double> &t_hist)
+{
+	emit SignalSendLABLumHist(t_hist);
 }

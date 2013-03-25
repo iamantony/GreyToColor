@@ -2,12 +2,15 @@
 <ui version="4.0">
  <class>HistogramWindow</class>
  <widget class="QMainWindow" name="HistogramWindow">
+  <property name="windowModality">
+   <enum>Qt::ApplicationModal</enum>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>180</width>
-    <height>242</height>
+    <height>265</height>
    </rect>
   </property>
   <property name="sizeIncrement">
@@ -46,7 +49,7 @@
        <item>
         <widget class="QRadioButton" name="rbTargColor">
          <property name="text">
-          <string>TargetColorized</string>
+          <string>Target Colorized</string>
          </property>
         </widget>
        </item>
@@ -71,6 +74,9 @@
          <property name="text">
           <string>RGB Grey</string>
          </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
@@ -79,7 +85,7 @@
           <string>RGB</string>
          </property>
          <property name="checked">
-          <bool>true</bool>
+          <bool>false</bool>
          </property>
         </widget>
        </item>

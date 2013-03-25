@@ -94,10 +94,12 @@ signals:
 	void SignalUseColorMethod(const Methods::Type &t_type);
 	void SignalUseLumEqual(const LumEqualization::Type &t_type);
 	void SignalStartColorization();
-	void SignalGetOrigTargImg();
-	void SignalGetColorTargImg();
-	void SignalGetSourceImg();
-	void SignalSendImg(const Image &t_img);
+	void SignalBuildGreyRGBHist(const ImageKind::Type &t_type);
+	void SignalSendGreyRGBHist(const QList<double> &t_hist);
+	void SignalBuildRGBHist(const ImageKind::Type &t_type);
+	void SignalSendRGBHist(const QList< QList<double> > &t_hist);
+	void SignalBuildLABLumHist(const ImageKind::Type &t_type);
+	void SignalSendLABLumHist(const QList<double> &t_hist);
 
 public slots:
 	// Slot for getting new Target image
@@ -108,10 +110,6 @@ public slots:
 	void SlotGetResultImg(QImage t_resultImg);
 	// Slot to set SKO value
 	void SlotGetImagesSKO(const double &t_sko);
-	// Slot for getting type of image which needs Histogram window
-	void SlotGetImgType(const ImageKind::Type &t_type);
-	// Get image from Image Handler and send it to Histogram Window
-	void SlotRecieveImg(const Image &t_img);
 	// Info-slot: type of current proccess
 	void SlotCurrProcess(const Program::Status &t_status);
 	// Info-slot: process ended normally
@@ -120,6 +118,12 @@ public slots:
 	void SlotProcError(const QString &t_message);
 	// Info-slot: process fatal fail
 	void SlotProcessFail();
+	// Slot to get Grey RGB histogram
+	void SlotGetGreyRGBHist(const QList<double> &t_hist);
+	// Slot to get RGB histogram
+	void SlotGetRGBHist(const QList< QList<double> > &t_hist);
+	// Slot to get LAB Luminance histogram
+	void SlotGetLABLumHist(const QList<double> &t_hist);
 
 private slots:
 	void on_openTargetImgPB_clicked();
@@ -138,6 +142,12 @@ private slots:
 	void SlotGetColorMethodType(const Methods::Type &t_colorMethodType);
 	void SlotGetLumEqualType(const LumEqualization::Type &t_lumEqualType);
 	void on_actionFormHist_triggered();
+	// Slot for emitting signal from Histogram Window. Need Grey RGB Histogram
+	void SlotNeedGreyRGBHist(const ImageKind::Type &t_type);
+	// Slot for emitting signal from Histogram Window. Need RGB Histogram
+	void SlotNeedRGBHist(const ImageKind::Type &t_type);
+	// Slot for emitting signal from Histogram Window. Need LAB Luminance Histogram
+	void SlotNeedLABLumHist(const ImageKind::Type &t_type);
 };
 
 #endif // MAINWINDOW_H

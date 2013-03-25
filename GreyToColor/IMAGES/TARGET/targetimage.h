@@ -68,6 +68,8 @@ public:
 private:
 	// Construct custom pixels of loaded image
 	virtual void ConstructImgPixels();
+	// Save current LAB luminance of pixels as original luminance
+	void SetOrigLum();
 };
 
 #endif // TARGETIMAGE_H

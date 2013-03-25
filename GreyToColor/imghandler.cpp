@@ -281,48 +281,158 @@ void ImgHandler::CalcTargetsSKO(const QImage &t_resultImg)
 	emit SignalTargetResultSKO(imagesSKO);
 }
 
-// Slot to send Target Original Image
+// Slot to form Grey RGB Histogram
 // @input:
 // @output:
-void ImgHandler::SlotSendTargOrigImg()
+void ImgHandler::SlotGreyRGBHist(const ImageKind::Type &t_type)
 {
-	if ( true == m_targetOriginal.IsNull() )
+	Image image;
+	switch(t_type)
 	{
-		emit SignalProcError(tr("No original image"));
+		case ImageKind::TARGET_ORIGINAL:
+			image = m_targetOriginal;
+			break;
+
+		case ImageKind::TARGET_COLORIZED:
+			image = m_target.GetResultImage();
+			break;
+
+		case ImageKind::SOURCE:
+			image = m_source.GetImage();
+			break;
+
+		case ImageKind::DEFAULT_LAST:
+		default:
+		{
+			qDebug() << "SlotGreyRGBHist(): Error - invalid arguments";
+			return;
+		}
+	}
+
+	if ( true == image.IsNull() )
+	{
+		emit SignalProcError(tr("No such image"));
+
+		qDebug() << "SlotGreyRGBHist(): Error - no image";
 		return;
 	}
 
-	emit SignalSendImage(m_targetOriginal);
+	ImgHistogram histogramer;
+	QList<double> greyHist = histogramer.RGBLumHistogram(image, NUM_RGB_VALUES);
+	if ( true == greyHist.isEmpty() )
+	{
+		emit SignalProcError(tr("Can't form Grey RGB Histogram"));
+
+		qDebug() << "SlotGreyRGBHist(): Error - failed to form grey RGB Histogram";
+		return;
+	}
+
+	emit SignalGetGreyRGBHist(greyHist);
 }
 
-// Slot to send Target Image
+// Slot to form RGB Histogram
 // @input:
 // @output:
-void ImgHandler::SlotSendTargImg()
+void ImgHandler::SlotRGBHist(const ImageKind::Type &t_type)
 {
-	if ( false == m_target.HasImage() )
+	Image image;
+	switch(t_type)
 	{
-		emit SignalProcError(tr("No target image"));
+		case ImageKind::TARGET_ORIGINAL:
+			image = m_targetOriginal;
+			break;
+
+		case ImageKind::TARGET_COLORIZED:
+			image = m_target.GetResultImage();
+			break;
+
+		case ImageKind::SOURCE:
+			image = m_source.GetImage();
+			break;
+
+		case ImageKind::DEFAULT_LAST:
+		default:
+		{
+			qDebug() << "SlotRGBHist(): Error - invalid arguments";
+			return;
+		}
+	}
+
+	if ( true == image.IsNull() )
+	{
+		emit SignalProcError(tr("No such image"));
+
+		qDebug() << "SlotRGBHist(): Error - no image";
 		return;
 	}
 
-	Image targetImg = m_target.GetImage();
+	ImgHistogram histogramer;
+	QList< QList<double> > rgbHist = histogramer.RGBHistogram(image, NUM_RGB_VALUES);
+	if ( true == rgbHist.isEmpty() )
+	{
+		emit SignalProcError(tr("Can't form RGB Histogram"));
 
-	emit SignalSendImage(targetImg);
+		qDebug() << "SlotRGBHist(): Error - failed to form RGB Histogram";
+		return;
+	}
+
+	emit SignalGetRGBHist(rgbHist);
 }
 
-// Slot to send Source Image
+// Slot to form LAB Luminance Histogram
 // @input:
 // @output:
-void ImgHandler::SlotSendSourceImg()
+void ImgHandler::SlotLABLumHist(const ImageKind::Type &t_type)
 {
-	if ( false == m_source.HasImage() )
+	TargetImage *image;
+	switch(t_type)
 	{
-		emit SignalProcError(tr("No source image"));
+		case ImageKind::TARGET_ORIGINAL:
+		{
+			QImage origImg = m_targetOriginal.GetImg();
+			image = new TargetImage;
+			image->SetImg(origImg);
+			break;
+		}
+
+		case ImageKind::TARGET_COLORIZED:
+			image = &m_target;
+			break;
+
+		case ImageKind::SOURCE:
+		{
+			Image sourceImage = m_source.GetImage();
+			QImage sourceImg = sourceImage.GetImg();
+			image = new TargetImage;
+			image->SetImg(sourceImg);
+			break;
+		}
+
+		case ImageKind::DEFAULT_LAST:
+		default:
+		{
+			qDebug() << "SlotLABLumHist(): Error - invalid arguments";
+			return;
+		}
+	}
+
+	if ( false == image->HasImage() )
+	{
+		emit SignalProcError(tr("No such image"));
+
+		qDebug() << "SlotLABLumHist(): Error - no image";
 		return;
 	}
 
-	Image sourceImg = m_source.GetImage();
+	ImgHistogram histogramer;
+	QList<double> lumHist = histogramer.LABLumHistogram(image);
+	if ( true == lumHist.isEmpty() )
+	{
+		emit SignalProcError(tr("Can't form LAB Luminance Histogram"));
 
-	emit SignalSendImage(sourceImg);
+		qDebug() << "SlotLABLumHist(): Error - failed to form LAB Luminance Histogram";
+		return;
+	}
+
+	emit SignalGetLABLumHist(lumHist);
 }

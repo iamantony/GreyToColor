@@ -60,6 +60,8 @@ public:
 	void SetUncolored();
 	// Check if pixel colorized
 	bool IsColored() const;
+	// Save current LAB luminance as original
+	void SaveOriginalLum();
 
 private:
 	// Transform pixel to grey color

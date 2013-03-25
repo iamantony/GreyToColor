@@ -38,6 +38,8 @@ public:
 	virtual void Clear();
 	// Save all pixels from input QImage as custom pixels
 	virtual bool FormImgPixels(const QImage &t_img);
+	// Set current LAB luminance as original
+	void SetOriginalLuminance();
 	// Calc for each pixel in image it's SKO
 	void CalcPixelsSKO();
 	// Get SKO of pixel with certain coords

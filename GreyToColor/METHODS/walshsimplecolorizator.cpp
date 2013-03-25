@@ -86,9 +86,6 @@ bool WalshSimpleColorizator::PrepareImages(const LumEqualization::Type &t_type)
 
 	m_target->SetPixelsUncoloured();
 
-	m_target->TransformImgRGB2LAB();
-	m_source->TransformImgRGB2LAB();
-
 	bool lumScaled = ScaleTargetImgLum(t_type);
 	if ( false == lumScaled )
 	{

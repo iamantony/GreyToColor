@@ -57,6 +57,17 @@ void TargetImage::ConstructImgPixels()
 	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
 	pixels->Clear();
 	pixels->FormImgPixels(currentImg);
+	TransformImgRGB2LAB();
+	SetOrigLum();
+}
+
+// Save current LAB luminance of pixels as original luminance
+// @input:
+// @output:
+void TargetImage::SetOrigLum()
+{
+	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	pixels->SetOriginalLuminance();
 }
 
 // Calc for each pixel in image it's SKO

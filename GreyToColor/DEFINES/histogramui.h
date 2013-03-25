@@ -19,6 +19,6 @@
 #ifndef HISTOGRAMUI_H
 #define HISTOGRAMUI_H
 
-#define NUM_RGB_VALUES 256
+
 
 #endif // HISTOGRAMUI_H
