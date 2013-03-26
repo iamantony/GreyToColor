@@ -34,213 +34,213 @@
   <property name="windowTitle">
    <string>Preferences</string>
   </property>
-  <widget class="QDialogButtonBox" name="exitBBox">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>200</y>
-     <width>156</width>
-     <height>23</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
-   </property>
-  </widget>
-  <widget class="QTabWidget" name="prefCategories">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>601</width>
-     <height>181</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="currentIndex">
-    <number>1</number>
-   </property>
-   <widget class="QWidget" name="tabDatabase">
-    <attribute name="title">
-     <string>Databse</string>
-    </attribute>
-    <widget class="QGroupBox" name="gbPassType">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>302</width>
-       <height>142</height>
-      </rect>
+  <layout class="QVBoxLayout" name="verticalLayout_3">
+   <item>
+    <widget class="QTabWidget" name="prefCategories">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-     <property name="title">
-      <string>Passport Type for Image Searching</string>
+     <property name="currentIndex">
+      <number>0</number>
      </property>
-     <property name="checkable">
-      <bool>false</bool>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QRadioButton" name="rbLumHist">
-        <property name="text">
-         <string>Luminance Histogram</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="rbSubLum">
-        <property name="text">
-         <string>Subsampled Luminance</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="rbLumGradHist">
-        <property name="text">
-         <string>Luminance and Gradient Histigram</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="rbSubLumGrad">
-        <property name="text">
-         <string>Subsampled Luminance and Gradient</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
+     <widget class="QWidget" name="tabDatabase">
+      <attribute name="title">
+       <string>Databse</string>
+      </attribute>
+      <widget class="QGroupBox" name="gbPassType">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>302</width>
+         <height>142</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Passport Type for Image Searching</string>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QRadioButton" name="rbLumHist">
+          <property name="text">
+           <string>Luminance Histogram</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbSubLum">
+          <property name="text">
+           <string>Subsampled Luminance</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbLumGradHist">
+          <property name="text">
+           <string>Luminance and Gradient Histigram</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbSubLumGrad">
+          <property name="text">
+           <string>Subsampled Luminance and Gradient</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tabColorization">
+      <property name="toolTip">
+       <string/>
+      </property>
+      <property name="statusTip">
+       <string/>
+      </property>
+      <property name="accessibleDescription">
+       <string/>
+      </property>
+      <attribute name="title">
+       <string>Colorization</string>
+      </attribute>
+      <widget class="QGroupBox" name="gbColorMethod">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>271</width>
+         <height>141</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Colorization Methods</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <item>
+         <widget class="QRadioButton" name="rbWSimple">
+          <property name="text">
+           <string>Walsh Simple</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbWNeighbor">
+          <property name="text">
+           <string>Walsh Neighbor</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbWNNoRand">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Walsh Neighbor (fixed net)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbWNOneRand">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="text">
+           <string>Walsh Neighbor (same pixels set)</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QGroupBox" name="gbImgLumEqual">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>10</y>
+         <width>301</width>
+         <height>141</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Images Luminance Equalization</string>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QRadioButton" name="rbNoScale">
+          <property name="text">
+           <string>No Scale</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbScaleMaxLum">
+          <property name="text">
+           <string>Scale by Max Luminance</string>
+          </property>
+          <property name="checked">
+           <bool>false</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbScaleAverLum">
+          <property name="text">
+           <string>Scale by Average Luminance</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbNormLumBorder">
+          <property name="text">
+           <string>Normalize Luminance (by borders)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbNormLumCentral">
+          <property name="text">
+           <string>Normalize Luminance (by center)</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
     </widget>
-   </widget>
-   <widget class="QWidget" name="tabColorization">
-    <property name="toolTip">
-     <string/>
-    </property>
-    <property name="statusTip">
-     <string/>
-    </property>
-    <property name="accessibleDescription">
-     <string/>
-    </property>
-    <attribute name="title">
-     <string>Colorization</string>
-    </attribute>
-    <widget class="QGroupBox" name="gbColorMethod">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>10</y>
-       <width>271</width>
-       <height>141</height>
-      </rect>
+   </item>
+   <item>
+    <widget class="QDialogButtonBox" name="exitBBox">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
      </property>
-     <property name="title">
-      <string>Colorization Methods</string>
+     <property name="standardButtons">
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QRadioButton" name="rbWSimple">
-        <property name="text">
-         <string>Walsh Simple</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="rbWNeighbor">
-        <property name="text">
-         <string>Walsh Neighbor</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="rbWNNoRand">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Walsh Neighbor (fixed net)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="rbWNOneRand">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>Walsh Neighbor (same pixels set)</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
     </widget>
-    <widget class="QGroupBox" name="gbImgLumEqual">
-     <property name="geometry">
-      <rect>
-       <x>290</x>
-       <y>10</y>
-       <width>301</width>
-       <height>141</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Images Luminance Equalization</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_4">
-      <item>
-       <widget class="QRadioButton" name="rbScaleMaxLum">
-        <property name="text">
-         <string>Scale by Max Luminance</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="rbScaleAverLum">
-        <property name="text">
-         <string>Scale by Average Luminance</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="rbNormLumBorder">
-        <property name="text">
-         <string>Normalize Luminance (by borders)</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="rbNormLumCentral">
-        <property name="text">
-         <string>Normalize Luminance (by center)</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </widget>
-  </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections>

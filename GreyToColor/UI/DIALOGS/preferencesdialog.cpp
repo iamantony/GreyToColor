@@ -27,7 +27,7 @@ PreferencesDialog::PreferencesDialog(QWidget *parent) :
 
 	m_imgPassport = Passport::LUM_HISTOGRAM;
 	m_colorizationMethod = Methods::WALSH_SIMPLE;
-	m_lumEqualType = LumEqualization::SCALE_BY_MAX;
+	m_lumEqualType = LumEqualization::NO_SCALE;
 }
 
 PreferencesDialog::~PreferencesDialog()
@@ -133,6 +133,10 @@ void PreferencesDialog::SetUpLumEqualType()
 {
 	switch(m_lumEqualType)
 	{
+		case LumEqualization::NO_SCALE:
+			ui->rbNoScale->setChecked(true);
+			break;
+
 		case LumEqualization::SCALE_BY_MAX:
 			ui->rbScaleMaxLum->setChecked(true);
 			break;
@@ -209,7 +213,11 @@ void PreferencesDialog::DefineColorMethodType()
 // @output:
 void PreferencesDialog::DefineLumEqualType()
 {
-	if ( true == ui->rbScaleMaxLum->isChecked() )
+	if ( true == ui->rbNoScale->isChecked() )
+	{
+		m_lumEqualType = LumEqualization::NO_SCALE;
+	}
+	else if ( true == ui->rbScaleMaxLum->isChecked() )
 	{
 		m_lumEqualType = LumEqualization::SCALE_BY_MAX;
 	}

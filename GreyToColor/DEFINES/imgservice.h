@@ -49,7 +49,8 @@ namespace LumEqualization
 {
 	enum Type
 	{
-		SCALE_BY_MAX = 0,
+		NO_SCALE = 0,
+		SCALE_BY_MAX,
 		SCALE_BY_AVERAGE,
 		NORMALIZE_LUM_BORDER,
 		NORMALIZE_LUM_CENTER,

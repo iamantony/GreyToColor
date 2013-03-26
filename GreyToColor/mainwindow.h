@@ -100,6 +100,7 @@ signals:
 	void SignalSendRGBHist(const QList< QList<double> > &t_hist);
 	void SignalBuildLABLumHist(const ImageKind::Type &t_type);
 	void SignalSendLABLumHist(const QList<double> &t_hist);
+	void SignalBuildTargLumHist(const LumEqualization::Type &t_lumType);
 
 public slots:
 	// Slot for getting new Target image
@@ -124,6 +125,8 @@ public slots:
 	void SlotGetRGBHist(const QList< QList<double> > &t_hist);
 	// Slot to get LAB Luminance histogram
 	void SlotGetLABLumHist(const QList<double> &t_hist);
+//	// Slot to get scaled LAB Luminance histogram of Target image
+//	void SlotGetTargLumHist(const QList<double> &t_hist);
 
 private slots:
 	void on_openTargetImgPB_clicked();
@@ -148,6 +151,8 @@ private slots:
 	void SlotNeedRGBHist(const ImageKind::Type &t_type);
 	// Slot for emitting signal from Histogram Window. Need LAB Luminance Histogram
 	void SlotNeedLABLumHist(const ImageKind::Type &t_type);
+	// Slot for emitting signal from Histogram Window. Need scaled LAB Luminance Histogram of Target image
+	void SlotNeedTargLumHist(const LumEqualization::Type &t_lumType);
 };
 
 #endif // MAINWINDOW_H

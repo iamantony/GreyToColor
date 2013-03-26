@@ -52,7 +52,7 @@ void MainWindow::InitSettings()
 
 	m_imgPassport = Passport::LUM_HISTOGRAM;
 	m_colorizationMethod = Methods::WALSH_SIMPLE;
-	m_lumEqualType = LumEqualization::SCALE_BY_MAX;
+	m_lumEqualType = LumEqualization::NO_SCALE;
 }
 
 // Creating, applying settings to status bar
@@ -599,6 +599,16 @@ void MainWindow::on_actionFormHist_triggered()
 			histWind,
 			SLOT(SlotRecieveLABLumHist(QList<double>)));
 
+	connect(histWind,
+			SIGNAL(SignalFormTargLumHist(LumEqualization::Type)),
+			this,
+			SLOT(SlotNeedTargLumHist(LumEqualization::Type)));
+
+//	connect(this,
+//			SIGNAL(SignalSendLABLumHist(QList<double>)),
+//			histWind,
+//			SLOT(SlotRecieveLABLumHist(QList<double>)));
+
 	histWind->show();
 }
 
@@ -654,4 +664,13 @@ void MainWindow::SlotNeedLABLumHist(const ImageKind::Type &t_type)
 void MainWindow::SlotGetLABLumHist(const QList<double> &t_hist)
 {
 	emit SignalSendLABLumHist(t_hist);
+}
+
+// Slot for emitting signal from Histogram Window. Need scaled LAB Luminance Histogram of Target image
+// @input:
+// - LumEqualization::Type - exist luminance equalization type
+// @output:
+void MainWindow::SlotNeedTargLumHist(const LumEqualization::Type &t_lumType)
+{
+	emit SignalBuildTargLumHist(t_lumType);
 }

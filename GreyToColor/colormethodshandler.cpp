@@ -37,7 +37,7 @@ void ColorMethodsHandler::Clear()
 	m_targetImg = NULL;
 	m_sourceImg = NULL;
 	m_methodToUse = Methods::WALSH_SIMPLE;
-	m_lumEqualType = LumEqualization::SCALE_BY_MAX;
+	m_lumEqualType = LumEqualization::NO_SCALE;
 }
 
 // Set type of colorization method to use

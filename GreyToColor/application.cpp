@@ -153,6 +153,11 @@ void Application::ConnectUIandImgHand()
 					 m_imgHandler,
 					 SLOT(SlotLABLumHist(ImageKind::Type)));
 
+	QObject::connect(m_mainUI,
+					 SIGNAL(SignalBuildTargLumHist(LumEqualization::Type)),
+					 m_imgHandler,
+					 SLOT(SlotTargImgScale(LumEqualization::Type)));
+
 	QObject::connect(m_imgHandler,
 					 SIGNAL(SignalGetGreyRGBHist(QList<double>)),
 					 m_mainUI,

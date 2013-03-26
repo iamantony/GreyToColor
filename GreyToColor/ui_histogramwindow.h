@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'histogramwindow.ui'
 **
-** Created: Mon Mar 25 22:33:54 2013
+** Created: Tue Mar 26 18:52:25 2013
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -49,6 +49,7 @@ public:
     QRadioButton *rbLAB;
     QGroupBox *gbTargLum;
     QVBoxLayout *verticalLayout_4;
+    QRadioButton *rbNoScale;
     QRadioButton *rbScaleMax;
     QRadioButton *rbScaleAver;
     QRadioButton *rbNormBorder;
@@ -64,7 +65,7 @@ public:
         if (HistogramWindow->objectName().isEmpty())
             HistogramWindow->setObjectName(QString::fromUtf8("HistogramWindow"));
         HistogramWindow->setWindowModality(Qt::ApplicationModal);
-        HistogramWindow->resize(323, 447);
+        HistogramWindow->resize(411, 457);
         HistogramWindow->setSizeIncrement(QSize(1, 1));
         HistogramWindow->setBaseSize(QSize(400, 300));
         actionTargOriginal = new QAction(HistogramWindow);
@@ -137,9 +138,15 @@ public:
         gbTargLum->setEnabled(false);
         verticalLayout_4 = new QVBoxLayout(gbTargLum);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        rbNoScale = new QRadioButton(gbTargLum);
+        rbNoScale->setObjectName(QString::fromUtf8("rbNoScale"));
+        rbNoScale->setChecked(true);
+
+        verticalLayout_4->addWidget(rbNoScale);
+
         rbScaleMax = new QRadioButton(gbTargLum);
         rbScaleMax->setObjectName(QString::fromUtf8("rbScaleMax"));
-        rbScaleMax->setChecked(true);
+        rbScaleMax->setChecked(false);
 
         verticalLayout_4->addWidget(rbScaleMax);
 
@@ -209,6 +216,7 @@ public:
         rbRGB->setText(QApplication::translate("HistogramWindow", "RGB", 0, QApplication::UnicodeUTF8));
         rbLAB->setText(QApplication::translate("HistogramWindow", "LAB Luminance", 0, QApplication::UnicodeUTF8));
         gbTargLum->setTitle(QApplication::translate("HistogramWindow", "Target LAB Luminance", 0, QApplication::UnicodeUTF8));
+        rbNoScale->setText(QApplication::translate("HistogramWindow", "No scale", 0, QApplication::UnicodeUTF8));
         rbScaleMax->setText(QApplication::translate("HistogramWindow", "Scale by Source Image Max Luminance", 0, QApplication::UnicodeUTF8));
         rbScaleAver->setText(QApplication::translate("HistogramWindow", "Scale by Source Image Average Luminance", 0, QApplication::UnicodeUTF8));
         rbNormBorder->setText(QApplication::translate("HistogramWindow", "Normalise by Source Image Luminance borders", 0, QApplication::UnicodeUTF8));

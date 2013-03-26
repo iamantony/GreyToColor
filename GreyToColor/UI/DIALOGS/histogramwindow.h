@@ -68,12 +68,13 @@ private:
 	// Init Button group for types of Target image luminance scale
 	void InitTargLumScaleBG();
 	// Checking rule for enabling Group Box of Target Luminance scale types
-	void CheckLumScaleGBRule(const ImageKind::Type &t_imgType, const ColorSpace::Type &t_csType);
+	bool CheckLumScaleGBRule(const ImageKind::Type &t_imgType, const ColorSpace::Type &t_csType);
 
 signals:
 	void SignalFormGreyRGBHist(const ImageKind::Type &t_imgType);
 	void SignalFormRGBHist(const ImageKind::Type &t_imgType);
 	void SignalFormLABLumHist(const ImageKind::Type &t_imgType);
+	void SignalFormTargLumHist(const LumEqualization::Type &t_lumType);
 
 public slots:
 	// Slot for recieving greyscaled RGB histogram

@@ -478,7 +478,7 @@ void ImgHandler::SlotTargImgScale(const LumEqualization::Type &t_type)
 		return;
 	}
 
-//	emit SignalGetLABLumHist(lumHist);
+	emit SignalGetLABLumHist(lumHist);
 
 	m_target.RestoreLABLum();
 }

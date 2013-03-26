@@ -47,6 +47,10 @@ bool ImgLumScaler::ScaleTargetImgLum(const LumEqualization::Type &t_type,
 	bool targImgLumScaled = false;
 	switch(t_type)
 	{
+		case LumEqualization::NO_SCALE:
+			targImgLumScaled = true;
+			break;
+
 		case LumEqualization::SCALE_BY_MAX:
 			targImgLumScaled = ScaleTargetImgLumByMax(t_target, t_source);
 			break;
@@ -72,7 +76,6 @@ bool ImgLumScaler::ScaleTargetImgLum(const LumEqualization::Type &t_type,
 	}
 
 	return targImgLumScaled;
-
 }
 
 // Scale Target Image pixels luminances by Max luminance value of Source Image

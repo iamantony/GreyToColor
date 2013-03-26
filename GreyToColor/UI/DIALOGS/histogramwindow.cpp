@@ -29,8 +29,6 @@ HistogramWindow::HistogramWindow(QWidget *parent) :
 	InitImgTypeBG();
 	InitColorSpaceBG();
 	InitTargLumScaleBG();
-//	SetUpImgType();
-//	SetUpColorSpaceType();
 }
 
 HistogramWindow::~HistogramWindow()
@@ -108,6 +106,10 @@ void HistogramWindow::InitTargLumScaleBG()
 	m_targetLumScaleBG.setExclusive(true);
 
 	int buttonID = 0;
+	m_targetLumScaleBG.addButton(ui->rbNoScale, buttonID);
+	m_targScaleTypes.insert(buttonID, LumEqualization::NO_SCALE);
+
+	buttonID++;
 	m_targetLumScaleBG.addButton(ui->rbScaleMax, buttonID);
 	m_targScaleTypes.insert(buttonID, LumEqualization::SCALE_BY_MAX);
 
@@ -140,14 +142,24 @@ void HistogramWindow::on_pbFormHist_clicked()
 		return;
 	}
 
+
 	int imgTypeRBID = m_imgTypeBG.checkedId();
 	ImageKind::Type imgType = m_imgTypes.value(imgTypeRBID);
 
 	int colorSpRBID = m_colorSpcaeBG.checkedId();
 	ColorSpace::Type colorSpaceType = m_csTypes.value(colorSpRBID);
 
-//	int lumScaleRBID = m_targetLumScaleBG.checkedId();
-//	LumEqualization::Type lumEqType = m_targScaleTypes.value(lumScaleRBID);
+	// Check if user want to see scaled Target image Luminance histogram
+	bool ruleComplied = CheckLumScaleGBRule(imgType, colorSpaceType);
+	if ( true == ruleComplied )
+	{
+		int lumScaleRBID = m_targetLumScaleBG.checkedId();
+		LumEqualization::Type lumEqType = m_targScaleTypes.value(lumScaleRBID);
+
+		emit SignalFormTargLumHist(lumEqType);
+
+		return;
+	}
 
 	switch(colorSpaceType)
 	{
@@ -205,16 +217,20 @@ void HistogramWindow::SlotColorSPTypeRBClicked(int t_id)
 // - ImageKind::Type - exist Image Type
 // - ColorSpace::Type - exist Color Space type
 // @output:
-void HistogramWindow::CheckLumScaleGBRule(const ImageKind::Type &t_imgType, const ColorSpace::Type &t_csType)
+bool HistogramWindow::CheckLumScaleGBRule(const ImageKind::Type &t_imgType, const ColorSpace::Type &t_csType)
 {
+	bool enableTargLumGB = false;
 	if ( (ImageKind::TARGET_COLORIZED == t_imgType) && (ColorSpace::LAB == t_csType) )
 	{
-		ui->gbTargLum->setEnabled(true);
+		enableTargLumGB = true;
 	}
 	else
 	{
-		ui->gbTargLum->setEnabled(false);
+		enableTargLumGB = false;
 	}
+
+	ui->gbTargLum->setEnabled(enableTargLumGB);
+	return enableTargLumGB;
 }
 
 // Slot for recieving greyscaled RGB histogram
@@ -401,13 +417,13 @@ void HistogramWindow::SlotRecieveLABLumHist(const QList<double> &t_hist)
 
 	const int numOfValues = t_hist.size();
 
-	streamToFile << "NUM;Step;LAB Lum" << endl;
+	streamToFile << "NUM;LAB_Lum;Pixels" << endl;
 	for ( int i = 0; i < numOfValues; i++ )
 	{
-		double lum = t_hist[i] * LAB_LUM_HIST_DIVIDER;
+		double lumValue = i * LAB_LUM_HIST_DIVIDER;
 		streamToFile << i << ";" <<
-						t_hist[i] << ";" <<
-						lum << endl;
+						lumValue << ";" <<
+						t_hist[i] << endl;
 	}
 
 	histFile.close();

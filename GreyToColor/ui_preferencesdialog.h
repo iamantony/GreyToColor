@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'preferencesdialog.ui'
 **
-** Created: Mon Mar 25 22:33:54 2013
+** Created: Tue Mar 26 18:52:25 2013
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -28,7 +28,7 @@ QT_BEGIN_NAMESPACE
 class Ui_PreferencesDialog
 {
 public:
-    QDialogButtonBox *exitBBox;
+    QVBoxLayout *verticalLayout_3;
     QTabWidget *prefCategories;
     QWidget *tabDatabase;
     QGroupBox *gbPassType;
@@ -46,10 +46,12 @@ public:
     QRadioButton *rbWNOneRand;
     QGroupBox *gbImgLumEqual;
     QVBoxLayout *verticalLayout_4;
+    QRadioButton *rbNoScale;
     QRadioButton *rbScaleMaxLum;
     QRadioButton *rbScaleAverLum;
     QRadioButton *rbNormLumBorder;
     QRadioButton *rbNormLumCentral;
+    QDialogButtonBox *exitBBox;
 
     void setupUi(QDialog *PreferencesDialog)
     {
@@ -64,14 +66,10 @@ public:
         PreferencesDialog->setSizePolicy(sizePolicy);
         PreferencesDialog->setMinimumSize(QSize(620, 240));
         PreferencesDialog->setMaximumSize(QSize(620, 240));
-        exitBBox = new QDialogButtonBox(PreferencesDialog);
-        exitBBox->setObjectName(QString::fromUtf8("exitBBox"));
-        exitBBox->setGeometry(QRect(450, 200, 156, 23));
-        exitBBox->setOrientation(Qt::Horizontal);
-        exitBBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+        verticalLayout_3 = new QVBoxLayout(PreferencesDialog);
+        verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         prefCategories = new QTabWidget(PreferencesDialog);
         prefCategories->setObjectName(QString::fromUtf8("prefCategories"));
-        prefCategories->setGeometry(QRect(10, 10, 601, 181));
         QSizePolicy sizePolicy1(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
@@ -147,9 +145,15 @@ public:
         gbImgLumEqual->setGeometry(QRect(290, 10, 301, 141));
         verticalLayout_4 = new QVBoxLayout(gbImgLumEqual);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        rbNoScale = new QRadioButton(gbImgLumEqual);
+        rbNoScale->setObjectName(QString::fromUtf8("rbNoScale"));
+        rbNoScale->setChecked(true);
+
+        verticalLayout_4->addWidget(rbNoScale);
+
         rbScaleMaxLum = new QRadioButton(gbImgLumEqual);
         rbScaleMaxLum->setObjectName(QString::fromUtf8("rbScaleMaxLum"));
-        rbScaleMaxLum->setChecked(true);
+        rbScaleMaxLum->setChecked(false);
 
         verticalLayout_4->addWidget(rbScaleMaxLum);
 
@@ -170,11 +174,21 @@ public:
 
         prefCategories->addTab(tabColorization, QString());
 
+        verticalLayout_3->addWidget(prefCategories);
+
+        exitBBox = new QDialogButtonBox(PreferencesDialog);
+        exitBBox->setObjectName(QString::fromUtf8("exitBBox"));
+        exitBBox->setOrientation(Qt::Horizontal);
+        exitBBox->setStandardButtons(QDialogButtonBox::Cancel|QDialogButtonBox::Ok);
+
+        verticalLayout_3->addWidget(exitBBox);
+
+
         retranslateUi(PreferencesDialog);
         QObject::connect(exitBBox, SIGNAL(accepted()), PreferencesDialog, SLOT(accept()));
         QObject::connect(exitBBox, SIGNAL(rejected()), PreferencesDialog, SLOT(reject()));
 
-        prefCategories->setCurrentIndex(1);
+        prefCategories->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(PreferencesDialog);
@@ -204,6 +218,7 @@ public:
         rbWNNoRand->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor (fixed net)", 0, QApplication::UnicodeUTF8));
         rbWNOneRand->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor (same pixels set)", 0, QApplication::UnicodeUTF8));
         gbImgLumEqual->setTitle(QApplication::translate("PreferencesDialog", "Images Luminance Equalization", 0, QApplication::UnicodeUTF8));
+        rbNoScale->setText(QApplication::translate("PreferencesDialog", "No Scale", 0, QApplication::UnicodeUTF8));
         rbScaleMaxLum->setText(QApplication::translate("PreferencesDialog", "Scale by Max Luminance", 0, QApplication::UnicodeUTF8));
         rbScaleAverLum->setText(QApplication::translate("PreferencesDialog", "Scale by Average Luminance", 0, QApplication::UnicodeUTF8));
         rbNormLumBorder->setText(QApplication::translate("PreferencesDialog", "Normalize Luminance (by borders)", 0, QApplication::UnicodeUTF8));

@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>323</width>
-    <height>447</height>
+    <width>411</width>
+    <height>457</height>
    </rect>
   </property>
   <property name="sizeIncrement">
@@ -109,12 +109,22 @@
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
+           <widget class="QRadioButton" name="rbNoScale">
+            <property name="text">
+             <string>No scale</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QRadioButton" name="rbScaleMax">
             <property name="text">
              <string>Scale by Source Image Max Luminance</string>
             </property>
             <property name="checked">
-             <bool>true</bool>
+             <bool>false</bool>
             </property>
            </widget>
           </item>
