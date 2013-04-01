@@ -38,6 +38,8 @@ public:
 						   SourceImage *t_source);
 
 private:
+	// Restore Target image default LAB Luminance
+	bool RestoreTargImgLum(TargetImage *t_target);
 	// Scale Target Image pixels luminances by Max luminance value of Source Image
 	bool ScaleTargetImgLumByMax(TargetImage *t_target, SourceImage *t_source);
 	// Scale Target Image pixels luminances by Average luminance value of Source Image

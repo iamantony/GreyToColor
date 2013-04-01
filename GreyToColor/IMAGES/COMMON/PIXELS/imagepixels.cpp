@@ -334,7 +334,7 @@ double ImagePixels::FindMostCommonLum() const
 		{
 			double pixLum = m_pixels[width][height]->GetChL();
 			double lumLvl = pixLum / LAB_LUM_HIST_DIVIDER;
-			int lvlNum = (int)floor(lumLvl + 0.5);
+			int lvlNum = (int)floor(lumLvl);
 
 			lumStatistic[lvlNum]++;
 		}

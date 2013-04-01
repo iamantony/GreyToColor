@@ -125,7 +125,7 @@ void HistogramWindow::InitTargLumScaleBG()
 	m_targetLumScaleBG.addButton(ui->rbNormCenter, buttonID);
 	m_targScaleTypes.insert(buttonID, LumEqualization::NORMALIZE_LUM_CENTER);
 
-	ui->rbScaleMax->setChecked(true);
+	ui->rbNoScale->setChecked(true);
 }
 
 // Slot for button Show Histogram

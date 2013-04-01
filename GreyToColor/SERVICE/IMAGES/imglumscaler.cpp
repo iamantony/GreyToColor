@@ -48,7 +48,7 @@ bool ImgLumScaler::ScaleTargetImgLum(const LumEqualization::Type &t_type,
 	switch(t_type)
 	{
 		case LumEqualization::NO_SCALE:
-			targImgLumScaled = true;
+			targImgLumScaled = RestoreTargImgLum(t_target);
 			break;
 
 		case LumEqualization::SCALE_BY_MAX:
@@ -76,6 +76,24 @@ bool ImgLumScaler::ScaleTargetImgLum(const LumEqualization::Type &t_type,
 	}
 
 	return targImgLumScaled;
+}
+
+// Restore Target image default LAB Luminance
+// @input:
+// - TargetImage - unnull, unempty Target Image
+// @output:
+// - true - LAB Luminance of target image restored
+// - false - can't restore LAB Luminance of Target Image
+bool ImgLumScaler::RestoreTargImgLum(TargetImage *t_target)
+{
+	if ( (NULL == t_target) || (false == t_target->HasImage()) )
+	{
+		qDebug() << "RestoreTargImgLum(): Error - invalid arguments";
+		return false;
+	}
+
+	t_target->RestoreLABLum();
+	return true;
 }
 
 // Scale Target Image pixels luminances by Max luminance value of Source Image
