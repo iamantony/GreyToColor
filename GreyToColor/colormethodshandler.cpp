@@ -91,6 +91,10 @@ void ColorMethodsHandler::SlotStartColorization()
 			ColorizeByWalshSimple();
 			break;
 
+		case Methods::WALSH_SIMPLE_LOOKUP:
+			ColorizeByWSLookUp();
+			break;
+
 		case Methods::WALSH_NEIGHBOR:
 			ColorizeByWalshNeighbor();
 			break;
@@ -157,6 +161,29 @@ void ColorMethodsHandler::ColorizeByWalshSimple()
 	if ( false == targetColorized )
 	{
 		qDebug() << "ColorizeByWalshSimple(): Error - can't colorize by Waslh Simple Method";
+		emit SignalProcError(tr("Colorization failed"));
+		return;
+	}
+
+	emit SignalColorizationDone();
+	emit SignalProcDone();
+}
+
+// Start colorization method Walsh Simple Look Up Table
+// @input:
+// @output:
+void ColorMethodsHandler::ColorizeByWSLookUp()
+{
+	emit SignalCurrentProc(Program::COLORIZATION);
+
+	WSLookUpTableColorizator colorizator;
+	bool targetColorized = colorizator.Colorize(m_targetImg,
+												m_sourceImg,
+												m_lumEqualType);
+
+	if ( false == targetColorized )
+	{
+		qDebug() << "ColorizeByWSLookUp(): Error - can't colorize by Waslh Simple Look Up Method";
 		emit SignalProcError(tr("Colorization failed"));
 		return;
 	}

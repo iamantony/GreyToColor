@@ -72,7 +72,10 @@ bool WalshSimpleColorizator::Colorize(TargetImage *t_targetImg,
 
 // Prepare images to colorization
 // @input:
+// - LumEqualization::Type - exist type of way to equalise luminance of the Target image to Source image
 // @output:
+// - true - images prepared
+// - false - can't prepare images to colorization
 bool WalshSimpleColorizator::PrepareImages(const LumEqualization::Type &t_type)
 {
 	if ( (NULL == m_target) ||
@@ -102,6 +105,8 @@ bool WalshSimpleColorizator::PrepareImages(const LumEqualization::Type &t_type)
 // Colorize Target image using color information from Source image
 // @input:
 // @output:
+// - true - Target image colorized
+// - false - failed to colorize Target image
 bool WalshSimpleColorizator::ColorizeImage()
 {
 	if ( (NULL == m_target) ||
@@ -224,6 +229,8 @@ bool WalshSimpleColorizator::ColorizeImage()
 // Restore images params if needed
 // @input:
 // @output:
+// - true - images params restored
+// - false - can't restore images parameters
 bool WalshSimpleColorizator::PostColorization()
 {
 	if ( (NULL == m_target) ||

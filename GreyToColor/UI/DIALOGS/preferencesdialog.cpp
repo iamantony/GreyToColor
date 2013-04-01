@@ -105,6 +105,10 @@ void PreferencesDialog::SetUpColorMethodType()
 			ui->rbWSimple->setChecked(true);
 			break;
 
+		case Methods::WALSH_SIMPLE_LOOKUP:
+			ui->rbWSLookUp->setChecked(true);
+			break;
+
 		case Methods::WALSH_NEIGHBOR:
 			ui->rbWNeighbor->setChecked(true);
 			break;
@@ -170,18 +174,22 @@ void PreferencesDialog::DefinePassportType()
 	if ( true == ui->rbLumHist->isChecked() )
 	{
 		m_imgPassport = Passport::LUM_HISTOGRAM;
+		return;
 	}
 	else if ( true == ui->rbSubLum->isChecked() )
 	{
 		m_imgPassport = Passport::LUM_SUBSAMPLE;
+		return;
 	}
 	else if ( true == ui->rbLumGradHist->isChecked() )
 	{
 		m_imgPassport = Passport::LUM_AND_GRAD_HIST;
+		return;
 	}
 	else if ( true == ui->rbSubLumGrad->isChecked() )
 	{
 		m_imgPassport = Passport::LUM_AND_GRAD_SUB;
+		return;
 	}
 }
 
@@ -193,18 +201,27 @@ void PreferencesDialog::DefineColorMethodType()
 	if ( true == ui->rbWSimple->isChecked() )
 	{
 		m_colorizationMethod = Methods::WALSH_SIMPLE;
+		return;
+	}
+	else if ( true == ui->rbWSLookUp->isChecked() )
+	{
+		m_colorizationMethod = Methods::WALSH_SIMPLE_LOOKUP;
+		return;
 	}
 	else if ( true == ui->rbWNeighbor->isChecked() )
 	{
 		m_colorizationMethod = Methods::WALSH_NEIGHBOR;
+		return;
 	}
 	else if ( true == ui->rbWNNoRand->isChecked() )
 	{
 		m_colorizationMethod = Methods::WALSH_NEIGHBOR_NORAND;
+		return;
 	}
 	else if ( true == ui->rbWNOneRand->isChecked() )
 	{
 		m_colorizationMethod = Methods::WALSH_NEIGHBOR_ONERAND;
+		return;
 	}
 }
 
@@ -216,22 +233,27 @@ void PreferencesDialog::DefineLumEqualType()
 	if ( true == ui->rbNoScale->isChecked() )
 	{
 		m_lumEqualType = LumEqualization::NO_SCALE;
+		return;
 	}
 	else if ( true == ui->rbScaleMaxLum->isChecked() )
 	{
 		m_lumEqualType = LumEqualization::SCALE_BY_MAX;
+		return;
 	}
 	else if ( true == ui->rbScaleAverLum->isChecked() )
 	{
 		m_lumEqualType = LumEqualization::SCALE_BY_AVERAGE;
+		return;
 	}
 	else if ( true == ui->rbNormLumBorder->isChecked() )
 	{
 		m_lumEqualType = LumEqualization::NORMALIZE_LUM_BORDER;
+		return;
 	}
 	else if ( true == ui->rbNormLumCentral->isChecked() )
 	{
 		m_lumEqualType = LumEqualization::NORMALIZE_LUM_CENTER;
+		return;
 	}
 }
 

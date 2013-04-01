@@ -72,7 +72,10 @@ bool WNNoRandColorizator::Colorize(TargetImage *t_targetImg,
 
 // Prepare images to colorization
 // @input:
+// - LumEqualization::Type - exist type of way to equalise luminance of the Target image to Source image
 // @output:
+// - true - images prepared
+// - false - can't prepare images to colorization
 bool WNNoRandColorizator::PrepareImages(const LumEqualization::Type &t_type)
 {
 	if ( (NULL == m_target) ||
@@ -102,6 +105,8 @@ bool WNNoRandColorizator::PrepareImages(const LumEqualization::Type &t_type)
 // Colorize Target image using color information from Source image
 // @input:
 // @output:
+// - true - Target image colorized
+// - false - failed to colorize Target image
 bool WNNoRandColorizator::ColorizeImage()
 {
 	if ( (NULL == m_target) ||
@@ -227,6 +232,10 @@ bool WNNoRandColorizator::ColorizeImage()
 }
 
 // Try to colorize neighbor pixels by the same color
+// @input:
+// - unsigned int - start pixel width coord
+// - unsigned int - start pixel height coord
+// @output:
 void WNNoRandColorizator::ColorizeNeighbor(const unsigned int &t_startWidth, const unsigned int &t_startHeight)
 {
 	const unsigned int targetWdt = m_target->GetImageWidth();
@@ -332,8 +341,19 @@ void WNNoRandColorizator::ColorizeNeighbor(const unsigned int &t_startWidth, con
 // Restore images params if needed
 // @input:
 // @output:
+// - true - images params restored
+// - false - can't restore images parameters
 bool WNNoRandColorizator::PostColorization()
 {
+	if ( (NULL == m_target) ||
+		 (NULL == m_source) ||
+		 (false == m_target->HasImage()) ||
+		 (false == m_source->HasImage()) )
+	{
+		qDebug() << "PostColorization(): Error - invalid arguments";
+		return false;
+	}
+
 	m_target->RestoreLABLum();
 	return true;
 }

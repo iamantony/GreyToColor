@@ -357,8 +357,8 @@ QList<double> ImgHistogram::LABLumHistogram(TargetImage *t_img)
 QList<double> ImgHistogram::FormZeroLABLumHist()
 {
 	QList<double> zeroLABLumHist;
-	int numOfSteps = LAB_MAX_LUM / LAB_LUM_HIST_DIVIDER;
-	for ( int step = 0; step < numOfSteps; step++ )
+	unsigned int numOfSteps = LAB_MAX_LUM / LAB_LUM_HIST_DIVIDER;
+	for ( unsigned int step = 0; step < numOfSteps; step++ )
 	{
 		zeroLABLumHist.append(0);
 	}

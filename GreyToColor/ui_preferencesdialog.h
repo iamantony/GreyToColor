@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'preferencesdialog.ui'
 **
-** Created: Tue Mar 26 18:52:25 2013
+** Created: Mon Apr 1 23:14:27 2013
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -41,6 +41,7 @@ public:
     QGroupBox *gbColorMethod;
     QVBoxLayout *verticalLayout_2;
     QRadioButton *rbWSimple;
+    QRadioButton *rbWSLookUp;
     QRadioButton *rbWNeighbor;
     QRadioButton *rbWNNoRand;
     QRadioButton *rbWNOneRand;
@@ -117,6 +118,11 @@ public:
         rbWSimple->setChecked(true);
 
         verticalLayout_2->addWidget(rbWSimple);
+
+        rbWSLookUp = new QRadioButton(gbColorMethod);
+        rbWSLookUp->setObjectName(QString::fromUtf8("rbWSLookUp"));
+
+        verticalLayout_2->addWidget(rbWSLookUp);
 
         rbWNeighbor = new QRadioButton(gbColorMethod);
         rbWNeighbor->setObjectName(QString::fromUtf8("rbWNeighbor"));
@@ -214,6 +220,7 @@ public:
 #endif // QT_NO_ACCESSIBILITY
         gbColorMethod->setTitle(QApplication::translate("PreferencesDialog", "Colorization Methods", 0, QApplication::UnicodeUTF8));
         rbWSimple->setText(QApplication::translate("PreferencesDialog", "Walsh Simple", 0, QApplication::UnicodeUTF8));
+        rbWSLookUp->setText(QApplication::translate("PreferencesDialog", "Walsh Simple (look up table)", 0, QApplication::UnicodeUTF8));
         rbWNeighbor->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor", 0, QApplication::UnicodeUTF8));
         rbWNNoRand->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor (fixed net)", 0, QApplication::UnicodeUTF8));
         rbWNOneRand->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor (same pixels set)", 0, QApplication::UnicodeUTF8));

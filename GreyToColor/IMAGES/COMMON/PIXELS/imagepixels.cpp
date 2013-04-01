@@ -405,7 +405,8 @@ QList<double> ImagePixels::GetPixNeighborsLum(const unsigned int &t_width, const
 				// (central) pixel
 				continue;
 			}
-				double pixelLum = m_pixels[width][height]->GetChL();
+
+			double pixelLum = m_pixels[width][height]->GetChL();
 			luminances.append(pixelLum);
 		}
 	}

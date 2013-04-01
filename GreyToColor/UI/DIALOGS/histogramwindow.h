@@ -31,7 +31,6 @@
 #include "DEFINES/imgservice.h"
 #include "DEFINES/pixels.h"
 #include "DEFINES/images.h"
-#include "DEFINES/histogramui.h"
 
 namespace Ui
 {

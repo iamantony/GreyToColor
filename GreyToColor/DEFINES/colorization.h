@@ -24,12 +24,17 @@ namespace Methods
 	enum Type
 	{
 		WALSH_SIMPLE = 0,
+		WALSH_SIMPLE_LOOKUP,
 		WALSH_NEIGHBOR,
 		WALSH_NEIGHBOR_NORAND,
 		WALSH_NEIGHBOR_ONERAND,
 		DEFAULT_LAST
 	};
 }
+
+typedef QPair<unsigned int, unsigned int> Coord;
+typedef QList<Coord> PixCoords;
+typedef QMap<unsigned int, PixCoords> LookUpSKO;
 
 #define DEFAULT_LUM 999999
 #define DEFAULT_SKO 999999

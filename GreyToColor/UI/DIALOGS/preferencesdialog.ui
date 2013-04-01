@@ -137,6 +137,13 @@
          </widget>
         </item>
         <item>
+         <widget class="QRadioButton" name="rbWSLookUp">
+          <property name="text">
+           <string>Walsh Simple (look up table)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <widget class="QRadioButton" name="rbWNeighbor">
           <property name="text">
            <string>Walsh Neighbor</string>

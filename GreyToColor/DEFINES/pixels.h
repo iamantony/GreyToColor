@@ -31,5 +31,6 @@
 #define LAB_MAX_LUM 4.2
 
 #define LAB_LUM_HIST_DIVIDER 0.001
+#define SKO_DIVIDER 0.01
 
 #endif // PIXELS_H
