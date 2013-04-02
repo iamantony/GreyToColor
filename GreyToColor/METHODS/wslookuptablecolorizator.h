@@ -20,6 +20,7 @@
 #define WSLOOKUPTABLECOLORIZATOR_H
 
 #include <math.h>
+#include <time.h>
 
 #include <QPair>
 #include <QDebug>

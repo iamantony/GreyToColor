@@ -268,6 +268,11 @@ bool WSLookUpTableColorizator::ColorizeImage()
 	double sourceChA = 0;
 	double sourceChB = 0;
 
+	PixCoords sourceImgCoords;
+
+	// Offset for search in look up table
+	const unsigned int offset = 1;
+
 	int found = 0;
 
 	qDebug() << "Start colorization!";
@@ -276,6 +281,7 @@ bool WSLookUpTableColorizator::ColorizeImage()
 
 	for ( unsigned int width = 0; width < targetWdt; width++ )
 	{
+		qDebug() << "width =" << width;
 		for ( unsigned int height = 0; height < targetHgt; height++ )
 		{
 			// Get target pixel params
@@ -290,9 +296,24 @@ bool WSLookUpTableColorizator::ColorizeImage()
 			lumStepNum = (unsigned int)floor( targPixLum / LAB_LUM_HIST_DIVIDER );
 			skoStepNum = (unsigned int)floor( targPixSKO / SKO_DIVIDER );
 
-			PixCoords sourceImgCoords = m_lookUpTable[lumStepNum][skoStepNum];
+			sourceImgCoords = m_lookUpTable[lumStepNum][skoStepNum];
 
-			// If we can't find in look up table Source image pixel with such params, we skip it and colorise later
+			if ( true == sourceImgCoords.isEmpty() )
+			{
+				// Try to find similar pixel with quite similar params
+				for ( unsigned int lum = lumStepNum - offset; lum <= lumStepNum + offset; lum++ )
+				{
+					for ( unsigned int sko = skoStepNum - offset; sko <= skoStepNum + offset; sko++ )
+					{
+						sourceImgCoords = m_lookUpTable[lum][sko];
+						if ( false == sourceImgCoords.isEmpty() )
+						{
+							break;
+						}
+					}
+				}
+			}
+
 			if ( true == sourceImgCoords.isEmpty() )
 			{
 				continue;
