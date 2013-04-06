@@ -130,6 +130,8 @@ bool WSLookUpTableColorizator::FormLookUpTable()
 		return false;
 	}
 
+	ReduceLookUpTable();
+
 	return true;
 }
 
@@ -223,6 +225,41 @@ bool WSLookUpTableColorizator::FillLookUpTable()
 	}
 
 	return true;
+}
+
+// Reduce number of coords per cell in look up table
+// @input:
+// @output:
+void WSLookUpTableColorizator::ReduceLookUpTable()
+{
+	if ( true == m_lookUpTable.isEmpty() )
+	{
+		qDebug() << "ReduceLookUpTable(): Error - look up table is empty";
+		return;
+	}
+
+	const int lumListSize = m_lookUpTable.size();
+	const int skoListSize = m_lookUpTable[0].size();
+	for ( int lum = 0; lum < lumListSize; lum++ )
+	{
+		for ( int sko = 0; sko < skoListSize; sko++ )
+		{
+			const int coordsNum = m_lookUpTable[lum][sko].size();
+			if ( coordsNum <= MAX_COORDS_PER_CELL )
+			{
+				continue;
+			}
+
+			const int step = coordsNum / MAX_COORDS_PER_CELL;
+			PixCoords reducedCoords;
+			for ( int addedCoord = 0, coord = 0; addedCoord < MAX_COORDS_PER_CELL; addedCoord++, coord += step)
+			{
+				reducedCoords.append(m_lookUpTable[lum][sko][coord]);
+			}
+
+			m_lookUpTable[lum].insert(sko, reducedCoords);
+		}
+	}
 }
 
 // Colorize Target image using color information from Source image

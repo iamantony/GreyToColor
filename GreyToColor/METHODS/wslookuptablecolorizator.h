@@ -59,6 +59,8 @@ private:
 	QList<unsigned int> FormSKOValues();
 	// Fill look up table
 	bool FillLookUpTable();
+	// Reduce number of coords per cell in look up table
+	void ReduceLookUpTable();
 	// Colorize Target image using color information from Source image
 	virtual bool ColorizeImage();
 	// Finish colorization of Target image using Walsh Simple algorithm
