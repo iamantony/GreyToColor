@@ -128,8 +128,6 @@ void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int
 		return;
 	}
 
-//	qDebug() << "Neighbor pixels:" << lumInMask.size();
-
 	double pixelLum = m_pixels[t_width][t_height]->GetChL();
 
 	CalculatorSKO calc;
@@ -142,9 +140,6 @@ void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int
 
 	ColorPixel *centralPixel = (ColorPixel *)m_pixels[t_width][t_height];
 	centralPixel->SetSKO(pixelSKO);
-
-	// TEST
-//	qDebug() << "Pixel:" << t_width << t_height << "have SKO" << centralPixel->GetSKO() << endl;
 }
 
 // Get SKO of pixel with certain coords
