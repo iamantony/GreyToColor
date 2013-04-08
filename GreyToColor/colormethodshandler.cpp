@@ -95,6 +95,10 @@ void ColorMethodsHandler::SlotStartColorization()
 			ColorizeByWSLookUp();
 			break;
 
+		case Methods::WALSH_SIMPLE_ENTROPY:
+			ColorizeByWSEntropy();
+			break;
+
 		case Methods::WALSH_NEIGHBOR:
 			ColorizeByWalshNeighbor();
 			break;
@@ -184,6 +188,29 @@ void ColorMethodsHandler::ColorizeByWSLookUp()
 	if ( false == targetColorized )
 	{
 		qDebug() << "ColorizeByWSLookUp(): Error - can't colorize by Waslh Simple Look Up Method";
+		emit SignalProcError(tr("Colorization failed"));
+		return;
+	}
+
+	emit SignalColorizationDone();
+	emit SignalProcDone();
+}
+
+// Start colorization method Walsh Simple Entropy
+// @input:
+// @output:
+void ColorMethodsHandler::ColorizeByWSEntropy()
+{
+	emit SignalCurrentProc(Program::COLORIZATION);
+
+	WSEntropyColorizator colorizator;
+	bool targetColorized = colorizator.Colorize(m_targetImg,
+												m_sourceImg,
+												m_lumEqualType);
+
+	if ( false == targetColorized )
+	{
+		qDebug() << "ColorizeByWSEntropy(): Error - can't colorize by Waslh Simple Look Up Method";
 		emit SignalProcError(tr("Colorization failed"));
 		return;
 	}

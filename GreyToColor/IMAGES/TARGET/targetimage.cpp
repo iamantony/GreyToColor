@@ -92,6 +92,27 @@ double TargetImage::GetPixelsSKO(const unsigned int &t_width, const unsigned int
 	return pixels->GetPixelsSKO(t_width, t_height);
 }
 
+// Calc for each pixel in image it's Entropy
+// @input:
+// @output:
+void TargetImage::CalcPixelsEntropy()
+{
+	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	pixels->CalcPixelsEntropy();
+}
+
+// Get Entropy of pixel with certain coords
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+// - double - pixels Entropy
+double TargetImage::GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const
+{
+	const TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	return pixels->GetPixelsEntropy(t_width, t_height);
+}
+
 // Scale luminance of all pixels in image with certain scale factor
 // @input:
 // - double - positive unnull scale factor for pixel LAB luminance

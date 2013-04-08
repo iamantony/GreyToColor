@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>620</width>
-    <height>240</height>
+    <width>650</width>
+    <height>280</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -21,14 +21,14 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>620</width>
-    <height>240</height>
+    <width>650</width>
+    <height>280</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>620</width>
-    <height>240</height>
+    <width>650</width>
+    <height>280</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -56,7 +56,7 @@
          <x>10</x>
          <y>10</y>
          <width>302</width>
-         <height>142</height>
+         <height>151</height>
         </rect>
        </property>
        <property name="title">
@@ -119,7 +119,7 @@
          <x>10</x>
          <y>10</y>
          <width>271</width>
-         <height>141</height>
+         <height>181</height>
         </rect>
        </property>
        <property name="title">
@@ -140,6 +140,13 @@
          <widget class="QRadioButton" name="rbWSLookUp">
           <property name="text">
            <string>Walsh Simple (look up table)</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbWSEntropy">
+          <property name="text">
+           <string>Walsh Simple (entropy)</string>
           </property>
          </widget>
         </item>
@@ -184,7 +191,7 @@
          <x>290</x>
          <y>10</y>
          <width>301</width>
-         <height>141</height>
+         <height>181</height>
         </rect>
        </property>
        <property name="title">

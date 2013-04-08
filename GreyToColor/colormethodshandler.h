@@ -25,6 +25,7 @@
 #include "./IMAGES/TARGET/targetimage.h"
 #include "METHODS/walshsimplecolorizator.h"
 #include "METHODS/wslookuptablecolorizator.h"
+#include "METHODS/wsentropycolorizator.h"
 #include "METHODS/walshneighborcolorizator.h"
 #include "METHODS/wnnorandcolorizator.h"
 #include "METHODS/wnonerandcolorizator.h"
@@ -55,6 +56,8 @@ private:
 	void ColorizeByWalshSimple();
 	// Start colorization method Walsh Simple Look Up Table
 	void ColorizeByWSLookUp();
+	// Start colorization method Walsh Simple Entropy
+	void ColorizeByWSEntropy();
 	// Start colorization method Walsh Neighbor
 	void ColorizeByWalshNeighbor();
 	// Start colorization method Walsh Neighbor No Rand

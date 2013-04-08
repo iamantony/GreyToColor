@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'preferencesdialog.ui'
 **
-** Created: Sat 6. Apr 22:02:44 2013
+** Created: Mon Apr 8 22:31:53 2013
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -42,6 +42,7 @@ public:
     QVBoxLayout *verticalLayout_2;
     QRadioButton *rbWSimple;
     QRadioButton *rbWSLookUp;
+    QRadioButton *rbWSEntropy;
     QRadioButton *rbWNeighbor;
     QRadioButton *rbWNNoRand;
     QRadioButton *rbWNOneRand;
@@ -59,14 +60,14 @@ public:
         if (PreferencesDialog->objectName().isEmpty())
             PreferencesDialog->setObjectName(QString::fromUtf8("PreferencesDialog"));
         PreferencesDialog->setWindowModality(Qt::ApplicationModal);
-        PreferencesDialog->resize(620, 240);
+        PreferencesDialog->resize(650, 280);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(PreferencesDialog->sizePolicy().hasHeightForWidth());
         PreferencesDialog->setSizePolicy(sizePolicy);
-        PreferencesDialog->setMinimumSize(QSize(620, 240));
-        PreferencesDialog->setMaximumSize(QSize(620, 240));
+        PreferencesDialog->setMinimumSize(QSize(650, 280));
+        PreferencesDialog->setMaximumSize(QSize(650, 280));
         verticalLayout_3 = new QVBoxLayout(PreferencesDialog);
         verticalLayout_3->setObjectName(QString::fromUtf8("verticalLayout_3"));
         prefCategories = new QTabWidget(PreferencesDialog);
@@ -80,7 +81,7 @@ public:
         tabDatabase->setObjectName(QString::fromUtf8("tabDatabase"));
         gbPassType = new QGroupBox(tabDatabase);
         gbPassType->setObjectName(QString::fromUtf8("gbPassType"));
-        gbPassType->setGeometry(QRect(10, 10, 302, 142));
+        gbPassType->setGeometry(QRect(10, 10, 302, 151));
         gbPassType->setCheckable(false);
         verticalLayout = new QVBoxLayout(gbPassType);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
@@ -110,7 +111,7 @@ public:
         tabColorization->setObjectName(QString::fromUtf8("tabColorization"));
         gbColorMethod = new QGroupBox(tabColorization);
         gbColorMethod->setObjectName(QString::fromUtf8("gbColorMethod"));
-        gbColorMethod->setGeometry(QRect(10, 10, 271, 141));
+        gbColorMethod->setGeometry(QRect(10, 10, 271, 181));
         verticalLayout_2 = new QVBoxLayout(gbColorMethod);
         verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         rbWSimple = new QRadioButton(gbColorMethod);
@@ -123,6 +124,11 @@ public:
         rbWSLookUp->setObjectName(QString::fromUtf8("rbWSLookUp"));
 
         verticalLayout_2->addWidget(rbWSLookUp);
+
+        rbWSEntropy = new QRadioButton(gbColorMethod);
+        rbWSEntropy->setObjectName(QString::fromUtf8("rbWSEntropy"));
+
+        verticalLayout_2->addWidget(rbWSEntropy);
 
         rbWNeighbor = new QRadioButton(gbColorMethod);
         rbWNeighbor->setObjectName(QString::fromUtf8("rbWNeighbor"));
@@ -148,7 +154,7 @@ public:
 
         gbImgLumEqual = new QGroupBox(tabColorization);
         gbImgLumEqual->setObjectName(QString::fromUtf8("gbImgLumEqual"));
-        gbImgLumEqual->setGeometry(QRect(290, 10, 301, 141));
+        gbImgLumEqual->setGeometry(QRect(290, 10, 301, 181));
         verticalLayout_4 = new QVBoxLayout(gbImgLumEqual);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
         rbNoScale = new QRadioButton(gbImgLumEqual);
@@ -221,6 +227,7 @@ public:
         gbColorMethod->setTitle(QApplication::translate("PreferencesDialog", "Colorization Methods", 0, QApplication::UnicodeUTF8));
         rbWSimple->setText(QApplication::translate("PreferencesDialog", "Walsh Simple", 0, QApplication::UnicodeUTF8));
         rbWSLookUp->setText(QApplication::translate("PreferencesDialog", "Walsh Simple (look up table)", 0, QApplication::UnicodeUTF8));
+        rbWSEntropy->setText(QApplication::translate("PreferencesDialog", "Walsh Simple (entropy)", 0, QApplication::UnicodeUTF8));
         rbWNeighbor->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor", 0, QApplication::UnicodeUTF8));
         rbWNNoRand->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor (fixed net)", 0, QApplication::UnicodeUTF8));
         rbWNOneRand->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor (same pixels set)", 0, QApplication::UnicodeUTF8));

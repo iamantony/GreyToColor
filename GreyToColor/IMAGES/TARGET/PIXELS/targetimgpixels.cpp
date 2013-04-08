@@ -17,6 +17,7 @@
  */
 
 #include "targetimgpixels.h"
+#include "./SERVICE/IMAGES/imghistogram.h"
 
 TargetImgPixels::TargetImgPixels()
 {
@@ -201,6 +202,85 @@ bool TargetImgPixels::ScaleLum(const double &t_scaleFactor)
 	}
 
 	return true;
+}
+
+// Calc for each pixel in image it's Entropy
+// @input:
+// @output:
+void TargetImgPixels::CalcPixelsEntropy()
+{
+	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
+	{
+		for ( unsigned int hgt = 0; hgt < m_height; hgt++ )
+		{
+			CalcPixsEntropy(wdt, hgt);
+		}
+	}
+}
+
+// Calc for certain pixel in image it's entropy
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+void TargetImgPixels::CalcPixsEntropy(const unsigned int &t_width, const unsigned int &t_height)
+{
+	if ( false == IsPixelExist(t_width, t_height) )
+	{
+		qDebug() << "CalcPixsEntropy(): Error - invalid arguments";
+		return;
+	}
+
+	QList<double> lumInMask = GetPixNeighborsLum(t_width, t_height);
+	if ( true == lumInMask.isEmpty() )
+	{
+		qDebug() << "CalcPixsEntropy(): Error - no pixels - no SKO";
+		return;
+	}
+
+	double pixelLum = m_pixels[t_width][t_height]->GetChL();
+	lumInMask.append(pixelLum);
+
+	ImgHistogram histogramer;
+	QList<double> maskHist = histogramer.MaskLumHistogram(lumInMask);
+
+	double pixelEntropy = 0;
+	const int maskSize = lumInMask.size();
+	const int numOfLumValues = maskHist.size();
+	for ( int lum = 0; lum < numOfLumValues; lum++ )
+	{
+		if ( maskHist.at(lum) <= 0 )
+		{
+			continue;
+		}
+
+		double numberOfPixels = maskHist.at(lum);
+		double relativeLum = numberOfPixels / maskSize;
+		double logarithm = log2(relativeLum);
+		pixelEntropy -= relativeLum * logarithm;
+	}
+
+	TargetPixel *centralPixel = (TargetPixel *)m_pixels[t_width][t_height];
+	centralPixel->SetEntropy(pixelEntropy);
+}
+
+// Get Entropy of pixel with certain coords
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+// - NULL - can't find such pixel
+// - double - pixels entropy
+double TargetImgPixels::GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const
+{
+	if ( false == IsPixelExist(t_width, t_height) )
+	{
+		qDebug() << "GetPixelsEntropy(): Error - invalid arguments";
+		return 0;
+	}
+
+	const TargetPixel *pixel = (TargetPixel *)m_pixels[t_width][t_height];
+	return pixel->GetEntropy();
 }
 
 // Normalise pixels luminances by min/max borders

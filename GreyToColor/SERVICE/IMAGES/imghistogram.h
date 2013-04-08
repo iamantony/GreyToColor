@@ -42,6 +42,8 @@ public:
 	QList< QList<double> > RGBHistogram(const Image &t_img, const int t_size);
 	// Get images histogram of luminance L channel of LAB color space
 	QList<double> LABLumHistogram(TargetImage *t_img);
+	// Histogram for image mask (LAB luminance)
+	QList<double> MaskLumHistogram(const QList<double> &t_mask);
 
 	// Test of forming image histogram
 	void TestRGBHist();

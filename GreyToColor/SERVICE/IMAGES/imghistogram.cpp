@@ -366,6 +366,33 @@ QList<double> ImgHistogram::FormZeroLABLumHist()
 	return zeroLABLumHist;
 }
 
+// Histogram for image mask (LAB luminance)
+// @input:
+// - QList<double> - unempty image mask with LAB luminance values
+// @output:
+// - QList<double> - mask histogram
+// - empty QList<double> - failed to form mask histogram
+QList<double> ImgHistogram::MaskLumHistogram(const QList<double> &t_mask)
+{
+	if ( true == t_mask.isEmpty() )
+	{
+		qDebug() << "MaskLumHistogram(): Error - invalid arguments";
+		QList<double> empty;
+		return empty;
+	}
+
+	QList<double> lumHist = FormZeroLABLumHist();
+	const int maskSize = t_mask.size();
+	for ( int value = 0; value < maskSize; value++ )
+	{
+		double luminance = t_mask.at(value);
+		int stepNum = floor( luminance / LAB_LUM_HIST_DIVIDER );
+		lumHist[stepNum]++;
+	}
+
+	return lumHist;
+}
+
 // Test of forming image histogram
 void ImgHistogram::TestRGBHist()
 {

@@ -60,7 +60,8 @@ SOURCES += main.cpp\
     UI/DIALOGS/preferencesdialog.cpp \
     UI/DIALOGS/histogramwindow.cpp \
     SERVICE/IMAGES/imglumscaler.cpp \
-    METHODS/wslookuptablecolorizator.cpp
+    METHODS/wslookuptablecolorizator.cpp \
+    METHODS/wsentropycolorizator.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -117,7 +118,8 @@ HEADERS  += \
     UI/DIALOGS/preferencesdialog.h \
     UI/DIALOGS/histogramwindow.h \
     SERVICE/IMAGES/imglumscaler.h \
-    METHODS/wslookuptablecolorizator.h
+    METHODS/wslookuptablecolorizator.h \
+    METHODS/wsentropycolorizator.h
 
 FORMS    += \
 	mainwindow.ui \

@@ -16,9 +16,9 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "walshsimplecolorizator.h"
+#include "wsentropycolorizator.h"
 
-WalshSimpleColorizator::WalshSimpleColorizator()
+WSEntropyColorizator::WSEntropyColorizator()
 {
 
 }
@@ -30,9 +30,9 @@ WalshSimpleColorizator::WalshSimpleColorizator()
 // @output:
 // - false - can't colorize
 // - true - Target Image colorized
-bool WalshSimpleColorizator::Colorize(TargetImage *t_targetImg,
-									  SourceImage *t_sourceImg,
-									  const LumEqualization::Type &t_type)
+bool WSEntropyColorizator::Colorize(TargetImage *t_targetImg,
+									SourceImage *t_sourceImg,
+									const LumEqualization::Type &t_type)
 {
 	if ( (NULL == t_targetImg) ||
 		 (NULL == t_sourceImg) ||
@@ -76,7 +76,7 @@ bool WalshSimpleColorizator::Colorize(TargetImage *t_targetImg,
 // @output:
 // - true - images prepared
 // - false - can't prepare images to colorization
-bool WalshSimpleColorizator::PrepareImages(const LumEqualization::Type &t_type)
+bool WSEntropyColorizator::PrepareImages(const LumEqualization::Type &t_type)
 {
 	if ( (NULL == m_target) ||
 		 (NULL == m_source) ||
@@ -96,6 +96,9 @@ bool WalshSimpleColorizator::PrepareImages(const LumEqualization::Type &t_type)
 		return false;
 	}
 
+	m_target->CalcPixelsEntropy();
+	m_source->CalcPixelsEntropy();
+
 	m_target->CalcPixelsSKO();
 	m_source->CalcPixelsSKO();
 
@@ -107,7 +110,7 @@ bool WalshSimpleColorizator::PrepareImages(const LumEqualization::Type &t_type)
 // @output:
 // - true - Target image colorized
 // - false - failed to colorize Target image
-bool WalshSimpleColorizator::ColorizeImage()
+bool WSEntropyColorizator::ColorizeImage()
 {
 	if ( (NULL == m_target) ||
 		 (NULL == m_source) ||
@@ -133,28 +136,29 @@ bool WalshSimpleColorizator::ColorizeImage()
 
 	// Values of best found pixels characteristics
 	double bestDiffLum = DEFAULT_LUM;
+	double bestDiffEntropy = DEFAULT_ENTROPY;
 	double bestDiffSKO = DEFAULT_SKO;
 	unsigned int bestSourcePixWdt = 0;
 	unsigned int bestSourcePixHgt = 0;
 
 	// Targets pixel variables
 	double targPixLum = DEFAULT_LUM;
+	double targPixEntropy = DEFAULT_ENTROPY;
 	double targPixSKO = DEFAULT_SKO;
 
 	// Source pixel variables
 	unsigned int sourceRandWdt = 0;
 	unsigned int sourceRandHgt = 0;
 	double sourcePixLum = DEFAULT_LUM;
+	double sourcePixEntropy = DEFAULT_ENTROPY;
 	double sourcePixSKO = DEFAULT_SKO;
 	double sourceChA = 0;
 	double sourceChB = 0;
 
 	// Decision variables
 	double diffLum = DEFAULT_LUM;
+	double diffEntropy = DEFAULT_ENTROPY;
 	double diffSKO = DEFAULT_SKO;
-
-//	// For rand() statistic
-//	QList< QList<double> > randStat = GetMassForStat(sourceWdt, sourceHgt);
 
 	qDebug() << "Start colorization!";
 	QElapsedTimer timer;
@@ -167,18 +171,18 @@ bool WalshSimpleColorizator::ColorizeImage()
 //		qDebug() << "ColorizeImage(): row =" << width;
 		for ( unsigned int height = 0; height < targetHgt; height++ )
 		{
-//			srand(time(NULL));
-
 			// Reset best params
 			bestDiffLum = DEFAULT_LUM;
+			bestDiffEntropy = DEFAULT_ENTROPY;
 			bestDiffSKO = DEFAULT_SKO;
 			bestSourcePixWdt = 0;
 			bestSourcePixHgt = 0;
 
 			// Get target pixel params
 			targPixLum = m_target->PixelChLum(width, height);
+			targPixEntropy = m_target->GetPixelsEntropy(width, height);
 			targPixSKO = m_target->GetPixelsSKO(width, height);
-			if ( (targPixLum <= NO_INFO) || (targPixSKO <= ERROR) )
+			if ( (targPixLum <= NO_INFO) || (targPixEntropy <= ERROR) )
 			{
 				qDebug() << "ColorizeImage(): Warning - failed to colorize pixel" << width << height;
 				continue;
@@ -190,19 +194,28 @@ bool WalshSimpleColorizator::ColorizeImage()
 				sourceRandWdt = rand() % sourceWdt;
 				sourceRandHgt = rand() % sourceHgt;
 
-//				// Get rand() stat
-//				randStat[sourceRandWdt][sourceRandHgt]++;
-
 				sourcePixLum = m_source->PixelChLum(sourceRandWdt, sourceRandHgt);
+				sourcePixEntropy = m_source->GetPixelsEntropy(sourceRandWdt, sourceRandHgt);
 				sourcePixSKO = m_source->GetPixelsSKO(sourceRandWdt, sourceRandHgt);
 
 				diffLum = fabs( targPixLum - sourcePixLum );
+				diffEntropy = abs( targPixEntropy - sourcePixEntropy );
 				diffSKO = fabs( targPixSKO - sourcePixSKO );
 
-				if ( ( (diffLum < bestDiffLum) && (diffSKO < (bestDiffSKO + SKO_TRESHOLD)) ) ||
-					 ( (diffLum < (bestDiffLum + LUM_TRESHOLD)) && (diffSKO < bestDiffSKO) ) )
+				if ( ((diffLum < bestDiffLum) &&
+					  (diffSKO < bestDiffSKO) &&
+					  (diffEntropy < (bestDiffEntropy + ENTROPY_TRESHOLD)) ) ||
+
+					 ((diffLum < (bestDiffLum + LUM_TRESHOLD)) &&
+					  (diffSKO < bestDiffSKO) &&
+					  (diffEntropy < bestDiffEntropy)) ||
+
+					 ((diffLum < bestDiffLum) &&
+					  (diffSKO < (bestDiffSKO + SKO_TRESHOLD)) &&
+					  (diffEntropy < bestDiffEntropy)) )
 				{
 					bestDiffLum = diffLum;
+					bestDiffEntropy = diffEntropy;
 					bestDiffSKO = diffSKO;
 					bestSourcePixWdt = sourceRandWdt;
 					bestSourcePixHgt = sourceRandHgt;
@@ -221,7 +234,6 @@ bool WalshSimpleColorizator::ColorizeImage()
 	}
 
 	qDebug() << "Elapsed time in nanosec:" << timer.nsecsElapsed();
-//	FormStatImage(randStat);
 
 	return true;
 }
@@ -231,7 +243,7 @@ bool WalshSimpleColorizator::ColorizeImage()
 // @output:
 // - true - images params restored
 // - false - can't restore images parameters
-bool WalshSimpleColorizator::PostColorization()
+bool WSEntropyColorizator::PostColorization()
 {
 	if ( (NULL == m_target) ||
 		 (NULL == m_source) ||
@@ -244,73 +256,4 @@ bool WalshSimpleColorizator::PostColorization()
 
 	m_target->RestoreLABLum();
 	return true;
-}
-
-// Create mass of zeros for statistic
-QList< QList<double> > WalshSimpleColorizator::GetMassForStat(const unsigned int &t_width,
-																	const unsigned int &t_height)
-{
-	QList<double> columnLine;
-	for ( unsigned int col = 0; col < t_height; col++ )
-	{
-		columnLine.append(0);
-	}
-
-	QList< QList<double> > statMass;
-	for ( unsigned int row = 0;  row < t_width; row++ )
-	{
-		statMass.append(columnLine);
-	}
-
-	return statMass;
-}
-
-// Form statistic image
-void WalshSimpleColorizator::FormStatImage(const QList< QList<double> > &t_statMass)
-{
-	if ( true == t_statMass.isEmpty() )
-	{
-		qDebug() << "FormStatImage(): Error - invalid arguments";
-		return;
-	}
-
-	int width = t_statMass.size();
-	int height = t_statMass.at(0).size();
-
-	// Find max value
-	double maxValue = 0;
-	for ( int wdt = 0; wdt < width; wdt++ )
-	{
-		for ( int hgt = 0; hgt < height; hgt++ )
-		{
-			if ( maxValue < t_statMass[wdt][hgt] )
-			{
-				maxValue = t_statMass[wdt][hgt];
-			}
-		}
-	}
-
-	// Scale all values and form list of RGB luminances
-	QImage statImg(width, height, QImage::Format_RGB32);
-	for ( int wdt = 0; wdt < width; wdt++ )
-	{
-		for ( int hgt = 0; hgt < height; hgt++ )
-		{
-			double scaledValue = t_statMass[wdt][hgt] / maxValue;
-			int luminance = (int)floor( 255 * scaledValue + 0.5);
-			if ( luminance < 0 )
-			{
-				luminance = 0;
-			}
-			else if ( 255 < luminance )
-			{
-				luminance = 255;
-			}
-
-			QRgb pixel = qRgb(luminance, luminance, luminance);
-			statImg.setPixel(wdt, hgt, pixel);
-		}
-	}
-
-	statImg.save("./TEST/rand_stat.png");
 }

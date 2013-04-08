@@ -16,34 +16,36 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef COLORPIXEL_H
-#define COLORPIXEL_H
+#ifndef WSENTROPYCOLORIZATOR_H
+#define WSENTROPYCOLORIZATOR_H
 
 #include <QDebug>
-#include "../../COMMON/PIXELS/pixel.h"
+#include <QElapsedTimer>
 
-class ColorPixel : public Pixel
+#include "colorizator.h"
+#include "./DEFINES/global.h"
+#include "./DEFINES/colorization.h"
+
+class WSEntropyColorizator : public Colorizator
 {
 	// == DATA ==
-private:
-	double m_sko;
-	double m_entropy;
 
 	// == METHODS ==
 public:
-	ColorPixel();
-	~ColorPixel();
+	WSEntropyColorizator();
 
-	// Set SKO for pixel of image
-	bool SetSKO(const double &t_sko);
-	// Set SKO for pixel of image
-	double GetSKO() const;
-	// Set entropy for pixel of image
-	void SetEntropy(const double &t_entropy);
-	// Set entropy for pixel of image
-	double GetEntropy() const;
-	// Clear color pixel
-	void ClearColor();
+	// Start Colorization
+	virtual bool Colorize(TargetImage *t_targetImg,
+						  SourceImage *t_sourceImg,
+						  const LumEqualization::Type &t_type);
+
+private:
+	// Prepare images to colorization
+	virtual bool PrepareImages(const LumEqualization::Type &t_type);
+	// Colorize Target image using color information from Source image
+	virtual bool ColorizeImage();
+	// Restore images params if needed
+	virtual bool PostColorization();
 };
 
-#endif // COLORPIXEL_H
+#endif // WSENTROPYCOLORIZATOR_H

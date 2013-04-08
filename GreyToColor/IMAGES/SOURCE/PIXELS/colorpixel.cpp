@@ -54,6 +54,24 @@ double ColorPixel::GetSKO() const
 	return m_sko;
 }
 
+// Set entropy for pixel of image
+// @input:
+// - double - entropy value
+// @output:
+void ColorPixel::SetEntropy(const double &t_entropy)
+{
+	m_entropy = t_entropy;
+}
+
+// Set entropy for pixel of image
+// @input:
+// @output:
+// - double - entropy value of this pixel
+double ColorPixel::GetEntropy() const
+{
+	return m_entropy;
+}
+
 // Clear color pixel
 // @input:
 // @output:

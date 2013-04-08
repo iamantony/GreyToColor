@@ -109,6 +109,10 @@ void PreferencesDialog::SetUpColorMethodType()
 			ui->rbWSLookUp->setChecked(true);
 			break;
 
+		case Methods::WALSH_SIMPLE_ENTROPY:
+			ui->rbWSEntropy->setChecked(true);
+			break;
+
 		case Methods::WALSH_NEIGHBOR:
 			ui->rbWNeighbor->setChecked(true);
 			break;
@@ -206,6 +210,11 @@ void PreferencesDialog::DefineColorMethodType()
 	else if ( true == ui->rbWSLookUp->isChecked() )
 	{
 		m_colorizationMethod = Methods::WALSH_SIMPLE_LOOKUP;
+		return;
+	}
+	else if ( true == ui->rbWSEntropy->isChecked() )
+	{
+		m_colorizationMethod = Methods::WALSH_SIMPLE_ENTROPY;
 		return;
 	}
 	else if ( true == ui->rbWNeighbor->isChecked() )

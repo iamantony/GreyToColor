@@ -39,6 +39,10 @@ public:
 	void CalcPixelsSKO();
 	// Get SKO of pixel with certain coords
 	double GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const;
+	// Calc for each pixel in image it's Entropy
+	void CalcPixelsEntropy();
+	// Get Entropy of pixel with certain coords
+	double GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const;
 
 	// Test initialising
 	void TestInit();

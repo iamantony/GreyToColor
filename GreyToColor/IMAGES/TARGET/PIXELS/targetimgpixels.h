@@ -44,6 +44,10 @@ public:
 	void CalcPixelsSKO();
 	// Get SKO of pixel with certain coords
 	double GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const;
+	// Calc for each pixel in image it's Entropy
+	void CalcPixelsEntropy();
+	// Get Entropy of pixel with certain coords
+	double GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const;
 	// Scale luminance of all pixels in image with certain scale factor
 	bool ScaleLum(const double &t_scaleFactor);
 	// Normalise pixels luminances by min/max borders
@@ -77,6 +81,8 @@ public:
 private:
 	// Calc for certain pixel in image it's SKO
 	void CalcPixSKO(const unsigned int &t_width, const unsigned int &t_height);
+	// Calc for certain pixel in image it's entropy
+	void CalcPixsEntropy(const unsigned int &t_width, const unsigned int &t_height);
 };
 
 #endif // TRAGETIMGPIXELS_H
