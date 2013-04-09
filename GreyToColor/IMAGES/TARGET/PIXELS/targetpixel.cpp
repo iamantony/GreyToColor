@@ -101,6 +101,15 @@ bool TargetPixel::ScaleLum(const double &t_factor)
 	RestoreLum();
 
 	double scaledLum = m_originalLum * t_factor;
+	if ( LAB_MAX_LUM < scaledLum )
+	{
+		scaledLum = LAB_MAX_LUM;
+	}
+	else if ( scaledLum < 0 )
+	{
+		scaledLum = 0;
+	}
+
 	bool lumSet = SetChL(scaledLum);
 	if ( false == lumSet )
 	{

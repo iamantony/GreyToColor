@@ -335,6 +335,7 @@ QList<double> ImgHistogram::LABLumHistogram(TargetImage *t_img)
 	}
 
 	QList<double> lumHist = FormZeroLABLumHist();
+	const int maxLumStep = lumHist.size();
 	const unsigned int imgWdt = t_img->GetImageWidth();
 	const unsigned int imgHgt = t_img->GetImageHeight();
 	for ( unsigned int width = 0; width < imgWdt; width++ )
@@ -343,6 +344,16 @@ QList<double> ImgHistogram::LABLumHistogram(TargetImage *t_img)
 		{
 			double luminance = t_img->PixelChLum(width, height);
 			int stepNum = floor( luminance / LAB_LUM_HIST_DIVIDER );
+			if ( stepNum < 0 )
+			{
+				stepNum = 0;
+			}
+			else if ( maxLumStep <= stepNum )
+			{
+				qDebug() << width << height << luminance << stepNum;
+				stepNum = maxLumStep - 1;
+			}
+
 			lumHist[stepNum]++;
 		}
 	}

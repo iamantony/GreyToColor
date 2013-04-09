@@ -46,60 +46,6 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="tabDatabase">
-      <attribute name="title">
-       <string>Databse</string>
-      </attribute>
-      <widget class="QGroupBox" name="gbPassType">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>10</y>
-         <width>302</width>
-         <height>151</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Passport Type for Image Searching</string>
-       </property>
-       <property name="checkable">
-        <bool>false</bool>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <widget class="QRadioButton" name="rbLumHist">
-          <property name="text">
-           <string>Luminance Histogram</string>
-          </property>
-          <property name="checked">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="rbSubLum">
-          <property name="text">
-           <string>Subsampled Luminance</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="rbLumGradHist">
-          <property name="text">
-           <string>Luminance and Gradient Histigram</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QRadioButton" name="rbSubLumGrad">
-          <property name="text">
-           <string>Subsampled Luminance and Gradient</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-     </widget>
      <widget class="QWidget" name="tabColorization">
       <property name="toolTip">
        <string/>
@@ -146,7 +92,7 @@
         <item>
          <widget class="QRadioButton" name="rbWSEntropy">
           <property name="text">
-           <string>Walsh Simple (entropy)</string>
+           <string>Walsh Simple (sko and entropy)</string>
           </property>
          </widget>
         </item>
@@ -236,6 +182,60 @@
          <widget class="QRadioButton" name="rbNormLumCentral">
           <property name="text">
            <string>Normalize Luminance (by center)</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="tabDatabase">
+      <attribute name="title">
+       <string>Databse</string>
+      </attribute>
+      <widget class="QGroupBox" name="gbPassType">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>302</width>
+         <height>151</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Passport Type for Image Searching</string>
+       </property>
+       <property name="checkable">
+        <bool>false</bool>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <widget class="QRadioButton" name="rbLumHist">
+          <property name="text">
+           <string>Luminance Histogram</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbSubLum">
+          <property name="text">
+           <string>Subsampled Luminance</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbLumGradHist">
+          <property name="text">
+           <string>Luminance and Gradient Histigram</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QRadioButton" name="rbSubLumGrad">
+          <property name="text">
+           <string>Subsampled Luminance and Gradient</string>
           </property>
          </widget>
         </item>

@@ -20,8 +20,10 @@
 #define TARGETPIXEL_H
 
 #include <QDebug>
+
 #include "../../SOURCE/PIXELS/colorpixel.h"
 #include "preferedcolor.h"
+#include "./DEFINES/pixels.h"
 
 #define DEFAULT_SCALE_LUM_FACTOR 1
 

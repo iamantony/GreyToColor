@@ -19,6 +19,8 @@
 #ifndef WSENTROPYCOLORIZATOR_H
 #define WSENTROPYCOLORIZATOR_H
 
+#include <time.h>
+
 #include <QDebug>
 #include <QElapsedTimer>
 
