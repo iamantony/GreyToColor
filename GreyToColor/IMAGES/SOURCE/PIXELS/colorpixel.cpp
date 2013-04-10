@@ -20,23 +20,76 @@
 
 ColorPixel::ColorPixel()
 {
-	m_sko = 0;
+	ClearColor();
 }
 
 ColorPixel::~ColorPixel()
 {
-	m_sko = 0;
+	ClearColor();
+}
+
+// Clear color pixel
+// @input:
+// @output:
+void ColorPixel::ClearColor()
+{
+	this->Clear();
+
+	m_relativeLum = ERROR;
+	m_sko = 0.0;
+	m_entropy = 0.0;
+}
+
+// Calc relative value of LAB luminance
+// @input:
+// @output:
+void ColorPixel::CalcRelativeLum()
+{
+	m_relativeLum = GetChL() / LAB_MAX_LUM;
+}
+
+// Get relative LAB luminance value
+// @input:
+// @output:
+// - double - relative LAB luminance in range [0, 1]
+// - double < 0 - error, relative luminance not calc yet
+double ColorPixel::GetRelativeLum()
+{
+	return m_relativeLum;
+}
+
+// Set relative LAB luminance value
+// @input:
+// - double - value of relative LAB luminace in range [0, 1]
+// @output:
+// - true - luminance accepted
+// - false - luminance is out of range
+bool ColorPixel::SetRelativeLum(const double &t_lum)
+{
+	if ( (t_lum < RELATIVE_MIN) || (RELATIVE_MAX < t_lum) )
+	{
+		qDebug() << "SetRelativeLum(): Error - invalid arguments, t_lum =" << t_lum;
+		qDebug() << "Realtive lumiance not accepted";
+		return false;
+	}
+
+	m_relativeLum = t_lum;
+
+	return true;
 }
 
 // Set SKO for pixel of image
 // @input:
-// - double - positive SKO value
+// - double - relative SKO value in range [0, 1]
 // @output:
+// - true - SKO accepted
+// - false - SKO is out of range
 bool ColorPixel::SetSKO(const double &t_sko)
 {
-	if ( t_sko < 0 )
+	if ( (t_sko < RELATIVE_MIN) || (RELATIVE_MAX < t_sko) )
 	{
-		qDebug() << "SetSKO(): Error - invalid arguments:" << t_sko;
+		qDebug() << "SetSKO(): Error - invalid arguments, t_sko =" << t_sko;
+		qDebug() << "Realtive SKO not accepted";
 		return false;
 	}
 
@@ -48,7 +101,7 @@ bool ColorPixel::SetSKO(const double &t_sko)
 // Set SKO for pixel of image
 // @input:
 // @output:
-// - double - positive SKO of this pixel
+// - double - relative SKO value in range [0, 1]
 double ColorPixel::GetSKO() const
 {
 	return m_sko;
@@ -56,27 +109,29 @@ double ColorPixel::GetSKO() const
 
 // Set entropy for pixel of image
 // @input:
-// - double - entropy value
+// - double - relative entropy value in range [0, 1]
 // @output:
-void ColorPixel::SetEntropy(const double &t_entropy)
+// - true - entropy accepted
+// - false - entropy is out of range
+bool ColorPixel::SetEntropy(const double &t_entropy)
 {
+	if ( (t_entropy < RELATIVE_MIN) || (RELATIVE_MAX < t_entropy) )
+	{
+		qDebug() << "SetEntropy(): Error - invalid arguments, t_entropy =" << t_entropy;
+		qDebug() << "Realtive Entropy not accepted";
+		return false;
+	}
+
 	m_entropy = t_entropy;
+
+	return true;
 }
 
 // Set entropy for pixel of image
 // @input:
 // @output:
-// - double - entropy value of this pixel
+// - double - entropy value in range [0, 1]
 double ColorPixel::GetEntropy() const
 {
 	return m_entropy;
-}
-
-// Clear color pixel
-// @input:
-// @output:
-void ColorPixel::ClearColor()
-{
-	this->Clear();
-	m_sko = 0;
 }

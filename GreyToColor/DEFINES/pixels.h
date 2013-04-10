@@ -29,8 +29,16 @@
 
 #define LAB_MIN_LUM 0.0
 #define LAB_MAX_LUM 4.2
-
 #define LAB_LUM_HIST_DIVIDER 0.001
+
+// For mask 5x5
+#define SKO_MAX 1.0
 #define SKO_DIVIDER 0.001
+
+// For mask 11x11
+#define ENTROPY_MAX -7.0
+
+#define RELATIVE_MIN 0.0
+#define RELATIVE_MAX 1.0
 
 #endif // PIXELS_H

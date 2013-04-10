@@ -47,8 +47,8 @@ double CalculatorSKO::PixelMaskSKO(const double t_centralPixLum, const QList<dou
 		SKO += pow(diff, 2);
 	}
 
-	// Pixels in mask: central pixel + his neighbors
-	int pixInMask = pixNum + 1;
+	// Pixels in mask: all pixels in mask - central pixel
+	int pixInMask = pixNum;
 	SKO /= pixInMask;
 	SKO = pow(SKO, 0.5);
 
