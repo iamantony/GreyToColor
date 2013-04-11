@@ -22,11 +22,10 @@
 #include <QFileDialog>
 #include <QElapsedTimer>
 
-#include "./IMAGES/SOURCE/PIXELS/sourceimgpixels.h"
+#include "../../SOURCE/PIXELS/sourceimgpixels.h"
 #include "targetpixel.h"
-#include "./SERVICE/calculatorsko.h"
 
-class TargetImgPixels : public SourceImgPixels
+class TargetImgPixels : SourceImgPixels
 {
 	// == DATA ==
 

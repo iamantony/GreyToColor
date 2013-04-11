@@ -23,10 +23,9 @@
 #include <QImage>
 #include <QDebug>
 
-#include "../../COMMON/PIXELS/imagepixels.h"
 #include "colorpixel.h"
+#include "../../COMMON/PIXELS/imagepixels.h"
 #include "./SERVICE/calculatorsko.h"
-#include "./SERVICE/IMAGES/imghistogram.h"
 
 class SourceImgPixels : public ImagePixels
 {

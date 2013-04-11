@@ -17,6 +17,7 @@
  */
 
 #include "sourceimgpixels.h"
+#include "./SERVICE/IMAGES/imghistogram.h"
 
 SourceImgPixels::SourceImgPixels()
 {
