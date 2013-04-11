@@ -22,6 +22,7 @@
 #include <QFileDialog>
 #include <QImage>
 #include <QDebug>
+
 #include "../../COMMON/PIXELS/imagepixels.h"
 #include "colorpixel.h"
 #include "./SERVICE/calculatorsko.h"
@@ -40,6 +41,8 @@ public:
 	virtual void Clear();
 	// Save all pixels from input QImage as custom pixels
 	virtual bool FormImgPixels(const QImage &t_img);
+	// Transform all image pixels from RGB color space to LAB
+	virtual void TransAllPixRGB2LAB();
 	// Calc for each pixel in image it's SKO
 	void CalcPixelsSKO();
 	// Get SKO of pixel with certain coords
@@ -48,11 +51,25 @@ public:
 	void CalcPixelsEntropy();
 	// Get Entropy of pixel with certain coords
 	double GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const;
+	// Find among all pixels in image value of max relative luminance
+	double FindMaxRelLum() const;
+	// Find among all pixels in image value of min relative luminance
+	double FindMinRelLum() const;
+	// Find average image relative luminance
+	double FindAverageRelLum() const;
+	// Find most common relative luminance value
+	double FindMostCommonRelLum() const;
 
 	// Test functions
 	void TestFunctionality();
 
+protected:
+	// Get list of relative luminances of neighbor pixels (to calc SKO, for example)
+	QList<double> GetPixNeighborsRelLum(const unsigned int &t_width, const unsigned int &t_height) const;
+
 private:
+	// Calc relative LAB luminance
+	void CalcPixRelativeLum(const unsigned int &t_width, const unsigned int &t_height);
 	// Calc for certain pixel in image it's SKO
 	void CalcPixSKO(const unsigned int &t_width, const unsigned int &t_height);
 	// Calc for certain pixel in image it's entropy

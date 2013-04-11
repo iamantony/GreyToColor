@@ -127,13 +127,6 @@ bool TargetPixel::SetNormalizedRelLum(const double &t_newLum)
 		return false;
 	}
 
-	// TODO: do we still need this?
-//	// If pixel was not previously set or scaled or normalised, we need to save pixels orignal lumiance value
-//	if ( m_originalLum < 0 )
-//	{
-//		m_originalLum = GetChL();
-//	}
-
 	bool isLumSet = SetRelativeLum(t_newLum);
 
 	return isLumSet;

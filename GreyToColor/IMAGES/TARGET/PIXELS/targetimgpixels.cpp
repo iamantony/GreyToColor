@@ -95,107 +95,25 @@ bool TargetImgPixels::FormImgPixels(const QImage &t_img)
 	return true;
 }
 
-// Set current LAB luminance as original
+// Scale relative luminance of all pixels in image with certain scale factor
 // @input:
+// - double - positive unnull scale factor for pixel relative luminance
 // @output:
-void TargetImgPixels::SetOriginalLuminance()
+// - true - relative luminance of all pixels scaled
+// - false - can't scale relative luminance
+bool TargetImgPixels::ScaleRelLum(const double &t_scaleFactor)
 {
 	for ( unsigned int width = 0; width < m_width; width++ )
 	{
 		for ( unsigned int height = 0; height < m_height; height++ )
 		{
 			TargetPixel *pixel = (TargetPixel *)m_pixels[width][height];
-			pixel->SaveOriginalLum();
-		}
-	}
-}
-
-// Calc for each pixel in image it's SKO
-// @input:
-// @output:
-void TargetImgPixels::CalcPixelsSKO()
-{
-	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
-	{
-		for ( unsigned int hgt = 0; hgt < m_height; hgt++ )
-		{
-			CalcPixSKO(wdt, hgt);
-		}
-	}
-}
-
-// Calc for certain pixel in image it's SKO
-// @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
-// @output:
-void TargetImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int &t_height)
-{
-	if ( false == IsPixelExist(t_width, t_height) )
-	{
-		qDebug() << "CalcPixSKO(): Error - invalid arguments";
-		return;
-	}
-
-	QList<double> lumInMask = GetPixNeighborsLum(t_width, t_height);
-	if ( true == lumInMask.isEmpty() )
-	{
-		qDebug() << "CalcPixSKO(): Error - no pixels - no SKO";
-		return;
-	}
-
-	double pixelLum = m_pixels[t_width][t_height]->GetChL();
-
-	CalculatorSKO calc;
-	double pixelSKO = calc.PixelMaskSKO(pixelLum, lumInMask);
-	if ( pixelSKO < 0 )
-	{
-		qDebug() << "CalcPixSKO(): Error - can't calc pixel SKO" << t_width << t_height;
-		return;
-	}
-
-	TargetPixel *centralPixel = (TargetPixel *)m_pixels[t_width][t_height];
-	centralPixel->SetSKO(pixelSKO);
-}
-
-// Get SKO of pixel with certain coords
-// @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
-// @output:
-// - ERROR - can't find such pixel
-// - double - pixels SKO
-double TargetImgPixels::GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const
-{
-	if ( false == IsPixelExist(t_width, t_height) )
-	{
-		qDebug() << "GetPixelsSKO(): Error - invalid arguments";
-		return ERROR;
-	}
-
-	const TargetPixel *pixel = (TargetPixel *)m_pixels[t_width][t_height];
-	return pixel->GetSKO();
-}
-
-// Scale luminance of all pixels in image with certain scale factor
-// @input:
-// - double - positive unnull scale factor for pixel luminance
-// @output:
-// - true - luminance of all pixels scaled
-// - false - can't scale luminance
-bool TargetImgPixels::ScaleLum(const double &t_scaleFactor)
-{
-	for ( unsigned int width = 0; width < m_width; width++ )
-	{
-		for ( unsigned int height = 0; height < m_height; height++ )
-		{
-			TargetPixel *pixel = (TargetPixel *)m_pixels[width][height];
-			bool pixelScaled = pixel->ScaleLum(t_scaleFactor);
+			bool pixelScaled = pixel->ScaleRelLum(t_scaleFactor);
 			if ( false == pixelScaled )
 			{
-				qDebug() << "ScaleLum(): Error - can't scale luminance for pixel" << width << height;
+				qDebug() << "ScaleRelLum(): Error - can't scale relative luminance for pixel" << width << height;
 				qDebug() << "Luminance restored!";
-				RestoreLum();
+				RestoreRelLum();
 				return false;
 			}
 		}
@@ -204,116 +122,54 @@ bool TargetImgPixels::ScaleLum(const double &t_scaleFactor)
 	return true;
 }
 
-// Calc for each pixel in image it's Entropy
+// Restore original relative luminance of all pixels in image
 // @input:
 // @output:
-void TargetImgPixels::CalcPixelsEntropy()
+void TargetImgPixels::RestoreRelLum()
 {
-	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
+	for ( unsigned int width = 0; width < m_width; width++ )
 	{
-		for ( unsigned int hgt = 0; hgt < m_height; hgt++ )
+		for ( unsigned int height = 0; height < m_height; height++ )
 		{
-			CalcPixsEntropy(wdt, hgt);
+			TargetPixel *pixel = (TargetPixel *)m_pixels[width][height];
+			pixel->RestoreRelLum();
 		}
 	}
 }
 
-// Calc for certain pixel in image it's entropy
+// Normalise pixels relative luminances by min/max borders
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
+// - double - positive value of new min relative LAB luminance
+// - double - positive value of new max relative LAB luminance
 // @output:
-void TargetImgPixels::CalcPixsEntropy(const unsigned int &t_width, const unsigned int &t_height)
+// - true - relative luminance of all pixels normalised
+// - false - can't normalise relative luminance
+bool TargetImgPixels::NormaliseRelLumByBorders(const double &t_newMinRelLum, const double &t_newMaxRelLum)
 {
-	if ( false == IsPixelExist(t_width, t_height) )
+	if ( (t_newMinRelLum < RELATIVE_MIN) ||
+		 (t_newMaxRelLum < RELATIVE_MIN) ||
+		 (RELATIVE_MAX < t_newMinRelLum) ||
+		 (RELATIVE_MAX < t_newMaxRelLum) ||
+		 (t_newMaxRelLum < t_newMinRelLum ))
 	{
-		qDebug() << "CalcPixsEntropy(): Error - invalid arguments";
-		return;
-	}
-
-	QList<double> lumInMask = GetPixNeighborsLum(t_width, t_height);
-	if ( true == lumInMask.isEmpty() )
-	{
-		qDebug() << "CalcPixsEntropy(): Error - no pixels - no SKO";
-		return;
-	}
-
-	double pixelLum = m_pixels[t_width][t_height]->GetChL();
-	lumInMask.append(pixelLum);
-
-	ImgHistogram histogramer;
-	QList<double> maskHist = histogramer.MaskLumHistogram(lumInMask);
-
-	double pixelEntropy = 0;
-	const int maskSize = lumInMask.size();
-	const int numOfLumValues = maskHist.size();
-	for ( int lum = 0; lum < numOfLumValues; lum++ )
-	{
-		if ( maskHist.at(lum) <= 0 )
-		{
-			continue;
-		}
-
-		double numberOfPixels = maskHist.at(lum);
-		double relativeLum = numberOfPixels / maskSize;
-		double logarithm = log2(relativeLum);
-		pixelEntropy -= relativeLum * logarithm;
-	}
-
-	TargetPixel *centralPixel = (TargetPixel *)m_pixels[t_width][t_height];
-	centralPixel->SetEntropy(pixelEntropy);
-}
-
-// Get Entropy of pixel with certain coords
-// @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
-// @output:
-// - NULL - can't find such pixel
-// - double - pixels entropy
-double TargetImgPixels::GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const
-{
-	if ( false == IsPixelExist(t_width, t_height) )
-	{
-		qDebug() << "GetPixelsEntropy(): Error - invalid arguments";
-		return 0;
-	}
-
-	const TargetPixel *pixel = (TargetPixel *)m_pixels[t_width][t_height];
-	return pixel->GetEntropy();
-}
-
-// Normalise pixels luminances by min/max borders
-// @input:
-// - double - positive value of new min LAB luminance
-// - double - positive value of new max LAB luminance
-// @output:
-// - true - luminance of all pixels normalised
-// - false - can't normalise luminance
-bool TargetImgPixels::NormaliseLumByBorders(const double &t_newMinLum, const double &t_newMaxLum)
-{
-	if ( (t_newMinLum < 0) ||
-		 (t_newMaxLum < 0) ||
-		 (t_newMaxLum < t_newMinLum ))
-	{
-		qDebug() << "NormaliseLum(): Error - invalid arguments";
+		qDebug() << "NormaliseRelLumByBorders(): Error - invalid arguments";
 		return false;
 	}
 
-	const double currMinLum = FindMinLum();
-	const double currMaxLum = FindMaxLum();
-	if ( (currMinLum < 0) || (currMaxLum < 0) )
+	const double currMinLum = FindMinRelLum();
+	const double currMaxLum = FindMaxRelLum();
+	if ( (currMinLum < RELATIVE_MIN) || (currMaxLum < RELATIVE_MIN) )
 	{
-		qDebug() << "NormaliseLum(): Error - invalid current min/max luminances";
+		qDebug() << "NormaliseRelLumByBorders(): Error - invalid current min/max relative luminances";
 		return false;
 	}
 
 	const double diffLum = currMaxLum - currMinLum;
 
-	double scaleFactor = ( t_newMaxLum - t_newMinLum ) / diffLum;
-	if ( scaleFactor <= 0 )
+	double scaleFactor = ( t_newMaxRelLum - t_newMinRelLum ) / diffLum;
+	if ( scaleFactor <= 0.0 )
 	{
-		scaleFactor = 1;
+		scaleFactor = 1.0;
 	}
 
 	for ( unsigned int width = 0; width < m_width; width++ )
@@ -321,16 +177,18 @@ bool TargetImgPixels::NormaliseLumByBorders(const double &t_newMinLum, const dou
 		for ( unsigned int height = 0; height < m_height; height++ )
 		{
 			TargetPixel *pixel = (TargetPixel *)m_pixels[width][height];
-			double luminance = pixel->GetChL();
+			double relLum = pixel->GetRelativeLum();
 
-			luminance = (luminance - currMinLum) * scaleFactor + t_newMinLum;
+			relLum = (relLum - currMinLum) * scaleFactor + t_newMinRelLum;
 
-			bool pixNormalised = pixel->SetNormalizedLum(luminance);
+			bool pixNormalised = pixel->SetNormalizedRelLum(relLum);
 			if ( false == pixNormalised )
 			{
-				qDebug() << "NormaliseLum(): Error - can't normalize luminance for pixel" << width << height;
+				qDebug() << "NormaliseRelLumByBorders(): Error - can't normalize relative luminance for pixel" <<
+							width << height;
+
 				qDebug() << "Luminance restored!";
-				RestoreLum();
+				RestoreRelLum();
 				return false;
 			}
 		}
@@ -339,50 +197,54 @@ bool TargetImgPixels::NormaliseLumByBorders(const double &t_newMinLum, const dou
 	return true;
 }
 
-// Normalise pixels luminance by center
+// Normalise pixels relative luminance by center
 // @input:
-// - double - positive value of new min LAB luminance
-// - double - positive value of new center (common) LAB luminance
-// - double - positive value of new max LAB luminance
+// - double - positive value of new min relative LAB luminance
+// - double - positive value of new center (common) relative LAB luminance
+// - double - positive value of new max relative LAB luminance
 // @output:
-// - true - luminance of all pixels normalised
-// - false - can't normalise luminance
-bool TargetImgPixels::NormaliseLumByCenter(const double &t_newMinLum,
-										   const double &t_newCenterLum,
-										   const double &t_newMaxLum)
+// - true - relative luminance of all pixels normalised
+// - false - can't normalise relative luminance
+bool TargetImgPixels::NormaliseRelLumByCenter(const double &t_newMinRelLum,
+											  const double &t_newCenterRelLum,
+											  const double &t_newMaxRelLum)
 {
-	if ( (t_newMinLum < 0) ||
-		 (t_newCenterLum < 0) ||
-		 (t_newMaxLum < 0) )
+	if ( (t_newMinRelLum < RELATIVE_MIN) ||
+		 (t_newCenterRelLum < RELATIVE_MIN) ||
+		 (t_newMaxRelLum < RELATIVE_MIN) ||
+		 (RELATIVE_MAX < t_newMinRelLum) ||
+		 (RELATIVE_MAX < t_newCenterRelLum) ||
+		 (RELATIVE_MAX < t_newMaxRelLum) ||
+		 (t_newMaxRelLum < t_newMinRelLum ))
 	{
-		qDebug() << "NormaliseLumByCenter(): Error - invalid arguments";
+		qDebug() << "NormaliseRelLumByCenter(): Error - invalid arguments";
 		return false;
 	}
 
-	const double currMinLum = FindMinLum();
-	const double currCommonLum = FindMostCommonLum();
-	const double currMaxLum = FindMaxLum();
-	if ( (currMinLum < 0) ||
-		 (currCommonLum < 0) ||
-		 (currMaxLum < 0) )
+	const double currMinLum = FindMinRelLum();
+	const double currCommonLum = FindMostCommonRelLum();
+	const double currMaxLum = FindMaxRelLum();
+	if ( (currMinLum < RELATIVE_MIN) ||
+		 (currCommonLum < RELATIVE_MIN) ||
+		 (currMaxLum < RELATIVE_MIN) )
 	{
-		qDebug() << "NormaliseLumByCenter(): Error - invalid current min/common/max luminances";
+		qDebug() << "NormaliseRelLumByCenter(): Error - invalid current min/common/max luminances";
 		return false;
 	}
 
 	// Params for lower area (current luminance between min and common)
 	const double currDiffLumLA = currCommonLum - currMinLum;
-	const double newDiffLumLA = t_newCenterLum - t_newMinLum;
+	const double newDiffLumLA = t_newCenterRelLum - t_newMinLum;
 	const double scaleFactorLA = newDiffLumLA / currDiffLumLA;
 
 	// Params for upper area (current luminance between common and max)
 	const double currDiffLumUA = currMaxLum - currCommonLum;
-	const double newDiffLumUA = t_newMaxLum - t_newCenterLum;
+	const double newDiffLumUA = t_newMaxRelLum - t_newCenterRelLum;
 	const double scaleFactorUA = newDiffLumUA / currDiffLumUA;
 
-	if ( (scaleFactorLA <= 0) || (scaleFactorUA <= 0) )
+	if ( (scaleFactorLA <= 0.0) || (scaleFactorUA <= 0.0) )
 	{
-		qDebug() << "NormaliseLumByCenter(): Error - invalid scale factors";
+		qDebug() << "NormaliseRelLumByCenter(): Error - invalid scale factors";
 		return false;
 	}
 
@@ -391,44 +253,31 @@ bool TargetImgPixels::NormaliseLumByCenter(const double &t_newMinLum,
 		for ( unsigned int height = 0; height < m_height; height++ )
 		{
 			TargetPixel *pixel = (TargetPixel *)m_pixels[width][height];
-			double luminance = pixel->GetChL();
+			double relLum = pixel->GetRelativeLum();
 
-			if ( luminance <= currCommonLum )
+			if ( relLum <= currCommonLum )
 			{
-				luminance = (luminance - currMinLum) * scaleFactorLA + t_newMinLum;
+				relLum = (relLum - currMinLum) * scaleFactorLA + t_newMinRelLum;
 			}
 			else
 			{
-				luminance = (luminance - currCommonLum) * scaleFactorUA + t_newCenterLum;
+				relLum = (relLum - currCommonLum) * scaleFactorUA + t_newCenterRelLum;
 			}
 
-			bool pixNormalised = pixel->SetNormalizedLum(luminance);
+			bool pixNormalised = pixel->SetNormalizedRelLum(relLum);
 			if ( false == pixNormalised )
 			{
-				qDebug() << "NormaliseLumByCenter(): Error - can't normalize luminance for pixel" << width << height;
+				qDebug() << "NormaliseRelLumByCenter(): Error - can't normalize luminance for pixel" <<
+							width << height;
+
 				qDebug() << "Luminance restored!";
-				RestoreLum();
+				RestoreRelLum();
 				return false;
 			}
 		}
 	}
 
 	return true;
-}
-
-// Restore original luminance of all pixels in image
-// @input:
-// @output:
-void TargetImgPixels::RestoreLum()
-{
-	for ( unsigned int width = 0; width < m_width; width++ )
-	{
-		for ( unsigned int height = 0; height < m_height; height++ )
-		{
-			TargetPixel *pixel = (TargetPixel *)m_pixels[width][height];
-			pixel->RestoreLum();
-		}
-	}
 }
 
 // Set prefered color for certain pixel

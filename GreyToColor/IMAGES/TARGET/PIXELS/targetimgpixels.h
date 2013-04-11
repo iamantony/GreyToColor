@@ -21,11 +21,12 @@
 
 #include <QFileDialog>
 #include <QElapsedTimer>
-#include "../../COMMON/PIXELS/imagepixels.h"
+
+#include "./IMAGES/SOURCE/PIXELS/sourceimgpixels.h"
 #include "targetpixel.h"
 #include "./SERVICE/calculatorsko.h"
 
-class TargetImgPixels : public ImagePixels
+class TargetImgPixels : public SourceImgPixels
 {
 	// == DATA ==
 
@@ -38,27 +39,17 @@ public:
 	virtual void Clear();
 	// Save all pixels from input QImage as custom pixels
 	virtual bool FormImgPixels(const QImage &t_img);
-	// Set current LAB luminance as original
-	void SetOriginalLuminance();
-	// Calc for each pixel in image it's SKO
-	void CalcPixelsSKO();
-	// Get SKO of pixel with certain coords
-	double GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const;
-	// Calc for each pixel in image it's Entropy
-	void CalcPixelsEntropy();
-	// Get Entropy of pixel with certain coords
-	double GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const;
-	// Scale luminance of all pixels in image with certain scale factor
-	bool ScaleLum(const double &t_scaleFactor);
-	// Normalise pixels luminances by min/max borders
-	bool NormaliseLumByBorders(const double &t_newMinLum, const double &t_newMaxLum);
-	// Normalise pixels luminance by center
-	bool NormaliseLumByCenter(const double &t_newMinLum,
-							  const double &t_newCenterLum,
-							  const double &t_newMaxLum);
+	// Scale relative luminance of all pixels in image with certain scale factor
+	bool ScaleRelLum(const double &t_scaleFactor);
+	// Restore original relative luminance of all pixels in image
+	void RestoreRelLum();
+	// Normalise pixels relative luminances by min/max borders
+	bool NormaliseRelLumByBorders(const double &t_newMinRelLum, const double &t_newMaxRelLum);
+	// Normalise pixels relative luminance by center
+	bool NormaliseRelLumByCenter(const double &t_newMinRelLum,
+								  const double &t_newCenterRelLum,
+								  const double &t_newMaxRelLum);
 
-	// Restore original luminance of all pixels in image
-	void RestoreLum();
 	// Set prefered color for certain pixel
 	void SetPixPreferedColor(const unsigned int &t_width,
 							 const unsigned int &t_height,
@@ -77,12 +68,6 @@ public:
 	void TestFunctionality();
 	// Test Calc SKO
 	void TestSKO();
-
-private:
-	// Calc for certain pixel in image it's SKO
-	void CalcPixSKO(const unsigned int &t_width, const unsigned int &t_height);
-	// Calc for certain pixel in image it's entropy
-	void CalcPixsEntropy(const unsigned int &t_width, const unsigned int &t_height);
 };
 
 #endif // TRAGETIMGPIXELS_H

@@ -45,7 +45,7 @@ public:
 	// Save all pixels from input QImage as custom pixels
 	virtual bool FormImgPixels(const QImage &t_img) = 0;
 	// Transform all image pixels from RGB color space to LAB
-	void TransAllPixRGB2LAB();
+	virtual void TransAllPixRGB2LAB();
 	// Transform all image pixels from LAB color space to RGB
 	void TransAllPixLAB2RGB();
 	// Get Luminance of pixel with certain coords
@@ -60,14 +60,6 @@ public:
 						  const double &t_chA,
 						  const double &t_chB);
 
-	// Find among all pixels in image value of max luminance
-	double FindMaxLum() const;
-	// Find among all pixels in image value of min luminance
-	double FindMinLum() const;
-	// Find average pixels luminance
-	double FindAverageLum() const;
-	// Find most common luminance value
-	double FindMostCommonLum() const;
 	// Check if pixel with certain coords is greyscale
 	bool IsPixGrey(const unsigned int &t_width, const unsigned int &t_height) const;
 
@@ -78,8 +70,6 @@ protected:
 	void TransformPixRGB2LAB(const unsigned int &t_width, const unsigned int &t_height);
 	// Transform certain pixel from LAB color space to RGB
 	void TransformPixLAB2RGB(const unsigned int &t_width, const unsigned int &t_height);
-	// Get list of luminances of neighbor pixels (to calc SKO)
-	QList<double> GetPixNeighborsLum(const unsigned int &t_width, const unsigned int &t_height) const;
 };
 
 #endif // IMAGEPIXELS_H
