@@ -349,6 +349,6 @@ bool WalshNeighborColorizator::PostColorization()
 		return false;
 	}
 
-	m_target->RestoreLABLum();
+	m_target->RestoreLABRelLum();
 	return true;
 }

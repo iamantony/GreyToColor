@@ -234,7 +234,7 @@ bool TargetImgPixels::NormaliseRelLumByCenter(const double &t_newMinRelLum,
 
 	// Params for lower area (current luminance between min and common)
 	const double currDiffLumLA = currCommonLum - currMinLum;
-	const double newDiffLumLA = t_newCenterRelLum - t_newMinLum;
+	const double newDiffLumLA = t_newCenterRelLum - t_newMinRelLum;
 	const double scaleFactorLA = newDiffLumLA / currDiffLumLA;
 
 	// Params for upper area (current luminance between common and max)
@@ -397,10 +397,10 @@ void TargetImgPixels::TestFunctionality()
 	qDebug() << "Before scaling:" << pixel->GetChL();
 
 	double scaleFactor = 1.5;
-	ScaleLum(scaleFactor);
+	ScaleRelLum(scaleFactor);
 	qDebug() << "After scaling:" << pixel->GetChL();
 
-	RestoreLum();
+	RestoreRelLum();
 	qDebug() << "After unscaling:" << pixel->GetChL();
 }
 
@@ -431,8 +431,7 @@ void TargetImgPixels::TestSKO()
 	QElapsedTimer timer;
 	timer.start();
 
-	// Calc SKO for some pixel (in the middle of the image)
-	CalcPixSKO(5, 5);
+	CalcPixelsSKO();
 
 	qint64 elapsed = timer.nsecsElapsed();
 	qDebug() << "Elapsed:" << elapsed;

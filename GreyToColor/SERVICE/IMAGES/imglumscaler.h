@@ -24,6 +24,9 @@
 #include "IMAGES/SOURCE/sourceimage.h"
 #include "./DEFINES/imgservice.h"
 
+// Class ImgLumScaler
+// This class we use to scale Target image relative luminance. Type of scale operation
+// defined in enum LumEqualization
 class ImgLumScaler
 {
 	// == DATA ==
@@ -40,13 +43,13 @@ public:
 private:
 	// Restore Target image default LAB Luminance
 	bool RestoreTargImgLum(TargetImage *t_target);
-	// Scale Target Image pixels luminances by Max luminance value of Source Image
+	// Scale Target Image pixels relative luminances by Max relative luminance value of Source Image
 	bool ScaleTargetImgLumByMax(TargetImage *t_target, SourceImage *t_source);
-	// Scale Target Image pixels luminances by Average luminance value of Source Image
+	// Scale Target Image pixels relative luminances by Average relative luminance value of Source Image
 	bool ScaleTargetImgLumByAverage(TargetImage *t_target, SourceImage *t_source);
-	// Normalize Target Image pixels luminances using min/max luminances of Source Image
+	// Normalize Target Image pixels relative luminances using min/max relative luminances of Source Image
 	bool NormalizeTargetImgByBorder(TargetImage *t_target, SourceImage *t_source);
-	// Normalize Target Image pixels luminance using min, max and central luminances of Source Imge
+	// Normalize Target Image pixels reltive luminance using min, max and central relative luminances of Source Imge
 	bool NormalizeTargetImgByCenter(TargetImage *t_target, SourceImage *t_source);
 };
 

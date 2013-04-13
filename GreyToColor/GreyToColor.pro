@@ -128,3 +128,6 @@ FORMS    += \
 
 RESOURCES += \
 	resources_ui.qrc
+
+OTHER_FILES += \
+    DOCS/TODO.txt

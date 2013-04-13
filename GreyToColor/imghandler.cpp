@@ -458,8 +458,6 @@ void ImgHandler::SlotTargImgScale(const LumEqualization::Type &t_type)
 	bool lumScaled = scaler.ScaleTargetImgLum(t_type, &m_target, &m_source);
 	if ( false == lumScaled )
 	{
-		m_target.RestoreLABLum();
-
 		emit SignalProcError(tr("Can't scale Target Image luminance"));
 
 		qDebug() << "SlotTargImgScale(): Error - can't scale Target image luminance";
@@ -470,8 +468,7 @@ void ImgHandler::SlotTargImgScale(const LumEqualization::Type &t_type)
 	QList<double> lumHist = histogramer.LABLumHistogram(&m_target);
 	if ( true == lumHist.isEmpty() )
 	{
-		m_target.RestoreLABLum();
-
+		m_target.RestoreLABRelLum();
 		emit SignalProcError(tr("Can't form LAB Luminance Histogram"));
 
 		qDebug() << "SlotTargImgScale(): Error - failed to form LAB Luminance Histogram";
@@ -480,5 +477,5 @@ void ImgHandler::SlotTargImgScale(const LumEqualization::Type &t_type)
 
 	emit SignalGetLABLumHist(lumHist);
 
-	m_target.RestoreLABLum();
+	m_target.RestoreLABRelLum();
 }

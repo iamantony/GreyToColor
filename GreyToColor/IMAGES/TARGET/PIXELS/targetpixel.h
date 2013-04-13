@@ -60,7 +60,6 @@ public:
 	// Check if pixel colorized
 	bool IsColored() const;
 
-
 private:
 	// Transform pixel to grey color
 	void ToGrey(const RGB &t_color);
