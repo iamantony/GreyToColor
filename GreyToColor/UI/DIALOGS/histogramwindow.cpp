@@ -430,3 +430,64 @@ void HistogramWindow::SlotRecieveLABLumHist(const QList<double> &t_hist)
 
 	m_processing.unlock();
 }
+
+// Slot for recieving relative Luminance histogram
+// @input:
+// - QList<double> - unempty relative luminance histogram
+// @output:
+void HistogramWindow::SlotRecieveRelLumHist(const QList<double> &t_hist)
+{
+	if ( true == t_hist.isEmpty() )
+	{
+		m_processing.unlock();
+
+		qDebug() << "SlotRecieveRelLumHist(): Error - invalid arguments";
+		return;
+	}
+
+	if ( false == m_processing.tryLock() )
+	{
+		return;
+	}
+
+	QString histFileName = QFileDialog::getSaveFileName(this,
+														"Choose name for Relative Luminance Histogram...",
+														QDir::currentPath(),
+														"CSV file (*.csv)");
+
+	if ( true == histFileName.isEmpty() )
+	{
+		m_processing.unlock();
+		return;
+	}
+
+	QFile histFile;
+	histFile.setFileName(histFileName);
+
+	bool fileOpened = histFile.open(QIODevice::WriteOnly);
+	if ( false == fileOpened )
+	{
+		m_processing.unlock();
+
+		qDebug() << "SlotRecieveRelLumHist(): Error - can't open file!";
+		return;
+	}
+
+	QTextStream streamToFile;
+	streamToFile.setDevice(&histFile);
+
+	const int numOfValues = t_hist.size();
+
+	streamToFile << "NUM;Rel_Lum;Pixels" << endl;
+	for ( int i = 0; i < numOfValues; i++ )
+	{
+		double lumValue = i * RELATIVE_DIVIDER;
+		streamToFile << i << ";" <<
+						lumValue << ";" <<
+						t_hist[i] << endl;
+	}
+
+	histFile.close();
+
+	m_processing.unlock();
+}

@@ -40,5 +40,6 @@
 
 #define RELATIVE_MIN 0.0
 #define RELATIVE_MAX 1.0
+#define RELATIVE_DIVIDER 0.001
 
 #endif // PIXELS_H

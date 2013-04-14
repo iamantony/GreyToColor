@@ -36,12 +36,14 @@ class SourceImage : public ProcessingImage
 	// == METHODS ==
 public:
 	SourceImage();
-	~SourceImage();
+	virtual ~SourceImage();
 
 	// Clear all info
 	virtual void Clear();
 	// Transform custom pixels from RGB to LAB
 	virtual void TransformImgRGB2LAB();
+	// Get relative luminance of pixel with certain coords
+	double GetPixelsRelLum(const unsigned int &t_width, const unsigned int &t_height) const;
 	// Calc for each pixel in image it's SKO
 	void CalcPixelsSKO();
 	// Get SKO of pixel with certain coords

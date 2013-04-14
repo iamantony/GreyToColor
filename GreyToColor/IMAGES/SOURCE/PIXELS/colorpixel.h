@@ -44,7 +44,7 @@ public:
 	// Calc relative value of LAB luminance
 	void CalcRelativeLum();
 	// Get relative LAB luminance value
-	double GetRelativeLum();
+	double GetRelativeLum() const;
 	// Set relative LAB luminance value
 	bool SetRelativeLum(const double &t_lum);
 	// Set SKO for pixel of image

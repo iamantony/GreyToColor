@@ -139,7 +139,7 @@ QList<QRect> ImgSubsampler::GetSamplesRects(const int &t_samplesOnHorizontal,
 	if ( (true == wdtSamples.isEmpty()) ||
 		 (t_samplesOnHorizontal != wdtSamples.size()) ||
 		 (true == hgtSamples.isEmpty()) ||
-		 (t_samplesOnVertical != hgtSamples.size()))
+		 (t_samplesOnVertical != hgtSamples.size()) )
 	{
 		qDebug() << "GetSamplesRects(): Error - can't divide to samples";
 		QList<QRect> empty;

@@ -25,7 +25,7 @@ ImgHandler::ImgHandler(QObject *parent) :
 
 ImgHandler::~ImgHandler()
 {
-	Clear();
+//	Clear();
 }
 
 // Clear all data
@@ -440,7 +440,7 @@ void ImgHandler::SlotLABLumHist(const ImageKind::Type &t_type)
 	emit SignalGetLABLumHist(lumHist);
 }
 
-// Slot for scaling/normalising Target image LAB Luminance
+// Slot for scaling/normalising Target image relative Luminance
 // @input:
 // -LumEqualization::Type - exist type of luminance equalization
 // @output:
@@ -465,7 +465,7 @@ void ImgHandler::SlotTargImgScale(const LumEqualization::Type &t_type)
 	}
 
 	ImgHistogram histogramer;
-	QList<double> lumHist = histogramer.LABLumHistogram(&m_target);
+	QList<double> lumHist = histogramer.RelLumHistogram(&m_target);
 	if ( true == lumHist.isEmpty() )
 	{
 		m_target.RestoreLABRelLum();
@@ -475,7 +475,7 @@ void ImgHandler::SlotTargImgScale(const LumEqualization::Type &t_type)
 		return;
 	}
 
-	emit SignalGetLABLumHist(lumHist);
+	emit SignalGetRelLumHist(lumHist);
 
 	m_target.RestoreLABRelLum();
 }

@@ -34,7 +34,7 @@ class SourceImgPixels : public ImagePixels
 	// == METHODS ==
 public:
 	SourceImgPixels();
-	~SourceImgPixels();
+	virtual ~SourceImgPixels();
 
 	// Clear info about pixels (call this function before deleting object SourceImgPixels!)
 	virtual void Clear();
@@ -42,6 +42,8 @@ public:
 	virtual bool FormImgPixels(const QImage &t_img);
 	// Transform all image pixels from RGB color space to LAB
 	virtual void TransAllPixRGB2LAB();
+	// Get pixel relative luminance
+	double GetPixelsRelativeLum(const unsigned int &t_width, const unsigned int &t_height) const;
 	// Calc for each pixel in image it's SKO
 	void CalcPixelsSKO();
 	// Get SKO of pixel with certain coords

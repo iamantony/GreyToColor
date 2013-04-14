@@ -125,6 +125,25 @@ void SourceImgPixels::CalcPixRelativeLum(const unsigned int &t_width, const unsi
 	pixel->CalcRelativeLum();
 }
 
+// Get pixel relative luminance
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+// - double in range [0, 1] - pixels relative luminance
+// - double < 0 - can't find such pixel
+double SourceImgPixels::GetPixelsRelativeLum(const unsigned int &t_width, const unsigned int &t_height) const
+{
+	if ( false == IsPixelExist(t_width, t_height) )
+	{
+		qDebug() << "GetPixelsRelativeLum(): Error - invalid arguments";
+		return ERROR;
+	}
+
+	const ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	return pixel->GetRelativeLum();
+}
+
 // Calc for each pixel in image it's SKO
 // @input:
 // @output:
@@ -231,7 +250,7 @@ void SourceImgPixels::CalcPixsEntropy(const unsigned int &t_width, const unsigne
 	lumInMask.append(pixelLum);
 
 	ImgHistogram histogramer;
-	QList<double> maskHist = histogramer.MaskLumHistogram(lumInMask);
+	QList<double> maskHist = histogramer.MaskRelLumHistogram(lumInMask);
 
 	double pixelEntropy = 0;
 	const int maskSize = lumInMask.size();

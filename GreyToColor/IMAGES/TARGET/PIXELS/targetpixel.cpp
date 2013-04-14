@@ -33,7 +33,6 @@ TargetPixel::~TargetPixel()
 // @output:
 void TargetPixel::ClearPixel()
 {
-	// Clear pixels and SKO
 	this->ClearColor();
 	m_prefColor.ClearColor();
 

@@ -174,6 +174,11 @@ void Application::ConnectUIandImgHand()
 					 SLOT(SlotGetLABLumHist(QList<double>)));
 
 	QObject::connect(m_imgHandler,
+					 SIGNAL(SignalGetRelLumHist(QList<double>)),
+					 m_mainUI,
+					 SLOT(SlotGetRelLumHist(QList<double>)));
+
+	QObject::connect(m_imgHandler,
 					 SIGNAL(SignalCurrentProc(Program::Status)),
 					 m_mainUI,
 					 SLOT(SlotCurrProcess(Program::Status)));

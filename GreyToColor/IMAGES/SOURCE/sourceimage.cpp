@@ -29,7 +29,9 @@ SourceImage::~SourceImage()
 
 	if ( NULL != m_imgPixels )
 	{
-		delete m_imgPixels;
+		SourceImgPixels *pixels = (SourceImgPixels *)m_imgPixels;
+		delete pixels;
+		m_imgPixels = NULL;
 	}
 }
 
@@ -41,7 +43,10 @@ void SourceImage::Clear()
 	m_img.Clear();
 
 	SourceImgPixels *pixels = (SourceImgPixels *)m_imgPixels;
-	pixels->Clear();
+	if ( NULL != pixels )
+	{
+		pixels->Clear();
+	}
 }
 
 // Transform custom pixels from RGB to LAB
@@ -69,6 +74,19 @@ void SourceImage::ConstructImgPixels()
 	pixels->Clear();
 	pixels->FormImgPixels(currentImg);
 	TransformImgRGB2LAB();
+}
+
+// Get relative luminance of pixel with certain coords
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+// - double in range [0, 1] - pixels relative luminance
+// - double < 0 - can't find such pixel
+double SourceImage::GetPixelsRelLum(const unsigned int &t_width, const unsigned int &t_height) const
+{
+	const SourceImgPixels *pixels = (SourceImgPixels *)m_imgPixels;
+	return pixels->GetPixelsRelativeLum(t_width, t_height);
 }
 
 // Calc for each pixel in image it's SKO

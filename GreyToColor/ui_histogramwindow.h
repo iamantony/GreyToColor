@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'histogramwindow.ui'
 **
-** Created: Sat 13. Apr 23:28:32 2013
+** Created: Sun 14. Apr 14:35:41 2013
 **      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!

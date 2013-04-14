@@ -20,6 +20,7 @@
 #define TARGETIMAGE_H
 
 #include "./IMAGES/COMMON/processingimage.h"
+#include "./IMAGES/SOURCE/sourceimage.h"
 #include "../TARGET/PIXELS/targetimgpixels.h"
 #include "../COMMON/PIXELS/rgb.h"
 
@@ -30,37 +31,37 @@
 // This class represents an image, that we colorize in colorization process
 // This class derived form SourceImage class, so it also consist an real uploaded color image and array
 // of pixels with some parameters. Class provides functionality for scaling image luminance (relative LAB luminance)
-class TargetImage : public ProcessingImage
+class TargetImage : public SourceImage
 {
 	// == DATA ==
-private:
-	TargetImgPixels *m_targetPixels;
 
 	// == METHODS ==
 public:
 	TargetImage();
-	~TargetImage();
+	virtual ~TargetImage();
 
 	// Clear all info
 	virtual void Clear();
-	// Transform custom pixels from RGB to LAB
-	virtual void TransformImgRGB2LAB();
-	// Calc for each pixel in image it's SKO
-	void CalcPixelsSKO();
-	// Get SKO of pixel with certain coords
-	double GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const;
-	// Calc for each pixel in image it's Entropy
-	void CalcPixelsEntropy();
-	// Get Entropy of pixel with certain coords
-	double GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const;
-	// Get maximum value of relative LAB luminance in image
-	double GetMaxRelLum();
-	// Get minimum value of relative LAB luminance in image
-	double GetMinRelLum();
-	// Get average value of relative LAB luminance in image
-	double GetAverageRelLum();
-	// Get most common value of relative LAB luminance in image
-	double GetMostCommonRelLum();
+//	// Transform custom pixels from RGB to LAB
+//	virtual void TransformImgRGB2LAB();
+//	// Get relative luminance of pixel with certain coords
+//	double GetPixelsRelLum(const unsigned int &t_width, const unsigned int &t_height) const;
+//	// Calc for each pixel in image it's SKO
+//	void CalcPixelsSKO();
+//	// Get SKO of pixel with certain coords
+//	double GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const;
+//	// Calc for each pixel in image it's Entropy
+//	void CalcPixelsEntropy();
+//	// Get Entropy of pixel with certain coords
+//	double GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const;
+//	// Get maximum value of relative LAB luminance in image
+//	double GetMaxRelLum();
+//	// Get minimum value of relative LAB luminance in image
+//	double GetMinRelLum();
+//	// Get average value of relative LAB luminance in image
+//	double GetAverageRelLum();
+//	// Get most common value of relative LAB luminance in image
+//	double GetMostCommonRelLum();
 	// Scale relative luminance of all pixels in image with certain scale factor
 	bool ScaleLABRelLum(const double &t_scaleFactor);
 	// Unscale relative luminance of all pixels in image

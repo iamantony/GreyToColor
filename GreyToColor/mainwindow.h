@@ -101,6 +101,7 @@ signals:
 	void SignalBuildLABLumHist(const ImageKind::Type &t_type);
 	void SignalSendLABLumHist(const QList<double> &t_hist);
 	void SignalBuildTargLumHist(const LumEqualization::Type &t_lumType);
+	void SignalSendRelLumHist(const QList<double> &t_hist);
 
 public slots:
 	// Slot for getting new Target image
@@ -125,8 +126,8 @@ public slots:
 	void SlotGetRGBHist(const QList< QList<double> > &t_hist);
 	// Slot to get LAB Luminance histogram
 	void SlotGetLABLumHist(const QList<double> &t_hist);
-//	// Slot to get scaled LAB Luminance histogram of Target image
-//	void SlotGetTargLumHist(const QList<double> &t_hist);
+	// Slot to get relative Luminance histogram
+	void SlotGetRelLumHist(const QList<double> &t_hist);
 
 private slots:
 	void on_openTargetImgPB_clicked();

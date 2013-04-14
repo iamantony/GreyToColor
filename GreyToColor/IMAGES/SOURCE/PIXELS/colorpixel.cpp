@@ -53,7 +53,7 @@ void ColorPixel::CalcRelativeLum()
 // @output:
 // - double - relative LAB luminance in range [0, 1]
 // - double < 0 - error, relative luminance not calc yet
-double ColorPixel::GetRelativeLum()
+double ColorPixel::GetRelativeLum() const
 {
 	return m_relativeLum;
 }

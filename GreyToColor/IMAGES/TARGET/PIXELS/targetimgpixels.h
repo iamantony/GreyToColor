@@ -25,14 +25,14 @@
 #include "../../SOURCE/PIXELS/sourceimgpixels.h"
 #include "targetpixel.h"
 
-class TargetImgPixels : SourceImgPixels
+class TargetImgPixels : public SourceImgPixels
 {
 	// == DATA ==
 
 	// == METHODS ==
 public:
 	TargetImgPixels();
-	~TargetImgPixels();
+	virtual ~TargetImgPixels();
 
 	// Clear info about pixels (call this function before deleting object TragetImgPixels!)
 	virtual void Clear();
