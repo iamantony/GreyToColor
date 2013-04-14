@@ -21,14 +21,20 @@
 TargetImage::TargetImage()
 {
 	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	if ( NULL != pixels )
+	{
+		delete pixels;
+	}
+
 	pixels = new TargetImgPixels();
 }
 
 TargetImage::~TargetImage()
 {
-	Clear();
+//	Clear();
 
 	// WARNING
+	m_img.Clear();
 	if ( NULL != m_imgPixels )
 	{
 		TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;

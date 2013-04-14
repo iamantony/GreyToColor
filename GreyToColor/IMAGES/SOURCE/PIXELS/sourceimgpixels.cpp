@@ -34,6 +34,7 @@ SourceImgPixels::~SourceImgPixels()
 // @output:
 void SourceImgPixels::Clear()
 {
+
 	for ( int width = 0; width < m_pixels.size(); width++ )
 	{
 		int pixInColumn = m_pixels[width].size();

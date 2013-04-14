@@ -25,7 +25,7 @@ ImgHandler::ImgHandler(QObject *parent) :
 
 ImgHandler::~ImgHandler()
 {
-//	Clear();
+	qDebug() << "~ImgHandler()";
 }
 
 // Clear all data

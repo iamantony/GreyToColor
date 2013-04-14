@@ -25,7 +25,9 @@ SourceImage::SourceImage()
 
 SourceImage::~SourceImage()
 {
-	Clear();
+//	Clear();
+
+	m_img.Clear();
 
 	if ( NULL != m_imgPixels )
 	{

@@ -22,6 +22,7 @@
 #include <QList>
 #include <QImage>
 #include <QDebug>
+
 #include "pixel.h"
 #include "./DEFINES/pixels.h"
 
