@@ -20,14 +20,12 @@
 
 ImagePixels::ImagePixels()
 {
-	m_width = 0;
-	m_height = 0;
+	Clear();
 }
 
 ImagePixels::~ImagePixels()
 {
-	m_width = 0;
-	m_height = 0;
+	Clear();
 }
 
 // Clear all info (set to defaults)
@@ -35,10 +33,14 @@ ImagePixels::~ImagePixels()
 // @output:
 void ImagePixels::Clear()
 {
-	for ( int i = m_pixels.size() - 1; i >= 0; i-- )
+	m_width = 0;
+	m_height = 0;
+
+	const int width = m_pixels.size();
+	for ( int i = width - 1; i >= 0; --i )
 	{
-		int listsize = m_pixels[i].size();
-		for ( int j = listsize - 1; j >= 0; j-- )
+		const int height = m_pixels.at(i).size();
+		for ( int j = height - 1; j >= 0; --j )
 		{
 			Pixel *pix = (Pixel *)m_pixels[i][j];
 			if ( NULL != pix )
@@ -219,199 +221,6 @@ void ImagePixels::SetPixChannelsAB(const unsigned int &t_width,
 
 	m_pixels[t_width][t_height]->SetChA(t_chA);
 	m_pixels[t_width][t_height]->SetChB(t_chB);
-}
-
-// Find among all pixels in image value of max luminance
-// @input:
-// @output:
-// - ERROR - can't find max luminance
-// - double - positive found max luminance of images pixels
-double ImagePixels::FindMaxLum() const
-{
-	if ( false == HasPixels() )
-	{
-		qDebug() << "FindMaxLum(): Error - no pixels";
-		return ERROR;
-	}
-
-	double maxLum = DEFAULT_MAX_LAB_LUM;
-	for ( unsigned int width = 0; width < m_width; width++ )
-	{
-		for ( unsigned int height = 0; height < m_height; height++ )
-		{
-			double pixelLum = m_pixels[width][height]->GetChL();
-			if ( maxLum < pixelLum )
-			{
-				maxLum = pixelLum;
-			}
-		}
-	}
-
-	return maxLum;
-}
-
-// Find among all pixels in image value of min luminance
-// @input:
-// @output:
-// - ERROR - can't find min luminance
-// - double - positive found min luminance of images pixels
-double ImagePixels::FindMinLum() const
-{
-	if ( false == HasPixels() )
-	{
-		qDebug() << "FindMinLum(): Error - no pixels";
-		return ERROR;
-	}
-
-	double minLum = DEFAULT_MIN_LAB_LUM;
-	for ( unsigned int width = 0; width < m_width; width++ )
-	{
-		for ( unsigned int height = 0; height < m_height; height++ )
-		{
-			double pixelLum = m_pixels[width][height]->GetChL();
-			if ( pixelLum < minLum )
-			{
-				minLum = pixelLum;
-			}
-		}
-	}
-
-	return minLum;
-}
-
-// Find average image luminance
-// @input:
-// @output:
-// - ERROR - can't find average luminance
-// - double - positive found average luminance of images pixels
-double ImagePixels::FindAverageLum() const
-{
-	if ( false == HasPixels() )
-	{
-		qDebug() << "FindAverageLum(): Error - no pixels";
-		return ERROR;
-	}
-
-	double averageLum = DEFAULT_MIN_LAB_LUM;
-	for ( unsigned int width = 0; width < m_width; width++ )
-	{
-		for ( unsigned int height = 0; height < m_height; height++ )
-		{
-			averageLum += m_pixels[width][height]->GetChL();
-		}
-	}
-
-	averageLum /= m_width * m_height;
-
-	return averageLum;
-}
-
-// Find most common luminance value
-// @input:
-// @output:
-// - ERROR - can't find most common luminance
-// - double - positive found most common luminance of images pixels
-double ImagePixels::FindMostCommonLum() const
-{
-	if ( false == HasPixels() )
-	{
-		qDebug() << "FindMostCommonLum(): Error - no pixels";
-		return ERROR;
-	}
-
-	// Create zero mass for statistic
-	const int numberOfLevels = LAB_MAX_LUM / LAB_LUM_HIST_DIVIDER;
-	QList<int> lumStatistic;
-	for ( int lumLvl = 0; lumLvl < numberOfLevels; lumLvl++ )
-	{
-		lumStatistic.append(0);
-	}
-
-	// Form statistic
-	for ( unsigned int width = 0; width < m_width; width++ )
-	{
-		for ( unsigned int height = 0; height < m_height; height++ )
-		{
-			double pixLum = m_pixels[width][height]->GetChL();
-			double lumLvl = pixLum / LAB_LUM_HIST_DIVIDER;
-			int lvlNum = (int)floor(lumLvl);
-
-			lumStatistic[lvlNum]++;
-		}
-	}
-
-	// Find number of most popular luminance level
-	int mostCommonLvl = 0;
-	int maxNumInLvl = 0;
-	for ( int lvl = 0; lvl < numberOfLevels; lvl++ )
-	{
-		if ( maxNumInLvl < lumStatistic.at(lvl) )
-		{
-			maxNumInLvl = lumStatistic.at(lvl);
-			mostCommonLvl = lvl;
-		}
-	}
-
-	// Transform number of luminance level to LAB luminance value
-	double mostCommonLum = mostCommonLvl * LAB_LUM_HIST_DIVIDER;
-
-	return mostCommonLum;
-}
-
-// Get list of luminances of neighbor pixels (to calc SKO, for example)
-// @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
-// @output:
-// - empty QList<double> - don't have pixels
-// - unempy QList<double> - luminances of neighbor pixels
-QList<double> ImagePixels::GetPixNeighborsLum(const unsigned int &t_width, const unsigned int &t_height) const
-{
-	QList<double> luminances;
-
-	if ( false == IsPixelExist(t_width, t_height) )
-	{
-		qDebug() << "GetPixNeighborsLum(): Error - invalid arguments";
-		return luminances;
-	}
-
-	// This is length of side of a rect, which is form a mask. Central pixel in mask is pixel with input coords.
-	// Other pixels are neighbors of central pixel.
-	int maskRectSide = MASK_RECT_SIDE_LENGTH;
-	if ( maskRectSide < 0 )
-	{
-		maskRectSide *= (-1);
-	}
-
-	// In current version we use mask with an odd length of a rect side. But it's OK if mask side length is even.
-	// Calc offset to get to extreme pixels in mask
-	int offset = maskRectSide / 2;
-	int minWidthCoord = (int)t_width - offset;
-	int minHeightCoord = (int)t_height - offset;
-
-	// Calc position of extreme pixels
-	unsigned int widthStart = (unsigned int)qMax( 0, minWidthCoord );
-	unsigned int widthEnd = qMin( m_width, t_width + (unsigned int)offset + 1 );
-	unsigned int heightStart = (unsigned int)qMax( 0, minHeightCoord );
-	unsigned int heightEnd = qMin( m_height, t_height + (unsigned int)offset + 1 );
-
-	for ( unsigned int width = widthStart; width < widthEnd; width++ )
-	{
-		for ( unsigned int height = heightStart; height < heightEnd; height++ )
-		{
-			if ( (width == t_width) && (height == t_height) )
-			{
-				// We take luminance of neighbor pixels, so we don't interested in value of luminance of current
-				// (central) pixel
-				continue;
-			}
-
-			double pixelLum = m_pixels[width][height]->GetChL();
-			luminances.append(pixelLum);
-		}
-	}
-
-	return luminances;
 }
 
 // Check if pixel with certain coords is greyscale

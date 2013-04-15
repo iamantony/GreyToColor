@@ -19,41 +19,38 @@
 #ifndef TARGETIMAGE_H
 #define TARGETIMAGE_H
 
-#include "../COMMON/processingimage.h"
+#include "./IMAGES/COMMON/processingimage.h"
+#include "./IMAGES/SOURCE/sourceimage.h"
 #include "../TARGET/PIXELS/targetimgpixels.h"
 #include "../COMMON/PIXELS/rgb.h"
-#include "./DEFINES/images.h"
 
-class TargetImage : public ProcessingImage
+// Class TargetImage
+// This class represents an image, that we colorize in colorization process
+// This class derived form SourceImage class, so it also consist an real uploaded color image and array
+// of pixels with some parameters. Class provides functionality for scaling image luminance (relative LAB luminance)
+class TargetImage : public SourceImage
 {
 	// == DATA ==
 
 	// == METHODS ==
 public:
 	TargetImage();
-	~TargetImage();
+	virtual ~TargetImage();
 
 	// Clear all info
 	virtual void Clear();
-	// Calc for each pixel in image it's SKO
-	void CalcPixelsSKO();
-	// Get SKO of pixel with certain coords
-	double GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const;
-	// Calc for each pixel in image it's Entropy
-	void CalcPixelsEntropy();
-	// Get Entropy of pixel with certain coords
-	double GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const;
-	// Scale luminance of all pixels in image with certain scale factor
-	bool ScaleLABLum(const double &t_scaleFactor);
-	// Normalise luminance of all pixels in image by min/max borders
-	bool NormaliseLABLumByBorders(const double &t_newMinLABLum, const double &t_newMaxLABLum);
-	// Normalise luminance of all pixels in image by center
-	bool NormaliseLABLumByCenter(const double &t_newMinLABLum,
-											 const double &t_newCenterLABLum,
-											 const double &t_newMaxLABLum);
+	// Scale relative luminance of all pixels in image with certain scale factor
+	bool ScaleLABRelLum(const double &t_scaleFactor);
+	// Unscale relative luminance of all pixels in image
+	void RestoreLABRelLum();
+	// Normalise relative luminance of all pixels in image by min/max borders
+	bool NormaliseLABRelLumByBorders(const double &t_newMinLABRelLum, const double &t_newMaxLABRelLum);
+	// Normalise relative luminance of all pixels in image by center
+	bool NormaliseLABRelLumByCenter(const double &t_newMinLABRelLum,
+									const double &t_newCenterLABRelLum,
+									const double &t_newMaxLABRelLum);
 
-	// Unscale luminance of all pixels in image
-	void RestoreLABLum();
+
 	// Set prefered color for certain pixel
 	void SetPixPrefColor(const unsigned int &t_width,
 						 const unsigned int &t_height,
@@ -72,8 +69,6 @@ public:
 private:
 	// Construct custom pixels of loaded image
 	virtual void ConstructImgPixels();
-	// Save current LAB luminance of pixels as original luminance
-	void SetOrigLum();
 };
 
 #endif // TARGETIMAGE_H

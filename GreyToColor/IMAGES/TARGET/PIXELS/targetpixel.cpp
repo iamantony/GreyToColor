@@ -33,11 +33,10 @@ TargetPixel::~TargetPixel()
 // @output:
 void TargetPixel::ClearPixel()
 {
-	// Clear pixels and SKO
 	this->ClearColor();
+
 	m_prefColor.ClearColor();
 
-	m_originalLum = ERROR;
 	SetUncolored();
 }
 
@@ -84,13 +83,13 @@ void TargetPixel::ToGrey(const RGB &t_color)
 
 }
 
-// Scale luminance with some factor
+// Scale relative luminance with some factor
 // @input:
 // - double - positive scale factor
 // @output:
 // - true - luminance scaled
 // - false - can't scale luminance with that factor
-bool TargetPixel::ScaleLum(const double &t_factor)
+bool TargetPixel::ScaleRelLum(const double &t_factor)
 {
 	if ( t_factor <= 0 )
 	{
@@ -98,76 +97,39 @@ bool TargetPixel::ScaleLum(const double &t_factor)
 	}
 
 	// We don't want to scale luminance of pixel twice
-	RestoreLum();
+	RestoreRelLum();
 
-	double scaledLum = m_originalLum * t_factor;
-	if ( LAB_MAX_LUM < scaledLum )
-	{
-		scaledLum = LAB_MAX_LUM;
-	}
-	else if ( scaledLum < 0 )
-	{
-		scaledLum = 0;
-	}
+	const double relativeLum = GetRelativeLum();
+	double scaledLum = relativeLum * t_factor;
+	bool isLumSet = SetRelativeLum(scaledLum);
 
-	bool lumSet = SetChL(scaledLum);
-	if ( false == lumSet )
-	{
-		return false;
-	}
-
-	return true;
+	return isLumSet;
 }
 
-// Set normalised luminance
+// Restore relative luminance value
 // @input:
-// - double - positive value of LAB luminance
 // @output:
-// - true - luminance restored
-// - false - can't restore luminance
-bool TargetPixel::SetNormalizedLum(const double &t_newLum)
+void TargetPixel::RestoreRelLum()
+{
+	CalcRelativeLum();
+}
+
+// Set normalised relative luminance
+// @input:
+// - double - value of relative LAB luminance
+// @output:
+// - true - normalized relative luminance set
+// - false - can't set relative luminance
+bool TargetPixel::SetNormalizedRelLum(const double &t_newLum)
 {
 	if ( t_newLum < 0 )
 	{
 		return false;
 	}
 
-	// If pixel was not previously set or scaled or normalised, we need to save pixels orignal lumiance value
-	if ( m_originalLum < 0 )
-	{
-		m_originalLum = GetChL();
-	}
+	bool isLumSet = SetRelativeLum(t_newLum);
 
-	bool lumSet = SetChL(t_newLum);
-	if ( false == lumSet )
-	{
-		return false;
-	}
-
-	return true;
-}
-
-// Restore original luminance
-// @input:
-// @output:
-// - true - luminance restored
-// - false - can't restore luminance
-bool TargetPixel::RestoreLum()
-{
-	// If pixel was not previously set or scaled or normalised, we need to save pixels orignal lumiance value
-	if ( m_originalLum < 0 )
-	{
-		m_originalLum = GetChL();
-		return true;
-	}
-
-	bool lumSet = SetChL(m_originalLum);
-	if ( false == lumSet )
-	{
-		return false;
-	}
-
-	return true;
+	return isLumSet;
 }
 
 // Set prefered color for pixel
@@ -189,8 +151,14 @@ bool TargetPixel::HasPreferedColor() const
 	return m_prefColor.HasColor();
 }
 
-// TODO:
-// how we would know what prefered color have pixel?
+// Get prefered color
+// @input:
+// @output:
+// - RGB - pixels prefered color
+RGB TargetPixel::GetPreferedColor()
+{
+	return m_prefColor.GetPreferedColor();
+}
 
 // Set that pixel colorized (has color)
 // @input:
@@ -214,14 +182,6 @@ void TargetPixel::SetUncolored()
 bool TargetPixel::IsColored() const
 {
 	return m_colored;
-}
-
-// Save current LAB luminance as original
-// @input:
-// @output:
-void TargetPixel::SaveOriginalLum()
-{
-	m_originalLum = GetChL();
 }
 
 // Test function SetAsGrey()
@@ -272,12 +232,18 @@ void TargetPixel::TestScaleLum()
 	SetRGB(color);
 
 	TransformRGB2LAB();
+	CalcRelativeLum();
 
-	ScaleLum(1.243);
-	RestoreLum();
+	qDebug() << "Relative luminance =" << GetRelativeLum();
 
-	TransformLAB2RGB();
+	const double scaleFactor = 1.243;
+	qDebug() << "Scale Factor =" << scaleFactor;
 
-	RGB resultColor = GetRGB();
-	qDebug() << "Result:" << resultColor.GetRed() << resultColor.GetGreen() << resultColor.GetBlue();
+	ScaleRelLum(scaleFactor);
+
+	qDebug() << "Relative luminance after scale =" << GetRelativeLum();
+
+	RestoreRelLum();
+
+	qDebug() << "Relative luminance after restore =" << GetRelativeLum();
 }

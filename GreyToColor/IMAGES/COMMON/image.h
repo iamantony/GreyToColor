@@ -21,6 +21,7 @@
 
 #include <QImage>
 #include <QDebug>
+
 #include "./DEFINES/global.h"
 #include "./SERVICE/FILES/imgfilesservice.h"
 

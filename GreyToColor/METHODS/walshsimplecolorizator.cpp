@@ -176,7 +176,7 @@ bool WalshSimpleColorizator::ColorizeImage()
 			bestSourcePixHgt = 0;
 
 			// Get target pixel params
-			targPixLum = m_target->PixelChLum(width, height);
+			targPixLum = m_target->GetPixelsRelLum(width, height);
 			targPixSKO = m_target->GetPixelsSKO(width, height);
 			if ( (targPixLum <= NO_INFO) || (targPixSKO <= ERROR) )
 			{
@@ -193,7 +193,7 @@ bool WalshSimpleColorizator::ColorizeImage()
 //				// Get rand() stat
 //				randStat[sourceRandWdt][sourceRandHgt]++;
 
-				sourcePixLum = m_source->PixelChLum(sourceRandWdt, sourceRandHgt);
+				sourcePixLum = m_source->GetPixelsRelLum(sourceRandWdt, sourceRandHgt);
 				sourcePixSKO = m_source->GetPixelsSKO(sourceRandWdt, sourceRandHgt);
 
 				diffLum = fabs( targPixLum - sourcePixLum );
@@ -242,7 +242,7 @@ bool WalshSimpleColorizator::PostColorization()
 		return false;
 	}
 
-	m_target->RestoreLABLum();
+	m_target->RestoreLABRelLum();
 	return true;
 }
 

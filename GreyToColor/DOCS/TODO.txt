@@ -1,0 +1,2 @@
+1) Add new pixels comparison parameters
+3) Add descriptions to classes

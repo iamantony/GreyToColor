@@ -26,11 +26,11 @@ CalculatorSKO::CalculatorSKO(QObject *parent) :
 
 // Calc SKO for a pixel mask
 // @input:
-// - double - positive luminance of central masks pixel
-// - QList<double> - unempty list of pixels luminances
+// - double - positive relative luminance of central masks pixel
+// - QList<double> - unempty list of pixels relative luminances
 // @output:
 // - ERROR - can't calc SKO
-// - double - positive value of pixels luminance SKO
+// - double - positive value of pixels relative luminance SKO
 double CalculatorSKO::PixelMaskSKO(const double t_centralPixLum, const QList<double> &t_luminances)
 {
 	if ( (t_centralPixLum < 0) || (true == t_luminances.isEmpty()) )
@@ -47,8 +47,8 @@ double CalculatorSKO::PixelMaskSKO(const double t_centralPixLum, const QList<dou
 		SKO += pow(diff, 2);
 	}
 
-	// Pixels in mask: central pixel + his neighbors
-	int pixInMask = pixNum + 1;
+	// Pixels in mask: all pixels in mask - central pixel
+	int pixInMask = pixNum;
 	SKO /= pixInMask;
 	SKO = pow(SKO, 0.5);
 

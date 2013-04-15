@@ -44,7 +44,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="tabColorization">
       <property name="toolTip">
@@ -92,7 +92,7 @@
         <item>
          <widget class="QRadioButton" name="rbWSEntropy">
           <property name="text">
-           <string>Walsh Simple (sko and entropy)</string>
+           <string>Walsh Simple (all parameters)</string>
           </property>
          </widget>
         </item>

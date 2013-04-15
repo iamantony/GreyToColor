@@ -25,14 +25,11 @@
 #include "preferedcolor.h"
 #include "./DEFINES/pixels.h"
 
-#define DEFAULT_SCALE_LUM_FACTOR 1
-
 class TargetPixel : public ColorPixel
 {
 	// == DATA ==
 private:
 	bool m_colored;
-	double m_originalLum;
 	PreferedColor m_prefColor;
 
 	// == METHODS ==
@@ -46,24 +43,24 @@ public:
 	void SetAsGrey(const RGB &t_color);
 	// Set current pixel as grey
 	void SetAsGrey();
-	// Scale luminance with some factor
-	bool ScaleLum(const double &t_factor);
-	// Set normalised luminance
-	bool SetNormalizedLum(const double &t_newLum);
-	// Restore original luminance
-	bool RestoreLum();
+	// Scale relative luminance with some factor
+	bool ScaleRelLum(const double &t_factor);
+	// Restore relative luminance value
+	void RestoreRelLum();
+	// Set normalised relative luminance
+	bool SetNormalizedRelLum(const double &t_newLum);
 	// Set prefered color for pixel
 	void SetPreferedColor(const RGB &t_prefColor);
 	// Check if pixel has prefered color
 	bool HasPreferedColor() const;
+	// Get prefered color
+	RGB GetPreferedColor();
 	// Set that pixel colorized (has color)
 	void SetColored();
 	// Set that pixel not colorized (has not color)
 	void SetUncolored();
 	// Check if pixel colorized
 	bool IsColored() const;
-	// Save current LAB luminance as original
-	void SaveOriginalLum();
 
 private:
 	// Transform pixel to grey color

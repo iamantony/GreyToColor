@@ -20,10 +20,15 @@
 #define PROCESSINGIMAGE_H
 
 #include <QFileDialog>
+
 #include "image.h"
 #include "../COMMON/PIXELS/imagepixels.h"
 #include "./PARAMS/IMAGES/imgsimilarityarea.h"
 
+// Class ProcessingImage
+// This class represents a processing image. It has uploded real image and array of special pixels. Those
+// pixels are formed on original image basis. They take from original image it's color information.
+// Also they store some pixels characteristics, which we use in colorization process.
 class ProcessingImage
 {
 	// == DATA ==
@@ -36,6 +41,7 @@ protected:
 	// == METHODS ==
 public:
 	ProcessingImage();
+	virtual ~ProcessingImage();
 
 	// Clear class info
 	virtual void Clear();
@@ -54,7 +60,7 @@ public:
 	// Get height of image
 	unsigned int GetImageHeight() const;
 	// Transform custom pixels from RGB to LAB
-	void TransformImgRGB2LAB();
+	virtual void TransformImgRGB2LAB();
 	// Transform custom pixels from LAB to RGB
 	void TransformImgLAB2GRB();
 	// Get pixel luminance (LAB)
@@ -69,14 +75,6 @@ public:
 					  const double &t_chA,
 					  const double &t_chB);
 
-	// Find among all pixels in image value of min luminance
-	double GetMinLABLum() const;
-	// Find among all pixels in image value of max luminance
-	double GetMaxLABLum() const;
-	// Find average image luminance
-	double GetAverageLABLum() const;
-	// Find most common image luminance
-	double GetCommonLABLum() const;
 	// Check if pixel with certain coords is greyscale
 	bool IsPixelGrey(const unsigned int &t_width, const unsigned int &t_height) const;
 	// Add image similiarity area

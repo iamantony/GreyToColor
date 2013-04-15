@@ -43,25 +43,25 @@ SOURCES += main.cpp\
 	application.cpp \
 	SERVICE/FILES/idbfilesservice.cpp \
 	PARAMS/IMAGES/imgpassport.cpp \
-    SERVICE/IMAGES/imghistogram.cpp \
-    SERVICE/IMAGES/imgpassportcreator.cpp \
-    SERVICE/IMAGES/imgsubsampler.cpp \
-    idbhandler.cpp \
-    DATABASE/imgdatabase.cpp \
-    SERVICE/IMAGES/imgpassportcomparer.cpp \
-    SERVICE/IMAGES/imgfilter.cpp \
-    SERVICE/KERNELS/kernelcreator.cpp \
-    colormethodshandler.cpp \
-    METHODS/colorizator.cpp \
-    METHODS/walshsimplecolorizator.cpp \
-    METHODS/walshneighborcolorizator.cpp \
-    METHODS/wnnorandcolorizator.cpp \
-    METHODS/wnonerandcolorizator.cpp \
-    UI/DIALOGS/preferencesdialog.cpp \
-    UI/DIALOGS/histogramwindow.cpp \
-    SERVICE/IMAGES/imglumscaler.cpp \
-    METHODS/wslookuptablecolorizator.cpp \
-    METHODS/wsentropycolorizator.cpp
+	SERVICE/IMAGES/imghistogram.cpp \
+	SERVICE/IMAGES/imgpassportcreator.cpp \
+	SERVICE/IMAGES/imgsubsampler.cpp \
+	idbhandler.cpp \
+	DATABASE/imgdatabase.cpp \
+	SERVICE/IMAGES/imgpassportcomparer.cpp \
+	SERVICE/IMAGES/imgfilter.cpp \
+	SERVICE/KERNELS/kernelcreator.cpp \
+	colormethodshandler.cpp \
+	METHODS/colorizator.cpp \
+	METHODS/walshsimplecolorizator.cpp \
+	METHODS/walshneighborcolorizator.cpp \
+	METHODS/wnnorandcolorizator.cpp \
+	METHODS/wnonerandcolorizator.cpp \
+	UI/DIALOGS/preferencesdialog.cpp \
+	UI/DIALOGS/histogramwindow.cpp \
+	SERVICE/IMAGES/imglumscaler.cpp \
+	METHODS/wslookuptablecolorizator.cpp \
+	METHODS/wsentropycolorizator.cpp
 
 HEADERS  += \
 	mainwindow.h \
@@ -98,33 +98,36 @@ HEADERS  += \
 	application.h \
 	SERVICE/FILES/idbfilesservice.h \
 	PARAMS/IMAGES/imgpassport.h \
-    DEFINES/imgservice.h \
-    SERVICE/IMAGES/imghistogram.h \
-    SERVICE/IMAGES/imgpassportcreator.h \
-    SERVICE/IMAGES/imgsubsampler.h \
-    idbhandler.h \
-    DATABASE/imgdatabase.h \
-    SERVICE/IMAGES/imgpassportcomparer.h \
-    DEFINES/calcsko.h \
-    SERVICE/IMAGES/imgfilter.h \
-    SERVICE/KERNELS/kernelcreator.h \
-    colormethodshandler.h \
-    DEFINES/colorization.h \
-    METHODS/colorizator.h \
-    METHODS/walshsimplecolorizator.h \
-    METHODS/walshneighborcolorizator.h \
-    METHODS/wnnorandcolorizator.h \
-    METHODS/wnonerandcolorizator.h \
-    UI/DIALOGS/preferencesdialog.h \
-    UI/DIALOGS/histogramwindow.h \
-    SERVICE/IMAGES/imglumscaler.h \
-    METHODS/wslookuptablecolorizator.h \
-    METHODS/wsentropycolorizator.h
+	DEFINES/imgservice.h \
+	SERVICE/IMAGES/imghistogram.h \
+	SERVICE/IMAGES/imgpassportcreator.h \
+	SERVICE/IMAGES/imgsubsampler.h \
+	idbhandler.h \
+	DATABASE/imgdatabase.h \
+	SERVICE/IMAGES/imgpassportcomparer.h \
+	DEFINES/calcsko.h \
+	SERVICE/IMAGES/imgfilter.h \
+	SERVICE/KERNELS/kernelcreator.h \
+	colormethodshandler.h \
+	DEFINES/colorization.h \
+	METHODS/colorizator.h \
+	METHODS/walshsimplecolorizator.h \
+	METHODS/walshneighborcolorizator.h \
+	METHODS/wnnorandcolorizator.h \
+	METHODS/wnonerandcolorizator.h \
+	UI/DIALOGS/preferencesdialog.h \
+	UI/DIALOGS/histogramwindow.h \
+	SERVICE/IMAGES/imglumscaler.h \
+	METHODS/wslookuptablecolorizator.h \
+	METHODS/wsentropycolorizator.h
 
 FORMS    += \
 	mainwindow.ui \
-    UI/DIALOGS/preferencesdialog.ui \
-    UI/DIALOGS/histogramwindow.ui
+	UI/DIALOGS/preferencesdialog.ui \
+	UI/DIALOGS/histogramwindow.ui
 
 RESOURCES += \
 	resources_ui.qrc
+
+OTHER_FILES += \
+	DOCS/TODO.txt

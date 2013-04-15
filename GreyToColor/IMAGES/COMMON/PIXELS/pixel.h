@@ -21,6 +21,7 @@
 
 #include <QColor>
 #include <QDebug>
+
 #include "rgb.h"
 #include "lab.h"
 #include "COLOR_SPACE/rgblab.h"

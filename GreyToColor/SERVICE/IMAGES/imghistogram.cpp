@@ -343,17 +343,7 @@ QList<double> ImgHistogram::LABLumHistogram(TargetImage *t_img)
 		for( unsigned int height = 0; height < imgHgt; height++ )
 		{
 			double luminance = t_img->PixelChLum(width, height);
-			int stepNum = floor( luminance / LAB_LUM_HIST_DIVIDER );
-			if ( stepNum < 0 )
-			{
-				stepNum = 0;
-			}
-			else if ( maxLumStep <= stepNum )
-			{
-				qDebug() << width << height << luminance << stepNum;
-				stepNum = maxLumStep - 1;
-			}
-
+			int stepNum = (int)floor( luminance / LAB_LUM_HIST_DIVIDER );
 			lumHist[stepNum]++;
 		}
 	}
@@ -377,13 +367,60 @@ QList<double> ImgHistogram::FormZeroLABLumHist()
 	return zeroLABLumHist;
 }
 
-// Histogram for image mask (LAB luminance)
+// Get images histogram of relative LAB luminance
+// @input:
+// - TargetImage - unnull Target image
+// @output:
+// - empty QList<double> - failed to form histogram
+// - QList<double> - images relative luminance histogram
+QList<double> ImgHistogram::RelLumHistogram(TargetImage *t_img)
+{
+	if ( false == t_img->HasImage() )
+	{
+		qDebug() << "RelLumHistogram(): Error - invalid arguments";
+		QList<double> empty;
+		return empty;
+	}
+
+	QList<double> lumHist = FormZeroRelLumHist();
+	const unsigned int imgWdt = t_img->GetImageWidth();
+	const unsigned int imgHgt = t_img->GetImageHeight();
+	for ( unsigned int width = 0; width < imgWdt; width++ )
+	{
+		for( unsigned int height = 0; height < imgHgt; height++ )
+		{
+			double relLum = t_img->GetPixelsRelLum(width, height);
+			int stepNum = (int)floor( relLum / RELATIVE_DIVIDER );
+			lumHist[stepNum]++;
+		}
+	}
+
+	return lumHist;
+}
+
+// Get zero histogram for relative luminance
+// @input:
+// @output:
+// - QList<double> - zero LAB histograms
+QList<double> ImgHistogram::FormZeroRelLumHist()
+{
+	QList<double> zeroRelLumHist;
+	unsigned int numOfSteps = RELATIVE_MAX / RELATIVE_DIVIDER;
+	for ( unsigned int step = 0; step < numOfSteps; step++ )
+	{
+		zeroRelLumHist.append(0);
+	}
+
+	return zeroRelLumHist;
+}
+
+// Histogram for image mask (relative LAB luminance)
 // @input:
 // - QList<double> - unempty image mask with LAB luminance values
 // @output:
 // - QList<double> - mask histogram
 // - empty QList<double> - failed to form mask histogram
-QList<double> ImgHistogram::MaskLumHistogram(const QList<double> &t_mask)
+QList<double> ImgHistogram::MaskRelLumHistogram(const QList<double> &t_mask)
 {
 	if ( true == t_mask.isEmpty() )
 	{
@@ -392,12 +429,11 @@ QList<double> ImgHistogram::MaskLumHistogram(const QList<double> &t_mask)
 		return empty;
 	}
 
-	QList<double> lumHist = FormZeroLABLumHist();
+	QList<double> lumHist = FormZeroRelLumHist();
 	const int maskSize = t_mask.size();
 	for ( int value = 0; value < maskSize; value++ )
 	{
-		double luminance = t_mask.at(value);
-		int stepNum = floor( luminance / LAB_LUM_HIST_DIVIDER );
+		int stepNum = (int)floor( t_mask.at(value) / RELATIVE_DIVIDER );
 		lumHist[stepNum]++;
 	}
 

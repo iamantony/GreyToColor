@@ -25,7 +25,7 @@ ImgHandler::ImgHandler(QObject *parent) :
 
 ImgHandler::~ImgHandler()
 {
-	Clear();
+
 }
 
 // Clear all data
@@ -440,7 +440,7 @@ void ImgHandler::SlotLABLumHist(const ImageKind::Type &t_type)
 	emit SignalGetLABLumHist(lumHist);
 }
 
-// Slot for scaling/normalising Target image LAB Luminance
+// Slot for scaling/normalising Target image relative Luminance
 // @input:
 // -LumEqualization::Type - exist type of luminance equalization
 // @output:
@@ -458,8 +458,6 @@ void ImgHandler::SlotTargImgScale(const LumEqualization::Type &t_type)
 	bool lumScaled = scaler.ScaleTargetImgLum(t_type, &m_target, &m_source);
 	if ( false == lumScaled )
 	{
-		m_target.RestoreLABLum();
-
 		emit SignalProcError(tr("Can't scale Target Image luminance"));
 
 		qDebug() << "SlotTargImgScale(): Error - can't scale Target image luminance";
@@ -467,18 +465,17 @@ void ImgHandler::SlotTargImgScale(const LumEqualization::Type &t_type)
 	}
 
 	ImgHistogram histogramer;
-	QList<double> lumHist = histogramer.LABLumHistogram(&m_target);
+	QList<double> lumHist = histogramer.RelLumHistogram(&m_target);
 	if ( true == lumHist.isEmpty() )
 	{
-		m_target.RestoreLABLum();
-
+		m_target.RestoreLABRelLum();
 		emit SignalProcError(tr("Can't form LAB Luminance Histogram"));
 
 		qDebug() << "SlotTargImgScale(): Error - failed to form LAB Luminance Histogram";
 		return;
 	}
 
-	emit SignalGetLABLumHist(lumHist);
+	emit SignalGetRelLumHist(lumHist);
 
-	m_target.RestoreLABLum();
+	m_target.RestoreLABRelLum();
 }

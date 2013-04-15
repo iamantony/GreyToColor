@@ -134,31 +134,26 @@ bool WSEntropyColorizator::ColorizeImage()
 		numOfAttempts = pixelsInTargetImg;
 	}
 
-	// Values of best found pixels characteristics
-	double bestDiffLum = DEFAULT_LUM;
-	double bestDiffEntropy = DEFAULT_ENTROPY;
-	double bestDiffSKO = DEFAULT_SKO;
+	// Define number of params to compare
+	const int numOfCompareParams = 3;
+
+	// Values of best found pixels characteristic
+	double bestParamsDiff = DEFAULT_DIFF;
 	unsigned int bestSourcePixWdt = 0;
 	unsigned int bestSourcePixHgt = 0;
 
 	// Targets pixel variables
-	double targPixLum = DEFAULT_LUM;
-	double targPixEntropy = DEFAULT_ENTROPY;
-	double targPixSKO = DEFAULT_SKO;
+	QList<double> targParams;
 
 	// Source pixel variables
 	unsigned int sourceRandWdt = 0;
 	unsigned int sourceRandHgt = 0;
-	double sourcePixLum = DEFAULT_LUM;
-	double sourcePixEntropy = DEFAULT_ENTROPY;
-	double sourcePixSKO = DEFAULT_SKO;
 	double sourceChA = 0;
 	double sourceChB = 0;
+	QList<double> sourceParams;
 
 	// Decision variables
-	double diffLum = DEFAULT_LUM;
-	double diffEntropy = DEFAULT_ENTROPY;
-	double diffSKO = DEFAULT_SKO;
+	double diffParams = DEFAULT_DIFF;
 
 	qDebug() << "Start colorization!";
 	QElapsedTimer timer;
@@ -166,57 +161,41 @@ bool WSEntropyColorizator::ColorizeImage()
 
 	srand(time(NULL));
 
-	for ( unsigned int width = 0; width < targetWdt; width++ )
+	for ( unsigned int width = 0; width < targetWdt; ++width )
 	{
 //		qDebug() << "ColorizeImage(): row =" << width;
-		for ( unsigned int height = 0; height < targetHgt; height++ )
+		for ( unsigned int height = 0; height < targetHgt; ++height )
 		{
 			// Reset best params
-			bestDiffLum = DEFAULT_LUM;
-			bestDiffEntropy = DEFAULT_ENTROPY;
-			bestDiffSKO = DEFAULT_SKO;
+			bestParamsDiff = DEFAULT_DIFF;
 			bestSourcePixWdt = 0;
 			bestSourcePixHgt = 0;
+			targParams.clear();
 
 			// Get target pixel params
-			targPixLum = m_target->PixelChLum(width, height);
-			targPixEntropy = m_target->GetPixelsEntropy(width, height);
-			targPixSKO = m_target->GetPixelsSKO(width, height);
-			if ( (targPixLum <= NO_INFO) || (targPixEntropy <= ERROR) )
-			{
-				qDebug() << "ColorizeImage(): Warning - failed to colorize pixel" << width << height;
-				continue;
-			}
+			targParams << m_target->GetPixelsRelLum(width, height);
+			targParams << m_target->GetPixelsSKO(width, height);
+			targParams << m_target->GetPixelsEntropy(width, height);
 
 			// Try to find best similar source image pixel
-			for ( unsigned int pix = 0; pix < numOfAttempts; pix++ )
+			for ( unsigned int pix = 0; pix < numOfAttempts; ++pix )
 			{
+				sourceParams.clear();
 				sourceRandWdt = rand() % sourceWdt;
 				sourceRandHgt = rand() % sourceHgt;
 
-				sourcePixLum = m_source->PixelChLum(sourceRandWdt, sourceRandHgt);
-				sourcePixEntropy = m_source->GetPixelsEntropy(sourceRandWdt, sourceRandHgt);
-				sourcePixSKO = m_source->GetPixelsSKO(sourceRandWdt, sourceRandHgt);
+				sourceParams << m_source->GetPixelsRelLum(sourceRandWdt, sourceRandHgt);
+				sourceParams << m_source->GetPixelsSKO(sourceRandWdt, sourceRandHgt);
+				sourceParams << m_source->GetPixelsEntropy(sourceRandWdt, sourceRandHgt);
 
-				diffLum = fabs( targPixLum - sourcePixLum );
-				diffEntropy = abs( targPixEntropy - sourcePixEntropy );
-				diffSKO = fabs( targPixSKO - sourcePixSKO );
-
-				if ( ((diffLum < bestDiffLum) &&
-					  (diffSKO < bestDiffSKO) &&
-					  (diffEntropy < (bestDiffEntropy + ENTROPY_TRESHOLD)) ) ||
-
-					 ((diffLum < (bestDiffLum + LUM_TRESHOLD)) &&
-					  (diffSKO < bestDiffSKO) &&
-					  (diffEntropy < bestDiffEntropy)) ||
-
-					 ((diffLum < bestDiffLum) &&
-					  (diffSKO < (bestDiffSKO + SKO_TRESHOLD)) &&
-					  (diffEntropy < bestDiffEntropy)) )
+				for ( int i = 0; i < numOfCompareParams; ++i)
 				{
-					bestDiffLum = diffLum;
-					bestDiffEntropy = diffEntropy;
-					bestDiffSKO = diffSKO;
+					diffParams += fabs( targParams.at(i) - sourceParams.at(i) );
+				}
+
+				if ( diffParams < bestParamsDiff )
+				{
+					bestParamsDiff = diffParams;
 					bestSourcePixWdt = sourceRandWdt;
 					bestSourcePixHgt = sourceRandHgt;
 				}
@@ -254,6 +233,6 @@ bool WSEntropyColorizator::PostColorization()
 		return false;
 	}
 
-	m_target->RestoreLABLum();
+	m_target->RestoreLABRelLum();
 	return true;
 }

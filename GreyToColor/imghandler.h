@@ -72,6 +72,7 @@ signals:
 	void SignalGetGreyRGBHist(const QList<double> &t_hist);
 	void SignalGetRGBHist(const QList< QList<double> > &t_hist);
 	void SignalGetLABLumHist(const QList<double> &t_hist);
+	void SignalGetRelLumHist(const QList<double> &t_hist);
 
 public slots:
 	// This slot get signal to save result (colorized or not) image and send it copy signal to some (MainWindow) UI
@@ -90,7 +91,7 @@ public slots:
 	void SlotRGBHist(const ImageKind::Type &t_type);
 	// Slot to form LAB Histogram
 	void SlotLABLumHist(const ImageKind::Type &t_type);
-	// Slot for scaling/normalising Target image LAB Luminance
+	// Slot for scaling/normalising Target image relative Luminance
 	void SlotTargImgScale(const LumEqualization::Type &t_type);
 };
 

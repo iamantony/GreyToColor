@@ -19,7 +19,7 @@
 #ifndef CALCSKO_H
 #define CALCSKO_H
 
-#define DEFAULT_SKO 999999
-#define BEST_SKO 0
+#define DEFAULT_BAD_SKO 999999.0
+#define BEST_SKO 0.0
 
 #endif // CALCSKO_H

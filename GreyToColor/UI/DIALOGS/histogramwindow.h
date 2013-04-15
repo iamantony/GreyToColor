@@ -82,6 +82,8 @@ public slots:
 	void SlotRecieveRGBHist(const QList< QList<double> > &t_hist);
 	// Slot for recieving LAB Luminance histogram
 	void SlotRecieveLABLumHist(const QList<double> &t_hist);
+	// Slot for recieving relative Luminance histogram
+	void SlotRecieveRelLumHist(const QList<double> &t_hist);
 
 private slots:
 	void on_pbFormHist_clicked();

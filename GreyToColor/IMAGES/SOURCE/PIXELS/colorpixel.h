@@ -20,12 +20,18 @@
 #define COLORPIXEL_H
 
 #include <QDebug>
+
 #include "../../COMMON/PIXELS/pixel.h"
+#include "./DEFINES/pixels.h"
+#include "./DEFINES/global.h"
 
 class ColorPixel : public Pixel
 {
 	// == DATA ==
 private:
+	// In m_relativeLum we save relative LAB Luminance. It has range [0, 1]
+	double m_relativeLum;
+	// All other characteristics values also relative. They have range [0, 1]
 	double m_sko;
 	double m_entropy;
 
@@ -34,16 +40,22 @@ public:
 	ColorPixel();
 	~ColorPixel();
 
+	// Clear color pixel
+	void ClearColor();
+	// Calc relative value of LAB luminance
+	void CalcRelativeLum();
+	// Get relative LAB luminance value
+	double GetRelativeLum() const;
+	// Set relative LAB luminance value
+	bool SetRelativeLum(const double &t_lum);
 	// Set SKO for pixel of image
 	bool SetSKO(const double &t_sko);
 	// Set SKO for pixel of image
 	double GetSKO() const;
 	// Set entropy for pixel of image
-	void SetEntropy(const double &t_entropy);
+	bool SetEntropy(const double &t_entropy);
 	// Set entropy for pixel of image
 	double GetEntropy() const;
-	// Clear color pixel
-	void ClearColor();
 };
 
 #endif // COLORPIXEL_H

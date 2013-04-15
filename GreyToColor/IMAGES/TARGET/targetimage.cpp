@@ -20,16 +20,24 @@
 
 TargetImage::TargetImage()
 {
+	if ( NULL != m_imgPixels )
+	{
+		delete m_imgPixels;
+	}
+
 	m_imgPixels = new TargetImgPixels();
 }
 
 TargetImage::~TargetImage()
 {
-	Clear();
+	m_img.Clear();
+	m_similarAreas.clear();
 
 	if ( NULL != m_imgPixels )
 	{
-		delete m_imgPixels;
+		TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+		delete pixels;
+		m_imgPixels = NULL;
 	}
 }
 
@@ -39,7 +47,13 @@ TargetImage::~TargetImage()
 void TargetImage::Clear()
 {
 	m_img.Clear();
-	m_imgPixels->Clear();
+	m_similarAreas.clear();
+
+	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	if ( NULL != pixels )
+	{
+		pixels->TargetImgPixels::Clear();
+	}
 }
 
 // Construct custom pixels of loaded image
@@ -55,114 +69,67 @@ void TargetImage::ConstructImgPixels()
 	}
 
 	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	if ( NULL == pixels )
+	{
+		pixels = new TargetImgPixels();
+	}
+
 	pixels->Clear();
 	pixels->FormImgPixels(currentImg);
+
 	TransformImgRGB2LAB();
-	SetOrigLum();
 }
 
-// Save current LAB luminance of pixels as original luminance
-// @input:
-// @output:
-void TargetImage::SetOrigLum()
-{
-	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
-	pixels->SetOriginalLuminance();
-}
-
-// Calc for each pixel in image it's SKO
-// @input:
-// @output:
-void TargetImage::CalcPixelsSKO()
-{
-	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
-	pixels->CalcPixelsSKO();
-}
-
-// Get SKO of pixel with certain coords
-// @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
-// @output:
-// - ERROR - can't find such pixel
-// - double - pixels SKO
-double TargetImage::GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const
-{
-	const TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
-	return pixels->GetPixelsSKO(t_width, t_height);
-}
-
-// Calc for each pixel in image it's Entropy
-// @input:
-// @output:
-void TargetImage::CalcPixelsEntropy()
-{
-	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
-	pixels->CalcPixelsEntropy();
-}
-
-// Get Entropy of pixel with certain coords
-// @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
-// @output:
-// - double - pixels Entropy
-double TargetImage::GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const
-{
-	const TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
-	return pixels->GetPixelsEntropy(t_width, t_height);
-}
-
-// Scale luminance of all pixels in image with certain scale factor
+// Scale relative luminance of all pixels in image with certain scale factor
 // @input:
 // - double - positive unnull scale factor for pixel LAB luminance
 // @output:
-// - true - luminance of all pixels scaled
-// - false - can't scale luminance
-bool TargetImage::ScaleLABLum(const double &t_scaleFactor)
+// - true - relative luminance of all pixels scaled
+// - false - can't scale relative luminance
+bool TargetImage::ScaleLABRelLum(const double &t_scaleFactor)
 {
 	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
-	return pixels->ScaleLum(t_scaleFactor);
+	return pixels->ScaleRelLum(t_scaleFactor);
 }
 
-// Normalise luminance of all pixels in image by min/max borders
+// Restore relative luminance of all pixels in image
 // @input:
-// - double - positive value of new min LAB luminance
-// - double - positive value of new max LAB luminance
 // @output:
-// - true - luminance of all pixels normalised
-// - false - can't normalise luminance
-bool TargetImage::NormaliseLABLumByBorders(const double &t_newMinLABLum, const double &t_newMaxLABLum)
+void TargetImage::RestoreLABRelLum()
 {
 	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
-	return pixels->NormaliseLumByBorders(t_newMinLABLum, t_newMaxLABLum);
+	pixels->RestoreRelLum();
 }
 
-// Normalise luminance of all pixels in image by center
+// Normalise relative luminance of all pixels in image by min/max borders
 // @input:
-// - double - positive value of new min LAB luminance
-// - double - positive value of new center (common) LAB luminance
-// - double - positive value of new max LAB luminance
+// - double - positive value of new min LAB relative luminance
+// - double - positive value of new max LAB relative luminance
 // @output:
-// - true - luminance of all pixels normalised
-// - false - can't normalise luminance
-bool TargetImage::NormaliseLABLumByCenter(const double &t_newMinLABLum,
-										 const double &t_newCenterLABLum,
-										 const double &t_newMaxLABLum)
+// - true - relative luminance of all pixels normalised
+// - false - can't normalise relative luminance
+bool TargetImage::NormaliseLABRelLumByBorders(const double &t_newMinLABRelLum, const double &t_newMaxLABRelLum)
 {
 	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
-	return pixels->NormaliseLumByCenter(t_newMinLABLum,
-										t_newCenterLABLum,
-										t_newMaxLABLum);
+	return pixels->NormaliseRelLumByBorders(t_newMinLABRelLum, t_newMaxLABRelLum);
 }
 
-// Restore luminance of all pixels in image
+// Normalise relative luminance of all pixels in image by center
 // @input:
+// - double - positive value of new min LAB relative luminance
+// - double - positive value of new center (common) LAB relative luminance
+// - double - positive value of new max LAB relative luminance
 // @output:
-void TargetImage::RestoreLABLum()
+// - true - relative luminance of all pixels normalised
+// - false - can't normalise relative luminance
+bool TargetImage::NormaliseLABRelLumByCenter(const double &t_newMinLABRelLum,
+											 const double &t_newCenterLABRelLum,
+											 const double &t_newMaxLABRelLum)
 {
 	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
-	pixels->RestoreLum();
+	return pixels->NormaliseRelLumByCenter(t_newMinLABRelLum,
+										   t_newCenterLABRelLum,
+										   t_newMaxLABRelLum);
 }
 
 // Set prefered color for certain pixel
@@ -212,8 +179,8 @@ bool TargetImage::IsPixColoured(const unsigned int &t_width, const unsigned int 
 	return pixels->IsPixColoured(t_width, t_height);
 }
 
-// Get result image. It could be colorized (if we perform colorization) or
-// greyscale as original target (if we have not performed colorizztion yet).
+// Get result image. It could be colorized (if we had performed colorization) or
+// greyscale as original target (if we had not performed colorization yet).
 // @input:
 // @output:
 // - null Image - can't return colorized image
@@ -227,10 +194,7 @@ Image TargetImage::GetResultImage()
 		return empty;
 	}
 
-	// Go reverse:
-	// - bring back original value of luminance for all image pixels
-	RestoreLABLum();
-	// - get from LAB pixels (myabe, their value was changed) new values for RGB pixels
+	// Transform LAB pixels to new RGB pixels (maybe we have changed LAB pixel so we need to update RGB pixel)
 	TransformImgLAB2GRB();
 
 	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;

@@ -41,7 +41,7 @@ QString ImgPassportComparer::FindMostSimilar(const ImgPassport &t_reference,
 
 	CalculatorSKO calc;
 	QString nameOfSimilar;
-	double minSKO = DEFAULT_SKO;
+	double minSKO = DEFAULT_BAD_SKO;
 	const QList<double> refPass = t_reference.GetPassportAsList();
 
 	QMap<QString, ImgPassport>::const_iterator var = t_variants.begin();

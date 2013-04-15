@@ -92,17 +92,17 @@ bool ImgLumScaler::RestoreTargImgLum(TargetImage *t_target)
 		return false;
 	}
 
-	t_target->RestoreLABLum();
+	t_target->RestoreLABRelLum();
 	return true;
 }
 
-// Scale Target Image pixels luminances by Max luminance value of Source Image
+// Scale Target Image pixels relative luminances by Max relative luminance value of Source Image
 // @input:
 // - TargetImage - unnull, unempty Target Image
 // - SourceImage - unnull, unempty Source Image
 // @output:
-// - true - LAB Luminance of target image scaled
-// - false - can't scale LAB Luminance of Target Image
+// - true - relative luminance of target image scaled
+// - false - can't scale relative luminance of Target Image
 bool ImgLumScaler::ScaleTargetImgLumByMax(TargetImage *t_target, SourceImage *t_source)
 {
 	if ( (NULL == t_target) ||
@@ -114,25 +114,25 @@ bool ImgLumScaler::ScaleTargetImgLumByMax(TargetImage *t_target, SourceImage *t_
 		return false;
 	}
 
-	const double targMaxLum = t_target->GetMaxLABLum();
-	const double sourceMaxLum = t_source->GetMaxLABLum();
-	const double scaleFactor = sourceMaxLum / targMaxLum;
-	bool lumScaled = t_target->ScaleLABLum(scaleFactor);
+	const double targMaxRelLum = t_target->GetMaxRelLum();
+	const double sourceMaxRelLum = t_source->GetMaxRelLum();
+	const double scaleFactor = sourceMaxRelLum / targMaxRelLum;
+	bool lumScaled = t_target->ScaleLABRelLum(scaleFactor);
 	if ( false == lumScaled )
 	{
-		qDebug() << "ScaleTargetImgLumByMax(): Error - can't scale luminance of Target image";
+		qDebug() << "ScaleTargetImgLumByMax(): Error - can't scale relative luminance of Target image";
 		return false;
 	}
 
 	return true;
 }
 
-// Scale Target Image pixels luminances by Average luminance value of Source Image
+// Scale Target Image pixels relative luminances by Average relative luminance value of Source Image
 // - TargetImage - unnull, unempty Target Image
 // - SourceImage - unnull, unempty Source Image
 // @output:
-// - true - LAB Luminance of target image scaled
-// - false - can't scale LAB Luminance of Target Image
+// - true - relative luminance of target image scaled
+// - false - can't scale relative luminance of Target Image
 bool ImgLumScaler::ScaleTargetImgLumByAverage(TargetImage *t_target, SourceImage *t_source)
 {
 	if ( (NULL == t_target) ||
@@ -144,25 +144,25 @@ bool ImgLumScaler::ScaleTargetImgLumByAverage(TargetImage *t_target, SourceImage
 		return false;
 	}
 
-	const double targAverLum = t_target->GetAverageLABLum();
-	const double sourceAverLum = t_source->GetAverageLABLum();
+	const double targAverLum = t_target->GetAverageRelLum();
+	const double sourceAverLum = t_source->GetAverageRelLum();
 	const double scaleFactor = sourceAverLum / targAverLum;
-	bool lumScaled = t_target->ScaleLABLum(scaleFactor);
+	bool lumScaled = t_target->ScaleLABRelLum(scaleFactor);
 	if ( false == lumScaled )
 	{
-		qDebug() << "ScaleTargetImgLumByAverage(): Error - can't scale luminance of Target image";
+		qDebug() << "ScaleTargetImgLumByAverage(): Error - can't scale relative luminance of Target image";
 		return false;
 	}
 
 	return true;
 }
 
-// Normalize Target Image pixels luminances using min/max luminances of Source Image
+// Normalize Target Image pixels relative luminances using min/max relative luminances of Source Image
 // - TargetImage - unnull, unempty Target Image
 // - SourceImage - unnull, unempty Source Image
 // @output:
-// - true - LAB Luminance of target image normalised
-// - false - can't normalise LAB Luminance of Target Image
+// - true - relative luminance of target image normalized
+// - false - can't normalize relative luminance of Target Image
 bool ImgLumScaler::NormalizeTargetImgByBorder(TargetImage *t_target, SourceImage *t_source)
 {
 	if ( (NULL == t_target) ||
@@ -174,44 +174,45 @@ bool ImgLumScaler::NormalizeTargetImgByBorder(TargetImage *t_target, SourceImage
 		return false;
 	}
 
-	const double sourceMinLum = t_source->GetMinLABLum();
-	const double sourceMaxLum = t_source->GetMaxLABLum();
-	bool lumNormalised = t_target->NormaliseLABLumByBorders(sourceMinLum, sourceMaxLum);
+	const double sourceMinLum = t_source->GetMinRelLum();
+	const double sourceMaxLum = t_source->GetMaxRelLum();
+	bool lumNormalised = t_target->NormaliseLABRelLumByBorders(sourceMinLum, sourceMaxLum);
 	if ( false == lumNormalised )
 	{
-		qDebug() << "NormalizeTargetImgByBorder(): Error - can't normalise luminance of Target image";
+		qDebug() << "NormalizeTargetImgByBorder(): Error - can't normalize relative luminance of Target image";
 		return false;
 	}
 
 	return true;
 }
 
-// Normalize Target Image pixels luminance using min, max and central luminances of Source Imge
+// Normalize Target Image pixels reltive luminance using min, max and central relative luminances of Source Imge
 // - TargetImage - unnull, unempty Target Image
 // - SourceImage - unnull, unempty Source Image
 // @output:
-// - true - LAB Luminance of target image normalised
-// - false - can't normalise LAB Luminance of Target Image
+// - true - relative luminance of target image normalized
+// - false - can't normalize relative luminance of Target Image
 bool ImgLumScaler::NormalizeTargetImgByCenter(TargetImage *t_target, SourceImage *t_source)
 {
 	if ( (NULL == t_target) ||
 		 (NULL == t_source) ||
 		 (false == t_target->HasImage()) ||
-		 (false == t_source->HasImage()))
+		 (false == t_source->HasImage()) )
 	{
 		qDebug() << "NormalizeTargetImgByCenter(): Error - invalid arguments";
 		return false;
 	}
 
-	const double sourceMinLum = t_source->GetMinLABLum();
-	const double sourceMaxLum = t_source->GetMaxLABLum();
-	const double sourceCommonLum = t_source->GetCommonLABLum();
-	bool lumNormalised = t_target->NormaliseLABLumByCenter(sourceMinLum,
-														   sourceCommonLum,
-														   sourceMaxLum);
+	const double sourceMinLum = t_source->GetMinRelLum();
+	const double sourceMaxLum = t_source->GetMaxRelLum();
+	const double sourceCommonLum = t_source->GetMostCommonRelLum();
+	bool lumNormalised = t_target->NormaliseLABRelLumByCenter(sourceMinLum,
+															  sourceCommonLum,
+															  sourceMaxLum);
+
 	if ( false == lumNormalised )
 	{
-		qDebug() << "NormalizeTargetImgByCenter(): Error - can't normalise luminance of Target image";
+		qDebug() << "NormalizeTargetImgByCenter(): Error - can't normalize relative luminance of Target image";
 		return false;
 	}
 

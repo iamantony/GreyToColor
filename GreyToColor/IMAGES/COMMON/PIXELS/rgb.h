@@ -35,6 +35,7 @@ public:
 	RGB(const int &t_red = 0,
 		const int &t_green = 0,
 		const int &t_blue = 0);
+
 	~RGB();
 
 	// Set RGB color

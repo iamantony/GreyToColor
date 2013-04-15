@@ -604,10 +604,10 @@ void MainWindow::on_actionFormHist_triggered()
 			this,
 			SLOT(SlotNeedTargLumHist(LumEqualization::Type)));
 
-//	connect(this,
-//			SIGNAL(SignalSendLABLumHist(QList<double>)),
-//			histWind,
-//			SLOT(SlotRecieveLABLumHist(QList<double>)));
+	connect(this,
+			SIGNAL(SignalSendRelLumHist(QList<double>)),
+			histWind,
+			SLOT(SlotRecieveRelLumHist(QList<double>)));
 
 	histWind->show();
 }
@@ -673,4 +673,13 @@ void MainWindow::SlotGetLABLumHist(const QList<double> &t_hist)
 void MainWindow::SlotNeedTargLumHist(const LumEqualization::Type &t_lumType)
 {
 	emit SignalBuildTargLumHist(t_lumType);
+}
+
+// Slot to get relative Luminance histogram
+// @input:
+// - QList<double> - unempty histogram
+// @output:
+void MainWindow::SlotGetRelLumHist(const QList<double> &t_hist)
+{
+	emit SignalSendRelLumHist(t_hist);
 }

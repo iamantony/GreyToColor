@@ -17,6 +17,7 @@
  */
 
 #include "sourceimgpixels.h"
+#include "./SERVICE/IMAGES/imghistogram.h"
 
 SourceImgPixels::SourceImgPixels()
 {
@@ -33,10 +34,11 @@ SourceImgPixels::~SourceImgPixels()
 // @output:
 void SourceImgPixels::Clear()
 {
-	for ( int width = 0; width < m_pixels.size(); width++ )
+	const int pixWidth = m_pixels.size();
+	for ( int width = pixWidth - 1; width >= 0; --width )
 	{
-		int pixInColumn = m_pixels[width].size();
-		for ( int height = 0; height < pixInColumn; height++ )
+		int pixHeight = m_pixels.at(width).size();
+		for ( int height = pixHeight - 1; height >= 0; --height )
 		{
 			ColorPixel *pix = (ColorPixel *)m_pixels[width][height];
 			if ( NULL != pix )
@@ -94,6 +96,55 @@ bool SourceImgPixels::FormImgPixels(const QImage &t_img)
 	return true;
 }
 
+// Transform all image pixels from RGB color space to LAB
+// @input:
+// @output:
+void SourceImgPixels::TransAllPixRGB2LAB()
+{
+	for ( unsigned int width = 0; width < m_width; width++ )
+	{
+		for ( unsigned int height = 0; height < m_height; height++ )
+		{
+			TransformPixRGB2LAB(width, height);
+			CalcPixRelativeLum(width, height);
+		}
+	}
+}
+
+// Calc relative LAB luminance
+// @input:
+// @output:
+void SourceImgPixels::CalcPixRelativeLum(const unsigned int &t_width, const unsigned int &t_height)
+{
+	if ( false == IsPixelExist(t_width, t_height) )
+	{
+		qDebug() << "CalcPixRelativeLum(): Error - invalid arguments";
+		return;
+	}
+
+	ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	pixel->CalcRelativeLum();
+}
+
+// Get pixel relative luminance
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+// - double in range [0, 1] - pixels relative luminance
+// - double < 0 - can't find such pixel
+double SourceImgPixels::GetPixelsRelativeLum(const unsigned int &t_width, const unsigned int &t_height) const
+{
+	if ( false == IsPixelExist(t_width, t_height) )
+	{
+		qDebug() << "GetPixelsRelativeLum(): Error - invalid arguments";
+		return ERROR;
+	}
+
+	const ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	return pixel->GetRelativeLum();
+}
+
 // Calc for each pixel in image it's SKO
 // @input:
 // @output:
@@ -121,25 +172,25 @@ void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int
 		return;
 	}
 
-	QList<double> lumInMask = GetPixNeighborsLum(t_width, t_height);
+	QList<double> lumInMask = GetPixNeighborsRelLum(t_width, t_height);
 	if ( true == lumInMask.isEmpty() )
 	{
-		qDebug() << "CalcPixSKO(): Error - no pixels - no SKO";
+		qDebug() << "CalcPixSKO(): Error - no pixels in mask";
 		return;
 	}
 
-	double pixelLum = m_pixels[t_width][t_height]->GetChL();
+	ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	double pixelLum = pixel->GetRelativeLum();
 
 	CalculatorSKO calc;
 	double pixelSKO = calc.PixelMaskSKO(pixelLum, lumInMask);
 	if ( pixelSKO < 0 )
 	{
-		qDebug() << "CalcPixSKO(): Error - can't calc pixel SKO" << t_width << t_height;
+		qDebug() << "CalcPixSKO(): Error - can't calc SKO for pixel" << t_width << t_height;
 		return;
 	}
 
-	ColorPixel *centralPixel = (ColorPixel *)m_pixels[t_width][t_height];
-	centralPixel->SetSKO(pixelSKO);
+	pixel->SetSKO(pixelSKO);
 }
 
 // Get SKO of pixel with certain coords
@@ -188,18 +239,19 @@ void SourceImgPixels::CalcPixsEntropy(const unsigned int &t_width, const unsigne
 		return;
 	}
 
-	QList<double> lumInMask = GetPixNeighborsLum(t_width, t_height);
+	QList<double> lumInMask = GetPixNeighborsRelLum(t_width, t_height);
 	if ( true == lumInMask.isEmpty() )
 	{
 		qDebug() << "CalcPixsEntropy(): Error - no pixels - no SKO";
 		return;
 	}
 
-	double pixelLum = m_pixels[t_width][t_height]->GetChL();
+	ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	double pixelLum = pixel->GetRelativeLum();
 	lumInMask.append(pixelLum);
 
 	ImgHistogram histogramer;
-	QList<double> maskHist = histogramer.MaskLumHistogram(lumInMask);
+	QList<double> maskHist = histogramer.MaskRelLumHistogram(lumInMask);
 
 	double pixelEntropy = 0;
 	const int maskSize = lumInMask.size();
@@ -239,6 +291,204 @@ double SourceImgPixels::GetPixelsEntropy(const unsigned int &t_width, const unsi
 	return pixel->GetEntropy();
 }
 
+// Find among all pixels in image value of max relative luminance
+// @input:
+// @output:
+// - double - positive found max relative luminance of images pixels
+// - ERROR - can't find max relative luminance
+double SourceImgPixels::FindMaxRelLum() const
+{
+	if ( false == HasPixels() )
+	{
+		qDebug() << "FindMaxLum(): Error - no pixels";
+		return ERROR;
+	}
+
+	double maxLum = RELATIVE_MIN;
+	for ( unsigned int width = 0; width < m_width; width++ )
+	{
+		for ( unsigned int height = 0; height < m_height; height++ )
+		{
+			ColorPixel *pixel = (ColorPixel *)m_pixels[width][height];
+			double pixelLum = pixel->GetRelativeLum();
+			if ( maxLum < pixelLum )
+			{
+				maxLum = pixelLum;
+			}
+		}
+	}
+
+	return maxLum;
+}
+
+// Find among all pixels in image value of min relative luminance
+// @input:
+// @output:
+// - double - positive found min relative luminance of images pixels
+// - ERROR - can't find min relative luminance
+double SourceImgPixels::FindMinRelLum() const
+{
+	if ( false == HasPixels() )
+	{
+		qDebug() << "FindMinLum(): Error - no pixels";
+		return ERROR;
+	}
+
+	double minLum = DEFAULT_MIN_LAB_LUM;
+	for ( unsigned int width = 0; width < m_width; width++ )
+	{
+		for ( unsigned int height = 0; height < m_height; height++ )
+		{
+			ColorPixel *pixel = (ColorPixel *)m_pixels[width][height];
+			double pixelLum = pixel->GetRelativeLum();
+			if ( pixelLum < minLum )
+			{
+				minLum = pixelLum;
+			}
+		}
+	}
+
+	return minLum;
+}
+
+// Find average image relative luminance
+// @input:
+// @output:
+// - double - positive found average relative luminance of images pixels
+// - ERROR - can't find average relative luminance
+double SourceImgPixels::FindAverageRelLum() const
+{
+	if ( false == HasPixels() )
+	{
+		qDebug() << "FindAverageLum(): Error - no pixels";
+		return ERROR;
+	}
+
+	double averageLum = DEFAULT_MIN_LAB_LUM;
+	for ( unsigned int width = 0; width < m_width; width++ )
+	{
+		for ( unsigned int height = 0; height < m_height; height++ )
+		{
+			ColorPixel *pixel = (ColorPixel *)m_pixels[width][height];
+			averageLum += pixel->GetRelativeLum();
+		}
+	}
+
+	averageLum /= m_width * m_height;
+
+	return averageLum;
+}
+
+// Find most common relative luminance value
+// @input:
+// @output:
+// - double - positive found most common relative luminance of images pixels
+// - ERROR - can't find most common relative luminance
+double SourceImgPixels::FindMostCommonRelLum() const
+{
+	if ( false == HasPixels() )
+	{
+		qDebug() << "FindMostCommonLum(): Error - no pixels";
+		return ERROR;
+	}
+
+	// Create zero mass for statistic
+	const int numberOfLevels = RELATIVE_MAX / LAB_LUM_HIST_DIVIDER;
+	QList<int> lumStatistic;
+	for ( int lumLvl = 0; lumLvl < numberOfLevels; lumLvl++ )
+	{
+		lumStatistic.append(0);
+	}
+
+	// Form statistic
+	for ( unsigned int width = 0; width < m_width; width++ )
+	{
+		for ( unsigned int height = 0; height < m_height; height++ )
+		{
+			ColorPixel *pixel = (ColorPixel *)m_pixels[width][height];
+			double pixLum = pixel->GetRelativeLum();
+			double lumLvl = pixLum / LAB_LUM_HIST_DIVIDER;
+			int lvlNum = (int)floor(lumLvl);
+
+			lumStatistic[lvlNum]++;
+		}
+	}
+
+	// Find number of most popular luminance level
+	int mostCommonLvl = 0;
+	int maxNumInLvl = 0;
+	for ( int lvl = 0; lvl < numberOfLevels; lvl++ )
+	{
+		if ( maxNumInLvl < lumStatistic.at(lvl) )
+		{
+			maxNumInLvl = lumStatistic.at(lvl);
+			mostCommonLvl = lvl;
+		}
+	}
+
+	// Transform number of luminance level to relative LAB luminance value
+	double mostCommonLum = mostCommonLvl * LAB_LUM_HIST_DIVIDER;
+
+	return mostCommonLum;
+}
+
+// Get list of relative luminances of neighbor pixels (to calc SKO, for example)
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+// - unempy QList<double> - luminances of neighbor pixels
+// - empty QList<double> - don't have pixels
+QList<double> SourceImgPixels::GetPixNeighborsRelLum(const unsigned int &t_width, const unsigned int &t_height) const
+{
+	QList<double> luminances;
+
+	if ( false == IsPixelExist(t_width, t_height) )
+	{
+		qDebug() << "GetPixNeighborsLum(): Error - invalid arguments";
+		return luminances;
+	}
+
+	// This is length of side of a rect, which is form a mask. Central pixel in mask is pixel with input coords.
+	// Other pixels are neighbors of central pixel.
+	int maskRectSide = MASK_RECT_SIDE_LENGTH;
+	if ( maskRectSide < 0 )
+	{
+		maskRectSide *= (-1);
+	}
+
+	// In current version we use mask with an odd length of a rect side. But it's OK if mask side length is even.
+	// Calc offset to get to extreme pixels in mask
+	int offset = maskRectSide / 2;
+	int minWidthCoord = (int)t_width - offset;
+	int minHeightCoord = (int)t_height - offset;
+
+	// Calc position of extreme pixels
+	unsigned int widthStart = (unsigned int)qMax( 0, minWidthCoord );
+	unsigned int widthEnd = qMin( m_width, t_width + (unsigned int)offset + 1 );
+	unsigned int heightStart = (unsigned int)qMax( 0, minHeightCoord );
+	unsigned int heightEnd = qMin( m_height, t_height + (unsigned int)offset + 1 );
+
+	for ( unsigned int width = widthStart; width < widthEnd; width++ )
+	{
+		for ( unsigned int height = heightStart; height < heightEnd; height++ )
+		{
+			if ( (width == t_width) && (height == t_height) )
+			{
+				// We take luminance of neighbor pixels, so we don't interested in value of luminance of current
+				// (central) pixel
+				continue;
+			}
+
+			ColorPixel *pixel = (ColorPixel *)m_pixels[width][height];
+			double pixelLum = pixel->GetRelativeLum();
+			luminances.append(pixelLum);
+		}
+	}
+
+	return luminances;
+}
+
 // Test functions
 void SourceImgPixels::TestFunctionality()
 {
@@ -258,8 +508,8 @@ void SourceImgPixels::TestFunctionality()
 
 	TransAllPixRGB2LAB();
 
-	qDebug() << "Max Lum:" << FindMaxLum();
-	qDebug() << "Min Lum:" << FindMinLum();
+	qDebug() << "Max Lum:" << FindMaxRelLum();
+	qDebug() << "Min Lum:" << FindMinRelLum();
 
 	CalcPixelsSKO();
 

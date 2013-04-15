@@ -20,7 +20,14 @@
 
 ProcessingImage::ProcessingImage()
 {
+	m_img.Clear();
+	m_similarAreas.clear();
+	m_imgPixels = NULL;
+}
 
+ProcessingImage::~ProcessingImage()
+{
+	Clear();
 }
 
 // Clear class info
@@ -29,13 +36,13 @@ ProcessingImage::ProcessingImage()
 void ProcessingImage::Clear()
 {
 	m_img.Clear();
+	m_similarAreas.clear();
+
 	if ( NULL != m_imgPixels )
 	{
 		delete m_imgPixels;
 		m_imgPixels = NULL;
 	}
-
-	m_similarAreas.clear();
 }
 
 // Check if we have loaded image
@@ -161,7 +168,7 @@ void ProcessingImage::TransformImgLAB2GRB()
 	m_imgPixels->TransAllPixLAB2RGB();
 }
 
-// Get pixel luminance (LAB)
+// Get pixel LAB luminance
 // @input:
 // - unsigned int - exist width (x) position of pixel
 // - unsigned int - exist height (y) position of pixel
@@ -213,46 +220,6 @@ void ProcessingImage::SetPixelChAB(const unsigned int &t_width,
 								  t_height,
 								  t_chA,
 								  t_chB);
-}
-
-// Find among all pixels in image value of min luminance
-// @input:
-// @output:
-// - ERROR - can't find min luminance
-// - double - positive found min luminance of image pixels
-double ProcessingImage::GetMinLABLum() const
-{
-	return m_imgPixels->FindMinLum();
-}
-
-// Find among all pixels in image value of max luminance
-// @input:
-// @output:
-// - ERROR - can't find max luminance
-// - double - positive found max luminance of image pixels
-double ProcessingImage::GetMaxLABLum() const
-{
-	return m_imgPixels->FindMaxLum();
-}
-
-// Find average image luminance
-// @input:
-// @output:
-// - ERROR - can't find average luminance
-// - double - positive found average luminance of image pixels
-double ProcessingImage::GetAverageLABLum() const
-{
-	return m_imgPixels->FindAverageLum();
-}
-
-// Find most common image luminance
-// @input:
-// @output:
-// - ERROR - can't find most common luminance
-// - double - positive found most common luminance of image pixels
-double ProcessingImage::GetCommonLABLum() const
-{
-	return m_imgPixels->FindMostCommonLum();
 }
 
 // Check if pixel with certain coords is greyscale
