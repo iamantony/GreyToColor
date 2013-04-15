@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'preferencesdialog.ui'
 **
-** Created: Mon 15. Apr 14:42:43 2013
+** Created: Mon 15. Apr 17:54:04 2013
 **      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -200,7 +200,7 @@ public:
         QObject::connect(exitBBox, SIGNAL(accepted()), PreferencesDialog, SLOT(accept()));
         QObject::connect(exitBBox, SIGNAL(rejected()), PreferencesDialog, SLOT(reject()));
 
-        prefCategories->setCurrentIndex(0);
+        prefCategories->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(PreferencesDialog);
@@ -227,7 +227,7 @@ public:
         gbColorMethod->setTitle(QApplication::translate("PreferencesDialog", "Colorization Methods", 0, QApplication::UnicodeUTF8));
         rbWSimple->setText(QApplication::translate("PreferencesDialog", "Walsh Simple", 0, QApplication::UnicodeUTF8));
         rbWSLookUp->setText(QApplication::translate("PreferencesDialog", "Walsh Simple (look up table)", 0, QApplication::UnicodeUTF8));
-        rbWSEntropy->setText(QApplication::translate("PreferencesDialog", "Walsh Simple (entropy)", 0, QApplication::UnicodeUTF8));
+        rbWSEntropy->setText(QApplication::translate("PreferencesDialog", "Walsh Simple (all parameters)", 0, QApplication::UnicodeUTF8));
         rbWNeighbor->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor", 0, QApplication::UnicodeUTF8));
         rbWNNoRand->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor (fixed net)", 0, QApplication::UnicodeUTF8));
         rbWNOneRand->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor (same pixels set)", 0, QApplication::UnicodeUTF8));

@@ -213,7 +213,7 @@ bool WSLookUpTableColorizator::FillLookUpTable()
 	{
 		for ( unsigned int height = 0; height < sourceHgt; height++ )
 		{
-			double pixLum = m_source->PixelChLum(width, height);
+			double pixLum = m_source->GetPixelsRelLum(width, height);
 			unsigned int lumStepNum = (unsigned int)floor( pixLum / LAB_LUM_HIST_DIVIDER );
 
 			double pixSKO = m_source->GetPixelsSKO(width, height);
@@ -322,7 +322,7 @@ bool WSLookUpTableColorizator::ColorizeImage()
 		for ( unsigned int height = 0; height < targetHgt; height++ )
 		{
 			// Get target pixel params
-			targPixLum = m_target->PixelChLum(width, height);
+			targPixLum = m_target->GetPixelsRelLum(width, height);
 			targPixSKO = m_target->GetPixelsSKO(width, height);
 			if ( (targPixLum <= NO_INFO) || (targPixSKO <= ERROR) )
 			{
@@ -371,7 +371,7 @@ bool WSLookUpTableColorizator::ColorizeImage()
 				sourceWdt = sourceImgCoords.at(coord).first;
 				sourceHgt = sourceImgCoords.at(coord).second;
 
-				sourcePixLum = m_source->PixelChLum(sourceWdt, sourceHgt);
+				sourcePixLum = m_source->GetPixelsRelLum(sourceWdt, sourceHgt);
 				sourcePixSKO = m_source->GetPixelsSKO(sourceWdt, sourceHgt);
 
 				diffLum = fabs( targPixLum - sourcePixLum );
@@ -482,7 +482,7 @@ bool WSLookUpTableColorizator::FinishColorization()
 			bestSourcePixHgt = 0;
 
 			// Get target pixel params
-			targPixLum = m_target->PixelChLum(width, height);
+			targPixLum = m_target->GetPixelsRelLum(width, height);
 			targPixSKO = m_target->GetPixelsSKO(width, height);
 			if ( (targPixLum <= NO_INFO) || (targPixSKO <= ERROR) )
 			{
@@ -496,7 +496,7 @@ bool WSLookUpTableColorizator::FinishColorization()
 				sourceRandWdt = rand() % sourceWdt;
 				sourceRandHgt = rand() % sourceHgt;
 
-				sourcePixLum = m_source->PixelChLum(sourceRandWdt, sourceRandHgt);
+				sourcePixLum = m_source->GetPixelsRelLum(sourceRandWdt, sourceRandHgt);
 				sourcePixSKO = m_source->GetPixelsSKO(sourceRandWdt, sourceRandHgt);
 
 				diffLum = fabs( targPixLum - sourcePixLum );

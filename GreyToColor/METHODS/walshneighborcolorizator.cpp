@@ -176,7 +176,7 @@ bool WalshNeighborColorizator::ColorizeImage()
 			bestSourcePixHgt = 0;
 
 			// Get target pixel params
-			targPixLum = m_target->PixelChLum(width, height);
+			targPixLum = m_target->GetPixelsRelLum(width, height);
 			targPixSKO = m_target->GetPixelsSKO(width, height);
 			if ( (targPixLum <= NO_INFO) || (targPixSKO <= ERROR) )
 			{
@@ -190,7 +190,7 @@ bool WalshNeighborColorizator::ColorizeImage()
 				sourceRandWdt = rand() % sourceWdt;
 				sourceRandHgt = rand() % sourceHgt;
 
-				sourcePixLum = m_source->PixelChLum(sourceRandWdt, sourceRandHgt);
+				sourcePixLum = m_source->GetPixelsRelLum(sourceRandWdt, sourceRandHgt);
 				sourcePixSKO = m_source->GetPixelsSKO(sourceRandWdt, sourceRandHgt);
 
 				diffLum = fabs( targPixLum - sourcePixLum );
@@ -276,11 +276,11 @@ void WalshNeighborColorizator::ColorizeNeighbor(const unsigned int &t_startWidth
 		   (false == m_target->IsPixColoured(targCurrWdt, targHgtTry)) )
 	{
 		// Get characteristics of current pixel
-		targPixLum = m_target->PixelChLum(targCurrWdt, targCurrHgt);
+		targPixLum = m_target->GetPixelsRelLum(targCurrWdt, targCurrHgt);
 		targPixSKO = m_target->GetPixelsSKO(targCurrWdt, targCurrHgt);
 
 		// Get characteristics of next lower pixel
-		lowerTargPixLum = m_target->PixelChLum(targCurrWdt, targHgtTry);
+		lowerTargPixLum = m_target->GetPixelsRelLum(targCurrWdt, targHgtTry);
 		lowerTargPixSKO = m_target->GetPixelsSKO(targCurrWdt, targHgtTry);
 
 		lowerNeighborDiffLum = fabs( targPixLum - lowerTargPixLum );
@@ -304,7 +304,7 @@ void WalshNeighborColorizator::ColorizeNeighbor(const unsigned int &t_startWidth
 				   (targWdtTry < targetWdt) &&
 				   (false == m_target->IsPixColoured(targWdtTry, targHgtTry)) )
 			{
-				rightTargPixLum = m_target->PixelChLum(targWdtTry, targHgtTry);
+				rightTargPixLum = m_target->GetPixelsRelLum(targWdtTry, targHgtTry);
 				rightTargPixSKO = m_target->GetPixelsSKO(targWdtTry, targHgtTry);
 
 				rightNeighborDiffLum = fabs( lowerTargPixLum - rightTargPixLum );
