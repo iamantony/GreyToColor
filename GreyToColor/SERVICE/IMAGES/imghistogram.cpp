@@ -335,7 +335,6 @@ QList<double> ImgHistogram::LABLumHistogram(TargetImage *t_img)
 	}
 
 	QList<double> lumHist = FormZeroLABLumHist();
-	const int maxLumStep = lumHist.size();
 	const unsigned int imgWdt = t_img->GetImageWidth();
 	const unsigned int imgHgt = t_img->GetImageHeight();
 	for ( unsigned int width = 0; width < imgWdt; width++ )
@@ -361,7 +360,7 @@ QList<double> ImgHistogram::FormZeroLABLumHist()
 	unsigned int numOfSteps = LAB_MAX_LUM / LAB_LUM_HIST_DIVIDER;
 	for ( unsigned int step = 0; step < numOfSteps; step++ )
 	{
-		zeroLABLumHist.append(0);
+		zeroLABLumHist.append(0.0);
 	}
 
 	return zeroLABLumHist;
@@ -405,10 +404,10 @@ QList<double> ImgHistogram::RelLumHistogram(TargetImage *t_img)
 QList<double> ImgHistogram::FormZeroRelLumHist()
 {
 	QList<double> zeroRelLumHist;
-	unsigned int numOfSteps = RELATIVE_MAX / RELATIVE_DIVIDER;
+	unsigned int numOfSteps = (unsigned int)( RELATIVE_MAX / RELATIVE_DIVIDER );
 	for ( unsigned int step = 0; step < numOfSteps; step++ )
 	{
-		zeroRelLumHist.append(0);
+		zeroRelLumHist.append(0.0);
 	}
 
 	return zeroRelLumHist;

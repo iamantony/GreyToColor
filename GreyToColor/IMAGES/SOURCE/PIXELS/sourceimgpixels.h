@@ -66,7 +66,9 @@ public:
 
 protected:
 	// Get list of relative luminances of neighbor pixels (to calc SKO, for example)
-	QList<double> GetPixNeighborsRelLum(const unsigned int &t_width, const unsigned int &t_height) const;
+	QList<double> GetPixNeighborsRelLum(const unsigned int &t_width,
+										const unsigned int &t_height,
+										const unsigned int &t_maskRectSide) const;
 
 private:
 	// Calc relative LAB luminance

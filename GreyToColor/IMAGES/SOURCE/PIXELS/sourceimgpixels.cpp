@@ -172,7 +172,9 @@ void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int
 		return;
 	}
 
-	QList<double> lumInMask = GetPixNeighborsRelLum(t_width, t_height);
+	QList<double> lumInMask = GetPixNeighborsRelLum(t_width,
+													t_height,
+													SKO_MASK_RECT_SIDE);
 	if ( true == lumInMask.isEmpty() )
 	{
 		qDebug() << "CalcPixSKO(): Error - no pixels in mask";
@@ -239,7 +241,9 @@ void SourceImgPixels::CalcPixsEntropy(const unsigned int &t_width, const unsigne
 		return;
 	}
 
-	QList<double> lumInMask = GetPixNeighborsRelLum(t_width, t_height);
+	QList<double> lumInMask = GetPixNeighborsRelLum(t_width,
+													t_height,
+													ENTROPY_MASK_RECT_SIDE);
 	if ( true == lumInMask.isEmpty() )
 	{
 		qDebug() << "CalcPixsEntropy(): Error - no pixels - no SKO";
@@ -254,19 +258,29 @@ void SourceImgPixels::CalcPixsEntropy(const unsigned int &t_width, const unsigne
 	QList<double> maskHist = histogramer.MaskRelLumHistogram(lumInMask);
 
 	double pixelEntropy = 0;
+	int existLumNum = 0;
 	const int maskSize = lumInMask.size();
 	const int numOfLumValues = maskHist.size();
 	for ( int lum = 0; lum < numOfLumValues; lum++ )
 	{
-		if ( maskHist.at(lum) <= 0 )
+		if ( maskHist.at(lum) <= 0.0 )
 		{
 			continue;
 		}
 
-		double luminance = maskHist.at(lum) * LAB_LUM_HIST_DIVIDER;
-		double relativeLum = luminance / maskSize;
-		pixelEntropy -= relativeLum * log2(relativeLum);
+		double relativeHistValue = maskHist.at(lum) / maskSize;
+		pixelEntropy -= relativeHistValue * log2(relativeHistValue);
+
+		++existLumNum;
 	}
+
+	if ( pixelEntropy < RELATIVE_MIN )
+	{
+		qDebug() << "CalcPixsEntropy(): negative entropy =" << pixelEntropy;
+		pixelEntropy = RELATIVE_MIN;
+	}
+
+	pixelEntropy /= existLumNum;
 
 	ColorPixel *centralPixel = (ColorPixel *)m_pixels[t_width][t_height];
 	centralPixel->SetEntropy(pixelEntropy);
@@ -436,30 +450,27 @@ double SourceImgPixels::FindMostCommonRelLum() const
 // @input:
 // - unsigned int - exist width (x) position of pixel
 // - unsigned int - exist height (y) position of pixel
+// - unsigned int - get size of rectangle in which we will search neighbor pixels
 // @output:
 // - unempy QList<double> - luminances of neighbor pixels
 // - empty QList<double> - don't have pixels
-QList<double> SourceImgPixels::GetPixNeighborsRelLum(const unsigned int &t_width, const unsigned int &t_height) const
+QList<double> SourceImgPixels::GetPixNeighborsRelLum(const unsigned int &t_width,
+													 const unsigned int &t_height,
+													 const unsigned int &t_maskRectSide) const
 {
-	QList<double> luminances;
-
-	if ( false == IsPixelExist(t_width, t_height) )
+	if ( (false == IsPixelExist(t_width, t_height)) ||
+		 (m_width <= t_maskRectSide) ||
+		 (m_height <= t_maskRectSide) )
 	{
 		qDebug() << "GetPixNeighborsLum(): Error - invalid arguments";
-		return luminances;
+		QList<double> empty;
+		return empty;
 	}
 
-	// This is length of side of a rect, which is form a mask. Central pixel in mask is pixel with input coords.
-	// Other pixels are neighbors of central pixel.
-	int maskRectSide = MASK_RECT_SIDE_LENGTH;
-	if ( maskRectSide < 0 )
-	{
-		maskRectSide *= (-1);
-	}
-
-	// In current version we use mask with an odd length of a rect side. But it's OK if mask side length is even.
+	// t_maskRectSide is a length of side of a rect, which is form a mask. Central pixel in mask is pixel with
+	// input coords. Other pixels are neighbors of central pixel.
 	// Calc offset to get to extreme pixels in mask
-	int offset = maskRectSide / 2;
+	int offset = (int)t_maskRectSide / 2;
 	int minWidthCoord = (int)t_width - offset;
 	int minHeightCoord = (int)t_height - offset;
 
@@ -468,7 +479,7 @@ QList<double> SourceImgPixels::GetPixNeighborsRelLum(const unsigned int &t_width
 	unsigned int widthEnd = qMin( m_width, t_width + (unsigned int)offset + 1 );
 	unsigned int heightStart = (unsigned int)qMax( 0, minHeightCoord );
 	unsigned int heightEnd = qMin( m_height, t_height + (unsigned int)offset + 1 );
-
+	QList<double> luminances;
 	for ( unsigned int width = widthStart; width < widthEnd; width++ )
 	{
 		for ( unsigned int height = heightStart; height < heightEnd; height++ )

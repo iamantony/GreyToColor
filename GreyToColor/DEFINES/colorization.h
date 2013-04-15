@@ -45,6 +45,8 @@ typedef QMap<unsigned int, PixCoords> LookUpSKO;
 #define SKO_TRESHOLD 0.01
 #define ENTROPY_TRESHOLD 0.01
 
+#define MIN_SUMM 0.0
+
 #define MAX_COORDS_PER_CELL 25
 
 #define NUM_OF_ATTEMPTS 200

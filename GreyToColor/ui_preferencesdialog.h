@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'preferencesdialog.ui'
 **
-** Created: Tue 9. Apr 14:45:36 2013
-**      by: Qt User Interface Compiler version 4.8.3
+** Created: Mon Apr 15 20:20:21 2013
+**      by: Qt User Interface Compiler version 4.8.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -30,13 +30,6 @@ class Ui_PreferencesDialog
 public:
     QVBoxLayout *verticalLayout_3;
     QTabWidget *prefCategories;
-    QWidget *tabDatabase;
-    QGroupBox *gbPassType;
-    QVBoxLayout *verticalLayout;
-    QRadioButton *rbLumHist;
-    QRadioButton *rbSubLum;
-    QRadioButton *rbLumGradHist;
-    QRadioButton *rbSubLumGrad;
     QWidget *tabColorization;
     QGroupBox *gbColorMethod;
     QVBoxLayout *verticalLayout_2;
@@ -53,6 +46,13 @@ public:
     QRadioButton *rbScaleAverLum;
     QRadioButton *rbNormLumBorder;
     QRadioButton *rbNormLumCentral;
+    QWidget *tabDatabase;
+    QGroupBox *gbPassType;
+    QVBoxLayout *verticalLayout;
+    QRadioButton *rbLumHist;
+    QRadioButton *rbSubLum;
+    QRadioButton *rbLumGradHist;
+    QRadioButton *rbSubLumGrad;
     QDialogButtonBox *exitBBox;
 
     void setupUi(QDialog *PreferencesDialog)
@@ -77,36 +77,6 @@ public:
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(prefCategories->sizePolicy().hasHeightForWidth());
         prefCategories->setSizePolicy(sizePolicy1);
-        tabDatabase = new QWidget();
-        tabDatabase->setObjectName(QString::fromUtf8("tabDatabase"));
-        gbPassType = new QGroupBox(tabDatabase);
-        gbPassType->setObjectName(QString::fromUtf8("gbPassType"));
-        gbPassType->setGeometry(QRect(10, 10, 302, 151));
-        gbPassType->setCheckable(false);
-        verticalLayout = new QVBoxLayout(gbPassType);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-        rbLumHist = new QRadioButton(gbPassType);
-        rbLumHist->setObjectName(QString::fromUtf8("rbLumHist"));
-        rbLumHist->setChecked(true);
-
-        verticalLayout->addWidget(rbLumHist);
-
-        rbSubLum = new QRadioButton(gbPassType);
-        rbSubLum->setObjectName(QString::fromUtf8("rbSubLum"));
-
-        verticalLayout->addWidget(rbSubLum);
-
-        rbLumGradHist = new QRadioButton(gbPassType);
-        rbLumGradHist->setObjectName(QString::fromUtf8("rbLumGradHist"));
-
-        verticalLayout->addWidget(rbLumGradHist);
-
-        rbSubLumGrad = new QRadioButton(gbPassType);
-        rbSubLumGrad->setObjectName(QString::fromUtf8("rbSubLumGrad"));
-
-        verticalLayout->addWidget(rbSubLumGrad);
-
-        prefCategories->addTab(tabDatabase, QString());
         tabColorization = new QWidget();
         tabColorization->setObjectName(QString::fromUtf8("tabColorization"));
         gbColorMethod = new QGroupBox(tabColorization);
@@ -185,6 +155,36 @@ public:
         verticalLayout_4->addWidget(rbNormLumCentral);
 
         prefCategories->addTab(tabColorization, QString());
+        tabDatabase = new QWidget();
+        tabDatabase->setObjectName(QString::fromUtf8("tabDatabase"));
+        gbPassType = new QGroupBox(tabDatabase);
+        gbPassType->setObjectName(QString::fromUtf8("gbPassType"));
+        gbPassType->setGeometry(QRect(10, 10, 302, 151));
+        gbPassType->setCheckable(false);
+        verticalLayout = new QVBoxLayout(gbPassType);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        rbLumHist = new QRadioButton(gbPassType);
+        rbLumHist->setObjectName(QString::fromUtf8("rbLumHist"));
+        rbLumHist->setChecked(true);
+
+        verticalLayout->addWidget(rbLumHist);
+
+        rbSubLum = new QRadioButton(gbPassType);
+        rbSubLum->setObjectName(QString::fromUtf8("rbSubLum"));
+
+        verticalLayout->addWidget(rbSubLum);
+
+        rbLumGradHist = new QRadioButton(gbPassType);
+        rbLumGradHist->setObjectName(QString::fromUtf8("rbLumGradHist"));
+
+        verticalLayout->addWidget(rbLumGradHist);
+
+        rbSubLumGrad = new QRadioButton(gbPassType);
+        rbSubLumGrad->setObjectName(QString::fromUtf8("rbSubLumGrad"));
+
+        verticalLayout->addWidget(rbSubLumGrad);
+
+        prefCategories->addTab(tabDatabase, QString());
 
         verticalLayout_3->addWidget(prefCategories);
 
@@ -209,12 +209,6 @@ public:
     void retranslateUi(QDialog *PreferencesDialog)
     {
         PreferencesDialog->setWindowTitle(QApplication::translate("PreferencesDialog", "Preferences", 0, QApplication::UnicodeUTF8));
-        gbPassType->setTitle(QApplication::translate("PreferencesDialog", "Passport Type for Image Searching", 0, QApplication::UnicodeUTF8));
-        rbLumHist->setText(QApplication::translate("PreferencesDialog", "Luminance Histogram", 0, QApplication::UnicodeUTF8));
-        rbSubLum->setText(QApplication::translate("PreferencesDialog", "Subsampled Luminance", 0, QApplication::UnicodeUTF8));
-        rbLumGradHist->setText(QApplication::translate("PreferencesDialog", "Luminance and Gradient Histigram", 0, QApplication::UnicodeUTF8));
-        rbSubLumGrad->setText(QApplication::translate("PreferencesDialog", "Subsampled Luminance and Gradient", 0, QApplication::UnicodeUTF8));
-        prefCategories->setTabText(prefCategories->indexOf(tabDatabase), QApplication::translate("PreferencesDialog", "Databse", 0, QApplication::UnicodeUTF8));
 #ifndef QT_NO_TOOLTIP
         tabColorization->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
@@ -238,6 +232,12 @@ public:
         rbNormLumBorder->setText(QApplication::translate("PreferencesDialog", "Normalize Luminance (by borders)", 0, QApplication::UnicodeUTF8));
         rbNormLumCentral->setText(QApplication::translate("PreferencesDialog", "Normalize Luminance (by center)", 0, QApplication::UnicodeUTF8));
         prefCategories->setTabText(prefCategories->indexOf(tabColorization), QApplication::translate("PreferencesDialog", "Colorization", 0, QApplication::UnicodeUTF8));
+        gbPassType->setTitle(QApplication::translate("PreferencesDialog", "Passport Type for Image Searching", 0, QApplication::UnicodeUTF8));
+        rbLumHist->setText(QApplication::translate("PreferencesDialog", "Luminance Histogram", 0, QApplication::UnicodeUTF8));
+        rbSubLum->setText(QApplication::translate("PreferencesDialog", "Subsampled Luminance", 0, QApplication::UnicodeUTF8));
+        rbLumGradHist->setText(QApplication::translate("PreferencesDialog", "Luminance and Gradient Histigram", 0, QApplication::UnicodeUTF8));
+        rbSubLumGrad->setText(QApplication::translate("PreferencesDialog", "Subsampled Luminance and Gradient", 0, QApplication::UnicodeUTF8));
+        prefCategories->setTabText(prefCategories->indexOf(tabDatabase), QApplication::translate("PreferencesDialog", "Databse", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

@@ -180,9 +180,9 @@ QList<unsigned int> WSLookUpTableColorizator::FormLumValues()
 // - QList<unsigned int> - possible values of LAB luminance
 QList<unsigned int> WSLookUpTableColorizator::FormSKOValues()
 {
-	const double squareRectSide = pow( MASK_RECT_SIDE_LENGTH, 2 );
+	const double squareRectSide = pow( SKO_MASK_RECT_SIDE, 2 );
 	const double squareLum = pow( LAB_MAX_LUM, 2 );
-	const double maxSKO = sqrt( (squareRectSide - 1) * squareLum / MASK_RECT_SIDE_LENGTH );
+	const double maxSKO = sqrt( (squareRectSide - 1) * squareLum / SKO_MASK_RECT_SIDE );
 	const unsigned int numOfSteps = maxSKO / SKO_DIVIDER;
 
 	QList<unsigned int> skoValues;

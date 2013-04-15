@@ -134,23 +134,20 @@ bool WSEntropyColorizator::ColorizeImage()
 		numOfAttempts = pixelsInTargetImg;
 	}
 
-	// Define number of params to compare
-	const int numOfCompareParams = 3;
-
 	// Values of best found pixels characteristic
 	double bestParamsDiff = DEFAULT_DIFF;
 	unsigned int bestSourcePixWdt = 0;
 	unsigned int bestSourcePixHgt = 0;
 
-	// Targets pixel variables
-	QList<double> targParams;
+	// Sum of Targets pixel variables
+	double targSumParams = MIN_SUMM;
 
 	// Source pixel variables
 	unsigned int sourceRandWdt = 0;
 	unsigned int sourceRandHgt = 0;
 	double sourceChA = 0;
 	double sourceChB = 0;
-	QList<double> sourceParams;
+	double sourceSumParams = MIN_SUMM;
 
 	// Decision variables
 	double diffParams = DEFAULT_DIFF;
@@ -170,29 +167,26 @@ bool WSEntropyColorizator::ColorizeImage()
 			bestParamsDiff = DEFAULT_DIFF;
 			bestSourcePixWdt = 0;
 			bestSourcePixHgt = 0;
-			targParams.clear();
+
 
 			// Get target pixel params
-			targParams << m_target->GetPixelsRelLum(width, height);
-			targParams << m_target->GetPixelsSKO(width, height);
-			targParams << m_target->GetPixelsEntropy(width, height);
+			targSumParams = MIN_SUMM;
+			targSumParams += m_target->GetPixelsRelLum(width, height);
+			targSumParams += m_target->GetPixelsSKO(width, height);
+			targSumParams += m_target->GetPixelsEntropy(width, height);
 
 			// Try to find best similar source image pixel
 			for ( unsigned int pix = 0; pix < numOfAttempts; ++pix )
 			{
-				sourceParams.clear();
 				sourceRandWdt = rand() % sourceWdt;
 				sourceRandHgt = rand() % sourceHgt;
 
-				sourceParams << m_source->GetPixelsRelLum(sourceRandWdt, sourceRandHgt);
-				sourceParams << m_source->GetPixelsSKO(sourceRandWdt, sourceRandHgt);
-				sourceParams << m_source->GetPixelsEntropy(sourceRandWdt, sourceRandHgt);
+				sourceSumParams = MIN_SUMM;
+				sourceSumParams += m_source->GetPixelsRelLum(sourceRandWdt, sourceRandHgt);
+				sourceSumParams += m_source->GetPixelsSKO(sourceRandWdt, sourceRandHgt);
+				sourceSumParams += m_source->GetPixelsEntropy(sourceRandWdt, sourceRandHgt);
 
-				for ( int i = 0; i < numOfCompareParams; ++i)
-				{
-					diffParams += fabs( targParams.at(i) - sourceParams.at(i) );
-				}
-
+				diffParams = fabs(targSumParams - sourceSumParams);
 				if ( diffParams < bestParamsDiff )
 				{
 					bestParamsDiff = diffParams;
