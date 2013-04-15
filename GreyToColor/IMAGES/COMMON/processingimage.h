@@ -41,6 +41,7 @@ protected:
 	// == METHODS ==
 public:
 	ProcessingImage();
+	virtual ~ProcessingImage();
 
 	// Clear class info
 	virtual void Clear();

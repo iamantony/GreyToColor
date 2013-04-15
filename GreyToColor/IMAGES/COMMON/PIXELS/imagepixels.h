@@ -40,7 +40,7 @@ public:
 	virtual ~ImagePixels();
 
 	// Clear all info (set to defaults)
-	virtual void Clear() = 0;
+	virtual void Clear();
 	// Check if we have pixels of image
 	bool HasPixels() const;
 	// Save all pixels from input QImage as custom pixels

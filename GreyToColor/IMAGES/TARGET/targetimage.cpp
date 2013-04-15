@@ -20,21 +20,19 @@
 
 TargetImage::TargetImage()
 {
-	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
-	if ( NULL != pixels )
+	if ( NULL != m_imgPixels )
 	{
-		delete pixels;
+		delete m_imgPixels;
 	}
 
-	pixels = new TargetImgPixels();
+	m_imgPixels = new TargetImgPixels();
 }
 
 TargetImage::~TargetImage()
 {
-//	Clear();
-
-	// WARNING
 	m_img.Clear();
+	m_similarAreas.clear();
+
 	if ( NULL != m_imgPixels )
 	{
 		TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
@@ -49,6 +47,7 @@ TargetImage::~TargetImage()
 void TargetImage::Clear()
 {
 	m_img.Clear();
+	m_similarAreas.clear();
 
 	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
 	if ( NULL != pixels )
@@ -70,6 +69,11 @@ void TargetImage::ConstructImgPixels()
 	}
 
 	TargetImgPixels *pixels = (TargetImgPixels *)m_imgPixels;
+	if ( NULL == pixels )
+	{
+		pixels = new TargetImgPixels();
+	}
+
 	pixels->Clear();
 	pixels->FormImgPixels(currentImg);
 

@@ -20,14 +20,18 @@
 
 SourceImage::SourceImage()
 {
+	if ( NULL != m_imgPixels )
+	{
+		delete m_imgPixels;
+	}
+
 	m_imgPixels = new SourceImgPixels();
 }
 
 SourceImage::~SourceImage()
 {
-//	Clear();
-
 	m_img.Clear();
+	m_similarAreas.clear();
 
 	if ( NULL != m_imgPixels )
 	{
@@ -43,6 +47,7 @@ SourceImage::~SourceImage()
 void SourceImage::Clear()
 {
 	m_img.Clear();
+	m_similarAreas.clear();
 
 	SourceImgPixels *pixels = (SourceImgPixels *)m_imgPixels;
 	if ( NULL != pixels )
@@ -73,6 +78,11 @@ void SourceImage::ConstructImgPixels()
 	}
 
 	SourceImgPixels *pixels = (SourceImgPixels *)m_imgPixels;
+	if ( NULL == pixels )
+	{
+		pixels = new SourceImgPixels();
+	}
+
 	pixels->Clear();
 	pixels->FormImgPixels(currentImg);
 	TransformImgRGB2LAB();

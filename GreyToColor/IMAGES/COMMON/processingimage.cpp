@@ -20,7 +20,14 @@
 
 ProcessingImage::ProcessingImage()
 {
+	m_img.Clear();
+	m_similarAreas.clear();
+	m_imgPixels = NULL;
+}
 
+ProcessingImage::~ProcessingImage()
+{
+	Clear();
 }
 
 // Clear class info
@@ -29,13 +36,13 @@ ProcessingImage::ProcessingImage()
 void ProcessingImage::Clear()
 {
 	m_img.Clear();
+	m_similarAreas.clear();
+
 	if ( NULL != m_imgPixels )
 	{
 		delete m_imgPixels;
 		m_imgPixels = NULL;
 	}
-
-	m_similarAreas.clear();
 }
 
 // Check if we have loaded image

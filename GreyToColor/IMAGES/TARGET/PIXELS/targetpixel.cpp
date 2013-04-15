@@ -34,6 +34,7 @@ TargetPixel::~TargetPixel()
 void TargetPixel::ClearPixel()
 {
 	this->ClearColor();
+
 	m_prefColor.ClearColor();
 
 	SetUncolored();

@@ -34,11 +34,11 @@ SourceImgPixels::~SourceImgPixels()
 // @output:
 void SourceImgPixels::Clear()
 {
-
-	for ( int width = 0; width < m_pixels.size(); width++ )
+	const int pixWidth = m_pixels.size();
+	for ( int width = pixWidth - 1; width >= 0; --width )
 	{
-		int pixInColumn = m_pixels[width].size();
-		for ( int height = 0; height < pixInColumn; height++ )
+		int pixHeight = m_pixels.at(width).size();
+		for ( int height = pixHeight - 1; height >= 0; --height )
 		{
 			ColorPixel *pix = (ColorPixel *)m_pixels[width][height];
 			if ( NULL != pix )

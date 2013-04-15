@@ -20,36 +20,38 @@
 
 ImagePixels::ImagePixels()
 {
-	m_width = 0;
-	m_height = 0;
+	Clear();
 }
 
 ImagePixels::~ImagePixels()
 {
-	m_width = 0;
-	m_height = 0;
+	Clear();
 }
 
-//// Clear all info (set to defaults)
-//// @input:
-//// @output:
-//void ImagePixels::Clear()
-//{
-//	for ( int i = m_pixels.size() - 1; i >= 0; i-- )
-//	{
-//		int listsize = m_pixels[i].size();
-//		for ( int j = listsize - 1; j >= 0; j-- )
-//		{
-//			Pixel *pix = (Pixel *)m_pixels[i][j];
-//			if ( NULL != pix )
-//			{
-//				delete pix;
-//			}
-//		}
-//	}
+// Clear all info (set to defaults)
+// @input:
+// @output:
+void ImagePixels::Clear()
+{
+	m_width = 0;
+	m_height = 0;
 
-//	m_pixels.clear();
-//}
+	const int width = m_pixels.size();
+	for ( int i = width - 1; i >= 0; --i )
+	{
+		const int height = m_pixels.at(i).size();
+		for ( int j = height - 1; j >= 0; --j )
+		{
+			Pixel *pix = (Pixel *)m_pixels[i][j];
+			if ( NULL != pix )
+			{
+				delete pix;
+			}
+		}
+	}
+
+	m_pixels.clear();
+}
 
 // Transform all image pixels from RGB color space to LAB
 // @input:

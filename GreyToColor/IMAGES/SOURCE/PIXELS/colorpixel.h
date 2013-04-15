@@ -23,6 +23,7 @@
 
 #include "../../COMMON/PIXELS/pixel.h"
 #include "./DEFINES/pixels.h"
+#include "./DEFINES/global.h"
 
 class ColorPixel : public Pixel
 {
