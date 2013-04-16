@@ -138,11 +138,41 @@ void SourceImage::CalcPixelsEntropy()
 // - unsigned int - exist height (y) position of pixel
 // @output:
 // - double - pixels Entropy
-// - ERROR - can't find such pixel
 double SourceImage::GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const
 {
 	const SourceImgPixels *pixels = (SourceImgPixels *)m_imgPixels;
 	return pixels->GetPixelsEntropy(t_width, t_height);
+}
+
+// Calc for each pixel in image it's Skewness and Kurtosis
+void SourceImage::CalcPixelsSkewAndKurt()
+{
+	SourceImgPixels *pixels = (SourceImgPixels *)m_imgPixels;
+	pixels->CalcPixelsSkewAndKurt();
+}
+
+// Get Skewness of pixel with certain coords
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+// - double - pixels Skewness
+double SourceImage::GetPixelsSkewness(const unsigned int &t_width, const unsigned int &t_height) const
+{
+	const SourceImgPixels *pixels = (SourceImgPixels *)m_imgPixels;
+	return pixels->GetPixelsSkewness(t_width, t_height);
+}
+
+// Get Kurtosis of pixel with certain coords
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+// - double - pixels Kurtosis
+double SourceImage::GetPixelsKurtosis(const unsigned int &t_width, const unsigned int &t_height) const
+{
+	const SourceImgPixels *pixels = (SourceImgPixels *)m_imgPixels;
+	return pixels->GetPixelsKurtosis(t_width, t_height);
 }
 
 // Get maximum value of relative LAB luminance in image

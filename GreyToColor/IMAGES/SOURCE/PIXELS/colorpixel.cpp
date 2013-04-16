@@ -36,8 +36,10 @@ void ColorPixel::ClearColor()
 	this->Clear();
 
 	m_relativeLum = ERROR;
-	m_sko = 0.0;
-	m_entropy = 0.0;
+	m_sko = RELATIVE_MIN;
+	m_entropy = RELATIVE_MIN;
+	m_skewness = RELATIVE_MIN;
+	m_kurtosis = RELATIVE_MIN;
 }
 
 // Calc relative value of LAB luminance
@@ -134,4 +136,61 @@ bool ColorPixel::SetEntropy(const double &t_entropy)
 double ColorPixel::GetEntropy() const
 {
 	return m_entropy;
+}
+
+// Set skewness for pixel of image
+// @input:
+// - double - relative skewness value in range [0, 1]
+// @output:
+// - true - skewness accepted
+// - false - skewness is out of range
+bool ColorPixel::SetSkewness(const double &t_skewness)
+{
+	if ( (t_skewness < RELATIVE_MIN) || (RELATIVE_MAX < t_skewness) )
+	{
+		qDebug() << "SetSkewness(): Error - invalid arguments, t_skewness =" << t_skewness;
+		qDebug() << "Realtive Skewness not accepted";
+		return false;
+	}
+
+	m_skewness = t_skewness;
+
+	return true;
+}
+
+// Set skewness for pixel of image
+// @input:
+// @output:
+// - double - skewness value in range [0, 1]
+double ColorPixel::GetSkewness() const
+{
+	return m_skewness;
+}
+
+// Set kurtosis for pixel of image
+// @input:
+// - double - relative kurtosis value in range [0, 1]
+// @output:
+// - true - kurtosis accepted
+// - false - kurtosis is out of range
+bool ColorPixel::SetKurtosis(const double &t_kurtosis)
+{
+	if ( (t_kurtosis < RELATIVE_MIN) || (RELATIVE_MAX < t_kurtosis) )
+	{
+		qDebug() << "SetKurtosis(): Error - invalid arguments, t_kurtosis =" << t_kurtosis;
+		return false;
+	}
+
+	m_kurtosis = t_kurtosis;
+
+	return true;
+}
+
+// Set kurtosis for pixel of image
+// @input:
+// @output:
+// - double - kurtosis value in range [0, 1]
+double ColorPixel::GetKurtosis() const
+{
+	return m_kurtosis;
 }

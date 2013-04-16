@@ -1,8 +1,8 @@
 /********************************************************************************
 ** Form generated from reading UI file 'preferencesdialog.ui'
 **
-** Created: Mon Apr 15 20:20:21 2013
-**      by: Qt User Interface Compiler version 4.8.1
+** Created: Tue 16. Apr 14:21:26 2013
+**      by: Qt User Interface Compiler version 4.8.3
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -200,7 +200,7 @@ public:
         QObject::connect(exitBBox, SIGNAL(accepted()), PreferencesDialog, SLOT(accept()));
         QObject::connect(exitBBox, SIGNAL(rejected()), PreferencesDialog, SLOT(reject()));
 
-        prefCategories->setCurrentIndex(1);
+        prefCategories->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(PreferencesDialog);

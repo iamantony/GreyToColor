@@ -102,6 +102,9 @@ bool WSEntropyColorizator::PrepareImages(const LumEqualization::Type &t_type)
 	m_target->CalcPixelsSKO();
 	m_source->CalcPixelsSKO();
 
+	m_target->CalcPixelsSkewAndKurt();
+	m_source->CalcPixelsSkewAndKurt();
+
 	return true;
 }
 
@@ -174,6 +177,8 @@ bool WSEntropyColorizator::ColorizeImage()
 			targSumParams += m_target->GetPixelsRelLum(width, height);
 			targSumParams += m_target->GetPixelsSKO(width, height);
 			targSumParams += m_target->GetPixelsEntropy(width, height);
+			targSumParams += m_target->GetPixelsSkewness(width, height);
+			targSumParams += m_target->GetPixelsKurtosis(width, height);
 
 			// Try to find best similar source image pixel
 			for ( unsigned int pix = 0; pix < numOfAttempts; ++pix )
@@ -185,6 +190,8 @@ bool WSEntropyColorizator::ColorizeImage()
 				sourceSumParams += m_source->GetPixelsRelLum(sourceRandWdt, sourceRandHgt);
 				sourceSumParams += m_source->GetPixelsSKO(sourceRandWdt, sourceRandHgt);
 				sourceSumParams += m_source->GetPixelsEntropy(sourceRandWdt, sourceRandHgt);
+				sourceSumParams += m_source->GetPixelsSkewness(sourceRandWdt, sourceRandHgt);
+				sourceSumParams += m_source->GetPixelsKurtosis(sourceRandWdt, sourceRandHgt);
 
 				diffParams = fabs(targSumParams - sourceSumParams);
 				if ( diffParams < bestParamsDiff )

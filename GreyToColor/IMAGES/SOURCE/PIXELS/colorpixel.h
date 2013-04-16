@@ -34,6 +34,8 @@ private:
 	// All other characteristics values also relative. They have range [0, 1]
 	double m_sko;
 	double m_entropy;
+	double m_skewness;
+	double m_kurtosis;
 
 	// == METHODS ==
 public:
@@ -56,6 +58,14 @@ public:
 	bool SetEntropy(const double &t_entropy);
 	// Set entropy for pixel of image
 	double GetEntropy() const;
+	// Set skewness for pixel of image
+	bool SetSkewness(const double &t_skewness);
+	// Set skewness for pixel of image
+	double GetSkewness() const;
+	// Set kurtosis for pixel of image
+	bool SetKurtosis(const double &t_kurtosis);
+	// Set kurtosis for pixel of image
+	double GetKurtosis() const;
 };
 
 #endif // COLORPIXEL_H

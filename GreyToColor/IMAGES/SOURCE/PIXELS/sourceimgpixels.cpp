@@ -246,7 +246,7 @@ void SourceImgPixels::CalcPixsEntropy(const unsigned int &t_width, const unsigne
 													ENTROPY_MASK_RECT_SIDE);
 	if ( true == lumInMask.isEmpty() )
 	{
-		qDebug() << "CalcPixsEntropy(): Error - no pixels - no SKO";
+		qDebug() << "CalcPixsEntropy(): Error - no neighbor pixels";
 		return;
 	}
 
@@ -291,18 +291,210 @@ void SourceImgPixels::CalcPixsEntropy(const unsigned int &t_width, const unsigne
 // - unsigned int - exist width (x) position of pixel
 // - unsigned int - exist height (y) position of pixel
 // @output:
-// - NULL - can't find such pixel
 // - double - pixels entropy
 double SourceImgPixels::GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
 		qDebug() << "GetPixelsEntropy(): Error - invalid arguments";
-		return 0;
+		return RELATIVE_MIN;
 	}
 
 	const ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
 	return pixel->GetEntropy();
+}
+
+// Calc for each pixel in image it's Skewness and Kurtosis
+// @input:
+// @output:
+void SourceImgPixels::CalcPixelsSkewAndKurt()
+{
+	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
+	{
+		for ( unsigned int hgt = 0; hgt < m_height; hgt++ )
+		{
+			CalcPixsSkewAndKurt(wdt, hgt);
+		}
+	}
+}
+
+// Calc for certain pixel in image it's Skewness and Kurtosis
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+void SourceImgPixels::CalcPixsSkewAndKurt(const unsigned int &t_width, const unsigned int &t_height)
+{
+	if ( false == IsPixelExist(t_width, t_height) )
+	{
+		qDebug() << "CalcPixsSkewAndKurt(): Error - invalid arguments";
+		return;
+	}
+
+	QList<double> lumInMask = GetPixNeighborsRelLum(t_width,
+													t_height,
+													ENTROPY_MASK_RECT_SIDE);
+	if ( true == lumInMask.isEmpty() )
+	{
+		qDebug() << "CalcPixsSkewAndKurt(): Error - no neighbor pixels";
+		return;
+	}
+
+	ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	double pixelLum = pixel->GetRelativeLum();
+	lumInMask.append(pixelLum);
+
+	ImgHistogram histogramer;
+	QList<double> maskHist = histogramer.MaskRelLumHistogram(lumInMask);
+
+	const int maskSize = lumInMask.size();
+	QList<double> relMaskHist = CalcRelativeMaskHist(maskHist, maskSize);
+
+	double mean = CalcMaskHistMean(relMaskHist);
+	double variance = CalcMaskHistVariance(relMaskHist, mean);
+
+	double skewness = 0.0;
+	double kurtosis = 0.0;
+	int existLumNum = 0;
+	const int relMaskHistSize = relMaskHist.size();
+	for ( int val = 0; val < relMaskHistSize; ++val )
+	{
+		if ( relMaskHist.at(val) <= 0.0 )
+		{
+			continue;
+		}
+
+		double lumDiff = val * RELATIVE_DIVIDER - mean;
+
+		skewness += pow(lumDiff, 3.0) * relMaskHist.at(val);
+		kurtosis += pow(lumDiff, 4.0) * relMaskHist.at(val);
+
+		++existLumNum;
+	}
+
+	skewness = pow(variance, -3.0) * skewness;
+	kurtosis = pow(variance, -4.0) * kurtosis - 3.0;
+
+	skewness = fabs(skewness) / existLumNum;
+	kurtosis = fabs(kurtosis) / ( 2 * existLumNum );
+
+	pixel->SetSkewness(skewness);
+	pixel->SetKurtosis(kurtosis);
+}
+
+// Calc relative mask histogram
+// @input:
+// - QList<double> - unempty mask histogram
+// - int - positive mask size
+// @output:
+// - QList<double> - mask histogram with relative values
+// - empty QList<double> - failed to calc relative values
+QList<double> SourceImgPixels::CalcRelativeMaskHist(const QList<double> &t_hist, const int &t_maskSize)
+{
+	if ( (true == t_hist.isEmpty()) || (t_maskSize <= 0) )
+	{
+		qDebug() << "CalcRelativeMaskHist(): Error - invalid arguments";
+		QList<double> empty;
+		return empty;
+	}
+
+	QList<double> relHist;
+	const int histSize = t_hist.size();
+	for ( int val = 0; val < histSize; ++val )
+	{
+		double relValue = t_hist.at(val) / t_maskSize;
+		relHist.append(relValue);
+	}
+
+	return relHist;
+}
+
+// Calc relative mask histogram mean value
+// @input:
+// - QList<double> - unempty mask histogram
+// @output:
+// - double - mask histogram mean value
+// - double < 0 - failed to calc mean
+double SourceImgPixels::CalcMaskHistMean(const QList<double> &t_hist)
+{
+	if ( true == t_hist.isEmpty() )
+	{
+		qDebug() << "CalcMaskHistMean(): Error - invalid arguments";
+		return ERROR;
+	}
+
+	double mean = 0.0;
+	const int histSize = t_hist.size();
+	for( int val = 0; val < histSize; ++val )
+	{
+		mean += val * RELATIVE_DIVIDER * t_hist.at(val);
+	}
+
+	return mean;
+}
+
+// Calc relative mask histogram variance value
+// @input:
+// - QList<double> - unempty mask histogram
+// - double - positive mask histogram mean value
+// @output:
+// - double - mask histogram variance value
+// - double < 0 - failed to calc variance
+double SourceImgPixels::CalcMaskHistVariance(const QList<double> &t_hist, const double &t_histMean)
+{
+	if ( (true == t_hist.isEmpty()) || (t_histMean < 0.0) )
+	{
+		qDebug() << "CalcMaskHistVariance(): Error - invalid arguments";
+		return ERROR;
+	}
+
+	double squareVariance = 0.0;
+	const int histSize = t_hist.size();
+	for( int val = 0; val < histSize; ++val )
+	{
+		double relLum = val * RELATIVE_DIVIDER;
+		squareVariance += t_hist.at(val) * pow( relLum - t_histMean, 2 );
+	}
+
+	double variance = pow(squareVariance, 0.5);
+
+	return variance;
+}
+
+// Get Skewness of pixel with certain coords
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+// - double - pixels Skewness
+double SourceImgPixels::GetPixelsSkewness(const unsigned int &t_width, const unsigned int &t_height) const
+{
+	if ( false == IsPixelExist(t_width, t_height) )
+	{
+		qDebug() << "GetPixelsSkewness(): Error - invalid arguments";
+		return RELATIVE_MIN;
+	}
+
+	const ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	return pixel->GetSkewness();
+}
+
+// Get Kurtosis of pixel with certain coords
+// @input:
+// - unsigned int - exist width (x) position of pixel
+// - unsigned int - exist height (y) position of pixel
+// @output:
+// - double - pixels Kurtosis
+double SourceImgPixels::GetPixelsKurtosis(const unsigned int &t_width, const unsigned int &t_height) const
+{
+	if ( false == IsPixelExist(t_width, t_height) )
+	{
+		qDebug() << "GetPixelsKurtosis(): Error - invalid arguments";
+		return RELATIVE_MIN;
+	}
+
+	const ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	return pixel->GetKurtosis();
 }
 
 // Find among all pixels in image value of max relative luminance

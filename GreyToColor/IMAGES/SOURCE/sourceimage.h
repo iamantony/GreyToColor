@@ -52,6 +52,12 @@ public:
 	void CalcPixelsEntropy();
 	// Get Entropy of pixel with certain coords
 	double GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const;
+	// Calc for each pixel in image it's Skewness and Kurtosis
+	void CalcPixelsSkewAndKurt();
+	// Get Skewness of pixel with certain coords
+	double GetPixelsSkewness(const unsigned int &t_width, const unsigned int &t_height) const;
+	// Get Kurtosis of pixel with certain coords
+	double GetPixelsKurtosis(const unsigned int &t_width, const unsigned int &t_height) const;
 	// Get maximum value of relative LAB luminance in image
 	double GetMaxRelLum();
 	// Get minimum value of relative LAB luminance in image

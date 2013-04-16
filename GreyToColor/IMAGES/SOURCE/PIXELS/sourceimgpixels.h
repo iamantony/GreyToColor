@@ -52,6 +52,12 @@ public:
 	void CalcPixelsEntropy();
 	// Get Entropy of pixel with certain coords
 	double GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const;
+	// Calc for each pixel in image it's Skewness and Kurtosis
+	void CalcPixelsSkewAndKurt();
+	// Get Skewness of pixel with certain coords
+	double GetPixelsSkewness(const unsigned int &t_width, const unsigned int &t_height) const;
+	// Get Kurtosis of pixel with certain coords
+	double GetPixelsKurtosis(const unsigned int &t_width, const unsigned int &t_height) const;
 	// Find among all pixels in image value of max relative luminance
 	double FindMaxRelLum() const;
 	// Find among all pixels in image value of min relative luminance
@@ -77,6 +83,14 @@ private:
 	void CalcPixSKO(const unsigned int &t_width, const unsigned int &t_height);
 	// Calc for certain pixel in image it's entropy
 	void CalcPixsEntropy(const unsigned int &t_width, const unsigned int &t_height);
+	// Calc for certain pixel in image it's Skewness and Kurtosis
+	void CalcPixsSkewAndKurt(const unsigned int &t_width, const unsigned int &t_height);
+	// Calc relative mask histogram
+	QList<double> CalcRelativeMaskHist(const QList<double> &t_hist, const int &t_maskSize);
+	// Calc relative mask histogram mean value
+	double CalcMaskHistMean(const QList<double> &t_hist);
+	// Calc relative mask histogram variance value
+	double CalcMaskHistVariance(const QList<double> &t_hist, const double &t_histMean);
 };
 
 #endif // SOURCEIMGPIXELS_H
