@@ -46,6 +46,8 @@ private:
 	virtual bool PrepareImages(const LumEqualization::Type &t_type);
 	// Colorize Target image using color information from Source image
 	virtual bool ColorizeImage();
+	// Colorize Target image using color information from Source image. Use correlation
+	bool ColorizeImageCorrelation();
 	// Restore images params if needed
 	virtual bool PostColorization();
 };

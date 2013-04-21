@@ -53,7 +53,7 @@ bool WSEntropyColorizator::Colorize(TargetImage *t_targetImg,
 		return false;
 	}
 
-	bool targetColorized = ColorizeImage();
+	bool targetColorized = ColorizeImageCorrelation();
 	if ( false == targetColorized )
 	{
 		qDebug() << "Colorize(): Error - can't colorize Target image";
@@ -197,6 +197,129 @@ bool WSEntropyColorizator::ColorizeImage()
 				if ( diffParams < bestParamsDiff )
 				{
 					bestParamsDiff = diffParams;
+					bestSourcePixWdt = sourceRandWdt;
+					bestSourcePixHgt = sourceRandHgt;
+				}
+			}
+
+			// Transfer color from Source pixel to Target pixel
+			sourceChA = m_source->PixelChA(bestSourcePixWdt, bestSourcePixHgt);
+			sourceChB = m_source->PixelChB(bestSourcePixWdt, bestSourcePixHgt);
+
+			m_target->SetPixelChAB(width,
+								   height,
+								   sourceChA,
+								   sourceChB);
+		}
+	}
+
+	qDebug() << "Elapsed time in nanosec:" << timer.nsecsElapsed();
+
+	return true;
+}
+
+// Colorize Target image using color information from Source image. Use correlation
+// @input:
+// @output:
+// - true - Target image colorized
+// - false - failed to colorize Target image
+bool WSEntropyColorizator::ColorizeImageCorrelation()
+{
+	if ( (NULL == m_target) ||
+		 (NULL == m_source) ||
+		 (false == m_target->HasImage()) ||
+		 (false == m_source->HasImage()) )
+	{
+		qDebug() << "ColorizeImage(): Error - invalid arguments";
+		return false;
+	}
+
+	const unsigned int targetWdt = m_target->GetImageWidth();
+	const unsigned int targetHgt = m_target->GetImageHeight();
+	const unsigned int sourceWdt = m_source->GetImageWidth();
+	const unsigned int sourceHgt = m_source->GetImageHeight();
+
+	// Define number of attempts for each target pixel of searching similar pixel in source image
+	const unsigned int pixelsInTargetImg = targetWdt * targetHgt;
+	unsigned int numOfAttempts = NUM_OF_ATTEMPTS;
+	if ( pixelsInTargetImg < NUM_OF_ATTEMPTS )
+	{
+		numOfAttempts = pixelsInTargetImg;
+	}
+
+	// Values of best found pixels characteristic
+	double bestParamsCorr = 0;
+	unsigned int bestSourcePixWdt = 0;
+	unsigned int bestSourcePixHgt = 0;
+
+	// Sum of Targets pixel variables
+	QList<double> targParams;
+
+	// Source pixel variables
+	unsigned int sourceRandWdt = 0;
+	unsigned int sourceRandHgt = 0;
+	double sourceChA = 0;
+	double sourceChB = 0;
+	QList<double> sourceParams;
+
+	// Decision variables
+	double product = 0.0;
+	double targSumm = 0.0;
+	double sourceSumm = 0.0;
+	double corrParams = DEFAULT_DIFF;
+
+	qDebug() << "Start colorization!";
+	QElapsedTimer timer;
+	timer.start();
+
+	srand(time(NULL));
+
+	for ( unsigned int width = 0; width < targetWdt; ++width )
+	{
+//		qDebug() << "ColorizeImage(): row =" << width;
+		for ( unsigned int height = 0; height < targetHgt; ++height )
+		{
+			// Reset best params
+			bestParamsCorr = 0.0;
+			bestSourcePixWdt = 0;
+			bestSourcePixHgt = 0;
+
+
+			// Get target pixel params
+			targParams.clear();
+			targParams << m_target->GetPixelsRelLum(width, height) <<
+						  m_target->GetPixelsSKO(width, height) <<
+						  m_target->GetPixelsEntropy(width, height) <<
+						  m_target->GetPixelsSkewness(width, height)/* <<
+						  m_target->GetPixelsKurtosis(width, height)*/;
+
+			// Try to find best similar source image pixel
+			for ( unsigned int pix = 0; pix < numOfAttempts; ++pix )
+			{
+				sourceRandWdt = rand() % sourceWdt;
+				sourceRandHgt = rand() % sourceHgt;
+
+				sourceParams.clear();
+				sourceParams << m_source->GetPixelsRelLum(sourceRandWdt, sourceRandHgt) <<
+								m_source->GetPixelsSKO(sourceRandWdt, sourceRandHgt) <<
+								m_source->GetPixelsEntropy(sourceRandWdt, sourceRandHgt) <<
+								m_source->GetPixelsSkewness(sourceRandWdt, sourceRandHgt)/* <<
+								m_source->GetPixelsKurtosis(sourceRandWdt, sourceRandHgt)*/;
+
+				product = 0.0;
+				targSumm = 0.0;
+				sourceSumm = 0.0;
+				for ( int i = 0; i < targParams.size(); ++i )
+				{
+					product += targParams.at(i) * sourceParams.at(i);
+					targSumm += pow( targParams.at(i), 2.0 );
+					sourceSumm += pow( sourceParams.at(i), 2.0 );
+				}
+
+				corrParams = product / ( pow(targSumm, 0.5) * pow(sourceSumm, 0.5) );
+				if ( bestParamsCorr < corrParams )
+				{
+					bestParamsCorr = corrParams;
 					bestSourcePixWdt = sourceRandWdt;
 					bestSourcePixHgt = sourceRandHgt;
 				}
