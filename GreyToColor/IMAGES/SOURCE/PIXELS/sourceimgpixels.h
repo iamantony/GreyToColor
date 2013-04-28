@@ -69,6 +69,8 @@ public:
 
 	// Test functions
 	void TestFunctionality();
+	// Find out what min and max values for skewness
+	void TestFindMaxSkewness();
 
 protected:
 	// Get list of relative luminances of neighbor pixels (to calc SKO, for example)

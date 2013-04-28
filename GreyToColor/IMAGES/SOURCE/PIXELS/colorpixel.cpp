@@ -120,7 +120,6 @@ bool ColorPixel::SetEntropy(const double &t_entropy)
 	if ( (t_entropy < RELATIVE_MIN) || (RELATIVE_MAX < t_entropy) )
 	{
 		qDebug() << "SetEntropy(): Error - invalid arguments, t_entropy =" << t_entropy;
-		qDebug() << "Realtive Entropy not accepted";
 		return false;
 	}
 
@@ -149,7 +148,6 @@ bool ColorPixel::SetSkewness(const double &t_skewness)
 	if ( (t_skewness < RELATIVE_MIN) || (RELATIVE_MAX < t_skewness) )
 	{
 		qDebug() << "SetSkewness(): Error - invalid arguments, t_skewness =" << t_skewness;
-		qDebug() << "Realtive Skewness not accepted";
 		return false;
 	}
 
@@ -169,18 +167,12 @@ double ColorPixel::GetSkewness() const
 
 // Set kurtosis for pixel of image
 // @input:
-// - double - relative kurtosis value in range [0, 1]
+// - double - relative kurtosis value
 // @output:
 // - true - kurtosis accepted
 // - false - kurtosis is out of range
 bool ColorPixel::SetKurtosis(const double &t_kurtosis)
 {
-	if ( (t_kurtosis < RELATIVE_MIN) || (RELATIVE_MAX < t_kurtosis) )
-	{
-		qDebug() << "SetKurtosis(): Error - invalid arguments, t_kurtosis =" << t_kurtosis;
-		return false;
-	}
-
 	m_kurtosis = t_kurtosis;
 
 	return true;
@@ -189,7 +181,7 @@ bool ColorPixel::SetKurtosis(const double &t_kurtosis)
 // Set kurtosis for pixel of image
 // @input:
 // @output:
-// - double - kurtosis value in range [0, 1]
+// - double - kurtosis value
 double ColorPixel::GetKurtosis() const
 {
 	return m_kurtosis;

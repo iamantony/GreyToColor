@@ -355,7 +355,6 @@ void SourceImgPixels::CalcPixsSkewAndKurt(const unsigned int &t_width, const uns
 
 	double skewness = 0.0;
 	double kurtosis = 0.0;
-	int existLumNum = 0;
 	const int relMaskHistSize = relMaskHist.size();
 	for ( int val = 0; val < relMaskHistSize; ++val )
 	{
@@ -368,15 +367,49 @@ void SourceImgPixels::CalcPixsSkewAndKurt(const unsigned int &t_width, const uns
 
 		skewness += pow(lumDiff, 3.0) * relMaskHist.at(val);
 		kurtosis += pow(lumDiff, 4.0) * relMaskHist.at(val);
-
-		++existLumNum;
 	}
 
 	skewness = pow(variance, -3.0) * skewness;
-	kurtosis = pow(variance, -4.0) * kurtosis - 3.0;
+	kurtosis = pow(variance, -4.0) * kurtosis;
 
-	skewness = fabs(skewness) / existLumNum;
-	kurtosis = fabs(kurtosis) / ( 2 * existLumNum );
+	// If you change mask rectangular size you will shoud change SKEW_OFFSET and KURT_OFFSET!
+	if ( NAN == skewness )
+	{
+		skewness = 0.5;
+	}
+	else
+	{
+		skewness = ( skewness + SKEW_OFFSET ) / (2 * SKEW_OFFSET );
+		if ( skewness < RELATIVE_MIN )
+		{
+			qDebug() << "min skewness =" << skewness;
+			skewness = RELATIVE_MIN;
+		}
+		else if ( RELATIVE_MAX < skewness )
+		{
+			qDebug() << "max skewness =" << skewness;
+			skewness = RELATIVE_MAX;
+		}
+	}
+
+	if ( NAN == kurtosis )
+	{
+		kurtosis = 0.0;
+	}
+	else
+	{
+		kurtosis = ( kurtosis + KURT_OFFSET ) / ( 2 * KURT_OFFSET );
+		if ( kurtosis < RELATIVE_MIN )
+		{
+			qDebug() << "min kurtosis =" << kurtosis;
+			kurtosis = RELATIVE_MIN;
+		}
+		else if ( RELATIVE_MAX < kurtosis )
+		{
+			qDebug() << "max kurtosis =" << kurtosis;
+			kurtosis = RELATIVE_MAX;
+		}
+	}
 
 	pixel->SetSkewness(skewness);
 	pixel->SetKurtosis(kurtosis);
@@ -726,4 +759,77 @@ void SourceImgPixels::TestFunctionality()
 	}
 
 	TransAllPixLAB2RGB();
+}
+
+// Find out what min and max values for skewness
+void SourceImgPixels::TestFindMaxSkewness()
+{
+	const int numOfLumLvl = (int)( RELATIVE_MAX / RELATIVE_DIVIDER );
+//	const int numPixels = 121;
+//	int step = numOfLumLvl / numPixels;
+
+	QList<double> relMaskHist;
+//	int counter = 0;
+	for ( int i = 0; i < numOfLumLvl; ++i )
+	{
+		if ( i == 500 )
+		{
+			relMaskHist.append(109.0 / 121.0);
+		}
+		else if ( i == 901 )
+		{
+			relMaskHist.append(10.0 / 121.0);
+		}
+		else if ( i == 499 )
+		{
+			relMaskHist.append(1.0 / 121.0);
+		}
+//		else if ( i == 3 )
+//		{
+//			relMaskHist.append(0.05);
+//		}
+		else
+		{
+			relMaskHist.append(0.0);
+		}
+
+//		++counter;
+//		if ( step == counter )
+//		{
+//			counter = 0;
+//			relMaskHist.append(1.0 / 121.0);
+//		}
+//		else
+//		{
+//			relMaskHist.append(0.0);
+//		}
+	}
+
+	double mean = CalcMaskHistMean(relMaskHist);
+	double variance = CalcMaskHistVariance(relMaskHist, mean);
+
+	double skewness = 0.0;
+	double kurtosis = 0.0;
+	int existLumNum = 0;
+	const int relMaskHistSize = relMaskHist.size();
+	for ( int val = 0; val < relMaskHistSize; ++val )
+	{
+		if ( relMaskHist.at(val) <= 0.0 )
+		{
+			continue;
+		}
+
+		double lumDiff = val * RELATIVE_DIVIDER - mean;
+
+		skewness += pow(lumDiff, 3.0) * relMaskHist.at(val);
+		kurtosis += pow(lumDiff, 4.0) * relMaskHist.at(val);
+
+		++existLumNum;
+	}
+
+	skewness = pow(variance, -3.0) * skewness;
+	kurtosis = pow(variance, -4.0) * kurtosis;
+
+	qDebug() << "skewness =" << skewness;
+	qDebug() << "kurtosis =" << kurtosis;
 }

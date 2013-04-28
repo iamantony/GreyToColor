@@ -42,6 +42,8 @@
 
 // For mask 11x11
 #define ENTROPY_MAX -7.0
+#define SKEW_OFFSET 15.0
+#define KURT_OFFSET 121.0
 
 #define RELATIVE_MIN 0.0
 #define RELATIVE_MAX 1.0

@@ -37,6 +37,8 @@
 #include "DEFINES/idbs.h"
 #include "DEFINES/colorization.h"
 
+#include "IMAGES/SOURCE/PIXELS/sourceimgpixels.h"
+
 namespace Ui
 {
 	class MainWindow;

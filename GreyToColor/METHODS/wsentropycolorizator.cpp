@@ -96,11 +96,11 @@ bool WSEntropyColorizator::PrepareImages(const LumEqualization::Type &t_type)
 		return false;
 	}
 
-	m_target->CalcPixelsEntropy();
-	m_source->CalcPixelsEntropy();
-
 	m_target->CalcPixelsSKO();
 	m_source->CalcPixelsSKO();
+
+	m_target->CalcPixelsEntropy();
+	m_source->CalcPixelsEntropy();
 
 	m_target->CalcPixelsSkewAndKurt();
 	m_source->CalcPixelsSkewAndKurt();
@@ -276,7 +276,7 @@ bool WSEntropyColorizator::ColorizeImageCorrelation()
 
 	for ( unsigned int width = 0; width < targetWdt; ++width )
 	{
-//		qDebug() << "ColorizeImage(): row =" << width;
+		qDebug() << "ColorizeImage(): row =" << width;
 		for ( unsigned int height = 0; height < targetHgt; ++height )
 		{
 			// Reset best params
@@ -290,8 +290,8 @@ bool WSEntropyColorizator::ColorizeImageCorrelation()
 			targParams << m_target->GetPixelsRelLum(width, height) <<
 						  m_target->GetPixelsSKO(width, height) <<
 						  m_target->GetPixelsEntropy(width, height) <<
-						  m_target->GetPixelsSkewness(width, height)/* <<
-						  m_target->GetPixelsKurtosis(width, height)*/;
+						  m_target->GetPixelsSkewness(width, height) <<
+						  m_target->GetPixelsKurtosis(width, height);
 
 			// Try to find best similar source image pixel
 			for ( unsigned int pix = 0; pix < numOfAttempts; ++pix )
@@ -303,8 +303,8 @@ bool WSEntropyColorizator::ColorizeImageCorrelation()
 				sourceParams << m_source->GetPixelsRelLum(sourceRandWdt, sourceRandHgt) <<
 								m_source->GetPixelsSKO(sourceRandWdt, sourceRandHgt) <<
 								m_source->GetPixelsEntropy(sourceRandWdt, sourceRandHgt) <<
-								m_source->GetPixelsSkewness(sourceRandWdt, sourceRandHgt)/* <<
-								m_source->GetPixelsKurtosis(sourceRandWdt, sourceRandHgt)*/;
+								m_source->GetPixelsSkewness(sourceRandWdt, sourceRandHgt) <<
+								m_source->GetPixelsKurtosis(sourceRandWdt, sourceRandHgt);
 
 				product = 0.0;
 				targSumm = 0.0;
