@@ -101,6 +101,11 @@ bool TargetPixel::ScaleRelLum(const double &t_factor)
 
 	const double relativeLum = GetRelativeLum();
 	double scaledLum = relativeLum * t_factor;
+	if ( RELATIVE_MAX < scaledLum )
+	{
+		scaledLum = RELATIVE_MAX;
+	}
+
 	bool isLumSet = SetRelativeLum(scaledLum);
 
 	return isLumSet;

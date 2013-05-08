@@ -151,7 +151,7 @@ void Application::ConnectUIandImgHand()
 	QObject::connect(m_mainUI,
 					 SIGNAL(SignalBuildLABLumHist(ImageKind::Type)),
 					 m_imgHandler,
-					 SLOT(SlotLABLumHist(ImageKind::Type)));
+					 SLOT(SlotRelLABLumHist(ImageKind::Type)));
 
 	QObject::connect(m_mainUI,
 					 SIGNAL(SignalBuildTargLumHist(LumEqualization::Type)),

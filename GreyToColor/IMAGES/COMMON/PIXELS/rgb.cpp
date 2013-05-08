@@ -154,7 +154,10 @@ void RGB::ToGrey()
 	}
 
 	// http://en.wikipedia.org/wiki/Grayscale
-	double greyLum = 0.2126 * m_red + 0.7152 * m_green + 0.0722 * m_blue;
+	double greyLum = 0.0;
+	greyLum += 0.2126 * m_red;
+	greyLum += 0.7152 * m_green;
+	greyLum += 0.0722 * m_blue;
 	int grey = (int)floor(greyLum + 0.5);
 
 	m_red = grey;

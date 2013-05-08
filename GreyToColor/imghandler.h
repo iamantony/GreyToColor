@@ -89,8 +89,8 @@ public slots:
 	void SlotGreyRGBHist(const ImageKind::Type &t_type);
 	// Slot to form RGB Histogram
 	void SlotRGBHist(const ImageKind::Type &t_type);
-	// Slot to form LAB Histogram
-	void SlotLABLumHist(const ImageKind::Type &t_type);
+	// Slot to form relative LAB Histogram
+	void SlotRelLABLumHist(const ImageKind::Type &t_type);
 	// Slot for scaling/normalising Target image relative Luminance
 	void SlotTargImgScale(const LumEqualization::Type &t_type);
 };

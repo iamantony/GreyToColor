@@ -573,7 +573,7 @@ double SourceImgPixels::FindMinRelLum() const
 		return ERROR;
 	}
 
-	double minLum = DEFAULT_MIN_LAB_LUM;
+	double minLum = RELATIVE_MAX;
 	for ( unsigned int width = 0; width < m_width; width++ )
 	{
 		for ( unsigned int height = 0; height < m_height; height++ )
@@ -603,7 +603,7 @@ double SourceImgPixels::FindAverageRelLum() const
 		return ERROR;
 	}
 
-	double averageLum = DEFAULT_MIN_LAB_LUM;
+	double averageLum = 0.0;
 	for ( unsigned int width = 0; width < m_width; width++ )
 	{
 		for ( unsigned int height = 0; height < m_height; height++ )
@@ -632,7 +632,7 @@ double SourceImgPixels::FindMostCommonRelLum() const
 	}
 
 	// Create zero mass for statistic
-	const int numberOfLevels = RELATIVE_MAX / LAB_LUM_HIST_DIVIDER;
+	const int numberOfLevels = RELATIVE_MAX / RELATIVE_DIVIDER;
 	QList<int> lumStatistic;
 	for ( int lumLvl = 0; lumLvl < numberOfLevels; lumLvl++ )
 	{
@@ -646,17 +646,26 @@ double SourceImgPixels::FindMostCommonRelLum() const
 		{
 			ColorPixel *pixel = (ColorPixel *)m_pixels[width][height];
 			double pixLum = pixel->GetRelativeLum();
-			double lumLvl = pixLum / LAB_LUM_HIST_DIVIDER;
+			double lumLvl = pixLum / RELATIVE_DIVIDER;
 			int lvlNum = (int)floor(lumLvl);
 
-			lumStatistic[lvlNum]++;
+//			qDebug() << width << ";" <<
+//						height << ";" <<
+//						pixLum << ";" <<
+//						lvlNum;
+
+			++lumStatistic[lvlNum];
 		}
 	}
 
+	TestStatistic(lumStatistic);
+
 	// Find number of most popular luminance level
+	const int percentOffset = 10;
+	const int lvlOffset = (numberOfLevels * percentOffset) / 100;
 	int mostCommonLvl = 0;
 	int maxNumInLvl = 0;
-	for ( int lvl = 0; lvl < numberOfLevels; lvl++ )
+	for ( int lvl = lvlOffset; lvl < numberOfLevels - lvlOffset; ++lvl )
 	{
 		if ( maxNumInLvl < lumStatistic.at(lvl) )
 		{
@@ -666,7 +675,7 @@ double SourceImgPixels::FindMostCommonRelLum() const
 	}
 
 	// Transform number of luminance level to relative LAB luminance value
-	double mostCommonLum = mostCommonLvl * LAB_LUM_HIST_DIVIDER;
+	double mostCommonLum = mostCommonLvl * RELATIVE_DIVIDER;
 
 	return mostCommonLum;
 }
@@ -832,4 +841,35 @@ void SourceImgPixels::TestFindMaxSkewness()
 
 	qDebug() << "skewness =" << skewness;
 	qDebug() << "kurtosis =" << kurtosis;
+}
+
+void SourceImgPixels::TestStatistic(const QList<int> t_stat) const
+{
+	QFile histFile;
+	histFile.setFileName("./hist.csv");
+
+	bool fileOpened = histFile.open(QIODevice::WriteOnly);
+	if ( false == fileOpened )
+	{
+		qDebug() << "TestStatistic(): Error - can't open file!";
+		return;
+	}
+
+	QTextStream streamToFile;
+	streamToFile.setDevice(&histFile);
+
+	const int numOfValues = t_stat.size();
+
+	streamToFile << "sep = ;" << endl;
+	streamToFile << "NUM;Rel_Lum;Pixels" << endl;
+	for ( int i = 0; i < numOfValues; i++ )
+	{
+		double lumValue = i * RELATIVE_DIVIDER;
+		streamToFile << i << ";" <<
+						lumValue << ";" <<
+						t_stat[i] <<
+						endl;
+	}
+
+	histFile.close();
 }

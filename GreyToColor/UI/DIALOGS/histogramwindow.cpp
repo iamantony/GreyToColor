@@ -280,10 +280,13 @@ void HistogramWindow::SlotRecieveGreyRGBHist(const QList<double> &t_hist)
 
 	const int numOfValues = t_hist.size();
 
+	streamToFile << "sep = ;" << endl;
 	streamToFile << "NUM;Grey" << endl;
 	for ( int i = 0; i < numOfValues; i++ )
 	{
-		streamToFile << i << ";" << t_hist[i] << endl;
+		streamToFile << i << ";" <<
+						t_hist[i] <<
+						endl;
 	}
 
 	histFile.close();
@@ -356,13 +359,15 @@ void HistogramWindow::SlotRecieveRGBHist(const QList< QList<double> > &t_hist)
 	QTextStream streamToFile;
 	streamToFile.setDevice(&histFile);
 
+	streamToFile << "sep = ;" << endl;
 	streamToFile << "NUM;R;G;B" << endl;
 	for ( int i = 0; i < chanRedLength; i++ )
 	{
 		streamToFile << i << ";" <<
 						t_hist[Histogram::RED][i] << ";" <<
 						t_hist[Histogram::GREEN][i] << ";" <<
-						t_hist[Histogram::BLUE][i] << endl;
+						t_hist[Histogram::BLUE][i] <<
+						endl;
 	}
 
 	histFile.close();
@@ -417,13 +422,15 @@ void HistogramWindow::SlotRecieveLABLumHist(const QList<double> &t_hist)
 
 	const int numOfValues = t_hist.size();
 
+	streamToFile << "sep = ;" << endl;
 	streamToFile << "NUM;LAB_Lum;Pixels" << endl;
 	for ( int i = 0; i < numOfValues; i++ )
 	{
 		double lumValue = i * LAB_LUM_HIST_DIVIDER;
 		streamToFile << i << ";" <<
 						lumValue << ";" <<
-						t_hist[i] << endl;
+						t_hist[i] <<
+						endl;
 	}
 
 	histFile.close();
@@ -478,13 +485,16 @@ void HistogramWindow::SlotRecieveRelLumHist(const QList<double> &t_hist)
 
 	const int numOfValues = t_hist.size();
 
+	streamToFile << "sep = ;" << endl;
 	streamToFile << "NUM;Rel_Lum;Pixels" << endl;
 	for ( int i = 0; i < numOfValues; i++ )
 	{
 		double lumValue = i * RELATIVE_DIVIDER;
 		streamToFile << i << ";" <<
 						lumValue << ";" <<
-						t_hist[i] << endl;
+						t_hist[i] <<
+						endl;
+
 	}
 
 	histFile.close();

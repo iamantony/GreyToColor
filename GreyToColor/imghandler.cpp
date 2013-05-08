@@ -381,11 +381,11 @@ void ImgHandler::SlotRGBHist(const ImageKind::Type &t_type)
 	emit SignalGetRGBHist(rgbHist);
 }
 
-// Slot to form LAB Luminance Histogram
+// Slot to form relative LAB Luminance Histogram
 // @input:
 // - ImageKind::Type - exist image type
 // @output:
-void ImgHandler::SlotLABLumHist(const ImageKind::Type &t_type)
+void ImgHandler::SlotRelLABLumHist(const ImageKind::Type &t_type)
 {
 	TargetImage *image;
 	switch(t_type)
@@ -414,7 +414,7 @@ void ImgHandler::SlotLABLumHist(const ImageKind::Type &t_type)
 		case ImageKind::DEFAULT_LAST:
 		default:
 		{
-			qDebug() << "SlotLABLumHist(): Error - invalid arguments";
+			qDebug() << "SlotRelLABLumHist(): Error - invalid arguments";
 			return;
 		}
 	}
@@ -423,21 +423,21 @@ void ImgHandler::SlotLABLumHist(const ImageKind::Type &t_type)
 	{
 		emit SignalProcError(tr("No such image"));
 
-		qDebug() << "SlotLABLumHist(): Error - no image";
+		qDebug() << "SlotRelLABLumHist(): Error - no image";
 		return;
 	}
 
 	ImgHistogram histogramer;
-	QList<double> lumHist = histogramer.LABLumHistogram(image);
+	QList<double> lumHist = histogramer.RelLumHistogram(image);
 	if ( true == lumHist.isEmpty() )
 	{
-		emit SignalProcError(tr("Can't form LAB Luminance Histogram"));
+		emit SignalProcError(tr("Can't form relative LAB Luminance Histogram"));
 
-		qDebug() << "SlotLABLumHist(): Error - failed to form LAB Luminance Histogram";
+		qDebug() << "SlotRelLABLumHist(): Error - failed to form LAB Luminance Histogram";
 		return;
 	}
 
-	emit SignalGetLABLumHist(lumHist);
+	emit SignalGetRelLumHist(lumHist);
 }
 
 // Slot for scaling/normalising Target image relative Luminance

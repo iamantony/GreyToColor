@@ -203,6 +203,8 @@ bool ImgLumScaler::NormalizeTargetImgByCenter(TargetImage *t_target, SourceImage
 		return false;
 	}
 
+	t_target->RestoreLABRelLum();
+
 	const double sourceMinLum = t_source->GetMinRelLum();
 	const double sourceMaxLum = t_source->GetMaxRelLum();
 	const double sourceCommonLum = t_source->GetMostCommonRelLum();

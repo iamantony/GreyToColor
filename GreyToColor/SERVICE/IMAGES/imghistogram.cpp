@@ -325,7 +325,7 @@ QList< QList<double> > ImgHistogram::ShrinkHistogram(const QList< QList<double> 
 // @output:
 // - empty QList<double> - failed to form histogram
 // - QList<double> - images luminance histogram
-QList<double> ImgHistogram::LABLumHistogram(TargetImage *t_img)
+QList<double> ImgHistogram::LABLumHistogram(SourceImage *t_img)
 {
 	if ( false == t_img->HasImage() )
 	{
@@ -372,7 +372,7 @@ QList<double> ImgHistogram::FormZeroLABLumHist()
 // @output:
 // - empty QList<double> - failed to form histogram
 // - QList<double> - images relative luminance histogram
-QList<double> ImgHistogram::RelLumHistogram(TargetImage *t_img)
+QList<double> ImgHistogram::RelLumHistogram(SourceImage *t_img)
 {
 	if ( false == t_img->HasImage() )
 	{
@@ -381,7 +381,11 @@ QList<double> ImgHistogram::RelLumHistogram(TargetImage *t_img)
 		return empty;
 	}
 
+//	qDebug() << "RelLumHistogram";
+
 	QList<double> lumHist = FormZeroRelLumHist();
+
+	const int maxRelLumStep = lumHist.size() -1;
 	const unsigned int imgWdt = t_img->GetImageWidth();
 	const unsigned int imgHgt = t_img->GetImageHeight();
 	for ( unsigned int width = 0; width < imgWdt; width++ )
@@ -389,8 +393,20 @@ QList<double> ImgHistogram::RelLumHistogram(TargetImage *t_img)
 		for( unsigned int height = 0; height < imgHgt; height++ )
 		{
 			double relLum = t_img->GetPixelsRelLum(width, height);
-			int stepNum = (int)floor( relLum / RELATIVE_DIVIDER );
-			lumHist[stepNum]++;
+			double lumLvl = relLum / RELATIVE_DIVIDER;
+			int stepNum = (int)floor(lumLvl);
+
+//			qDebug() << width << ";" <<
+//						height << ";" <<
+//						relLum << ";" <<
+//						stepNum;
+
+			if ( maxRelLumStep < stepNum)
+			{
+				stepNum = maxRelLumStep;
+			}
+
+			++lumHist[stepNum];
 		}
 	}
 

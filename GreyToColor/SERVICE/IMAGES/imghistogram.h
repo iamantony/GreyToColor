@@ -23,7 +23,8 @@
 #include <QImage>
 #include <QDebug>
 #include "./IMAGES/COMMON/image.h"
-#include "IMAGES/TARGET/targetimage.h"
+//#include "IMAGES/TARGET/targetimage.h"
+#include "IMAGES/SOURCE/sourceimage.h"
 #include "imgtransform.h"
 #include "DEFINES/imgservice.h"
 #include "DEFINES/pixels.h"
@@ -41,9 +42,9 @@ public:
 	// Get image channels histogram (in percent)
 	QList< QList<double> > RGBHistogram(const Image &t_img, const int t_size);
 	// Get images histogram of luminance L channel of LAB color space
-	QList<double> LABLumHistogram(TargetImage *t_img);
+	QList<double> LABLumHistogram(SourceImage *t_img);
 	// Get images histogram of relative LAB luminance
-	QList<double> RelLumHistogram(TargetImage *t_img);
+	QList<double> RelLumHistogram(SourceImage *t_img);
 	// Histogram for image mask (relative LAB luminance)
 	QList<double> MaskRelLumHistogram(const QList<double> &t_mask);
 

@@ -20,6 +20,7 @@
 #define SOURCEIMGPIXELS_H
 
 #include <QFileDialog>
+#include <QTextStream>
 #include <QImage>
 #include <QDebug>
 
@@ -71,6 +72,7 @@ public:
 	void TestFunctionality();
 	// Find out what min and max values for skewness
 	void TestFindMaxSkewness();
+	void TestStatistic(const QList<int> t_stat) const;
 
 protected:
 	// Get list of relative luminances of neighbor pixels (to calc SKO, for example)
