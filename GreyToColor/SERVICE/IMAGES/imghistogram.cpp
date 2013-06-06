@@ -381,8 +381,6 @@ QList<double> ImgHistogram::RelLumHistogram(SourceImage *t_img)
 		return empty;
 	}
 
-//	qDebug() << "RelLumHistogram";
-
 	QList<double> lumHist = FormZeroRelLumHist();
 
 	const int maxRelLumStep = lumHist.size() -1;
@@ -395,11 +393,6 @@ QList<double> ImgHistogram::RelLumHistogram(SourceImage *t_img)
 			double relLum = t_img->GetPixelsRelLum(width, height);
 			double lumLvl = relLum / RELATIVE_DIVIDER;
 			int stepNum = (int)floor(lumLvl);
-
-//			qDebug() << width << ";" <<
-//						height << ";" <<
-//						relLum << ";" <<
-//						stepNum;
 
 			if ( maxRelLumStep < stepNum)
 			{
@@ -445,10 +438,20 @@ QList<double> ImgHistogram::MaskRelLumHistogram(const QList<double> &t_mask)
 	}
 
 	QList<double> lumHist = FormZeroRelLumHist();
+	const int lumHistSize = lumHist.size();
 	const int maskSize = t_mask.size();
 	for ( int value = 0; value < maskSize; value++ )
 	{
 		int stepNum = (int)floor( t_mask.at(value) / RELATIVE_DIVIDER );
+		if ( stepNum < 0 )
+		{
+			stepNum = 0;
+		}
+		else if ( lumHistSize <= stepNum )
+		{
+			stepNum = lumHistSize - 1;
+		}
+
 		lumHist[stepNum]++;
 	}
 

@@ -46,6 +46,9 @@ bool WSEntropyColorizator::Colorize(TargetImage *t_targetImg,
 	m_target = t_targetImg;
 	m_source = t_sourceImg;
 
+	QElapsedTimer timer;
+	timer.start();
+
 	bool imagesPrepared = PrepareImages(t_type);
 	if ( false == imagesPrepared )
 	{
@@ -66,6 +69,8 @@ bool WSEntropyColorizator::Colorize(TargetImage *t_targetImg,
 		qDebug() << "Colorize(): Error - can't restore images parameters";
 		return false;
 	}
+
+	qDebug() << "All time in nanosec:" << timer.nsecsElapsed();
 
 	return true;
 }
@@ -96,12 +101,15 @@ bool WSEntropyColorizator::PrepareImages(const LumEqualization::Type &t_type)
 		return false;
 	}
 
+	qDebug() << "SKO";
 	m_target->CalcPixelsSKO();
 	m_source->CalcPixelsSKO();
 
+	qDebug() << "Entropy";
 	m_target->CalcPixelsEntropy();
 	m_source->CalcPixelsEntropy();
 
+	qDebug() << "Skew and Kurt";
 	m_target->CalcPixelsSkewAndKurt();
 	m_source->CalcPixelsSkewAndKurt();
 
@@ -276,7 +284,7 @@ bool WSEntropyColorizator::ColorizeImageCorrelation()
 
 	for ( unsigned int width = 0; width < targetWdt; ++width )
 	{
-		qDebug() << "ColorizeImage(): row =" << width;
+//		qDebug() << "ColorizeImage(): row =" << width;
 		for ( unsigned int height = 0; height < targetHgt; ++height )
 		{
 			// Reset best params

@@ -48,6 +48,11 @@ void ColorPixel::ClearColor()
 void ColorPixel::CalcRelativeLum()
 {
 	m_relativeLum = GetChL() / LAB_MAX_LUM;
+
+	if ( (NAN == m_relativeLum) || (m_relativeLum < RELATIVE_MIN) )
+	{
+		m_relativeLum = RELATIVE_MIN;
+	}
 }
 
 // Get relative LAB luminance value
@@ -68,7 +73,9 @@ double ColorPixel::GetRelativeLum() const
 // - false - luminance is out of range
 bool ColorPixel::SetRelativeLum(const double &t_lum)
 {
-	if ( (t_lum < RELATIVE_MIN) || (RELATIVE_MAX < t_lum) )
+	if ( (t_lum < RELATIVE_MIN) ||
+		 (RELATIVE_MAX < t_lum) ||
+		 (NAN == t_lum) )
 	{
 		qDebug() << "SetRelativeLum(): Error - invalid arguments, t_lum =" << t_lum;
 		qDebug() << "Realtive lumiance not accepted";

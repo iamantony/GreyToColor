@@ -46,6 +46,9 @@ bool WalshSimpleColorizator::Colorize(TargetImage *t_targetImg,
 	m_target = t_targetImg;
 	m_source = t_sourceImg;
 
+	QElapsedTimer timer;
+	timer.start();
+
 	bool imagesPrepared = PrepareImages(t_type);
 	if ( false == imagesPrepared )
 	{
@@ -66,6 +69,8 @@ bool WalshSimpleColorizator::Colorize(TargetImage *t_targetImg,
 		qDebug() << "Colorize(): Error - can't restore images parameters";
 		return false;
 	}
+
+	qDebug() << "All time in nanosec:" << timer.nsecsElapsed();
 
 	return true;
 }

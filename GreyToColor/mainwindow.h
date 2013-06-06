@@ -83,6 +83,7 @@ private:
 
 	// Automatic colorization: all methods, all luminance equalization types. Test!
 	void TestAutoColorization();
+	void TestAutoLongColorization();
 
 signals:
 	void SignalNewIDB(const QString &t_name);

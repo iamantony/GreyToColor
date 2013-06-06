@@ -46,6 +46,9 @@ bool WSLookUpTableColorizator::Colorize(TargetImage *t_targetImg,
 	m_target = t_targetImg;
 	m_source = t_sourceImg;
 
+	QElapsedTimer timer;
+	timer.start();
+
 	bool imagesPrepared = PrepareImages(t_type);
 	if ( false == imagesPrepared )
 	{
@@ -66,6 +69,8 @@ bool WSLookUpTableColorizator::Colorize(TargetImage *t_targetImg,
 		qDebug() << "Colorize(): Error - can't restore images parameters";
 		return false;
 	}
+
+	qDebug() << "All time in nanosec:" << timer.nsecsElapsed();
 
 	return true;
 }
@@ -318,7 +323,7 @@ bool WSLookUpTableColorizator::ColorizeImage()
 
 	for ( unsigned int width = 0; width < targetWdt; width++ )
 	{
-		qDebug() << "width =" << width;
+//		qDebug() << "width =" << width;
 		for ( unsigned int height = 0; height < targetHgt; height++ )
 		{
 			// Get target pixel params
@@ -408,7 +413,7 @@ bool WSLookUpTableColorizator::ColorizeImage()
 	}
 
 	qDebug() << "Elapsed time in nanosec:" << timer.nsecsElapsed();
-	qDebug() << "found = " << found;
+//	qDebug() << "found = " << found;
 
 	return true;
 }

@@ -46,6 +46,9 @@ bool WNNoRandColorizator::Colorize(TargetImage *t_targetImg,
 	m_target = t_targetImg;
 	m_source = t_sourceImg;
 
+	QElapsedTimer timer;
+	timer.start();
+
 	bool imagesPrepared = PrepareImages(t_type);
 	if ( false == imagesPrepared )
 	{
@@ -66,6 +69,8 @@ bool WNNoRandColorizator::Colorize(TargetImage *t_targetImg,
 		qDebug() << "Colorize(): Error - can't restore images parameters";
 		return false;
 	}
+
+	qDebug() << "All time in nanosec:" << timer.nsecsElapsed();
 
 	return true;
 }
@@ -401,8 +406,8 @@ QList< QPair<unsigned int, unsigned int> > WNNoRandColorizator::FormRefPixelCoor
 
 	const unsigned int sourceWdt = m_source->GetImageWidth();
 	const unsigned int sourceHgt = m_source->GetImageHeight();
-	const unsigned int distBtwPixsOnWdt = sourceWdt / pixOnWdt;
-	const unsigned int distBtwPixsOnHgt = sourceHgt / pixOnHgt;
+	const unsigned int distBtwPixsOnWdt = (sourceWdt - 1) / pixOnWdt;
+	const unsigned int distBtwPixsOnHgt = (sourceHgt - 1) / pixOnHgt;
 
 	QList< QPair<unsigned int, unsigned int> > pixelsCoords;
 	for ( unsigned int wdtPix = 1; wdtPix <= pixOnWdt; wdtPix++ )

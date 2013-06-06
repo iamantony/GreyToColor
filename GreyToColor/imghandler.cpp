@@ -428,7 +428,8 @@ void ImgHandler::SlotRelLABLumHist(const ImageKind::Type &t_type)
 	}
 
 	ImgHistogram histogramer;
-	QList<double> lumHist = histogramer.RelLumHistogram(image);
+//	QList<double> lumHist = histogramer.RelLumHistogram(image);
+	QList<double> lumHist = histogramer.LABLumHistogram(image);
 	if ( true == lumHist.isEmpty() )
 	{
 		emit SignalProcError(tr("Can't form relative LAB Luminance Histogram"));
@@ -437,7 +438,8 @@ void ImgHandler::SlotRelLABLumHist(const ImageKind::Type &t_type)
 		return;
 	}
 
-	emit SignalGetRelLumHist(lumHist);
+//	emit SignalGetRelLumHist(lumHist);
+	emit SignalGetLABLumHist(lumHist);
 }
 
 // Slot for scaling/normalising Target image relative Luminance

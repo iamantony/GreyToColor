@@ -257,6 +257,8 @@ void MainWindow::SlotGetSourceImg(const QString &t_sourceImgPath)
 	}
 
 	ui->sourceImgLbl->SetImage(t_sourceImgPath);
+
+	qDebug() << "Source image:" << t_sourceImgPath;
 }
 
 // Slot for button findSourceImgPB to find similar image from IDB
@@ -281,7 +283,7 @@ void MainWindow::SlotGetResultImg(QImage t_resultImg)
 
 	ui->resultImgLbl->SetImage(t_resultImg);
 
-//	m_result = t_resultImg;
+	m_result = t_resultImg;
 }
 
 // Slot for start colrization process
@@ -307,8 +309,7 @@ void MainWindow::on_resetPB_clicked()
 		return;
 	}
 
-	SourceImgPixels pixels;
-	pixels.TestFindMaxSkewness();
+	TestAutoLongColorization();
 
 	// TODO:
 	// Send signal to ImgHandler. It should reload target image, calc all it's params (LAB, SKO) and then send
@@ -685,4 +686,79 @@ void MainWindow::SlotNeedTargLumHist(const LumEqualization::Type &t_lumType)
 void MainWindow::SlotGetRelLumHist(const QList<double> &t_hist)
 {
 	emit SignalSendRelLumHist(t_hist);
+}
+
+void MainWindow::TestAutoLongColorization()
+{
+	QString targetImage = "TEST/timesquare.jpg";
+	emit SignalNewTargetImg(targetImage);
+	QTime dieTime= QTime::currentTime().addSecs(10);
+	while( QTime::currentTime() < dieTime )
+	{
+		QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+	}
+
+	// Use for manual source image set
+	QString sourceImage = "TEST/ts3.jpg";
+	emit SignalNewSourceImg(sourceImage);
+	dieTime= QTime::currentTime().addSecs(10);
+	while( QTime::currentTime() < dieTime )
+	{
+		QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+	}
+
+//	// Use for automatic source image set using IDB
+//	emit SignalOpenIDB("idb/test.sqlite");
+//	dieTime= QTime::currentTime().addSecs(10);
+//	while( QTime::currentTime() < dieTime )
+//	{
+//		QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+//	}
+
+	emit SignalUseLumEqual(LumEqualization::NORMALIZE_LUM_CENTER);
+
+	for ( int method = Methods::WALSH_SIMPLE; method < Methods::DEFAULT_LAST; method++ )
+	{
+		Methods::Type methodType = static_cast<Methods::Type>(method);
+		emit SignalUseColorMethod(methodType);
+
+//		for ( int pass = Passport::LUM_HISTOGRAM; pass < Passport::DEFAULT_LAST; pass++ )
+//		{
+			qDebug() << "Method:" << method /*<< "; Passport:" << pass*/;
+
+//			// Use when source image is set automatically
+//			emit SignalFindSimilarImgInIDB();
+//			dieTime= QTime::currentTime().addSecs(100);
+//			while( QTime::currentTime() < dieTime )
+//			{
+//				QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+//			}
+
+//			Passport::Type passType = static_cast<Passport::Type>(pass);
+//			emit SignalUseImgPassport(passType);
+
+			QImage empty;
+			m_result = empty;
+
+			emit SignalStartColorization();
+
+			while ( true == m_result.isNull() )
+			{
+				QTime dieTime= QTime::currentTime().addSecs(10);
+				while( QTime::currentTime() < dieTime )
+				{
+					QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+				}
+			}
+
+			QString saveToPath = "TEST/Time/time_square";
+			saveToPath.append( QString::number(method) );
+//			saveToPath.append( QString::number(pass) );
+			saveToPath.append(".png");
+
+			m_result.save(saveToPath);
+
+			qDebug() << "Image saved:" << saveToPath;
+//		}
+	}
 }

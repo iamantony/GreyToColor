@@ -649,19 +649,12 @@ double SourceImgPixels::FindMostCommonRelLum() const
 			double lumLvl = pixLum / RELATIVE_DIVIDER;
 			int lvlNum = (int)floor(lumLvl);
 
-//			qDebug() << width << ";" <<
-//						height << ";" <<
-//						pixLum << ";" <<
-//						lvlNum;
-
 			++lumStatistic[lvlNum];
 		}
 	}
 
-	TestStatistic(lumStatistic);
-
 	// Find number of most popular luminance level
-	const int percentOffset = 10;
+	const int percentOffset = 0;
 	const int lvlOffset = (numberOfLevels * percentOffset) / 100;
 	int mostCommonLvl = 0;
 	int maxNumInLvl = 0;
@@ -843,6 +836,7 @@ void SourceImgPixels::TestFindMaxSkewness()
 	qDebug() << "kurtosis =" << kurtosis;
 }
 
+// Save ime LAB luminance statistic
 void SourceImgPixels::TestStatistic(const QList<int> t_stat) const
 {
 	QFile histFile;
