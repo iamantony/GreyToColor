@@ -1,2 +1,1 @@
-1) Add new pixels comparison parameters
-3) Add descriptions to classes
+1) Combine in different objects (or paths) classes for image processing, database and so on. Image = image classes + image service
