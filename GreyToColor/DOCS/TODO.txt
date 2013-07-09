@@ -1,1 +1,2 @@
 1) Combine in different objects (or paths) classes for image processing, database and so on. Image = image classes + image service
+2) Convert RGB to LAB through search table
