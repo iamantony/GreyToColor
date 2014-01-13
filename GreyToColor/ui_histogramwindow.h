@@ -11,19 +11,19 @@
 #define UI_HISTOGRAMWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QMainWindow>
-#include <QtGui/QPushButton>
-#include <QtGui/QRadioButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QStatusBar>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QAction>
+#include <QApplication>
+#include <QButtonGroup>
+#include <QGroupBox>
+#include <QHBoxLayout>
+#include <QHeaderView>
+#include <QMainWindow>
+#include <QPushButton>
+#include <QRadioButton>
+#include <QSpacerItem>
+#include <QStatusBar>
+#include <QVBoxLayout>
+#include <QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -201,27 +201,27 @@ public:
 
     void retranslateUi(QMainWindow *HistogramWindow)
     {
-        HistogramWindow->setWindowTitle(QApplication::translate("HistogramWindow", "Histogram", 0, QApplication::UnicodeUTF8));
-        actionTargOriginal->setText(QApplication::translate("HistogramWindow", "Target Original", 0, QApplication::UnicodeUTF8));
-        actionTargColorized->setText(QApplication::translate("HistogramWindow", "Target Colorized", 0, QApplication::UnicodeUTF8));
-        actionSource->setText(QApplication::translate("HistogramWindow", "Source", 0, QApplication::UnicodeUTF8));
-        actionHistRGB->setText(QApplication::translate("HistogramWindow", "RGB", 0, QApplication::UnicodeUTF8));
-        actionHistLAB->setText(QApplication::translate("HistogramWindow", "LAB", 0, QApplication::UnicodeUTF8));
-        gbImageType->setTitle(QApplication::translate("HistogramWindow", "Image type", 0, QApplication::UnicodeUTF8));
-        rbTargOrig->setText(QApplication::translate("HistogramWindow", "Target Oiginal", 0, QApplication::UnicodeUTF8));
-        rbTargColor->setText(QApplication::translate("HistogramWindow", "Target Colorized", 0, QApplication::UnicodeUTF8));
-        rbSource->setText(QApplication::translate("HistogramWindow", "Source", 0, QApplication::UnicodeUTF8));
-        gbColorSpaceType->setTitle(QApplication::translate("HistogramWindow", "Color space", 0, QApplication::UnicodeUTF8));
-        rbRGBGrey->setText(QApplication::translate("HistogramWindow", "RGB Grey", 0, QApplication::UnicodeUTF8));
-        rbRGB->setText(QApplication::translate("HistogramWindow", "RGB", 0, QApplication::UnicodeUTF8));
-        rbLAB->setText(QApplication::translate("HistogramWindow", "LAB Luminance", 0, QApplication::UnicodeUTF8));
-        gbTargLum->setTitle(QApplication::translate("HistogramWindow", "Target LAB Luminance", 0, QApplication::UnicodeUTF8));
-        rbNoScale->setText(QApplication::translate("HistogramWindow", "No scale", 0, QApplication::UnicodeUTF8));
-        rbScaleMax->setText(QApplication::translate("HistogramWindow", "Scale by Source Image Max Luminance", 0, QApplication::UnicodeUTF8));
-        rbScaleAver->setText(QApplication::translate("HistogramWindow", "Scale by Source Image Average Luminance", 0, QApplication::UnicodeUTF8));
-        rbNormBorder->setText(QApplication::translate("HistogramWindow", "Normalise by Source Image Luminance borders", 0, QApplication::UnicodeUTF8));
-        rbNormCenter->setText(QApplication::translate("HistogramWindow", "Normalise by Source Image Central Luminance", 0, QApplication::UnicodeUTF8));
-        pbFormHist->setText(QApplication::translate("HistogramWindow", "Form histogram", 0, QApplication::UnicodeUTF8));
+		HistogramWindow->setWindowTitle("Histogram");
+		actionTargOriginal->setText("Target Original");
+		actionTargColorized->setText("Target Colorized");
+		actionSource->setText("Source");
+		actionHistRGB->setText("RGB");
+		actionHistLAB->setText("LAB");
+		gbImageType->setTitle("Image type");
+		rbTargOrig->setText("Target Oiginal");
+		rbTargColor->setText("Target Colorized");
+		rbSource->setText("Source");
+		gbColorSpaceType->setTitle("Color space");
+		rbRGBGrey->setText("RGB Grey");
+		rbRGB->setText("RGB");
+		rbLAB->setText("LAB Luminance");
+		gbTargLum->setTitle("Target LAB Luminance");
+		rbNoScale->setText("No scale");
+		rbScaleMax->setText("Scale by Source Image Max Luminance");
+		rbScaleAver->setText("Scale by Source Image Average Luminance");
+		rbNormBorder->setText("Normalise by Source Image Luminance borders");
+		rbNormCenter->setText("Normalise by Source Image Central Luminance");
+		pbFormHist->setText("Form histogram");
     } // retranslateUi
 
 };

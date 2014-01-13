@@ -11,20 +11,20 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QMainWindow>
-#include <QtGui/QMenu>
-#include <QtGui/QMenuBar>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QAction>
+#include <QApplication>
+#include <QButtonGroup>
+#include <QHBoxLayout>
+#include <QHeaderView>
+#include <QLabel>
+#include <QLineEdit>
+#include <QMainWindow>
+#include <QMenu>
+#include <QMenuBar>
+#include <QPushButton>
+#include <QSpacerItem>
+#include <QVBoxLayout>
+#include <QWidget>
 #include <UI/scalelabel.h>
 
 QT_BEGIN_NAMESPACE
@@ -381,37 +381,38 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "GreyToColor", 0, QApplication::UnicodeUTF8));
-        actionOpenTargetImage->setText(QApplication::translate("MainWindow", "Open target image...", 0, QApplication::UnicodeUTF8));
-        actionClose->setText(QApplication::translate("MainWindow", "Close", 0, QApplication::UnicodeUTF8));
-        actionOpenSourceImage->setText(QApplication::translate("MainWindow", "Open source image...", 0, QApplication::UnicodeUTF8));
-        actionSaveResult->setText(QApplication::translate("MainWindow", "Save result...", 0, QApplication::UnicodeUTF8));
-        actionCreateDatabase->setText(QApplication::translate("MainWindow", "Create database...", 0, QApplication::UnicodeUTF8));
-        actionAddImages->setText(QApplication::translate("MainWindow", "Add images...", 0, QApplication::UnicodeUTF8));
-        actionOpenDatabase->setText(QApplication::translate("MainWindow", "Open database...", 0, QApplication::UnicodeUTF8));
-        actionPreferences->setText(QApplication::translate("MainWindow", "Preferences", 0, QApplication::UnicodeUTF8));
-        actionLumHist->setText(QApplication::translate("MainWindow", "Luminance Histogram", 0, QApplication::UnicodeUTF8));
-        actionSubsampLum->setText(QApplication::translate("MainWindow", "Subsampled Luminance", 0, QApplication::UnicodeUTF8));
-        actionLumGradHists->setText(QApplication::translate("MainWindow", "Luminance and Gradient Histograms", 0, QApplication::UnicodeUTF8));
-        actionSubsampLumGrad->setText(QApplication::translate("MainWindow", "Subsampled Luminance and Gradient", 0, QApplication::UnicodeUTF8));
-        actionWalshSimple->setText(QApplication::translate("MainWindow", "Walsh Simple", 0, QApplication::UnicodeUTF8));
-        actionWalshNeighbor->setText(QApplication::translate("MainWindow", "Walsh Neighbor", 0, QApplication::UnicodeUTF8));
-        actionWNNoRand->setText(QApplication::translate("MainWindow", "Walsh Neighbor No Rand", 0, QApplication::UnicodeUTF8));
-        actionWNOneRand->setText(QApplication::translate("MainWindow", "Walsh Neighbor One Rand", 0, QApplication::UnicodeUTF8));
-        actionFormHist->setText(QApplication::translate("MainWindow", "Form histogram", 0, QApplication::UnicodeUTF8));
+//        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "GreyToColor", 0, QApplication::UnicodeUTF8));
+		MainWindow->setWindowTitle("GreyToColor");
+		actionOpenTargetImage->setText("Open target image...");
+		actionClose->setText("Close");
+		actionOpenSourceImage->setText("Open source image...");
+		actionSaveResult->setText("Save result...");
+		actionCreateDatabase->setText("Create database...");
+		actionAddImages->setText("Add images...");
+		actionOpenDatabase->setText("Open database...");
+		actionPreferences->setText("Preferences");
+		actionLumHist->setText("Luminance Histogram");
+		actionSubsampLum->setText("Subsampled Luminance");
+		actionLumGradHists->setText("Luminance and Gradient Histograms");
+		actionSubsampLumGrad->setText("Subsampled Luminance and Gradient");
+		actionWalshSimple->setText("Walsh Simple");
+		actionWalshNeighbor->setText("Walsh Neighbor");
+		actionWNNoRand->setText("Walsh Neighbor No Rand");
+		actionWNOneRand->setText("Walsh Neighbor One Rand");
+		actionFormHist->setText("Form histogram");
         targetImgLbl->setText(QString());
-        openTargetImgPB->setText(QApplication::translate("MainWindow", "Open target image", 0, QApplication::UnicodeUTF8));
+		openTargetImgPB->setText("Open target image");
         resultImgLbl->setText(QString());
-        startColorizationPB->setText(QApplication::translate("MainWindow", "Colorize", 0, QApplication::UnicodeUTF8));
-        resetPB->setText(QApplication::translate("MainWindow", "Reset", 0, QApplication::UnicodeUTF8));
+		startColorizationPB->setText("Colorize");
+		resetPB->setText("Reset");
         sourceImgLbl->setText(QString());
-        openSourceImgPB->setText(QApplication::translate("MainWindow", "Open source image", 0, QApplication::UnicodeUTF8));
-        findSourceImgPB->setText(QApplication::translate("MainWindow", "Find in DB", 0, QApplication::UnicodeUTF8));
-        skoLbl->setText(QApplication::translate("MainWindow", "SKO:", 0, QApplication::UnicodeUTF8));
-        menuFile->setTitle(QApplication::translate("MainWindow", "File", 0, QApplication::UnicodeUTF8));
-        menuDatabase->setTitle(QApplication::translate("MainWindow", "Database", 0, QApplication::UnicodeUTF8));
-        menuColorization->setTitle(QApplication::translate("MainWindow", "Colorization", 0, QApplication::UnicodeUTF8));
-        menuHistogram->setTitle(QApplication::translate("MainWindow", "Histogram", 0, QApplication::UnicodeUTF8));
+		openSourceImgPB->setText("Open source image");
+		findSourceImgPB->setText("Find in DB");
+		skoLbl->setText("SKO:");
+		menuFile->setTitle("File");
+		menuDatabase->setTitle("Database");
+		menuColorization->setTitle("Colorization");
+		menuHistogram->setTitle("Histogram");
     } // retranslateUi
 
 };

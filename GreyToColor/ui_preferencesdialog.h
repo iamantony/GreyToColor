@@ -11,17 +11,17 @@
 #define UI_PREFERENCESDIALOG_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialog>
-#include <QtGui/QDialogButtonBox>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHeaderView>
-#include <QtGui/QRadioButton>
-#include <QtGui/QTabWidget>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QAction>
+#include <QApplication>
+#include <QButtonGroup>
+#include <QDialog>
+#include <QDialogButtonBox>
+#include <QGroupBox>
+#include <QHeaderView>
+#include <QRadioButton>
+#include <QTabWidget>
+#include <QVBoxLayout>
+#include <QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -208,7 +208,7 @@ public:
 
     void retranslateUi(QDialog *PreferencesDialog)
     {
-        PreferencesDialog->setWindowTitle(QApplication::translate("PreferencesDialog", "Preferences", 0, QApplication::UnicodeUTF8));
+		PreferencesDialog->setWindowTitle("Preferences");
 #ifndef QT_NO_TOOLTIP
         tabColorization->setToolTip(QString());
 #endif // QT_NO_TOOLTIP
@@ -218,26 +218,26 @@ public:
 #ifndef QT_NO_ACCESSIBILITY
         tabColorization->setAccessibleDescription(QString());
 #endif // QT_NO_ACCESSIBILITY
-        gbColorMethod->setTitle(QApplication::translate("PreferencesDialog", "Colorization Methods", 0, QApplication::UnicodeUTF8));
-        rbWSimple->setText(QApplication::translate("PreferencesDialog", "Walsh Simple", 0, QApplication::UnicodeUTF8));
-        rbWSLookUp->setText(QApplication::translate("PreferencesDialog", "Walsh Simple (look up table)", 0, QApplication::UnicodeUTF8));
-        rbWSEntropy->setText(QApplication::translate("PreferencesDialog", "Walsh Simple (all parameters)", 0, QApplication::UnicodeUTF8));
-        rbWNeighbor->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor", 0, QApplication::UnicodeUTF8));
-        rbWNNoRand->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor (fixed net)", 0, QApplication::UnicodeUTF8));
-        rbWNOneRand->setText(QApplication::translate("PreferencesDialog", "Walsh Neighbor (same pixels set)", 0, QApplication::UnicodeUTF8));
-        gbImgLumEqual->setTitle(QApplication::translate("PreferencesDialog", "Images Luminance Equalization", 0, QApplication::UnicodeUTF8));
-        rbNoScale->setText(QApplication::translate("PreferencesDialog", "No Scale", 0, QApplication::UnicodeUTF8));
-        rbScaleMaxLum->setText(QApplication::translate("PreferencesDialog", "Scale by Max Luminance", 0, QApplication::UnicodeUTF8));
-        rbScaleAverLum->setText(QApplication::translate("PreferencesDialog", "Scale by Average Luminance", 0, QApplication::UnicodeUTF8));
-        rbNormLumBorder->setText(QApplication::translate("PreferencesDialog", "Normalize Luminance (by borders)", 0, QApplication::UnicodeUTF8));
-        rbNormLumCentral->setText(QApplication::translate("PreferencesDialog", "Normalize Luminance (by center)", 0, QApplication::UnicodeUTF8));
-        prefCategories->setTabText(prefCategories->indexOf(tabColorization), QApplication::translate("PreferencesDialog", "Colorization", 0, QApplication::UnicodeUTF8));
-        gbPassType->setTitle(QApplication::translate("PreferencesDialog", "Passport Type for Image Searching", 0, QApplication::UnicodeUTF8));
-        rbLumHist->setText(QApplication::translate("PreferencesDialog", "Luminance Histogram", 0, QApplication::UnicodeUTF8));
-        rbSubLum->setText(QApplication::translate("PreferencesDialog", "Subsampled Luminance", 0, QApplication::UnicodeUTF8));
-        rbLumGradHist->setText(QApplication::translate("PreferencesDialog", "Luminance and Gradient Histigram", 0, QApplication::UnicodeUTF8));
-        rbSubLumGrad->setText(QApplication::translate("PreferencesDialog", "Subsampled Luminance and Gradient", 0, QApplication::UnicodeUTF8));
-        prefCategories->setTabText(prefCategories->indexOf(tabDatabase), QApplication::translate("PreferencesDialog", "Databse", 0, QApplication::UnicodeUTF8));
+		gbColorMethod->setTitle("Colorization Methods");
+		rbWSimple->setText("Walsh Simple");
+		rbWSLookUp->setText("Walsh Simple (look up table)");
+		rbWSEntropy->setText("Walsh Simple (all parameters)");
+		rbWNeighbor->setText("Walsh Neighbor");
+		rbWNNoRand->setText("Walsh Neighbor (fixed net)");
+		rbWNOneRand->setText("Walsh Neighbor (same pixels set)");
+		gbImgLumEqual->setTitle("Images Luminance Equalization");
+		rbNoScale->setText("No Scale");
+		rbScaleMaxLum->setText("Scale by Max Luminance");
+		rbScaleAverLum->setText("Scale by Average Luminance");
+		rbNormLumBorder->setText("Normalize Luminance (by borders)");
+		rbNormLumCentral->setText("Normalize Luminance (by center)");
+		prefCategories->setTabText(prefCategories->indexOf(tabColorization), "Colorization");
+		gbPassType->setTitle("Passport Type for Image Searching");
+		rbLumHist->setText("Luminance Histogram");
+		rbSubLum->setText("Subsampled Luminance");
+		rbLumGradHist->setText("Luminance and Gradient Histigram");
+		rbSubLumGrad->setText("Subsampled Luminance and Gradient");
+		prefCategories->setTabText(prefCategories->indexOf(tabDatabase), "Databse");
     } // retranslateUi
 
 };
