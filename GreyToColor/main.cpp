@@ -16,7 +16,7 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QtGui/QApplication>
+#include <QApplication>
 #include "application.h"
 
 int main(int argc, char *argv[])

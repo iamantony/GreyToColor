@@ -92,3 +92,6 @@ $RECYCLE.BIN/
 *.csv
 *.xls
 *.xlsx
+*.jpg
+*.png
+*.bmp

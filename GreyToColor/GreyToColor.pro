@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT += core gui sql
+QT += core gui widgets sql
 
 CONFIG += warn_on
 QMAKE_CXXFLAGS_WARN_ON += -Werror -Wformat=2 -Wuninitialized -Winit-self -Wmissing-include-dirs -Wswitch-enum \

@@ -1,2 +1,13 @@
 1) Combine in different objects (or paths) classes for image processing, database and so on. Image = image classes + image service
 2) Convert RGB to LAB through search table
+3) Add ability to use other color spaces
+
+Refactoring:
+1) Use C++ everywhere where it is possible. In ideal use Qt for interfaces.
+2) Use Boost, OpenCV
+3) Write tests for each class. Test only public functions.
+4) Graphs drawing: add support for qwt
+5) Parallel image processing
+6) Repository should not contain databases, images and so on
+7) Add app version
+8) Qt 5.2 support
