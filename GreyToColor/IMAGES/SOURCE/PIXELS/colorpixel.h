@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -19,17 +19,13 @@
 #ifndef COLORPIXEL_H
 #define COLORPIXEL_H
 
-#include <QDebug>
-
 #include "../../COMMON/PIXELS/pixel.h"
-#include "./DEFINES/pixels.h"
-#include "./DEFINES/global.h"
 
 class ColorPixel : public Pixel
 {
 	// == DATA ==
 private:
-	// In m_relativeLum we save relative LAB Luminance. It has range [0, 1]
+	// Relative LAB Luminance. It has range [0, 1]
 	double m_relativeLum;
 	// All other characteristics values also relative. They have range [0, 1]
 	double m_sko;
@@ -40,10 +36,8 @@ private:
 	// == METHODS ==
 public:
 	ColorPixel();
-	~ColorPixel();
+	virtual ~ColorPixel();
 
-	// Clear color pixel
-	void ClearColor();
 	// Calc relative value of LAB luminance
 	void CalcRelativeLum();
 	// Get relative LAB luminance value
@@ -66,6 +60,10 @@ public:
 	bool SetKurtosis(const double &t_kurtosis);
 	// Set kurtosis for pixel of image
 	double GetKurtosis() const;
+
+private:
+	// Clear color pixel parameters
+	void ClearParams();
 };
 
 #endif // COLORPIXEL_H

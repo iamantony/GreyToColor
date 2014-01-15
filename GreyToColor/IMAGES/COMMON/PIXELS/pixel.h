@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -19,9 +19,6 @@
 #ifndef PIXEL_H
 #define PIXEL_H
 
-#include <QColor>
-#include <QDebug>
-
 #include "rgb.h"
 #include "lab.h"
 #include "COLOR_SPACE/rgblab.h"
@@ -30,13 +27,13 @@ class Pixel
 {
 	// == DATA ==
 private:
-	RGB m_pixelInRGB;
-	LAB m_pixelInLAB;
+	RGB m_pixelRGB;
+	LAB m_pixelLAB;
 
 	// == METHODS ==
 public:
 	explicit Pixel();
-	~Pixel();
+	virtual ~Pixel();
 
 	// Set RGB color for pixel
 	void SetRGB(const RGB &t_rgbColor);
@@ -45,16 +42,16 @@ public:
 	// Check if current RGB color is a grey color
 	bool IsGrey() const;
 	// Setup new luminance value for pixel
-	bool SetChL(const double &t_lum);
+	bool SetChL(const double &t_chLum);
 	// Setup new value of channel A for pixel
-	void SetChA(const double &t_a);
+	void SetChA(const double &t_chA);
 	// Setup new value of channel B for pixel
-	void SetChB(const double &t_b);
-	// Return Luminance channel value
+	void SetChB(const double &t_chB);
+	// Get Luminance channel value
 	double GetChL() const;
-	// Return A-channel value
+	// Get A-channel value
 	double GetChA() const;
-	// Return B-channel value
+	// Get B-channel value
 	double GetChB() const;
 	// Transform current pixels RGB coords to LAB coords
 	void TransformRGB2LAB();
@@ -62,7 +59,7 @@ public:
 	void TransformLAB2RGB();
 
 protected:
-	// Set RGB color for as black pixel
+	// Set color of pixel as black pixel
 	void Clear();
 };
 

@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -19,8 +19,6 @@
 #ifndef LAB_H
 #define LAB_H
 
-#include <QDebug>
-
 class LAB
 {
 	// == DATA ==
@@ -31,16 +29,16 @@ private:
 
 	// == METHODS ==
 public:
-	LAB(const double &t_L = 0,
-		const double &t_A = 0,
-		const double &t_B = 0);
+	LAB(const double &t_L = 0.0,
+		const double &t_A = 0.0,
+		const double &t_B = 0.0);
 
 	~LAB();
 
 	// Set LAB color
-	bool SetColor(const double &t_L = 0,
-				   const double &t_A = 0,
-				   const double &t_B = 0);
+	bool SetColor(const double &t_chL = 0.0,
+				  const double &t_chA = 0.0,
+				  const double &t_chB = 0.0);
 
 	// Return Luminance channel value
 	double GetChL() const;
@@ -49,15 +47,15 @@ public:
 	// Return B-channel value
 	double GetChB() const;
 	// Set new luminance
-	bool SetChL(const double &t_l);
+	bool SetChL(const double &t_chL);
 	// Set new channel A
-	void SetChA(const double &t_a);
+	void SetChA(const double &t_chA);
 	// Set new channel B
-	void SetChB(const double &t_b);
+	void SetChB(const double &t_chB);
 
 private:
 	// Check value for Luminance channel
-	bool CheckLuminance(const double &t_lum);
+	bool CheckLuminance(const double &t_lum) const;
 };
 
 #endif // LAB_H

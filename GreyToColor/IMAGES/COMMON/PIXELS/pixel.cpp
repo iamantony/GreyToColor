@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QDebug>
 #include "pixel.h"
 
 Pixel::Pixel()
@@ -25,30 +26,25 @@ Pixel::Pixel()
 
 Pixel::~Pixel()
 {
-	Clear();
+
 }
 
-// Set RGB color for as black pixel
+// Set color of pixel as black pixel
 // @input:
 // @output:
 void Pixel::Clear()
 {
-	m_pixelInRGB.SetColor(0,
-						  0,
-						  0);
-
-	m_pixelInLAB.SetColor(0,
-						  0,
-						  0);
+	m_pixelRGB.SetColor(0, 0, 0);
+	m_pixelLAB.SetColor(0.0, 0.0, 0.0);
 }
 
 // Set RGB color for pixel
 // @input:
-// - RGB - exist color in RGB color space
+// - t_rgbColor - existing color in RGB color space
 // @output:
 void Pixel::SetRGB(const RGB &t_rgbColor)
 {
-	m_pixelInRGB = t_rgbColor;
+	m_pixelRGB = t_rgbColor;
 }
 
 // Get color of pixel in RGB color space
@@ -57,7 +53,7 @@ void Pixel::SetRGB(const RGB &t_rgbColor)
 // - RGB - current pixel in RGB
 RGB Pixel::GetRGB() const
 {
-	return m_pixelInRGB;
+	return m_pixelRGB;
 }
 
 // Check if current RGB color is a grey color
@@ -67,69 +63,63 @@ RGB Pixel::GetRGB() const
 // - false - pixel is not monochrome (grey)
 bool Pixel::IsGrey() const
 {
-	return m_pixelInRGB.IsGreyColor();
+	return m_pixelRGB.IsGreyColor();
 }
 
 // Setup new luminance value for pixel
 // @input:
-// - double - positive new luminance value
+// - t_chLum - positive new luminance value
 // @output:
 // - true - value set
 // - false - impossible value
-bool Pixel::SetChL(const double &t_lum)
+bool Pixel::SetChL(const double &t_chLum)
 {
-	bool lumSet = m_pixelInLAB.SetChL(t_lum);
-	if ( false == lumSet )
-	{
-		return false;
-	}
-
-	return true;
+	return m_pixelLAB.SetChL(t_chLum);
 }
 
 // Setup new value of channel A for pixel
 // @input:
-// - double - new channel A value
+// - t_chA - new channel A value
 // @output:
-void Pixel::SetChA(const double &t_a)
+void Pixel::SetChA(const double &t_chA)
 {
-	m_pixelInLAB.SetChA(t_a);
+	m_pixelLAB.SetChA(t_chA);
 }
 
 // Setup new value of channel B for pixel
 // @input:
-// - double - new channel B value
+// - t_chB - new channel B value
 // @output:
-void Pixel::SetChB(const double &t_b)
+void Pixel::SetChB(const double &t_chB)
 {
-	m_pixelInLAB.SetChB(t_b);
+	m_pixelLAB.SetChB(t_chB);
 }
 
-// Return Luminance channel value
+// Get Luminance channel value
 // @input:
 // @output:
 // - double - value >= 0 of Luminance channel
 double Pixel::GetChL() const
 {
-	return m_pixelInLAB.GetChL();
+	return m_pixelLAB.GetChL();
 }
 
-// Return A-channel value
+// Get A-channel value
 // @input:
 // @output:
 // - double - value of A channel
 double Pixel::GetChA() const
 {
-	return m_pixelInLAB.GetChA();
+	return m_pixelLAB.GetChA();
 }
 
-// Return B-channel value
+// Get B-channel value
 // @input:
 // @output:
 // - double - value of B channel
 double Pixel::GetChB() const
 {
-	return m_pixelInLAB.GetChB();
+	return m_pixelLAB.GetChB();
 }
 
 // Transform current pixels RGB coords to LAB coords
@@ -138,7 +128,7 @@ double Pixel::GetChB() const
 void Pixel::TransformRGB2LAB()
 {
 	RGBLAB transformer;
-	m_pixelInLAB = transformer.RGB2LAB(m_pixelInRGB);
+	m_pixelLAB = transformer.RGB2LAB(m_pixelRGB);
 }
 
 // Transform current pixels LAB coords to RGB coords
@@ -147,5 +137,5 @@ void Pixel::TransformRGB2LAB()
 void Pixel::TransformLAB2RGB()
 {
 	RGBLAB transformer;
-	m_pixelInRGB = transformer.LAB2RGB(m_pixelInLAB);
+	m_pixelRGB = transformer.LAB2RGB(m_pixelLAB);
 }

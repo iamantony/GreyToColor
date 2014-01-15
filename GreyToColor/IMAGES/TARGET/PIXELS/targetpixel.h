@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -19,11 +19,8 @@
 #ifndef TARGETPIXEL_H
 #define TARGETPIXEL_H
 
-#include <QDebug>
-
 #include "../../SOURCE/PIXELS/colorpixel.h"
 #include "preferedcolor.h"
-#include "./DEFINES/pixels.h"
 
 class TargetPixel : public ColorPixel
 {
@@ -35,10 +32,8 @@ private:
 	// == METHODS ==
 public:
 	TargetPixel();
-	~TargetPixel();
+	virtual ~TargetPixel();
 
-	// Clear all info about target pixel (set it to defaults)
-	void ClearPixel();
 	// Set pixel as grey variant of input RGB pixel
 	void SetAsGrey(const RGB &t_color);
 	// Set current pixel as grey
@@ -54,7 +49,7 @@ public:
 	// Check if pixel has prefered color
 	bool HasPreferedColor() const;
 	// Get prefered color
-	RGB GetPreferedColor();
+	RGB GetPreferedColor() const;
 	// Set that pixel colorized (has color)
 	void SetColored();
 	// Set that pixel not colorized (has not color)
@@ -63,13 +58,10 @@ public:
 	bool IsColored() const;
 
 private:
+	// Clear all info about target pixel (set it to defaults)
+	void ClearPixel();
 	// Transform pixel to grey color
 	void ToGrey(const RGB &t_color);
-
-	// == TESTS ==
-public:
-	void TestSetAsGrey();
-	void TestScaleLum();
 };
 
 #endif // TARGETPIXEL_H

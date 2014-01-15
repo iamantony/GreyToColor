@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -16,26 +16,27 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QDebug>
 #include "colorpixel.h"
+#include "./DEFINES/pixels.h"
+#include "./DEFINES/global.h"
 
 ColorPixel::ColorPixel()
 {
-	ClearColor();
+	ClearParams();
 }
 
 ColorPixel::~ColorPixel()
 {
-	ClearColor();
+	ClearParams();
 }
 
-// Clear color pixel
+// Clear color pixel parameters
 // @input:
 // @output:
-void ColorPixel::ClearColor()
+void ColorPixel::ClearParams()
 {
-	this->Clear();
-
-	m_relativeLum = ERROR;
+	m_relativeLum = ERROR_FP;
 	m_sko = RELATIVE_MIN;
 	m_entropy = RELATIVE_MIN;
 	m_skewness = RELATIVE_MIN;
@@ -49,7 +50,7 @@ void ColorPixel::CalcRelativeLum()
 {
 	m_relativeLum = GetChL() / LAB_MAX_LUM;
 
-	if ( (NAN == m_relativeLum) || (m_relativeLum < RELATIVE_MIN) )
+	if ( /*(NAN == m_relativeLum) ||*/ (m_relativeLum < RELATIVE_MIN) )
 	{
 		m_relativeLum = RELATIVE_MIN;
 	}
@@ -58,7 +59,7 @@ void ColorPixel::CalcRelativeLum()
 // Get relative LAB luminance value
 // @input:
 // @output:
-// - double - relative LAB luminance in range [0, 1]
+// - double > 0 - relative LAB luminance in range [0, 1]
 // - double < 0 - error, relative luminance not calc yet
 double ColorPixel::GetRelativeLum() const
 {
@@ -67,29 +68,29 @@ double ColorPixel::GetRelativeLum() const
 
 // Set relative LAB luminance value
 // @input:
-// - double - value of relative LAB luminace in range [0, 1]
+// - t_lum - value of relative LAB luminace in range [0, 1]
 // @output:
 // - true - luminance accepted
 // - false - luminance is out of range
 bool ColorPixel::SetRelativeLum(const double &t_lum)
 {
 	if ( (t_lum < RELATIVE_MIN) ||
-		 (RELATIVE_MAX < t_lum) ||
-		 (NAN == t_lum) )
+		 (RELATIVE_MAX < t_lum) /*||
+		 (NAN == t_lum)*/ )
 	{
-		qDebug() << "SetRelativeLum(): Error - invalid arguments, t_lum =" << t_lum;
-		qDebug() << "Realtive lumiance not accepted";
+		qDebug() << "SetRelativeLum(): Error - invalid arguments, t_lum = " <<
+					t_lum;
+
 		return false;
 	}
 
 	m_relativeLum = t_lum;
-
 	return true;
 }
 
 // Set SKO for pixel of image
 // @input:
-// - double - relative SKO value in range [0, 1]
+// - t_sko - relative SKO value in range [0, 1]
 // @output:
 // - true - SKO accepted
 // - false - SKO is out of range
@@ -97,13 +98,12 @@ bool ColorPixel::SetSKO(const double &t_sko)
 {
 	if ( (t_sko < RELATIVE_MIN) || (RELATIVE_MAX < t_sko) )
 	{
-		qDebug() << "SetSKO(): Error - invalid arguments, t_sko =" << t_sko;
-		qDebug() << "Realtive SKO not accepted";
+		qDebug() << "SetSKO(): Error - invalid arguments, t_sko = " << t_sko;
+
 		return false;
 	}
 
 	m_sko = t_sko;
-
 	return true;
 }
 
@@ -118,7 +118,7 @@ double ColorPixel::GetSKO() const
 
 // Set entropy for pixel of image
 // @input:
-// - double - relative entropy value in range [0, 1]
+// - t_entropy - relative entropy value in range [0, 1]
 // @output:
 // - true - entropy accepted
 // - false - entropy is out of range
@@ -126,12 +126,13 @@ bool ColorPixel::SetEntropy(const double &t_entropy)
 {
 	if ( (t_entropy < RELATIVE_MIN) || (RELATIVE_MAX < t_entropy) )
 	{
-		qDebug() << "SetEntropy(): Error - invalid arguments, t_entropy =" << t_entropy;
+		qDebug() << "SetEntropy(): Error - invalid arguments, t_entropy = " <<
+					t_entropy;
+
 		return false;
 	}
 
 	m_entropy = t_entropy;
-
 	return true;
 }
 
@@ -146,7 +147,7 @@ double ColorPixel::GetEntropy() const
 
 // Set skewness for pixel of image
 // @input:
-// - double - relative skewness value in range [0, 1]
+// - t_skewness - relative skewness value in range [0, 1]
 // @output:
 // - true - skewness accepted
 // - false - skewness is out of range
@@ -154,12 +155,12 @@ bool ColorPixel::SetSkewness(const double &t_skewness)
 {
 	if ( (t_skewness < RELATIVE_MIN) || (RELATIVE_MAX < t_skewness) )
 	{
-		qDebug() << "SetSkewness(): Error - invalid arguments, t_skewness =" << t_skewness;
+		qDebug() << "SetSkewness(): Error - invalid arguments, t_skewness = " <<
+					t_skewness;
 		return false;
 	}
 
 	m_skewness = t_skewness;
-
 	return true;
 }
 
@@ -174,14 +175,13 @@ double ColorPixel::GetSkewness() const
 
 // Set kurtosis for pixel of image
 // @input:
-// - double - relative kurtosis value
+// - t_kurtosis - kurtosis value
 // @output:
 // - true - kurtosis accepted
 // - false - kurtosis is out of range
 bool ColorPixel::SetKurtosis(const double &t_kurtosis)
 {
 	m_kurtosis = t_kurtosis;
-
 	return true;
 }
 

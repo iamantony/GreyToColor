@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -19,22 +19,19 @@
 #ifndef RGBLAB_H
 #define RGBLAB_H
 
-#include <QDebug>
-#include <math.h>
 #include "../rgb.h"
 #include "../lab.h"
-#include "./DEFINES/global.h"
 
 class RGBLAB
 {
-// METHODS
+	// == METHODS ==
 public:
 	explicit RGBLAB();
 
 	// Transform color from RGB color space to LAB color space
-	LAB RGB2LAB(const RGB &t_rgbColor);
+	LAB RGB2LAB(const RGB &t_rgbColor) const;
 	// Transform color from LAB color space to RGB color space
-	RGB LAB2RGB(const LAB &t_labColor);
+	RGB LAB2RGB(const LAB &t_labColor) const;
 };
 
 #endif // RGBLAB_H

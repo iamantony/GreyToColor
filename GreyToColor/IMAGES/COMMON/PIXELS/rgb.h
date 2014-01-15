@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -18,9 +18,6 @@
 
 #ifndef RGB_H
 #define RGB_H
-
-#include <QDebug>
-#include <math.h>
 
 class RGB
 {
@@ -43,11 +40,11 @@ public:
 				   const int &t_green = 0,
 				   const int &t_blue = 0);
 
-	// Return red channel value
+	// Get red channel value
 	int GetRed() const;
-	// Return green channel value
+	// Get green channel value
 	int GetGreen() const;
-	// Return blue channel value
+	// Get blue channel value
 	int GetBlue() const;
 	// Check if color is grey
 	bool IsGreyColor() const;
@@ -55,7 +52,7 @@ public:
 	void ToGrey();
 
 private:
-	bool CheckChannelValue(const int &t_value);
+	bool CheckChannelValue(const int &t_value) const;
 };
 
 #endif // RGB_H

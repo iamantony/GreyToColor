@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -16,7 +16,10 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <math.h>
+#include <QDebug>
 #include "targetpixel.h"
+#include "./DEFINES/pixels.h"
 
 TargetPixel::TargetPixel()
 {
@@ -33,16 +36,13 @@ TargetPixel::~TargetPixel()
 // @output:
 void TargetPixel::ClearPixel()
 {
-	this->ClearColor();
-
 	m_prefColor.ClearColor();
-
 	SetUncolored();
 }
 
 // Set pixel as grey variant of input RGB pixel
 // @input:
-// - RGB - color from RGB space
+// - t_color - color from RGB space
 // @output:
 void TargetPixel::SetAsGrey(const RGB &t_color)
 {
@@ -60,7 +60,7 @@ void TargetPixel::SetAsGrey()
 
 // Transform pixel to grey color
 // @input:
-// - RGB - unnull color
+// - t_color - valid RGB color
 // @output:
 void TargetPixel::ToGrey(const RGB &t_color)
 {
@@ -71,32 +71,27 @@ void TargetPixel::ToGrey(const RGB &t_color)
 	}
 	else
 	{
-		int red = t_color.GetRed();
-		int green = t_color.GetGreen();
-		int blue = t_color.GetBlue();
-
-		RGB greyColor(red, green, blue);
+		RGB greyColor = t_color;
 		greyColor.ToGrey();
 
 		SetRGB(greyColor);
 	}
-
 }
 
 // Scale relative luminance with some factor
 // @input:
-// - double - positive scale factor
+// - t_factor - positive scale factor
 // @output:
 // - true - luminance scaled
 // - false - can't scale luminance with that factor
 bool TargetPixel::ScaleRelLum(const double &t_factor)
 {
-	if ( t_factor <= 0 )
+	if ( t_factor <= 0.0 )
 	{
 		return false;
 	}
 
-	// We don't want to scale luminance of pixel twice
+	// Protection from scaling luminance twice
 	RestoreRelLum();
 
 	const double relativeLum = GetRelativeLum();
@@ -106,9 +101,7 @@ bool TargetPixel::ScaleRelLum(const double &t_factor)
 		scaledLum = RELATIVE_MAX;
 	}
 
-	bool isLumSet = SetRelativeLum(scaledLum);
-
-	return isLumSet;
+	return SetRelativeLum(scaledLum);
 }
 
 // Restore relative luminance value
@@ -121,25 +114,23 @@ void TargetPixel::RestoreRelLum()
 
 // Set normalised relative luminance
 // @input:
-// - double - value of relative LAB luminance
+// - t_newLum - value of relative LAB luminance
 // @output:
 // - true - normalized relative luminance set
 // - false - can't set relative luminance
 bool TargetPixel::SetNormalizedRelLum(const double &t_newLum)
 {
-	if ( t_newLum < 0 )
+	if ( t_newLum < 0.0 )
 	{
 		return false;
 	}
 
-	bool isLumSet = SetRelativeLum(t_newLum);
-
-	return isLumSet;
+	return SetRelativeLum(t_newLum);
 }
 
 // Set prefered color for pixel
 // @input:
-// - RGB - prefered color for this pixel
+// - t_prefColor - prefered color for this pixel
 // @output:
 void TargetPixel::SetPreferedColor(const RGB &t_prefColor)
 {
@@ -160,7 +151,7 @@ bool TargetPixel::HasPreferedColor() const
 // @input:
 // @output:
 // - RGB - pixels prefered color
-RGB TargetPixel::GetPreferedColor()
+RGB TargetPixel::GetPreferedColor() const
 {
 	return m_prefColor.GetPreferedColor();
 }
@@ -187,68 +178,4 @@ void TargetPixel::SetUncolored()
 bool TargetPixel::IsColored() const
 {
 	return m_colored;
-}
-
-// Test function SetAsGrey()
-void TargetPixel::TestSetAsGrey()
-{
-	// http://en.wikipedia.org/wiki/Grayscales
-	// Random color
-	const int red = 50;
-	const int green = 128;
-	const int blue = 203;
-	const double calcs = 0.2126 * red + 0.7152 * green + 0.0722 * blue;
-	const int grey = (int)floor(calcs + 0.5);
-
-	qDebug() << endl << "TestSetAsGrey(): random RGB color";
-	qDebug() << "RGB:" << red << green << blue;
-	qDebug() << "Grey:" << grey;
-
-	RGB color(red, green, blue);
-	SetAsGrey(color);
-
-	RGB greyResult1 = GetRGB();
-	qDebug() << "Result:" << greyResult1.GetRed() << greyResult1.GetGreen() << greyResult1.GetBlue();
-
-	// Grey color
-	const int greyChannel = 50;
-
-	qDebug() << endl << "TestSetAsGrey(): grey RGB color";
-	qDebug() << "Grey RGB:" << greyChannel;
-
-	RGB greyColor(greyChannel, greyChannel, greyChannel);
-	SetAsGrey(greyColor);
-
-	RGB greyResult2 = GetRGB();
-	qDebug() << "Result:" << greyResult2.GetRed() << greyResult2.GetGreen() << greyResult2.GetBlue();
-}
-
-// Test function for scaling and unscaling luminance
-void TargetPixel::TestScaleLum()
-{
-	const int red = 50;
-	const int green = 128;
-	const int blue = 203;
-
-	qDebug() << endl << "TestScaleLum()";
-	qDebug() << "RGB:" << red << green << blue;
-
-	RGB color(red, green, blue);
-	SetRGB(color);
-
-	TransformRGB2LAB();
-	CalcRelativeLum();
-
-	qDebug() << "Relative luminance =" << GetRelativeLum();
-
-	const double scaleFactor = 1.243;
-	qDebug() << "Scale Factor =" << scaleFactor;
-
-	ScaleRelLum(scaleFactor);
-
-	qDebug() << "Relative luminance after scale =" << GetRelativeLum();
-
-	RestoreRelLum();
-
-	qDebug() << "Relative luminance after restore =" << GetRelativeLum();
 }

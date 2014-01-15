@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QDebug>
 #include "preferedcolor.h"
 
 PreferedColor::PreferedColor()
@@ -41,7 +42,7 @@ bool PreferedColor::HasColor() const
 
 // Set prefered RGB color
 // @input:
-// - RGB - RGB color
+// - t_color - RGB color
 // @output:
 void PreferedColor::SetPreferedColor(const RGB &t_color)
 {

@@ -20,6 +20,7 @@
 #define GLOBAL_H
 
 #define ERROR -1
+#define ERROR_FP -1.0
 #define NO_INFO -9999
 
 #define MAX_PERCENT 100

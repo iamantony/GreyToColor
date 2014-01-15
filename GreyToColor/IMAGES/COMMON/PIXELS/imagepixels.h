@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -21,10 +21,7 @@
 
 #include <QList>
 #include <QImage>
-#include <QDebug>
-
 #include "pixel.h"
-#include "./DEFINES/pixels.h"
 
 class ImagePixels
 {

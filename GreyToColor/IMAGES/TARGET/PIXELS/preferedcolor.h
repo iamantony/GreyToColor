@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -19,7 +19,6 @@
 #ifndef PREFEREDCOLOR_H
 #define PREFEREDCOLOR_H
 
-#include <QDebug>
 #include "../../COMMON/PIXELS/pixel.h"
 
 class PreferedColor : public Pixel

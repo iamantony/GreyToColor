@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -16,6 +16,9 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <math.h>
+#include <QDebug>
+
 #include "rgblab.h"
 
 RGBLAB::RGBLAB()
@@ -24,10 +27,10 @@ RGBLAB::RGBLAB()
 
 // Transform color from RGB color space to LAB color space
 // @input:
-// - RGB - RGB color
+// - t_rgbColor - RGB color
 // @output:
 // - LAB - mapped RGB color in LAB color space
-LAB RGBLAB::RGB2LAB(const RGB &t_rgbColor)
+LAB RGBLAB::RGB2LAB(const RGB &t_rgbColor) const
 {
 	const int R = t_rgbColor.GetRed();
 	const int G = t_rgbColor.GetGreen();
@@ -62,22 +65,20 @@ LAB RGBLAB::RGB2LAB(const RGB &t_rgbColor)
 
 	if ( chL < 0.01 )
 	{
-		chL = 0;
+		chL = 0.0;
 	}
 
-	LAB labColor(chL,
-				 chA,
-				 chB);
+	LAB labColor(chL, chA, chB);
 
 	return labColor;
 }
 
 // Transform color from LAB color space to RGB color space
 // @input:
-// - LAB - LAB color
+// - t_labColor - LAB color
 // @output:
 // - RGB - mapped LAB color in RGB color space
-RGB RGBLAB::LAB2RGB(const LAB &t_labColor)
+RGB RGBLAB::LAB2RGB(const LAB &t_labColor) const
 {
 	const double chL = t_labColor.GetChL();
 	const double chA = t_labColor.GetChA();
@@ -91,9 +92,9 @@ RGB RGBLAB::LAB2RGB(const LAB &t_labColor)
 	M = pow(10, M);
 	S = pow(10, S);
 
-	int R = 4.4679*L - 3.5873*M + 0.1193*S;
-	int G = (-1.2186)*L + 2.3809*M - 0.1624*S;
-	int B = 0.0497*L - 0.2439*M + 1.2045*S;
+	int R = (int)floor( 4.4679*L - 3.5873*M + 0.1193*S + 0.5 );
+	int G = (int)floor( (-1.2186)*L + 2.3809*M - 0.1624*S + 0.5 );
+	int B = (int)floor( 0.0497*L - 0.2439*M + 1.2045*S + 0.5 );
 
 	if(R < 0)
 	{
