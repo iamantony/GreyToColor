@@ -52,6 +52,9 @@ public:
 	void ToGrey();
 
 private:
+	// Clear color
+	void Clear();
+	// Check if value for one of the RGB channels is possible
 	bool CheckChannelValue(const int &t_value) const;
 };
 

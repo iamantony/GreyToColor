@@ -31,7 +31,7 @@ private:
 
 	// == METHODS ==
 public:
-	TargetPixel();
+	TargetPixel(const RGB *t_rgbColor = nullptr);
 	virtual ~TargetPixel();
 
 	// Set pixel as grey variant of input RGB pixel

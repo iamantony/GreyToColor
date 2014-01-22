@@ -32,7 +32,7 @@ private:
 
 	// == METHODS ==
 public:
-	explicit Pixel();
+	explicit Pixel(const RGB *t_rgbColor = nullptr);
 	virtual ~Pixel();
 
 	// Set RGB color for pixel

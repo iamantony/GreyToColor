@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -19,14 +19,9 @@
 #ifndef SOURCEIMGPIXELS_H
 #define SOURCEIMGPIXELS_H
 
-#include <QFileDialog>
-#include <QTextStream>
 #include <QImage>
-#include <QDebug>
-
 #include "colorpixel.h"
 #include "../../COMMON/PIXELS/imagepixels.h"
-#include "./SERVICE/calculatorsko.h"
 
 class SourceImgPixels : public ImagePixels
 {
@@ -37,28 +32,36 @@ public:
 	SourceImgPixels();
 	virtual ~SourceImgPixels();
 
-	// Clear info about pixels (call this function before deleting object SourceImgPixels!)
-	virtual void Clear();
 	// Save all pixels from input QImage as custom pixels
 	virtual bool FormImgPixels(const QImage &t_img);
 	// Transform all image pixels from RGB color space to LAB
 	virtual void TransAllPixRGB2LAB();
 	// Get pixel relative luminance
-	double GetPixelsRelativeLum(const unsigned int &t_width, const unsigned int &t_height) const;
+	double GetPixelsRelativeLum(const unsigned int &t_width,
+								const unsigned int &t_height) const;
+
 	// Calc for each pixel in image it's SKO
 	void CalcPixelsSKO();
 	// Get SKO of pixel with certain coords
-	double GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const;
+	double GetPixelsSKO(const unsigned int &t_width,
+						const unsigned int &t_height) const;
+
 	// Calc for each pixel in image it's Entropy
 	void CalcPixelsEntropy();
 	// Get Entropy of pixel with certain coords
-	double GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const;
+	double GetPixelsEntropy(const unsigned int &t_width,
+							const unsigned int &t_height) const;
+
 	// Calc for each pixel in image it's Skewness and Kurtosis
 	void CalcPixelsSkewAndKurt();
 	// Get Skewness of pixel with certain coords
-	double GetPixelsSkewness(const unsigned int &t_width, const unsigned int &t_height) const;
+	double GetPixelsSkewness(const unsigned int &t_width,
+							 const unsigned int &t_height) const;
+
 	// Get Kurtosis of pixel with certain coords
-	double GetPixelsKurtosis(const unsigned int &t_width, const unsigned int &t_height) const;
+	double GetPixelsKurtosis(const unsigned int &t_width,
+							 const unsigned int &t_height) const;
+
 	// Find among all pixels in image value of max relative luminance
 	double FindMaxRelLum() const;
 	// Find among all pixels in image value of min relative luminance
@@ -68,33 +71,38 @@ public:
 	// Find most common relative luminance value
 	double FindMostCommonRelLum() const;
 
-	// Test functions
-	void TestFunctionality();
-	// Find out what min and max values for skewness
-	void TestFindMaxSkewness();
-	void TestStatistic(const QList<int> t_stat) const;
-
 protected:
 	// Get list of relative luminances of neighbor pixels (to calc SKO, for example)
-	QList<double> GetPixNeighborsRelLum(const unsigned int &t_width,
-										const unsigned int &t_height,
-										const unsigned int &t_maskRectSide) const;
+	std::vector<double> GetPixNeighborsRelLum(const unsigned int &t_width,
+											  const unsigned int &t_height,
+											  const unsigned int &t_maskRectSide) const;
 
 private:
 	// Calc relative LAB luminance
-	void CalcPixRelativeLum(const unsigned int &t_width, const unsigned int &t_height);
+	void CalcPixRelativeLum(const unsigned int &t_width,
+							const unsigned int &t_height);
+
 	// Calc for certain pixel in image it's SKO
-	void CalcPixSKO(const unsigned int &t_width, const unsigned int &t_height);
+	void CalcPixSKO(const unsigned int &t_width,
+					const unsigned int &t_height);
+
 	// Calc for certain pixel in image it's entropy
-	void CalcPixsEntropy(const unsigned int &t_width, const unsigned int &t_height);
+	void CalcPixsEntropy(const unsigned int &t_width,
+						 const unsigned int &t_height);
+
 	// Calc for certain pixel in image it's Skewness and Kurtosis
-	void CalcPixsSkewAndKurt(const unsigned int &t_width, const unsigned int &t_height);
+	void CalcPixsSkewAndKurt(const unsigned int &t_width,
+							 const unsigned int &t_height);
+
 	// Calc relative mask histogram
-	QList<double> CalcRelativeMaskHist(const QList<double> &t_hist, const int &t_maskSize);
+	std::vector<double> CalcRelativeMaskHist(const std::vector<double> &t_hist,
+											  const int &t_maskSize);
+
 	// Calc relative mask histogram mean value
-	double CalcMaskHistMean(const QList<double> &t_hist);
+	double CalcMaskHistMean(const std::vector<double> &t_hist);
 	// Calc relative mask histogram variance value
-	double CalcMaskHistVariance(const QList<double> &t_hist, const double &t_histMean);
+	double CalcMaskHistVariance(const std::vector<double> &t_hist,
+								const double &t_histMean);
 };
 
 #endif // SOURCEIMGPIXELS_H

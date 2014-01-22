@@ -19,14 +19,17 @@
 #include <QDebug>
 #include "pixel.h"
 
-Pixel::Pixel()
+Pixel::Pixel(const RGB *t_rgbColor)
 {
-	Clear();
+	if ( nullptr != t_rgbColor )
+	{
+		SetRGB(*t_rgbColor);
+	}
 }
 
 Pixel::~Pixel()
 {
-
+	Clear();
 }
 
 // Set color of pixel as black pixel

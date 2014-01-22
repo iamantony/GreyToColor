@@ -19,7 +19,7 @@
 #ifndef IMAGEPIXELS_H
 #define IMAGEPIXELS_H
 
-#include <QList>
+#include <vector>
 #include <QImage>
 #include "pixel.h"
 
@@ -29,7 +29,7 @@ class ImagePixels
 protected:
 	unsigned int m_width;
 	unsigned int m_height;
-	QList< QList<Pixel *> > m_pixels;
+	std::vector<Pixel*> m_pixels;
 
 	// == METHODS ==
 public:
@@ -47,11 +47,17 @@ public:
 	// Transform all image pixels from LAB color space to RGB
 	void TransAllPixLAB2RGB();
 	// Get Luminance of pixel with certain coords
-	double GetPixChLum(const unsigned int &t_width, const unsigned int &t_height) const;
+	double GetPixChLum(const unsigned int &t_width,
+					   const unsigned int &t_height) const;
+
 	// Get value of channel A of pixel with certain coords
-	double GetPixChA(const unsigned int &t_width, const unsigned int &t_height) const;
+	double GetPixChA(const unsigned int &t_width,
+					 const unsigned int &t_height) const;
+
 	// Get value of channel B of pixel with certain coords
-	double GetPixChB(const unsigned int &t_width, const unsigned int &t_height) const;
+	double GetPixChB(const unsigned int &t_width,
+					 const unsigned int &t_height) const;
+
 	// Set value for channels A and B of pixel with certain coords
 	void SetPixChannelsAB(const unsigned int &t_width,
 						  const unsigned int &t_height,
@@ -59,15 +65,25 @@ public:
 						  const double &t_chB);
 
 	// Check if pixel with certain coords is greyscale
-	bool IsPixGrey(const unsigned int &t_width, const unsigned int &t_height) const;
+	bool IsPixGrey(const unsigned int &t_width,
+				   const unsigned int &t_height) const;
 
 protected:
 	// Check if we have pixel with such coords
-	bool IsPixelExist(const unsigned int &t_width, const unsigned int &t_height) const;
+	bool IsPixelExist(const unsigned int &t_width,
+					  const unsigned int &t_height) const;
+
 	// Transform certain pixel from RGB color space to LAB
-	void TransformPixRGB2LAB(const unsigned int &t_width, const unsigned int &t_height);
+	void TransformPixRGB2LAB(const unsigned int &t_width,
+							 const unsigned int &t_height);
+
 	// Transform certain pixel from LAB color space to RGB
-	void TransformPixLAB2RGB(const unsigned int &t_width, const unsigned int &t_height);
+	void TransformPixLAB2RGB(const unsigned int &t_width,
+							 const unsigned int &t_height);
+
+	// Calculate real index of pixel
+	unsigned int GetPixelIndex(const unsigned int &t_width,
+							   const unsigned int &t_height) const;
 };
 
 #endif // IMAGEPIXELS_H

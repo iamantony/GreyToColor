@@ -35,7 +35,7 @@ private:
 
 	// == METHODS ==
 public:
-	ColorPixel();
+	ColorPixel(const RGB *t_rgbColor = nullptr);
 	virtual ~ColorPixel();
 
 	// Calc relative value of LAB luminance

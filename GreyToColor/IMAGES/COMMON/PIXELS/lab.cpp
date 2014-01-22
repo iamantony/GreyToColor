@@ -30,6 +30,14 @@ LAB::LAB(const double &t_L,
 
 LAB::~LAB()
 {
+	Clear();
+}
+
+// Clear color
+// @input:
+// @output:
+void LAB::Clear()
+{
 	m_Lum = 0.0;
 	m_A = 0.0;
 	m_B = 0.0;

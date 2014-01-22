@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -19,11 +19,10 @@
 #ifndef IMGHISTOGRAM_H
 #define IMGHISTOGRAM_H
 
-#include <QFileDialog>
 #include <QImage>
 #include <QDebug>
+#include <vector>
 #include "./IMAGES/COMMON/image.h"
-//#include "IMAGES/TARGET/targetimage.h"
 #include "IMAGES/SOURCE/sourceimage.h"
 #include "imgtransform.h"
 #include "DEFINES/imgservice.h"
@@ -46,10 +45,7 @@ public:
 	// Get images histogram of relative LAB luminance
 	QList<double> RelLumHistogram(SourceImage *t_img);
 	// Histogram for image mask (relative LAB luminance)
-	QList<double> MaskRelLumHistogram(const QList<double> &t_mask);
-
-	// Test of forming image histogram
-	void TestRGBHist();
+	std::vector<double> MaskRelLumHistogram(const std::vector<double> &t_mask);
 
 private:
 	// Check histogram size

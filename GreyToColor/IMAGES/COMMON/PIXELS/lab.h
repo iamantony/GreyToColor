@@ -54,6 +54,8 @@ public:
 	void SetChB(const double &t_chB);
 
 private:
+	// Clear color
+	void Clear();
 	// Check value for Luminance channel
 	bool CheckLuminance(const double &t_lum) const;
 };

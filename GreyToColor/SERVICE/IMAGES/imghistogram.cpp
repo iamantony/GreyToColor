@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -424,25 +424,25 @@ QList<double> ImgHistogram::FormZeroRelLumHist()
 
 // Histogram for image mask (relative LAB luminance)
 // @input:
-// - QList<double> - unempty image mask with LAB luminance values
+// - t_mask - unempty image mask with LAB luminance values
 // @output:
-// - QList<double> - mask histogram
-// - empty QList<double> - failed to form mask histogram
-QList<double> ImgHistogram::MaskRelLumHistogram(const QList<double> &t_mask)
+// - std::vector<double> - mask histogram
+// - empty std::vector<double> - failed to form mask histogram
+std::vector<double> ImgHistogram::MaskRelLumHistogram(const std::vector<double> &t_mask)
 {
-	if ( true == t_mask.isEmpty() )
+	if ( true == t_mask.empty() )
 	{
 		qDebug() << "MaskLumHistogram(): Error - invalid arguments";
-		QList<double> empty;
-		return empty;
+		return std::vector<double>();
 	}
 
+	// TODO: use vector
 	QList<double> lumHist = FormZeroRelLumHist();
 	const int lumHistSize = lumHist.size();
-	const int maskSize = t_mask.size();
-	for ( int value = 0; value < maskSize; value++ )
+	const unsigned int maskSize = t_mask.size();
+	for ( unsigned int value = 0; value < maskSize; ++value )
 	{
-		int stepNum = (int)floor( t_mask.at(value) / RELATIVE_DIVIDER );
+		int stepNum = (int)floor( t_mask[value] / RELATIVE_DIVIDER );
 		if ( stepNum < 0 )
 		{
 			stepNum = 0;
@@ -452,42 +452,8 @@ QList<double> ImgHistogram::MaskRelLumHistogram(const QList<double> &t_mask)
 			stepNum = lumHistSize - 1;
 		}
 
-		lumHist[stepNum]++;
+		++lumHist[stepNum];
 	}
 
-	return lumHist;
-}
-
-// Test of forming image histogram
-void ImgHistogram::TestRGBHist()
-{
-	QWidget wdt;
-	QString imgName = QFileDialog::getOpenFileName(&wdt,
-												 "Open target image...",
-												 QDir::currentPath(),
-												 "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
-
-	Image testImg;
-	testImg.LoadImg(imgName);
-
-	QList< QList<double> > hist = RGBHistogram(testImg, 256);
-	if ( true == hist.isEmpty() )
-	{
-		qDebug() << "TestRGBHist(): Fail - no histogram";
-		return;
-	}
-
-	QList<double> lumHist = RGBLumHistogram(testImg, 256);
-	if ( true == lumHist.isEmpty() )
-	{
-		qDebug() << "TestRGBHist(): Fail - no lum histogram";
-		return;
-	}
-
-	QList<double> shrinkHist = RGBLumHistogram(testImg, 128);
-	if ( true == shrinkHist.isEmpty() )
-	{
-		qDebug() << "TestRGBHist(): Fail - no shrinked lum histogram";
-		return;
-	}
+	return lumHist.toVector().toStdVector();
 }

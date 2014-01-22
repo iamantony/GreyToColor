@@ -36,24 +36,19 @@ ImagePixels::~ImagePixels()
 // @output:
 void ImagePixels::Clear()
 {
-	m_width = 0;
-	m_height = 0;
-
-	const int width = m_pixels.size();
-	for ( int i = width - 1; i >= 0; --i )
+	const int numOfPixels = m_pixels.size();
+	for ( int i = numOfPixels - 1; i >= 0; --i )
 	{
-		const int height = m_pixels.at(i).size();
-		for ( int j = height - 1; j >= 0; --j )
+		Pixel *pix = m_pixels[i];
+		if ( nullptr != pix )
 		{
-			Pixel *pix = (Pixel *)m_pixels[i][j];
-			if ( NULL != pix )
-			{
-				delete pix;
-			}
+			delete pix;
 		}
 	}
 
 	m_pixels.clear();
+	m_width = 0;
+	m_height = 0;
 }
 
 // Transform all image pixels from RGB color space to LAB
@@ -61,9 +56,9 @@ void ImagePixels::Clear()
 // @output:
 void ImagePixels::TransAllPixRGB2LAB()
 {
-	for ( unsigned int width = 0; width < m_width; width++ )
+	for ( unsigned int width = 0; width < m_width; ++width )
 	{
-		for ( unsigned int height = 0; height < m_height; height++ )
+		for ( unsigned int height = 0; height < m_height; ++height )
 		{
 			TransformPixRGB2LAB(width, height);
 		}
@@ -72,18 +67,21 @@ void ImagePixels::TransAllPixRGB2LAB()
 
 // Transform certain pixel from RGB color space to LAB
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // @output:
-void ImagePixels::TransformPixRGB2LAB(const unsigned int &t_width, const unsigned int &t_height)
+void ImagePixels::TransformPixRGB2LAB(const unsigned int &t_width,
+									  const unsigned int &t_height)
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
-		qDebug() << "TransformPixRGB2LAB(): Error - invalid arguments";
+		qDebug() << "TransformPixRGB2LAB(): Error - invalid arguments. " <<
+					"Width =" << t_width << ", height =" << t_height;
 		return;
 	}
 
-	m_pixels[t_width][t_height]->TransformRGB2LAB();
+	const int index = GetPixelIndex(t_width, t_height);
+	m_pixels[index]->TransformRGB2LAB();
 }
 
 // Transform all image pixels from LAB color space to RGB
@@ -102,10 +100,11 @@ void ImagePixels::TransAllPixLAB2RGB()
 
 // Transform certain pixel from LAB color space to RGB
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // @output:
-void ImagePixels::TransformPixLAB2RGB(const unsigned int &t_width, const unsigned int &t_height)
+void ImagePixels::TransformPixLAB2RGB(const unsigned int &t_width,
+									  const unsigned int &t_height)
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
@@ -113,17 +112,31 @@ void ImagePixels::TransformPixLAB2RGB(const unsigned int &t_width, const unsigne
 		return;
 	}
 
-	m_pixels[t_width][t_height]->TransformLAB2RGB();
+	const int index = GetPixelIndex(t_width, t_height);
+	m_pixels[index]->TransformLAB2RGB();
+}
+
+// Calculate real index of pixel
+// @input:
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
+// @output:
+// - unsigned int - real pixel position in pixels array
+unsigned int ImagePixels::GetPixelIndex(const unsigned int &t_width,
+										const unsigned int &t_height) const
+{
+	return t_height * m_width + t_width;
 }
 
 // Check if we have pixel with such coords
 // @input:
-// - unsigned int - width (x) position of pixel
-// - unsigned int - height (y) position of pixel
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // @output:
 // - true - pixels with such coords exist
 // - false - pixel don't exist
-bool ImagePixels::IsPixelExist(const unsigned int &t_width, const unsigned int &t_height) const
+bool ImagePixels::IsPixelExist(const unsigned int &t_width,
+							   const unsigned int &t_height) const
 {
 	if ( (m_width <= t_width) || (m_height <= t_height) )
 	{
@@ -142,7 +155,7 @@ bool ImagePixels::HasPixels() const
 {
 	if ( (0 == m_width) ||
 		 (0 == m_height) ||
-		 (true == m_pixels.isEmpty()) )
+		 (true == m_pixels.empty()) )
 	{
 		return false;
 	}
@@ -152,12 +165,13 @@ bool ImagePixels::HasPixels() const
 
 // Get Luminance of pixel with certain coords
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // @output:
 // - NO_INFO - can't find such pixel.
-// - double - luminance of pixel
-double ImagePixels::GetPixChLum(const unsigned int &t_width, const unsigned int &t_height) const
+// - double > 0 - luminance of pixel
+double ImagePixels::GetPixChLum(const unsigned int &t_width,
+								const unsigned int &t_height) const
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
@@ -165,17 +179,19 @@ double ImagePixels::GetPixChLum(const unsigned int &t_width, const unsigned int 
 		return NO_INFO;
 	}
 
-	return m_pixels[t_width][t_height]->GetChL();
+	const int index = GetPixelIndex(t_width, t_height);
+	return m_pixels[index]->GetChL();
 }
 
 // Get value of channel A of pixel with certain coords
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // @output:
 // - NO_INFO - can't find such pixel
 // - double - cannel A of pixel
-double ImagePixels::GetPixChA(const unsigned int &t_width, const unsigned int &t_height) const
+double ImagePixels::GetPixChA(const unsigned int &t_width,
+							  const unsigned int &t_height) const
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
@@ -183,17 +199,19 @@ double ImagePixels::GetPixChA(const unsigned int &t_width, const unsigned int &t
 		return NO_INFO;
 	}
 
-	return m_pixels[t_width][t_height]->GetChA();
+	const int index = GetPixelIndex(t_width, t_height);
+	return m_pixels[index]->GetChA();
 }
 
 // Get value of channel B of pixel with certain coords
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // @output:
 // - NO_INFO - can't find such pixel
 // - double - cannel B of pixel
-double ImagePixels::GetPixChB(const unsigned int &t_width, const unsigned int &t_height) const
+double ImagePixels::GetPixChB(const unsigned int &t_width,
+							  const unsigned int &t_height) const
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
@@ -201,13 +219,14 @@ double ImagePixels::GetPixChB(const unsigned int &t_width, const unsigned int &t
 		return NO_INFO;
 	}
 
-	return m_pixels[t_width][t_height]->GetChB();
+	const int index = GetPixelIndex(t_width, t_height);
+	return m_pixels[index]->GetChB();
 }
 
 // Set value for channels A and B of pixel with certain coords
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // - double - value for pixels channel A
 // - double - value for pixels channel B
 // @output:
@@ -222,18 +241,20 @@ void ImagePixels::SetPixChannelsAB(const unsigned int &t_width,
 		return;
 	}
 
-	m_pixels[t_width][t_height]->SetChA(t_chA);
-	m_pixels[t_width][t_height]->SetChB(t_chB);
+	const int index = GetPixelIndex(t_width, t_height);
+	m_pixels[index]->SetChA(t_chA);
+	m_pixels[index]->SetChB(t_chB);
 }
 
 // Check if pixel with certain coords is greyscale
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // @output:
 // - true - pixel is grey
 // - false - pixel is colourful
-bool ImagePixels::IsPixGrey(const unsigned int &t_width, const unsigned int &t_height) const
+bool ImagePixels::IsPixGrey(const unsigned int &t_width,
+							const unsigned int &t_height) const
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
@@ -241,5 +262,6 @@ bool ImagePixels::IsPixGrey(const unsigned int &t_width, const unsigned int &t_h
 		return false;
 	}
 
-	return m_pixels[t_width][t_height]->IsGrey();
+	const int index = GetPixelIndex(t_width, t_height);
+	return m_pixels[index]->IsGrey();
 }

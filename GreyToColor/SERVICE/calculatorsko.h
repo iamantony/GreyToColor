@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -22,6 +22,7 @@
 #include <QObject>
 #include <QImage>
 #include <QDebug>
+#include <vector>
 #include <math.h>
 #include "./DEFINES/global.h"
 #include "./DEFINES/calcsko.h"
@@ -37,11 +38,12 @@ public:
 	explicit CalculatorSKO(QObject *parent = 0);
 
 	// Calc SKO of two images
-	double ImagesSKO(const QImage &t_firstImg, const QImage &t_secondImg);
+	double ImagesSKO(const QImage &t_firstImg, const QImage &t_secondImg) const;
 	// Calc SKO of two image passports
-	double PassportsSKO(const QList<double> &t_first, const QList<double> &t_second);
+	double PassportsSKO(const QList<double> &t_first, const QList<double> &t_second) const;
 	// Calc SKO for a pixel mask
-	double PixelMaskSKO(const double t_centralPixLum, const QList<double> &t_luminances);
+	double PixelMaskSKO(const double t_centralPixLum,
+						const std::vector<double> &t_luminances) const;
 };
 
 #endif // CALCULATORSKO_H

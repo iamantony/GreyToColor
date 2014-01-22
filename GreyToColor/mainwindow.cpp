@@ -19,6 +19,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "IMAGES/TARGET/PIXELS/targetpixel.h"
+
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow)
@@ -309,7 +311,6 @@ void MainWindow::on_resetPB_clicked()
 		return;
 	}
 
-	TestAutoLongColorization();
 
 	// TODO:
 	// Send signal to ImgHandler. It should reload target image, calc all it's params (LAB, SKO) and then send

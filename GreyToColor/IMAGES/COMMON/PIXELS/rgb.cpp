@@ -31,6 +31,14 @@ RGB::RGB(const int &t_red,
 
 RGB::~RGB()
 {
+	Clear();
+}
+
+// Clear color
+// @input:
+// @output:
+void RGB::Clear()
+{
 	m_red = 0;
 	m_green = 0;
 	m_blue = 0;

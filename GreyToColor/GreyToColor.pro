@@ -6,6 +6,7 @@
 
 QT += core gui widgets sql
 
+QMAKE_CXXFLAGS += -std=c++0x
 CONFIG += warn_on
 QMAKE_CXXFLAGS_WARN_ON += -Werror -Wformat=2 -Wuninitialized -Winit-self -Wmissing-include-dirs -Wswitch-enum \
 	-Wundef -Wpointer-arith -Wdisabled-optimization -Wcast-align -Wcast-qual

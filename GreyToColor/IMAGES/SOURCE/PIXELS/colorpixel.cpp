@@ -21,9 +21,9 @@
 #include "./DEFINES/pixels.h"
 #include "./DEFINES/global.h"
 
-ColorPixel::ColorPixel()
+ColorPixel::ColorPixel(const RGB *t_rgbColor) : Pixel(t_rgbColor)
 {
-	ClearParams();
+
 }
 
 ColorPixel::~ColorPixel()

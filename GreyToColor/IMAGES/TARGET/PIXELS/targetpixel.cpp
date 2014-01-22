@@ -21,9 +21,9 @@
 #include "targetpixel.h"
 #include "./DEFINES/pixels.h"
 
-TargetPixel::TargetPixel()
+TargetPixel::TargetPixel(const RGB *t_rgbColor) : ColorPixel(t_rgbColor)
 {
-	ClearPixel();
+
 }
 
 TargetPixel::~TargetPixel()

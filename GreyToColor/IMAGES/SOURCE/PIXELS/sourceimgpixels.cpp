@@ -1,6 +1,6 @@
 /* === This file is part of GreyToColor ===
  *
- *	Copyright 2012-2013, Antony Cherepanov <antony.cherepanov@gmail.com>
+ *	Copyright 2012-2014, Antony Cherepanov <antony.cherepanov@gmail.com>
  *
  *	GreyToColor is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -16,7 +16,9 @@
  *	along with GreyToColor. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QDebug>
 #include "sourceimgpixels.h"
+#include "./SERVICE/calculatorsko.h"
 #include "./SERVICE/IMAGES/imghistogram.h"
 
 SourceImgPixels::SourceImgPixels()
@@ -26,37 +28,15 @@ SourceImgPixels::SourceImgPixels()
 
 SourceImgPixels::~SourceImgPixels()
 {
-	Clear();
-}
 
-// Clear info about pixels (call this function before deleting object SourceImgPixels!)
-// @input:
-// @output:
-void SourceImgPixels::Clear()
-{
-	const int pixWidth = m_pixels.size();
-	for ( int width = pixWidth - 1; width >= 0; --width )
-	{
-		int pixHeight = m_pixels.at(width).size();
-		for ( int height = pixHeight - 1; height >= 0; --height )
-		{
-			ColorPixel *pix = (ColorPixel *)m_pixels[width][height];
-			if ( NULL != pix )
-			{
-				delete pix;
-			}
-		}
-
-		m_pixels[width].clear();
-	}
-
-	m_pixels.clear();
 }
 
 // Save all pixels from input QImage as custom pixels
 // @input:
-// - QImage - unnull image
+// - t_img - unnull image
 // @output:
+// - true - new image formed
+// - false - failed to form pixels from image
 bool SourceImgPixels::FormImgPixels(const QImage &t_img)
 {
 	if ( true == t_img.isNull() )
@@ -67,30 +47,21 @@ bool SourceImgPixels::FormImgPixels(const QImage &t_img)
 
 	m_width = t_img.width();
 	m_height = t_img.height();
+	m_pixels.reserve(m_width * m_height);
 
-	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
+	for ( unsigned int wdt = 0; wdt < m_width; ++wdt )
 	{
-		QList<Pixel *> columnOfPixels;
-
-		for ( unsigned int hgt = 0; hgt < m_height; hgt++ )
+		for ( unsigned int hgt = 0; hgt < m_height; ++hgt )
 		{
 			QRgb pixel = t_img.pixel(wdt, hgt);
 
-			RGB rgbPixel;
-			bool colorOK = rgbPixel.SetColor(qRed(pixel), qGreen(pixel), qBlue(pixel));
-			if ( false == colorOK )
-			{
-				qDebug() << "FormImgPixels(): pixel with coords (" << wdt << "," << hgt <<
-							") has problems with RGB channels: invalid value";
-			}
+			RGB rgbPixel(qRed(pixel),
+						 qGreen(pixel),
+						 qBlue(pixel) );
 
-			ColorPixel *colorPix = new ColorPixel;
-			colorPix->SetRGB(rgbPixel);
-
-			columnOfPixels.append(colorPix);
+			ColorPixel *colorPix = new ColorPixel(&rgbPixel);
+			m_pixels.push_back(colorPix);
 		}
-
-		m_pixels.append(columnOfPixels);
 	}
 
 	return true;
@@ -101,9 +72,9 @@ bool SourceImgPixels::FormImgPixels(const QImage &t_img)
 // @output:
 void SourceImgPixels::TransAllPixRGB2LAB()
 {
-	for ( unsigned int width = 0; width < m_width; width++ )
+	for ( unsigned int width = 0; width < m_width; ++width )
 	{
-		for ( unsigned int height = 0; height < m_height; height++ )
+		for ( unsigned int height = 0; height < m_height; ++height )
 		{
 			TransformPixRGB2LAB(width, height);
 			CalcPixRelativeLum(width, height);
@@ -113,8 +84,11 @@ void SourceImgPixels::TransAllPixRGB2LAB()
 
 // Calc relative LAB luminance
 // @input:
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // @output:
-void SourceImgPixels::CalcPixRelativeLum(const unsigned int &t_width, const unsigned int &t_height)
+void SourceImgPixels::CalcPixRelativeLum(const unsigned int &t_width,
+										 const unsigned int &t_height)
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
@@ -122,18 +96,20 @@ void SourceImgPixels::CalcPixRelativeLum(const unsigned int &t_width, const unsi
 		return;
 	}
 
-	ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	const unsigned int index = GetPixelIndex(t_width, t_height);
+	ColorPixel *pixel = (ColorPixel *)m_pixels[index];
 	pixel->CalcRelativeLum();
 }
 
 // Get pixel relative luminance
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // @output:
 // - double in range [0, 1] - pixels relative luminance
 // - double < 0 - can't find such pixel
-double SourceImgPixels::GetPixelsRelativeLum(const unsigned int &t_width, const unsigned int &t_height) const
+double SourceImgPixels::GetPixelsRelativeLum(const unsigned int &t_width,
+											 const unsigned int &t_height) const
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
@@ -141,7 +117,8 @@ double SourceImgPixels::GetPixelsRelativeLum(const unsigned int &t_width, const 
 		return ERROR;
 	}
 
-	const ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	const unsigned int index = GetPixelIndex(t_width, t_height);
+	ColorPixel *pixel = (ColorPixel *)m_pixels[index];
 	return pixel->GetRelativeLum();
 }
 
@@ -150,9 +127,9 @@ double SourceImgPixels::GetPixelsRelativeLum(const unsigned int &t_width, const 
 // @output:
 void SourceImgPixels::CalcPixelsSKO()
 {
-	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
+	for ( unsigned int wdt = 0; wdt < m_width; ++wdt )
 	{
-		for ( unsigned int hgt = 0; hgt < m_height; hgt++ )
+		for ( unsigned int hgt = 0; hgt < m_height; ++hgt )
 		{
 			CalcPixSKO(wdt, hgt);
 		}
@@ -161,10 +138,11 @@ void SourceImgPixels::CalcPixelsSKO()
 
 // Calc for certain pixel in image it's SKO
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // @output:
-void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int &t_height)
+void SourceImgPixels::CalcPixSKO(const unsigned int &t_width,
+								 const unsigned int &t_height)
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
@@ -172,23 +150,26 @@ void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int
 		return;
 	}
 
-	QList<double> lumInMask = GetPixNeighborsRelLum(t_width,
-													t_height,
-													SKO_MASK_RECT_SIDE);
-	if ( true == lumInMask.isEmpty() )
+	std::vector<double> lumInMask = GetPixNeighborsRelLum(t_width,
+														  t_height,
+														  SKO_MASK_RECT_SIDE);
+
+	if ( true == lumInMask.empty() )
 	{
 		qDebug() << "CalcPixSKO(): Error - no pixels in mask";
 		return;
 	}
 
-	ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	const unsigned int index = GetPixelIndex(t_width, t_height);
+	ColorPixel *pixel = (ColorPixel *)m_pixels[index];
 	double pixelLum = pixel->GetRelativeLum();
 
 	CalculatorSKO calc;
 	double pixelSKO = calc.PixelMaskSKO(pixelLum, lumInMask);
 	if ( pixelSKO < 0 )
 	{
-		qDebug() << "CalcPixSKO(): Error - can't calc SKO for pixel" << t_width << t_height;
+		qDebug() << "CalcPixSKO(): Error - can't calc SKO for pixel" <<
+					t_width << t_height;
 		return;
 	}
 
@@ -197,12 +178,13 @@ void SourceImgPixels::CalcPixSKO(const unsigned int &t_width, const unsigned int
 
 // Get SKO of pixel with certain coords
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // @output:
 // - ERROR - can't find such pixel
 // - double - pixels SKO
-double SourceImgPixels::GetPixelsSKO(const unsigned int &t_width, const unsigned int &t_height) const
+double SourceImgPixels::GetPixelsSKO(const unsigned int &t_width,
+									 const unsigned int &t_height) const
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
@@ -210,7 +192,8 @@ double SourceImgPixels::GetPixelsSKO(const unsigned int &t_width, const unsigned
 		return ERROR;
 	}
 
-	const ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	const unsigned int index = GetPixelIndex(t_width, t_height);
+	ColorPixel *pixel = (ColorPixel *)m_pixels[index];
 	return pixel->GetSKO();
 }
 
@@ -219,9 +202,9 @@ double SourceImgPixels::GetPixelsSKO(const unsigned int &t_width, const unsigned
 // @output:
 void SourceImgPixels::CalcPixelsEntropy()
 {
-	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
+	for ( unsigned int wdt = 0; wdt < m_width; ++wdt )
 	{
-		for ( unsigned int hgt = 0; hgt < m_height; hgt++ )
+		for ( unsigned int hgt = 0; hgt < m_height; ++hgt )
 		{
 			CalcPixsEntropy(wdt, hgt);
 		}
@@ -230,10 +213,11 @@ void SourceImgPixels::CalcPixelsEntropy()
 
 // Calc for certain pixel in image it's entropy
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // @output:
-void SourceImgPixels::CalcPixsEntropy(const unsigned int &t_width, const unsigned int &t_height)
+void SourceImgPixels::CalcPixsEntropy(const unsigned int &t_width,
+									  const unsigned int &t_height)
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
@@ -241,21 +225,23 @@ void SourceImgPixels::CalcPixsEntropy(const unsigned int &t_width, const unsigne
 		return;
 	}
 
-	QList<double> lumInMask = GetPixNeighborsRelLum(t_width,
-													t_height,
-													ENTROPY_MASK_RECT_SIDE);
-	if ( true == lumInMask.isEmpty() )
+	std::vector<double> lumInMask = GetPixNeighborsRelLum(t_width,
+														  t_height,
+														  ENTROPY_MASK_RECT_SIDE);
+
+	if ( true == lumInMask.empty() )
 	{
 		qDebug() << "CalcPixsEntropy(): Error - no neighbor pixels";
 		return;
 	}
 
-	ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	const unsigned int index = GetPixelIndex(t_width, t_height);
+	ColorPixel *pixel = (ColorPixel *)m_pixels[index];
 	double pixelLum = pixel->GetRelativeLum();
-	lumInMask.append(pixelLum);
+	lumInMask.push_back(pixelLum);
 
 	ImgHistogram histogramer;
-	QList<double> maskHist = histogramer.MaskRelLumHistogram(lumInMask);
+	std::vector<double> maskHist = histogramer.MaskRelLumHistogram(lumInMask);
 
 	double pixelEntropy = 0;
 	int existLumNum = 0;
@@ -263,12 +249,12 @@ void SourceImgPixels::CalcPixsEntropy(const unsigned int &t_width, const unsigne
 	const int numOfLumValues = maskHist.size();
 	for ( int lum = 0; lum < numOfLumValues; lum++ )
 	{
-		if ( maskHist.at(lum) <= 0.0 )
+		if ( maskHist[lum] <= 0.0 )
 		{
 			continue;
 		}
 
-		double relativeHistValue = maskHist.at(lum) / maskSize;
+		double relativeHistValue = maskHist[lum] / maskSize;
 		pixelEntropy -= relativeHistValue * log2(relativeHistValue);
 
 		++existLumNum;
@@ -281,18 +267,17 @@ void SourceImgPixels::CalcPixsEntropy(const unsigned int &t_width, const unsigne
 	}
 
 	pixelEntropy /= existLumNum;
-
-	ColorPixel *centralPixel = (ColorPixel *)m_pixels[t_width][t_height];
-	centralPixel->SetEntropy(pixelEntropy);
+	pixel->SetEntropy(pixelEntropy);
 }
 
 // Get Entropy of pixel with certain coords
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // @output:
 // - double - pixels entropy
-double SourceImgPixels::GetPixelsEntropy(const unsigned int &t_width, const unsigned int &t_height) const
+double SourceImgPixels::GetPixelsEntropy(const unsigned int &t_width,
+										 const unsigned int &t_height) const
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
@@ -300,7 +285,8 @@ double SourceImgPixels::GetPixelsEntropy(const unsigned int &t_width, const unsi
 		return RELATIVE_MIN;
 	}
 
-	const ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	const unsigned int index = GetPixelIndex(t_width, t_height);
+	const ColorPixel *pixel = (ColorPixel *)m_pixels[index];
 	return pixel->GetEntropy();
 }
 
@@ -320,10 +306,11 @@ void SourceImgPixels::CalcPixelsSkewAndKurt()
 
 // Calc for certain pixel in image it's Skewness and Kurtosis
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // @output:
-void SourceImgPixels::CalcPixsSkewAndKurt(const unsigned int &t_width, const unsigned int &t_height)
+void SourceImgPixels::CalcPixsSkewAndKurt(const unsigned int &t_width,
+										  const unsigned int &t_height)
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
@@ -331,32 +318,33 @@ void SourceImgPixels::CalcPixsSkewAndKurt(const unsigned int &t_width, const uns
 		return;
 	}
 
-	QList<double> lumInMask = GetPixNeighborsRelLum(t_width,
-													t_height,
-													ENTROPY_MASK_RECT_SIDE);
-	if ( true == lumInMask.isEmpty() )
+	std::vector<double> lumInMask = GetPixNeighborsRelLum(t_width,
+														  t_height,
+														  ENTROPY_MASK_RECT_SIDE);
+	if ( true == lumInMask.empty() )
 	{
 		qDebug() << "CalcPixsSkewAndKurt(): Error - no neighbor pixels";
 		return;
 	}
 
-	ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	const unsigned int index = GetPixelIndex(t_width, t_height);
+	ColorPixel *pixel = (ColorPixel *)m_pixels[index];
 	double pixelLum = pixel->GetRelativeLum();
-	lumInMask.append(pixelLum);
+	lumInMask.push_back(pixelLum);
 
 	ImgHistogram histogramer;
-	QList<double> maskHist = histogramer.MaskRelLumHistogram(lumInMask);
+	std::vector<double> maskHist = histogramer.MaskRelLumHistogram(lumInMask);
 
 	const int maskSize = lumInMask.size();
-	QList<double> relMaskHist = CalcRelativeMaskHist(maskHist, maskSize);
+	std::vector<double> relMaskHist = CalcRelativeMaskHist(maskHist, maskSize);
 
 	double mean = CalcMaskHistMean(relMaskHist);
 	double variance = CalcMaskHistVariance(relMaskHist, mean);
 
 	double skewness = 0.0;
 	double kurtosis = 0.0;
-	const int relMaskHistSize = relMaskHist.size();
-	for ( int val = 0; val < relMaskHistSize; ++val )
+	const unsigned int relMaskHistSize = relMaskHist.size();
+	for ( unsigned int val = 0; val < relMaskHistSize; ++val )
 	{
 		if ( relMaskHist.at(val) <= 0.0 )
 		{
@@ -365,8 +353,8 @@ void SourceImgPixels::CalcPixsSkewAndKurt(const unsigned int &t_width, const uns
 
 		double lumDiff = val * RELATIVE_DIVIDER - mean;
 
-		skewness += pow(lumDiff, 3.0) * relMaskHist.at(val);
-		kurtosis += pow(lumDiff, 4.0) * relMaskHist.at(val);
+		skewness += pow(lumDiff, 3.0) * relMaskHist[val];
+		kurtosis += pow(lumDiff, 4.0) * relMaskHist[val];
 	}
 
 	skewness = pow(variance, -3.0) * skewness;
@@ -417,26 +405,26 @@ void SourceImgPixels::CalcPixsSkewAndKurt(const unsigned int &t_width, const uns
 
 // Calc relative mask histogram
 // @input:
-// - QList<double> - unempty mask histogram
-// - int - positive mask size
+// - t_hist - unempty mask histogram
+// - t_maskSize - positive mask size
 // @output:
-// - QList<double> - mask histogram with relative values
-// - empty QList<double> - failed to calc relative values
-QList<double> SourceImgPixels::CalcRelativeMaskHist(const QList<double> &t_hist, const int &t_maskSize)
+// - std::vector<double> - mask histogram with relative values
+// - empty std::vector<double> - failed to calc relative values
+std::vector<double> SourceImgPixels::CalcRelativeMaskHist(const std::vector<double> &t_hist,
+														  const int &t_maskSize)
 {
-	if ( (true == t_hist.isEmpty()) || (t_maskSize <= 0) )
+	if ( (true == t_hist.empty()) || (t_maskSize <= 0) )
 	{
 		qDebug() << "CalcRelativeMaskHist(): Error - invalid arguments";
-		QList<double> empty;
-		return empty;
+		return std::vector<double>();
 	}
 
-	QList<double> relHist;
+	std::vector<double> relHist;
 	const int histSize = t_hist.size();
 	for ( int val = 0; val < histSize; ++val )
 	{
-		double relValue = t_hist.at(val) / t_maskSize;
-		relHist.append(relValue);
+		double relValue = t_hist[val] / t_maskSize;
+		relHist.push_back(relValue);
 	}
 
 	return relHist;
@@ -444,23 +432,23 @@ QList<double> SourceImgPixels::CalcRelativeMaskHist(const QList<double> &t_hist,
 
 // Calc relative mask histogram mean value
 // @input:
-// - QList<double> - unempty mask histogram
+// - t_hist - unempty mask histogram
 // @output:
 // - double - mask histogram mean value
 // - double < 0 - failed to calc mean
-double SourceImgPixels::CalcMaskHistMean(const QList<double> &t_hist)
+double SourceImgPixels::CalcMaskHistMean(const std::vector<double> &t_hist)
 {
-	if ( true == t_hist.isEmpty() )
+	if ( true == t_hist.empty() )
 	{
 		qDebug() << "CalcMaskHistMean(): Error - invalid arguments";
-		return ERROR;
+		return ERROR_FP;
 	}
 
 	double mean = 0.0;
 	const int histSize = t_hist.size();
 	for( int val = 0; val < histSize; ++val )
 	{
-		mean += val * RELATIVE_DIVIDER * t_hist.at(val);
+		mean += val * RELATIVE_DIVIDER * t_hist[val];
 	}
 
 	return mean;
@@ -468,17 +456,18 @@ double SourceImgPixels::CalcMaskHistMean(const QList<double> &t_hist)
 
 // Calc relative mask histogram variance value
 // @input:
-// - QList<double> - unempty mask histogram
-// - double - positive mask histogram mean value
+// - t_hist - unempty mask histogram
+// - t_histMean - positive mask histogram mean value
 // @output:
 // - double - mask histogram variance value
 // - double < 0 - failed to calc variance
-double SourceImgPixels::CalcMaskHistVariance(const QList<double> &t_hist, const double &t_histMean)
+double SourceImgPixels::CalcMaskHistVariance(const std::vector<double> &t_hist,
+											 const double &t_histMean)
 {
-	if ( (true == t_hist.isEmpty()) || (t_histMean < 0.0) )
+	if ( (true == t_hist.empty()) || (t_histMean < 0.0) )
 	{
 		qDebug() << "CalcMaskHistVariance(): Error - invalid arguments";
-		return ERROR;
+		return ERROR_FP;
 	}
 
 	double squareVariance = 0.0;
@@ -486,7 +475,7 @@ double SourceImgPixels::CalcMaskHistVariance(const QList<double> &t_hist, const 
 	for( int val = 0; val < histSize; ++val )
 	{
 		double relLum = val * RELATIVE_DIVIDER;
-		squareVariance += t_hist.at(val) * pow( relLum - t_histMean, 2 );
+		squareVariance += t_hist[val] * pow( relLum - t_histMean, 2 );
 	}
 
 	double variance = pow(squareVariance, 0.5);
@@ -496,11 +485,12 @@ double SourceImgPixels::CalcMaskHistVariance(const QList<double> &t_hist, const 
 
 // Get Skewness of pixel with certain coords
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // @output:
 // - double - pixels Skewness
-double SourceImgPixels::GetPixelsSkewness(const unsigned int &t_width, const unsigned int &t_height) const
+double SourceImgPixels::GetPixelsSkewness(const unsigned int &t_width,
+										  const unsigned int &t_height) const
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
@@ -508,17 +498,19 @@ double SourceImgPixels::GetPixelsSkewness(const unsigned int &t_width, const uns
 		return RELATIVE_MIN;
 	}
 
-	const ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	const unsigned int index = GetPixelIndex(t_width, t_height);
+	const ColorPixel *pixel = (ColorPixel *)m_pixels[index];
 	return pixel->GetSkewness();
 }
 
 // Get Kurtosis of pixel with certain coords
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
 // @output:
 // - double - pixels Kurtosis
-double SourceImgPixels::GetPixelsKurtosis(const unsigned int &t_width, const unsigned int &t_height) const
+double SourceImgPixels::GetPixelsKurtosis(const unsigned int &t_width,
+										  const unsigned int &t_height) const
 {
 	if ( false == IsPixelExist(t_width, t_height) )
 	{
@@ -526,7 +518,8 @@ double SourceImgPixels::GetPixelsKurtosis(const unsigned int &t_width, const uns
 		return RELATIVE_MIN;
 	}
 
-	const ColorPixel *pixel = (ColorPixel *)m_pixels[t_width][t_height];
+	const unsigned int index = GetPixelIndex(t_width, t_height);
+	const ColorPixel *pixel = (ColorPixel *)m_pixels[index];
 	return pixel->GetKurtosis();
 }
 
@@ -534,26 +527,25 @@ double SourceImgPixels::GetPixelsKurtosis(const unsigned int &t_width, const uns
 // @input:
 // @output:
 // - double - positive found max relative luminance of images pixels
-// - ERROR - can't find max relative luminance
+// - double < 0 - can't find max relative luminance
 double SourceImgPixels::FindMaxRelLum() const
 {
 	if ( false == HasPixels() )
 	{
 		qDebug() << "FindMaxLum(): Error - no pixels";
-		return ERROR;
+		return ERROR_FP;
 	}
 
 	double maxLum = RELATIVE_MIN;
-	for ( unsigned int width = 0; width < m_width; width++ )
+	ColorPixel *pixel = nullptr;
+	const unsigned int maxPixels = m_pixels.size();
+	for ( unsigned int pix = 0; pix < maxPixels; ++pix )
 	{
-		for ( unsigned int height = 0; height < m_height; height++ )
+		pixel = (ColorPixel *)m_pixels[pix];
+		double pixelLum = pixel->GetRelativeLum();
+		if ( maxLum < pixelLum )
 		{
-			ColorPixel *pixel = (ColorPixel *)m_pixels[width][height];
-			double pixelLum = pixel->GetRelativeLum();
-			if ( maxLum < pixelLum )
-			{
-				maxLum = pixelLum;
-			}
+			maxLum = pixelLum;
 		}
 	}
 
@@ -564,26 +556,25 @@ double SourceImgPixels::FindMaxRelLum() const
 // @input:
 // @output:
 // - double - positive found min relative luminance of images pixels
-// - ERROR - can't find min relative luminance
+// - double < 0 - can't find min relative luminance
 double SourceImgPixels::FindMinRelLum() const
 {
 	if ( false == HasPixels() )
 	{
 		qDebug() << "FindMinLum(): Error - no pixels";
-		return ERROR;
+		return ERROR_FP;
 	}
 
 	double minLum = RELATIVE_MAX;
-	for ( unsigned int width = 0; width < m_width; width++ )
+	ColorPixel *pixel = nullptr;
+	const unsigned int maxPixels = m_pixels.size();
+	for ( unsigned int pix = 0; pix < maxPixels; ++pix )
 	{
-		for ( unsigned int height = 0; height < m_height; height++ )
+		pixel = (ColorPixel *)m_pixels[pix];
+		double pixelLum = pixel->GetRelativeLum();
+		if ( pixelLum < minLum )
 		{
-			ColorPixel *pixel = (ColorPixel *)m_pixels[width][height];
-			double pixelLum = pixel->GetRelativeLum();
-			if ( pixelLum < minLum )
-			{
-				minLum = pixelLum;
-			}
+			minLum = pixelLum;
 		}
 	}
 
@@ -594,26 +585,24 @@ double SourceImgPixels::FindMinRelLum() const
 // @input:
 // @output:
 // - double - positive found average relative luminance of images pixels
-// - ERROR - can't find average relative luminance
+// - double < 0 - can't find average relative luminance
 double SourceImgPixels::FindAverageRelLum() const
 {
 	if ( false == HasPixels() )
 	{
 		qDebug() << "FindAverageLum(): Error - no pixels";
-		return ERROR;
+		return ERROR_FP;
 	}
 
 	double averageLum = 0.0;
-	for ( unsigned int width = 0; width < m_width; width++ )
+	const unsigned int maxPixels = m_pixels.size();
+	for ( unsigned int pix = 0; pix < maxPixels; ++pix )
 	{
-		for ( unsigned int height = 0; height < m_height; height++ )
-		{
-			ColorPixel *pixel = (ColorPixel *)m_pixels[width][height];
-			averageLum += pixel->GetRelativeLum();
-		}
+		ColorPixel *pixel = (ColorPixel *)m_pixels[pix];
+		averageLum += pixel->GetRelativeLum();
 	}
 
-	averageLum /= m_width * m_height;
+	averageLum /= maxPixels;
 
 	return averageLum;
 }
@@ -622,35 +611,28 @@ double SourceImgPixels::FindAverageRelLum() const
 // @input:
 // @output:
 // - double - positive found most common relative luminance of images pixels
-// - ERROR - can't find most common relative luminance
+// - double < 0 - can't find most common relative luminance
 double SourceImgPixels::FindMostCommonRelLum() const
 {
 	if ( false == HasPixels() )
 	{
 		qDebug() << "FindMostCommonLum(): Error - no pixels";
-		return ERROR;
+		return ERROR_FP;
 	}
 
 	// Create zero mass for statistic
-	const int numberOfLevels = RELATIVE_MAX / RELATIVE_DIVIDER;
-	QList<int> lumStatistic;
-	for ( int lumLvl = 0; lumLvl < numberOfLevels; lumLvl++ )
-	{
-		lumStatistic.append(0);
-	}
+	const int numberOfLevels = (int)floor(RELATIVE_MAX / RELATIVE_DIVIDER + 0.5);
+	std::vector<int> lumStatistic(numberOfLevels, 0);
 
 	// Form statistic
-	for ( unsigned int width = 0; width < m_width; width++ )
+	const unsigned int maxPixels = m_pixels.size();
+	for ( unsigned int pix = 0; pix < maxPixels; ++pix )
 	{
-		for ( unsigned int height = 0; height < m_height; height++ )
-		{
-			ColorPixel *pixel = (ColorPixel *)m_pixels[width][height];
-			double pixLum = pixel->GetRelativeLum();
-			double lumLvl = pixLum / RELATIVE_DIVIDER;
-			int lvlNum = (int)floor(lumLvl);
+		ColorPixel *pixel = (ColorPixel *)m_pixels[pix];
+		double lumLvl = pixel->GetRelativeLum() / RELATIVE_DIVIDER;
+		int lvlNum = (int)floor(lumLvl);
 
-			++lumStatistic[lvlNum];
-		}
+		++lumStatistic[lvlNum];
 	}
 
 	// Find number of most popular luminance level
@@ -660,9 +642,9 @@ double SourceImgPixels::FindMostCommonRelLum() const
 	int maxNumInLvl = 0;
 	for ( int lvl = lvlOffset; lvl < numberOfLevels - lvlOffset; ++lvl )
 	{
-		if ( maxNumInLvl < lumStatistic.at(lvl) )
+		if ( maxNumInLvl < lumStatistic[lvl] )
 		{
-			maxNumInLvl = lumStatistic.at(lvl);
+			maxNumInLvl = lumStatistic[lvl];
 			mostCommonLvl = lvl;
 		}
 	}
@@ -675,23 +657,22 @@ double SourceImgPixels::FindMostCommonRelLum() const
 
 // Get list of relative luminances of neighbor pixels (to calc SKO, for example)
 // @input:
-// - unsigned int - exist width (x) position of pixel
-// - unsigned int - exist height (y) position of pixel
-// - unsigned int - get size of rectangle in which we will search neighbor pixels
+// - t_width - exist width (x) position of pixel
+// - t_height - exist height (y) position of pixel
+// - t_maskRectSide - get size of rectangle in which we will search neighbor pixels
 // @output:
-// - unempy QList<double> - luminances of neighbor pixels
+// - QList<double> - luminances of neighbor pixels
 // - empty QList<double> - don't have pixels
-QList<double> SourceImgPixels::GetPixNeighborsRelLum(const unsigned int &t_width,
-													 const unsigned int &t_height,
-													 const unsigned int &t_maskRectSide) const
+std::vector<double> SourceImgPixels::GetPixNeighborsRelLum(const unsigned int &t_width,
+														   const unsigned int &t_height,
+														   const unsigned int &t_maskRectSide) const
 {
 	if ( (false == IsPixelExist(t_width, t_height)) ||
 		 (m_width <= t_maskRectSide) ||
 		 (m_height <= t_maskRectSide) )
 	{
 		qDebug() << "GetPixNeighborsLum(): Error - invalid arguments";
-		QList<double> empty;
-		return empty;
+		return std::vector<double>();
 	}
 
 	// t_maskRectSide is a length of side of a rect, which is form a mask. Central pixel in mask is pixel with
@@ -706,10 +687,10 @@ QList<double> SourceImgPixels::GetPixNeighborsRelLum(const unsigned int &t_width
 	unsigned int widthEnd = qMin( m_width, t_width + (unsigned int)offset + 1 );
 	unsigned int heightStart = (unsigned int)qMax( 0, minHeightCoord );
 	unsigned int heightEnd = qMin( m_height, t_height + (unsigned int)offset + 1 );
-	QList<double> luminances;
-	for ( unsigned int width = widthStart; width < widthEnd; width++ )
+	std::vector<double> luminances;
+	for ( unsigned int width = widthStart; width < widthEnd; ++width )
 	{
-		for ( unsigned int height = heightStart; height < heightEnd; height++ )
+		for ( unsigned int height = heightStart; height < heightEnd; ++height )
 		{
 			if ( (width == t_width) && (height == t_height) )
 			{
@@ -718,152 +699,12 @@ QList<double> SourceImgPixels::GetPixNeighborsRelLum(const unsigned int &t_width
 				continue;
 			}
 
-			ColorPixel *pixel = (ColorPixel *)m_pixels[width][height];
+			const unsigned int index = GetPixelIndex(t_width, t_height);
+			ColorPixel *pixel = (ColorPixel *)m_pixels[index];
 			double pixelLum = pixel->GetRelativeLum();
-			luminances.append(pixelLum);
+			luminances.push_back(pixelLum);
 		}
 	}
 
 	return luminances;
-}
-
-// Test functions
-void SourceImgPixels::TestFunctionality()
-{
-	QWidget wdt;
-	QString imgName = QFileDialog::getOpenFileName(&wdt,
-												 "Open target image...",
-												 QDir::currentPath(),
-												 "IMG files (*.png *.jpg *.jpeg *.bmp *.tiff)");
-
-	QImage image(imgName);
-	bool imgFormed = FormImgPixels(image);
-	if ( false == imgFormed )
-	{
-		qDebug() << "Fail: Can't form image";
-		return;
-	}
-
-	TransAllPixRGB2LAB();
-
-	qDebug() << "Max Lum:" << FindMaxRelLum();
-	qDebug() << "Min Lum:" << FindMinRelLum();
-
-	CalcPixelsSKO();
-
-	qDebug() << "After calculating:";
-	for ( unsigned int wdt = 0; wdt < m_width; wdt++ )
-	{
-		for ( unsigned int hgt = 0; hgt < m_height; hgt++ )
-		{
-			qDebug() << wdt << hgt << GetPixelsSKO(wdt, hgt);
-		}
-	}
-
-	TransAllPixLAB2RGB();
-}
-
-// Find out what min and max values for skewness
-void SourceImgPixels::TestFindMaxSkewness()
-{
-	const int numOfLumLvl = (int)( RELATIVE_MAX / RELATIVE_DIVIDER );
-//	const int numPixels = 121;
-//	int step = numOfLumLvl / numPixels;
-
-	QList<double> relMaskHist;
-//	int counter = 0;
-	for ( int i = 0; i < numOfLumLvl; ++i )
-	{
-		if ( i == 500 )
-		{
-			relMaskHist.append(109.0 / 121.0);
-		}
-		else if ( i == 901 )
-		{
-			relMaskHist.append(10.0 / 121.0);
-		}
-		else if ( i == 499 )
-		{
-			relMaskHist.append(1.0 / 121.0);
-		}
-//		else if ( i == 3 )
-//		{
-//			relMaskHist.append(0.05);
-//		}
-		else
-		{
-			relMaskHist.append(0.0);
-		}
-
-//		++counter;
-//		if ( step == counter )
-//		{
-//			counter = 0;
-//			relMaskHist.append(1.0 / 121.0);
-//		}
-//		else
-//		{
-//			relMaskHist.append(0.0);
-//		}
-	}
-
-	double mean = CalcMaskHistMean(relMaskHist);
-	double variance = CalcMaskHistVariance(relMaskHist, mean);
-
-	double skewness = 0.0;
-	double kurtosis = 0.0;
-	int existLumNum = 0;
-	const int relMaskHistSize = relMaskHist.size();
-	for ( int val = 0; val < relMaskHistSize; ++val )
-	{
-		if ( relMaskHist.at(val) <= 0.0 )
-		{
-			continue;
-		}
-
-		double lumDiff = val * RELATIVE_DIVIDER - mean;
-
-		skewness += pow(lumDiff, 3.0) * relMaskHist.at(val);
-		kurtosis += pow(lumDiff, 4.0) * relMaskHist.at(val);
-
-		++existLumNum;
-	}
-
-	skewness = pow(variance, -3.0) * skewness;
-	kurtosis = pow(variance, -4.0) * kurtosis;
-
-	qDebug() << "skewness =" << skewness;
-	qDebug() << "kurtosis =" << kurtosis;
-}
-
-// Save ime LAB luminance statistic
-void SourceImgPixels::TestStatistic(const QList<int> t_stat) const
-{
-	QFile histFile;
-	histFile.setFileName("./hist.csv");
-
-	bool fileOpened = histFile.open(QIODevice::WriteOnly);
-	if ( false == fileOpened )
-	{
-		qDebug() << "TestStatistic(): Error - can't open file!";
-		return;
-	}
-
-	QTextStream streamToFile;
-	streamToFile.setDevice(&histFile);
-
-	const int numOfValues = t_stat.size();
-
-	streamToFile << "sep = ;" << endl;
-	streamToFile << "NUM;Rel_Lum;Pixels" << endl;
-	for ( int i = 0; i < numOfValues; i++ )
-	{
-		double lumValue = i * RELATIVE_DIVIDER;
-		streamToFile << i << ";" <<
-						lumValue << ";" <<
-						t_stat[i] <<
-						endl;
-	}
-
-	histFile.close();
 }
